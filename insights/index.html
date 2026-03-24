@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>insights — indéva studio</title>
+<meta name="description" content="design intelligence from indéva studio — perspectives on luxury interior design, spatial logic, materials, and process.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.indevastudio.com/insights/">
+<meta property="og:title" content="insights — indéva studio">
+<meta property="og:description" content="design intelligence from indéva studio.">
+<meta property="og:url" content="https://www.indevastudio.com/insights/">
+<meta property="og:image" content="https://www.indevastudio.com/og-default.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Founders+Grotesk:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#0a0a0a;--black-2:#111111;--black-3:#181818;
+  --gold:#b89a6a;--gold-dim:#8a7250;--gold-bright:#c9ac7e;
+  --white:#f0ebe3;--white-dim:rgba(240,235,227,0.55);--white-muted:rgba(240,235,227,0.28);
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Founders Grotesk',sans-serif;--mono:'DM Mono',monospace;
+  --line:rgba(240,235,227,0.08);--line-gold:rgba(184,154,106,0.2);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:var(--black);border-bottom:1px solid var(--line);}
+.nav-logo{font-family:var(--serif);font-size:1.45rem;font-weight:400;letter-spacing:0.04em;color:var(--white);text-decoration:none;line-height:1;}
+.nav-logo sub{font-family:var(--mono);font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:block;margin-top:2px;}
+.nav-center{display:flex;gap:36px;}
+.nav-link{font-family:var(--mono);font-size:0.62rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);text-decoration:none;transition:color 0.25s;}
+.nav-link:hover{color:var(--white);}.nav-link.active{color:var(--gold);}
+.nav-cta{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line-gold);padding:10px 22px;text-decoration:none;transition:all 0.25s;}
+.nav-cta:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--line);}
+.label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:block;}
+.page-title{font-family:var(--serif);font-size:clamp(2.5rem,5vw,5rem);font-weight:300;line-height:1;letter-spacing:-0.02em;color:var(--white);}
+.blog-grid{padding:80px 60px 120px;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.blog-card{display:block;text-decoration:none;background:var(--black-2);padding:40px;border:1px solid var(--line);transition:border-color 0.25s;}
+.blog-card:hover{border-color:var(--gold);}
+.blog-card-image{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:28px;filter:brightness(0.75) saturate(0.8);transition:filter 0.4s;}
+.blog-card:hover .blog-card-image{filter:brightness(0.9) saturate(1);}
+.blog-card-cat{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;}
+.blog-card-title{font-family:var(--serif);font-size:clamp(1.2rem,1.8vw,1.6rem);font-weight:300;color:var(--white);line-height:1.25;margin-bottom:16px;}
+.blog-card-excerpt{font-family:var(--sans);font-size:0.82rem;font-weight:300;line-height:1.85;color:var(--white-dim);margin-bottom:24px;}
+.blog-card-read{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);transition:color 0.2s;}
+.blog-card:hover .blog-card-read{color:var(--gold);}
+footer{background:var(--black-2);border-top:1px solid var(--line);padding:60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;}
+.footer-logo{font-family:var(--serif);font-size:1.2rem;color:var(--white);text-decoration:none;}
+.footer-note{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);}
+@media(max-width:768px){nav{padding:0 24px;}.nav-center{display:none;}.page-hero{padding:120px 24px 60px;}.blog-grid{grid-template-columns:1fr;padding:40px 24px 80px;}footer{padding:40px 24px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/">indéva studio<sub>luxury interior design · new delhi</sub></a>
+  <div class="nav-center">
+    <a class="nav-link" href="/">home</a>
+    <a class="nav-link" href="/#about">about</a>
+    <a class="nav-link" href="/#services">services</a>
+    <a class="nav-link" href="/#projects">projects</a>
+    <a class="nav-link active" href="/insights/">insights</a>
+  </div>
+  <a class="nav-cta" href="/#contact">start a project</a>
+</nav>
+<section class="page-hero">
+  <span class="label">08 · insights</span>
+  <h1 class="page-title">design<br><em style="font-style:italic;color:var(--gold)">intelligence.</em></h1>
+</section>
+<div class="blog-grid">
+
+    <a class="blog-card" href="/insights/why-most-floor-plans-fail/">
+      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80" alt="why most floor plans fail" class="blog-card-image">
+      <div class="blog-card-cat">spatial logic</div>
+      <h2 class="blog-card-title">why most floor plans fail</h2>
+      <p class="blog-card-excerpt">the plan is not the starting point of design — it is the design. most projects go wrong before a single material is selected, because the spatial logic was never interrogated.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/execution-is-design/">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80" alt="execution is design" class="blog-card-image">
+      <div class="blog-card-cat">execution</div>
+      <h2 class="blog-card-title">execution is design</h2>
+      <p class="blog-card-excerpt">there is a persistent myth that design ends when drawings are submitted. it doesn't. design intent dies on site when no one is watching.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/perfection-is-the-enemy-of-comfort/">
+      <img src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80" alt="perfection is the enemy of comfort" class="blog-card-image">
+      <div class="blog-card-cat">philosophy</div>
+      <h2 class="blog-card-title">perfection is the enemy of comfort</h2>
+      <p class="blog-card-excerpt">the most uncomfortable spaces we've encountered are the most perfectly finished. when everything is controlled, nothing is human.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/budget-truth-in-indian-interiors/">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80" alt="budget truth in indian interiors" class="blog-card-image">
+      <div class="blog-card-cat">india market</div>
+      <h2 class="blog-card-title">budget truth in indian interiors</h2>
+      <p class="blog-card-excerpt">the gap between a client's stated budget and their actual expectations is the most dangerous distance in indian interior design.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/how-we-protect-design-on-site/">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80" alt="how we protect design on site" class="blog-card-image">
+      <div class="blog-card-cat">process</div>
+      <h2 class="blog-card-title">how we protect design on site</h2>
+      <p class="blog-card-excerpt">every project has a moment when the contractor suggests a shortcut, the vendor substitutes a material, or the client approves a change without understanding the consequence.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/why-we-refuse-to-start-with-moodboards/">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="why we refuse to start with moodboards" class="blog-card-image">
+      <div class="blog-card-cat">architecture</div>
+      <h2 class="blog-card-title">why we refuse to start with moodboards</h2>
+      <p class="blog-card-excerpt">moodboards are a sedative. they create the feeling of progress without any of the substance.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/light-is-not-a-finish-it-is-the-space/">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80" alt="light is not a finish — it is the space" class="blog-card-image">
+      <div class="blog-card-cat">design theory</div>
+      <h2 class="blog-card-title">light is not a finish — it is the space</h2>
+      <p class="blog-card-excerpt">most designers treat lighting as the last decision. we treat it as the first. the way light enters, bounces, and dissolves determines whether a room breathes or suffocates.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/the-honest-material-stone-over-stone-effect/">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80" alt="the honest material: why we prefer stone over stone-effect" class="blog-card-image">
+      <div class="blog-card-cat">materials</div>
+      <h2 class="blog-card-title">the honest material: why we prefer stone over stone-effect</h2>
+      <p class="blog-card-excerpt">imitation materials are a tax on your future self. they age poorly, feel hollow underfoot, and eventually betray themselves. honesty in material selection is not idealism — it is long-term economics.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/what-a-good-brief-actually-looks-like/">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" alt="what a good brief actually looks like" class="blog-card-image">
+      <div class="blog-card-cat">process</div>
+      <h2 class="blog-card-title">what a good brief actually looks like</h2>
+      <p class="blog-card-excerpt">the brief is not a wish list. it is a document of constraints — of what cannot move, what must function, and who will inhabit the space day after day.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/the-scale-problem-small-rooms/">
+      <img src="https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=1200&q=80" alt="the scale problem: why small rooms feel smaller after renovation" class="blog-card-image">
+      <div class="blog-card-cat">spatial logic</div>
+      <h2 class="blog-card-title">the scale problem: why small rooms feel smaller after renovation</h2>
+      <p class="blog-card-excerpt">furniture that is three inches too large, a ceiling dropped two inches too low, a tile with the wrong joint width — these micro-decisions compound into spaces that feel diminished rather than designed.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/choosing-a-contractor-in-india/">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80" alt="choosing a contractor in india: what we look for and why" class="blog-card-image">
+      <div class="blog-card-cat">india market</div>
+      <h2 class="blog-card-title">choosing a contractor in india: what we look for and why</h2>
+      <p class="blog-card-excerpt">the contractor is not a vendor — they are a collaborator who will either protect or destroy three months of design work. we have a rubric. here it is, in full.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/colour-follows-conviction-not-trends/">
+      <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80" alt="colour follows conviction, not trends" class="blog-card-image">
+      <div class="blog-card-cat">philosophy</div>
+      <h2 class="blog-card-title">colour follows conviction, not trends</h2>
+      <p class="blog-card-excerpt">a palette chosen from a trend report is a palette without a reason. colour in a well-designed interior is a consequence of the space, the occupant, and the light — never the starting point.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/interior-design-trends-india-2025/">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" alt="interior design trends in india for 2025" class="blog-card-image">
+      <div class="blog-card-cat">design trends</div>
+      <h2 class="blog-card-title">interior design trends in india for 2025</h2>
+      <p class="blog-card-excerpt">from warm minimalism to biophilic living, here are the design movements shaping indian homes in 2025 — and how to adopt them with intention rather than impulse.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/what-luxury-interior-design-means-in-india/">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="what luxury interior design actually means in india" class="blog-card-image">
+      <div class="blog-card-cat">luxury design</div>
+      <h2 class="blog-card-title">what luxury interior design actually means in india</h2>
+      <p class="blog-card-excerpt">luxury is not a price point — it's a philosophy. we break down what separates genuinely luxurious interiors from expensive ones, and why the distinction matters more than ever.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/complete-guide-kitchen-design-indian-homes/">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80" alt="the complete guide to kitchen design in indian homes" class="blog-card-image">
+      <div class="blog-card-cat">kitchen design</div>
+      <h2 class="blog-card-title">the complete guide to kitchen design in indian homes</h2>
+      <p class="blog-card-excerpt">the indian kitchen is unlike any other. it cooks hard, lives hard, and needs to look good doing it. here's how to design one that truly works.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/how-to-design-a-bedroom-that-helps-you-sleep/">
+      <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80" alt="how to design a bedroom that actually helps you sleep" class="blog-card-image">
+      <div class="blog-card-cat">bedroom design</div>
+      <h2 class="blog-card-title">how to design a bedroom that actually helps you sleep</h2>
+      <p class="blog-card-excerpt">most bedrooms are designed to look good in photographs. we design them to help you rest. the two goals are more different than you might think.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/office-interior-design-team-performance/">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" alt="why your office interior design affects your team's performance" class="blog-card-image">
+      <div class="blog-card-cat">commercial design</div>
+      <h2 class="blog-card-title">why your office interior design affects your team's performance</h2>
+      <p class="blog-card-excerpt">the workspace is not neutral. how it looks, feels, and functions has a measurable impact on the people inside it. here's the design evidence.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/complete-guide-home-lighting-design/">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="a complete guide to home lighting design" class="blog-card-image">
+      <div class="blog-card-cat">lighting</div>
+      <h2 class="blog-card-title">a complete guide to home lighting design</h2>
+      <p class="blog-card-excerpt">lighting is the element that makes or breaks every other design decision. this is everything you need to know about getting it right — room by room.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/small-apartment-design-every-square-foot/">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80" alt="small apartment design: how to make every square foot count" class="blog-card-image">
+      <div class="blog-card-cat">small spaces</div>
+      <h2 class="blog-card-title">small apartment design: how to make every square foot count</h2>
+      <p class="blog-card-excerpt">small spaces are not a compromise — they are a design brief. with the right approach, a compact apartment can feel more intentional and generous than a sprawling one.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/restaurant-interior-design-ambience-revenue/">
+      <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80" alt="restaurant interior design: how ambience drives revenue" class="blog-card-image">
+      <div class="blog-card-cat">hospitality design</div>
+      <h2 class="blog-card-title">restaurant interior design: how ambience drives revenue</h2>
+      <p class="blog-card-excerpt">a restaurant's interior is not decoration — it is a business tool. the right design increases dwell time, average spend, and return visits. here's the evidence.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/how-to-choose-the-right-colour-palette/">
+      <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80" alt="how to choose the right colour palette for your home" class="blog-card-image">
+      <div class="blog-card-cat">colour theory</div>
+      <h2 class="blog-card-title">how to choose the right colour palette for your home</h2>
+      <p class="blog-card-excerpt">colour decisions are permanent until they're not — and undoing them is expensive. this is our systematic approach to building a palette that works across every room, in every light.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/sustainable-interior-design/">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80" alt="sustainable interior design: building beautiful spaces responsibly" class="blog-card-image">
+      <div class="blog-card-cat">sustainable design</div>
+      <h2 class="blog-card-title">sustainable interior design: building beautiful spaces responsibly</h2>
+      <p class="blog-card-excerpt">sustainability in interiors is not a trend — it is a responsibility. here's how thoughtful material choices, local sourcing, and considered design create spaces that are better for everyone.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/open-plan-living-when-it-works/">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80" alt="open plan living: when it works and when it doesn't" class="blog-card-image">
+      <div class="blog-card-cat">spatial planning</div>
+      <h2 class="blog-card-title">open plan living: when it works and when it doesn't</h2>
+      <p class="blog-card-excerpt">open plan became the default modern layout. but defaulting to it without interrogating the brief produces spaces that are neither private enough nor social enough. here's how to decide.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/biophilic-design-bringing-nature-indoors/">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80" alt="biophilic design: why bringing nature indoors changes everything" class="blog-card-image">
+      <div class="blog-card-cat">biophilic design</div>
+      <h2 class="blog-card-title">biophilic design: why bringing nature indoors changes everything</h2>
+      <p class="blog-card-excerpt">biophilic design is not about placing a plant on a shelf. it is a systematic approach to reconnecting interior environments with the natural world — and its effects on wellbeing are well-documented.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/expensive-interior-design-mistakes-india/">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80" alt="the 8 most expensive interior design mistakes indian homeowners make" class="blog-card-image">
+      <div class="blog-card-cat">design intelligence</div>
+      <h2 class="blog-card-title">the 8 most expensive interior design mistakes indian homeowners make</h2>
+      <p class="blog-card-excerpt">most design mistakes are not made out of ignorance — they're made out of impatience. we document the eight decisions that cost clients the most, and how to avoid each one.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/designing-the-luxury-bathroom/">
+      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80" alt="designing the luxury bathroom: a room that earns its investment" class="blog-card-image">
+      <div class="blog-card-cat">bathroom design</div>
+      <h2 class="blog-card-title">designing the luxury bathroom: a room that earns its investment</h2>
+      <p class="blog-card-excerpt">the bathroom has become the most important room in the luxury home. here's why — and how to design one that genuinely justifies the spend.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/how-to-write-a-brief-your-interior-designer-will-love/">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" alt="how to write a brief your interior designer will actually love" class="blog-card-image">
+      <div class="blog-card-cat">client guide</div>
+      <h2 class="blog-card-title">how to write a brief your interior designer will actually love</h2>
+      <p class="blog-card-excerpt">a good brief is the most underrated tool a client has. it saves time, prevents misalignment, and produces dramatically better design outcomes. here's exactly how to write one.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/interior-design-cost-india-2025/">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80" alt="how much does interior design cost in india? a complete 2025 breakdown" class="blog-card-image">
+      <div class="blog-card-cat">india market</div>
+      <h2 class="blog-card-title">how much does interior design cost in india? a complete 2025 breakdown</h2>
+      <p class="blog-card-excerpt">from per-square-foot rates to full turnkey fees, this is the most transparent breakdown of interior design pricing in india — what you get at every level, and where the hidden costs live.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/designing-a-luxury-villa-in-india/">
+      <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=80" alt="designing a luxury villa in india: what separates the extraordinary from the expensive" class="blog-card-image">
+      <div class="blog-card-cat">villa & farmhouse</div>
+      <h2 class="blog-card-title">designing a luxury villa in india: what separates the extraordinary from the expensive</h2>
+      <p class="blog-card-excerpt">india's finest villas share one quality that no budget can buy: spatial intelligence. we examine what makes a villa truly luxurious — from site planning through to the last door handle.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/interior-designer-vs-architect/">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80" alt="interior designer vs architect: who do you actually need for your project?" class="blog-card-image">
+      <div class="blog-card-cat">client guide</div>
+      <h2 class="blog-card-title">interior designer vs architect: who do you actually need for your project?</h2>
+      <p class="blog-card-excerpt">the difference between an interior designer and an architect is not just training — it is philosophy, scope, and legal responsibility. knowing which you need can save your project from the start.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/vastu-and-modern-interior-design/">
+      <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80" alt="vastu and modern interior design: how to honour both without compromising either" class="blog-card-image">
+      <div class="blog-card-cat">india market</div>
+      <h2 class="blog-card-title">vastu and modern interior design: how to honour both without compromising either</h2>
+      <p class="blog-card-excerpt">vastu shastra and contemporary design are not in conflict — if you understand what each is actually asking for. here is how india's best designers reconcile ancient principles with modern living.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+
+    <a class="blog-card" href="/insights/how-to-hire-an-interior-designer-india/">
+      <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=1200&q=80" alt="how to hire an interior designer in india: the questions every client should ask" class="blog-card-image">
+      <div class="blog-card-cat">client guide</div>
+      <h2 class="blog-card-title">how to hire an interior designer in india: the questions every client should ask</h2>
+      <p class="blog-card-excerpt">most clients choose a designer on the basis of portfolio photographs. here is a better way — the twelve questions that reveal whether a designer is right for your project before a single rupee changes hands.</p>
+      <div class="blog-card-read">read article ↗</div>
+    </a>
+</div>
+<footer>
+  <a class="footer-logo" href="/">indéva studio</a>
+  <span class="footer-note">luxury interior design · new delhi, india</span>
+  <span class="footer-note">© 2026 indéva studio</span>
+</footer>
+</body>
+</html>
