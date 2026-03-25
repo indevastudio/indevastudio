@@ -5,296 +5,133 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <!-- ══ CORE PAGES ══ -->
-
   <url>
     <loc>https://www.indevastudio.com/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#about</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/about</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#services</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/services</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#projects</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/projects</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#process</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/process</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#philosophy</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/philosophy</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#blog</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#vendors</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/vendors</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#contact</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/contact</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- ══ EDITORIAL BLOG ARTICLES ══ -->
-
+  <!-- ══ BLOG ARTICLES ══ -->
   <url>
-    <loc>https://www.indevastudio.com/#floorplans</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/floorplans</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#execution</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/execution</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#perfection</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/perfection</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#budget</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/budget</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#protect</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/protect</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#moodboards</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/moodboards</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#light</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/light</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#material</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/material</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#client</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/client</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#scale</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/scale</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#contractor</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/contractor</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/#color</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.indevastudio.com/insights#blog/color</loc>
+    <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
-  </url>
-
-  <!-- ══ SEO BLOG ARTICLES ══ -->
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo01</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo02</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo03</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo04</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo05</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo06</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo07</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo08</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo09</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo10</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo11</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo12</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo13</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo14</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo15</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo16</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo17</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo18</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo19</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.indevastudio.com/#seo20</loc>
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
 </urlset>
