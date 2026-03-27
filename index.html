@@ -6244,10 +6244,18 @@ document.addEventListener('click',function(e){
 
 
 <!-- EmailJS SDK -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <script>
 (function() {
-  emailjs.init('HGr3wuPNyLvmq1S14');
+  // Init EmailJS after page load
+  function initEmailJS() {
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init('HGr3wuPNyLvmq1S14');
+    } else {
+      setTimeout(initEmailJS, 200);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', initEmailJS);
 })();
 
 function submitEnquiry() {
