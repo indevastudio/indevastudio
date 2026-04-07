@@ -1,261 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-
-  <!-- ── INSIGHTS HUB PAGE ── -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.indevastudio.com/insights</loc>
-    <lastmod>2026-03-28</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.indevastudio.com/blogs/index.html</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- why most floor plans fail -->
   <url>
-    <loc>https://www.indevastudio.com/insights/floorplans</loc>
-    <lastmod>2025-02-01</lastmod>
+    <loc>https://www.indevastudio.com/blogs/2026-04-07-luxury-home-interior-design-in-india.html</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- execution is design -->
   <url>
-    <loc>https://www.indevastudio.com/insights/execution</loc>
-    <lastmod>2025-01-01</lastmod>
+    <loc>https://www.indevastudio.com/blogs/2026-04-07-vastu-compliant-home-design-principles.html</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- perfection is the enemy of comfort -->
   <url>
-    <loc>https://www.indevastudio.com/insights/perfection</loc>
-    <lastmod>2024-12-01</lastmod>
+    <loc>https://www.indevastudio.com/blogs/2026-04-07-bespoke-furniture-design-for-luxury-homes.html</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- budget truth in indian interiors -->
   <url>
-    <loc>https://www.indevastudio.com/insights/budget</loc>
-    <lastmod>2024-11-01</lastmod>
+    <loc>https://www.indevastudio.com/blogs/2026-04-07-commercial-interior-design-services-in-india.html</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- how we protect design on site -->
   <url>
-    <loc>https://www.indevastudio.com/insights/protect</loc>
-    <lastmod>2024-10-01</lastmod>
+    <loc>https://www.indevastudio.com/blogs/2026-04-07-home-renovation-ideas-and-tips-in-india.html</loc>
+    <lastmod>2026-04-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- why we refuse to start with moodboards -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/moodboards</loc>
-    <lastmod>2024-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- light is not a finish — it is the space -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/light</loc>
-    <lastmod>2024-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- the honest material: why we prefer stone over stone-effect -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/material</loc>
-    <lastmod>2024-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- what a good brief actually looks like -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/client</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- the scale problem: why small rooms feel smaller after renovation -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/scale</loc>
-    <lastmod>2024-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- choosing a contractor in india: what we look for and why -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/contractor</loc>
-    <lastmod>2024-04-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- colour follows conviction, not trends -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/color</loc>
-    <lastmod>2024-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- interior design trends in india for 2025 -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo01</loc>
-    <lastmod>2025-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- what luxury interior design actually means in india -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo02</loc>
-    <lastmod>2025-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- the complete guide to kitchen design in indian homes -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo03</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- how to design a bedroom that actually helps you sleep -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo04</loc>
-    <lastmod>2024-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- a complete guide to home lighting design -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo05</loc>
-    <lastmod>2024-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- small apartment design: how to make every square foot count -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo07</loc>
-    <lastmod>2024-09-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- restaurant interior design: how ambience drives revenue -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo08</loc>
-    <lastmod>2024-08-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- how to choose the right colour palette for your home -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo09</loc>
-    <lastmod>2024-07-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- sustainable interior design: building beautiful spaces responsibly -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo10</loc>
-    <lastmod>2024-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- open plan living: when it works and when it doesn\ -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo11</loc>
-    <lastmod>2025-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- biophilic design: why bringing nature indoors changes everything -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo12</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- the 8 most expensive interior design mistakes indian homeowners make -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo13</loc>
-    <lastmod>2024-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- designing the luxury bathroom: a room that earns its investment -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo14</loc>
-    <lastmod>2024-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- how to write a brief your interior designer will actually love -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo15</loc>
-    <lastmod>2024-10-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- how much does interior design cost in india? a complete 2025 breakdown -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo16</loc>
-    <lastmod>2025-03-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- designing a luxury villa in india: what separates the extraordinary from the expensive -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo17</loc>
-    <lastmod>2025-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- interior designer vs architect: who do you actually need for your project? -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo18</loc>
-    <lastmod>2025-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- vastu and modern interior design: how to honour both without compromising either -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo19</loc>
-    <lastmod>2024-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- how to hire an interior designer in india: the questions every client should ask -->
-  <url>
-    <loc>https://www.indevastudio.com/insights/seo20</loc>
-    <lastmod>2024-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
 </urlset>
