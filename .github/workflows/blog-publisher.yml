@@ -1,4 +1,4 @@
-name: Auto Blog Publisher
+\name: Auto Blog Publisher
 
 on:
   schedule:
@@ -41,5 +41,4 @@ jobs:
 
       - name: Send email notification
         env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-        run: node scripts/email-notifier.js
+          RESEND_API_KEY: ${{ secrets.R
