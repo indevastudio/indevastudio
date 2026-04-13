@@ -8,24 +8,31 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    
+    permissions:
+      contents: write
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - run: npm install
+      - name: Install dependencies
+        run: npm install @anthropic-ai/sdk
 
       - name: Generate blogs
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/generate-blogs.js
 
-      - name: Push to GitHub
+      - name: Commit and push blogs
         run: |
           git config user.name "Indeva Bot"
           git config user.email "bot@indevastudio.com"
-          git add blogs/ content/
+          git add -A
           git diff --staged --quiet || git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
           git push
