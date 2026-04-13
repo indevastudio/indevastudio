@@ -13,7 +13,7 @@
       ]
     },
     {
-      "source": "/(.*\\.html|/)",
+      "source": "/(.*\\.html/)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
@@ -31,12 +31,4 @@
   ],
   "rewrites": [
     { "source": "/interior-designer-delhi", "destination": "/interior-designer-delhi.html" },
-    { "source": "/interior-designer-gurgaon", "destination": "/interior-designer-gurgaon.html" },
-    { "source": "/interior-designer-noida", "destination": "/interior-designer-noida.html" },
-    { "source": "/projects/:slug", "destination": "/index.html" }
-  ],
-  "redirects": [
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/contact-us", "destination": "/#contact", "permanent": true }
-  ]
-}
+    { "source": "/interior-designer-gurgaon", "destination
