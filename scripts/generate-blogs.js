@@ -1,16 +1,15 @@
 /**
  * INDEVA STUDIO — AUTOMATED BLOG ENGINE
- * Fixed version — correct folder paths for indevastudio repo
+ * Uses Google Gemini API (FREE — 1000 requests/day)
  */
 
-import Anthropic from "@anthropic-ai/sdk";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 // ─────────────────────────────────────────────
 // 1. KEYWORD POOL
@@ -131,7 +130,7 @@ function toSlug(keyword) {
 }
 
 // ─────────────────────────────────────────────
-// 5. BLOG GENERATOR
+// 5. BLOG GENERATOR — GEMINI API (FREE)
 // ─────────────────────────────────────────────
 async function generateBlog(keyword) {
   const internalLink1 = INTERNAL_LINKS[Math.floor(Math.random() * 3)];
@@ -178,12 +177,33 @@ SLUG: [slug here]
 Write the complete article now. No truncation. No placeholders.`;
 
   console.log(`  ✍️  Generating: "${keyword}"`);
-  const response = await client.messages.create({
-    model: "claude-opus-4-5",
-    max_tokens: 4000,
-    messages: [{ role: "user", content: prompt }],
-  });
-  return response.content[0].text;
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.8,
+          maxOutputTokens: 4000,
+        },
+      }),
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(`Gemini API error: ${JSON.stringify(data)}`);
+  }
+
+  if (!data.candidates || !data.candidates[0]) {
+    throw new Error(`No response from Gemini: ${JSON.stringify(data)}`);
+  }
+
+  return data.candidates[0].content.parts[0].text;
 }
 
 // ─────────────────────────────────────────────
@@ -402,7 +422,11 @@ async function main() {
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
 
-  // Ensure blogs folder exists
+  if (!GEMINI_API_KEY) {
+    console.error("❌ GEMINI_API_KEY is not set. Add it to GitHub Secrets.");
+    process.exit(1);
+  }
+
   const blogsDir = path.join(REPO_ROOT, "blogs");
   if (!fs.existsSync(blogsDir)) {
     fs.mkdirSync(blogsDir, { recursive: true });
