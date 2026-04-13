@@ -26,7 +26,7 @@ const CONFIG = {
 // 1. LOAD TODAY'S PUBLISHED BLOGS
 // ─────────────────────────────────────────────
 function getTodaysBlogs() {
-  const indexPath = path.join(REPO_ROOT, "blogs", "index.json");
+  const indexPath = path.join(REPO_ROOT, "blogs", "tracking.json");
 
   if (!fs.existsSync(indexPath)) {
     console.log("⚠️  No blog index found. Skipping email.");
