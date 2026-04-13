@@ -1,9 +1,10 @@
 /**
  * INDEVA STUDIO — AUTOMATED BLOG ENGINE
- * - Generates blogs inside /insights/ folder
- * - Injects cards into /insights/index.html automatically
- * - Matches existing insights card design exactly
- * - Uses Google Gemini API (FREE)
+ * - Saves blogs to /insights/[slug]/index.html
+ * - Injects cards into /insights/index.html
+ * - Uses Gemini 1.5 Flash (1500 req/day free)
+ * - Uses Picsum for reliable free images
+ * - Targets: villas, farmhouses, restaurants, luxury homes
  */
 
 import fs from "fs";
@@ -14,78 +15,86 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// ─────────────────────────────────────────────
-// KEYWORD POOL
-// ─────────────────────────────────────────────
 const KEYWORD_POOL = {
   interior_design: [
-    "interior design cost in Delhi 2025",
-    "luxury interior designers in Delhi NCR",
-    "modular interior design ideas for Indian homes",
-    "contemporary interior design trends India",
-    "interior design services price list India",
+    "luxury home interior design cost Delhi 2025",
+    "premium interior designers Delhi NCR",
+    "bespoke interior design ideas Indian homes",
+    "contemporary interior design trends India 2025",
     "full home interior design cost Gurgaon",
-    "best interior designers near me Delhi",
-    "affordable luxury interior design India",
+    "best luxury interior designers near me Delhi",
+    "high end interior design services India",
+    "affordable luxury interior design Delhi NCR",
   ],
-  modular_kitchen: [
-    "modular kitchen design ideas for Indian homes",
-    "modular kitchen cost in Delhi 2025",
-    "L-shaped modular kitchen design small space",
-    "parallel kitchen design ideas India",
-    "modular kitchen materials comparison India",
-    "open kitchen design ideas Indian homes",
-    "modular kitchen with island design India",
-    "best modular kitchen brands India price",
+  villa: [
+    "luxury villa interior design India",
+    "villa interior design cost Delhi NCR",
+    "modern villa design ideas Indian homes",
+    "farmhouse villa interior design Gurgaon",
+    "luxury villa bedroom design ideas India",
+    "contemporary villa living room design India",
+    "villa interior designers Delhi NCR price",
+    "bespoke villa interior design Noida",
+  ],
+  farmhouse: [
+    "farmhouse interior design ideas India",
+    "luxury farmhouse design Delhi NCR",
+    "modern farmhouse interior design cost India",
+    "farmhouse living room design ideas India",
+    "rustic luxury farmhouse design Delhi",
+    "farmhouse bedroom interior design India",
+    "weekend farmhouse interior design Gurgaon",
+    "farmhouse kitchen design ideas India",
+  ],
+  restaurant: [
+    "luxury restaurant interior design India",
+    "restaurant interior design cost Delhi",
+    "fine dining restaurant design ideas India",
+    "modern cafe interior design Delhi NCR",
+    "restaurant interior designers Gurgaon",
+    "premium restaurant design ideas India 2025",
+    "restaurant ambience design cost India",
+    "high end cafe and restaurant design Delhi",
   ],
   living_room: [
-    "modern living room design ideas India 2025",
     "luxury living room interior design Delhi",
-    "small living room design ideas Indian apartment",
+    "modern living room design ideas India 2025",
     "living room TV unit design ideas India",
-    "living room color combinations Indian homes",
     "false ceiling design for living room India",
-    "sofa set design ideas for Indian living room",
+    "sofa set design ideas Indian living room",
     "living room interior cost estimate Delhi",
+    "premium living room design Gurgaon",
+    "open plan living room design India",
   ],
   bedroom: [
     "master bedroom interior design ideas India",
-    "bedroom design cost in Delhi NCR",
+    "luxury bedroom design cost Delhi NCR",
     "luxury bedroom design ideas Indian homes",
-    "small bedroom storage ideas India",
-    "kids bedroom design ideas India",
     "wardrobe design ideas for bedroom India",
-    "bedroom false ceiling design ideas",
-    "couple bedroom interior design ideas",
-  ],
-  home_salon: [
-    "home salon interior design ideas India",
-    "beauty parlour interior design small space",
-    "home salon setup cost India 2025",
-    "salon interior design ideas for small rooms",
-    "home beauty studio design ideas India",
-    "nail salon interior design ideas India",
-    "home parlour furniture ideas India",
-    "budget home salon design India",
+    "bedroom false ceiling design ideas India",
+    "couple bedroom interior design Delhi",
+    "kids bedroom luxury design ideas India",
+    "premium master suite design India",
   ],
   local_seo: [
-    "interior designer in Gurgaon for home",
-    "interior design company Noida residential",
-    "best interior designer Dehradun homes",
+    "interior designer in Gurgaon for villa",
+    "luxury interior design company Noida",
+    "best interior designer Dehradun farmhouse",
     "interior design services Delhi NCR reviews",
     "interior designer Udaipur luxury villas",
     "top interior designers Delhi farmhouse",
-    "home renovation interior design Delhi",
+    "restaurant interior designer Delhi NCR",
     "flat interior design Delhi cost per sqft",
   ],
 };
 
 const CATEGORY_MAP = {
   interior_design: "design intelligence",
-  modular_kitchen: "kitchen design",
+  villa: "villa & farmhouse",
+  farmhouse: "villa & farmhouse",
+  restaurant: "hospitality design",
   living_room: "spatial logic",
   bedroom: "bedroom design",
-  home_salon: "residential design",
   local_seo: "india market",
 };
 
@@ -105,33 +114,18 @@ const EXTERNAL_LINKS = [
   { text: "houzz india", url: "https://www.houzz.in" },
 ];
 
-// Reliable Unsplash images — same pool your existing insights use
-const IMAGE_POOL = [
-  "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80",
-  "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80",
-  "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80",
-  "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80",
-  "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80",
-  "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80",
-  "https://images.unsplash.com/photo-1567016376408-0226e4d0c1ea?w=1200&q=80",
-  "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=1200&q=80",
-  "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=1200&q=80",
-  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80",
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80",
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80",
-  "https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=1200&q=80",
+// Picsum — 100% free, no API key, always works
+const IMAGE_IDS = [
+  "1024", "1029", "1031", "1033", "1038",
+  "1040", "1041", "1043", "1044", "1047",
+  "1048", "1050", "1053", "1054", "1055",
 ];
 
 function getImageUrl(slug) {
-  const index = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % IMAGE_POOL.length;
-  return IMAGE_POOL[index];
+  const index = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % IMAGE_IDS.length;
+  return `https://picsum.photos/id/${IMAGE_IDS[index]}/1200/675`;
 }
 
-// ─────────────────────────────────────────────
-// KEYWORD SELECTOR
-// ─────────────────────────────────────────────
 function selectDailyKeywords() {
   const categories = Object.keys(KEYWORD_POOL);
   const today = new Date();
@@ -151,12 +145,14 @@ function selectDailyKeywords() {
 }
 
 function toSlug(keyword) {
-  return keyword.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim();
+  return keyword
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim();
 }
 
-// ─────────────────────────────────────────────
-// BLOG GENERATOR — GEMINI API
-// ─────────────────────────────────────────────
 async function generateBlog(keyword) {
   const internalLink1 = INTERNAL_LINKS[Math.floor(Math.random() * 3)];
   const internalLink2 = INTERNAL_LINKS[3 + Math.floor(Math.random() * 2)];
@@ -168,45 +164,45 @@ Write a complete SEO-optimized blog article for keyword: "${keyword}"
 
 BRAND VOICE:
 - Brand name always lowercase: indéva studio
-- Authoritative, intelligent, warm
+- Authoritative, intelligent, warm tone
 - No clichés: no "dive into", "delve", "certainly", "absolutely"
 - Grade 7-8 readability
 - Indian context: use ₹ for prices, reference Indian cities
 
-OUTPUT — respond with EXACTLY this structure:
-SEO_TITLE: [60-65 chars, keyword-first, compelling]
-META_DESC: [under 155 chars, include keyword]
-SLUG: [hyphenated-slug-only]
-CATEGORY: [one of: spatial logic / design intelligence / india market / kitchen design / bedroom design / residential design / materials / philosophy / process]
-EXCERPT: [2 sentences max, used as card preview — no HTML]
+RESPOND WITH EXACTLY THIS STRUCTURE — nothing before or after:
+SEO_TITLE: [60-65 chars, keyword-first]
+META_DESC: [under 155 chars]
+SLUG: [hyphenated-slug]
+CATEGORY: [one of: spatial logic / design intelligence / india market / kitchen design / bedroom design / residential design / villa & farmhouse / hospitality design / materials / philosophy / process]
+EXCERPT: [2 sentences, plain text, no HTML, used as card preview]
 ---ARTICLE---
-[Pure HTML article body. Do NOT include DOCTYPE, html, head, or body tags.
-Start directly with <h1>.
+[HTML article body only. NO DOCTYPE, NO html/head/body tags.
+Start with <h1>.
 Include:
-- <h1> with keyword
-- Opening paragraph (hook, problem statement)  
-- 4-5 <h2> sections with <h3> subsections
+- Opening paragraph as hook
+- 4-5 <h2> sections
+- <h3> subsections where useful
 - <ul> or <ol> lists
 - Cost estimates in ₹ where relevant
-- This link naturally: <a href="${internalLink1.url}">${internalLink1.text}</a>
-- This link naturally: <a href="${internalLink2.url}">${internalLink2.text}</a>
-- This external link: <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
-- A <blockquote> with a key insight
-- FAQ: 4 questions with <details><summary> tags
-- Final CTA paragraph with <a href="/#contact">start a project</a>
-Target: 1400-1800 words. No markdown. No code fences.]
+- <a href="${internalLink1.url}">${internalLink1.text}</a> used naturally
+- <a href="${internalLink2.url}">${internalLink2.text}</a> used naturally
+- <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
+- One <blockquote> with a key insight
+- FAQ: 4 questions using <details><summary> tags
+- Final paragraph with <a href="/#contact">start a project</a>
+1400-1800 words. No markdown.]
 ---END---`;
 
   console.log(`  ✍️  Generating: "${keyword}"`);
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.75, maxOutputTokens: 4000 },
+        generationConfig: { temperature: 0.75, maxOutputTokens: 4096 },
       }),
     }
   );
@@ -217,15 +213,12 @@ Target: 1400-1800 words. No markdown. No code fences.]
   return data.candidates[0].content.parts[0].text;
 }
 
-// ─────────────────────────────────────────────
-// PARSE RESPONSE
-// ─────────────────────────────────────────────
 function parseBlogResponse(raw, keyword, category) {
   const titleMatch = raw.match(/SEO_TITLE:\s*(.+)/);
   const metaMatch = raw.match(/META_DESC:\s*(.+)/);
   const slugMatch = raw.match(/SLUG:\s*(.+)/);
   const catMatch = raw.match(/CATEGORY:\s*(.+)/);
-  const excerptMatch = raw.match(/EXCERPT:\s*(.+)/);
+  const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=---ARTICLE---)/);
   const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
   return {
@@ -238,14 +231,12 @@ function parseBlogResponse(raw, keyword, category) {
   };
 }
 
-// ─────────────────────────────────────────────
-// BUILD INDIVIDUAL INSIGHT PAGE
-// Matches your existing /insights/floorplans structure exactly
-// ─────────────────────────────────────────────
 function buildInsightPage(blogData) {
   const date = new Date().toISOString().split("T")[0];
   const imageUrl = getImageUrl(blogData.slug);
-  const monthYear = new Date().toLocaleDateString("en-IN", { month: "long", year: "numeric" }).toLowerCase();
+  const monthYear = new Date().toLocaleDateString("en-IN", {
+    month: "long", year: "numeric"
+  }).toLowerCase();
   const wordCount = blogData.article.replace(/<[^>]+>/g, "").split(/\s+/).length;
   const readTime = Math.ceil(wordCount / 200);
 
@@ -281,7 +272,7 @@ function buildInsightPage(blogData) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Founders+Grotesk:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root{--black:#0a0a0a;--black-2:#111111;--black-3:#181818;--gold:#b89a6a;--gold-dim:#8a7250;--gold-bright:#c9ac7e;--white:#f0ebe3;--white-dim:rgba(240,235,227,0.55);--white-muted:rgba(240,235,227,0.28);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Founders Grotesk',sans-serif;--mono:'DM Mono',monospace;--line:rgba(240,235,227,0.08);--line-gold:rgba(184,154,106,0.2);}
+:root{--black:#0a0a0a;--black-2:#111111;--gold:#b89a6a;--gold-dim:#8a7250;--gold-bright:#c9ac7e;--white:#f0ebe3;--white-dim:rgba(240,235,227,0.55);--white-muted:rgba(240,235,227,0.28);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Founders Grotesk',sans-serif;--mono:'DM Mono',monospace;--line:rgba(240,235,227,0.08);--line-gold:rgba(184,154,106,0.2);}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;}
@@ -301,7 +292,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .article-cat{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:block;}
 .article-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:32px;}
 .article-meta{display:flex;gap:20px;align-items:center;font-family:var(--mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);padding-bottom:48px;border-bottom:1px solid var(--line);}
-.article-image{padding:0 60px;margin-bottom:0;}
+.article-image{padding:0 60px;}
 .article-image img{width:100%;max-height:560px;object-fit:cover;display:block;filter:brightness(0.8) saturate(0.85);}
 .article-body{max-width:720px;padding:64px 60px 120px;}
 .article-body h1{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:2rem;font-style:italic;}
@@ -385,35 +376,16 @@ ${blogData.article}
 </html>`;
 }
 
-// ─────────────────────────────────────────────
-// INJECT CARDS INTO /insights/index.html
-// Adds new blog cards at the TOP of the existing grid
-// ─────────────────────────────────────────────
 function injectCardsIntoInsightsPage(newBlogs) {
   const insightsIndexPath = path.join(REPO_ROOT, "insights", "index.html");
-
   if (!fs.existsSync(insightsIndexPath)) {
-    console.log("⚠️  insights/index.html not found — skipping injection");
+    console.log("⚠️  insights/index.html not found");
     return;
   }
 
   let html = fs.readFileSync(insightsIndexPath, "utf8");
 
-  // Build new cards in your exact existing card format
   const newCards = newBlogs.map(blog => {
-    const imageUrl = getImageUrl(blog.slug);
-    return `
-    <a class="blog-card" href="/insights/${blog.slug}/">
-      <img src="${imageUrl}" alt="${blog.title.toLowerCase()}" class="blog-card-image">
-      <div class="blog-card-cat">${blog.cat}</div>
-      <h2 class="blog-card-title">${blog.title.toLowerCase()}</h2>
-      <p class="blog-card-excerpt">${blog.excerpt}</p>
-      <div class="blog-card-read">read article ↗</div>
-    </a>`;
-  }).join("\n");
-
-  // Check if these slugs already exist and skip duplicates
-  const filteredCards = newBlogs.map(blog => {
     if (html.includes(`/insights/${blog.slug}/`)) {
       console.log(`  ⏭️  Already in insights: ${blog.slug}`);
       return null;
@@ -429,52 +401,42 @@ function injectCardsIntoInsightsPage(newBlogs) {
     </a>`;
   }).filter(Boolean).join("\n");
 
-  if (!filteredCards) {
+  if (!newCards) {
     console.log("  ℹ️  All blogs already in insights page");
     return;
   }
 
-  // Inject after the opening <div class="blog-grid"> tag
   const gridOpenTag = '<div class="blog-grid">';
   if (html.includes(gridOpenTag)) {
-    html = html.replace(gridOpenTag, `${gridOpenTag}\n${filteredCards}`);
+    html = html.replace(gridOpenTag, `${gridOpenTag}\n${newCards}`);
     fs.writeFileSync(insightsIndexPath, html);
     console.log(`✅ Injected ${newBlogs.length} new cards into insights/index.html`);
   } else {
-    console.log("⚠️  Could not find blog-grid div in insights/index.html");
+    console.log("⚠️  Could not find blog-grid div");
   }
 }
 
-// ─────────────────────────────────────────────
-// UPDATE SITEMAP
-// ─────────────────────────────────────────────
 function updateSitemap(newBlogs) {
   const sitemapPath = path.join(REPO_ROOT, "sitemap.xml");
   if (!fs.existsSync(sitemapPath)) return;
-
   let sitemap = fs.readFileSync(sitemapPath, "utf8");
   const today = new Date().toISOString().split("T")[0];
-
   const newEntries = newBlogs
-    .filter(blog => !sitemap.includes(`/insights/${blog.slug}/`))
-    .map(blog => `
+    .filter(b => !sitemap.includes(`/insights/${b.slug}/`))
+    .map(b => `
   <url>
-    <loc>https://indevastudio.com/insights/${blog.slug}/</loc>
+    <loc>https://indevastudio.com/insights/${b.slug}/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>`).join("");
-
   if (newEntries) {
     sitemap = sitemap.replace("</urlset>", `${newEntries}\n</urlset>`);
     fs.writeFileSync(sitemapPath, sitemap);
-    console.log("🗺️  Sitemap updated with new insight URLs");
+    console.log("🗺️  Sitemap updated");
   }
 }
 
-// ─────────────────────────────────────────────
-// MAIN
-// ─────────────────────────────────────────────
 async function main() {
   console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE");
   console.log("━".repeat(50));
@@ -485,11 +447,8 @@ async function main() {
     process.exit(1);
   }
 
-  // Ensure insights folder exists
   const insightsDir = path.join(REPO_ROOT, "insights");
-  if (!fs.existsSync(insightsDir)) {
-    fs.mkdirSync(insightsDir, { recursive: true });
-  }
+  if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
 
   const selections = selectDailyKeywords();
   const publishedBlogs = [];
@@ -502,7 +461,6 @@ async function main() {
       const blogData = parseBlogResponse(raw, keyword, category);
       blogData.keyword = keyword;
 
-      // Save as /insights/[slug]/index.html for clean URLs
       const slugDir = path.join(insightsDir, blogData.slug);
       if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
 
@@ -512,7 +470,7 @@ async function main() {
       console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
       publishedBlogs.push(blogData);
 
-      if (i < selections.length - 1) await new Promise(r => setTimeout(r, 2000));
+      if (i < selections.length - 1) await new Promise(r => setTimeout(r, 3000));
     } catch (err) {
       console.error(`  ❌ Failed: ${err.message}`);
     }
@@ -528,4 +486,3 @@ async function main() {
 }
 
 main().catch(console.error);
-
