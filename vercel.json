@@ -1,4 +1,8 @@
 {
+  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null,
   "headers": [
     {
       "source": "/(.*\\.webp|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.gif|.*\\.svg|.*\\.ico|.*\\.woff2|.*\\.woff|.*\\.ttf|.*\\.otf)",
@@ -31,4 +35,12 @@
   ],
   "rewrites": [
     { "source": "/interior-designer-delhi", "destination": "/interior-designer-delhi.html" },
-    { "source": "/interior-designer-gurgaon", "destination
+    { "source": "/interior-designer-gurgaon", "destination": "/interior-designer-gurgaon.html" },
+    { "source": "/interior-designer-noida", "destination": "/interior-designer-noida.html" },
+    { "source": "/projects/:slug", "destination": "/index.html" }
+  ],
+  "redirects": [
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/contact-us", "destination": "/#contact", "permanent": true }
+  ]
+}
