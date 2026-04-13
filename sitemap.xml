@@ -1,78 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Homepage -->
   <url>
-    <loc>https://www.indevastudio.com/</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://indevastudio.com/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2025-01-01</lastmod>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp</image:loc>
-      <image:title>Indéva Studio — Luxury Interior Designer in Delhi NCR</image:title>
-    </image:image>
-  </url>
-
-  <!-- Core pages -->
-  <url><loc>https://www.indevastudio.com/projects</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.indevastudio.com/services</loc><changefreq>yearly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.indevastudio.com/about</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.indevastudio.com/contact</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
-
-  <!-- City landing pages -->
-  <url><loc>https://www.indevastudio.com/interior-designer-delhi</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.indevastudio.com/interior-designer-gurgaon</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.indevastudio.com/interior-designer-noida</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-
-  <!-- Project pages -->
-  <url>
-    <loc>https://www.indevastudio.com/projects/mini-farmhouse</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp</image:loc>
-      <image:title>Mini Farmhouse Interior Design, New Delhi — Indéva Studio</image:title>
-    </image:image>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/shanti-villa</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp</image:loc>
-      <image:title>Shanti Villa Luxury Interior Design, Delhi — Indéva Studio</image:title>
-    </image:image>
+    <loc>https://indevastudio.com/blogs/</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/studio-workspace</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp</image:loc>
-      <image:title>Studio Workspace Commercial Interior Design, Gurgaon — Indéva Studio</image:title>
-    </image:image>
+    <loc>https://indevastudio.com/interior-designer-delhi</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/urban-apartment</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp</image:loc>
-      <image:title>Urban Apartment Interior Design, Dehradun — Indéva Studio</image:title>
-    </image:image>
+    <loc>https://indevastudio.com/interior-designer-gurgaon</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/restaurant-udaipur</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Main%20lobby%20area%20design.webp</image:loc>
-      <image:title>Restaurant Interior Design, Udaipur — Indéva Studio</image:title>
-    </image:image>
+    <loc>https://indevastudio.com/interior-designer-noida</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/hashtag-restaurant</loc>
-    <changefreq>yearly</changefreq><priority>0.85</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp</image:loc>
-      <image:title>Hashtag Restaurant Interior Design, Noida — Indéva Studio</image:title>
-    </image:image>
+    <loc>https://indevastudio.com/blogs/2026-04-07-luxury-home-interior-design-in-india</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://indevastudio.com/blogs/2026-04-07-vastu-compliant-home-design-principles</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/2026-04-07-bespoke-furniture-design-for-luxury-homes</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/2026-04-07-commercial-interior-design-services-in-india</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/2026-04-07-home-renovation-ideas-and-tips-in-india</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/luxury-villa-interiors</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/vastu-home-offices</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/new-delhi-architects</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/office-interior-design-trends</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://indevastudio.com/blogs/luxury-apartment-interiors</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

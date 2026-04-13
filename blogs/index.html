@@ -1,133 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interior Design Blog — Insights &amp; Ideas | indéva Studio</title>
-<meta name="description" content="Expert articles on luxury interior design, architecture, bespoke furniture, and home renovation in India. Insights from indéva Studio, New Delhi.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.indevastudio.com/blogs/index.html">
-<meta property="og:title" content="Interior Design Blog | indéva Studio">
-<meta property="og:description" content="Expert articles on luxury interior design, architecture, and home renovation from indéva Studio, New Delhi.">
-<meta property="og:url" content="https://www.indevastudio.com/blogs/index.html">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg:     #fafaf8;
-    --surface:#ffffff;
-    --ink:    #1a1a1a;
-    --muted:  #6b6b6b;
-    --gold:   #8B6914;
-    --border: #e8e4dc;
-    --radius: 4px;
-  }
-  body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif;
-         font-size: 16px; line-height: 1.7; }
-  a { color: inherit; text-decoration: none; }
-
-  /* Header */
-  .site-header { background: #fff; border-bottom: 1px solid var(--border);
-                  padding: 1.2rem 2rem; display: flex; align-items: center;
-                  justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; letter-spacing: .04em; color: var(--ink); }
-  .logo span { color: var(--gold); }
-  .header-nav a { font-size: .85rem; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-  .header-nav a:hover { color: var(--gold); }
-
-  /* Hero */
-  .hero { background: var(--ink); color: #fff; padding: 4rem 2rem; text-align: center; }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem);
-              font-weight: 400; letter-spacing: .02em; margin-bottom: .8rem; }
-  .hero p { color: #aaa; font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
-
-  /* Grid */
-  .grid-section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem 5rem; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 2rem; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-           padding: 1.8rem; display: flex; flex-direction: column; gap: .6rem;
-           transition: box-shadow .2s; }
-  .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
-  .card-date { font-size: .78rem; color: var(--gold); letter-spacing: .07em; text-transform: uppercase; }
-  .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600;
-                 line-height: 1.4; }
-  .card-title a:hover { color: var(--gold); }
-  .card-excerpt { font-size: .9rem; color: var(--muted); line-height: 1.6; flex: 1; }
-  .card-link { font-size: .85rem; color: var(--gold); font-weight: 500; margin-top: .4rem; }
-  .card-link:hover { text-decoration: underline; }
-
-  /* Footer */
-  footer { background: var(--ink); color: #888; text-align: center;
-            font-size: .85rem; padding: 2rem; }
-  footer a { color: #bbb; }
-  footer a:hover { color: var(--gold); }
-
-  @media (max-width: 600px) {
-    .site-header { padding: 1rem; }
-    .hero { padding: 2.5rem 1rem; }
-    .grid-section { padding: 2rem 1rem 3rem; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interior Design Journal | Indéva Studio</title>
+  <meta name="description" content="Expert interior design insights, trends, and ideas from Indéva Studio — Delhi NCR's premium design firm." />
+  <link rel="canonical" href="https://indevastudio.com/blogs/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/blogs/blog-style.css" />
 </head>
 <body>
-
-<header class="site-header">
-  <a class="logo" href="https://www.indevastudio.com">ind<span>é</span>va studio</a>
-  <nav class="header-nav">
-    <a href="https://www.indevastudio.com/#services">Services</a> &nbsp;·&nbsp;
-    <a href="https://www.indevastudio.com/#contact">Contact</a>
+  <nav class="blog-nav">
+    <a href="/" class="blog-nav__logo">Indéva Studio</a>
+    <div class="blog-nav__links">
+      <a href="/index.html#projects">Portfolio</a>
+      <a href="/index.html#services">Services</a>
+      <a href="/blogs/">Journal</a>
+      <a href="/index.html#contact" class="blog-nav__cta">Get Consultation</a>
+    </div>
   </nav>
-</header>
-
-<section class="hero">
-  <h1>Design Insights &amp; Ideas</h1>
-  <p>Expert perspectives on luxury interiors, architecture, and crafted living from New Delhi.</p>
-</section>
-
-<section class="grid-section">
-  <div class="grid">
-
-    <article class="card">
-      <time class="card-date">April 07, 2026</time>
-      <h2 class="card-title"><a href="2026-04-07-luxury-home-interior-design-in-india.html">Luxury Home Interior Design in India</a></h2>
-      <p class="card-excerpt">Discover luxury home interior design in India with indéva Studio. Expert interior designers for bespoke homes.</p>
-      <a class="card-link" href="2026-04-07-luxury-home-interior-design-in-india.html">Read article →</a>
+  <header class="blog-listing-header">
+    <p class="blog-listing-header__eyebrow">The Indéva Journal</p>
+    <h1>Interior Design Insights</h1>
+    <p class="blog-listing-header__sub">Ideas, trends, and expertise from Delhi NCR's premium design studio</p>
+  </header>
+  <main class="blog-listing-grid">
+    
+    <article class="blog-card">
+      <a href="/blogs/flat-interior-design-delhi-cost-per-sqft" class="blog-card__link">
+        <div class="blog-card__img">
+          <img src="https://source.unsplash.com/600x400/?luxury+interior+design&sig=40" alt="Flat Interior Design Delhi Cost Per Sqft | Indéva Studio" loading="lazy" />
+        </div>
+        <div class="blog-card__body">
+          <time class="blog-card__date">undefined</time>
+          <h2 class="blog-card__title">Flat Interior Design Delhi Cost Per Sqft | Indéva Studio</h2>
+          <p class="blog-card__meta">Discover the flat interior design Delhi cost per sqft with Indéva Studio. Get expert insights for your luxury home. Enquire today!</p>
+          <span class="blog-card__read">Read Article →</span>
+        </div>
+      </a>
     </article>
-    <article class="card">
-      <time class="card-date">April 07, 2026</time>
-      <h2 class="card-title"><a href="2026-04-07-vastu-compliant-home-design-principles.html">Vastu Compliant Home Design Principles</a></h2>
-      <p class="card-excerpt">Learn about vastu compliant home design principles with indéva Studio. Expert vastu interior design services in India.</p>
-      <a class="card-link" href="2026-04-07-vastu-compliant-home-design-principles.html">Read article →</a>
+    <article class="blog-card">
+      <a href="/blogs/home-salon-setup-cost-india-2025" class="blog-card__link">
+        <div class="blog-card__img">
+          <img src="https://source.unsplash.com/600x400/?luxury+interior+design&sig=32" alt="Home Salon Setup Cost India 2025: Luxury Design Guide" loading="lazy" />
+        </div>
+        <div class="blog-card__body">
+          <time class="blog-card__date">undefined</time>
+          <h2 class="blog-card__title">Home Salon Setup Cost India 2025: Luxury Design Guide</h2>
+          <p class="blog-card__meta">Planning a home salon in India for 2025? Discover the luxe setup cost and expert tips from Indéva Studio. Get your personalized quote today!</p>
+          <span class="blog-card__read">Read Article →</span>
+        </div>
+      </a>
     </article>
-    <article class="card">
-      <time class="card-date">April 07, 2026</time>
-      <h2 class="card-title"><a href="2026-04-07-bespoke-furniture-design-for-luxury-homes.html">Bespoke Furniture Design for Luxury Homes</a></h2>
-      <p class="card-excerpt">Get bespoke furniture design for luxury homes with indéva Studio. Custom furniture makers in India.</p>
-      <a class="card-link" href="2026-04-07-bespoke-furniture-design-for-luxury-homes.html">Read article →</a>
+    <article class="blog-card">
+      <a href="/blogs/wardrobe-design-ideas-bedroom-india" class="blog-card__link">
+        <div class="blog-card__img">
+          <img src="https://source.unsplash.com/600x400/?luxury+interior+design&sig=35" alt="Luxury Wardrobe Design Ideas for Bedrooms in India" loading="lazy" />
+        </div>
+        <div class="blog-card__body">
+          <time class="blog-card__date">undefined</time>
+          <h2 class="blog-card__title">Luxury Wardrobe Design Ideas for Bedrooms in India</h2>
+          <p class="blog-card__meta">Discover exquisite wardrobe design ideas for your Indian bedroom. Elevate your space with premium solutions. Contact us for a free consultation.</p>
+          <span class="blog-card__read">Read Article →</span>
+        </div>
+      </a>
     </article>
-    <article class="card">
-      <time class="card-date">April 07, 2026</time>
-      <h2 class="card-title"><a href="2026-04-07-commercial-interior-design-services-in-india.html">Commercial Interior Design Services in India</a></h2>
-      <p class="card-excerpt">Expert commercial interior design services in India with indéva Studio. Transform your workspace.</p>
-      <a class="card-link" href="2026-04-07-commercial-interior-design-services-in-india.html">Read article →</a>
+    <article class="blog-card">
+      <a href="/blogs/modern-living-room-design-ideas-india-2025" class="blog-card__link">
+        <div class="blog-card__img">
+          <img src="https://source.unsplash.com/600x400/?luxury+interior+design&sig=42" alt="Modern Living Room Design Ideas India 2025 | Indéva Studio" loading="lazy" />
+        </div>
+        <div class="blog-card__body">
+          <time class="blog-card__date">undefined</time>
+          <h2 class="blog-card__title">Modern Living Room Design Ideas India 2025 | Indéva Studio</h2>
+          <p class="blog-card__meta">Discover the latest modern living room design ideas for India in 2025. Elevate your space with luxury insights from Indéva Studio. Explore now!</p>
+          <span class="blog-card__read">Read Article →</span>
+        </div>
+      </a>
     </article>
-    <article class="card">
-      <time class="card-date">April 07, 2026</time>
-      <h2 class="card-title"><a href="2026-04-07-home-renovation-ideas-and-tips-in-india.html">Home Renovation Ideas and Tips in India</a></h2>
-      <p class="card-excerpt">Get home renovation ideas and tips in India with indéva Studio. Expert home renovation services for a luxury look.</p>
-      <a class="card-link" href="2026-04-07-home-renovation-ideas-and-tips-in-india.html">Read article →</a>
-    </article>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 indéva Studio · New Delhi ·
-     <a href="mailto:hello@indevastudio.com">hello@indevastudio.com</a> ·
-     <a href="https://www.indevastudio.com">indevastudio.com</a>
-  </p>
-</footer>
-
+  </main>
+  <footer class="blog-footer">
+    <p>© 2026 Indéva Studio · <a href="/">indevastudio.com</a></p>
+  </footer>
 </body>
 </html>
