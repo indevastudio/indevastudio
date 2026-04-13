@@ -10,24 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
-        run: npm install @anthropic-ai/sdk
+
       - name: Generate blogs
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/generate-blogs.js
+
       - name: Update sitemap
         run: node scripts/update-sitemap.js
+
       - name: Commit and push
         run: |
           git config user.name "Indeva Bot"
           git config user.email "bot@indevastudio.com"
           git add -A
-          git diff
+          git diff --staged --quiet || git commit -m "Auto-publish blogs"
+          git push
+
+      - name: Send email notification
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: node scripts/email-notifier.js
