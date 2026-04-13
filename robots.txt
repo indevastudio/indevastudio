@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Block internal search and query params
+Disallow: /?s=
+Disallow: /cdn-cgi/
+
+# Sitemap
 Sitemap: https://www.indevastudio.com/sitemap.xml
