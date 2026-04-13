@@ -8,7 +8,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    
     permissions:
       contents: write
 
@@ -36,3 +35,8 @@ jobs:
           git add -A
           git diff --staged --quiet || git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
           git push
+
+      - name: Send email notification
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: node scripts/email-notifier.js
