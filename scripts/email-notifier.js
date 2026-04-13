@@ -37,7 +37,7 @@ function getTodaysBlogs() {
   const today = new Date().toISOString().split("T")[0];
 
   // Filter only today's blogs
-  const todaysBlogs = allBlogs.filter((b) => b.date === today);
+  const todaysBlogs = allBlogs.slice(0, 4);
 
   console.log(`📋 Found ${todaysBlogs.length} blogs published today`);
   return todaysBlogs;
