@@ -20,16 +20,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Redesign old blogs
-        run: node scripts/redesign-old-blogs.js
-
       - name: Generate blogs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node scripts/generate-blogs.js
-
-      - name: Update sitemap
-        run: node scripts/update-sitemap.js
 
       - name: Commit and push
         run: |
