@@ -16,7 +16,7 @@ const REPO_ROOT = path.join(__dirname, "..");
 // ─────────────────────────────────────────────
 const CONFIG = {
   to: "ceo@indevastudio.com",
-  from: "Indéva Studio <onboarding@resend.dev>", // change after domain verify
+  from: "Indéva Studio <hello@indevastudio.com>",
   subject: "Daily Blogs Published – Indeva Studio",
   baseUrl: "https://indevastudio.com",
   resendApiKey: process.env.RESEND_API_KEY,
