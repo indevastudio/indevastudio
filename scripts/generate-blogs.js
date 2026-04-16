@@ -1,10 +1,7 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE
- * - Saves blogs to /insights/[slug]/index.html
- * - Injects cards into /insights/index.html
- * - Uses Gemini 1.5 Flash (1500 req/day free)
- * - Uses Picsum for reliable free images
- * - Targets: villas, farmhouses, restaurants, luxury homes
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v3
+ * Full uniqueness system: angle rotation, title history,
+ * structure variation, semantic diversity, anti-duplication
  */
 
 import fs from "fs";
@@ -14,7 +11,139 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
+// ─────────────────────────────────────────────
+// MEMORY SYSTEM
+// Tracks: used titles, used angles, content summaries
+// ─────────────────────────────────────────────
+function loadMemory() {
+  if (!fs.existsSync(MEMORY_FILE)) {
+    return { titles: [], slugs: [], usedKeywords: [], summaries: [], lastAngles: [] };
+  }
+  try {
+    return JSON.parse(fs.readFileSync(MEMORY_FILE, "utf8"));
+  } catch (_) {
+    return { titles: [], slugs: [], usedKeywords: [], summaries: [], lastAngles: [] };
+  }
+}
+
+function saveMemory(memory) {
+  fs.mkdirSync(path.dirname(MEMORY_FILE), { recursive: true });
+  // Keep only last 200 entries to avoid bloat
+  memory.titles = memory.titles.slice(-200);
+  memory.slugs = memory.slugs.slice(-200);
+  memory.summaries = memory.summaries.slice(-200);
+  memory.usedKeywords = memory.usedKeywords.slice(-200);
+  memory.lastAngles = memory.lastAngles.slice(-20);
+  fs.writeFileSync(MEMORY_FILE, JSON.stringify(memory, null, 2));
+}
+
+// ─────────────────────────────────────────────
+// CONTENT ANGLES — 6 distinct approaches
+// Each blog gets a different angle to ensure
+// content is different even for same keyword
+// ─────────────────────────────────────────────
+const ANGLES = [
+  {
+    id: "cost-guide",
+    name: "Cost & Budget Guide",
+    structure: "Guide format",
+    intro: "Data-driven with cost anchors",
+    instruction: `Write as a DEFINITIVE COST GUIDE. 
+    Structure: Start with the biggest cost misconception in India.
+    H2s must cover: what drives costs up, cost breakdown by room, 
+    how to negotiate, red flags that inflate bills, real project budget example.
+    Tone: Financial advisor meets design expert. Specific ₹ figures throughout.
+    Opening: Start with a surprising cost statistic or common pricing myth.`,
+  },
+  {
+    id: "mistakes-avoid",
+    name: "Mistakes to Avoid",
+    structure: "Warning/listicle format",
+    intro: "Problem-aware story opening",
+    instruction: `Write as a WARNING GUIDE exposing costly mistakes.
+    Structure: Open with a real-sounding client disaster story (no names).
+    H2s must be mistakes, each with: what goes wrong, why it happens, exact fix.
+    Tone: Experienced designer who has seen everything go wrong.
+    Opening: "The day a client called us mid-project..." type narrative.
+    Every section must feel like hard-won wisdom, not generic advice.`,
+  },
+  {
+    id: "expert-insights",
+    name: "Expert Perspective",
+    structure: "Narrative/opinion format",
+    intro: "Provocative expert opinion",
+    instruction: `Write as a PROVOCATIVE EXPERT OPINION piece.
+    Structure: Take a contrarian or unexpected position on the topic.
+    H2s must challenge conventional wisdom about this topic in India.
+    Tone: Senior designer with 15 years experience speaking candidly.
+    Opening: Start with a bold statement that most designers won't say publicly.
+    Include at least one counterintuitive insight specific to Indian homes/clients.`,
+  },
+  {
+    id: "step-by-step",
+    name: "Step-by-Step Process",
+    structure: "Sequential how-to format",
+    intro: "Question-based opening",
+    instruction: `Write as a PRACTICAL STEP-BY-STEP PROCESS guide.
+    Structure: Open with the question clients ask most about this topic.
+    H2s must be numbered steps (Step 1, Step 2, etc.) in logical sequence.
+    Tone: Patient teacher explaining to a first-time client.
+    Each step must include: what to do, what to ask your designer, common pitfall.
+    Opening: Start with "Most people approach [topic] backwards. Here is the right sequence."`,
+  },
+  {
+    id: "case-study",
+    name: "Case Study Style",
+    structure: "Story-driven narrative",
+    intro: "Story-based client journey",
+    instruction: `Write as a CASE STUDY following a real-sounding client project.
+    Structure: Follow one project from brief to completion.
+    Use a specific Indian city, property type, and budget throughout.
+    H2s must be project phases: The Brief, The Challenge, The Design Solution, The Result.
+    Tone: Documentary storytelling — specific details make it feel real.
+    Opening: Describe the client situation before the project started.
+    Include: exact timeline, specific design decisions and why, final cost vs budget.`,
+  },
+  {
+    id: "design-ideas",
+    name: "Design Ideas & Inspiration",
+    structure: "Inspirational listicle",
+    intro: "Vivid visual description opening",
+    instruction: `Write as a CURATED DESIGN IDEAS piece with strong visual language.
+    Structure: Open by describing a specific beautiful space in detail.
+    H2s must be distinct design directions/styles for this topic.
+    Tone: Design magazine editor — aspirational but grounded in Indian reality.
+    Each idea section must include: visual description, materials, cost range, who it suits.
+    Opening: Paint a vivid picture of what the ideal version of this space looks/feels like.
+    Reference specific Indian aesthetics, materials, or cultural elements.`,
+  },
+];
+
+// City rotation to ensure geographic variety
+const CITIES = [
+  { city: "Delhi", area: "South Delhi", property: "independent bungalow" },
+  { city: "Gurgaon", area: "DLF Phase 5", property: "luxury apartment" },
+  { city: "Noida", area: "Sector 150", property: "penthouse" },
+  { city: "Delhi", area: "Lutyens Delhi", property: "heritage bungalow" },
+  { city: "Gurgaon", area: "Golf Course Road", property: "villa" },
+  { city: "Noida", area: "Sector 44", property: "builder floor" },
+  { city: "Delhi", area: "Greater Kailash", property: "duplex" },
+];
+
+// Budget ranges to rotate through
+const BUDGETS = [
+  { range: "₹15–25 lakh", tier: "mid-luxury" },
+  { range: "₹40–80 lakh", tier: "premium" },
+  { range: "₹1–3 crore", tier: "ultra-luxury" },
+  { range: "₹8–15 lakh", tier: "aspirational" },
+  { range: "₹25–50 lakh", tier: "high-end" },
+];
+
+// ─────────────────────────────────────────────
+// KEYWORD POOL
+// ─────────────────────────────────────────────
 const KEYWORD_POOL = {
   interior_design: [
     "luxury home interior design cost Delhi 2025",
@@ -114,11 +243,11 @@ const EXTERNAL_LINKS = [
   { text: "houzz india", url: "https://www.houzz.in" },
 ];
 
-// Picsum — 100% free, no API key, always works
+// Picsum photo IDs — reliable, free, always loads
 const IMAGE_IDS = [
-  "1024", "1029", "1031", "1033", "1038",
-  "1040", "1041", "1043", "1044", "1047",
-  "1048", "1050", "1053", "1054", "1055",
+  "1024","1029","1031","1033","1038","1040","1041",
+  "1043","1044","1047","1048","1050","1053","1054",
+  "1055","1060","1062","1063","1064","1068",
 ];
 
 function getImageUrl(slug) {
@@ -126,74 +255,173 @@ function getImageUrl(slug) {
   return `https://picsum.photos/id/${IMAGE_IDS[index]}/1200/675`;
 }
 
-function selectDailyKeywords() {
-  const categories = Object.keys(KEYWORD_POOL);
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+// ─────────────────────────────────────────────
+// KEYWORD SELECTOR
+// Avoids recently used keywords, ensures category spread
+// ─────────────────────────────────────────────
+function selectDailyKeywords(memory) {
+  const allKeywords = Object.entries(KEYWORD_POOL).flatMap(
+    ([category, keywords]) => keywords.map(keyword => ({ keyword, category }))
+  );
+
+  // Filter recently used (last 56 = full pool cycle)
+  const recentlyUsed = new Set(memory.usedKeywords.slice(-56));
+  let available = allKeywords.filter(k => !recentlyUsed.has(k.keyword));
+
+  // If pool exhausted, reset
+  if (available.length < 4) {
+    console.log("🔄 Keyword pool cycled — resetting usage history");
+    available = allKeywords;
+    memory.usedKeywords = [];
+  }
+
+  // Shuffle with date seed for reproducibility
+  const seed = new Date().toISOString().split("T")[0];
+  const seeded = available.sort((a, b) =>
+    (a.keyword + seed).split("").reduce((s, c) => s + c.charCodeAt(0), 0) % 3 - 1
+  );
+
+  // Pick 4 from different categories
   const selected = [];
-  const shuffled = [...categories].sort(() => (dayOfYear % 2 === 0 ? 1 : -1));
-  for (let i = 0; i < 4; i++) {
-    const category = shuffled[i % shuffled.length];
-    const pool = KEYWORD_POOL[category];
-    const keyword = pool[(dayOfYear + i * 3) % pool.length];
-    if (!selected.find(s => s.keyword === keyword)) {
-      selected.push({ keyword, category });
+  const usedCategories = new Set();
+
+  for (const item of seeded) {
+    if (selected.length >= 4) break;
+    if (!usedCategories.has(item.category)) {
+      selected.push(item);
+      usedCategories.add(item.category);
     }
   }
+
+  // If not enough categories, fill remaining slots
+  for (const item of seeded) {
+    if (selected.length >= 4) break;
+    if (!selected.find(s => s.keyword === item.keyword)) {
+      selected.push(item);
+    }
+  }
+
   console.log("📌 Today's keywords:", selected.map(s => s.keyword));
   return selected;
 }
 
-function toSlug(keyword) {
-  return keyword
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .trim();
+// ─────────────────────────────────────────────
+// ANGLE SELECTOR
+// Each blog today gets a different angle
+// Avoids angles used recently
+// ─────────────────────────────────────────────
+function selectAnglesForToday(memory) {
+  const recentAngles = new Set(memory.lastAngles.slice(-4));
+  const available = ANGLES.filter(a => !recentAngles.has(a.id));
+  const pool = available.length >= 4 ? available : ANGLES;
+
+  // Shuffle and pick 4
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 4);
 }
 
-async function generateBlog(keyword) {
+// ─────────────────────────────────────────────
+// TITLE UNIQUENESS CHECK
+// Rejects titles too similar to existing ones
+// ─────────────────────────────────────────────
+function isTitleUnique(newTitle, existingTitles) {
+  const normalize = t => t.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
+  const newNorm = normalize(newTitle);
+
+  for (const existing of existingTitles) {
+    const exNorm = normalize(existing);
+
+    // Exact match
+    if (newNorm === exNorm) return false;
+
+    // High word overlap (>70%)
+    const newWords = new Set(newNorm.split(/\s+/).filter(w => w.length > 3));
+    const exWords = new Set(exNorm.split(/\s+/).filter(w => w.length > 3));
+    const intersection = [...newWords].filter(w => exWords.has(w)).length;
+    const union = new Set([...newWords, ...exWords]).size;
+    if (union > 0 && intersection / union > 0.7) return false;
+  }
+  return true;
+}
+
+// ─────────────────────────────────────────────
+// BLOG GENERATOR
+// ─────────────────────────────────────────────
+async function generateBlog(keyword, category, angle, cityData, budgetData, attemptNum = 1) {
   const internalLink1 = INTERNAL_LINKS[Math.floor(Math.random() * 3)];
   const internalLink2 = INTERNAL_LINKS[3 + Math.floor(Math.random() * 2)];
   const externalLink1 = EXTERNAL_LINKS[Math.floor(Math.random() * EXTERNAL_LINKS.length)];
 
-  const prompt = `You are a senior content writer for indéva studio — a premium luxury interior design firm in Delhi NCR, India.
+  // Semantic keyword variations to avoid stuffing
+  const semanticVariations = [
+    keyword,
+    keyword.replace("cost", "pricing").replace("ideas", "concepts").replace("design", "interior"),
+    keyword.split(" ").reverse().join(" "),
+  ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 2).join(" / ");
 
-Write a complete SEO-optimized blog article for keyword: "${keyword}"
+  const prompt = `You are a senior interior design writer for indéva studio, Delhi NCR's most awarded luxury design firm.
+
+PRIMARY KEYWORD: "${keyword}"
+SEMANTIC VARIATIONS TO USE NATURALLY: ${semanticVariations}
+WRITING ANGLE: ${angle.name}
+ARTICLE STRUCTURE: ${angle.structure}
+INTRODUCTION STYLE: ${angle.intro}
+THIS IS ATTEMPT ${attemptNum} — make it completely different from any generic article on this topic.
+
+SPECIFIC CONTEXT TO USE:
+- Location: ${cityData.area}, ${cityData.city}
+- Property type: ${cityData.property}  
+- Budget range: ${budgetData.range} (${budgetData.tier} segment)
+
+WRITING DIRECTIVE:
+${angle.instruction}
+
+FORBIDDEN PHRASES (never use these):
+"in the realm of", "when it comes to", "it is worth noting", "needless to say",
+"at the end of the day", "having said that", "with that in mind", "on the other hand",
+"that being said", "first and foremost", "dive into", "delve", "certainly", "absolutely",
+"transformative", "holistic", "leverage", "cutting-edge", "seamlessly"
 
 BRAND VOICE:
-- Brand name always lowercase: indéva studio
-- Authoritative, intelligent, warm tone
-- No clichés: no "dive into", "delve", "certainly", "absolutely"
-- Grade 7-8 readability
-- Indian context: use ₹ for prices, reference Indian cities
+- Brand name always: indéva studio (lowercase)
+- Authoritative but warm — like a trusted expert, not a salesperson
+- Indian market fluency: ₹ for prices, reference real Delhi NCR areas
+- Grade 7-8 readability — complex ideas in plain language
 
-RESPOND WITH EXACTLY THIS STRUCTURE — nothing before or after:
-SEO_TITLE: [60-65 chars, keyword-first]
-META_DESC: [under 155 chars]
-SLUG: [hyphenated-slug]
-CATEGORY: [one of: spatial logic / design intelligence / india market / kitchen design / bedroom design / residential design / villa & farmhouse / hospitality design / materials / philosophy / process]
-EXCERPT: [2 sentences, plain text, no HTML, used as card preview]
+RESPOND WITH EXACTLY THIS FORMAT — nothing else:
+SEO_TITLE: [unique title, 60-65 chars, keyword-first, angle-specific]
+META_DESC: [155 chars max, includes keyword, has a hook]
+SLUG: [hyphenated-slug-max-8-words]
+CATEGORY: [one of: spatial logic / design intelligence / india market / kitchen design / bedroom design / villa & farmhouse / hospitality design / materials / philosophy / process]
+EXCERPT: [2 sentences, plain text only, used as card preview on insights page]
+CONTENT_SUMMARY: [1 sentence describing main argument — used for deduplication checking]
 ---ARTICLE---
-[HTML article body only. NO DOCTYPE, NO html/head/body tags.
-Start with <h1>.
-Include:
-- Opening paragraph as hook
-- 4-5 <h2> sections
-- <h3> subsections where useful
-- <ul> or <ol> lists
-- Cost estimates in ₹ where relevant
-- <a href="${internalLink1.url}">${internalLink1.text}</a> used naturally
-- <a href="${internalLink2.url}">${internalLink2.text}</a> used naturally
-- <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
-- One <blockquote> with a key insight
-- FAQ: 4 questions using <details><summary> tags
-- Final paragraph with <a href="/#contact">start a project</a>
-1400-1800 words. No markdown.]
+[HTML body only. No DOCTYPE. No html/head/body tags.
+Start directly with <h1>.
+
+STRUCTURE FOR THIS ANGLE (${angle.structure}):
+${angle.instruction}
+
+REQUIRED ELEMENTS:
+- <h1> containing keyword naturally
+- Opening paragraph matching intro style: ${angle.intro}
+- 4-5 <h2> sections (headings must be specific to this angle, not generic)
+- <h3> subsections where they add value
+- <ul> or <ol> with specific, non-generic items
+- Cost in ₹ from the budget range: ${budgetData.range}
+- Location reference: ${cityData.area}, ${cityData.city}
+- This internal link naturally placed: <a href="${internalLink1.url}">${internalLink1.text}</a>
+- This internal link naturally placed: <a href="${internalLink2.url}">${internalLink2.text}</a>  
+- This external link: <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
+- One <blockquote> with a non-obvious insight
+- FAQ section: 4 questions using <details><summary> tags — questions must match the angle
+- Final paragraph with natural CTA linking to <a href="/#contact">start a project</a>
+
+WORD COUNT: 1500-1900 words
+NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 ---END---`;
 
-  console.log(`  ✍️  Generating: "${keyword}"`);
+  console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum})`);
 
   const response = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
@@ -202,7 +430,10 @@ Include:
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.75, maxOutputTokens: 4096 },
+        generationConfig: {
+          temperature: 0.75 + Math.random() * 0.2, // 0.75–0.95 for variety
+          maxOutputTokens: 4096,
+        },
       }),
     }
   );
@@ -213,24 +444,43 @@ Include:
   return data.candidates[0].content.parts[0].text;
 }
 
-function parseBlogResponse(raw, keyword, category) {
+// ─────────────────────────────────────────────
+// PARSE RESPONSE
+// ─────────────────────────────────────────────
+function parseBlogResponse(raw, keyword, category, angle) {
   const titleMatch = raw.match(/SEO_TITLE:\s*(.+)/);
   const metaMatch = raw.match(/META_DESC:\s*(.+)/);
   const slugMatch = raw.match(/SLUG:\s*(.+)/);
   const catMatch = raw.match(/CATEGORY:\s*(.+)/);
-  const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=---ARTICLE---)/);
+  const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=CONTENT_SUMMARY:|---ARTICLE---)/);
+  const summaryMatch = raw.match(/CONTENT_SUMMARY:\s*(.+)/);
   const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
   return {
     title: titleMatch ? titleMatch[1].trim() : keyword,
     meta: metaMatch ? metaMatch[1].trim() : "",
-    slug: slugMatch ? slugMatch[1].trim() : toSlug(keyword),
+    slug: slugMatch ? slugMatch[1].trim() : toSlug(keyword + "-" + angle.id),
     cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[category] || "design intelligence"),
-    excerpt: excerptMatch ? excerptMatch[1].trim() : (metaMatch ? metaMatch[1].trim() : ""),
+    excerpt: excerptMatch ? excerptMatch[1].trim() : "",
+    summary: summaryMatch ? summaryMatch[1].trim() : "",
     article: articleMatch ? articleMatch[1].trim() : raw,
+    angleId: angle.id,
   };
 }
 
+function toSlug(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .trim()
+    .split("-").slice(0, 8).join("-"); // max 8 words
+}
+
+// ─────────────────────────────────────────────
+// BUILD INSIGHT PAGE HTML
+// ─────────────────────────────────────────────
 function buildInsightPage(blogData) {
   const date = new Date().toISOString().split("T")[0];
   const imageUrl = getImageUrl(blogData.slug);
@@ -364,7 +614,7 @@ ${blogData.article}
 <div class="article-cta">
   <span class="article-cta-label">indéva studio · new delhi</span>
   <h2>ready to transform your space?</h2>
-  <p>our design consultants are available for a complimentary discovery session. tell us about your project.</p>
+  <p>our design consultants are available for a complimentary discovery session.</p>
   <a href="/#contact">start a project ↗</a>
 </div>
 <footer>
@@ -376,6 +626,9 @@ ${blogData.article}
 </html>`;
 }
 
+// ─────────────────────────────────────────────
+// INJECT INTO INSIGHTS PAGE
+// ─────────────────────────────────────────────
 function injectCardsIntoInsightsPage(newBlogs) {
   const insightsIndexPath = path.join(REPO_ROOT, "insights", "index.html");
   if (!fs.existsSync(insightsIndexPath)) {
@@ -401,21 +654,19 @@ function injectCardsIntoInsightsPage(newBlogs) {
     </a>`;
   }).filter(Boolean).join("\n");
 
-  if (!newCards) {
-    console.log("  ℹ️  All blogs already in insights page");
-    return;
-  }
+  if (!newCards) return;
 
-  const gridOpenTag = '<div class="blog-grid">';
-  if (html.includes(gridOpenTag)) {
-    html = html.replace(gridOpenTag, `${gridOpenTag}\n${newCards}`);
+  const gridTag = '<div class="blog-grid">';
+  if (html.includes(gridTag)) {
+    html = html.replace(gridTag, `${gridTag}\n${newCards}`);
     fs.writeFileSync(insightsIndexPath, html);
-    console.log(`✅ Injected ${newBlogs.length} new cards into insights/index.html`);
-  } else {
-    console.log("⚠️  Could not find blog-grid div");
+    console.log(`✅ Injected ${newBlogs.length} cards into insights/index.html`);
   }
 }
 
+// ─────────────────────────────────────────────
+// UPDATE SITEMAP
+// ─────────────────────────────────────────────
 function updateSitemap(newBlogs) {
   const sitemapPath = path.join(REPO_ROOT, "sitemap.xml");
   if (!fs.existsSync(sitemapPath)) return;
@@ -437,8 +688,23 @@ function updateSitemap(newBlogs) {
   }
 }
 
+// ─────────────────────────────────────────────
+// PING GOOGLE
+// ─────────────────────────────────────────────
+async function pingGoogle() {
+  try {
+    await fetch("https://www.google.com/ping?sitemap=https://indevastudio.com/sitemap.xml");
+    console.log("📡 Google sitemap pinged");
+  } catch (_) {
+    console.log("⚠️  Google ping failed — not critical");
+  }
+}
+
+// ─────────────────────────────────────────────
+// MAIN ORCHESTRATOR
+// ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v3");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
 
@@ -447,41 +713,109 @@ async function main() {
     process.exit(1);
   }
 
+  // Load memory
+  const memory = loadMemory();
+  console.log(`📚 Memory: ${memory.titles.length} past titles tracked`);
+
+  // Ensure insights folder exists
   const insightsDir = path.join(REPO_ROOT, "insights");
   if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
 
-  const selections = selectDailyKeywords();
+  // Select today's keywords and angles
+  const selections = selectDailyKeywords(memory);
+  const angles = selectAnglesForToday(memory);
+
+  // Rotate cities and budgets
+  const dayIndex = Math.floor(Date.now() / 86400000);
   const publishedBlogs = [];
+  const newTitles = [];
+  const newKeywordsUsed = [];
+  const newAnglesUsed = [];
 
   for (let i = 0; i < selections.length; i++) {
     const { keyword, category } = selections[i];
-    console.log(`\n[${i + 1}/4] "${keyword}"`);
-    try {
-      const raw = await generateBlog(keyword);
-      const blogData = parseBlogResponse(raw, keyword, category);
-      blogData.keyword = keyword;
+    const angle = angles[i % angles.length];
+    const cityData = CITIES[(dayIndex + i) % CITIES.length];
+    const budgetData = BUDGETS[(dayIndex + i * 2) % BUDGETS.length];
 
-      const slugDir = path.join(insightsDir, blogData.slug);
-      if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
+    console.log(`\n[${i + 1}/4] "${keyword}" → [${angle.name}]`);
 
-      const html = buildInsightPage(blogData);
-      fs.writeFileSync(path.join(slugDir, "index.html"), html);
+    let blogData = null;
+    let attempts = 0;
+    const maxAttempts = 3;
 
-      console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
-      publishedBlogs.push(blogData);
+    while (attempts < maxAttempts) {
+      attempts++;
+      try {
+        const raw = await generateBlog(keyword, category, angle, cityData, budgetData, attempts);
+        const parsed = parseBlogResponse(raw, keyword, category, angle);
 
-      if (i < selections.length - 1) await new Promise(r => setTimeout(r, 3000));
-    } catch (err) {
-      console.error(`  ❌ Failed: ${err.message}`);
+        // TITLE UNIQUENESS CHECK
+        const allKnownTitles = [...memory.titles, ...newTitles];
+        if (!isTitleUnique(parsed.title, allKnownTitles)) {
+          console.log(`  ⚠️  Title not unique — regenerating (attempt ${attempts})`);
+          if (attempts < maxAttempts) {
+            await new Promise(r => setTimeout(r, 2000));
+            continue;
+          } else {
+            // Force unique by appending angle to title
+            parsed.title = `${parsed.title} — ${angle.name}`;
+            parsed.slug = toSlug(parsed.title);
+          }
+        }
+
+        // SLUG UNIQUENESS CHECK
+        if (memory.slugs.includes(parsed.slug)) {
+          parsed.slug = `${parsed.slug}-${angle.id}`;
+        }
+
+        blogData = parsed;
+        blogData.keyword = keyword;
+        break;
+
+      } catch (err) {
+        console.error(`  ❌ Attempt ${attempts} failed: ${err.message}`);
+        if (attempts < maxAttempts) {
+          await new Promise(r => setTimeout(r, 3000));
+        }
+      }
     }
+
+    if (!blogData) {
+      console.error(`  ❌ All attempts failed for "${keyword}" — skipping`);
+      continue;
+    }
+
+    // Save file
+    const slugDir = path.join(insightsDir, blogData.slug);
+    if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
+    const html = buildInsightPage(blogData);
+    fs.writeFileSync(path.join(slugDir, "index.html"), html);
+
+    console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
+    publishedBlogs.push(blogData);
+    newTitles.push(blogData.title);
+    newKeywordsUsed.push(keyword);
+    newAnglesUsed.push(angle.id);
+
+    if (i < selections.length - 1) await new Promise(r => setTimeout(r, 3000));
   }
+
+  // Update memory
+  memory.titles.push(...newTitles);
+  memory.slugs.push(...publishedBlogs.map(b => b.slug));
+  memory.usedKeywords.push(...newKeywordsUsed);
+  memory.summaries.push(...publishedBlogs.map(b => b.summary || ""));
+  memory.lastAngles.push(...newAnglesUsed);
+  saveMemory(memory);
 
   if (publishedBlogs.length > 0) {
     injectCardsIntoInsightsPage(publishedBlogs);
     updateSitemap(publishedBlogs);
+    await pingGoogle();
   }
 
-  console.log(`\n🎉 DONE! Published: ${publishedBlogs.length} insights`);
+  console.log(`\n🎉 DONE! Published: ${publishedBlogs.length}/4 insights`);
   console.log("━".repeat(50));
 }
 
