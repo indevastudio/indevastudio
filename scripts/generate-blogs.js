@@ -275,11 +275,23 @@ function selectDailyKeywords(memory) {
     memory.usedKeywords = [];
   }
 
-  // Shuffle with date seed for reproducibility
-  const seed = new Date().toISOString().split("T")[0];
-  const seeded = available.sort((a, b) =>
-    (a.keyword + seed).split("").reduce((s, c) => s + c.charCodeAt(0), 0) % 3 - 1
-  );
+  // Deterministic-by-date shuffle (Mulberry32-style) — was previously a broken
+  // sort comparator that only referenced `a`, not `b`, producing inconsistent ordering.
+  const seedStr = new Date().toISOString().split("T")[0];
+  let seedNum = 0;
+  for (const c of seedStr) seedNum = (seedNum * 31 + c.charCodeAt(0)) >>> 0;
+  function rng() {
+    seedNum = (seedNum + 0x6D2B79F5) >>> 0;
+    let t = seedNum;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+  const seeded = [...available];
+  for (let i = seeded.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [seeded[i], seeded[j]] = [seeded[j], seeded[i]];
+  }
 
   // Pick 4 from different categories
   const selected = [];
@@ -468,16 +480,32 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 0.75 + Math.random() * 0.2, // 0.75–0.95 for variety
-          maxOutputTokens: 4096,
+          maxOutputTokens: 8192,                    // ↑ doubled — 4096 was truncating mid-article
         },
       }),
     }
   );
 
   const data = await response.json();
-  if (!response.ok) throw new Error(`Gemini error: ${JSON.stringify(data)}`);
-  if (!data.candidates?.[0]) throw new Error("No response from Gemini");
-  return data.candidates[0].content.parts[0].text;
+  if (!response.ok) throw new Error(`Gemini HTTP ${response.status}: ${JSON.stringify(data).slice(0, 300)}`);
+
+  const candidate = data.candidates?.[0];
+  if (!candidate) throw new Error(`Gemini returned no candidates. Response: ${JSON.stringify(data).slice(0, 300)}`);
+
+  // Catch silent failures: SAFETY, RECITATION, OTHER, MAX_TOKENS without content
+  const finish = candidate.finishReason;
+  const text = candidate.content?.parts?.[0]?.text;
+
+  if (!text) {
+    throw new Error(`Gemini blocked or empty (finishReason=${finish}). No text returned.`);
+  }
+  if (finish && finish !== "STOP") {
+    console.warn(`  ⚠️  Gemini finishReason=${finish} (not STOP) — content may be incomplete (${text.length} chars)`);
+  } else {
+    console.log(`  📥 Gemini OK — ${text.length} chars, finishReason=${finish || "STOP"}`);
+  }
+
+  return text;
 }
 
 // ─────────────────────────────────────────────
@@ -492,14 +520,30 @@ function parseBlogResponse(raw, keyword, category, angle) {
   const summaryMatch = raw.match(/CONTENT_SUMMARY:\s*(.+)/);
   const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
+  // STRICT MODE: fail loudly if Gemini drifted from the format.
+  // The old silent fallback to `keyword` is exactly why the same string
+  // ("flat interior design delhi cost per sqft") was appearing as a title
+  // every day — it wasn't a title, it was the raw keyword leaking through.
+  const missing = [];
+  if (!titleMatch) missing.push("SEO_TITLE");
+  if (!slugMatch) missing.push("SLUG");
+  if (!articleMatch) missing.push("---ARTICLE---/---END---");
+
+  if (missing.length > 0) {
+    console.warn(`  ⚠️  Parse failure — missing fields: ${missing.join(", ")}`);
+    console.warn(`     Response head: ${raw.slice(0, 200).replace(/\n/g, " | ")}`);
+    console.warn(`     Response tail: ${raw.slice(-200).replace(/\n/g, " | ")}`);
+    throw new Error(`Malformed Gemini output (missing: ${missing.join(", ")})`);
+  }
+
   return {
-    title: titleMatch ? titleMatch[1].trim() : keyword,
+    title: titleMatch[1].trim(),
     meta: metaMatch ? metaMatch[1].trim() : "",
-    slug: slugMatch ? slugMatch[1].trim() : toSlug(keyword + "-" + angle.id),
+    slug: slugMatch[1].trim(),
     cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[category] || "design intelligence"),
     excerpt: excerptMatch ? excerptMatch[1].trim() : "",
     summary: summaryMatch ? summaryMatch[1].trim() : "",
-    article: articleMatch ? articleMatch[1].trim() : raw,
+    article: articleMatch[1].trim(),
     angleId: angle.id,
   };
 }
@@ -776,7 +820,15 @@ async function main() {
 
   // Load memory
   const memory = loadMemory();
-  console.log(`📚 Memory: ${memory.titles.length} past titles tracked`);
+  console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.slugs.length} past slugs, ${memory.usedKeywords.length} used keywords`);
+  if (memory.titles.length > 0) {
+    console.log(`   Last 3 titles: ${memory.titles.slice(-3).map(t => `"${t}"`).join(", ")}`);
+  }
+  if (!fs.existsSync(MEMORY_FILE)) {
+    console.log(`   ⚠️  Memory file does not exist yet — will be created at: ${MEMORY_FILE}`);
+  } else {
+    console.log(`   ✓ Memory file exists at: ${MEMORY_FILE}`);
+  }
 
   // Ensure insights folder exists
   const insightsDir = path.join(REPO_ROOT, "insights");
@@ -785,6 +837,11 @@ async function main() {
   // Select today's keywords and angles
   const selections = selectDailyKeywords(memory);
   const angles = selectAnglesForToday(memory);
+
+  console.log(`\n🎯 Selected ${selections.length} keywords for today:`);
+  selections.forEach((s, i) => console.log(`   ${i + 1}. [${s.category}] "${s.keyword}"`));
+  console.log(`🎨 Selected ${angles.length} angles: ${angles.map(a => a.id).join(", ")}`);
+  console.log("");
 
   // Rotate cities and budgets
   const dayIndex = Math.floor(Date.now() / 86400000);
@@ -877,7 +934,23 @@ async function main() {
     await pingSearchEngines(publishedBlogs);
   }
 
-  console.log(`\n🎉 DONE! Published: ${publishedBlogs.length}/4 insights`);
+  // Final summary — makes diagnosis instant in workflow logs
+  console.log("\n" + "━".repeat(50));
+  console.log(`📊 RUN SUMMARY`);
+  console.log(`   Selected:  ${selections.length} keywords`);
+  console.log(`   Published: ${publishedBlogs.length} insights`);
+  console.log(`   Failed:    ${selections.length - publishedBlogs.length}`);
+  if (publishedBlogs.length > 0) {
+    console.log(`   New slugs:`);
+    publishedBlogs.forEach(b => console.log(`     • ${b.slug}`));
+  }
+  if (publishedBlogs.length < selections.length) {
+    console.log(`   ⚠️  Not all keywords produced a blog. Check the per-attempt errors above.`);
+  }
+  if (publishedBlogs.length === 0) {
+    console.log(`   ❌ ZERO blogs published. Workflow will commit nothing.`);
+    process.exit(1);  // Fail the workflow so it's visible
+  }
   console.log("━".repeat(50));
 }
 
