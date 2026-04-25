@@ -1,11 +1,13 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/.github/workflows/blog-publisher.yml b/.github/workflows/blog-publisher.yml
-index b5df59fdb56132c2b764299c0d8e2e09df1bf78c..bf6ae41b85953a17494de73f3863ac4a62e3d0a4 100644
+index b5df59fdb56132c2b764299c0d8e2e09df1bf78c..bc72b13b8c5ee7e3d1bd92daee43db4efc5bf702 100644
 --- a/.github/workflows/blog-publisher.yml
 +++ b/.github/workflows/blog-publisher.yml
-@@ -2,62 +2,78 @@ name: Auto Blog Publisher
+@@ -1,63 +1,79 @@
+ name: Auto Blog Publisher
  
- on:
+-on:
++'on':
    schedule:
      - cron: '30 22 * * *'   # 04:00 IST daily — generates 2 blogs per run
    workflow_dispatch:         # Manual trigger from GitHub UI
