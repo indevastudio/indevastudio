@@ -2,8 +2,8 @@ name: Auto Blog Publisher
 
 on:
   schedule:
-    - cron: '30 22 * * *'
-  workflow_dispatch:
+    - cron: '30 22 * * *'   # 04:00 IST daily
+  workflow_dispatch:         # Manual trigger from GitHub UI
 
 jobs:
   publish:
@@ -20,20 +20,42 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies (safe even if package.json absent)
+        run: |
+          if [ -f package.json ]; then npm install --no-audit --no-fund; fi
+
       - name: Generate blogs
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          INDEXNOW_KEY:   ${{ secrets.INDEXNOW_KEY }}
         run: node scripts/generate-blogs.js
+
+      - name: Show what was generated
+        run: |
+          echo "── New files in insights/ ──"
+          git status --short insights/ || true
+          echo "── blog-memory.json head ──"
+          head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
 
       - name: Commit and push
         run: |
           git config user.name "Indeva Bot"
           git config user.email "bot@indevastudio.com"
           git add -A
-          git diff --staged --quiet || git commit -m "Auto-publish blogs"
+          if git diff --staged --quiet; then
+            echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
+            exit 0
+          fi
+          git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
           git push
 
       - name: Send email notification
+        if: success()
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-        run: node scripts/email-notifier.js
+        run: |
+          if [ -f scripts/email-notifier.js ]; then
+            node scripts/email-notifier.js
+          else
+            echo "ℹ️  email-notifier.js not present — skipping"
+          fi
