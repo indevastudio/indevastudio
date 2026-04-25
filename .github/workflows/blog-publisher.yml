@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'   # Updated from 20 — fixes Node.js deprecation warning
 
       - name: Install dependencies (safe even if package.json absent)
         run: |
