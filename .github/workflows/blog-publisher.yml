@@ -1,91 +1,178 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/.github/workflows/blog-publisher.yml b/.github/workflows/blog-publisher.yml
-index b5df59fdb56132c2b764299c0d8e2e09df1bf78c..bc72b13b8c5ee7e3d1bd92daee43db4efc5bf702 100644
+index 2185d857c6082421d56e5a618b5fa019ec46374e..fbae76f2057996050dfc19ec116442d1a03bdd18 100644
 --- a/.github/workflows/blog-publisher.yml
 +++ b/.github/workflows/blog-publisher.yml
-@@ -1,63 +1,79 @@
- name: Auto Blog Publisher
- 
--on:
-+'on':
-   schedule:
-     - cron: '30 22 * * *'   # 04:00 IST daily — generates 2 blogs per run
-   workflow_dispatch:         # Manual trigger from GitHub UI
- 
- jobs:
-   publish:
-     runs-on: ubuntu-latest
-     permissions:
-       contents: write
- 
-     steps:
-       - name: Checkout repo
-         uses: actions/checkout@v4
- 
-       - name: Setup Node.js
-         uses: actions/setup-node@v4
-         with:
-           node-version: '22'
- 
-       - name: Install dependencies (safe even if package.json absent)
-         run: |
-           if [ -f package.json ]; then npm install --no-audit --no-fund; fi
- 
+@@ -1,91 +1,78 @@
+- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+-diff --git a/.github/workflows/blog-publisher.yml b/.github/workflows/blog-publisher.yml
+-index b5df59fdb56132c2b764299c0d8e2e09df1bf78c..bc72b13b8c5ee7e3d1bd92daee43db4efc5bf702 100644
+---- a/.github/workflows/blog-publisher.yml
+-+++ b/.github/workflows/blog-publisher.yml
+-@@ -1,63 +1,79 @@
+- name: Auto Blog Publisher
+- 
+--on:
+-+'on':
+-   schedule:
+-     - cron: '30 22 * * *'   # 04:00 IST daily — generates 2 blogs per run
+-   workflow_dispatch:         # Manual trigger from GitHub UI
+- 
+- jobs:
+-   publish:
+-     runs-on: ubuntu-latest
+-     permissions:
+-       contents: write
+- 
+-     steps:
+-       - name: Checkout repo
+-         uses: actions/checkout@v4
+- 
+-       - name: Setup Node.js
+-         uses: actions/setup-node@v4
+-         with:
+-           node-version: '22'
+- 
+-       - name: Install dependencies (safe even if package.json absent)
+-         run: |
+-           if [ -f package.json ]; then npm install --no-audit --no-fund; fi
+- 
+-+      - name: Syntax check blog generator
+-+        run: node --check scripts/generate-blogs.js
+-+
+-       - name: Generate blogs
+-         env:
+-+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+-           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+-+          OPENROUTER_MODEL: ${{ secrets.OPENROUTER_MODEL }}
+-           INDEXNOW_KEY:   ${{ secrets.INDEXNOW_KEY }}
+-         run: node scripts/generate-blogs.js
+--        # Note: script uses gemini-1.5-flash with 60s gap between 2 blogs
+--        # Total runtime ~2.5 mins — well within GitHub Actions 6hr limit
+-+        # Script supports OPENROUTER_API_KEY (preferred) and GEMINI_API_KEY (legacy fallback).
+- 
+-       - name: Show what was generated
+-         run: |
+-           echo "── New files in insights/ ──"
+-           git status --short insights/ || true
+-           echo "── blog-memory.json head ──"
+-           head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
+- 
+-       - name: Commit and push
+-         run: |
+-           git config user.name "Indeva Bot"
+-           git config user.email "bot@indevastudio.com"
+-           git add -A
+-           if git diff --staged --quiet; then
+-             echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
+-             exit 0
+-           fi
+-           git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
+-           git push
+- 
+-+      - name: Validate email API key
+-+        if: success()
+-+        env:
+-+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+-+        run: |
+-+          if [ -z "$RESEND_API_KEY" ]; then
+-+            echo "❌ RESEND_API_KEY is missing. Add it under GitHub repo Settings → Secrets and variables → Actions."
+-+            exit 1
+-+          fi
+-+
+-       - name: Send email notification
+-         if: success()
+-         env:
+-           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+-+          EMAIL_TO: ceo@indevastudio.com
+-+          EMAIL_FROM: Indeva Studio <hello@indevastudio.com>
+-         run: |
+-           if [ -f scripts/email-notifier.js ]; then
+-             node scripts/email-notifier.js
+-           else
+-             echo "ℹ️  email-notifier.js not present — skipping"
+-           fi
+- 
+-EOF
+-)
++name: Auto Blog Publisher
++
++on:
++  schedule:
++    - cron: '30 22 * * *'   # 04:00 IST daily — generates blogs
++  workflow_dispatch:
++
++jobs:
++  publish:
++    runs-on: ubuntu-latest
++    permissions:
++      contents: write
++
++    steps:
++      - name: Checkout repo
++        uses: actions/checkout@v4
++
++      - name: Setup Node.js
++        uses: actions/setup-node@v4
++        with:
++          node-version: '22'
++
++      - name: Install dependencies (safe even if package.json absent)
++        run: |
++          if [ -f package.json ]; then npm install --no-audit --no-fund; fi
++
 +      - name: Syntax check blog generator
 +        run: node --check scripts/generate-blogs.js
 +
-       - name: Generate blogs
-         env:
++      - name: Generate blogs
++        env:
 +          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
++          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 +          OPENROUTER_MODEL: ${{ secrets.OPENROUTER_MODEL }}
-           INDEXNOW_KEY:   ${{ secrets.INDEXNOW_KEY }}
-         run: node scripts/generate-blogs.js
--        # Note: script uses gemini-1.5-flash with 60s gap between 2 blogs
--        # Total runtime ~2.5 mins — well within GitHub Actions 6hr limit
-+        # Script supports OPENROUTER_API_KEY (preferred) and GEMINI_API_KEY (legacy fallback).
- 
-       - name: Show what was generated
-         run: |
-           echo "── New files in insights/ ──"
-           git status --short insights/ || true
-           echo "── blog-memory.json head ──"
-           head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
- 
-       - name: Commit and push
-         run: |
-           git config user.name "Indeva Bot"
-           git config user.email "bot@indevastudio.com"
-           git add -A
-           if git diff --staged --quiet; then
-             echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
-             exit 0
-           fi
-           git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
-           git push
- 
++          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
++        run: node scripts/generate-blogs.js
++
++      - name: Show what was generated
++        run: |
++          echo "── New files in insights/ ──"
++          git status --short insights/ || true
++          echo "── blog-memory.json head ──"
++          head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
++
++      - name: Commit and push
++        run: |
++          git config user.name "Indeva Bot"
++          git config user.email "bot@indevastudio.com"
++          git add -A
++          if git diff --staged --quiet; then
++            echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
++            exit 0
++          fi
++          git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
++          git push
++
 +      - name: Validate email API key
 +        if: success()
 +        env:
-+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
++          RESEND_API_KEY: re_dK55fs95_9hmR3Ur55jmHGt8cMDNskNxz
 +        run: |
 +          if [ -z "$RESEND_API_KEY" ]; then
-+            echo "❌ RESEND_API_KEY is missing. Add it under GitHub repo Settings → Secrets and variables → Actions."
++            echo "❌ RESEND_API_KEY is missing."
 +            exit 1
 +          fi
 +
-       - name: Send email notification
-         if: success()
-         env:
-           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
++      - name: Send email notification
++        if: success()
++        env:
++          RESEND_API_KEY: re_dK55fs95_9hmR3Ur55jmHGt8cMDNskNxz
 +          EMAIL_TO: ceo@indevastudio.com
 +          EMAIL_FROM: Indeva Studio <hello@indevastudio.com>
-         run: |
-           if [ -f scripts/email-notifier.js ]; then
-             node scripts/email-notifier.js
-           else
-             echo "ℹ️  email-notifier.js not present — skipping"
-           fi
++        run: |
++          if [ -f scripts/email-notifier.js ]; then
++            node scripts/email-notifier.js
++          else
++            echo "ℹ️  email-notifier.js not present — skipping"
++          fi
  
 EOF
 )
