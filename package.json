@@ -1,5 +1,18 @@
-{
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.88.0"
-  }
-}
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/package.json b/package.json
+index 4bebb5f10d53b6742db4ee59a1c3199449f2fd1f..4e476be359ef91c8fc00cbc03d9e2bb7693be44e 100644
+--- a/package.json
++++ b/package.json
+@@ -1,5 +1,8 @@
+ {
+   "dependencies": {
+     "@anthropic-ai/sdk": "^0.88.0"
+-  }
++  },
++  "name": "indevastudio-site",
++  "version": "1.0.0",
++  "type": "module"
+ }
+ 
+EOF
+)
