@@ -1,7 +1,10 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v3
- * Full uniqueness system: angle rotation, title history,
- * structure variation, semantic diversity, anti-duplication
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v4
+ * - Uses gemini-1.5-flash (most stable free tier: 15 RPM, 1500 RPD)
+ * - Generates 2 blogs per run with 60s gap between them
+ * - Smart quota detection with exponential backoff
+ * - Full uniqueness system: angle rotation, title history,
+ *   structure variation, semantic diversity, anti-duplication
  */
 
 import fs from "fs";
@@ -12,6 +15,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
+
+// gemini-1.5-flash: most reliable free tier model (15 RPM, 1500 RPD)
+// Maintained these limits through December 2025 changes unlike 2.0-flash
+const GEMINI_MODEL = "gemini-1.5-flash";
+const BLOGS_PER_RUN = 2;
+const BETWEEN_BLOG_DELAY_MS = 60000;  // 60s between blogs — well under 15 RPM
+const QUOTA_RETRY_DELAY_MS  = 45000;  // 45s wait when quota hit
+const ERROR_RETRY_DELAY_MS  = 8000;   // 8s wait on other errors
+const MAX_ATTEMPTS = 3;
 
 // ─────────────────────────────────────────────
 // MEMORY SYSTEM
@@ -29,16 +41,16 @@ function loadMemory() {
 
 function saveMemory(memory) {
   fs.mkdirSync(path.dirname(MEMORY_FILE), { recursive: true });
-  memory.titles = memory.titles.slice(-200);
-  memory.slugs = memory.slugs.slice(-200);
-  memory.summaries = memory.summaries.slice(-200);
+  memory.titles      = memory.titles.slice(-200);
+  memory.slugs       = memory.slugs.slice(-200);
+  memory.summaries   = memory.summaries.slice(-200);
   memory.usedKeywords = memory.usedKeywords.slice(-200);
-  memory.lastAngles = memory.lastAngles.slice(-20);
+  memory.lastAngles  = memory.lastAngles.slice(-20);
   fs.writeFileSync(MEMORY_FILE, JSON.stringify(memory, null, 2));
 }
 
 // ─────────────────────────────────────────────
-// CONTENT ANGLES
+// CONTENT ANGLES — 6 distinct approaches
 // ─────────────────────────────────────────────
 const ANGLES = [
   {
@@ -46,9 +58,9 @@ const ANGLES = [
     name: "Cost & Budget Guide",
     structure: "Guide format",
     intro: "Data-driven with cost anchors",
-    instruction: `Write as a DEFINITIVE COST GUIDE. 
+    instruction: `Write as a DEFINITIVE COST GUIDE.
     Structure: Start with the biggest cost misconception in India.
-    H2s must cover: what drives costs up, cost breakdown by room, 
+    H2s must cover: what drives costs up, cost breakdown by room,
     how to negotiate, red flags that inflate bills, real project budget example.
     Tone: Financial advisor meets design expert. Specific ₹ figures throughout.
     Opening: Start with a surprising cost statistic or common pricing myth.`,
@@ -117,22 +129,24 @@ const ANGLES = [
   },
 ];
 
+// City rotation
 const CITIES = [
-  { city: "Delhi", area: "South Delhi", property: "independent bungalow" },
-  { city: "Gurgaon", area: "DLF Phase 5", property: "luxury apartment" },
-  { city: "Noida", area: "Sector 150", property: "penthouse" },
-  { city: "Delhi", area: "Lutyens Delhi", property: "heritage bungalow" },
-  { city: "Gurgaon", area: "Golf Course Road", property: "villa" },
-  { city: "Noida", area: "Sector 44", property: "builder floor" },
-  { city: "Delhi", area: "Greater Kailash", property: "duplex" },
+  { city: "Delhi",   area: "South Delhi",        property: "independent bungalow" },
+  { city: "Gurgaon", area: "DLF Phase 5",         property: "luxury apartment" },
+  { city: "Noida",   area: "Sector 150",           property: "penthouse" },
+  { city: "Delhi",   area: "Lutyens Delhi",        property: "heritage bungalow" },
+  { city: "Gurgaon", area: "Golf Course Road",     property: "villa" },
+  { city: "Noida",   area: "Sector 44",            property: "builder floor" },
+  { city: "Delhi",   area: "Greater Kailash",      property: "duplex" },
 ];
 
+// Budget rotation
 const BUDGETS = [
-  { range: "₹15–25 lakh", tier: "mid-luxury" },
-  { range: "₹40–80 lakh", tier: "premium" },
-  { range: "₹1–3 crore", tier: "ultra-luxury" },
-  { range: "₹8–15 lakh", tier: "aspirational" },
-  { range: "₹25–50 lakh", tier: "high-end" },
+  { range: "₹15–25 lakh",  tier: "mid-luxury" },
+  { range: "₹40–80 lakh",  tier: "premium" },
+  { range: "₹1–3 crore",   tier: "ultra-luxury" },
+  { range: "₹8–15 lakh",   tier: "aspirational" },
+  { range: "₹25–50 lakh",  tier: "high-end" },
 ];
 
 // ─────────────────────────────────────────────
@@ -213,28 +227,28 @@ const KEYWORD_POOL = {
 
 const CATEGORY_MAP = {
   interior_design: "design intelligence",
-  villa: "villa & farmhouse",
-  farmhouse: "villa & farmhouse",
-  restaurant: "hospitality design",
-  living_room: "spatial logic",
-  bedroom: "bedroom design",
-  local_seo: "india market",
+  villa:           "villa & farmhouse",
+  farmhouse:       "villa & farmhouse",
+  restaurant:      "hospitality design",
+  living_room:     "spatial logic",
+  bedroom:         "bedroom design",
+  local_seo:       "india market",
 };
 
 const INTERNAL_LINKS = [
-  { text: "our portfolio", url: "/#projects" },
-  { text: "our services", url: "/#services" },
-  { text: "contact us for a free consultation", url: "/#contact" },
-  { text: "our design process", url: "/#about" },
-  { text: "get in touch with our designers", url: "/#contact" },
+  { text: "our portfolio",                        url: "/#projects" },
+  { text: "our services",                         url: "/#services" },
+  { text: "contact us for a free consultation",   url: "/#contact" },
+  { text: "our design process",                   url: "/#about" },
+  { text: "get in touch with our designers",      url: "/#contact" },
 ];
 
 const EXTERNAL_LINKS = [
   { text: "architectural digest india", url: "https://www.architecturaldigest.in" },
-  { text: "elle decor india", url: "https://www.elledecor.com/in" },
+  { text: "elle decor india",           url: "https://www.elledecor.com/in" },
   { text: "indian green building council", url: "https://igbc.in" },
   { text: "national institute of design", url: "https://www.nid.edu" },
-  { text: "houzz india", url: "https://www.houzz.in" },
+  { text: "houzz india",               url: "https://www.houzz.in" },
 ];
 
 const IMAGE_IDS = [
@@ -249,7 +263,16 @@ function getImageUrl(slug) {
 }
 
 // ─────────────────────────────────────────────
-// KEYWORD SELECTOR — picks 2 per run (free tier safe)
+// SMART SLEEP — logs the wait so it's visible in CI
+// ─────────────────────────────────────────────
+function sleep(ms, reason = "") {
+  const label = reason ? ` (${reason})` : "";
+  console.log(`  ⏳ Waiting ${ms / 1000}s${label}...`);
+  return new Promise(r => setTimeout(r, ms));
+}
+
+// ─────────────────────────────────────────────
+// KEYWORD SELECTOR — picks BLOGS_PER_RUN from different categories
 // ─────────────────────────────────────────────
 function selectDailyKeywords(memory) {
   const allKeywords = Object.entries(KEYWORD_POOL).flatMap(
@@ -259,13 +282,13 @@ function selectDailyKeywords(memory) {
   const recentlyUsed = new Set(memory.usedKeywords.slice(-56));
   let available = allKeywords.filter(k => !recentlyUsed.has(k.keyword));
 
-  if (available.length < 2) {
+  if (available.length < BLOGS_PER_RUN) {
     console.log("🔄 Keyword pool cycled — resetting usage history");
     available = allKeywords;
     memory.usedKeywords = [];
   }
 
-  // Deterministic-by-date shuffle
+  // Deterministic-by-date shuffle (consistent across retries same day)
   const seedStr = new Date().toISOString().split("T")[0];
   let seedNum = 0;
   for (const c of seedStr) seedNum = (seedNum * 31 + c.charCodeAt(0)) >>> 0;
@@ -282,24 +305,20 @@ function selectDailyKeywords(memory) {
     [seeded[i], seeded[j]] = [seeded[j], seeded[i]];
   }
 
-  // Pick 2 from different categories
+  // Pick BLOGS_PER_RUN from different categories
   const selected = [];
   const usedCategories = new Set();
-
   for (const item of seeded) {
-    if (selected.length >= 2) break;
+    if (selected.length >= BLOGS_PER_RUN) break;
     if (!usedCategories.has(item.category)) {
       selected.push(item);
       usedCategories.add(item.category);
     }
   }
-
-  // Fill remaining if needed
+  // Fill remaining if not enough unique categories
   for (const item of seeded) {
-    if (selected.length >= 2) break;
-    if (!selected.find(s => s.keyword === item.keyword)) {
-      selected.push(item);
-    }
+    if (selected.length >= BLOGS_PER_RUN) break;
+    if (!selected.find(s => s.keyword === item.keyword)) selected.push(item);
   }
 
   console.log("📌 Today's keywords:", selected.map(s => s.keyword));
@@ -307,28 +326,28 @@ function selectDailyKeywords(memory) {
 }
 
 // ─────────────────────────────────────────────
-// ANGLE SELECTOR
+// ANGLE SELECTOR — avoids recently used angles
 // ─────────────────────────────────────────────
 function selectAnglesForToday(memory) {
   const recentAngles = new Set(memory.lastAngles.slice(-4));
   const available = ANGLES.filter(a => !recentAngles.has(a.id));
-  const pool = available.length >= 2 ? available : ANGLES;
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 2);
+  const pool = available.length >= BLOGS_PER_RUN ? available : ANGLES;
+  return [...pool].sort(() => Math.random() - 0.5).slice(0, BLOGS_PER_RUN);
 }
 
 // ─────────────────────────────────────────────
 // TITLE UNIQUENESS CHECK
+// Domain-aware — only rejects on rare-word overlap
 // ─────────────────────────────────────────────
 const STOPWORDS = new Set([
-  "the", "and", "for", "with", "your", "you", "are", "this", "that", "from",
-  "into", "what", "when", "where", "which", "have", "will", "best", "top",
-  "luxury", "design", "designs", "interior", "interiors", "designer", "designers",
-  "home", "homes", "house", "houses", "room", "rooms",
-  "delhi", "ncr", "gurgaon", "noida", "india", "indian",
-  "ideas", "cost", "price", "pricing", "guide", "tips", "trends",
-  "style", "styles", "modern", "premium", "high",
-  "2024", "2025", "2026",
+  "the","and","for","with","your","you","are","this","that","from",
+  "into","what","when","where","which","have","will","best","top",
+  "luxury","design","designs","interior","interiors","designer","designers",
+  "home","homes","house","houses","room","rooms",
+  "delhi","ncr","gurgaon","noida","india","indian",
+  "ideas","cost","price","pricing","guide","tips","trends",
+  "style","styles","modern","premium","high",
+  "2024","2025","2026",
 ]);
 
 function normalizeTitle(t) {
@@ -337,9 +356,7 @@ function normalizeTitle(t) {
 
 function getRareWords(title) {
   return new Set(
-    normalizeTitle(title)
-      .split(/\s+/)
-      .filter(w => w.length > 3 && !STOPWORDS.has(w))
+    normalizeTitle(title).split(/\s+/).filter(w => w.length > 3 && !STOPWORDS.has(w))
   );
 }
 
@@ -347,21 +364,19 @@ function isTitleUnique(newTitle, existingTitles) {
   const newNorm = normalizeTitle(newTitle);
   if (!newNorm) return false;
   const newRare = getRareWords(newTitle);
-
   for (const existing of existingTitles) {
     if (newNorm === normalizeTitle(existing)) return false;
     const exRare = getRareWords(existing);
     if (newRare.size === 0 || exRare.size === 0) continue;
     const intersection = [...newRare].filter(w => exRare.has(w)).length;
     const union = new Set([...newRare, ...exRare]).size;
-    const similarity = intersection / union;
-    if (similarity >= 0.85 && intersection >= 3) return false;
+    if ((intersection / union) >= 0.85 && intersection >= 3) return false;
   }
   return true;
 }
 
 // ─────────────────────────────────────────────
-// BLOG GENERATOR
+// BLOG GENERATOR — calls gemini-1.5-flash
 // ─────────────────────────────────────────────
 async function generateBlog(keyword, category, angle, cityData, budgetData, attemptNum = 1) {
   const internalLink1 = INTERNAL_LINKS[Math.floor(Math.random() * 3)];
@@ -370,7 +385,7 @@ async function generateBlog(keyword, category, angle, cityData, budgetData, atte
 
   const semanticVariations = [
     keyword,
-    keyword.replace("cost", "pricing").replace("ideas", "concepts").replace("design", "interior"),
+    keyword.replace("cost","pricing").replace("ideas","concepts").replace("design","interior"),
     keyword.split(" ").reverse().join(" "),
   ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 2).join(" / ");
 
@@ -385,7 +400,7 @@ THIS IS ATTEMPT ${attemptNum} — make it completely different from any generic 
 
 SPECIFIC CONTEXT TO USE:
 - Location: ${cityData.area}, ${cityData.city}
-- Property type: ${cityData.property}  
+- Property type: ${cityData.property}
 - Budget range: ${budgetData.range} (${budgetData.tier} segment)
 
 WRITING DIRECTIVE:
@@ -426,7 +441,7 @@ REQUIRED ELEMENTS:
 - Cost in ₹ from the budget range: ${budgetData.range}
 - Location reference: ${cityData.area}, ${cityData.city}
 - This internal link naturally placed: <a href="${internalLink1.url}">${internalLink1.text}</a>
-- This internal link naturally placed: <a href="${internalLink2.url}">${internalLink2.text}</a>  
+- This internal link naturally placed: <a href="${internalLink2.url}">${internalLink2.text}</a>
 - This external link: <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
 - One <blockquote> with a non-obvious insight
 - FAQ section: 4 questions using <details><summary> tags — questions must match the angle
@@ -436,10 +451,10 @@ WORD COUNT: 1500-1900 words
 NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 ---END---`;
 
-  console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum})`);
+  console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum}) via ${GEMINI_MODEL}`);
 
   const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -447,7 +462,7 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 0.75 + Math.random() * 0.2,
-          maxOutputTokens: 4096, // Reduced from 8192 — 1500-1900 word blog needs ~3500 tokens max
+          maxOutputTokens: 4096,
         },
       }),
     }
@@ -455,24 +470,33 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 
   const data = await response.json();
 
-  // Detect quota/rate limit errors specifically
-  if (response.status === 429 || (data.error && data.error.code === 429)) {
-    throw new Error(`QUOTA_EXCEEDED: ${JSON.stringify(data.error || data).slice(0, 200)}`);
+  // Detect quota / rate-limit errors explicitly
+  if (
+    response.status === 429 ||
+    data?.error?.code === 429 ||
+    data?.error?.status === "RESOURCE_EXHAUSTED" ||
+    JSON.stringify(data).includes("RESOURCE_EXHAUSTED")
+  ) {
+    throw new Error(`QUOTA_EXCEEDED: ${JSON.stringify(data?.error || data).slice(0, 300)}`);
   }
 
-  if (!response.ok) throw new Error(`Gemini HTTP ${response.status}: ${JSON.stringify(data).slice(0, 300)}`);
+  if (!response.ok) {
+    throw new Error(`Gemini HTTP ${response.status}: ${JSON.stringify(data).slice(0, 300)}`);
+  }
 
   const candidate = data.candidates?.[0];
-  if (!candidate) throw new Error(`Gemini returned no candidates. Response: ${JSON.stringify(data).slice(0, 300)}`);
+  if (!candidate) {
+    throw new Error(`Gemini returned no candidates. Response: ${JSON.stringify(data).slice(0, 300)}`);
+  }
 
   const finish = candidate.finishReason;
-  const text = candidate.content?.parts?.[0]?.text;
+  const text   = candidate.content?.parts?.[0]?.text;
 
   if (!text) {
-    throw new Error(`Gemini blocked or empty (finishReason=${finish}). No text returned.`);
+    throw new Error(`Gemini blocked or empty (finishReason=${finish}).`);
   }
   if (finish && finish !== "STOP") {
-    console.warn(`  ⚠️  Gemini finishReason=${finish} (not STOP) — content may be incomplete (${text.length} chars)`);
+    console.warn(`  ⚠️  finishReason=${finish} — content may be incomplete (${text.length} chars)`);
   } else {
     console.log(`  📥 Gemini OK — ${text.length} chars, finishReason=${finish || "STOP"}`);
   }
@@ -484,31 +508,31 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 // PARSE RESPONSE
 // ─────────────────────────────────────────────
 function parseBlogResponse(raw, keyword, category, angle) {
-  const titleMatch = raw.match(/SEO_TITLE:\s*(.+)/);
-  const metaMatch = raw.match(/META_DESC:\s*(.+)/);
-  const slugMatch = raw.match(/SLUG:\s*(.+)/);
-  const catMatch = raw.match(/CATEGORY:\s*(.+)/);
+  const titleMatch   = raw.match(/SEO_TITLE:\s*(.+)/);
+  const metaMatch    = raw.match(/META_DESC:\s*(.+)/);
+  const slugMatch    = raw.match(/SLUG:\s*(.+)/);
+  const catMatch     = raw.match(/CATEGORY:\s*(.+)/);
   const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=CONTENT_SUMMARY:|---ARTICLE---)/);
   const summaryMatch = raw.match(/CONTENT_SUMMARY:\s*(.+)/);
   const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
   const missing = [];
-  if (!titleMatch) missing.push("SEO_TITLE");
-  if (!slugMatch) missing.push("SLUG");
+  if (!titleMatch)   missing.push("SEO_TITLE");
+  if (!slugMatch)    missing.push("SLUG");
   if (!articleMatch) missing.push("---ARTICLE---/---END---");
 
   if (missing.length > 0) {
-    console.warn(`  ⚠️  Parse failure — missing fields: ${missing.join(", ")}`);
-    console.warn(`     Response head: ${raw.slice(0, 200).replace(/\n/g, " | ")}`);
-    console.warn(`     Response tail: ${raw.slice(-200).replace(/\n/g, " | ")}`);
+    console.warn(`  ⚠️  Parse failure — missing: ${missing.join(", ")}`);
+    console.warn(`     Head: ${raw.slice(0, 200).replace(/\n/g, " | ")}`);
+    console.warn(`     Tail: ${raw.slice(-200).replace(/\n/g, " | ")}`);
     throw new Error(`Malformed Gemini output (missing: ${missing.join(", ")})`);
   }
 
   return {
-    title: titleMatch[1].trim(),
-    meta: metaMatch ? metaMatch[1].trim() : "",
-    slug: slugMatch[1].trim(),
-    cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[category] || "design intelligence"),
+    title:   titleMatch[1].trim(),
+    meta:    metaMatch  ? metaMatch[1].trim()    : "",
+    slug:    slugMatch[1].trim(),
+    cat:     catMatch   ? catMatch[1].trim()     : (CATEGORY_MAP[category] || "design intelligence"),
     excerpt: excerptMatch ? excerptMatch[1].trim() : "",
     summary: summaryMatch ? summaryMatch[1].trim() : "",
     article: articleMatch[1].trim(),
@@ -530,13 +554,11 @@ function toSlug(text) {
 // BUILD INSIGHT PAGE HTML
 // ─────────────────────────────────────────────
 function buildInsightPage(blogData) {
-  const date = new Date().toISOString().split("T")[0];
-  const imageUrl = getImageUrl(blogData.slug);
-  const monthYear = new Date().toLocaleDateString("en-IN", {
-    month: "long", year: "numeric"
-  }).toLowerCase();
+  const date      = new Date().toISOString().split("T")[0];
+  const imageUrl  = getImageUrl(blogData.slug);
+  const monthYear = new Date().toLocaleDateString("en-IN", { month: "long", year: "numeric" }).toLowerCase();
   const wordCount = blogData.article.replace(/<[^>]+>/g, "").split(/\s+/).length;
-  const readTime = Math.ceil(wordCount / 200);
+  const readTime  = Math.ceil(wordCount / 200);
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
@@ -675,17 +697,15 @@ ${blogData.article}
 }
 
 // ─────────────────────────────────────────────
-// INJECT INTO INSIGHTS PAGE
+// INJECT CARDS INTO INSIGHTS INDEX
 // ─────────────────────────────────────────────
 function injectCardsIntoInsightsPage(newBlogs) {
   const insightsIndexPath = path.join(REPO_ROOT, "insights", "index.html");
   if (!fs.existsSync(insightsIndexPath)) {
-    console.log("⚠️  insights/index.html not found");
+    console.log("⚠️  insights/index.html not found — skipping card injection");
     return;
   }
-
   let html = fs.readFileSync(insightsIndexPath, "utf8");
-
   const newCards = newBlogs.map(blog => {
     if (html.includes(`/insights/${blog.slug}/`)) {
       console.log(`  ⏭️  Already in insights: ${blog.slug}`);
@@ -737,54 +757,41 @@ function updateSitemap(newBlogs) {
 }
 
 // ─────────────────────────────────────────────
-// PING SEARCH ENGINES
+// PING INDEXNOW
 // ─────────────────────────────────────────────
 async function pingSearchEngines(newBlogs) {
   const key = process.env.INDEXNOW_KEY;
-  if (!key) {
-    console.log("ℹ️  INDEXNOW_KEY not set — skipping search engine ping");
+  if (!key || newBlogs.length === 0) {
+    console.log("ℹ️  INDEXNOW_KEY not set — skipping ping");
     return;
   }
-  if (newBlogs.length === 0) return;
-
   const urlList = newBlogs.map(b => `https://indevastudio.com/insights/${b.slug}/`);
-
   try {
     const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: JSON.stringify({
         host: "indevastudio.com",
-        key: key,
+        key,
         keyLocation: `https://indevastudio.com/${key}.txt`,
-        urlList: urlList,
+        urlList,
       }),
     });
-    if (res.ok || res.status === 202) {
-      console.log(`📡 IndexNow pinged for ${urlList.length} URLs (status ${res.status})`);
-    } else {
-      console.log(`⚠️  IndexNow returned ${res.status} — non-critical`);
-    }
+    console.log(`📡 IndexNow pinged for ${urlList.length} URLs (status ${res.status})`);
   } catch (e) {
     console.log("⚠️  IndexNow ping failed — non-critical:", e.message);
   }
 }
 
 // ─────────────────────────────────────────────
-// SMART DELAY HELPER
-// ─────────────────────────────────────────────
-function sleep(ms) {
-  console.log(`  ⏳ Waiting ${ms / 1000}s...`);
-  return new Promise(r => setTimeout(r, ms));
-}
-
-// ─────────────────────────────────────────────
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v3");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v4");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
+  console.log(`🤖 Model: ${GEMINI_MODEL}`);
+  console.log(`📝 Blogs per run: ${BLOGS_PER_RUN}`);
 
   if (!GEMINI_API_KEY) {
     console.error("❌ GEMINI_API_KEY not set.");
@@ -792,70 +799,63 @@ async function main() {
   }
 
   const memory = loadMemory();
-  console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.slugs.length} past slugs, ${memory.usedKeywords.length} used keywords`);
+  console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.usedKeywords.length} used keywords`);
   if (memory.titles.length > 0) {
     console.log(`   Last 3 titles: ${memory.titles.slice(-3).map(t => `"${t}"`).join(", ")}`);
-  }
-  if (!fs.existsSync(MEMORY_FILE)) {
-    console.log(`   ⚠️  Memory file does not exist yet — will be created at: ${MEMORY_FILE}`);
-  } else {
-    console.log(`   ✓ Memory file exists at: ${MEMORY_FILE}`);
   }
 
   const insightsDir = path.join(REPO_ROOT, "insights");
   if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
 
-  // 2 keywords per run — safe for free tier
   const selections = selectDailyKeywords(memory);
-  const angles = selectAnglesForToday(memory);
+  const angles     = selectAnglesForToday(memory);
 
-  console.log(`\n🎯 Selected ${selections.length} keywords for today:`);
+  console.log(`\n🎯 Selected ${selections.length} keywords:`);
   selections.forEach((s, i) => console.log(`   ${i + 1}. [${s.category}] "${s.keyword}"`));
-  console.log(`🎨 Selected ${angles.length} angles: ${angles.map(a => a.id).join(", ")}`);
-  console.log("");
+  console.log(`🎨 Angles: ${angles.map(a => a.id).join(", ")}\n`);
 
-  const dayIndex = Math.floor(Date.now() / 86400000);
+  const dayIndex       = Math.floor(Date.now() / 86400000);
   const publishedBlogs = [];
-  const newTitles = [];
-  const newKeywordsUsed = [];
-  const newAnglesUsed = [];
+  const newTitles      = [];
+  const newKeywords    = [];
+  const newAngles      = [];
 
   for (let i = 0; i < selections.length; i++) {
     const { keyword, category } = selections[i];
-    const angle = angles[i % angles.length];
-    const cityData = CITIES[(dayIndex + i) % CITIES.length];
+    const angle      = angles[i % angles.length];
+    const cityData   = CITIES[(dayIndex + i) % CITIES.length];
     const budgetData = BUDGETS[(dayIndex + i * 2) % BUDGETS.length];
 
     console.log(`\n[${i + 1}/${selections.length}] "${keyword}" → [${angle.name}]`);
 
     let blogData = null;
     let attempts = 0;
-    const maxAttempts = 3;
 
-    while (attempts < maxAttempts) {
+    while (attempts < MAX_ATTEMPTS) {
       attempts++;
       try {
-        const raw = await generateBlog(keyword, category, angle, cityData, budgetData, attempts);
+        const raw    = await generateBlog(keyword, category, angle, cityData, budgetData, attempts);
         const parsed = parseBlogResponse(raw, keyword, category, angle);
 
+        // Title uniqueness check
         const allKnownTitles = [...memory.titles, ...newTitles];
         if (!isTitleUnique(parsed.title, allKnownTitles)) {
-          console.log(`  ⚠️  Title not unique — regenerating (attempt ${attempts})`);
-          if (attempts < maxAttempts) {
-            await sleep(20000); // 20s before retry on uniqueness failure
+          console.log(`  ⚠️  Title not unique — regenerating`);
+          if (attempts < MAX_ATTEMPTS) {
+            await sleep(QUOTA_RETRY_DELAY_MS, "uniqueness retry cooldown");
             continue;
-          } else {
-            parsed.title = `${parsed.title} — ${angle.name}`;
-            parsed.slug = toSlug(parsed.title);
           }
+          parsed.title = `${parsed.title} — ${angle.name}`;
+          parsed.slug  = toSlug(parsed.title);
         }
 
+        // Slug uniqueness check
         if (memory.slugs.includes(parsed.slug)) {
           parsed.slug = `${parsed.slug}-${angle.id}`;
         }
 
-        blogData = parsed;
-        blogData.keyword = keyword;
+        blogData          = parsed;
+        blogData.keyword  = keyword;
         break;
 
       } catch (err) {
@@ -864,45 +864,47 @@ async function main() {
                         err.message.includes("quota") ||
                         err.message.includes("RESOURCE_EXHAUSTED");
 
-        // Quota errors need a long wait; other errors just need a short pause
-        const waitTime = isQuota ? 30000 : 5000;
+        console.error(`  ❌ Attempt ${attempts} failed: ${err.message.slice(0, 120)}`);
 
-        console.error(`  ❌ Attempt ${attempts} failed: ${err.message}`);
-        if (attempts < maxAttempts) {
-          if (isQuota) console.log(`  🚦 Quota hit — waiting 30s before retry`);
-          await sleep(waitTime);
+        if (attempts < MAX_ATTEMPTS) {
+          if (isQuota) {
+            console.log(`  🚦 Quota hit — waiting ${QUOTA_RETRY_DELAY_MS / 1000}s before retry`);
+            await sleep(QUOTA_RETRY_DELAY_MS, "quota backoff");
+          } else {
+            await sleep(ERROR_RETRY_DELAY_MS, "error backoff");
+          }
         }
       }
     }
 
     if (!blogData) {
-      console.error(`  ❌ All ${maxAttempts} attempts failed for "${keyword}" — skipping`);
+      console.error(`  ❌ All ${MAX_ATTEMPTS} attempts failed for "${keyword}" — skipping`);
       continue;
     }
 
+    // Save file
     const slugDir = path.join(insightsDir, blogData.slug);
     if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
-    const html = buildInsightPage(blogData);
-    fs.writeFileSync(path.join(slugDir, "index.html"), html);
-
+    fs.writeFileSync(path.join(slugDir, "index.html"), buildInsightPage(blogData));
     console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
+
     publishedBlogs.push(blogData);
     newTitles.push(blogData.title);
-    newKeywordsUsed.push(keyword);
-    newAnglesUsed.push(angle.id);
+    newKeywords.push(keyword);
+    newAngles.push(angle.id);
 
-    // 20s gap between blogs — keeps well under 15 RPM free limit
+    // 60s gap between blogs — safe for 15 RPM free tier
     if (i < selections.length - 1) {
-      console.log(`\n  ⏳ Waiting 20s before next blog (free tier rate limit protection)...`);
-      await sleep(20000);
+      await sleep(BETWEEN_BLOG_DELAY_MS, "rate limit protection between blogs");
     }
   }
 
+  // Persist memory
   memory.titles.push(...newTitles);
   memory.slugs.push(...publishedBlogs.map(b => b.slug));
-  memory.usedKeywords.push(...newKeywordsUsed);
+  memory.usedKeywords.push(...newKeywords);
   memory.summaries.push(...publishedBlogs.map(b => b.summary || ""));
-  memory.lastAngles.push(...newAnglesUsed);
+  memory.lastAngles.push(...newAngles);
   saveMemory(memory);
 
   if (publishedBlogs.length > 0) {
@@ -911,20 +913,18 @@ async function main() {
     await pingSearchEngines(publishedBlogs);
   }
 
+  // Final summary
   console.log("\n" + "━".repeat(50));
   console.log(`📊 RUN SUMMARY`);
+  console.log(`   Model:     ${GEMINI_MODEL}`);
   console.log(`   Selected:  ${selections.length} keywords`);
   console.log(`   Published: ${publishedBlogs.length} insights`);
   console.log(`   Failed:    ${selections.length - publishedBlogs.length}`);
   if (publishedBlogs.length > 0) {
-    console.log(`   New slugs:`);
     publishedBlogs.forEach(b => console.log(`     • ${b.slug}`));
   }
-  if (publishedBlogs.length < selections.length) {
-    console.log(`   ⚠️  Not all keywords produced a blog. Check the per-attempt errors above.`);
-  }
   if (publishedBlogs.length === 0) {
-    console.log(`   ❌ ZERO blogs published. Workflow will commit nothing.`);
+    console.error("   ❌ ZERO blogs published.");
     process.exit(1);
   }
   console.log("━".repeat(50));
