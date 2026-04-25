@@ -2,7 +2,7 @@ name: Auto Blog Publisher
 
 on:
   schedule:
-    - cron: '30 22 * * *'   # 04:00 IST daily
+    - cron: '30 22 * * *'   # 04:00 IST daily — generates 2 blogs per run
   workflow_dispatch:         # Manual trigger from GitHub UI
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'   # Updated from 20 — fixes Node.js deprecation warning
+          node-version: '22'
 
       - name: Install dependencies (safe even if package.json absent)
         run: |
@@ -29,6 +29,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           INDEXNOW_KEY:   ${{ secrets.INDEXNOW_KEY }}
         run: node scripts/generate-blogs.js
+        # Note: script uses gemini-1.5-flash with 60s gap between 2 blogs
+        # Total runtime ~2.5 mins — well within GitHub Actions 6hr limit
 
       - name: Show what was generated
         run: |
