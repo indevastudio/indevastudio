@@ -320,26 +320,62 @@ function selectAnglesForToday(memory) {
   return shuffled.slice(0, 4);
 }
 
+
+
 // ─────────────────────────────────────────────
-// TITLE UNIQUENESS CHECK
-// Rejects titles too similar to existing ones
+// TITLE UNIQUENESS CHECK (v2)
+// Domain-aware — ignores filler/category words that legitimately
+// repeat across luxury-interior content (luxury, design, india, delhi, etc.)
+// Only rejects on rare-word overlap, which is what actually signals duplication
 // ─────────────────────────────────────────────
+const STOPWORDS = new Set([
+  // English filler
+  "the", "and", "for", "with", "your", "you", "are", "this", "that", "from",
+  "into", "what", "when", "where", "which", "have", "will", "best", "top",
+  // Domain words that repeat across virtually every blog (legitimately)
+  "luxury", "design", "designs", "interior", "interiors", "designer", "designers",
+  "home", "homes", "house", "houses", "room", "rooms",
+  "delhi", "ncr", "gurgaon", "noida", "india", "indian",
+  "ideas", "cost", "price", "pricing", "guide", "tips", "trends",
+  "style", "styles", "modern", "premium", "high",
+  "2024", "2025", "2026",
+]);
+
+function normalizeTitle(t) {
+  return t.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function getRareWords(title) {
+  return new Set(
+    normalizeTitle(title)
+      .split(/\s+/)
+      .filter(w => w.length > 3 && !STOPWORDS.has(w))
+  );
+}
+
 function isTitleUnique(newTitle, existingTitles) {
-  const normalize = t => t.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
-  const newNorm = normalize(newTitle);
+  const newNorm = normalizeTitle(newTitle);
+  if (!newNorm) return false;
+
+  const newRare = getRareWords(newTitle);
 
   for (const existing of existingTitles) {
-    const exNorm = normalize(existing);
+    // Exact normalized match → reject
+    if (newNorm === normalizeTitle(existing)) return false;
 
-    // Exact match
-    if (newNorm === exNorm) return false;
+    const exRare = getRareWords(existing);
 
-    // High word overlap (>70%)
-    const newWords = new Set(newNorm.split(/\s+/).filter(w => w.length > 3));
-    const exWords = new Set(exNorm.split(/\s+/).filter(w => w.length > 3));
-    const intersection = [...newWords].filter(w => exWords.has(w)).length;
-    const union = new Set([...newWords, ...exWords]).size;
-    if (union > 0 && intersection / union > 0.7) return false;
+    // If the new title has no rare words at all, fall back to length-aware check
+    if (newRare.size === 0 || exRare.size === 0) continue;
+
+    // Jaccard similarity on RARE words only
+    const intersection = [...newRare].filter(w => exRare.has(w)).length;
+    const union = new Set([...newRare, ...exRare]).size;
+    const similarity = intersection / union;
+
+    // Reject only if rare-word overlap is very high (≥ 0.85)
+    // AND at least 3 rare words match (prevents false positives on short titles)
+    if (similarity >= 0.85 && intersection >= 3) return false;
   }
   return true;
 }
@@ -689,14 +725,39 @@ function updateSitemap(newBlogs) {
 }
 
 // ─────────────────────────────────────────────
-// PING GOOGLE
+// PING SEARCH ENGINES (IndexNow protocol)
+// Note: Google deprecated their ping endpoint in 2023.
+// IndexNow covers Bing, Yandex, Naver, Seznam — Google discovers via sitemap.
+// Requires INDEXNOW_KEY env var + the same key hosted at /<KEY>.txt on your domain.
 // ─────────────────────────────────────────────
-async function pingGoogle() {
+async function pingSearchEngines(newBlogs) {
+  const key = process.env.INDEXNOW_KEY;
+  if (!key) {
+    console.log("ℹ️  INDEXNOW_KEY not set — skipping search engine ping");
+    return;
+  }
+  if (newBlogs.length === 0) return;
+
+  const urlList = newBlogs.map(b => `https://indevastudio.com/insights/${b.slug}/`);
+
   try {
-    await fetch("https://www.google.com/ping?sitemap=https://indevastudio.com/sitemap.xml");
-    console.log("📡 Google sitemap pinged");
-  } catch (_) {
-    console.log("⚠️  Google ping failed — not critical");
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host: "indevastudio.com",
+        key: key,
+        keyLocation: `https://indevastudio.com/${key}.txt`,
+        urlList: urlList,
+      }),
+    });
+    if (res.ok || res.status === 202) {
+      console.log(`📡 IndexNow pinged for ${urlList.length} URLs (status ${res.status})`);
+    } else {
+      console.log(`⚠️  IndexNow returned ${res.status} — non-critical`);
+    }
+  } catch (e) {
+    console.log("⚠️  IndexNow ping failed — non-critical:", e.message);
   }
 }
 
@@ -782,7 +843,8 @@ async function main() {
     }
 
     if (!blogData) {
-      console.error(`  ❌ All attempts failed for "${keyword}" — skipping`);
+      console.error(`  ❌ All ${maxAttempts} attempts failed for "${keyword}" — skipping`);
+      console.error(`     If this happens repeatedly, check: 1) GEMINI_API_KEY valid, 2) dedup not too strict`);
       continue;
     }
 
@@ -812,7 +874,7 @@ async function main() {
   if (publishedBlogs.length > 0) {
     injectCardsIntoInsightsPage(publishedBlogs);
     updateSitemap(publishedBlogs);
-    await pingGoogle();
+    await pingSearchEngines(publishedBlogs);
   }
 
   console.log(`\n🎉 DONE! Published: ${publishedBlogs.length}/4 insights`);
