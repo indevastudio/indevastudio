@@ -15,7 +15,6 @@ const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
 // ─────────────────────────────────────────────
 // MEMORY SYSTEM
-// Tracks: used titles, used angles, content summaries
 // ─────────────────────────────────────────────
 function loadMemory() {
   if (!fs.existsSync(MEMORY_FILE)) {
@@ -30,7 +29,6 @@ function loadMemory() {
 
 function saveMemory(memory) {
   fs.mkdirSync(path.dirname(MEMORY_FILE), { recursive: true });
-  // Keep only last 200 entries to avoid bloat
   memory.titles = memory.titles.slice(-200);
   memory.slugs = memory.slugs.slice(-200);
   memory.summaries = memory.summaries.slice(-200);
@@ -40,9 +38,7 @@ function saveMemory(memory) {
 }
 
 // ─────────────────────────────────────────────
-// CONTENT ANGLES — 6 distinct approaches
-// Each blog gets a different angle to ensure
-// content is different even for same keyword
+// CONTENT ANGLES
 // ─────────────────────────────────────────────
 const ANGLES = [
   {
@@ -121,7 +117,6 @@ const ANGLES = [
   },
 ];
 
-// City rotation to ensure geographic variety
 const CITIES = [
   { city: "Delhi", area: "South Delhi", property: "independent bungalow" },
   { city: "Gurgaon", area: "DLF Phase 5", property: "luxury apartment" },
@@ -132,7 +127,6 @@ const CITIES = [
   { city: "Delhi", area: "Greater Kailash", property: "duplex" },
 ];
 
-// Budget ranges to rotate through
 const BUDGETS = [
   { range: "₹15–25 lakh", tier: "mid-luxury" },
   { range: "₹40–80 lakh", tier: "premium" },
@@ -243,7 +237,6 @@ const EXTERNAL_LINKS = [
   { text: "houzz india", url: "https://www.houzz.in" },
 ];
 
-// Picsum photo IDs — reliable, free, always loads
 const IMAGE_IDS = [
   "1024","1029","1031","1033","1038","1040","1041",
   "1043","1044","1047","1048","1050","1053","1054",
@@ -256,27 +249,23 @@ function getImageUrl(slug) {
 }
 
 // ─────────────────────────────────────────────
-// KEYWORD SELECTOR
-// Avoids recently used keywords, ensures category spread
+// KEYWORD SELECTOR — picks 2 per run (free tier safe)
 // ─────────────────────────────────────────────
 function selectDailyKeywords(memory) {
   const allKeywords = Object.entries(KEYWORD_POOL).flatMap(
     ([category, keywords]) => keywords.map(keyword => ({ keyword, category }))
   );
 
-  // Filter recently used (last 56 = full pool cycle)
   const recentlyUsed = new Set(memory.usedKeywords.slice(-56));
   let available = allKeywords.filter(k => !recentlyUsed.has(k.keyword));
 
-  // If pool exhausted, reset
-  if (available.length < 4) {
+  if (available.length < 2) {
     console.log("🔄 Keyword pool cycled — resetting usage history");
     available = allKeywords;
     memory.usedKeywords = [];
   }
 
-  // Deterministic-by-date shuffle (Mulberry32-style) — was previously a broken
-  // sort comparator that only referenced `a`, not `b`, producing inconsistent ordering.
+  // Deterministic-by-date shuffle
   const seedStr = new Date().toISOString().split("T")[0];
   let seedNum = 0;
   for (const c of seedStr) seedNum = (seedNum * 31 + c.charCodeAt(0)) >>> 0;
@@ -293,21 +282,21 @@ function selectDailyKeywords(memory) {
     [seeded[i], seeded[j]] = [seeded[j], seeded[i]];
   }
 
-  // Pick 4 from different categories
+  // Pick 2 from different categories
   const selected = [];
   const usedCategories = new Set();
 
   for (const item of seeded) {
-    if (selected.length >= 4) break;
+    if (selected.length >= 2) break;
     if (!usedCategories.has(item.category)) {
       selected.push(item);
       usedCategories.add(item.category);
     }
   }
 
-  // If not enough categories, fill remaining slots
+  // Fill remaining if needed
   for (const item of seeded) {
-    if (selected.length >= 4) break;
+    if (selected.length >= 2) break;
     if (!selected.find(s => s.keyword === item.keyword)) {
       selected.push(item);
     }
@@ -319,32 +308,21 @@ function selectDailyKeywords(memory) {
 
 // ─────────────────────────────────────────────
 // ANGLE SELECTOR
-// Each blog today gets a different angle
-// Avoids angles used recently
 // ─────────────────────────────────────────────
 function selectAnglesForToday(memory) {
   const recentAngles = new Set(memory.lastAngles.slice(-4));
   const available = ANGLES.filter(a => !recentAngles.has(a.id));
-  const pool = available.length >= 4 ? available : ANGLES;
-
-  // Shuffle and pick 4
+  const pool = available.length >= 2 ? available : ANGLES;
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 4);
+  return shuffled.slice(0, 2);
 }
 
-
-
 // ─────────────────────────────────────────────
-// TITLE UNIQUENESS CHECK (v2)
-// Domain-aware — ignores filler/category words that legitimately
-// repeat across luxury-interior content (luxury, design, india, delhi, etc.)
-// Only rejects on rare-word overlap, which is what actually signals duplication
+// TITLE UNIQUENESS CHECK
 // ─────────────────────────────────────────────
 const STOPWORDS = new Set([
-  // English filler
   "the", "and", "for", "with", "your", "you", "are", "this", "that", "from",
   "into", "what", "when", "where", "which", "have", "will", "best", "top",
-  // Domain words that repeat across virtually every blog (legitimately)
   "luxury", "design", "designs", "interior", "interiors", "designer", "designers",
   "home", "homes", "house", "houses", "room", "rooms",
   "delhi", "ncr", "gurgaon", "noida", "india", "indian",
@@ -368,25 +346,15 @@ function getRareWords(title) {
 function isTitleUnique(newTitle, existingTitles) {
   const newNorm = normalizeTitle(newTitle);
   if (!newNorm) return false;
-
   const newRare = getRareWords(newTitle);
 
   for (const existing of existingTitles) {
-    // Exact normalized match → reject
     if (newNorm === normalizeTitle(existing)) return false;
-
     const exRare = getRareWords(existing);
-
-    // If the new title has no rare words at all, fall back to length-aware check
     if (newRare.size === 0 || exRare.size === 0) continue;
-
-    // Jaccard similarity on RARE words only
     const intersection = [...newRare].filter(w => exRare.has(w)).length;
     const union = new Set([...newRare, ...exRare]).size;
     const similarity = intersection / union;
-
-    // Reject only if rare-word overlap is very high (≥ 0.85)
-    // AND at least 3 rare words match (prevents false positives on short titles)
     if (similarity >= 0.85 && intersection >= 3) return false;
   }
   return true;
@@ -400,7 +368,6 @@ async function generateBlog(keyword, category, angle, cityData, budgetData, atte
   const internalLink2 = INTERNAL_LINKS[3 + Math.floor(Math.random() * 2)];
   const externalLink1 = EXTERNAL_LINKS[Math.floor(Math.random() * EXTERNAL_LINKS.length)];
 
-  // Semantic keyword variations to avoid stuffing
   const semanticVariations = [
     keyword,
     keyword.replace("cost", "pricing").replace("ideas", "concepts").replace("design", "interior"),
@@ -479,20 +446,25 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
-          temperature: 0.75 + Math.random() * 0.2, // 0.75–0.95 for variety
-          maxOutputTokens: 8192,                    // ↑ doubled — 4096 was truncating mid-article
+          temperature: 0.75 + Math.random() * 0.2,
+          maxOutputTokens: 4096, // Reduced from 8192 — 1500-1900 word blog needs ~3500 tokens max
         },
       }),
     }
   );
 
   const data = await response.json();
+
+  // Detect quota/rate limit errors specifically
+  if (response.status === 429 || (data.error && data.error.code === 429)) {
+    throw new Error(`QUOTA_EXCEEDED: ${JSON.stringify(data.error || data).slice(0, 200)}`);
+  }
+
   if (!response.ok) throw new Error(`Gemini HTTP ${response.status}: ${JSON.stringify(data).slice(0, 300)}`);
 
   const candidate = data.candidates?.[0];
   if (!candidate) throw new Error(`Gemini returned no candidates. Response: ${JSON.stringify(data).slice(0, 300)}`);
 
-  // Catch silent failures: SAFETY, RECITATION, OTHER, MAX_TOKENS without content
   const finish = candidate.finishReason;
   const text = candidate.content?.parts?.[0]?.text;
 
@@ -520,10 +492,6 @@ function parseBlogResponse(raw, keyword, category, angle) {
   const summaryMatch = raw.match(/CONTENT_SUMMARY:\s*(.+)/);
   const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
-  // STRICT MODE: fail loudly if Gemini drifted from the format.
-  // The old silent fallback to `keyword` is exactly why the same string
-  // ("flat interior design delhi cost per sqft") was appearing as a title
-  // every day — it wasn't a title, it was the raw keyword leaking through.
   const missing = [];
   if (!titleMatch) missing.push("SEO_TITLE");
   if (!slugMatch) missing.push("SLUG");
@@ -555,7 +523,7 @@ function toSlug(text) {
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
     .trim()
-    .split("-").slice(0, 8).join("-"); // max 8 words
+    .split("-").slice(0, 8).join("-");
 }
 
 // ─────────────────────────────────────────────
@@ -769,10 +737,7 @@ function updateSitemap(newBlogs) {
 }
 
 // ─────────────────────────────────────────────
-// PING SEARCH ENGINES (IndexNow protocol)
-// Note: Google deprecated their ping endpoint in 2023.
-// IndexNow covers Bing, Yandex, Naver, Seznam — Google discovers via sitemap.
-// Requires INDEXNOW_KEY env var + the same key hosted at /<KEY>.txt on your domain.
+// PING SEARCH ENGINES
 // ─────────────────────────────────────────────
 async function pingSearchEngines(newBlogs) {
   const key = process.env.INDEXNOW_KEY;
@@ -806,6 +771,14 @@ async function pingSearchEngines(newBlogs) {
 }
 
 // ─────────────────────────────────────────────
+// SMART DELAY HELPER
+// ─────────────────────────────────────────────
+function sleep(ms) {
+  console.log(`  ⏳ Waiting ${ms / 1000}s...`);
+  return new Promise(r => setTimeout(r, ms));
+}
+
+// ─────────────────────────────────────────────
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
@@ -818,7 +791,6 @@ async function main() {
     process.exit(1);
   }
 
-  // Load memory
   const memory = loadMemory();
   console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.slugs.length} past slugs, ${memory.usedKeywords.length} used keywords`);
   if (memory.titles.length > 0) {
@@ -830,11 +802,10 @@ async function main() {
     console.log(`   ✓ Memory file exists at: ${MEMORY_FILE}`);
   }
 
-  // Ensure insights folder exists
   const insightsDir = path.join(REPO_ROOT, "insights");
   if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
 
-  // Select today's keywords and angles
+  // 2 keywords per run — safe for free tier
   const selections = selectDailyKeywords(memory);
   const angles = selectAnglesForToday(memory);
 
@@ -843,7 +814,6 @@ async function main() {
   console.log(`🎨 Selected ${angles.length} angles: ${angles.map(a => a.id).join(", ")}`);
   console.log("");
 
-  // Rotate cities and budgets
   const dayIndex = Math.floor(Date.now() / 86400000);
   const publishedBlogs = [];
   const newTitles = [];
@@ -856,7 +826,7 @@ async function main() {
     const cityData = CITIES[(dayIndex + i) % CITIES.length];
     const budgetData = BUDGETS[(dayIndex + i * 2) % BUDGETS.length];
 
-    console.log(`\n[${i + 1}/4] "${keyword}" → [${angle.name}]`);
+    console.log(`\n[${i + 1}/${selections.length}] "${keyword}" → [${angle.name}]`);
 
     let blogData = null;
     let attempts = 0;
@@ -868,21 +838,18 @@ async function main() {
         const raw = await generateBlog(keyword, category, angle, cityData, budgetData, attempts);
         const parsed = parseBlogResponse(raw, keyword, category, angle);
 
-        // TITLE UNIQUENESS CHECK
         const allKnownTitles = [...memory.titles, ...newTitles];
         if (!isTitleUnique(parsed.title, allKnownTitles)) {
           console.log(`  ⚠️  Title not unique — regenerating (attempt ${attempts})`);
           if (attempts < maxAttempts) {
-            await new Promise(r => setTimeout(r, 2000));
+            await sleep(20000); // 20s before retry on uniqueness failure
             continue;
           } else {
-            // Force unique by appending angle to title
             parsed.title = `${parsed.title} — ${angle.name}`;
             parsed.slug = toSlug(parsed.title);
           }
         }
 
-        // SLUG UNIQUENESS CHECK
         if (memory.slugs.includes(parsed.slug)) {
           parsed.slug = `${parsed.slug}-${angle.id}`;
         }
@@ -892,20 +859,27 @@ async function main() {
         break;
 
       } catch (err) {
+        const isQuota = err.message.includes("QUOTA_EXCEEDED") ||
+                        err.message.includes("429") ||
+                        err.message.includes("quota") ||
+                        err.message.includes("RESOURCE_EXHAUSTED");
+
+        // Quota errors need a long wait; other errors just need a short pause
+        const waitTime = isQuota ? 30000 : 5000;
+
         console.error(`  ❌ Attempt ${attempts} failed: ${err.message}`);
         if (attempts < maxAttempts) {
-          await new Promise(r => setTimeout(r, 3000));
+          if (isQuota) console.log(`  🚦 Quota hit — waiting 30s before retry`);
+          await sleep(waitTime);
         }
       }
     }
 
     if (!blogData) {
       console.error(`  ❌ All ${maxAttempts} attempts failed for "${keyword}" — skipping`);
-      console.error(`     If this happens repeatedly, check: 1) GEMINI_API_KEY valid, 2) dedup not too strict`);
       continue;
     }
 
-    // Save file
     const slugDir = path.join(insightsDir, blogData.slug);
     if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
     const html = buildInsightPage(blogData);
@@ -917,10 +891,13 @@ async function main() {
     newKeywordsUsed.push(keyword);
     newAnglesUsed.push(angle.id);
 
-    if (i < selections.length - 1) await new Promise(r => setTimeout(r, 3000));
+    // 20s gap between blogs — keeps well under 15 RPM free limit
+    if (i < selections.length - 1) {
+      console.log(`\n  ⏳ Waiting 20s before next blog (free tier rate limit protection)...`);
+      await sleep(20000);
+    }
   }
 
-  // Update memory
   memory.titles.push(...newTitles);
   memory.slugs.push(...publishedBlogs.map(b => b.slug));
   memory.usedKeywords.push(...newKeywordsUsed);
@@ -934,7 +911,6 @@ async function main() {
     await pingSearchEngines(publishedBlogs);
   }
 
-  // Final summary — makes diagnosis instant in workflow logs
   console.log("\n" + "━".repeat(50));
   console.log(`📊 RUN SUMMARY`);
   console.log(`   Selected:  ${selections.length} keywords`);
@@ -949,7 +925,7 @@ async function main() {
   }
   if (publishedBlogs.length === 0) {
     console.log(`   ❌ ZERO blogs published. Workflow will commit nothing.`);
-    process.exit(1);  // Fail the workflow so it's visible
+    process.exit(1);
   }
   console.log("━".repeat(50));
 }
