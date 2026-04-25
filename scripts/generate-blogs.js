@@ -1,9 +1,9 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/scripts/generate-blogs.js b/scripts/generate-blogs.js
-index c8d8068939d25ff34579907b9c3652333a80b204..d4c31fd216f4f0c9657b3843b0b4ad1d2e645078 100644
+index c8d8068939d25ff34579907b9c3652333a80b204..4b9431a74cecd9b5eaa02f905ce7606a3d10c172 100644
 --- a/scripts/generate-blogs.js
 +++ b/scripts/generate-blogs.js
-@@ -1,381 +1,151 @@
+@@ -1,381 +1,156 @@
 - (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 -diff --git a/scripts/generate-blogs.js b/scripts/generate-blogs.js
 -index 2ec05d1ab15308f2ba2ecbdadf923ca36322d259..164cd9046e1ef6964aeb465c4c31e05e224dadd6 100644
@@ -398,7 +398,7 @@ index c8d8068939d25ff34579907b9c3652333a80b204..d4c31fd216f4f0c9657b3843b0b4ad1d
 +const __dirname = path.dirname(fileURLToPath(import.meta.url));
 +const REPO_ROOT = path.join(__dirname, "..");
 +
-+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
++const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY;
 +const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || "anthropic/claude-3.5-sonnet:free";
 +
 +const MAX_ATTEMPTS = 3;
@@ -452,7 +452,12 @@ index c8d8068939d25ff34579907b9c3652333a80b204..d4c31fd216f4f0c9657b3843b0b4ad1d
 +      })
 +    });
 +
-+    data = await response.json();
++    const rawBody = await response.text();
++    try {
++      data = rawBody ? JSON.parse(rawBody) : {};
++    } catch {
++      throw new Error(`INVALID_JSON_RESPONSE: ${rawBody.slice(0, 300)}`);
++    }
 +  } catch (err) {
 +    throw new Error(`NETWORK_ERROR: ${err.message}`);
 +  }
@@ -494,8 +499,8 @@ index c8d8068939d25ff34579907b9c3652333a80b204..d4c31fd216f4f0c9657b3843b0b4ad1d
 +  console.log("🚀 BLOG GENERATION STARTED");
 +
 +  if (!OPENROUTER_API_KEY) {
-+    console.error("❌ OPENROUTER_API_KEY not found");
-+    process.exit(1);
++    console.warn("⚠️ OPENROUTER_API_KEY (or legacy GEMINI_API_KEY) not found; skipping generation.");
++    return;
 +  }
 +
 +  const prompt = `
