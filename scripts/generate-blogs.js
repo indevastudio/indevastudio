@@ -1,8 +1,7 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v4 (FIXED)
- * - Uses Gemini v1 API (FIXED)
- * - Uses latest models (no 404 issue)
- * - Added strong error handling + retry system
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v5
+ * - Uses Claude 3.5 Sonnet (Free Tier via OpenRouter)
+ * - Retry handling + robust error checks
  */
 
 import fs from "fs";
@@ -12,13 +11,8 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
-// ✅ UPDATED MODELS (fallback enabled)
-const GEMINI_MODELS = [
-  "gemini-1.5-flash-latest",
-  "gemini-1.5-pro-latest"
-];
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_MODEL = "anthropic/claude-3.5-sonnet:free";
 
 const BLOGS_PER_RUN = 2;
 const MAX_ATTEMPTS = 3;
@@ -32,53 +26,49 @@ function sleep(ms) {
 }
 
 // ─────────────────────────────────────────────
-// GENERATE BLOG (FIXED CORE)
+// GENERATE BLOG
 // ─────────────────────────────────────────────
-async function generateBlog(prompt, attempt = 0) {
-  const model = GEMINI_MODELS[attempt % GEMINI_MODELS.length];
-
-  console.log(`🤖 Using model: ${model}`);
+async function generateBlog(prompt) {
+  console.log(`🤖 Using model: ${OPENROUTER_MODEL}`);
 
   let response;
   let data;
 
   try {
-    response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: prompt }]
-            }
-          ],
-          generationConfig: {
-            temperature: 0.8,
-            maxOutputTokens: 4096
+    response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "HTTP-Referer": "https://indevastudio.com",
+        "X-Title": "Indeva Studio Blog Engine"
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        messages: [
+          {
+            role: "user",
+            content: prompt
           }
-        })
-      }
-    );
+        ],
+        temperature: 0.8,
+        max_tokens: 4096
+      })
+    });
 
     data = await response.json();
-
   } catch (err) {
     throw new Error("NETWORK_ERROR: " + err.message);
   }
 
-  // 🚨 STRICT ERROR HANDLING
   if (!response.ok || data?.error) {
-    throw new Error(`GEMINI_ERROR: ${JSON.stringify(data?.error || data)}`);
+    throw new Error(`CLAUDE_ERROR: ${JSON.stringify(data?.error || data)}`);
   }
 
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  const text = data?.choices?.[0]?.message?.content;
 
   if (!text) {
-    throw new Error("EMPTY_RESPONSE_FROM_GEMINI");
+    throw new Error("EMPTY_RESPONSE_FROM_CLAUDE");
   }
 
   console.log(`✅ Content generated (${text.length} chars)`);
@@ -114,9 +104,10 @@ function saveBlog(content) {
 // ─────────────────────────────────────────────
 async function main() {
   console.log("🚀 BLOG GENERATION STARTED");
+  console.log(`🧮 Blogs per run: ${BLOGS_PER_RUN}`);
 
-  if (!GEMINI_API_KEY) {
-    console.error("❌ GEMINI_API_KEY not found");
+  if (!OPENROUTER_API_KEY) {
+    console.error("❌ OPENROUTER_API_KEY not found");
     process.exit(1);
   }
 
@@ -136,7 +127,7 @@ async function main() {
 
   for (let i = 0; i < MAX_ATTEMPTS; i++) {
     try {
-      result = await generateBlog(prompt, i);
+      result = await generateBlog(prompt);
       break;
     } catch (err) {
       console.log(`⚠️ Attempt ${i + 1} failed: ${err.message}`);
