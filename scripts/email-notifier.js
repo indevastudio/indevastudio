@@ -1,3 +1,4 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/scripts/email-notifier.js b/scripts/email-notifier.js
 index f8a88b968ff63c8ecfee977c4263439719f9cc9d..e8b18712c777016ab60566d5dc97d928dd900f47 100644
 --- a/scripts/email-notifier.js
@@ -95,3 +96,6 @@ index f8a88b968ff63c8ecfee977c4263439719f9cc9d..e8b18712c777016ab60566d5dc97d928
 +  console.error("❌ Email notifier failed:", error);
 +  process.exit(1);
 +});
+ 
+EOF
+)
