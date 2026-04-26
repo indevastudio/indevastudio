@@ -13,10 +13,10 @@
  *                                 llama-4-scout-17b-16e-instruct (newer)
  *   INDEXNOW_KEY  — for Bing/Yandex indexing pings (optional)
  *
- * RATE LIMITS (Groq free tier, per model):
- *   30 RPM  · 6,000 TPM · 1,000 RPD · 100K-500K TPD
- *   The 6,000 TPM cap is the binding constraint — a single blog uses ~5K tokens
- *   (input + output), so we sleep 70 seconds between blogs to stay safe.
+ * RATE LIMITS (Groq free tier):
+ *   30 RPM · 12,000 TPM · 1,000 RPD
+ *   With max_completion_tokens=5500 + ~1500 prompt tokens, one call ≈ 7K TPM.
+ *   We sleep 65s between blogs so the rolling-1-minute window resets.
  *
  * SAFETY NOTE FOR HUMANS PASTING THIS FILE:
  * If the very first character of the file is "(" instead of "/",
@@ -41,9 +41,10 @@ const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 // Stay reasonable — Groq free tier is 1,000 RPD shared across all your usage.
 const BLOGS_PER_DAY = 2;
 
-// Delay between blogs (ms). Groq free tier caps at 6,000 TPM, and one blog
-// uses ~5K tokens. Sleeping 70s between calls keeps us under that ceiling.
-const INTER_BLOG_DELAY_MS = 70_000;
+// Delay between blogs (ms). Groq free tier caps at 12K TPM. With output capped
+// at 5500 tokens + ~1500 prompt tokens, one call uses ~7K TPM. The TPM window
+// is rolling-1-minute, so 65s ensures the previous call's tokens fully expire.
+const INTER_BLOG_DELAY_MS = 65_000;
 
 // ─────────────────────────────────────────────
 // MEMORY SYSTEM
@@ -439,67 +440,45 @@ async function generateBlog(keyword, category, angle, cityData, budgetData, atte
     keyword.split(" ").reverse().join(" "),
   ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 2).join(" / ");
 
-  const prompt = `You are a senior interior design writer for indéva studio, Delhi NCR's most awarded luxury design firm.
+  const prompt = `You are a senior writer for indéva studio (Delhi NCR luxury interior design firm).
 
-PRIMARY KEYWORD: "${keyword}"
-SEMANTIC VARIATIONS TO USE NATURALLY: ${semanticVariations}
-WRITING ANGLE: ${angle.name}
-ARTICLE STRUCTURE: ${angle.structure}
-INTRODUCTION STYLE: ${angle.intro}
-THIS IS ATTEMPT ${attemptNum} — make it completely different from any generic article on this topic.
+WRITE A 1500-WORD SEO BLOG ON: "${keyword}"
 
-SPECIFIC CONTEXT TO USE:
-- Location: ${cityData.area}, ${cityData.city}
-- Property type: ${cityData.property}  
-- Budget range: ${budgetData.range} (${budgetData.tier} segment)
+ANGLE: ${angle.name} — ${angle.intro}
+SCENARIO: ${cityData.property} in ${cityData.area}, ${cityData.city}, budget ${budgetData.range}.
 
-WRITING DIRECTIVE:
+DIRECTIVE:
 ${angle.instruction}
 
-FORBIDDEN PHRASES (never use these):
-"in the realm of", "when it comes to", "it is worth noting", "needless to say",
-"at the end of the day", "having said that", "with that in mind", "on the other hand",
-"that being said", "first and foremost", "dive into", "delve", "certainly", "absolutely",
-"transformative", "holistic", "leverage", "cutting-edge", "seamlessly"
+VOICE: Lowercase brand name "indéva studio". Authoritative, warm, Indian market fluent (use ₹). Grade 7-8 readability. No clichés like "delve", "in the realm of", "at the end of the day", "transformative", "seamless", "leverage", "holistic", "cutting-edge".
 
-BRAND VOICE:
-- Brand name always: indéva studio (lowercase)
-- Authoritative but warm — like a trusted expert, not a salesperson
-- Indian market fluency: ₹ for prices, reference real Delhi NCR areas
-- Grade 7-8 readability — complex ideas in plain language
+OUTPUT EXACTLY THIS FORMAT (these labels are required):
 
-RESPOND WITH EXACTLY THIS FORMAT — nothing else:
-SEO_TITLE: [unique title, 60-65 chars, keyword-first, angle-specific]
-META_DESC: [155 chars max, includes keyword, has a hook]
-SLUG: [hyphenated-slug-max-8-words]
-CATEGORY: [one of: spatial logic / design intelligence / india market / kitchen design / bedroom design / villa & farmhouse / hospitality design / materials / philosophy / process]
-EXCERPT: [2 sentences, plain text only, used as card preview on insights page]
-CONTENT_SUMMARY: [1 sentence describing main argument — used for deduplication checking]
+SEO_TITLE: [60-65 chars, keyword-first]
+META_DESC: [under 155 chars, with hook]
+SLUG: [hyphenated, max 8 words]
+CATEGORY: [pick one: spatial logic / design intelligence / india market / kitchen design / bedroom design / villa & farmhouse / hospitality design / materials / philosophy / process]
+EXCERPT: [2 plain-text sentences for the card preview]
+CONTENT_SUMMARY: [1 sentence on the main argument]
 ---ARTICLE---
-[HTML body only. No DOCTYPE. No html/head/body tags.
-Start directly with <h1>.
+<h1>...</h1>
+<p>opening matching the angle...</p>
+<h2>...</h2>
+... 4-5 H2 sections, H3 subsections where useful, at least one <ul>, one <blockquote> with a non-obvious insight ...
+<h2>frequently asked questions</h2>
+<details><summary>Q1?</summary><p>A1</p></details>
+... 4 FAQs total ...
+<p>Closing line with <a href="/#contact">start a project</a>.</p>
+---END---
 
-STRUCTURE FOR THIS ANGLE (${angle.structure}):
-${angle.instruction}
-
-REQUIRED ELEMENTS:
-- <h1> containing keyword naturally
-- Opening paragraph matching intro style: ${angle.intro}
-- 4-5 <h2> sections (headings must be specific to this angle, not generic)
-- <h3> subsections where they add value
-- <ul> or <ol> with specific, non-generic items
-- Cost in ₹ from the budget range: ${budgetData.range}
-- Location reference: ${cityData.area}, ${cityData.city}
-- This internal link naturally placed: <a href="${internalLink1.url}">${internalLink1.text}</a>
-- This internal link naturally placed: <a href="${internalLink2.url}">${internalLink2.text}</a>  
+In the article body, naturally include:
+- ₹ figures from the ${budgetData.range} range
+- "${cityData.area}, ${cityData.city}" mentioned at least once
+- This link: <a href="${internalLink1.url}">${internalLink1.text}</a>
+- This link: <a href="${internalLink2.url}">${internalLink2.text}</a>
 - This external link: <a href="${externalLink1.url}" rel="noopener noreferrer" target="_blank">${externalLink1.text}</a>
-- One <blockquote> with a non-obvious insight
-- FAQ section: 4 questions using <details><summary> tags — questions must match the angle
-- Final paragraph with natural CTA linking to <a href="/#contact">start a project</a>
 
-WORD COUNT: 1500-1900 words
-NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
----END---`;
+Output ONLY the labels and HTML. No preamble, no markdown fences, no commentary. Begin with "SEO_TITLE:".`;
 
   console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum})`);
 
@@ -511,8 +490,10 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
     },
     body: JSON.stringify({
       model: GROQ_MODEL,
-      max_completion_tokens: 8000,
-      temperature: 0.75 + Math.random() * 0.2, // 0.75–0.95 for variety
+      // Cap output to ~5500 tokens (≈1700 words). Combined with our shorter
+      // prompt (~1500 tokens), one call uses ~7000 TPM — fits under 12K cap.
+      max_completion_tokens: 5500,
+      temperature: 0.75 + Math.random() * 0.2,
       messages: [
         { role: "user", content: prompt },
       ],
@@ -520,8 +501,19 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
   });
 
   const data = await response.json();
+
+  // Groq returns 429 with exact wait time. Parse it and signal a structured retry.
+  if (response.status === 429) {
+    const errMsg = data?.error?.message || JSON.stringify(data);
+    const waitMatch = errMsg.match(/try again in ([\d.]+)s/i);
+    const waitSec = waitMatch ? Math.ceil(parseFloat(waitMatch[1])) + 2 : 35;
+    const err = new Error(`Groq rate limit — wait ${waitSec}s. (${errMsg.slice(0, 200)})`);
+    err.isRateLimit = true;
+    err.retryAfterSec = waitSec;
+    throw err;
+  }
+
   if (!response.ok) {
-    // Surface useful Groq errors: 401 = bad key, 429 = rate limit, 400 = bad request
     throw new Error(`Groq HTTP ${response.status}: ${JSON.stringify(data).slice(0, 400)}`);
   }
 
@@ -537,8 +529,6 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
     throw new Error(`Groq returned empty content. finish_reason=${finish}, response=${JSON.stringify(data).slice(0, 300)}`);
   }
 
-  // finish_reason "stop" = clean end. "length" = hit max_tokens (truncation).
-  // "content_filter" = refused. Anything else is suspicious.
   if (finish && finish !== "stop") {
     console.warn(`  ⚠️  Groq finish_reason=${finish} (not "stop") — content may be incomplete (${text.length} chars)`);
   } else {
@@ -556,18 +546,34 @@ function parseBlogResponse(raw, keyword, category, angle) {
   const metaMatch = raw.match(/META_DESC:\s*(.+)/);
   const slugMatch = raw.match(/SLUG:\s*(.+)/);
   const catMatch = raw.match(/CATEGORY:\s*(.+)/);
-  const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=CONTENT_SUMMARY:|---ARTICLE---)/);
+  const excerptMatch = raw.match(/EXCERPT:\s*([\s\S]+?)(?=CONTENT_SUMMARY:|---ARTICLE---|<h1|<p>)/);
   const summaryMatch = raw.match(/CONTENT_SUMMARY:\s*(.+)/);
-  const articleMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
 
-  // STRICT MODE: fail loudly if the model drifted from the format.
-  // The old silent fallback to `keyword` is exactly why the same string
-  // ("flat interior design delhi cost per sqft") was appearing as a title
-  // every day — it wasn't a title, it was the raw keyword leaking through.
+  // Try to find the article body. Open-source models (Llama, Mistral) often
+  // skip the ---ARTICLE---/---END--- delimiters even when instructed to use them.
+  // Fallback: extract everything from the first HTML tag onward, then strip any
+  // trailing delimiter junk.
+  let articleBody = null;
+  const fencedMatch = raw.match(/---ARTICLE---([\s\S]+?)---END---/);
+  if (fencedMatch) {
+    articleBody = fencedMatch[1].trim();
+  } else {
+    // Find the first real HTML opening tag (<h1>, <p>, <h2>, <article>, <section>)
+    const htmlStart = raw.search(/<(h[1-6]|p|article|section|div)[\s>]/);
+    if (htmlStart !== -1) {
+      articleBody = raw.slice(htmlStart).trim();
+      // Strip trailing ---END--- or stray delimiters if present
+      articleBody = articleBody.replace(/---END---[\s\S]*$/, "").trim();
+      console.log(`  ℹ️  ---ARTICLE--- markers missing — extracted from first HTML tag (${articleBody.length} chars)`);
+    }
+  }
+
+  // STRICT MODE: only fail if we can't find the absolutely-required pieces.
+  // Title and slug are non-negotiable; article body falls back per above.
   const missing = [];
   if (!titleMatch) missing.push("SEO_TITLE");
   if (!slugMatch) missing.push("SLUG");
-  if (!articleMatch) missing.push("---ARTICLE---/---END---");
+  if (!articleBody || articleBody.length < 500) missing.push("article body (<500 chars)");
 
   if (missing.length > 0) {
     console.warn(`  ⚠️  Parse failure — missing fields: ${missing.join(", ")}`);
@@ -583,7 +589,7 @@ function parseBlogResponse(raw, keyword, category, angle) {
     cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[category] || "design intelligence"),
     excerpt: excerptMatch ? excerptMatch[1].trim() : "",
     summary: summaryMatch ? summaryMatch[1].trim() : "",
-    article: articleMatch[1].trim(),
+    article: articleBody,
     angleId: angle.id,
   };
 }
@@ -849,7 +855,7 @@ async function pingSearchEngines(newBlogs) {
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v5 (Groq / Llama)");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v6 (Groq / Llama)");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
   console.log(`🤖 Model: ${GROQ_MODEL}`);
@@ -936,7 +942,12 @@ async function main() {
       } catch (err) {
         console.error(`  ❌ Attempt ${attempts} failed: ${err.message}`);
         if (attempts < maxAttempts) {
-          await new Promise(r => setTimeout(r, 3000));
+          // If Groq told us exactly how long to wait, respect it (+2s buffer baked in)
+          const waitMs = err.isRateLimit && err.retryAfterSec
+            ? err.retryAfterSec * 1000
+            : 3000;
+          console.log(`  ⏳ Waiting ${Math.round(waitMs / 1000)}s before retry...`);
+          await new Promise(r => setTimeout(r, waitMs));
         }
       }
     }
