@@ -31,7 +31,7 @@ const REPO_ROOT = path.join(__dirname, "..");
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const NOTIFY_TO = process.env.NOTIFY_TO || "hello@indevastudio.com";
+const NOTIFY_TO = process.env.NOTIFY_TO || "ceo@indevastudio.com";
 const NOTIFY_FROM = process.env.NOTIFY_FROM || "onboarding@resend.dev";
 const BLOGS_PER_DAY = parseInt(process.env.BLOGS_PER_DAY || "2", 10);
 const SITE_URL = "https://indevastudio.com";
