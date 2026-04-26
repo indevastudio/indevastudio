@@ -1,17 +1,18 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v5
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v7
  *
  * Generates SEO-optimized luxury interior design blogs using Groq's free API
- * (running Meta's Llama 3.3 70B). Publishes BLOGS_PER_DAY posts per run.
+ * (running Meta's Llama 3.3 70B). Now with topic-relevant images via Unsplash.
  *
  * Required env vars:
- *   GROQ_API_KEY  — get from https://console.groq.com/keys (no credit card needed)
+ *   GROQ_API_KEY         — get from https://console.groq.com/keys (free, no card)
  *
  * Optional env vars:
- *   GROQ_MODEL    — defaults to llama-3.3-70b-versatile (best quality on free tier)
- *                   Alternatives: llama-3.1-8b-instant (faster, smaller),
- *                                 llama-4-scout-17b-16e-instruct (newer)
- *   INDEXNOW_KEY  — for Bing/Yandex indexing pings (optional)
+ *   GROQ_MODEL           — defaults to llama-3.3-70b-versatile
+ *   UNSPLASH_ACCESS_KEY  — get from https://unsplash.com/oauth/applications (free,
+ *                          50 req/hour). Without it, images fall back to a small
+ *                          curated Picsum set (less topic-relevant but still works).
+ *   INDEXNOW_KEY         — for Bing/Yandex indexing pings (optional)
  *
  * RATE LIMITS (Groq free tier):
  *   30 RPM · 12,000 TPM · 1,000 RPD
@@ -276,16 +277,106 @@ const EXTERNAL_LINKS = [
   { text: "houzz india", url: "https://www.houzz.in" },
 ];
 
-// Picsum photo IDs — reliable, free, always loads
-const IMAGE_IDS = [
-  "1024","1029","1031","1033","1038","1040","1041",
-  "1043","1044","1047","1048","1050","1053","1054",
-  "1055","1060","1062","1063","1064","1068",
-];
+// ─────────────────────────────────────────────
+// IMAGE SOURCING (topic-aware)
+//
+// Primary: Unsplash Search API (free, 50 req/hour, requires UNSPLASH_ACCESS_KEY)
+//          Get one at https://unsplash.com/oauth/applications → "New Application"
+//
+// Fallback: curated category-mapped Picsum IDs (works with no setup but
+//           images repeat and aren't perfectly on-topic)
+//
+// We try Unsplash first; on any failure (no key, rate limit, network) we fall
+// back to category-mapped Picsum so the workflow never breaks on images.
+// ─────────────────────────────────────────────
 
-function getImageUrl(slug) {
-  const index = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % IMAGE_IDS.length;
-  return `https://picsum.photos/id/${IMAGE_IDS[index]}/1200/675`;
+const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY;
+
+// Search queries per category — used by Unsplash. Pick neutral, well-photographed
+// terms that exist plentifully in stock libraries.
+const CATEGORY_IMAGE_QUERIES = {
+  interior_design: ["luxury living room", "modern interior", "elegant home interior"],
+  villa:           ["luxury villa interior", "modern villa living room", "premium home"],
+  farmhouse:       ["luxury farmhouse interior", "rustic luxury home", "modern farmhouse"],
+  restaurant:      ["luxury restaurant interior", "fine dining restaurant", "modern cafe interior"],
+  living_room:     ["luxury living room", "modern living room", "elegant lounge"],
+  bedroom:         ["luxury bedroom", "master bedroom design", "modern bedroom interior"],
+  local_seo:       ["luxury indian home", "modern home interior", "elegant home"],
+};
+
+// Curated Picsum IDs that happen to be architecture/interior-ish. Used only as
+// fallback when Unsplash is unavailable. Grouped to match category vibe loosely.
+const FALLBACK_PICSUM = {
+  interior_design: ["1048", "1080", "1043"],
+  villa:           ["1048", "1080", "1031"],
+  farmhouse:       ["1015", "1018", "1019"],   // outdoor/landscape leaning
+  restaurant:      ["292", "365", "431"],
+  living_room:     ["1048", "1080", "1043"],
+  bedroom:         ["1080", "1043", "490"],
+  local_seo:       ["1048", "1080", "1043"],
+};
+
+async function fetchUnsplashImage(category) {
+  if (!UNSPLASH_KEY) return null;
+  const queries = CATEGORY_IMAGE_QUERIES[category] || CATEGORY_IMAGE_QUERIES.interior_design;
+  const query = queries[Math.floor(Math.random() * queries.length)];
+
+  try {
+    const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&orientation=landscape&per_page=20&content_filter=high`;
+    const res = await fetch(url, {
+      headers: { Authorization: `Client-ID ${UNSPLASH_KEY}` },
+    });
+    if (!res.ok) {
+      console.warn(`  ⚠️  Unsplash HTTP ${res.status} — falling back to Picsum`);
+      return null;
+    }
+    const data = await res.json();
+    const results = data?.results || [];
+    if (results.length === 0) {
+      console.warn(`  ⚠️  Unsplash returned 0 results for "${query}" — falling back`);
+      return null;
+    }
+    // Random pick from top 20 → variety across blogs in same category
+    const pick = results[Math.floor(Math.random() * Math.min(results.length, 20))];
+    // Use 'regular' (1080w) sized, plus the photographer credit per Unsplash license
+    return {
+      url: `${pick.urls.raw}&w=1200&h=675&fit=crop&q=80`,
+      alt: pick.alt_description || query,
+      photographer: pick.user?.name || "Unsplash",
+      photographerUrl: pick.user?.links?.html || "https://unsplash.com",
+      sourceUrl: pick.links?.html || "https://unsplash.com",
+      query,
+    };
+  } catch (err) {
+    console.warn(`  ⚠️  Unsplash fetch failed: ${err.message} — falling back to Picsum`);
+    return null;
+  }
+}
+
+function getFallbackImage(category, slug) {
+  const pool = FALLBACK_PICSUM[category] || FALLBACK_PICSUM.interior_design;
+  const index = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % pool.length;
+  return {
+    url: `https://picsum.photos/id/${pool[index]}/1200/675`,
+    alt: "luxury interior design",
+    photographer: null,
+    photographerUrl: null,
+    sourceUrl: null,
+    query: null,
+  };
+}
+
+// Unified image getter — tries Unsplash, falls back to Picsum.
+// `category` is one of KEYWORD_POOL keys; `slug` is the blog slug.
+async function resolveBlogImage(category, slug) {
+  const fromUnsplash = await fetchUnsplashImage(category);
+  if (fromUnsplash) {
+    console.log(`  🖼️  Image from Unsplash: "${fromUnsplash.query}" by ${fromUnsplash.photographer}`);
+    return fromUnsplash;
+  }
+  const fb = getFallbackImage(category, slug);
+  console.log(`  🖼️  Image from fallback Picsum (set UNSPLASH_ACCESS_KEY for topic-relevant images)`);
+  return fb;
 }
 
 // ─────────────────────────────────────────────
@@ -607,14 +698,20 @@ function toSlug(text) {
 // ─────────────────────────────────────────────
 // BUILD INSIGHT PAGE HTML
 // ─────────────────────────────────────────────
-function buildInsightPage(blogData) {
+function buildInsightPage(blogData, image) {
   const date = new Date().toISOString().split("T")[0];
-  const imageUrl = getImageUrl(blogData.slug);
+  const imageUrl = image.url;
+  const imageAlt = image.alt || blogData.title;
   const monthYear = new Date().toLocaleDateString("en-IN", {
     month: "long", year: "numeric"
   }).toLowerCase();
   const wordCount = blogData.article.replace(/<[^>]+>/g, "").split(/\s+/).length;
   const readTime = Math.ceil(wordCount / 200);
+
+  // Photographer credit (Unsplash license requires it). Empty string if from fallback.
+  const photoCredit = image.photographer
+    ? `<div class="photo-credit">photo by <a href="${image.photographerUrl}?utm_source=indeva_studio&utm_medium=referral" target="_blank" rel="noopener">${image.photographer}</a> on <a href="https://unsplash.com/?utm_source=indeva_studio&utm_medium=referral" target="_blank" rel="noopener">unsplash</a></div>`
+    : "";
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
@@ -668,8 +765,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .article-cat{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:block;}
 .article-title{font-family:var(--serif);font-size:clamp(2rem,4.5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:-0.02em;color:var(--white);margin-bottom:32px;}
 .article-meta{display:flex;gap:20px;align-items:center;font-family:var(--mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-muted);padding-bottom:48px;border-bottom:1px solid var(--line);}
-.article-image{padding:0 60px;}
+.article-image{padding:0 60px;position:relative;}
 .article-image img{width:100%;max-height:560px;object-fit:cover;display:block;filter:brightness(0.8) saturate(0.85);}
+.photo-credit{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--white-muted);padding:12px 0 0;text-align:right;}
+.photo-credit a{color:var(--white-muted);text-decoration:none;border-bottom:1px solid rgba(240,235,227,0.15);}
+.photo-credit a:hover{color:var(--gold);}
 .article-body{max-width:720px;padding:64px 60px 120px;}
 .article-body h1{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:2rem;font-style:italic;}
 .article-body h2{font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.9rem);font-weight:300;color:var(--white);line-height:1.2;margin:3.5rem 0 1.25rem;}
@@ -732,7 +832,8 @@ footer{background:var(--black-2);border-top:1px solid var(--line);padding:60px;d
   </div>
 </header>
 <div class="article-image">
-  <img src="${imageUrl}" alt="${blogData.title}" loading="eager" width="1200" height="675">
+  <img src="${imageUrl}" alt="${imageAlt}" loading="eager" width="1200" height="675">
+  ${photoCredit}
 </div>
 <main class="article-body">
 ${blogData.article}
@@ -769,10 +870,12 @@ function injectCardsIntoInsightsPage(newBlogs) {
       console.log(`  ⏭️  Already in insights: ${blog.slug}`);
       return null;
     }
-    const imageUrl = getImageUrl(blog.slug);
+    // Each blog now carries its own resolved image (set in main loop)
+    const imageUrl = blog.image?.url || `https://picsum.photos/id/1048/1200/675`;
+    const imageAlt = blog.image?.alt || blog.title.toLowerCase();
     return `
     <a class="blog-card" href="/insights/${blog.slug}/">
-      <img src="${imageUrl}" alt="${blog.title.toLowerCase()}" class="blog-card-image">
+      <img src="${imageUrl}" alt="${imageAlt}" class="blog-card-image">
       <div class="blog-card-cat">${blog.cat}</div>
       <h2 class="blog-card-title">${blog.title.toLowerCase()}</h2>
       <p class="blog-card-excerpt">${blog.excerpt}</p>
@@ -855,7 +958,7 @@ async function pingSearchEngines(newBlogs) {
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v6 (Groq / Llama)");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v7 (Groq + Unsplash)");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
   console.log(`🤖 Model: ${GROQ_MODEL}`);
@@ -958,10 +1061,14 @@ async function main() {
       continue;
     }
 
+    // Resolve a topic-relevant image (Unsplash if key set, else fallback)
+    const image = await resolveBlogImage(category, blogData.slug);
+    blogData.image = image;
+
     // Save file
     const slugDir = path.join(insightsDir, blogData.slug);
     if (!fs.existsSync(slugDir)) fs.mkdirSync(slugDir, { recursive: true });
-    const html = buildInsightPage(blogData);
+    const html = buildInsightPage(blogData, image);
     fs.writeFileSync(path.join(slugDir, "index.html"), html);
 
     console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
@@ -971,7 +1078,7 @@ async function main() {
     newAnglesUsed.push(angle.id);
 
     if (i < selections.length - 1) {
-      console.log(`  ⏳ Sleeping ${INTER_BLOG_DELAY_MS / 1000}s to stay under Groq's 6K TPM cap...`);
+      console.log(`  ⏳ Sleeping ${INTER_BLOG_DELAY_MS / 1000}s to stay under Groq's TPM cap...`);
       await new Promise(r => setTimeout(r, INTER_BLOG_DELAY_MS));
     }
   }
