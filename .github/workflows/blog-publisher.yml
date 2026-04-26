@@ -26,8 +26,9 @@ jobs:
 
       - name: Generate blogs
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          GROQ_API_KEY:        ${{ secrets.GROQ_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          INDEXNOW_KEY:        ${{ secrets.INDEXNOW_KEY }}
         run: node scripts/generate-blogs.js
 
       - name: Show what was generated
@@ -51,8 +52,11 @@ jobs:
 
       - name: Send email notification
         if: success()
+        continue-on-error: true
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_TO:      ${{ secrets.NOTIFY_TO }}
+          NOTIFY_FROM:    ${{ secrets.NOTIFY_FROM }}
         run: |
           if [ -f scripts/email-notifier.js ]; then
             node scripts/email-notifier.js
