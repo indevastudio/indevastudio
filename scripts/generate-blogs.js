@@ -1,22 +1,30 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v4
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v5
  *
- * Generates SEO-optimized luxury interior design blogs using the Anthropic Claude API.
- * Publishes BLOGS_PER_DAY posts per run with rotating angles, cities, and budgets.
+ * Generates SEO-optimized luxury interior design blogs using Groq's free API
+ * (running Meta's Llama 3.3 70B). Publishes BLOGS_PER_DAY posts per run.
  *
  * Required env vars:
- *   ANTHROPIC_API_KEY  — Claude API key from https://console.anthropic.com
+ *   GROQ_API_KEY  — get from https://console.groq.com/keys (no credit card needed)
  *
  * Optional env vars:
- *   ANTHROPIC_MODEL    — defaults to claude-sonnet-4-5 (good quality/cost balance)
- *                        For cheaper runs, set to claude-haiku-4-5-20251001
- *   INDEXNOW_KEY       — for Bing/Yandex indexing pings (optional)
+ *   GROQ_MODEL    — defaults to llama-3.3-70b-versatile (best quality on free tier)
+ *                   Alternatives: llama-3.1-8b-instant (faster, smaller),
+ *                                 llama-4-scout-17b-16e-instruct (newer)
+ *   INDEXNOW_KEY  — for Bing/Yandex indexing pings (optional)
+ *
+ * RATE LIMITS (Groq free tier, per model):
+ *   30 RPM  · 6,000 TPM · 1,000 RPD · 100K-500K TPD
+ *   The 6,000 TPM cap is the binding constraint — a single blog uses ~5K tokens
+ *   (input + output), so we sleep 70 seconds between blogs to stay safe.
  *
  * SAFETY NOTE FOR HUMANS PASTING THIS FILE:
  * If the very first character of the file is "(" instead of "/",
  * something pasted a `git apply` command into the file. Delete everything
  * and re-paste from a clean source. The file MUST start with the
  * comment block above — nothing else.
+ * Also, no line in this file should start with "+" or "-" followed by code.
+ * Those are diff markers and indicate corruption.
  */
 
 import fs from "fs";
@@ -25,13 +33,17 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5";
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
-// How many blogs to publish per run. Currently 2/day to control API cost
-// while still building a substantial archive (≈60 posts/month).
+// How many blogs to publish per run. Currently 2/day.
+// Stay reasonable — Groq free tier is 1,000 RPD shared across all your usage.
 const BLOGS_PER_DAY = 2;
+
+// Delay between blogs (ms). Groq free tier caps at 6,000 TPM, and one blog
+// uses ~5K tokens. Sleeping 70s between calls keeps us under that ceiling.
+const INTER_BLOG_DELAY_MS = 70_000;
 
 // ─────────────────────────────────────────────
 // MEMORY SYSTEM
@@ -491,16 +503,15 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 
   console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum})`);
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
+      "Authorization": `Bearer ${GROQ_API_KEY}`,
     },
     body: JSON.stringify({
-      model: ANTHROPIC_MODEL,
-      max_tokens: 8192,
+      model: GROQ_MODEL,
+      max_completion_tokens: 8000,
       temperature: 0.75 + Math.random() * 0.2, // 0.75–0.95 for variety
       messages: [
         { role: "user", content: prompt },
@@ -510,27 +521,28 @@ NO MARKDOWN. NO CODE FENCES. PURE HTML ONLY.]
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(`Anthropic HTTP ${response.status}: ${JSON.stringify(data).slice(0, 300)}`);
+    // Surface useful Groq errors: 401 = bad key, 429 = rate limit, 400 = bad request
+    throw new Error(`Groq HTTP ${response.status}: ${JSON.stringify(data).slice(0, 400)}`);
   }
 
-  // Claude returns { content: [{ type: "text", text: "..." }, ...], stop_reason: "end_turn", ... }
-  const textBlock = Array.isArray(data.content)
-    ? data.content.find(b => b && b.type === "text")
-    : null;
-  const text = textBlock?.text;
-  const stop = data.stop_reason;
+  // Groq is OpenAI-compatible: { choices: [{ message: { content: "..." }, finish_reason: "stop" }] }
+  const choice = data.choices?.[0];
+  if (!choice) {
+    throw new Error(`Groq returned no choices. Response: ${JSON.stringify(data).slice(0, 300)}`);
+  }
+  const text = choice.message?.content;
+  const finish = choice.finish_reason;
 
   if (!text) {
-    throw new Error(
-      `Claude returned no text. stop_reason=${stop}, response=${JSON.stringify(data).slice(0, 300)}`
-    );
+    throw new Error(`Groq returned empty content. finish_reason=${finish}, response=${JSON.stringify(data).slice(0, 300)}`);
   }
 
-  // Catch silent truncation: stop_reason "max_tokens" means article was cut mid-sentence
-  if (stop && stop !== "end_turn") {
-    console.warn(`  ⚠️  Claude stop_reason=${stop} (not end_turn) — content may be incomplete (${text.length} chars)`);
+  // finish_reason "stop" = clean end. "length" = hit max_tokens (truncation).
+  // "content_filter" = refused. Anything else is suspicious.
+  if (finish && finish !== "stop") {
+    console.warn(`  ⚠️  Groq finish_reason=${finish} (not "stop") — content may be incomplete (${text.length} chars)`);
   } else {
-    console.log(`  📥 Claude OK — ${text.length} chars, stop_reason=${stop || "end_turn"}`);
+    console.log(`  📥 Groq OK — ${text.length} chars, finish_reason=${finish || "stop"}`);
   }
 
   return text;
@@ -837,14 +849,14 @@ async function pingSearchEngines(newBlogs) {
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v4 (Claude)");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v5 (Groq / Llama)");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
-  console.log(`🤖 Model: ${ANTHROPIC_MODEL}`);
+  console.log(`🤖 Model: ${GROQ_MODEL}`);
   console.log(`📝 Target: ${BLOGS_PER_DAY} blog(s) this run`);
 
-  if (!ANTHROPIC_API_KEY) {
-    console.error("❌ ANTHROPIC_API_KEY not set.");
+  if (!GROQ_API_KEY) {
+    console.error("❌ GROQ_API_KEY not set. Get one at https://console.groq.com/keys");
     process.exit(1);
   }
 
@@ -931,7 +943,7 @@ async function main() {
 
     if (!blogData) {
       console.error(`  ❌ All ${maxAttempts} attempts failed for "${keyword}" — skipping`);
-      console.error(`     If this happens repeatedly, check: 1) ANTHROPIC_API_KEY valid, 2) dedup not too strict, 3) prompt not triggering refusal`);
+      console.error(`     If this happens repeatedly, check: 1) GROQ_API_KEY valid, 2) dedup not too strict, 3) rate limit hit`);
       continue;
     }
 
@@ -947,7 +959,10 @@ async function main() {
     newKeywordsUsed.push(keyword);
     newAnglesUsed.push(angle.id);
 
-    if (i < selections.length - 1) await new Promise(r => setTimeout(r, 3000));
+    if (i < selections.length - 1) {
+      console.log(`  ⏳ Sleeping ${INTER_BLOG_DELAY_MS / 1000}s to stay under Groq's 6K TPM cap...`);
+      await new Promise(r => setTimeout(r, INTER_BLOG_DELAY_MS));
+    }
   }
 
   // Update memory
