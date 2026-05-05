@@ -1,9 +1,45 @@
+# indéva studio
+# https://www.indevastudio.com
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_vercel/
 
-# Block internal search and query params
-Disallow: /?s=
-Disallow: /cdn-cgi/
+# AI crawlers - allow them all (good for AI search visibility)
+User-agent: GPTBot
+Allow: /
 
-# Sitemap
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# SEO tools - allow (so we can track our own backlinks and rankings)
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+# spam bots - block
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
 Sitemap: https://www.indevastudio.com/sitemap.xml

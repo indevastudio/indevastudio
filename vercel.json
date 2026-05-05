@@ -1,49 +1,42 @@
 {
-  "version": 2,
-  "buildCommand": null,
-  "outputDirectory": ".",
-  "framework": null,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/((?!.*\\..*|about|delhi|gurgaon|noida|projects|services|contact|insights|sitemap\\.xml|robots\\.txt|api/).*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
-    {
-      "source": "/(.*\\.webp|.*\\.jpg|.*\\.jpeg|.*\\.png|.*\\.gif|.*\\.svg|.*\\.ico|.*\\.woff2|.*\\.woff|.*\\.ttf|.*\\.otf)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*\\.js|.*\\.css)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
-      ]
-    },
-    {
-      "source": "/(.*\\.html/)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|gif|ico|woff2?|ttf|css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/interior-designer-delhi", "destination": "/interior-designer-delhi.html" },
-    { "source": "/interior-designer-gurgaon", "destination": "/interior-designer-gurgaon.html" },
-    { "source": "/interior-designer-noida", "destination": "/interior-designer-noida.html" },
-    { "source": "/projects/:slug", "destination": "/index.html" },
-    { "source": "/blogs/:slug*", "destination": "/blogs/:slug*.html" },
-    { "source": "/insights/:slug/", "destination": "/insights/:slug/index.html" },
-    { "source": "/insights/:slug", "destination": "/insights/:slug/index.html" }
-  ],
   "redirects": [
-    { "source": "/home", "destination": "/", "permanent": true },
-    { "source": "/contact-us", "destination": "/#contact", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
   ]
 }
