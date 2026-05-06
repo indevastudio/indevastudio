@@ -1,78 +1,321 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.indevastudio.com/</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp</image:loc>
-      <image:title>luxury farmhouse residence interior design, new delhi — indéva studio</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dance%20floor%20area.webp</image:loc>
-      <image:title>restaurant interior design, udaipur — indéva studio</image:title>
-    </image:image>
+    <priority>1.00</priority>
   </url>
-
   <url>
     <loc>https://www.indevastudio.com/about</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.90</priority>
   </url>
-
+  <url>
+    <loc>https://www.indevastudio.com/insights/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
   <url>
     <loc>https://www.indevastudio.com/delhi</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp</image:loc>
-      <image:title>luxury interior designer in delhi — indéva studio</image:title>
-    </image:image>
   </url>
-
   <url>
     <loc>https://www.indevastudio.com/gurgaon</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp</image:loc>
-      <image:title>luxury interior designer in gurgaon — indéva studio</image:title>
-    </image:image>
   </url>
-
   <url>
     <loc>https://www.indevastudio.com/noida</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp</image:loc>
-      <image:title>luxury interior designer in noida — indéva studio</image:title>
-    </image:image>
   </url>
-
   <url>
     <loc>https://www.indevastudio.com/sonipat</loc>
-    <lastmod>2026-05-05</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp</image:loc>
-      <image:title>luxury farmhouse interior designer in sonipat — indéva studio</image:title>
-    </image:image>
   </url>
-
   <url>
-    <loc>https://www.indevastudio.com/insights</loc>
-    <lastmod>2026-05-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
+    <loc>https://www.indevastudio.com/insights/bedroom-false-ceiling-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
   </url>
-
+  <url>
+    <loc>https://www.indevastudio.com/insights/bespoke-interior-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/bespoke-villa-interior-design-noida/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/best-farmhouse-interior-designer-dehradun/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/budget-truth-in-indian-interiors/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/choosing-a-contractor-in-india/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/colour-follows-conviction-not-trends/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/contemporary-villa-living-room-design/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/execution-is-design/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/false-ceiling-design-cost-guide/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/farmhouse-bedroom-interior-design-india/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-ideas-india/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/farmhouse-kitchen-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/farmhouse-villa-interior-design-mistakes/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/fine-dining-restaurant-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/flat-interior-design-cost-delhi/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/flat-interior-design-delhi-cost-per-sqft/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/full-home-interior-design-cost/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/gurgaon-villa-interior-design-cost/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/high-end-cafe-design-delhi/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/high-end-interior-design-cost-guide/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/how-we-protect-design-on-site/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/light-is-not-a-finish-it-is-the-space/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/living-room-tv-unit-design-mistakes/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-cost-delhi-ncr/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-farmhouse-design-delhi-ncr/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-interior-design-noida/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-living-room-interior-design-delhi/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-india/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/modern-farmhouse-interior-design-cost/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/modern-living-room-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/open-plan-living-room-design-ideas/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/perfection-is-the-enemy-of-comfort/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/restaurant-ambience-design-cost/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-design-cost-delhi/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-designers-gurgaon/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/the-honest-material-stone-over-stone-effect/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/the-scale-problem-small-rooms/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/top-interior-designers-delhi-farmhouse/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/udaipur-luxury-villas-cost-guide/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/villa-interior-design-cost-delhi-ncr/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/villa-interior-designers-delhi-ncr-price/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/what-a-good-brief-actually-looks-like/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/why-most-floor-plans-fail/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/why-we-refuse-to-start-with-moodboards/</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
 </urlset>
