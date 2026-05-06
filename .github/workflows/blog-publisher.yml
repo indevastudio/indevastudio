@@ -2,7 +2,8 @@ name: Auto Blog Publisher
 
 on:
   schedule:
-    - cron: '30 22 * * *'   # 04:00 IST daily
+    - cron: '30 22 * * *'   # 04:00 IST — post 1 (morning)
+    - cron: '30 10 * * *'   # 16:00 IST — post 2 (afternoon)
   workflow_dispatch:         # Manual trigger from GitHub UI
 
 jobs:
@@ -14,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history so duplicate-slug check can scan existing files
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -24,34 +27,124 @@ jobs:
         run: |
           if [ -f package.json ]; then npm install --no-audit --no-fund; fi
 
-      - name: Generate blogs
+      - name: Generate blog post
+        id: generate
         env:
           GROQ_API_KEY:        ${{ secrets.GROQ_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           INDEXNOW_KEY:        ${{ secrets.INDEXNOW_KEY }}
         run: node scripts/generate-blogs.js
 
+      - name: Rebuild sitemap.xml from all insight pages
+        run: |
+          node - << 'JS'
+          const fs   = require('fs');
+          const path = require('path');
+
+          const ORIGIN   = 'https://www.indevastudio.com';
+          const TODAY    = new Date().toISOString().split('T')[0];
+          const INSIGHTS = path.join(process.cwd(), 'insights');
+
+          const staticPages = [
+            { loc: '/',         priority: '1.00', changefreq: 'weekly'  },
+            { loc: '/about',    priority: '0.90', changefreq: 'monthly' },
+            { loc: '/insights/',priority: '0.90', changefreq: 'daily'   },
+            { loc: '/delhi',    priority: '0.95', changefreq: 'monthly' },
+            { loc: '/gurgaon',  priority: '0.95', changefreq: 'monthly' },
+            { loc: '/noida',    priority: '0.95', changefreq: 'monthly' },
+            { loc: '/sonipat',  priority: '0.95', changefreq: 'monthly' },
+          ];
+
+          function urlEntry(loc, priority, changefreq, lastmod) {
+            return [
+              '  <url>',
+              `    <loc>${ORIGIN}${loc}</loc>`,
+              `    <lastmod>${lastmod || TODAY}</lastmod>`,
+              `    <changefreq>${changefreq}</changefreq>`,
+              `    <priority>${priority}</priority>`,
+              '  </url>',
+            ].join('\n');
+          }
+
+          const entries = staticPages.map(p => urlEntry(p.loc, p.priority, p.changefreq));
+
+          // scan insights/*/index.html for blog posts
+          let blogCount = 0;
+          if (fs.existsSync(INSIGHTS)) {
+            for (const slug of fs.readdirSync(INSIGHTS)) {
+              const fp = path.join(INSIGHTS, slug, 'index.html');
+              if (!fs.existsSync(fp)) continue;
+              const mtime = fs.statSync(fp).mtime.toISOString().split('T')[0];
+              entries.push(urlEntry(`/insights/${slug}/`, '0.80', 'monthly', mtime));
+              blogCount++;
+            }
+          }
+
+          const xml = [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+            ...entries,
+            '</urlset>',
+          ].join('\n');
+
+          fs.writeFileSync(path.join(process.cwd(), 'sitemap.xml'), xml + '\n');
+          console.log(`sitemap.xml written — ${staticPages.length} static + ${blogCount} blog posts`);
+          JS
+
       - name: Show what was generated
         run: |
           echo "── New files in insights/ ──"
           git status --short insights/ || true
+          echo "── sitemap.xml entry count ──"
+          grep -c '<loc>' sitemap.xml 2>/dev/null || echo "0"
           echo "── blog-memory.json head ──"
           head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
 
       - name: Commit and push
+        id: commit
         run: |
-          git config user.name "Indeva Bot"
+          git config user.name  "Indeva Bot"
           git config user.email "bot@indevastudio.com"
-          git add -A
+          git add insights/ sitemap.xml content/blog-memory.json
           if git diff --staged --quiet; then
             echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "Auto-publish blogs $(date +%Y-%m-%d)"
+          git commit -m "auto: publish blog $(date +'%Y-%m-%d %H:%M IST')"
           git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Send email notification
-        if: success()
+      - name: Ping IndexNow (Bing / Yandex instant indexing)
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          # Collect newly added insight URLs from the commit
+          SLUGS=$(git diff HEAD~1 --name-only 2>/dev/null | grep '^insights/' | grep 'index.html$' | sed 's|insights/\(.*\)/index.html|\1|')
+          if [ -z "$SLUGS" ]; then
+            echo "No new insight URLs to ping."
+            exit 0
+          fi
+          URL_LIST=""
+          for SLUG in $SLUGS; do
+            URL_LIST="${URL_LIST}\"https://www.indevastudio.com/insights/${SLUG}/\","
+          done
+          URL_LIST="${URL_LIST%,}"  # remove trailing comma
+
+          echo "Pinging IndexNow for: $URL_LIST"
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"www.indevastudio.com\",
+              \"key\": \"${INDEXNOW_KEY}\",
+              \"keyLocation\": \"https://www.indevastudio.com/${INDEXNOW_KEY}.txt\",
+              \"urlList\": [${URL_LIST}]
+            }" && echo "IndexNow ping sent." || echo "IndexNow ping failed (non-fatal)."
+
+      - name: Send success email notification
+        if: success() && steps.commit.outputs.committed == 'true'
         continue-on-error: true
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -61,5 +154,38 @@ jobs:
           if [ -f scripts/email-notifier.js ]; then
             node scripts/email-notifier.js
           else
-            echo "ℹ️  email-notifier.js not present — skipping"
+            # Inline fallback notification via Resend
+            TO="${NOTIFY_TO:-ceo@indevastudio.com}"
+            FROM="${NOTIFY_FROM:-hello@indevastudio.com}"
+            DATE=$(date +'%Y-%m-%d %H:%M IST')
+            curl -s -X POST "https://api.resend.com/emails" \
+              -H "Authorization: Bearer ${RESEND_API_KEY}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"from\":    \"indéva automation <${FROM}>\",
+                \"to\":      [\"${TO}\"],
+                \"subject\": \"✓ blog published — ${DATE}\",
+                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights/'>indevastudio.com/insights</a>.</p><p>Sitemap updated. IndexNow pinged.</p>\"
+              }" && echo "Success email sent." || echo "Email send failed (non-fatal)."
           fi
+
+      - name: Send failure email notification
+        if: failure()
+        continue-on-error: true
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_TO:      ${{ secrets.NOTIFY_TO }}
+          NOTIFY_FROM:    ${{ secrets.NOTIFY_FROM }}
+        run: |
+          TO="${NOTIFY_TO:-ceo@indevastudio.com}"
+          FROM="${NOTIFY_FROM:-hello@indevastudio.com}"
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${RESEND_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"from\":    \"indéva automation <${FROM}>\",
+              \"to\":      [\"${TO}\"],
+              \"subject\": \"✗ blog automation FAILED — $(date +'%Y-%m-%d')\",
+              \"html\":    \"<p>The scheduled blog automation run <strong>failed</strong>.</p><p><a href='${RUN_URL}'>View the GitHub Actions log</a> to diagnose the issue.</p><p>No blog was published today for this run.</p>\"
+            }" && echo "Failure email sent." || echo "Could not send failure email."
