@@ -1,5 +1,5 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v7
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v8
  *
  * Generates SEO-optimized luxury interior design blogs using Groq's free API
  * (running Meta's Llama 3.3 70B). Now with topic-relevant images via Unsplash.
@@ -38,9 +38,10 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
-// How many blogs to publish per run. Currently 2/day.
-// Stay reasonable — Groq free tier is 1,000 RPD shared across all your usage.
-const BLOGS_PER_DAY = 2;
+// How many blogs to publish per run.
+// Workflow now runs TWICE per day (2 crons), so 1 per run = 2 blogs/day total.
+// Keep at 1 unless you have a paid Groq plan — free tier is 1,000 RPD.
+const BLOGS_PER_DAY = 1;
 
 // Delay between blogs (ms). Groq free tier caps at 12K TPM. With output capped
 // at 5500 tokens + ~1500 prompt tokens, one call uses ~7K TPM. The TPM window
@@ -164,6 +165,9 @@ const CITIES = [
   { city: "Gurgaon", area: "Golf Course Road", property: "villa" },
   { city: "Noida", area: "Sector 44", property: "builder floor" },
   { city: "Delhi", area: "Greater Kailash", property: "duplex" },
+  { city: "Sonipat", area: "Kundli", property: "farmhouse" },
+  { city: "Sonipat", area: "KMP Expressway", property: "weekend retreat" },
+  { city: "Sonipat", area: "Rai", property: "plotted home" },
 ];
 
 // Budget ranges to rotate through
@@ -248,6 +252,9 @@ const KEYWORD_POOL = {
     "top interior designers Delhi farmhouse",
     "restaurant interior designer Delhi NCR",
     "flat interior design Delhi cost per sqft",
+    "farmhouse interior designer Sonipat",
+    "interior designer Sonipat NCR",
+    "plotted home interior design Sonipat",
   ],
 };
 
@@ -259,6 +266,7 @@ const CATEGORY_MAP = {
   living_room: "spatial logic",
   bedroom: "bedroom design",
   local_seo: "india market",
+  sonipat: "villa & farmhouse",
 };
 
 const INTERNAL_LINKS = [
@@ -267,6 +275,9 @@ const INTERNAL_LINKS = [
   { text: "contact us for a free consultation", url: "/#contact" },
   { text: "our design process", url: "/#about" },
   { text: "get in touch with our designers", url: "/#contact" },
+  { text: "our sonipat farmhouse projects", url: "/sonipat" },
+  { text: "interior design in delhi", url: "/delhi" },
+  { text: "interior design in gurgaon", url: "/gurgaon" },
 ];
 
 const EXTERNAL_LINKS = [
@@ -302,6 +313,7 @@ const CATEGORY_IMAGE_QUERIES = {
   living_room:     ["luxury living room", "modern living room", "elegant lounge"],
   bedroom:         ["luxury bedroom", "master bedroom design", "modern bedroom interior"],
   local_seo:       ["luxury indian home", "modern home interior", "elegant home"],
+  sonipat:         ["luxury farmhouse interior", "modern farmhouse", "rustic luxury home"],
 };
 
 // Curated Picsum IDs that happen to be architecture/interior-ish. Used only as
@@ -314,6 +326,7 @@ const FALLBACK_PICSUM = {
   living_room:     ["1048", "1080", "1043"],
   bedroom:         ["1080", "1043", "490"],
   local_seo:       ["1048", "1080", "1043"],
+  sonipat:         ["1015", "1018", "1019"],
 };
 
 async function fetchUnsplashImage(category) {
@@ -715,14 +728,14 @@ function buildInsightPage(blogData, image) {
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: blogData.title,
     description: blogData.meta,
     image: imageUrl,
     datePublished: date,
-    author: { "@type": "Organization", name: "indéva studio", url: "https://indevastudio.com" },
+    author: { "@type": "Organization", name: "indéva studio", url: "https://www.indevastudio.com" },
     publisher: { "@type": "Organization", name: "indéva studio" },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `https://indevastudio.com/insights/${blogData.slug}/` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://www.indevastudio.com/insights/${blogData.slug}/` },
   });
 
   return `<!DOCTYPE html>
@@ -733,11 +746,11 @@ function buildInsightPage(blogData, image) {
 <title>${blogData.title.toLowerCase()} — indéva studio</title>
 <meta name="description" content="${blogData.meta}">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://indevastudio.com/insights/${blogData.slug}/">
+<link rel="canonical" href="https://www.indevastudio.com/insights/${blogData.slug}/">
 <meta property="og:title" content="${blogData.title} — indéva studio">
 <meta property="og:description" content="${blogData.meta}">
 <meta property="og:image" content="${imageUrl}">
-<meta property="og:url" content="https://indevastudio.com/insights/${blogData.slug}/">
+<meta property="og:url" content="https://www.indevastudio.com/insights/${blogData.slug}/">
 <meta property="og:type" content="article">
 <script type="application/ld+json">${schema}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -905,7 +918,7 @@ function updateSitemap(newBlogs) {
     .filter(b => !sitemap.includes(`/insights/${b.slug}/`))
     .map(b => `
   <url>
-    <loc>https://indevastudio.com/insights/${b.slug}/</loc>
+    <loc>https://www.indevastudio.com/insights/${b.slug}/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -931,16 +944,16 @@ async function pingSearchEngines(newBlogs) {
   }
   if (newBlogs.length === 0) return;
 
-  const urlList = newBlogs.map(b => `https://indevastudio.com/insights/${b.slug}/`);
+  const urlList = newBlogs.map(b => `https://www.indevastudio.com/insights/${b.slug}/`);
 
   try {
     const res = await fetch("https://api.indexnow.org/indexnow", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8" },
       body: JSON.stringify({
-        host: "indevastudio.com",
+        host: "www.indevastudio.com",
         key: key,
-        keyLocation: `https://indevastudio.com/${key}.txt`,
+        keyLocation: `https://www.indevastudio.com/${key}.txt`,
         urlList: urlList,
       }),
     });
@@ -958,7 +971,7 @@ async function pingSearchEngines(newBlogs) {
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v7 (Groq + Unsplash)");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v8 (Groq + Unsplash)");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
   console.log(`🤖 Model: ${GROQ_MODEL}`);
@@ -1033,8 +1046,9 @@ async function main() {
           }
         }
 
-        // SLUG UNIQUENESS CHECK
-        if (memory.slugs.includes(parsed.slug)) {
+        // SLUG UNIQUENESS CHECK — memory AND filesystem (protects if memory.json resets)
+        const slugDir = path.join(REPO_ROOT, "insights", parsed.slug);
+        if (memory.slugs.includes(parsed.slug) || fs.existsSync(path.join(slugDir, "index.html"))) {
           parsed.slug = `${parsed.slug}-${angle.id}`;
         }
 
