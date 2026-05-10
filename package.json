@@ -1,13 +1,19 @@
 {
-  "name": "indeva-blog-engine",
-  "version": "1.0.0",
-  "description": "Automated daily blog generation for indéva studio",
+  "name": "indeva-blog-generator",
+  "version": "2.0.0",
   "type": "module",
-  "private": true,
   "scripts": {
-    "generate": "node scripts/generate-blogs.js"
+    "generate":       "node scripts/generate.js",
+    "generate:force": "node scripts/generate.js --force",
+    "generate:single":"node scripts/generate.js --slug",
+    "validate":       "node scripts/validate.js",
+    "audit":          "node scripts/generate.js --audit",
+    "sitemap":        "node scripts/sitemap.js",
+    "health":         "node scripts/health-check.js",
+    "health:all":     "node scripts/health-check.js --all",
+    "publish":        "node scripts/validate.js && node scripts/generate.js && node scripts/sitemap.js && git add insights/ sitemap.xml && git commit -m 'auto: publish blog posts' && git push"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=18.0.0"
   }
 }
