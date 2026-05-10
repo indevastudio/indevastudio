@@ -1,0 +1,94 @@
+name: 📝 Generate & Deploy Blogs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blogs.config.js'
+      - 'scripts/generate.js'
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Single slug to regenerate (blank = all pending)'
+        required: false
+        default: ''
+      force:
+        description: 'Force regenerate ALL posts'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write   # required to commit generated files back to repo
+
+jobs:
+  deploy:
+    name: Generate → Commit → Vercel → Health Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: ⬇️  Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⚙️  Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🔍  Validate config
+        run: node scripts/validate.js
+
+      - name: 📝  Generate HTML → insights/
+        run: |
+          if   [ "${{ github.event.inputs.force }}" = "true" ]; then
+            node scripts/generate.js --force
+          elif [ -n "${{ github.event.inputs.slug }}" ]; then
+            node scripts/generate.js --slug "${{ github.event.inputs.slug }}"
+          else
+            node scripts/generate.js
+          fi
+
+      - name: 🗺️  Regenerate sitemap
+        run: node scripts/sitemap.js
+
+      - name: 🔎  Check for new files
+        id: diff
+        run: |
+          git diff --quiet HEAD insights/ sitemap.xml \
+            && echo "changed=false" >> $GITHUB_OUTPUT \
+            || echo "changed=true"  >> $GITHUB_OUTPUT
+
+      - name: 💾  Commit & push generated files
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add insights/*.html sitemap.xml
+          COUNT=$(git diff --staged --name-only | grep "insights/" | wc -l | tr -d ' ')
+          git commit -m "auto: generate ${COUNT} blog post(s) + sitemap [skip ci]"
+          git push origin main
+
+      - name: ℹ️  Nothing new
+        if: steps.diff.outputs.changed == 'false'
+        run: echo "✅ No new posts to generate."
+
+      - name: ⏳  Wait for Vercel CDN propagation
+        if: steps.diff.outputs.changed == 'true'
+        run: sleep 75
+
+      - name: ✅  Health check
+        if: steps.diff.outputs.changed == 'true'
+        run: node scripts/health-check.js
+
+      - name: 📊  Summary
+        if: always()
+        run: |
+          echo "## Blog Deploy Report" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Site:** https://www.indevastudio.com/insights/" >> $GITHUB_STEP_SUMMARY
+          TOTAL=$(ls insights/*.html 2>/dev/null | wc -l | tr -d ' ')
+          echo "**Total blog files in repo:** ${TOTAL}" >> $GITHUB_STEP_SUMMARY
