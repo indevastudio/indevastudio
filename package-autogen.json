@@ -1,0 +1,13 @@
+{
+  "name": "indeva-auto-generator",
+  "version": "3.0.0",
+  "description": "Automatically detects and generates missing blog HTML files. Zero manual input.",
+  "type": "module",
+  "scripts": {
+    "auto":     "node scripts/auto-generate.js",
+    "dry-run":  "node scripts/auto-generate.js --dry-run"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
