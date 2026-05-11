@@ -2,7 +2,7 @@ name: 🤖 Auto-Generate & Deploy Missing Blog Posts
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 * * * *'    # every hour
   workflow_dispatch:
     inputs:
       dry_run:
@@ -21,18 +21,31 @@ jobs:
     timeout-minutes: 30
 
     steps:
+
       - name: ⬇️  Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── LOOP GUARD ────────────────────────────────────────────────
+      # Prevents infinite loop WITHOUT using [skip ci]
+      # [skip ci] was blocking Vercel deployments — this is the root cause fix
+      - name: 🛑  Skip if triggered by bot commit
+        run: |
+          AUTHOR=$(git log -1 --pretty=format:'%an')
+          echo "Last commit author: $AUTHOR"
+          if [ "$AUTHOR" = "indeva-bot[auto]" ]; then
+            echo "Bot commit detected — skipping to prevent loop."
+            exit 0
+          fi
 
       - name: ⚙️  Node 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 🤖  Generate missing blog posts → insights/{slug}/index.html
+      - name: 🤖  Detect & generate missing blog posts
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           INDEXNOW_KEY:      ${{ secrets.INDEXNOW_KEY }}
@@ -52,32 +65,35 @@ jobs:
             && echo "changed=false" >> $GITHUB_OUTPUT \
             || echo "changed=true"  >> $GITHUB_OUTPUT
 
-      - name: 💾  Commit → triggers Vercel auto-deploy
+      # ── CRITICAL FIX: NO [skip ci] in commit message ──────────────
+      # [skip ci] was telling Vercel to skip deployment.
+      # Removed it. Bot loop is prevented by the author-check above.
+      - name: 💾  Commit generated files → Vercel auto-deploys
         if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
         run: |
           git config user.name  "indeva-bot[auto]"
           git config user.email "indeva-bot@users.noreply.github.com"
 
-          # Stage entire insights/ folder (picks up new slug/index.html files)
           git add insights/
 
           COUNT=$(git diff --staged --name-only | grep "index.html" | wc -l | tr -d ' ')
-          SLUGS=$(git diff --staged --name-only | grep "index.html" | sed 's|insights/||;s|/index.html||' | tr '\n' ', ' | sed 's/,$//')
+          SLUGS=$(git diff --staged --name-only | grep "index.html" \
+            | sed 's|insights/||;s|/index.html||' \
+            | tr '\n' ', ' | sed 's/,$//')
 
-          git commit -m "🤖 auto: generate ${COUNT} blog post(s) [skip ci]
+          git commit -m "🤖 auto: generate ${COUNT} blog post(s)
 
           Slugs: ${SLUGS}
-          Structure: insights/{slug}/index.html
-          Time: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          Time:  $(date -u '+%Y-%m-%d %H:%M UTC')"
 
           git push origin main
-          echo "✅ Pushed ${COUNT} blog folder(s). Vercel deploying now."
+          echo "✅ Pushed. Vercel is now deploying."
 
-      - name: ⏳  Wait for Vercel (90s)
+      - name: ⏳  Wait for Vercel to deploy (90s)
         if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
         run: sleep 90
 
-      - name: ✅  Health check
+      - name: ✅  Health check new URLs
         if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
         run: |
           if [ ! -f ".generated-slugs.json" ]; then exit 0; fi
@@ -92,18 +108,16 @@ jobs:
 
       - name: ℹ️  Nothing to generate
         if: steps.diff.outputs.changed == 'false'
-        run: echo "✅ All blog posts are up to date."
+        run: echo "✅ All blog posts up to date."
 
       - name: 📊  Summary
         if: always()
         run: |
           echo "## 🤖 Auto Blog Report" >> $GITHUB_STEP_SUMMARY
-          echo "| | |" >> $GITHUB_STEP_SUMMARY
-          echo "|--|--|" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| **Status** | ${{ job.status }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Root cause fixed** | [skip ci] removed ✅ |" >> $GITHUB_STEP_SUMMARY
           echo "| **Time** | $(date -u '+%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Structure** | insights/{slug}/index.html |" >> $GITHUB_STEP_SUMMARY
-          TOTAL=$(find insights -name "index.html" ! -path "insights/index.html" 2>/dev/null | wc -l | tr -d ' ')
+          TOTAL=$(find insights -name "index.html" 2>/dev/null | grep -v "^insights/index.html$" | wc -l | tr -d ' ')
           echo "| **Total blog posts** | ${TOTAL} |" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View Insights](https://www.indevastudio.com/insights/)" >> $GITHUB_STEP_SUMMARY
