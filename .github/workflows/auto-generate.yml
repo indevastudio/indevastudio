@@ -2,7 +2,7 @@ name: 🤖 Auto-Generate & Deploy Missing Blog Posts
 
 on:
   schedule:
-    - cron: '0 * * * *'    # every hour
+    - cron: '0 * * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -16,36 +16,41 @@ permissions:
 
 jobs:
   auto-generate:
-    name: Detect → Generate → Commit → Deploy → Index → Notify
+    name: Detect → Generate → Commit → Deploy via CLI → Index → Notify
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
 
+      # ── 1. Checkout ───────────────────────────────────────────────
       - name: ⬇️  Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── LOOP GUARD ────────────────────────────────────────────────
-      # Prevents infinite loop WITHOUT using [skip ci]
-      # [skip ci] was blocking Vercel deployments — this is the root cause fix
-      - name: 🛑  Skip if triggered by bot commit
+      # ── 2. Skip if this is a bot commit (loop prevention) ────────
+      - name: 🛑  Skip if bot commit
+        id: botcheck
         run: |
           AUTHOR=$(git log -1 --pretty=format:'%an')
-          echo "Last commit author: $AUTHOR"
+          echo "author=$AUTHOR" >> $GITHUB_OUTPUT
           if [ "$AUTHOR" = "indeva-bot[auto]" ]; then
-            echo "Bot commit detected — skipping to prevent loop."
-            exit 0
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
+      # ── 3. Node setup ─────────────────────────────────────────────
       - name: ⚙️  Node 20
+        if: steps.botcheck.outputs.skip == 'false'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: 🤖  Detect & generate missing blog posts
+      # ── 4. Generate missing blog posts ────────────────────────────
+      - name: 🤖  Generate missing blog posts
+        if: steps.botcheck.outputs.skip == 'false'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           INDEXNOW_KEY:      ${{ secrets.INDEXNOW_KEY }}
@@ -58,66 +63,91 @@ jobs:
             node scripts/auto-generate.js
           fi
 
+      # ── 5. Check for new files ────────────────────────────────────
       - name: 🔎  Check for new files
+        if: steps.botcheck.outputs.skip == 'false'
         id: diff
         run: |
           git diff --quiet HEAD insights/ \
             && echo "changed=false" >> $GITHUB_OUTPUT \
             || echo "changed=true"  >> $GITHUB_OUTPUT
 
-      # ── CRITICAL FIX: NO [skip ci] in commit message ──────────────
-      # [skip ci] was telling Vercel to skip deployment.
-      # Removed it. Bot loop is prevented by the author-check above.
-      - name: 💾  Commit generated files → Vercel auto-deploys
-        if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
+      # ── 6. Commit new files to GitHub ─────────────────────────────
+      - name: 💾  Commit to GitHub
+        if: steps.botcheck.outputs.skip == 'false' && steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
         run: |
           git config user.name  "indeva-bot[auto]"
           git config user.email "indeva-bot@users.noreply.github.com"
-
           git add insights/
-
           COUNT=$(git diff --staged --name-only | grep "index.html" | wc -l | tr -d ' ')
           SLUGS=$(git diff --staged --name-only | grep "index.html" \
             | sed 's|insights/||;s|/index.html||' \
             | tr '\n' ', ' | sed 's/,$//')
-
           git commit -m "🤖 auto: generate ${COUNT} blog post(s)
 
           Slugs: ${SLUGS}
           Time:  $(date -u '+%Y-%m-%d %H:%M UTC')"
-
           git push origin main
-          echo "✅ Pushed. Vercel is now deploying."
+          echo "✅ Committed to GitHub."
 
-      - name: ⏳  Wait for Vercel to deploy (90s)
-        if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
-        run: sleep 90
+      # ── 7. Deploy to Vercel via CLI ───────────────────────────────
+      # Uses Vercel CLI directly — does NOT depend on GitHub webhooks.
+      # This is what actually makes the site go live immediately.
+      - name: 🚀  Deploy to Vercel (Production)
+        if: steps.botcheck.outputs.skip == 'false' && steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
+        env:
+          VERCEL_TOKEN:      ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID:     ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npx vercel --prod --yes --token "$VERCEL_TOKEN"
+          echo "✅ Vercel deployment triggered."
 
+      # ── 8. Wait for CDN propagation ───────────────────────────────
+      - name: ⏳  Wait for CDN (60s)
+        if: steps.botcheck.outputs.skip == 'false' && steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
+        run: sleep 60
+
+      # ── 9. Health check ───────────────────────────────────────────
       - name: ✅  Health check new URLs
-        if: steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
+        if: steps.botcheck.outputs.skip == 'false' && steps.diff.outputs.changed == 'true' && github.event.inputs.dry_run != 'true'
         run: |
           if [ ! -f ".generated-slugs.json" ]; then exit 0; fi
           SLUGS=$(node -e "console.log(JSON.parse(require('fs').readFileSync('.generated-slugs.json','utf8')).join(' '))")
+          ALL_OK=true
           for SLUG in $SLUGS; do
             URL="https://www.indevastudio.com/insights/${SLUG}/"
             STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$URL")
-            [ "$STATUS" = "200" ] \
-              && echo "  ✅  ${URL}  →  HTTP 200" \
-              || echo "  ⚠️   ${URL}  →  HTTP ${STATUS} (still propagating)"
+            if [ "$STATUS" = "200" ]; then
+              echo "  ✅  $URL  →  HTTP 200"
+            else
+              echo "  ⚠️   $URL  →  HTTP $STATUS (still propagating)"
+              ALL_OK=false
+            fi
           done
+          [ "$ALL_OK" = "true" ] && echo "All URLs confirmed live." \
+            || echo "CDN propagating — will be live in <2 minutes."
 
       - name: ℹ️  Nothing to generate
-        if: steps.diff.outputs.changed == 'false'
+        if: steps.botcheck.outputs.skip == 'false' && steps.diff.outputs.changed == 'false'
         run: echo "✅ All blog posts up to date."
 
+      - name: ⏭️  Skipped (bot commit)
+        if: steps.botcheck.outputs.skip == 'true'
+        run: echo "⏭️ Skipped — this is a bot commit."
+
+      # ── 10. Summary ───────────────────────────────────────────────
       - name: 📊  Summary
         if: always()
         run: |
           echo "## 🤖 Auto Blog Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| **Status** | ${{ job.status }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| **Root cause fixed** | [skip ci] removed ✅ |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Deployment** | Vercel CLI (reliable) |" >> $GITHUB_STEP_SUMMARY
           echo "| **Time** | $(date -u '+%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
           TOTAL=$(find insights -name "index.html" 2>/dev/null | grep -v "^insights/index.html$" | wc -l | tr -d ' ')
           echo "| **Total blog posts** | ${TOTAL} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View Insights](https://www.indevastudio.com/insights/)" >> $GITHUB_STEP_SUMMARY
