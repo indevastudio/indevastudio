@@ -9,9 +9,10 @@
     "validate":       "node scripts/validate.js",
     "audit":          "node scripts/generate.js --audit",
     "sitemap":        "node scripts/sitemap.js",
+    "feed":           "node scripts/feed.js",
     "health":         "node scripts/health-check.js",
     "health:all":     "node scripts/health-check.js --all",
-    "publish":        "node scripts/validate.js && node scripts/generate.js && node scripts/sitemap.js && git add insights/ sitemap.xml && git commit -m 'auto: publish blog posts' && git push"
+    "publish":        "node scripts/validate.js && node scripts/generate.js && node scripts/sitemap.js && node scripts/feed.js && git add insights/ sitemap.xml feed.xml && git commit -m 'auto: publish blog posts' && git push"
   },
   "engines": {
     "node": ">=18.0.0"
