@@ -76,6 +76,23 @@ jobs:
         if: steps.diff.outputs.changed == 'false'
         run: echo "✅ No new posts to generate."
 
+      # ── THE FIX: Trigger Vercel via Deploy Hook ───────────────────
+      # This workflow commits as github-actions[bot], so Vercel's normal
+      # git-push integration won't recognize the author and won't deploy
+      # automatically. Calling the deploy hook triggers it explicitly.
+      - name: 🚀  Trigger Vercel deployment via Deploy Hook
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          echo "Triggering Vercel deployment..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}")
+          if [ "$RESPONSE" = "201" ]; then
+            echo "✅ Vercel deployment triggered successfully."
+          else
+            echo "⚠️  Deploy hook returned HTTP $RESPONSE"
+            echo "    Check your VERCEL_DEPLOY_HOOK secret is correct."
+          fi
+
       - name: ⏳  Wait for Vercel CDN propagation
         if: steps.diff.outputs.changed == 'true'
         run: sleep 75
