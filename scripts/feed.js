@@ -1,11 +1,11 @@
-// scripts/generate-feed.js
+// scripts/feed.js
 // Rebuilds feed.xml from insights/*/index.html — mirrors the sitemap.xml
 // scan logic already used in auto-generate.yml, so it always matches
-// what's actually live. Run this in the SAME workflow step block as the
-// sitemap rebuild, right after it.
+// what's actually live. ESM syntax to match this repo's package.json
+// ("type": "module").
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const ORIGIN = 'https://www.indevastudio.com';
 const INSIGHTS = path.join(process.cwd(), 'insights');
@@ -26,7 +26,7 @@ function extract(html, tagRegex) {
 }
 
 function toRfc822(date) {
-  return date.toUTCString().replace('GMT', 'GMT');
+  return date.toUTCString();
 }
 
 if (!fs.existsSync(INSIGHTS)) {
@@ -43,21 +43,16 @@ for (const slug of fs.readdirSync(INSIGHTS)) {
   const html = fs.readFileSync(fp, 'utf8');
   const stat = fs.statSync(fp);
 
-  // Prefer <title>, fall back to og:title
   let title =
     extract(html, /<title>([^<]*)<\/title>/i) ||
     extract(html, /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']*)["']/i);
 
-  // Prefer meta description, fall back to og:description
   let description =
     extract(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i) ||
     extract(html, /<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']*)["']/i);
 
-  if (!title) continue; // skip anything that doesn't look like a real post
+  if (!title) continue;
 
-  // Use the file's git-tracked mtime as the publish date. Since each post
-  // is committed in its own workflow run (not a single batch write), this
-  // gives every item a genuinely distinct, real timestamp.
   posts.push({
     title: title.replace(/\s*—\s*indéva studio.*$/i, '').trim(),
     link: `${ORIGIN}/insights/${slug}/`,
@@ -66,7 +61,6 @@ for (const slug of fs.readdirSync(INSIGHTS)) {
   });
 }
 
-// Most recent first
 posts.sort((a, b) => b.pubDate - a.pubDate);
 
 const items = posts.slice(0, MAX_ITEMS).map(p => [
