@@ -91,12 +91,21 @@ jobs:
           console.log(`sitemap.xml written — ${staticPages.length} static + ${blogCount} blog posts`);
           JS
 
+      # ── NEW: feed.xml was never part of this pipeline — nothing wrote
+      # it, which is why it froze at whatever it last was manually built
+      # to. This step keeps it in sync with insights/ on every run,
+      # same as the sitemap step above.
+      - name: Rebuild feed.xml from all insight pages
+        run: node scripts/feed.js
+
       - name: Show what was generated
         run: |
           echo "── New files in insights/ ──"
           git status --short insights/ || true
           echo "── sitemap.xml entry count ──"
           grep -c '<loc>' sitemap.xml 2>/dev/null || echo "0"
+          echo "── feed.xml item count ──"
+          grep -c '<item>' feed.xml 2>/dev/null || echo "0"
           echo "── blog-memory.json head ──"
           head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
 
@@ -108,7 +117,7 @@ jobs:
         run: |
           git config user.name  "Indeva Bot"
           git config user.email "bot@indevastudio.com"
-          git add insights/ sitemap.xml content/blog-memory.json
+          git add insights/ sitemap.xml feed.xml content/blog-memory.json
           if git diff --staged --quiet; then
             echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
             echo "committed=false" >> "$GITHUB_OUTPUT"
@@ -189,7 +198,7 @@ jobs:
                 \"from\":    \"indéva automation <${FROM}>\",
                 \"to\":      [\"${TO}\"],
                 \"subject\": \"✓ blog published — ${DATE}\",
-                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights/'>indevastudio.com/insights</a>.</p><p>Sitemap updated. IndexNow pinged.</p>\"
+                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights/'>indevastudio.com/insights</a>.</p><p>Sitemap updated. Feed updated. IndexNow pinged.</p>\"
               }" && echo "Success email sent." || echo "Email send failed (non-fatal)."
           fi
 
