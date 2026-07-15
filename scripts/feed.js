@@ -1,145 +1,102 @@
-#!/usr/bin/env node
-/**
- * INDEVA STUDIO — RSS FEED GENERATOR
- * Scans actual insights/ files (same source of truth as sitemap.js) and
- * builds an RSS 2.0 feed at repo root: feed.xml → https://www.indevastudio.com/feed.xml
- *
- * Handles both post file layouts present in the repo:
- *   insights/<slug>.html
- *   insights/<slug>/index.html
- *
- * Pulls title / description / canonical link / publish date straight out
- * of each post's existing <title>, <meta name="description">, <link rel="canonical">,
- * and the Article JSON-LD block — no separate metadata source to maintain.
- *
- * Run: node scripts/feed.js
- */
+// scripts/generate-feed.js
+// Rebuilds feed.xml from insights/*/index.html — mirrors the sitemap.xml
+// scan logic already used in auto-generate.yml, so it always matches
+// what's actually live. Run this in the SAME workflow step block as the
+// sitemap rebuild, right after it.
 
-import fs   from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const fs = require('fs');
+const path = require('path');
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT       = path.join(__dirname, '..');
-const INSIGHTS   = path.join(ROOT, 'insights');
-const BASE       = 'https://www.indevastudio.com';
-const FEED_URL   = `${BASE}/feed.xml`;
-const MAX_ITEMS  = 50; // most feed readers/aggregators only care about recent posts
+const ORIGIN = 'https://www.indevastudio.com';
+const INSIGHTS = path.join(process.cwd(), 'insights');
+const MAX_ITEMS = 40; // keep the feed to the most recent N posts
 
-// ── FIND ACTUAL POST FILES (both layouts) ──────────────────────────
-function findPostFiles() {
-  if (!fs.existsSync(INSIGHTS)) return [];
-  const entries = fs.readdirSync(INSIGHTS, { withFileTypes: true });
-  const files = [];
-
-  for (const entry of entries) {
-    if (entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html') {
-      files.push({
-        slug: entry.name.replace('.html', ''),
-        filePath: path.join(INSIGHTS, entry.name),
-      });
-    } else if (entry.isDirectory()) {
-      const indexPath = path.join(INSIGHTS, entry.name, 'index.html');
-      if (fs.existsSync(indexPath)) {
-        files.push({ slug: entry.name, filePath: indexPath });
-      }
-    }
-  }
-  return files;
+function escapeXml(str = '') {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
 }
 
-// ── EXTRACT METADATA FROM AN HTML FILE ──────────────────────────────
-function extractMeta(html, slug) {
-  const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
-  const descMatch  = html.match(/<meta\s+name=["']description["']\s+content=["']([\s\S]*?)["']\s*\/?>/i);
-  const canonMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([\s\S]*?)["']\s*\/?>/i);
-
-  // Pull datePublished out of the Article JSON-LD block specifically
-  // (there can be more than one <script type="application/ld+json"> tag, e.g. FAQ schema)
-  let datePublished = null;
-  const ldBlocks = [...html.matchAll(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)];
-  for (const block of ldBlocks) {
-    try {
-      const data = JSON.parse(block[1]);
-      if (data['@type'] === 'Article' && data.datePublished) {
-        datePublished = data.datePublished;
-        break;
-      }
-    } catch { /* skip malformed / non-JSON-LD blocks */ }
-  }
-
-  const decode = (s = '') => s
-    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-
-  return {
-    slug,
-    title:       decode((titleMatch?.[1] || slug).replace(/\s*—\s*ind[ée]va studio$/i, '').trim()),
-    description: decode(descMatch?.[1] || ''),
-    link:        (canonMatch?.[1] || `${BASE}/insights/${slug}`).replace(/\/?$/, '/'),
-    pubDate:     datePublished ? new Date(datePublished) : null,
-  };
+function extract(html, tagRegex) {
+  const m = html.match(tagRegex);
+  return m ? m[1].trim() : '';
 }
 
-// ── BUILD RSS XML ────────────────────────────────────────────────────
-const escXml = (s = '') => String(s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-
-function itemXml(post) {
-  const pubDate = (post.pubDate && !isNaN(post.pubDate)) ? post.pubDate : new Date();
-  return `
-  <item>
-    <title>${escXml(post.title)}</title>
-    <link>${escXml(post.link)}</link>
-    <guid isPermaLink="true">${escXml(post.link)}</guid>
-    <description>${escXml(post.description)}</description>
-    <pubDate>${pubDate.toUTCString()}</pubDate>
-  </item>`;
+function toRfc822(date) {
+  return date.toUTCString().replace('GMT', 'GMT');
 }
 
-function buildFeed(posts) {
-  const now = new Date().toUTCString();
-  const items = posts.map(itemXml).join('');
-
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>indéva studio — Insights</title>
-  <link>${BASE}/insights</link>
-  <atom:link href="${FEED_URL}" rel="self" type="application/rss+xml"/>
-  <description>Design intelligence from indéva studio — perspectives on luxury interior design, spatial logic, materials, and process.</description>
-  <language>en-in</language>
-  <lastBuildDate>${now}</lastBuildDate>
-  <generator>indeva-blog-generator</generator>
-${items}
-</channel>
-</rss>`.trim();
+if (!fs.existsSync(INSIGHTS)) {
+  console.log('No insights/ directory found — skipping feed.xml generation.');
+  process.exit(0);
 }
 
-// ── MAIN ──────────────────────────────────────────────────────────────
-function main() {
-  const files = findPostFiles();
+const posts = [];
 
-  const posts = files
-    .map(({ slug, filePath }) => {
-      try {
-        const html = fs.readFileSync(filePath, 'utf8');
-        return extractMeta(html, slug);
-      } catch (err) {
-        console.warn(`  ⚠️   Skipped ${slug}: ${err.message}`);
-        return null;
-      }
-    })
-    .filter(Boolean)
-    // Most recent first; posts without a parsed date sort to the bottom
-    .sort((a, b) => (b.pubDate?.getTime() || 0) - (a.pubDate?.getTime() || 0))
-    .slice(0, MAX_ITEMS);
+for (const slug of fs.readdirSync(INSIGHTS)) {
+  const fp = path.join(INSIGHTS, slug, 'index.html');
+  if (!fs.existsSync(fp)) continue;
 
-  const xml = buildFeed(posts);
-  fs.writeFileSync(path.join(ROOT, 'feed.xml'), xml, 'utf8');
+  const html = fs.readFileSync(fp, 'utf8');
+  const stat = fs.statSync(fp);
 
-  console.log(`\n📡  feed.xml → ${posts.length} posts (of ${files.length} found in insights/)\n`);
+  // Prefer <title>, fall back to og:title
+  let title =
+    extract(html, /<title>([^<]*)<\/title>/i) ||
+    extract(html, /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']*)["']/i);
+
+  // Prefer meta description, fall back to og:description
+  let description =
+    extract(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["']/i) ||
+    extract(html, /<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']*)["']/i);
+
+  if (!title) continue; // skip anything that doesn't look like a real post
+
+  // Use the file's git-tracked mtime as the publish date. Since each post
+  // is committed in its own workflow run (not a single batch write), this
+  // gives every item a genuinely distinct, real timestamp.
+  posts.push({
+    title: title.replace(/\s*—\s*indéva studio.*$/i, '').trim(),
+    link: `${ORIGIN}/insights/${slug}/`,
+    description: description || '',
+    pubDate: stat.mtime,
+  });
 }
 
-main();
+// Most recent first
+posts.sort((a, b) => b.pubDate - a.pubDate);
+
+const items = posts.slice(0, MAX_ITEMS).map(p => [
+  '  <item>',
+  `    <title>${escapeXml(p.title)}</title>`,
+  `    <link>${p.link}</link>`,
+  `    <guid isPermaLink="true">${p.link}</guid>`,
+  `    <description>${escapeXml(p.description)}</description>`,
+  `    <pubDate>${toRfc822(p.pubDate)}</pubDate>`,
+  '  </item>',
+].join('\n'));
+
+const lastBuildDate = toRfc822(new Date());
+
+const xml = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+  '<channel>',
+  '  <title>indéva studio — Insights</title>',
+  '  <link>https://www.indevastudio.com/insights</link>',
+  '  <atom:link href="https://www.indevastudio.com/feed.xml" rel="self" type="application/rss+xml"/>',
+  '  <description>Design intelligence from indéva studio — perspectives on luxury interior design, spatial logic, materials, and process.</description>',
+  '  <language>en-in</language>',
+  `  <lastBuildDate>${lastBuildDate}</lastBuildDate>`,
+  '  <generator>indeva-blog-generator</generator>',
+  '',
+  items.join('\n\n'),
+  '</channel>',
+  '</rss>',
+].join('\n');
+
+fs.writeFileSync(path.join(process.cwd(), 'feed.xml'), xml + '\n');
+console.log(`feed.xml written — ${Math.min(posts.length, MAX_ITEMS)} of ${posts.length} posts included.`);
