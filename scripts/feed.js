@@ -1,15 +1,21 @@
 // scripts/feed.js
-// Rebuilds feed.xml from insights/*/index.html — mirrors the sitemap.xml
-// scan logic already used in auto-generate.yml, so it always matches
-// what's actually live. ESM syntax to match this repo's package.json
-// ("type": "module").
+// Rebuilds feed.xml from insights/*/index.html.
+//
+// IMPORTANT: publish dates are read from GIT HISTORY (git log), not
+// filesystem mtime. actions/checkout resets every file's mtime to the
+// moment of checkout, so mtime-based dates collapse to one shared
+// timestamp per workflow run. Git commit history is permanent and
+// reflects the actual date each post was published — that's the only
+// reliable source here. Requires `fetch-depth: 0` in actions/checkout
+// (already set in auto-generate.yml).
 
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
 
 const ORIGIN = 'https://www.indevastudio.com';
 const INSIGHTS = path.join(process.cwd(), 'insights');
-const MAX_ITEMS = 40; // keep the feed to the most recent N posts
+const MAX_ITEMS = 40;
 
 function escapeXml(str = '') {
   return str
@@ -29,6 +35,22 @@ function toRfc822(date) {
   return date.toUTCString();
 }
 
+// Real publish date = date this file was FIRST added to git, not last
+// touched (a later unrelated commit shouldn't bump a post to "new").
+function getFirstCommitDate(filePath) {
+  try {
+    const out = execSync(
+      `git log --follow --diff-filter=A --format=%aI -- "${filePath}"`,
+      { cwd: process.cwd(), stdio: ['ignore', 'pipe', 'ignore'] }
+    ).toString().trim();
+    const lines = out.split('\n').filter(Boolean);
+    if (lines.length) return new Date(lines[lines.length - 1]); // oldest = first add
+  } catch (e) {
+    // git log failed (e.g. file not yet committed this run) — fall through
+  }
+  return null;
+}
+
 if (!fs.existsSync(INSIGHTS)) {
   console.log('No insights/ directory found — skipping feed.xml generation.');
   process.exit(0);
@@ -41,7 +63,7 @@ for (const slug of fs.readdirSync(INSIGHTS)) {
   if (!fs.existsSync(fp)) continue;
 
   const html = fs.readFileSync(fp, 'utf8');
-  const stat = fs.statSync(fp);
+  const relPath = path.relative(process.cwd(), fp);
 
   let title =
     extract(html, /<title>([^<]*)<\/title>/i) ||
@@ -53,11 +75,17 @@ for (const slug of fs.readdirSync(INSIGHTS)) {
 
   if (!title) continue;
 
+  // Prefer real git history date. If this file was just generated in the
+  // current run (not committed yet at the point this script runs — it
+  // runs BEFORE the commit step), git log won't find it. In that case
+  // fall back to "now", which is correct since it's genuinely new today.
+  const gitDate = getFirstCommitDate(relPath);
+
   posts.push({
     title: title.replace(/\s*—\s*indéva studio.*$/i, '').trim(),
     link: `${ORIGIN}/insights/${slug}/`,
     description: description || '',
-    pubDate: stat.mtime,
+    pubDate: gitDate || new Date(),
   });
 }
 
