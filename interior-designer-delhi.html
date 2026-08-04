@@ -199,7 +199,124 @@ footer{background:var(--black-2);border-top:1px solid var(--line);padding:60px 6
   .footer-bottom{flex-direction:column;gap:8px;padding:24px;}
   .wa-sticky{bottom:16px;right:16px;}
 }
+
+
+/* ============================================================
+   FEATURED PROJECTS SHOWCASE — premium interactive gallery
+   ============================================================ */
+.pshow{margin-top:56px;display:flex;flex-direction:column;gap:120px;}
+.pshow-project{display:grid;grid-template-columns:1.55fr 1fr;gap:56px;align-items:start;opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+.pshow-project.in-view{opacity:1;transform:translateY(0);}
+
+/* -- media column -- */
+.pshow-media{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.pshow-swiper-frame{position:relative;aspect-ratio:4/3;background:#111;overflow:hidden;cursor:pointer;}
+.pshow-swiper{width:100%;height:100%;}
+.pshow-swiper .swiper-slide{overflow:hidden;}
+.pshow-swiper img{width:100%;height:100%;object-fit:cover;filter:brightness(.82);transition:filter .6s ease,transform 1.1s cubic-bezier(.16,1,.3,1);}
+.pshow-swiper-frame:hover img{filter:brightness(.95);transform:scale(1.045);}
+
+.pshow-badge{position:absolute;top:18px;left:18px;z-index:5;font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:rgba(10,10,10,.55);backdrop-filter:blur(6px);padding:7px 12px;border:1px solid var(--line-gold);pointer-events:none;}
+.pshow-counter{position:absolute;bottom:18px;right:18px;z-index:5;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;color:var(--white);background:rgba(10,10,10,.55);backdrop-filter:blur(6px);padding:6px 12px;pointer-events:none;}
+.pshow-viewgallery{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .35s ease;pointer-events:none;background:rgba(10,10,10,.28);}
+.pshow-swiper-frame:hover .pshow-viewgallery{opacity:1;}
+.pshow-viewgallery span{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--white);border:1px solid var(--gold);padding:12px 26px;background:rgba(10,10,10,.4);}
+
+.pshow-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.5);backdrop-filter:blur(6px);border:1px solid var(--line-gold);color:var(--white);cursor:pointer;opacity:0;transition:opacity .3s ease,background .2s ease;}
+.pshow-swiper-frame:hover .pshow-arrow{opacity:1;}
+.pshow-arrow:hover{background:var(--gold);color:var(--black);}
+.pshow-arrow.pshow-prev{left:14px;}
+.pshow-arrow.pshow-next{right:14px;}
+.pshow-arrow::after{font-family:var(--mono);font-size:1rem;}
+.pshow-arrow.pshow-prev::after{content:'←';}
+.pshow-arrow.pshow-next::after{content:'→';}
+.pshow-arrow.swiper-button-disabled{opacity:0!important;pointer-events:none;}
+
+.pshow-dots{position:absolute;bottom:18px;left:18px;z-index:5;display:flex;gap:6px;}
+.pshow-dots .swiper-pagination-bullet{width:5px;height:5px;border-radius:0;background:rgba(240,235,227,.4);opacity:1;transition:background .25s,width .25s;margin:0!important;}
+.pshow-dots .swiper-pagination-bullet-active{background:var(--gold);width:16px;}
+
+/* -- thumbnails -- */
+.pshow-thumbs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;}
+.pshow-thumbs::-webkit-scrollbar{display:none;}
+.pshow-thumb{flex:0 0 auto;width:76px;height:56px;padding:0;border:1px solid transparent;background:#111;cursor:pointer;overflow:hidden;opacity:.5;transition:opacity .25s ease,border-color .25s ease;}
+.pshow-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.pshow-thumb:hover{opacity:.85;}
+.pshow-thumb.active{opacity:1;border-color:var(--gold);}
+
+/* -- info column -- */
+.pshow-info{padding-top:6px;}
+.pshow-type{font-family:var(--mono);font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.pshow-name{font-family:var(--serif);font-size:clamp(1.7rem,2.6vw,2.4rem);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:18px;}
+.pshow-meta{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;padding:20px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
+.pshow-meta div span{display:block;font-family:var(--mono);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,235,227,.4);margin-bottom:5px;}
+.pshow-meta div{font-family:var(--mono);font-size:.72rem;color:var(--white-dim);}
+.pshow-desc{font-size:.75rem;line-height:1.9;color:rgba(240,235,227,.65);margin-bottom:20px;}
+.pshow-sub{display:flex;gap:8px;margin-bottom:10px;font-size:.68rem;line-height:1.7;color:rgba(240,235,227,.55);}
+.pshow-sub b{font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,235,227,.4);flex:0 0 108px;font-weight:400;padding-top:1px;}
+.pshow-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+.btn-outline{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);background:transparent;border:1px solid var(--line-gold);padding:13px 26px;cursor:pointer;transition:border-color .2s,color .2s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* -- mobile sticky CTA (project-level) -- */
+.pshow-sticky-cta{display:none;}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.pshow-lightbox{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;background:rgba(8,8,8,.88);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:opacity .35s ease;}
+.pshow-lightbox.open{opacity:1;visibility:visible;}
+.pshow-lightbox[hidden]{display:flex;}
+.pshow-lb-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:26px 32px 0;flex:0 0 auto;}
+.pshow-lb-title{font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--white);}
+.pshow-lb-loc{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+.pshow-lb-close{position:absolute;top:22px;right:28px;z-index:20;background:none;border:none;color:var(--white);font-size:1.8rem;line-height:1;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transition:opacity .2s;}
+.pshow-lb-close:hover{opacity:.6;}
+.pshow-lb-imgwrap{flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:24px 90px;min-height:0;overflow:hidden;}
+.pshow-lb-img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;transition:transform .45s cubic-bezier(.16,1,.3,1),opacity .3s ease;box-shadow:0 40px 100px rgba(0,0,0,.5);}
+.pshow-lb-img.zoomed{cursor:zoom-out;transform:scale(1.9);}
+.pshow-lb-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:15;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border:1px solid var(--line-gold);color:var(--white);cursor:pointer;transition:background .2s,border-color .2s;font-family:var(--mono);font-size:1.1rem;}
+.pshow-lb-arrow:hover{background:var(--gold);color:var(--black);border-color:var(--gold);}
+.pshow-lb-prev{left:24px;}
+.pshow-lb-next{right:24px;}
+.pshow-lb-foot{display:flex;align-items:center;justify-content:center;gap:18px;padding:0 32px 28px;flex:0 0 auto;}
+.pshow-lb-counter{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:rgba(240,235,227,.5);}
+.pshow-lb-thumbs{display:flex;gap:8px;overflow-x:auto;max-width:70vw;scrollbar-width:none;}
+.pshow-lb-thumbs::-webkit-scrollbar{display:none;}
+.pshow-lb-thumbs button{flex:0 0 auto;width:52px;height:38px;padding:0;border:1px solid transparent;background:#111;cursor:pointer;opacity:.45;transition:opacity .2s,border-color .2s;}
+.pshow-lb-thumbs button.active{opacity:1;border-color:var(--gold);}
+.pshow-lb-thumbs img{width:100%;height:100%;object-fit:cover;display:block;}
+body.pshow-lock{overflow:hidden;}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:980px){
+  .pshow{gap:64px;}
+  .pshow-project{grid-template-columns:1fr;gap:26px;}
+  .pshow-swiper-frame{aspect-ratio:4/3.1;}
+  .pshow-arrow{opacity:1;}
+  .pshow-viewgallery{display:none;}
+  .pshow-sticky-cta{display:flex;gap:10px;margin-top:18px;}
+  .pshow-sticky-cta a{flex:1;text-align:center;}
+  .pshow-lb-imgwrap{padding:16px 16px 8px;}
+  .pshow-lb-arrow{width:42px;height:42px;}
+  .pshow-lb-prev{left:8px;}
+  .pshow-lb-next{right:8px;}
+  .pshow-lb-thumbs{max-width:85vw;}
+  .pshow-meta{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .pshow-name{font-size:1.5rem;}
+  .pshow-thumb{width:60px;height:44px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .pshow-project,.pshow-swiper img,.pshow-lb-img{transition:none!important;}
+}
+
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14/swiper-bundle.min.css">
+
 </head>
 <body>
 
@@ -291,35 +408,162 @@ footer{background:var(--black-2);border-top:1px solid var(--line);padding:60px 6
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="section">
+<!-- FEATURED PROJECTS SHOWCASE -->
+<section class="section" id="projects" aria-label="Featured projects in Delhi">
   <div class="kicker">Delivered Work · Delhi</div>
   <h2 class="section-h2">Projects completed in<br><em>Delhi & Delhi NCR.</em></h2>
   <p class="body-text">A selection of projects delivered across Delhi and the wider NCR region. Each was completed to the same standard — full design, full execution, full handover.</p>
-  <div class="projects-grid">
-    <div class="proj-card">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp"
-           alt="Mini Farmhouse luxury interior design, New Delhi — Indéva Studio"
-           width="800" height="600" loading="lazy" decoding="async">
-      <div class="proj-info">
-        <div class="proj-type">Residential · 4,800 sqft</div>
-        <div class="proj-name">Mini Farmhouse</div>
-        <div class="proj-loc">New Delhi · 2024</div>
+
+  <div class="pshow">
+
+    <!-- PROJECT 1 — Mini Farmhouse -->
+    <article class="pshow-project" data-reveal itemscope itemtype="https://schema.org/CreativeWork">
+      <div class="pshow-media">
+        <div class="pshow-swiper-frame">
+          <div class="swiper pshow-swiper" data-project="0" tabindex="0" role="group" aria-label="Mini Farmhouse image gallery, image 1 of 3">
+          <div class="pshow-badge">Residential · Farmhouse</div>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp"
+                   alt="Mini Farmhouse — pavilion and reflecting pool, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="eager" fetchpriority="high" decoding="async"
+                   itemprop="image">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp"
+                   alt="Mini Farmhouse — formal living room, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="lazy" decoding="async">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp"
+                   alt="Mini Farmhouse — bar and lounge area, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="pshow-arrow pshow-prev" role="button" tabindex="0" aria-label="Previous image"></div>
+          <div class="pshow-arrow pshow-next" role="button" tabindex="0" aria-label="Next image"></div>
+          <div class="swiper-pagination pshow-dots"></div>
+          <div class="pshow-counter" data-counter>1 / 3</div>
+          <div class="pshow-viewgallery"><span>View Gallery</span></div>
+          </div>
+        </div>
+        <div class="pshow-thumbs" data-thumbs="0">
+          <button class="pshow-thumb active" data-slide="0" aria-label="Go to image 1"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp" alt="" width="76" height="56" loading="lazy"></button>
+          <button class="pshow-thumb" data-slide="1" aria-label="Go to image 2"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp" alt="" width="76" height="56" loading="lazy"></button>
+          <button class="pshow-thumb" data-slide="2" aria-label="Go to image 3"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp" alt="" width="76" height="56" loading="lazy"></button>
+        </div>
       </div>
-    </div>
-    <div class="proj-card">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp"
-           alt="Shanti Villa luxury interior design, Delhi — Indéva Studio"
-           width="800" height="600" loading="lazy" decoding="async">
-      <div class="proj-info">
-        <div class="proj-type">Residential · 8,000 sqft</div>
-        <div class="proj-name">Shanti Villa</div>
-        <div class="proj-loc">New Delhi · 2023</div>
+
+      <div class="pshow-info">
+        <div class="pshow-type">Residential · Farmhouse</div>
+        <h3 class="pshow-name" itemprop="name">Mini Farmhouse</h3>
+        <div class="pshow-meta">
+          <div><span>Location</span>New Delhi</div>
+          <div><span>Area</span>4,800 sq.ft</div>
+          <div><span>Completed</span>2024</div>
+          <div><span>Status</span>Delivered</div>
+        </div>
+        <p class="pshow-desc" itemprop="description">A weekend farmhouse built around a reflecting pool and an existing sandstone pavilion. The brief was to design the interior language to match the scale and material honesty of the structure already on site, rather than import a look that fought it.</p>
+        <div class="pshow-sub"><b>Scope</b><span itemprop="keywords">Interior Design, Execution, Custom Furniture</span></div>
+        <div class="pshow-sub"><b>Design Style</b><span>Warm contemporary, material-first</span></div>
+        <div class="pshow-sub"><b>Materials</b><span>Sandstone, teak, brass, lime plaster</span></div>
+        <div class="pshow-actions">
+          <a href="/projects/mini-farmhouse" class="btn-gold">View Complete Case Study →</a>
+          <a href="#start" class="btn-outline">Book Similar Project</a>
+          <a class="btn-wa" target="_blank" rel="noopener"
+             href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project%20similar%20to%20the%20Mini%20Farmhouse.">WhatsApp</a>
+        </div>
+        <div class="pshow-sticky-cta">
+          <a class="btn-wa" target="_blank" rel="noopener" href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20similar%20project.">Discuss Similar Project</a>
+        </div>
       </div>
-    </div>
+    </article>
+
+    <!-- PROJECT 2 — Shanti Villa -->
+    <article class="pshow-project" data-reveal itemscope itemtype="https://schema.org/CreativeWork">
+      <div class="pshow-media">
+        <div class="pshow-swiper-frame">
+          <div class="swiper pshow-swiper" data-project="1" tabindex="0" role="group" aria-label="Shanti Villa image gallery, image 1 of 3">
+          <div class="pshow-badge">Residential · Villa</div>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp"
+                   alt="Shanti Villa — master bedroom, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="lazy" decoding="async" itemprop="image">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp"
+                   alt="Shanti Villa — living area with night skyline view, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="lazy" decoding="async">
+            </div>
+            <div class="swiper-slide">
+              <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp"
+                   alt="Shanti Villa — home study and workspace, New Delhi — Indéva Studio"
+                   width="900" height="675" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <div class="pshow-arrow pshow-prev" role="button" tabindex="0" aria-label="Previous image"></div>
+          <div class="pshow-arrow pshow-next" role="button" tabindex="0" aria-label="Next image"></div>
+          <div class="swiper-pagination pshow-dots"></div>
+          <div class="pshow-counter" data-counter>1 / 3</div>
+          <div class="pshow-viewgallery"><span>View Gallery</span></div>
+          </div>
+        </div>
+        <div class="pshow-thumbs" data-thumbs="1">
+          <button class="pshow-thumb active" data-slide="0" aria-label="Go to image 1"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp" alt="" width="76" height="56" loading="lazy"></button>
+          <button class="pshow-thumb" data-slide="1" aria-label="Go to image 2"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp" alt="" width="76" height="56" loading="lazy"></button>
+          <button class="pshow-thumb" data-slide="2" aria-label="Go to image 3"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp" alt="" width="76" height="56" loading="lazy"></button>
+        </div>
+      </div>
+
+      <div class="pshow-info">
+        <div class="pshow-type">Residential · Villa</div>
+        <h3 class="pshow-name" itemprop="name">Shanti Villa</h3>
+        <div class="pshow-meta">
+          <div><span>Location</span>New Delhi</div>
+          <div><span>Area</span>8,000 sq.ft</div>
+          <div><span>Completed</span>2023</div>
+          <div><span>Status</span>Delivered</div>
+        </div>
+        <p class="pshow-desc" itemprop="description">A full-floor family villa reworked from an outdated builder layout into a calm, daylight-forward home. Bedrooms, the living wing and a dedicated study were replanned around how the family actually moves through the day.</p>
+        <div class="pshow-sub"><b>Scope</b><span itemprop="keywords">Architecture, Interior Design, Execution</span></div>
+        <div class="pshow-sub"><b>Design Style</b><span>Contemporary minimal, soft neutrals</span></div>
+        <div class="pshow-sub"><b>Materials</b><span>Oak veneer, marble, linen, blackened metal</span></div>
+        <div class="pshow-actions">
+          <a href="/projects/shanti-villa" class="btn-gold">View Complete Case Study →</a>
+          <a href="#start" class="btn-outline">Book Similar Project</a>
+          <a class="btn-wa" target="_blank" rel="noopener"
+             href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project%20similar%20to%20Shanti%20Villa.">WhatsApp</a>
+        </div>
+        <div class="pshow-sticky-cta">
+          <a class="btn-wa" target="_blank" rel="noopener" href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20similar%20project.">Discuss Similar Project</a>
+        </div>
+      </div>
+    </article>
+
   </div>
+
   <div style="margin-top:36px;"><a href="/projects" class="btn-gold">view all projects →</a></div>
 </section>
+
+<!-- LIGHTBOX (single, shared, reused by every project) -->
+<div class="pshow-lightbox" id="pshowLightbox" role="dialog" aria-modal="true" aria-label="Project image viewer" hidden>
+  <button class="pshow-lb-close" data-lb-close aria-label="Close gallery">&times;</button>
+  <div class="pshow-lb-head">
+    <div class="pshow-lb-title" data-lb-title></div>
+    <div class="pshow-lb-loc" data-lb-loc></div>
+  </div>
+  <button class="pshow-lb-arrow pshow-lb-prev" aria-label="Previous image">&#8249;</button>
+  <div class="pshow-lb-imgwrap">
+    <img class="pshow-lb-img" data-lb-img src="" alt="">
+  </div>
+  <button class="pshow-lb-arrow pshow-lb-next" aria-label="Next image">&#8250;</button>
+  <div class="pshow-lb-foot">
+    <div class="pshow-lb-counter" data-lb-counter aria-live="polite">1 / 3</div>
+    <div class="pshow-lb-thumbs" data-lb-thumbs></div>
+  </div>
+</div>
+
 
 <!-- WHY US -->
 <section class="section section-alt">
@@ -510,6 +754,289 @@ function cdfSubmit(){
 }
 // Phone + WhatsApp tracking
 document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.addEventListener('click',function(){try{gtag('event','phone_click',{event_category:'CTA'});}catch(e){}});});
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.indevastudio.com/"},
+    {"@type":"ListItem","position":2,"name":"Interior Designer in Delhi","item":"https://www.indevastudio.com/interior-designer-delhi"},
+    {"@type":"ListItem","position":3,"name":"Projects","item":"https://www.indevastudio.com/interior-designer-delhi#projects"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Mini Farmhouse",
+        "url": "https://www.indevastudio.com/projects/mini-farmhouse",
+        "description": "A weekend farmhouse in New Delhi built around a reflecting pool and an existing sandstone pavilion, 4,800 sq.ft, completed 2024.",
+        "locationCreated": {"@type": "Place", "name": "New Delhi"},
+        "dateCreated": "2024",
+        "image": [
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp",
+            "name": "Mini Farmhouse — pavilion and reflecting pool"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp",
+            "name": "Mini Farmhouse — formal living room"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp",
+            "name": "Mini Farmhouse — bar and lounge area"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "Shanti Villa",
+        "url": "https://www.indevastudio.com/projects/shanti-villa",
+        "description": "A full-floor family villa in New Delhi replanned from an outdated builder layout, 8,000 sq.ft, completed 2023.",
+        "locationCreated": {"@type": "Place", "name": "New Delhi"},
+        "dateCreated": "2023",
+        "image": [
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp",
+            "name": "Shanti Villa — master bedroom"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp",
+            "name": "Shanti Villa — living area with night skyline view"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp",
+            "name": "Shanti Villa — home study and workspace"
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@14/swiper-bundle.min.js"></script>
+<script>
+// ============================================================
+// FEATURED PROJECTS SHOWCASE — carousels + lightbox
+// Requires Swiper (loaded via CDN before this script)
+// ============================================================
+(function(){
+
+  // ---- Project data: mirrors the DOM above, used by the lightbox ----
+  var pshowData = [
+    {
+      title: 'Mini Farmhouse',
+      location: 'New Delhi',
+      images: [
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/desktop%20version%20banner.webp',
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp',
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp'
+      ]
+    },
+    {
+      title: 'Shanti Villa',
+      location: 'New Delhi',
+      images: [
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp',
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp',
+        'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp'
+      ]
+    }
+  ];
+
+  var swipers = [];       // Swiper instances, indexed by project index
+  var lb = document.getElementById('pshowLightbox');
+  var lbImg = lb.querySelector('[data-lb-img]');
+  var lbTitle = lb.querySelector('[data-lb-title]');
+  var lbLoc = lb.querySelector('[data-lb-loc]');
+  var lbCounter = lb.querySelector('[data-lb-counter]');
+  var lbThumbs = lb.querySelector('[data-lb-thumbs]');
+  var lbPrev = lb.querySelector('.pshow-lb-prev');
+  var lbNext = lb.querySelector('.pshow-lb-next');
+  var lbClose = lb.querySelectorAll('[data-lb-close]');
+  var currentProject = 0, currentImage = 0, lastFocused = null;
+
+  function track(name, label){
+    try { gtag('event', name, { event_category: 'ProjectGallery', event_label: label }); } catch(e){}
+  }
+
+  // ---------------- Swiper init ----------------
+  document.querySelectorAll('.pshow-swiper').forEach(function(el){
+    var idx = parseInt(el.getAttribute('data-project'), 10);
+    var sw = new Swiper(el, {
+      loop: true,
+      speed: 650,
+      grabCursor: true,
+      keyboard: { enabled: true, onlyInView: true },
+      autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      pagination: { el: el.querySelector('.pshow-dots'), clickable: true },
+      navigation: { nextEl: el.querySelector('.pshow-next'), prevEl: el.querySelector('.pshow-prev') },
+      a11y: { enabled: true, prevSlideMessage: 'Previous image', nextSlideMessage: 'Next image' },
+      on: {
+        slideChange: function(s){
+          var real = s.realIndex;
+          var counter = el.querySelector('[data-counter]');
+          if (counter) counter.textContent = (real + 1) + ' / ' + pshowData[idx].images.length;
+          el.setAttribute('aria-label', pshowData[idx].title + ' image gallery, image ' + (real + 1) + ' of ' + pshowData[idx].images.length);
+          var thumbWrap = document.querySelector('[data-thumbs="' + idx + '"]');
+          if (thumbWrap){
+            thumbWrap.querySelectorAll('.pshow-thumb').forEach(function(t, i){
+              t.classList.toggle('active', i === real);
+            });
+          }
+        }
+      }
+    });
+    swipers[idx] = sw;
+
+    // Click main image -> open lightbox (but not when clicking nav arrows)
+    el.addEventListener('click', function(e){
+      if (e.target.closest('.pshow-arrow') || e.target.closest('.pshow-dots')) return;
+      openLightbox(idx, sw.realIndex);
+      track('open_lightbox', pshowData[idx].title);
+    });
+  });
+
+  // Thumbnail strip -> jump slide
+  document.querySelectorAll('.pshow-thumbs').forEach(function(wrap){
+    var idx = parseInt(wrap.getAttribute('data-thumbs'), 10);
+    wrap.querySelectorAll('.pshow-thumb').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var slide = parseInt(btn.getAttribute('data-slide'), 10);
+        swipers[idx].slideToLoop(slide);
+      });
+    });
+  });
+
+  // ---------------- Lightbox ----------------
+  function renderLightbox(){
+    var proj = pshowData[currentProject];
+    lbImg.classList.remove('zoomed');
+    lbImg.src = proj.images[currentImage];
+    lbImg.alt = proj.title + ' — image ' + (currentImage + 1) + ' of ' + proj.images.length;
+    lbTitle.textContent = proj.title;
+    lbLoc.textContent = proj.location;
+    lbCounter.textContent = (currentImage + 1) + ' / ' + proj.images.length;
+    lbThumbs.innerHTML = '';
+    proj.images.forEach(function(src, i){
+      var b = document.createElement('button');
+      b.className = 'pshow-thumb' + (i === currentImage ? ' active' : '');
+      b.setAttribute('aria-label', 'Go to image ' + (i + 1));
+      var im = document.createElement('img');
+      im.src = src; im.alt = ''; im.loading = 'lazy';
+      b.appendChild(im);
+      b.addEventListener('click', function(){ currentImage = i; renderLightbox(); });
+      lbThumbs.appendChild(b);
+    });
+  }
+
+  function openLightbox(projectIdx, imageIdx){
+    currentProject = projectIdx;
+    currentImage = imageIdx || 0;
+    lastFocused = document.activeElement;
+    renderLightbox();
+    lb.hidden = false;
+    requestAnimationFrame(function(){ lb.classList.add('open'); });
+    document.body.classList.add('pshow-lock');
+    if (swipers[projectIdx] && swipers[projectIdx].autoplay) swipers[projectIdx].autoplay.stop();
+    lbClose[0].focus();
+    document.addEventListener('keydown', onKeydown);
+  }
+
+  function closeLightbox(){
+    lb.classList.remove('open');
+    document.body.classList.remove('pshow-lock');
+    document.removeEventListener('keydown', onKeydown);
+    // sync the underlying carousel to whatever image the lightbox ended on,
+    // so the gallery "returns to the same position"
+    var sw = swipers[currentProject];
+    if (sw){
+      sw.slideToLoop(currentImage);
+      if (sw.autoplay) sw.autoplay.start();
+    }
+    setTimeout(function(){ lb.hidden = true; }, 350);
+    if (lastFocused) lastFocused.focus();
+  }
+
+  function nextImage(){
+    var proj = pshowData[currentProject];
+    currentImage = (currentImage + 1) % proj.images.length;
+    renderLightbox();
+  }
+  function prevImage(){
+    var proj = pshowData[currentProject];
+    currentImage = (currentImage - 1 + proj.images.length) % proj.images.length;
+    renderLightbox();
+  }
+
+  lbNext.addEventListener('click', nextImage);
+  lbPrev.addEventListener('click', prevImage);
+  lbClose.forEach(function(b){ b.addEventListener('click', closeLightbox); });
+  lb.addEventListener('click', function(e){
+    if (e.target === lb) closeLightbox();
+  });
+  lbImg.addEventListener('click', function(){
+    lbImg.classList.toggle('zoomed');
+  });
+
+  function onKeydown(e){
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowRight') nextImage();
+    else if (e.key === 'ArrowLeft') prevImage();
+    else if (e.key === 'Tab'){
+      // simple focus trap within the lightbox
+      var focusables = lb.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      if (!focusables.length) return;
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  }
+
+  // ---------------- Scroll-reveal for each project block ----------------
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.pshow-project[data-reveal]').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.pshow-project[data-reveal]').forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // WhatsApp / CTA click tracking within the showcase
+  document.querySelectorAll('.pshow-project .btn-wa, .pshow-project .btn-gold, .pshow-project .btn-outline').forEach(function(a){
+    a.addEventListener('click', function(){
+      track('project_cta_click', a.textContent.trim());
+    });
+  });
+
+})();
+
 </script>
 </body>
 </html>
