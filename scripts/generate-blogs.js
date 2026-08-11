@@ -1,8 +1,23 @@
 /**
- * INDEVA STUDIO — AUTOMATED BLOG ENGINE v8
+ * INDEVA STUDIO — AUTOMATED BLOG ENGINE v9
  *
  * Generates SEO-optimized luxury interior design blogs using Groq's free API
- * (running Meta's Llama 3.3 70B). Now with topic-relevant images via Unsplash.
+ * (running Meta's Llama 3.3 70B). Topic-relevant images via Unsplash.
+ *
+ * v9 CHANGE SUMMARY (structured SEO content engine — South Delhi / Gurgaon
+ * focused, see the walkthrough given alongside this file for full detail):
+ *   - BLOGS_PER_DAY raised 1 → 4, filled via 4 fixed daily SLOTS instead of
+ *     random category selection (see DAILY_SLOTS / selectDailyKeywords()).
+ *   - KEYWORD_POOL (flat string arrays) replaced by KEYWORD_DATABASE
+ *     (structured objects: keyword/cluster/location/intent/priority/
+ *     contentType/targetUrl/canonicalGroup — see PART 2 of the brief).
+ *   - Canonical-group cooldown prevents cannibalisation — the same search
+ *     intent won't get a second near-duplicate article for 21 days.
+ *   - LANDING_PAGE and CASE_STUDY keywords are never auto-blogged.
+ *   - Fabricated "real-sounding" client projects / experience-year claims
+ *     removed from every angle's prompt instructions.
+ *   - Added a quality gate (validateBlog()) that SKIPS a slot rather than
+ *     publishing anything that fails basic checks.
  *
  * Required env vars:
  *   GROQ_API_KEY         — get from https://console.groq.com/keys (free, no card)
@@ -39,38 +54,85 @@ const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
 // How many blogs to publish per run.
-// Workflow now runs TWICE per day (2 crons), so 1 per run = 2 blogs/day total.
-// Keep at 1 unless you have a paid Groq plan — free tier is 1,000 RPD.
-const BLOGS_PER_DAY = 1;
+// v9: raised from 1 → 4 to support the structured 4-slot SEO content engine
+// (South Delhi / Gurgaon / property niche / technical). Each slot is generated
+// SEQUENTIALLY (never in parallel) with INTER_BLOG_DELAY_MS between calls —
+// see PART 13 rate-limit note below. If your Groq plan is still free-tier,
+// confirm 4 sequential calls (~4-5 min run time incl. sleeps) fits your
+// workflow's timeout before relying on this in production.
+const BLOGS_PER_DAY = 4;
 
 // Delay between blogs (ms). Groq free tier caps at 12K TPM. With output capped
 // at 5500 tokens + ~1500 prompt tokens, one call uses ~7K TPM. The TPM window
 // is rolling-1-minute, so 65s ensures the previous call's tokens fully expire.
+// Kept sequential (not parallel) intentionally — see selectDailyKeywords() and
+// the main loop, which run one slot fully (generate → validate → save) before
+// starting the next.
 const INTER_BLOG_DELAY_MS = 65_000;
+
+// The 4 daily content slots, in order. Slot order matters — it drives which
+// cluster each keyword is pulled from (see selectDailyKeywords()).
+const DAILY_SLOTS = ["south-delhi", "gurgaon", "property-niche", "technical"];
+
+// SLOT 3 rotates through these property/service niches (PART 1 spec).
+const PROPERTY_NICHE_ROTATION = [
+  "villa", "farmhouse", "penthouse", "apartment", "office", "renovation", "furniture",
+];
+
+// SLOT 4 rotates through these technical/material topics (PART 1 spec).
+const TECHNICAL_TOPIC_ROTATION = [
+  "plywood", "hdhmr", "laminates", "kitchen", "wardrobe",
+  "hardware", "lighting", "flooring", "furniture-construction", "boq", "execution",
+];
 
 // ─────────────────────────────────────────────
 // MEMORY SYSTEM
 // Tracks: used titles, used angles, content summaries
 // ─────────────────────────────────────────────
+// Default shape for a brand-new memory file. Also used to backfill any
+// properties missing from an OLDER memory.json (PART 11 — "if older memory
+// files don't contain the new properties, default them safely").
+function emptyMemory() {
+  return {
+    titles: [],
+    slugs: [],
+    usedKeywords: [],
+    summaries: [],
+    lastAngles: [],
+    // v9 additions — SEO cannibalisation / content-type tracking
+    canonicalGroups: [],      // [{ canonicalGroup, lastUsedDate }]
+    targetUrls: [],           // targetUrl of every published article
+    contentTypes: [],         // contentType of every published article
+    searchIntents: [],        // intent of every published article
+    lastUsedDate: {},         // { [canonicalGroup]: 'YYYY-MM-DD' }
+    lastLocations: [],        // recent location values, for slot-diversity checks
+  };
+}
+
 function loadMemory() {
-  if (!fs.existsSync(MEMORY_FILE)) {
-    return { titles: [], slugs: [], usedKeywords: [], summaries: [], lastAngles: [] };
-  }
+  if (!fs.existsSync(MEMORY_FILE)) return emptyMemory();
   try {
-    return JSON.parse(fs.readFileSync(MEMORY_FILE, "utf8"));
+    const loaded = JSON.parse(fs.readFileSync(MEMORY_FILE, "utf8"));
+    // Backfill any field an older memory.json won't have. Never drop existing data.
+    return { ...emptyMemory(), ...loaded };
   } catch (_) {
-    return { titles: [], slugs: [], usedKeywords: [], summaries: [], lastAngles: [] };
+    return emptyMemory();
   }
 }
 
 function saveMemory(memory) {
   fs.mkdirSync(path.dirname(MEMORY_FILE), { recursive: true });
-  // Keep only last 200 entries to avoid bloat
-  memory.titles = memory.titles.slice(-200);
-  memory.slugs = memory.slugs.slice(-200);
-  memory.summaries = memory.summaries.slice(-200);
-  memory.usedKeywords = memory.usedKeywords.slice(-200);
-  memory.lastAngles = memory.lastAngles.slice(-20);
+  // Keep only last N entries to avoid unbounded file growth
+  memory.titles = memory.titles.slice(-300);
+  memory.slugs = memory.slugs.slice(-300);
+  memory.summaries = memory.summaries.slice(-300);
+  memory.usedKeywords = memory.usedKeywords.slice(-300);
+  memory.lastAngles = memory.lastAngles.slice(-40);
+  memory.canonicalGroups = memory.canonicalGroups.slice(-300);
+  memory.targetUrls = (memory.targetUrls || []).slice(-300);
+  memory.contentTypes = (memory.contentTypes || []).slice(-300);
+  memory.searchIntents = (memory.searchIntents || []).slice(-300);
+  memory.lastLocations = (memory.lastLocations || []).slice(-40);
   fs.writeFileSync(MEMORY_FILE, JSON.stringify(memory, null, 2));
 }
 
@@ -79,16 +141,31 @@ function saveMemory(memory) {
 // Each blog gets a different angle to ensure
 // content is different even for same keyword
 // ─────────────────────────────────────────────
+// v9 CHANGE (PART 6 / PART 10 / PART 14): the old "case-study" angle asked the
+// model to write a "real-sounding client project" — i.e. present a fabricated
+// project as if it were a real Indéva job. That is removed entirely. Angles
+// that reference example projects now explicitly require the model to label
+// them as hypothetical. The "15 years experience" claim is also removed since
+// it isn't a verified fact about the studio.
+//
+// Each angle now carries an `intents` array so selectAnglesForToday() can pick
+// angles that actually fit the keyword's search intent (PART 10):
+//   commercial   → cost-guide, step-by-step (hiring/process)
+//   informational → mistakes-avoid, expert-insights, design-ideas
+//   technical    → material-comparison, step-by-step
 const ANGLES = [
   {
     id: "cost-guide",
     name: "Cost & Budget Guide",
     structure: "Guide format",
     intro: "Data-driven with cost anchors",
-    instruction: `Write as a DEFINITIVE COST GUIDE. 
+    intents: ["commercial", "technical"],
+    instruction: `Write as a DEFINITIVE COST GUIDE.
     Structure: Start with the biggest cost misconception in India.
-    H2s must cover: what drives costs up, cost breakdown by room, 
-    how to negotiate, red flags that inflate bills, real project budget example.
+    H2s must cover: what drives costs up, cost breakdown by room,
+    how to negotiate, red flags that inflate bills.
+    If a budget example is useful, present it as a clearly labeled
+    "ILLUSTRATIVE BUDGET" (not a real named project) with a realistic range, not a fabricated exact invoice.
     Tone: Financial advisor meets design expert. Specific ₹ figures throughout.
     Opening: Start with a surprising cost statistic or common pricing myth.`,
   },
@@ -96,24 +173,29 @@ const ANGLES = [
     id: "mistakes-avoid",
     name: "Mistakes to Avoid",
     structure: "Warning/listicle format",
-    intro: "Problem-aware story opening",
+    intro: "Problem-aware opening",
+    intents: ["informational", "commercial"],
     instruction: `Write as a WARNING GUIDE exposing costly mistakes.
-    Structure: Open with a real-sounding client disaster story (no names).
+    Structure: Open by naming the pattern of mistake this topic invites — describe
+    it generally (e.g. "many first-time villa clients...") rather than inventing a
+    specific client story presented as real. If an example clarifies a point, label
+    it explicitly as a "HYPOTHETICAL EXAMPLE".
     H2s must be mistakes, each with: what goes wrong, why it happens, exact fix.
-    Tone: Experienced designer who has seen everything go wrong.
-    Opening: "The day a client called us mid-project..." type narrative.
+    Tone: Experienced designer who has seen these patterns repeatedly.
     Every section must feel like hard-won wisdom, not generic advice.`,
   },
   {
     id: "expert-insights",
     name: "Expert Perspective",
     structure: "Narrative/opinion format",
-    intro: "Provocative expert opinion",
-    instruction: `Write as a PROVOCATIVE EXPERT OPINION piece.
-    Structure: Take a contrarian or unexpected position on the topic.
-    H2s must challenge conventional wisdom about this topic in India.
-    Tone: Senior designer with 15 years experience speaking candidly.
-    Opening: Start with a bold statement that most designers won't say publicly.
+    intro: "Grounded expert opinion",
+    intents: ["informational"],
+    instruction: `Write as a GROUNDED EXPERT OPINION piece.
+    Structure: Take a considered, slightly contrarian position on the topic.
+    H2s must challenge a common assumption about this topic in India.
+    Tone: A senior designer speaking candidly — do not claim a specific number
+    of years of experience or any unverified credential.
+    Opening: Start with a clear, direct statement most designers gloss over.
     Include at least one counterintuitive insight specific to Indian homes/clients.`,
   },
   {
@@ -121,6 +203,7 @@ const ANGLES = [
     name: "Step-by-Step Process",
     structure: "Sequential how-to format",
     intro: "Question-based opening",
+    intents: ["commercial", "technical"],
     instruction: `Write as a PRACTICAL STEP-BY-STEP PROCESS guide.
     Structure: Open with the question clients ask most about this topic.
     H2s must be numbered steps (Step 1, Step 2, etc.) in logical sequence.
@@ -129,46 +212,65 @@ const ANGLES = [
     Opening: Start with "Most people approach [topic] backwards. Here is the right sequence."`,
   },
   {
-    id: "case-study",
-    name: "Case Study Style",
-    structure: "Story-driven narrative",
-    intro: "Story-based client journey",
-    instruction: `Write as a CASE STUDY following a real-sounding client project.
-    Structure: Follow one project from brief to completion.
-    Use a specific Indian city, property type, and budget throughout.
-    H2s must be project phases: The Brief, The Challenge, The Design Solution, The Result.
-    Tone: Documentary storytelling — specific details make it feel real.
-    Opening: Describe the client situation before the project started.
-    Include: exact timeline, specific design decisions and why, final cost vs budget.`,
+    id: "material-comparison",
+    name: "Material / Specification Comparison",
+    structure: "Comparison format",
+    intro: "Direct technical opening",
+    intents: ["technical"],
+    instruction: `Write as a TECHNICAL MATERIAL COMPARISON guide.
+    Structure: Open by stating plainly what the two (or more) options actually are.
+    H2s must cover: material properties, cost difference, durability/moisture/termite
+    behaviour where relevant, where each option makes sense, what Indéva studio
+    specifies by default and why.
+    Tone: Technical but readable — a site engineer explaining to a client, not a
+    catalogue. Avoid fabricated lab statistics or invented certification numbers;
+    use general, well-known material properties instead.
+    Opening: Start by correcting the most common misconception about this comparison.`,
   },
   {
     id: "design-ideas",
     name: "Design Ideas & Inspiration",
     structure: "Inspirational listicle",
     intro: "Vivid visual description opening",
+    intents: ["informational"],
     instruction: `Write as a CURATED DESIGN IDEAS piece with strong visual language.
-    Structure: Open by describing a specific beautiful space in detail.
+    Structure: Open by describing a specific beautiful space in detail (a
+    composite/illustrative scene, not a claimed real project).
     H2s must be distinct design directions/styles for this topic.
     Tone: Design magazine editor — aspirational but grounded in Indian reality.
     Each idea section must include: visual description, materials, cost range, who it suits.
-    Opening: Paint a vivid picture of what the ideal version of this space looks/feels like.
     Reference specific Indian aesthetics, materials, or cultural elements.`,
   },
 ];
 
-// City rotation to ensure geographic variety
-const CITIES = [
-  { city: "Delhi", area: "South Delhi", property: "independent bungalow" },
-  { city: "Gurgaon", area: "DLF Phase 5", property: "luxury apartment" },
-  { city: "Noida", area: "Sector 150", property: "penthouse" },
-  { city: "Delhi", area: "Lutyens Delhi", property: "heritage bungalow" },
-  { city: "Gurgaon", area: "Golf Course Road", property: "villa" },
-  { city: "Noida", area: "Sector 44", property: "builder floor" },
-  { city: "Delhi", area: "Greater Kailash", property: "duplex" },
-  { city: "Sonipat", area: "Kundli", property: "farmhouse" },
-  { city: "Sonipat", area: "KMP Expressway", property: "weekend retreat" },
-  { city: "Sonipat", area: "Rai", property: "plotted home" },
-];
+// ─────────────────────────────────────────────
+// LOCALITY DATA
+// Keyword-driven replacement for the old random CITIES rotation (PART 9).
+// Each keyword's `location` field maps to one of these — the scenario used in
+// the generation prompt (city/area/property) is now DERIVED from the keyword
+// being written about, not picked at random. Noida/Sonipat/Dehradun/Udaipur
+// are intentionally NOT included here — PART 9 says stop rotating into
+// markets the keyword doesn't belong to. Sonipat/Noida keywords still exist
+// in the OLD deployed posts (see blogs.config.js) and remain live; this file
+// simply stops generating new ones.
+// ─────────────────────────────────────────────
+const LOCALITY_DATA = {
+  "South Delhi":                { city: "Delhi",   area: "South Delhi",                    property: "independent bungalow" },
+  "Vasant Vihar":                { city: "Delhi",   area: "Vasant Vihar",                   property: "independent bungalow" },
+  "Greater Kailash":             { city: "Delhi",   area: "Greater Kailash",                property: "duplex" },
+  "Defence Colony":              { city: "Delhi",   area: "Defence Colony",                 property: "independent floor" },
+  "Panchsheel Park":             { city: "Delhi",   area: "Panchsheel Park",                property: "independent bungalow" },
+  "Hauz Khas":                   { city: "Delhi",   area: "Hauz Khas",                      property: "duplex" },
+  "Maharani Bagh":               { city: "Delhi",   area: "Maharani Bagh",                  property: "independent bungalow" },
+  "Friends Colony":              { city: "Delhi",   area: "Friends Colony",                 property: "independent bungalow" },
+  "Sainik Farms":                { city: "Delhi",   area: "Sainik Farms",                   property: "farmhouse" },
+  "Gurgaon":                     { city: "Gurgaon", area: "Gurgaon",                        property: "luxury apartment" },
+  "DLF Gurgaon":                 { city: "Gurgaon", area: "DLF Phase 5",                    property: "luxury apartment" },
+  "Golf Course Road":            { city: "Gurgaon", area: "Golf Course Road",               property: "villa" },
+  "Golf Course Extension Road":  { city: "Gurgaon", area: "Golf Course Extension Road",     property: "villa" },
+  "Sohna Road":                  { city: "Gurgaon", area: "Sohna Road",                     property: "farmhouse" },
+  "New Gurgaon":                 { city: "Gurgaon", area: "New Gurgaon",                    property: "apartment" },
+};
 
 // Budget ranges to rotate through
 const BUDGETS = [
@@ -180,93 +282,380 @@ const BUDGETS = [
 ];
 
 // ─────────────────────────────────────────────
-// KEYWORD POOL
+// KEYWORD DATABASE (PART 2)
 // ─────────────────────────────────────────────
-const KEYWORD_POOL = {
-  interior_design: [
-    "luxury home interior design cost Delhi 2025",
-    "premium interior designers Delhi NCR",
-    "bespoke interior design ideas Indian homes",
-    "contemporary interior design trends India 2025",
-    "full home interior design cost Gurgaon",
-    "best luxury interior designers near me Delhi",
-    "high end interior design services India",
-    "affordable luxury interior design Delhi NCR",
-  ],
-  villa: [
-    "luxury villa interior design India",
-    "villa interior design cost Delhi NCR",
-    "modern villa design ideas Indian homes",
-    "farmhouse villa interior design Gurgaon",
-    "luxury villa bedroom design ideas India",
-    "contemporary villa living room design India",
-    "villa interior designers Delhi NCR price",
-    "bespoke villa interior design Noida",
-  ],
-  farmhouse: [
-    "farmhouse interior design ideas India",
-    "luxury farmhouse design Delhi NCR",
-    "modern farmhouse interior design cost India",
-    "farmhouse living room design ideas India",
-    "rustic luxury farmhouse design Delhi",
-    "farmhouse bedroom interior design India",
-    "weekend farmhouse interior design Gurgaon",
-    "farmhouse kitchen design ideas India",
-  ],
-  restaurant: [
-    "luxury restaurant interior design India",
-    "restaurant interior design cost Delhi",
-    "fine dining restaurant design ideas India",
-    "modern cafe interior design Delhi NCR",
-    "restaurant interior designers Gurgaon",
-    "premium restaurant design ideas India 2025",
-    "restaurant ambience design cost India",
-    "high end cafe and restaurant design Delhi",
-  ],
-  living_room: [
-    "luxury living room interior design Delhi",
-    "modern living room design ideas India 2025",
-    "living room TV unit design ideas India",
-    "false ceiling design for living room India",
-    "sofa set design ideas Indian living room",
-    "living room interior cost estimate Delhi",
-    "premium living room design Gurgaon",
-    "open plan living room design India",
-  ],
-  bedroom: [
-    "master bedroom interior design ideas India",
-    "luxury bedroom design cost Delhi NCR",
-    "luxury bedroom design ideas Indian homes",
-    "wardrobe design ideas for bedroom India",
-    "bedroom false ceiling design ideas India",
-    "couple bedroom interior design Delhi",
-    "kids bedroom luxury design ideas India",
-    "premium master suite design India",
-  ],
-  local_seo: [
-    "interior designer in Gurgaon for villa",
-    "luxury interior design company Noida",
-    "best interior designer Dehradun farmhouse",
-    "interior design services Delhi NCR reviews",
-    "interior designer Udaipur luxury villas",
-    "top interior designers Delhi farmhouse",
-    "restaurant interior designer Delhi NCR",
-    "flat interior design Delhi cost per sqft",
-    "farmhouse interior designer Sonipat",
-    "interior designer Sonipat NCR",
-    "plotted home interior design Sonipat",
-  ],
-};
+// Replaces the old flat KEYWORD_POOL (string arrays with no metadata).
+//
+// Rather than hand-writing ~250 near-duplicate objects, we define CLUSTERS —
+// each cluster shares one canonicalGroup, location, intent, contentType,
+// priority, targetUrl, and site `category` (used for image search + display
+// category) — and each cluster lists its raw keyword variants. The database
+// is flattened from clusters at module load, so every individual keyword
+// still ends up as its own { keyword, cluster, location, intent, priority,
+// contentType, targetUrl, canonicalGroup, category, niche?, techTopic? }
+// object, exactly per spec — clusters are just how we avoid repeating the
+// same 7 metadata fields 250 times.
+//
+// contentType legend (PART 4):
+//   LANDING_PAGE — high-intent commercial "hub" search. NOT auto-blogged —
+//                  these should become a real static page (see proposedLandingUrl
+//                  below). Auto-generating a blog for these would compete with
+//                  the page you actually want to rank.
+//   SERVICE_PAGE — specific service (villa/farmhouse/penthouse/commercial).
+//                  Auto-generated as a support/informational article.
+//   BLOG         — informational/evergreen guide. Always auto-generated.
+//   LOCATION_PAGE— locality-specific. Auto-generated as a short local guide,
+//                  capped to ONE live article per locality (see PART 3).
+//   CASE_STUDY   — NOT used by the generator at all (PART 6/15 — no verified
+//                  project data exists to write a real case study from).
+//
+// `targetUrl` = a route that ALREADY EXISTS on indevastudio.com today
+// (confirmed from the repo: /delhi, /gurgaon, /#services, /#contact, /#about,
+// /#projects). Generated articles link to these.
+// `proposedLandingUrl` = the SEO-recommended future URL for that canonical
+// group (e.g. /interior-designer-south-delhi). These do NOT exist yet — do
+// not link to them and do not treat them as live. Build the real page first,
+// then flip LANDING_PAGE clusters into auto-generation and point targetUrl
+// at the new page. (Flagged in the summary as something to confirm with you.)
+// ─────────────────────────────────────────────
 
+function cluster(def) {
+  return def.keywords.map(keyword => ({
+    keyword,
+    cluster: def.cluster,
+    location: def.location,
+    intent: def.intent,
+    priority: def.priority,
+    contentType: def.contentType,
+    targetUrl: def.targetUrl,
+    proposedLandingUrl: def.proposedLandingUrl || null,
+    canonicalGroup: def.canonicalGroup,
+    category: def.category,
+    niche: def.niche || null,       // matches PROPERTY_NICHE_ROTATION, for SLOT 3
+    techTopic: def.techTopic || null, // matches TECHNICAL_TOPIC_ROTATION, for SLOT 4
+  }));
+}
+
+// Helper for the 8 South Delhi + 5 Gurgaon locality clusters, which all share
+// the same shape (LOCATION_PAGE, one canonical group per locality).
+function localityClusters(localities, cityLabel, categoryId, keywordsFn) {
+  return localities.flatMap(name => cluster({
+    cluster: `${categoryId}-locality-${name.toLowerCase().replace(/\s+/g, "-")}`,
+    canonicalGroup: `locality-${name.toLowerCase().replace(/\s+/g, "-")}`,
+    location: name,
+    intent: "commercial",
+    priority: "C",
+    contentType: "LOCATION_PAGE",
+    targetUrl: categoryId === "south_delhi" ? "/delhi" : "/gurgaon",
+    proposedLandingUrl: null,
+    category: categoryId,
+    keywords: keywordsFn(name),
+  }));
+}
+
+const KEYWORD_DATABASE = [
+  // ============================================================
+  // SOUTH DELHI
+  // ============================================================
+  ...cluster({
+    cluster: "south-delhi-core",
+    canonicalGroup: "south-delhi-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE",
+    targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi",
+    category: "south_delhi",
+    keywords: [
+      "interior designer South Delhi", "interior designer in South Delhi",
+      "interior designers South Delhi", "interior design company South Delhi",
+      "interior design firm South Delhi", "interior design studio South Delhi",
+      "luxury interior designer South Delhi", "residential interior designer South Delhi",
+      "home interior designer South Delhi", "best interior designer South Delhi",
+      "top interior designers South Delhi", "turnkey interior designer South Delhi",
+      "interior design services South Delhi", "interior company South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-cost",
+    canonicalGroup: "south-delhi-interior-cost-guide",
+    location: "South Delhi", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "interior design cost South Delhi", "interior designer cost South Delhi",
+      "interior design cost per sq ft South Delhi", "2 BHK interior cost South Delhi",
+      "3 BHK interior cost South Delhi", "4 BHK interior cost South Delhi",
+      "luxury interior design cost South Delhi", "turnkey interior cost South Delhi",
+      "home renovation cost South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-villa",
+    canonicalGroup: "south-delhi-villa-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "villa",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "villa interior designer South Delhi", "villa interior design South Delhi",
+      "luxury villa interior designer South Delhi", "modern villa interior designer South Delhi",
+      "villa renovation South Delhi", "villa interior cost South Delhi",
+      "villa furniture design South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-farmhouse",
+    canonicalGroup: "south-delhi-farmhouse-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "farmhouse",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "farmhouse interior designer South Delhi", "farmhouse interior design South Delhi",
+      "farmhouse interior designer Delhi", "luxury farmhouse interior designer Delhi",
+      "farmhouse renovation South Delhi", "farmhouse interior cost South Delhi",
+      "farmhouse furniture design Delhi", "farmhouse architecture and interior design Delhi",
+      "farmhouse interior designer Sainik Farms", "farmhouse interior design Sainik Farms",
+      "farmhouse renovation Sainik Farms",
+    ],
+  }),
+  ...localityClusters(
+    ["Vasant Vihar", "Greater Kailash", "Defence Colony", "Panchsheel Park", "Hauz Khas", "Maharani Bagh", "Friends Colony"],
+    "South Delhi", "south_delhi",
+    name => [
+      `interior designer ${name}`, `luxury interior designer ${name}`,
+      `residential interior designer ${name}`, `home interior designer ${name}`,
+    ],
+  ),
+
+  // ============================================================
+  // GURGAON
+  // ============================================================
+  ...cluster({
+    cluster: "gurgaon-core",
+    canonicalGroup: "gurgaon-interior-designer",
+    location: "Gurgaon", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE",
+    targetUrl: "/gurgaon", proposedLandingUrl: "/interior-designer-gurgaon",
+    category: "gurgaon",
+    keywords: [
+      "interior designer Gurgaon", "interior designer in Gurgaon", "interior designers Gurgaon",
+      "interior designer Gurugram", "interior design company Gurgaon", "interior design firm Gurgaon",
+      "interior design studio Gurgaon", "luxury interior designer Gurgaon",
+      "residential interior designer Gurgaon", "home interior designer Gurgaon",
+      "best interior designer Gurgaon", "top interior designers Gurgaon",
+      "turnkey interior designer Gurgaon", "interior design and execution Gurgaon",
+    ],
+  }),
+  ...cluster({
+    cluster: "gurgaon-villa",
+    canonicalGroup: "gurgaon-villa-interior-designer",
+    location: "Gurgaon", intent: "commercial", priority: "A", niche: "villa",
+    contentType: "SERVICE_PAGE", targetUrl: "/gurgaon",
+    proposedLandingUrl: "/interior-designer-gurgaon", category: "gurgaon",
+    keywords: [
+      "villa interior designer Gurgaon", "villa interior design Gurgaon",
+      "luxury villa interior designer Gurgaon", "modern villa interior designer Gurgaon",
+      "villa renovation Gurgaon", "villa interior cost Gurgaon", "villa furniture design Gurgaon",
+    ],
+  }),
+  ...cluster({
+    cluster: "gurgaon-farmhouse",
+    canonicalGroup: "gurgaon-farmhouse-interior-designer",
+    location: "Gurgaon", intent: "commercial", priority: "A", niche: "farmhouse",
+    contentType: "SERVICE_PAGE", targetUrl: "/gurgaon",
+    proposedLandingUrl: "/interior-designer-gurgaon", category: "gurgaon",
+    keywords: [
+      "farmhouse interior designer Gurgaon", "farmhouse interior design Gurgaon",
+      "luxury farmhouse interior designer Gurgaon", "farmhouse renovation Gurgaon",
+      "farmhouse interior cost Gurgaon", "farmhouse furniture design Gurgaon",
+      "farmhouse design and execution Gurgaon",
+    ],
+  }),
+  ...cluster({
+    cluster: "gurgaon-penthouse",
+    canonicalGroup: "gurgaon-penthouse-interior-designer",
+    location: "Gurgaon", intent: "commercial", priority: "A", niche: "penthouse",
+    contentType: "SERVICE_PAGE", targetUrl: "/gurgaon",
+    proposedLandingUrl: "/interior-designer-gurgaon", category: "gurgaon",
+    keywords: [
+      "penthouse interior designer Gurgaon", "penthouse interior design Gurgaon",
+      "luxury penthouse interior designer Gurgaon", "penthouse renovation Gurgaon",
+      "penthouse interior cost Gurgaon", "penthouse furniture design Gurgaon",
+    ],
+  }),
+  ...cluster({
+    cluster: "gurgaon-cost",
+    canonicalGroup: "gurgaon-interior-cost-guide",
+    location: "Gurgaon", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/gurgaon", category: "gurgaon",
+    keywords: [
+      "interior design cost Gurgaon", "interior designer cost Gurgaon",
+      "interior design cost per sq ft Gurgaon", "2 BHK interior cost Gurgaon",
+      "3 BHK interior cost Gurgaon", "4 BHK interior cost Gurgaon",
+      "villa interior cost Gurgaon", "farmhouse interior cost Gurgaon",
+      "penthouse interior cost Gurgaon", "turnkey interior cost Gurgaon",
+    ],
+  }),
+  ...localityClusters(
+    ["DLF Gurgaon", "Golf Course Road", "Golf Course Extension Road", "Sohna Road", "New Gurgaon"],
+    "Gurgaon", "gurgaon",
+    name => [
+      `interior designer ${name}`, `luxury interior designer ${name}`,
+      `residential interior designer ${name}`, `villa interior designer ${name}`,
+    ],
+  ),
+
+  // ============================================================
+  // COMMERCIAL (South Delhi + Gurgaon) — niche: "office"
+  // ============================================================
+  ...cluster({
+    cluster: "commercial-south-delhi",
+    canonicalGroup: "south-delhi-commercial-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "B", niche: "office",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi", category: "commercial",
+    keywords: [
+      "office interior designer South Delhi", "commercial interior designer South Delhi",
+      "corporate interior designer South Delhi", "retail interior designer South Delhi",
+      "showroom interior designer South Delhi", "restaurant interior designer South Delhi",
+      "cafe interior designer South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "commercial-gurgaon",
+    canonicalGroup: "gurgaon-commercial-interior-designer",
+    location: "Gurgaon", intent: "commercial", priority: "B", niche: "office",
+    contentType: "SERVICE_PAGE", targetUrl: "/gurgaon", category: "commercial",
+    keywords: [
+      "office interior designer Gurgaon", "commercial interior designer Gurgaon",
+      "corporate interior designer Gurgaon", "retail interior designer Gurgaon",
+      "showroom interior designer Gurgaon", "restaurant interior designer Gurgaon",
+      "cafe interior designer Gurgaon",
+    ],
+  }),
+
+  // ============================================================
+  // FURNITURE / EXECUTION — niche: "furniture" / "renovation"
+  // ============================================================
+  ...cluster({
+    cluster: "furniture-custom",
+    canonicalGroup: "custom-furniture-delhi-ncr",
+    location: "Delhi NCR", intent: "commercial", priority: "B", niche: "furniture",
+    contentType: "BLOG", targetUrl: "/#services", category: "furniture",
+    keywords: [
+      "custom furniture Delhi", "custom furniture Gurgaon", "bespoke furniture Delhi",
+      "luxury furniture Delhi", "custom furniture manufacturer Delhi",
+      "custom wardrobe Gurgaon", "custom wardrobe South Delhi", "luxury wardrobe design Gurgaon",
+    ],
+  }),
+  ...cluster({
+    cluster: "turnkey-execution",
+    canonicalGroup: "turnkey-interior-execution-delhi-ncr",
+    location: "Delhi NCR", intent: "commercial", priority: "B", niche: "renovation",
+    contentType: "BLOG", targetUrl: "/#about", category: "renovation",
+    keywords: [
+      "turnkey interior design Delhi", "turnkey interior design Gurgaon",
+      "interior design and execution Delhi", "interior execution company Delhi",
+      "interior execution company Gurgaon", "interior renovation company Delhi",
+      "interior renovation company Gurgaon",
+    ],
+  }),
+
+  // ============================================================
+  // MATERIAL / TECHNICAL — SLOT 4 pool
+  // techTopic values map to TECHNICAL_TOPIC_ROTATION.
+  // NOTE (flag for you): the brief supplied source keywords for plywood,
+  // hdhmr, laminates, kitchen, wardrobe and hardware only. No keywords were
+  // given for lighting / flooring / furniture-construction / boq / execution,
+  // so a small starter set is added for those five so SLOT 4's rotation
+  // doesn't stall on empty topics — expand these before leaning on them.
+  // ============================================================
+  ...cluster({
+    cluster: "material-plywood",
+    canonicalGroup: "plywood-material-guide",
+    location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "plywood",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["best plywood for kitchen", "BWP plywood for kitchen", "best plywood for wardrobe", "best plywood brands India"],
+  }),
+  ...cluster({
+    cluster: "material-hdhmr",
+    canonicalGroup: "hdhmr-vs-plywood-comparison",
+    location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "hdhmr",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["HDHMR vs plywood kitchen", "HDHMR vs marine plywood", "HDHMR vs plywood wardrobe", "MDF vs HDHMR", "plywood vs HDHMR"],
+  }),
+  ...cluster({
+    cluster: "material-laminates",
+    canonicalGroup: "laminate-veneer-comparison-guide",
+    location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "laminates",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["best laminate brands India", "veneer vs laminate interiors", "PU polish vs laminate", "acrylic vs laminate kitchen"],
+  }),
+  ...cluster({
+    cluster: "material-kitchen",
+    canonicalGroup: "kitchen-material-cost-guide",
+    location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "kitchen",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["best material for kitchen cabinets", "kitchen cabinet material comparison", "modular kitchen cost Delhi", "modular kitchen cost Gurgaon", "kitchen interior cost Delhi", "kitchen interior cost Gurgaon"],
+  }),
+  ...cluster({
+    cluster: "material-wardrobe",
+    canonicalGroup: "wardrobe-material-cost-guide",
+    location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "wardrobe",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["wardrobe material comparison", "wardrobe cost Delhi", "wardrobe cost Gurgaon", "custom wardrobe cost Gurgaon", "custom wardrobe cost Delhi"],
+  }),
+  ...cluster({
+    cluster: "material-hardware",
+    canonicalGroup: "interior-hardware-fittings-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "hardware",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["best hardware brands for interiors", "soft close hinges comparison", "drawer channel brands India"],
+  }),
+  ...cluster({
+    // Starter set — no source keywords supplied, see NOTE above.
+    cluster: "material-lighting",
+    canonicalGroup: "interior-lighting-design-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "lighting",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["layered lighting design for Indian homes", "false ceiling lighting design ideas"],
+  }),
+  ...cluster({
+    cluster: "material-flooring",
+    canonicalGroup: "interior-flooring-material-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "flooring",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["best flooring material for Indian homes", "marble vs tile flooring cost"],
+  }),
+  ...cluster({
+    cluster: "material-furniture-construction",
+    canonicalGroup: "custom-furniture-construction-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "furniture-construction",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["how custom furniture is made", "carcass construction explained"],
+  }),
+  ...cluster({
+    cluster: "material-boq",
+    canonicalGroup: "interior-boq-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "boq",
+    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    keywords: ["how to read an interior design BOQ", "interior BOQ vs quotation"],
+  }),
+  ...cluster({
+    cluster: "material-execution",
+    canonicalGroup: "interior-execution-process-guide",
+    location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "execution",
+    contentType: "BLOG", targetUrl: "/#about", category: "technical",
+    keywords: ["interior execution timeline India", "site supervision during interior execution"],
+  }),
+];
+
+// Display category text (was CATEGORY_MAP, keyed by category id instead of
+// old KEYWORD_POOL keys — used for the "cat" badge shown on each article).
 const CATEGORY_MAP = {
-  interior_design: "design intelligence",
-  villa: "villa & farmhouse",
-  farmhouse: "villa & farmhouse",
-  restaurant: "hospitality design",
-  living_room: "spatial logic",
-  bedroom: "bedroom design",
-  local_seo: "india market",
-  sonipat: "villa & farmhouse",
+  south_delhi: "south delhi",
+  gurgaon: "gurgaon",
+  commercial: "commercial design",
+  furniture: "materials",
+  renovation: "process",
+  technical: "materials",
 };
 
 const INTERNAL_LINKS = [
@@ -275,8 +664,7 @@ const INTERNAL_LINKS = [
   { text: "contact us for a free consultation", url: "/#contact" },
   { text: "our design process", url: "/#about" },
   { text: "get in touch with our designers", url: "/#contact" },
-  { text: "our sonipat farmhouse projects", url: "/sonipat" },
-  { text: "interior design in delhi", url: "/delhi" },
+  { text: "interior design in south delhi", url: "/delhi" },
   { text: "interior design in gurgaon", url: "/gurgaon" },
 ];
 
@@ -305,33 +693,41 @@ const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY;
 
 // Search queries per category — used by Unsplash. Pick neutral, well-photographed
 // terms that exist plentifully in stock libraries.
+// v9: re-keyed to the `category` values used in KEYWORD_DATABASE. `niche`
+// (villa/farmhouse/penthouse/office/renovation/furniture) further refines the
+// query when present — see NICHE_IMAGE_QUERIES below — so a South Delhi villa
+// article gets a villa-flavoured image, not a generic South Delhi one.
 const CATEGORY_IMAGE_QUERIES = {
-  interior_design: ["luxury living room", "modern interior", "elegant home interior"],
-  villa:           ["luxury villa interior", "modern villa living room", "premium home"],
-  farmhouse:       ["luxury farmhouse interior", "rustic luxury home", "modern farmhouse"],
-  restaurant:      ["luxury restaurant interior", "fine dining restaurant", "modern cafe interior"],
-  living_room:     ["luxury living room", "modern living room", "elegant lounge"],
-  bedroom:         ["luxury bedroom", "master bedroom design", "modern bedroom interior"],
-  local_seo:       ["luxury indian home", "modern home interior", "elegant home"],
-  sonipat:         ["luxury farmhouse interior", "modern farmhouse", "rustic luxury home"],
+  south_delhi: ["luxury independent house Delhi", "elegant home interior", "modern interior Delhi"],
+  gurgaon:     ["luxury apartment interior", "modern interior", "elegant home interior"],
+  commercial:  ["modern office interior", "luxury retail interior", "restaurant interior design"],
+  furniture:   ["custom wood furniture", "luxury wardrobe interior", "bespoke furniture workshop"],
+  renovation:  ["home renovation interior", "modern interior construction", "interior site execution"],
+  technical:   ["plywood furniture workshop", "kitchen cabinet materials", "interior carpentry workshop"],
+};
+
+// Per-niche overrides (checked first, before CATEGORY_IMAGE_QUERIES).
+const NICHE_IMAGE_QUERIES = {
+  villa:     ["luxury villa interior", "modern villa living room", "premium villa home"],
+  farmhouse: ["luxury farmhouse interior", "rustic luxury home", "modern farmhouse"],
+  penthouse: ["luxury penthouse interior", "modern penthouse living room", "premium penthouse"],
+  office:    ["modern office interior", "corporate interior design", "luxury retail interior"],
 };
 
 // Curated Picsum IDs that happen to be architecture/interior-ish. Used only as
 // fallback when Unsplash is unavailable. Grouped to match category vibe loosely.
 const FALLBACK_PICSUM = {
-  interior_design: ["1048", "1080", "1043"],
-  villa:           ["1048", "1080", "1031"],
-  farmhouse:       ["1015", "1018", "1019"],   // outdoor/landscape leaning
-  restaurant:      ["292", "365", "431"],
-  living_room:     ["1048", "1080", "1043"],
-  bedroom:         ["1080", "1043", "490"],
-  local_seo:       ["1048", "1080", "1043"],
-  sonipat:         ["1015", "1018", "1019"],
+  south_delhi: ["1048", "1080", "1043"],
+  gurgaon:     ["1048", "1080", "1031"],
+  commercial:  ["292", "365", "431"],
+  furniture:   ["1080", "1043", "490"],
+  renovation:  ["1018", "1019", "1015"],
+  technical:   ["1080", "1043", "490"],
 };
 
-async function fetchUnsplashImage(category) {
+async function fetchUnsplashImage(category, niche) {
   if (!UNSPLASH_KEY) return null;
-  const queries = CATEGORY_IMAGE_QUERIES[category] || CATEGORY_IMAGE_QUERIES.interior_design;
+  const queries = (niche && NICHE_IMAGE_QUERIES[niche]) || CATEGORY_IMAGE_QUERIES[category] || CATEGORY_IMAGE_QUERIES.south_delhi;
   const query = queries[Math.floor(Math.random() * queries.length)];
 
   try {
@@ -367,7 +763,7 @@ async function fetchUnsplashImage(category) {
 }
 
 function getFallbackImage(category, slug) {
-  const pool = FALLBACK_PICSUM[category] || FALLBACK_PICSUM.interior_design;
+  const pool = FALLBACK_PICSUM[category] || FALLBACK_PICSUM.south_delhi;
   const index = slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % pool.length;
   return {
     url: `https://picsum.photos/id/${pool[index]}/1200/675`,
@@ -380,9 +776,9 @@ function getFallbackImage(category, slug) {
 }
 
 // Unified image getter — tries Unsplash, falls back to Picsum.
-// `category` is one of KEYWORD_POOL keys; `slug` is the blog slug.
-async function resolveBlogImage(category, slug) {
-  const fromUnsplash = await fetchUnsplashImage(category);
+// `category` and `niche` come from the selected KEYWORD_DATABASE entry; `slug` is the blog slug.
+async function resolveBlogImage(category, slug, niche) {
+  const fromUnsplash = await fetchUnsplashImage(category, niche);
   if (fromUnsplash) {
     console.log(`  🖼️  Image from Unsplash: "${fromUnsplash.query}" by ${fromUnsplash.photographer}`);
     return fromUnsplash;
@@ -392,81 +788,179 @@ async function resolveBlogImage(category, slug) {
   return fb;
 }
 
-// ─────────────────────────────────────────────
-// KEYWORD SELECTOR
-// Avoids recently used keywords, ensures category spread
-// ─────────────────────────────────────────────
-function selectDailyKeywords(memory) {
-  const allKeywords = Object.entries(KEYWORD_POOL).flatMap(
-    ([category, keywords]) => keywords.map(keyword => ({ keyword, category }))
-  );
-
-  // Filter recently used (last 56 = full pool cycle)
-  const recentlyUsed = new Set(memory.usedKeywords.slice(-56));
-  let available = allKeywords.filter(k => !recentlyUsed.has(k.keyword));
-
-  // If pool exhausted, reset
-  if (available.length < BLOGS_PER_DAY) {
-    console.log("🔄 Keyword pool cycled — resetting usage history");
-    available = allKeywords;
-    memory.usedKeywords = [];
-  }
-
-  // Deterministic-by-date shuffle (Mulberry32-style) — was previously a broken
-  // sort comparator that only referenced `a`, not `b`, producing inconsistent ordering.
-  const seedStr = new Date().toISOString().split("T")[0];
+// Deterministic-by-date PRNG (Mulberry32-style), seeded off today's date +
+// an optional extra string (used to give each slot its own independent
+// shuffle order while staying reproducible within a single run).
+function seededRng(extra = "") {
+  const seedStr = new Date().toISOString().split("T")[0] + extra;
   let seedNum = 0;
   for (const c of seedStr) seedNum = (seedNum * 31 + c.charCodeAt(0)) >>> 0;
-  function rng() {
+  return function rng() {
     seedNum = (seedNum + 0x6D2B79F5) >>> 0;
     let t = seedNum;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  }
-  const seeded = [...available];
-  for (let i = seeded.length - 1; i > 0; i--) {
+  };
+}
+function seededShuffle(arr, extra = "") {
+  const rng = seededRng(extra);
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
-    [seeded[i], seeded[j]] = [seeded[j], seeded[i]];
+    [out[i], out[j]] = [out[j], out[i]];
   }
-
-  // Pick BLOGS_PER_DAY from different categories
-  const selected = [];
-  const usedCategories = new Set();
-
-  for (const item of seeded) {
-    if (selected.length >= BLOGS_PER_DAY) break;
-    if (!usedCategories.has(item.category)) {
-      selected.push(item);
-      usedCategories.add(item.category);
-    }
-  }
-
-  // If not enough categories, fill remaining slots
-  for (const item of seeded) {
-    if (selected.length >= BLOGS_PER_DAY) break;
-    if (!selected.find(s => s.keyword === item.keyword)) {
-      selected.push(item);
-    }
-  }
-
-  console.log("📌 Today's keywords:", selected.map(s => s.keyword));
-  return selected;
+  return out;
 }
 
 // ─────────────────────────────────────────────
-// ANGLE SELECTOR
-// Each blog today gets a different angle
-// Avoids angles used recently
+// KEYWORD SELECTOR — 4-SLOT STRUCTURE (PART 1 / PART 3 / PART 4 / PART 5)
+//
+// SLOT 1: a South Delhi keyword
+// SLOT 2: a Gurgaon keyword
+// SLOT 3: a property/service niche keyword (villa/farmhouse/penthouse/
+//         apartment/office/renovation/furniture — rotated by day), pulled
+//         from WHICHEVER of South Delhi / Gurgaon was NOT already used in
+//         slots 1–2 that specific niche, so the day doesn't double up on
+//         one city (PART 1: "do not allow all 4 to target the same location").
+// SLOT 4: a technical/material keyword, rotated by TECHNICAL_TOPIC_ROTATION.
+//
+// Cannibalisation guards applied to every slot (PART 3 / PART 5):
+//   - LANDING_PAGE and CASE_STUDY keywords are NEVER auto-selected — those
+//     need a real static page / real verified project respectively, not an
+//     auto-generated blog. (PART 4, PART 6/15)
+//   - A canonicalGroup that was used in the last CANONICAL_COOLDOWN_DAYS days
+//     is skipped, so we don't publish 3 near-duplicate articles that all
+//     target the same URL's search intent.
+//   - A bare keyword already in memory.usedKeywords is skipped outright.
 // ─────────────────────────────────────────────
-function selectAnglesForToday(memory) {
-  const recentAngles = new Set(memory.lastAngles.slice(-BLOGS_PER_DAY));
-  const available = ANGLES.filter(a => !recentAngles.has(a.id));
-  const pool = available.length >= BLOGS_PER_DAY ? available : ANGLES;
+const CANONICAL_COOLDOWN_DAYS = 21;
 
-  // Shuffle and pick BLOGS_PER_DAY angles
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, BLOGS_PER_DAY);
+function daysBetween(dateStr) {
+  if (!dateStr) return Infinity;
+  const then = new Date(dateStr).getTime();
+  if (Number.isNaN(then)) return Infinity;
+  return (Date.now() - then) / 86400000;
+}
+
+// Auto-generation eligibility per contentType (PART 4 / PART 6 / PART 15).
+function isAutoGenerable(entry) {
+  if (entry.contentType === "LANDING_PAGE") return false; // needs a real static page, not a blog
+  if (entry.contentType === "CASE_STUDY") return false;   // no verified project data exists
+  return true; // BLOG, SERVICE_PAGE, LOCATION_PAGE
+}
+
+function isEligible(entry, memory, usedThisRunKeywords, usedThisRunCanonicalGroups) {
+  if (!isAutoGenerable(entry)) return false;
+  if (memory.usedKeywords.includes(entry.keyword)) return false;
+  if (usedThisRunKeywords.has(entry.keyword)) return false;
+  if (usedThisRunCanonicalGroups.has(entry.canonicalGroup)) return false;
+  const lastUsed = (memory.lastUsedDate || {})[entry.canonicalGroup];
+  if (lastUsed && daysBetween(lastUsed) < CANONICAL_COOLDOWN_DAYS) return false;
+  return true;
+}
+
+// Picks one eligible entry from `pool`, deterministically shuffled. Relaxes
+// constraints in stages (skip cooldown, then skip everything except the
+// bare "already published this exact keyword" check) rather than ever
+// leaving a slot empty — matches PART 16's "skip is fine, empty run is not"
+// spirit while still always returning something usable.
+function pickFromPool(pool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, seedExtra, excludeLocations = new Set()) {
+  const shuffled = seededShuffle(pool, seedExtra);
+
+  const locationFiltered = shuffled.filter(e => !excludeLocations.has(e.location));
+  const tryPool = locationFiltered.length > 0 ? locationFiltered : shuffled;
+
+  let pick = tryPool.find(e => isEligible(e, memory, usedThisRunKeywords, usedThisRunCanonicalGroups));
+  if (pick) return pick;
+
+  // Relax: allow canonical-group cooldown to be ignored (still respects
+  // "not used this exact run" + "not published this exact keyword before").
+  pick = tryPool.find(e =>
+    isAutoGenerable(e) &&
+    !memory.usedKeywords.includes(e.keyword) &&
+    !usedThisRunKeywords.has(e.keyword)
+  );
+  if (pick) return pick;
+
+  // Fully relaxed fallback — never leave a slot with nothing (BLOGS_PER_DAY
+  // must produce 4 attempts; failed *generation* is handled separately by
+  // the retry/skip logic in main(), which is where PART 13/15 actually bite).
+  return tryPool.find(isAutoGenerable) || shuffled[0];
+}
+
+function selectDailyKeywords(memory) {
+  const usedThisRunKeywords = new Set();
+  const usedThisRunCanonicalGroups = new Set();
+  const usedThisRunLocations = new Set();
+  const selections = [];
+
+  const dayIndex = Math.floor(Date.now() / 86400000);
+
+  for (const slot of DAILY_SLOTS) {
+    let entry;
+
+    if (slot === "south-delhi") {
+      const pool = KEYWORD_DATABASE.filter(e => e.category === "south_delhi");
+      entry = pickFromPool(pool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, "slot1");
+    } else if (slot === "gurgaon") {
+      const pool = KEYWORD_DATABASE.filter(e => e.category === "gurgaon");
+      entry = pickFromPool(pool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, "slot2");
+    } else if (slot === "property-niche") {
+      const niche = PROPERTY_NICHE_ROTATION[dayIndex % PROPERTY_NICHE_ROTATION.length];
+      const pool = KEYWORD_DATABASE.filter(e => e.niche === niche);
+      // Prefer a location not already used in slots 1–2 today (PART 1).
+      entry = pickFromPool(pool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, "slot3", usedThisRunLocations);
+      // If the niche pool is empty entirely (e.g. "apartment" has no dedicated
+      // cluster yet), fall back to any SERVICE_PAGE/BLOG keyword not yet used.
+      if (!entry) {
+        console.log(`  ℹ️  No dedicated cluster for niche "${niche}" yet — falling back to general commercial pool`);
+        const fallbackPool = KEYWORD_DATABASE.filter(e => e.intent === "commercial");
+        entry = pickFromPool(fallbackPool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, "slot3-fallback", usedThisRunLocations);
+      }
+    } else if (slot === "technical") {
+      const topic = TECHNICAL_TOPIC_ROTATION[dayIndex % TECHNICAL_TOPIC_ROTATION.length];
+      const pool = KEYWORD_DATABASE.filter(e => e.techTopic === topic);
+      entry = pickFromPool(pool, memory, usedThisRunKeywords, usedThisRunCanonicalGroups, "slot4");
+    }
+
+    if (entry) {
+      selections.push(entry);
+      usedThisRunKeywords.add(entry.keyword);
+      usedThisRunCanonicalGroups.add(entry.canonicalGroup);
+      usedThisRunLocations.add(entry.location);
+    } else {
+      console.warn(`  ⚠️  Slot "${slot}" produced no candidate — skipping this slot today`);
+    }
+  }
+
+  console.log("📌 Today's slots:");
+  selections.forEach((s, i) => console.log(`   [${DAILY_SLOTS[i]}] "${s.keyword}" (${s.contentType}, ${s.canonicalGroup})`));
+  return selections;
+}
+
+// ─────────────────────────────────────────────
+// ANGLE SELECTOR (PART 10)
+// Picks one angle PER SELECTED KEYWORD, matched to that keyword's search
+// intent (commercial / informational / technical), avoiding angle repeats
+// within the same run and de-prioritising angles used in recent memory.
+// ─────────────────────────────────────────────
+function selectAnglesForSelections(memory, selections) {
+  const recentAngles = new Set(memory.lastAngles.slice(-BLOGS_PER_DAY));
+  const usedToday = new Set();
+
+  return selections.map((sel, i) => {
+    const fitsIntent = a => a.intents.includes(sel.intent);
+    let candidates = ANGLES.filter(a => fitsIntent(a) && !usedToday.has(a.id) && !recentAngles.has(a.id));
+    if (candidates.length === 0) candidates = ANGLES.filter(a => fitsIntent(a) && !usedToday.has(a.id));
+    if (candidates.length === 0) candidates = ANGLES.filter(a => !usedToday.has(a.id));
+    if (candidates.length === 0) candidates = ANGLES;
+
+    const shuffled = seededShuffle(candidates, `angle${i}`);
+    const chosen = shuffled[0];
+    usedToday.add(chosen.id);
+    return chosen;
+  });
 }
 
 
@@ -532,33 +1026,73 @@ function isTitleUnique(newTitle, existingTitles) {
 // ─────────────────────────────────────────────
 // BLOG GENERATOR
 // ─────────────────────────────────────────────
-async function generateBlog(keyword, category, angle, cityData, budgetData, attemptNum = 1) {
-  const internalLink1 = INTERNAL_LINKS[Math.floor(Math.random() * 3)];
-  const internalLink2 = INTERNAL_LINKS[3 + Math.floor(Math.random() * 2)];
-  const externalLink1 = EXTERNAL_LINKS[Math.floor(Math.random() * EXTERNAL_LINKS.length)];
+// PART 7 — internal links selected BY CLUSTER, not at random, and only from
+// routes confirmed to exist on the live site today (see INTERNAL_LINKS /
+// the targetUrl values on KEYWORD_DATABASE). We never link to a
+// proposedLandingUrl — those aren't live.
+function buildInternalLinksForEntry(entry) {
+  const primaryUrl = entry.targetUrl || "/#services";
+  const primaryText = primaryUrl === "/delhi" ? "interior design in south delhi"
+    : primaryUrl === "/gurgaon" ? "interior design in gurgaon"
+    : primaryUrl === "/#about" ? "our design process"
+    : "our services";
+  const primary = { text: primaryText, url: primaryUrl };
+  // Second link: always portfolio or contact, picked deterministically off the keyword
+  const secondaryOptions = INTERNAL_LINKS.filter(l => l.url === "/#projects" || l.url === "/#contact");
+  const secondary = secondaryOptions[entry.keyword.length % secondaryOptions.length];
+  return [primary, secondary];
+}
 
-  // Semantic keyword variations to avoid stuffing
-  const semanticVariations = [
-    keyword,
-    keyword.replace("cost", "pricing").replace("ideas", "concepts").replace("design", "interior"),
-    keyword.split(" ").reverse().join(" "),
-  ].filter((v, i, arr) => arr.indexOf(v) === i).slice(0, 2).join(" / ");
+// PART 6 — semantic keyword variations (3-6 related terms), used so the
+// model has real supporting terms to weave in instead of repeating the
+// primary keyword (keyword stuffing).
+function semanticVariationsFor(entry) {
+  const base = entry.keyword;
+  const variants = new Set([
+    base.replace(/\bcost\b/i, "pricing"),
+    base.replace(/\binterior designer\b/i, "interior design company"),
+    base.replace(/\bdesign\b/i, "interiors"),
+    `${entry.location} ${entry.niche || "interior design"}`.trim(),
+    entry.cluster.replace(/-/g, " "),
+  ]);
+  variants.delete(base);
+  return [...variants].filter(Boolean).slice(0, 5);
+}
+
+async function generateBlog(entry, angle, cityData, budgetData, attemptNum = 1) {
+  const links = buildInternalLinksForEntry(entry);
+  const [internalLink1, internalLink2] = links;
+  const externalLink1 = EXTERNAL_LINKS[entry.keyword.length % EXTERNAL_LINKS.length];
+  const semanticTerms = semanticVariationsFor(entry);
 
   const prompt = `You are a senior writer for indéva studio (Delhi NCR luxury interior design firm).
 
-WRITE A 1500-WORD SEO BLOG ON: "${keyword}"
+WRITE A 1500-WORD SEO BLOG.
+
+PRIMARY KEYWORD (use exactly once as the core subject, do not repeat it more than 2-3 times total — no keyword stuffing): "${entry.keyword}"
+RELATED SEMANTIC TERMS (weave 3-6 of these naturally through the article instead of repeating the primary keyword): ${semanticTerms.join(", ")}
+SEARCH INTENT: ${entry.intent} (${entry.contentType === "SERVICE_PAGE" ? "reader is evaluating hiring a designer for this specific service" : entry.contentType === "LOCATION_PAGE" ? "reader wants to know if indéva studio genuinely serves this locality" : entry.intent === "technical" ? "reader wants a real technical answer, not a sales pitch" : "reader wants a genuinely useful guide"})
 
 ANGLE: ${angle.name} — ${angle.intro}
-SCENARIO: ${cityData.property} in ${cityData.area}, ${cityData.city}, budget ${budgetData.range}.
+SCENARIO (use ${cityData.area}, ${cityData.city} naturally — do not invent a fake named client or project set here): ${cityData.property} in ${cityData.area}, ${cityData.city}, illustrative budget ${budgetData.range}.
 
 DIRECTIVE:
 ${angle.instruction}
 
-VOICE: Lowercase brand name "indéva studio". Authoritative, warm, Indian market fluent (use ₹). Grade 7-8 readability. No clichés like "delve", "in the realm of", "at the end of the day", "transformative", "seamless", "leverage", "holistic", "cutting-edge".
+CRITICAL — DO NOT FABRICATE (PART 6):
+- Never invent a specific "real" Indéva client, project, or testimonial and present it as fact.
+- Never claim a specific number of years of experience, a project count, or a client count unless it is a generic, unverifiable-as-false statement (e.g. avoid "15 years of experience" or "500+ projects completed").
+- Never invent exact measurements, lab statistics, or certification numbers.
+- If an example genuinely helps the reader, label it explicitly in the text as "HYPOTHETICAL EXAMPLE" or "ILLUSTRATIVE BUDGET" — do not present it as something that actually happened.
+- Use ₹ pricing only where pricing is genuinely relevant to the topic.
+
+VOICE: Lowercase brand name "indéva studio". Authoritative, warm, Indian market fluent. Grade 7-8 readability. No clichés like "delve", "in the realm of", "at the end of the day", "transformative", "seamless", "leverage", "holistic", "cutting-edge".
+
+TITLE RULES (PART 8): Write a natural, human-readable title. Do NOT keyword-stuff or repeat the same phrase with pipes (e.g. never "X | X | Best X"). The primary keyword's intent should be clear from the title, but it must read like something a person would actually title an article.
 
 OUTPUT EXACTLY THIS FORMAT (these labels are required):
 
-SEO_TITLE: [60-65 chars, keyword-first]
+SEO_TITLE: [60-65 chars, natural, keyword-relevant, NOT keyword-stuffed]
 META_DESC: [under 155 chars, with hook]
 SLUG: [hyphenated, max 8 words]
 CATEGORY: [pick one: spatial logic / design intelligence / india market / kitchen design / bedroom design / villa & farmhouse / hospitality design / materials / philosophy / process]
@@ -576,7 +1110,7 @@ CONTENT_SUMMARY: [1 sentence on the main argument]
 ---END---
 
 In the article body, naturally include:
-- ₹ figures from the ${budgetData.range} range
+- ₹ figures from the ${budgetData.range} range, only where pricing is genuinely relevant
 - "${cityData.area}, ${cityData.city}" mentioned at least once
 - This link: <a href="${internalLink1.url}">${internalLink1.text}</a>
 - This link: <a href="${internalLink2.url}">${internalLink2.text}</a>
@@ -584,7 +1118,7 @@ In the article body, naturally include:
 
 Output ONLY the labels and HTML. No preamble, no markdown fences, no commentary. Begin with "SEO_TITLE:".`;
 
-  console.log(`  ✍️  Generating [${angle.name}]: "${keyword}" (attempt ${attemptNum})`);
+  console.log(`  ✍️  Generating [${angle.name}]: "${entry.keyword}" (attempt ${attemptNum})`);
 
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
@@ -645,7 +1179,7 @@ Output ONLY the labels and HTML. No preamble, no markdown fences, no commentary.
 // ─────────────────────────────────────────────
 // PARSE RESPONSE
 // ─────────────────────────────────────────────
-function parseBlogResponse(raw, keyword, category, angle) {
+function parseBlogResponse(raw, entry, angle) {
   const titleMatch = raw.match(/SEO_TITLE:\s*(.+)/);
   const metaMatch = raw.match(/META_DESC:\s*(.+)/);
   const slugMatch = raw.match(/SLUG:\s*(.+)/);
@@ -690,12 +1224,49 @@ function parseBlogResponse(raw, keyword, category, angle) {
     title: titleMatch[1].trim(),
     meta: metaMatch ? metaMatch[1].trim() : "",
     slug: slugMatch[1].trim(),
-    cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[category] || "design intelligence"),
+    cat: catMatch ? catMatch[1].trim() : (CATEGORY_MAP[entry.category] || "design intelligence"),
     excerpt: excerptMatch ? excerptMatch[1].trim() : "",
     summary: summaryMatch ? summaryMatch[1].trim() : "",
     article: articleBody,
     angleId: angle.id,
   };
+}
+
+// ─────────────────────────────────────────────
+// QUALITY GATE (PART 14 / PART 15)
+// Runs AFTER parseBlogResponse succeeds. Anything that fails here causes a
+// SKIP (not a publish) — "the purpose of this system is organic SEO growth,
+// not simply producing 4 URLs every day."
+// ─────────────────────────────────────────────
+function validateBlog(parsed, entry, allKnownTitles, allKnownSlugs) {
+  const problems = [];
+
+  if (!parsed.title || parsed.title.length < 10) problems.push("title missing or too short");
+  if (!parsed.meta) problems.push("meta description missing");
+  if (!parsed.slug) problems.push("slug missing");
+  if (!parsed.article || parsed.article.length < 500) problems.push("article body too short");
+
+  const plainText = (parsed.article || "").replace(/<[^>]+>/g, " ");
+  const wordCount = plainText.split(/\s+/).filter(Boolean).length;
+  if (wordCount < 600) problems.push(`article too short (${wordCount} words, need 600+)`);
+
+  if (!isTitleUnique(parsed.title, allKnownTitles)) problems.push("duplicate/near-duplicate title");
+  if (allKnownSlugs.includes(parsed.slug)) problems.push("duplicate slug (will be auto-suffixed, not a hard fail)");
+
+  if (/lorem ipsum/i.test(plainText)) problems.push("contains placeholder lorem ipsum text");
+  if (/```/.test(parsed.article)) problems.push("contains markdown code fences");
+  if (/\[PLACEHOLDER|\[INSERT|\[TODO/i.test(parsed.article)) problems.push("contains placeholder brackets");
+
+  // Basic broken-internal-link check: any /#... or /delhi /gurgaon style hrefs
+  // should match a known INTERNAL_LINKS url.
+  const knownUrls = new Set(INTERNAL_LINKS.map(l => l.url));
+  const hrefs = [...parsed.article.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
+  const brokenInternal = hrefs.filter(h => h.startsWith("/") && !knownUrls.has(h));
+  if (brokenInternal.length > 0) problems.push(`possible broken internal link(s): ${brokenInternal.join(", ")}`);
+
+  // Hard failures only (duplicate slug is soft — handled by auto-suffix in main()).
+  const hardFailures = problems.filter(p => !p.startsWith("duplicate slug"));
+  return { ok: hardFailures.length === 0, problems };
 }
 
 function toSlug(text) {
@@ -971,11 +1542,11 @@ async function pingSearchEngines(newBlogs) {
 // MAIN ORCHESTRATOR
 // ─────────────────────────────────────────────
 async function main() {
-  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v8 (Groq + Unsplash)");
+  console.log("\n🌟 INDEVA STUDIO — BLOG ENGINE v9 (structured SEO content engine — Groq + Unsplash)");
   console.log("━".repeat(50));
   console.log(`📅 Date: ${new Date().toLocaleDateString("en-IN")}`);
   console.log(`🤖 Model: ${GROQ_MODEL}`);
-  console.log(`📝 Target: ${BLOGS_PER_DAY} blog(s) this run`);
+  console.log(`📝 Target: ${BLOGS_PER_DAY} slot(s) this run — ${DAILY_SLOTS.join(" / ")}`);
 
   if (!GROQ_API_KEY) {
     console.error("❌ GROQ_API_KEY not set. Get one at https://console.groq.com/keys");
@@ -984,7 +1555,7 @@ async function main() {
 
   // Load memory
   const memory = loadMemory();
-  console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.slugs.length} past slugs, ${memory.usedKeywords.length} used keywords`);
+  console.log(`📚 Memory: ${memory.titles.length} past titles, ${memory.slugs.length} past slugs, ${memory.usedKeywords.length} used keywords, ${(memory.canonicalGroups || []).length} canonical-group entries`);
   if (memory.titles.length > 0) {
     console.log(`   Last 3 titles: ${memory.titles.slice(-3).map(t => `"${t}"`).join(", ")}`);
   }
@@ -998,29 +1569,33 @@ async function main() {
   const insightsDir = path.join(REPO_ROOT, "insights");
   if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
 
-  // Select today's keywords and angles
+  // Select today's 4 slots and one intent-matched angle per slot
   const selections = selectDailyKeywords(memory);
-  const angles = selectAnglesForToday(memory);
+  const angles = selectAnglesForSelections(memory, selections);
 
-  console.log(`\n🎯 Selected ${selections.length} keywords for today:`);
-  selections.forEach((s, i) => console.log(`   ${i + 1}. [${s.category}] "${s.keyword}"`));
-  console.log(`🎨 Selected ${angles.length} angles: ${angles.map(a => a.id).join(", ")}`);
+  console.log(`\n🎯 Selected ${selections.length} slot(s) for today:`);
+  selections.forEach((s, i) => console.log(`   ${i + 1}. [${DAILY_SLOTS[i]}] "${s.keyword}" (${s.contentType}, ${s.location}) → angle: ${angles[i].id}`));
   console.log("");
 
-  // Rotate cities and budgets
   const dayIndex = Math.floor(Date.now() / 86400000);
   const publishedBlogs = [];
   const newTitles = [];
   const newKeywordsUsed = [];
   const newAnglesUsed = [];
+  const newCanonicalGroups = [];
+  const newTargetUrls = [];
+  const newContentTypes = [];
+  const newSearchIntents = [];
+  const newLocations = [];
+  const todayStr = new Date().toISOString().split("T")[0];
 
   for (let i = 0; i < selections.length; i++) {
-    const { keyword, category } = selections[i];
-    const angle = angles[i % angles.length];
-    const cityData = CITIES[(dayIndex + i) % CITIES.length];
+    const entry = selections[i];
+    const angle = angles[i];
+    const cityData = LOCALITY_DATA[entry.location] || { city: entry.location, area: entry.location, property: "home" };
     const budgetData = BUDGETS[(dayIndex + i * 2) % BUDGETS.length];
 
-    console.log(`\n[${i + 1}/${selections.length}] "${keyword}" → [${angle.name}]`);
+    console.log(`\n[${i + 1}/${selections.length}] "${entry.keyword}" → [${angle.name}]`);
 
     let blogData = null;
     let attempts = 0;
@@ -1029,31 +1604,33 @@ async function main() {
     while (attempts < maxAttempts) {
       attempts++;
       try {
-        const raw = await generateBlog(keyword, category, angle, cityData, budgetData, attempts);
-        const parsed = parseBlogResponse(raw, keyword, category, angle);
+        const raw = await generateBlog(entry, angle, cityData, budgetData, attempts);
+        const parsed = parseBlogResponse(raw, entry, angle);
 
-        // TITLE UNIQUENESS CHECK
+        // QUALITY GATE (PART 14) — title uniqueness is one of several checks.
         const allKnownTitles = [...memory.titles, ...newTitles];
-        if (!isTitleUnique(parsed.title, allKnownTitles)) {
-          console.log(`  ⚠️  Title not unique — regenerating (attempt ${attempts})`);
+        const allKnownSlugs = [...memory.slugs, ...publishedBlogs.map(b => b.slug)];
+        const { ok, problems } = validateBlog(parsed, entry, allKnownTitles, allKnownSlugs);
+
+        if (!ok) {
+          console.log(`  ⚠️  Quality gate failed (attempt ${attempts}): ${problems.join("; ")}`);
           if (attempts < maxAttempts) {
             await new Promise(r => setTimeout(r, 2000));
             continue;
           } else {
-            // Force unique by appending angle to title
-            parsed.title = `${parsed.title} — ${angle.name}`;
-            parsed.slug = toSlug(parsed.title);
+            console.error(`  ❌ Quality gate still failing after ${maxAttempts} attempts — SKIPPING (PART 15: no bad content published)`);
+            break;
           }
         }
 
-        // SLUG UNIQUENESS CHECK — memory AND filesystem (protects if memory.json resets)
+        // SLUG UNIQUENESS — memory AND filesystem (protects if memory.json resets)
         const slugDir = path.join(REPO_ROOT, "insights", parsed.slug);
         if (memory.slugs.includes(parsed.slug) || fs.existsSync(path.join(slugDir, "index.html"))) {
           parsed.slug = `${parsed.slug}-${angle.id}`;
         }
 
         blogData = parsed;
-        blogData.keyword = keyword;
+        blogData.keyword = entry.keyword;
         break;
 
       } catch (err) {
@@ -1070,13 +1647,19 @@ async function main() {
     }
 
     if (!blogData) {
-      console.error(`  ❌ All ${maxAttempts} attempts failed for "${keyword}" — skipping`);
+      // PART 13: a failed/skipped slot does NOT mark the keyword as used —
+      // we only push into newKeywordsUsed etc. further below, on success.
+      console.error(`  ❌ All ${maxAttempts} attempts failed or were rejected by the quality gate for "${entry.keyword}" — skipping`);
       console.error(`     If this happens repeatedly, check: 1) GROQ_API_KEY valid, 2) dedup not too strict, 3) rate limit hit`);
+      // Still sleep before the next slot so we don't burn the whole run's TPM budget on retries.
+      if (i < selections.length - 1) {
+        await new Promise(r => setTimeout(r, INTER_BLOG_DELAY_MS));
+      }
       continue;
     }
 
     // Resolve a topic-relevant image (Unsplash if key set, else fallback)
-    const image = await resolveBlogImage(category, blogData.slug);
+    const image = await resolveBlogImage(entry.category, blogData.slug, entry.niche);
     blogData.image = image;
 
     // Save file
@@ -1088,8 +1671,13 @@ async function main() {
     console.log(`  ✅ Saved: insights/${blogData.slug}/index.html`);
     publishedBlogs.push(blogData);
     newTitles.push(blogData.title);
-    newKeywordsUsed.push(keyword);
+    newKeywordsUsed.push(entry.keyword);
     newAnglesUsed.push(angle.id);
+    newCanonicalGroups.push(entry.canonicalGroup);
+    newTargetUrls.push(entry.targetUrl);
+    newContentTypes.push(entry.contentType);
+    newSearchIntents.push(entry.intent);
+    newLocations.push(entry.location);
 
     if (i < selections.length - 1) {
       console.log(`  ⏳ Sleeping ${INTER_BLOG_DELAY_MS / 1000}s to stay under Groq's TPM cap...`);
@@ -1097,12 +1685,19 @@ async function main() {
     }
   }
 
-  // Update memory
+  // Update memory (PART 11 — extended, backward-compatible fields)
   memory.titles.push(...newTitles);
   memory.slugs.push(...publishedBlogs.map(b => b.slug));
   memory.usedKeywords.push(...newKeywordsUsed);
   memory.summaries.push(...publishedBlogs.map(b => b.summary || ""));
   memory.lastAngles.push(...newAnglesUsed);
+  memory.canonicalGroups.push(...newCanonicalGroups);
+  memory.targetUrls.push(...newTargetUrls);
+  memory.contentTypes.push(...newContentTypes);
+  memory.searchIntents.push(...newSearchIntents);
+  memory.lastLocations.push(...newLocations);
+  memory.lastUsedDate = memory.lastUsedDate || {};
+  for (const cg of newCanonicalGroups) memory.lastUsedDate[cg] = todayStr;
   saveMemory(memory);
 
   if (publishedBlogs.length > 0) {
