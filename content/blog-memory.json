@@ -203,7 +203,11 @@
     "Avoiding Costly Mistakes in Vasant Vihar Home Design",
     "Decoding Luxury Villa Interior Costs in Gurgaon",
     "Renovating Your Home in Delhi NCR",
-    "Choosing the Right Flooring for Indian Homes"
+    "Choosing the Right Flooring for Indian Homes",
+    "villa interior cost guide for south delhi homes",
+    "Designing Your Dream Luxury Penthouse in Gurgaon",
+    "Avoiding Common Pitfalls in Luxury Furniture Delhi Projects",
+    "Understanding Custom Furniture Construction"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -409,7 +413,11 @@
     "mistakes-in-vasant-vihar-home-design",
     "gurgaon-villa-interior-design-cost-guide",
     "renovating-home-in-delhi-ncr",
-    "flooring-material-comparison"
+    "flooring-material-comparison",
+    "villa-interior-cost-guide-south-delhi",
+    "luxury-penthouse-interior-design-gurgaon",
+    "common-mistakes-in-luxury-furniture-delhi",
+    "custom-furniture-construction-guide"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -615,7 +623,11 @@
     "residential interior designer Vasant Vihar",
     "villa interior designer Golf Course Road",
     "interior renovation company Delhi",
-    "best flooring material for Indian homes"
+    "best flooring material for Indian homes",
+    "villa interior cost South Delhi",
+    "luxury penthouse interior designer Gurgaon",
+    "luxury furniture Delhi",
+    "how custom furniture is made"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -821,7 +833,11 @@
     "This article highlights the common mistakes to avoid when working with a residential interior designer Vasant Vihar, ensuring a successful and stress-free design process.",
     "This article provides a comprehensive guide to understanding the costs associated with luxury villa interior design in Gurgaon, helping readers make informed decisions about their design projects.",
     "This article provides a practical step-by-step guide for homeowners in Delhi NCR to renovate their homes, covering key aspects such as planning, design, and execution.",
-    "This article provides a technical comparison of different flooring materials to help homeowners make an informed decision."
+    "This article provides a technical comparison of different flooring materials to help homeowners make an informed decision.",
+    "this article provides a comprehensive cost guide for villa interior design in south delhi, helping homeowners make informed decisions about their budget and design choices.",
+    "This article guides you through the step-by-step process of designing a luxury penthouse interior in Gurgaon, from planning to execution, with a focus on creating a stunning and functional space within a budget of ₹25-50 lakh.",
+    "This article highlights the most common mistakes to avoid when investing in luxury furniture for your home in Delhi NCR, providing valuable insights and practical advice to help you make informed decisions.",
+    "This article provides a technical comparison of different materials used in custom furniture construction, helping readers make informed decisions for their Delhi NCR interior design projects."
   ],
   "lastAngles": [
     "step-by-step",
@@ -847,27 +863,47 @@
     "mistakes-avoid",
     "cost-guide",
     "step-by-step",
+    "material-comparison",
+    "cost-guide",
+    "step-by-step",
+    "mistakes-avoid",
     "material-comparison"
   ],
   "canonicalGroups": [
     "locality-vasant-vihar",
     "locality-golf-course-road",
     "turnkey-interior-execution-delhi-ncr",
-    "interior-flooring-material-guide"
+    "interior-flooring-material-guide",
+    "south-delhi-villa-interior-designer",
+    "gurgaon-penthouse-interior-designer",
+    "custom-furniture-delhi-ncr",
+    "custom-furniture-construction-guide"
   ],
   "targetUrls": [
     "/delhi",
     "/gurgaon",
     "/#about",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/#services",
     "/#services"
   ],
   "contentTypes": [
     "LOCATION_PAGE",
     "LOCATION_PAGE",
     "BLOG",
+    "BLOG",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
     "BLOG"
   ],
   "searchIntents": [
+    "commercial",
+    "commercial",
+    "commercial",
+    "technical",
     "commercial",
     "commercial",
     "commercial",
@@ -877,11 +913,19 @@
     "locality-vasant-vihar": "2026-08-11",
     "locality-golf-course-road": "2026-08-11",
     "turnkey-interior-execution-delhi-ncr": "2026-08-11",
-    "interior-flooring-material-guide": "2026-08-11"
+    "interior-flooring-material-guide": "2026-08-11",
+    "south-delhi-villa-interior-designer": "2026-08-12",
+    "gurgaon-penthouse-interior-designer": "2026-08-12",
+    "custom-furniture-delhi-ncr": "2026-08-12",
+    "custom-furniture-construction-guide": "2026-08-12"
   },
   "lastLocations": [
     "Vasant Vihar",
     "Golf Course Road",
+    "Delhi NCR",
+    "Delhi NCR",
+    "South Delhi",
+    "Gurgaon",
     "Delhi NCR",
     "Delhi NCR"
   ]
