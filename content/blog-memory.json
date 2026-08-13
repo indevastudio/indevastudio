@@ -211,7 +211,11 @@
     "Cost Guide to Luxury Home Interior Design",
     "Planning Your Dream Home in Gurgaon",
     "Avoiding Costly Mistakes in Luxury Furniture Design",
-    "Understanding carcass construction explained"
+    "Understanding carcass construction explained",
+    "Decoding Luxury Interior Design Costs in Delhi",
+    "Avoiding Costly Mistakes in Villa Renovation",
+    "Designing Your Dream Villa in South Delhi",
+    "Understanding Interior Design BOQ for Your Home"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -425,7 +429,11 @@
     "luxury-home-interior-design-cost-guide",
     "planning-luxury-apartment-gurgaon",
     "luxury-furniture-design-mistakes",
-    "carcass-construction-material-comparison"
+    "carcass-construction-material-comparison",
+    "luxury-interior-design-costs-delhi",
+    "avoiding-villa-renovation-mistakes",
+    "villa-furniture-design-south-delhi",
+    "reading-interior-design-boq"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -639,7 +647,11 @@
     "home interior designer Maharani Bagh",
     "interior design cost Gurgaon",
     "custom furniture manufacturer Delhi",
-    "carcass construction explained"
+    "carcass construction explained",
+    "interior designer Panchsheel Park",
+    "villa renovation Gurgaon",
+    "villa furniture design South Delhi",
+    "how to read an interior design BOQ"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -853,7 +865,11 @@
     "This article provides a comprehensive cost guide to luxury home interior design, helping readers understand the factors that drive costs and how to budget for their projects.",
     "This article provides a step-by-step process to help you plan your luxury apartment in Gurgaon, including managing the interior design cost and avoiding common pitfalls.",
     "This article highlights the most common mistakes to avoid when designing your home in Delhi NCR, with a focus on luxury furniture design and budgeting.",
-    "This article provides a technical comparison of different materials used in carcass construction, highlighting their properties, cost, durability, and suitability for various projects."
+    "This article provides a technical comparison of different materials used in carcass construction, highlighting their properties, cost, durability, and suitability for various projects.",
+    "This article provides a comprehensive cost guide for luxury interior design in Delhi, covering common misconceptions, cost drivers, and budget breakdowns to help you plan your project.",
+    "This article highlights common mistakes to avoid when renovating a villa, ensuring a successful and stress-free project.",
+    "This article provides a step-by-step guide on how to design your luxury villa in South Delhi, including tips on what to do, what to ask your designer, and common pitfalls to avoid.",
+    "This article provides a technical guide to understanding interior design BOQ, focusing on material properties, cost differences, and durability to help you make informed decisions for your home in Delhi NCR."
   ],
   "lastAngles": [
     "step-by-step",
@@ -887,6 +903,10 @@
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
+    "material-comparison",
+    "cost-guide",
+    "mistakes-avoid",
+    "step-by-step",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -901,7 +921,11 @@
     "locality-maharani-bagh",
     "gurgaon-interior-cost-guide",
     "custom-furniture-delhi-ncr",
-    "custom-furniture-construction-guide"
+    "custom-furniture-construction-guide",
+    "locality-panchsheel-park",
+    "gurgaon-villa-interior-designer",
+    "south-delhi-villa-interior-designer",
+    "interior-boq-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -915,6 +939,10 @@
     "/delhi",
     "/gurgaon",
     "/#services",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services"
   ],
   "contentTypes": [
@@ -929,9 +957,17 @@
     "LOCATION_PAGE",
     "BLOG",
     "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
+    "commercial",
+    "commercial",
+    "commercial",
+    "technical",
     "commercial",
     "commercial",
     "commercial",
@@ -950,12 +986,15 @@
     "locality-golf-course-road": "2026-08-11",
     "turnkey-interior-execution-delhi-ncr": "2026-08-11",
     "interior-flooring-material-guide": "2026-08-11",
-    "south-delhi-villa-interior-designer": "2026-08-12",
+    "south-delhi-villa-interior-designer": "2026-08-13",
     "gurgaon-penthouse-interior-designer": "2026-08-12",
     "custom-furniture-delhi-ncr": "2026-08-12",
     "custom-furniture-construction-guide": "2026-08-12",
     "locality-maharani-bagh": "2026-08-12",
-    "gurgaon-interior-cost-guide": "2026-08-12"
+    "gurgaon-interior-cost-guide": "2026-08-12",
+    "locality-panchsheel-park": "2026-08-13",
+    "gurgaon-villa-interior-designer": "2026-08-13",
+    "interior-boq-guide": "2026-08-13"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -969,6 +1008,10 @@
     "Maharani Bagh",
     "Gurgaon",
     "Delhi NCR",
+    "Delhi NCR",
+    "Panchsheel Park",
+    "Gurgaon",
+    "South Delhi",
     "Delhi NCR"
   ]
 }
