@@ -215,7 +215,10 @@
     "Decoding Luxury Interior Design Costs in Delhi",
     "Avoiding Costly Mistakes in Villa Renovation",
     "Designing Your Dream Villa in South Delhi",
-    "Understanding Interior Design BOQ for Your Home"
+    "Understanding Interior Design BOQ for Your Home",
+    "Decoding Home Interior Costs in Defence Colony",
+    "Avoiding Costly Mistakes in Farmhouse Interior Design",
+    "Understanding Interior BOQ vs Quotation"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -433,7 +436,10 @@
     "luxury-interior-design-costs-delhi",
     "avoiding-villa-renovation-mistakes",
     "villa-furniture-design-south-delhi",
-    "reading-interior-design-boq"
+    "reading-interior-design-boq",
+    "home-interior-design-costs-defence-colony",
+    "avoiding-mistakes-in-farmhouse-interior-design",
+    "interior-design-boq-quotation"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -651,7 +657,10 @@
     "interior designer Panchsheel Park",
     "villa renovation Gurgaon",
     "villa furniture design South Delhi",
-    "how to read an interior design BOQ"
+    "how to read an interior design BOQ",
+    "home interior designer Defence Colony",
+    "farmhouse interior design Gurgaon",
+    "interior BOQ vs quotation"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -869,7 +878,10 @@
     "This article provides a comprehensive cost guide for luxury interior design in Delhi, covering common misconceptions, cost drivers, and budget breakdowns to help you plan your project.",
     "This article highlights common mistakes to avoid when renovating a villa, ensuring a successful and stress-free project.",
     "This article provides a step-by-step guide on how to design your luxury villa in South Delhi, including tips on what to do, what to ask your designer, and common pitfalls to avoid.",
-    "This article provides a technical guide to understanding interior design BOQ, focusing on material properties, cost differences, and durability to help you make informed decisions for your home in Delhi NCR."
+    "This article provides a technical guide to understanding interior design BOQ, focusing on material properties, cost differences, and durability to help you make informed decisions for your home in Delhi NCR.",
+    "This article provides a comprehensive guide to estimating home interior design costs in Defence Colony, Delhi, helping homeowners create a realistic budget for their projects.",
+    "This article highlights common mistakes to avoid when designing a farmhouse interior in Gurgaon, providing valuable insights and expert advice to help you create your dream space.",
+    "This article provides a technical comparison of interior BOQ and quotation, focusing on material properties, cost difference, and durability."
   ],
   "lastAngles": [
     "step-by-step",
@@ -907,6 +919,9 @@
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
+    "material-comparison",
+    "cost-guide",
+    "mistakes-avoid",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -925,6 +940,9 @@
     "locality-panchsheel-park",
     "gurgaon-villa-interior-designer",
     "south-delhi-villa-interior-designer",
+    "interior-boq-guide",
+    "locality-defence-colony",
+    "gurgaon-farmhouse-interior-designer",
     "interior-boq-guide"
   ],
   "targetUrls": [
@@ -943,6 +961,9 @@
     "/delhi",
     "/gurgaon",
     "/delhi",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
     "/#services"
   ],
   "contentTypes": [
@@ -960,6 +981,9 @@
     "BLOG",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
     "SERVICE_PAGE",
     "BLOG"
   ],
@@ -979,6 +1003,9 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -994,7 +1021,9 @@
     "gurgaon-interior-cost-guide": "2026-08-12",
     "locality-panchsheel-park": "2026-08-13",
     "gurgaon-villa-interior-designer": "2026-08-13",
-    "interior-boq-guide": "2026-08-13"
+    "interior-boq-guide": "2026-08-13",
+    "locality-defence-colony": "2026-08-13",
+    "gurgaon-farmhouse-interior-designer": "2026-08-13"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1012,6 +1041,9 @@
     "Panchsheel Park",
     "Gurgaon",
     "South Delhi",
+    "Delhi NCR",
+    "Defence Colony",
+    "Gurgaon",
     "Delhi NCR"
   ]
 }
