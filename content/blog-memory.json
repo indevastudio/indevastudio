@@ -218,7 +218,9 @@
     "Understanding Interior Design BOQ for Your Home",
     "Decoding Home Interior Costs in Defence Colony",
     "Avoiding Costly Mistakes in Farmhouse Interior Design",
-    "Understanding Interior BOQ vs Quotation"
+    "Understanding Interior BOQ vs Quotation",
+    "Finding the Right Residential Interior Designer",
+    "Understanding Interior Execution Timeline India"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -439,7 +441,9 @@
     "reading-interior-design-boq",
     "home-interior-design-costs-defence-colony",
     "avoiding-mistakes-in-farmhouse-interior-design",
-    "interior-design-boq-quotation"
+    "interior-design-boq-quotation",
+    "residential-interior-designer-friends-colony",
+    "interior-execution-timeline-india"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -660,7 +664,9 @@
     "how to read an interior design BOQ",
     "home interior designer Defence Colony",
     "farmhouse interior design Gurgaon",
-    "interior BOQ vs quotation"
+    "interior BOQ vs quotation",
+    "residential interior designer Friends Colony",
+    "interior execution timeline India"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -881,10 +887,11 @@
     "This article provides a technical guide to understanding interior design BOQ, focusing on material properties, cost differences, and durability to help you make informed decisions for your home in Delhi NCR.",
     "This article provides a comprehensive guide to estimating home interior design costs in Defence Colony, Delhi, helping homeowners create a realistic budget for their projects.",
     "This article highlights common mistakes to avoid when designing a farmhouse interior in Gurgaon, providing valuable insights and expert advice to help you create your dream space.",
-    "This article provides a technical comparison of interior BOQ and quotation, focusing on material properties, cost difference, and durability."
+    "This article provides a technical comparison of interior BOQ and quotation, focusing on material properties, cost difference, and durability.",
+    "This article guides homeowners in Friends Colony, Delhi through the step-by-step process of finding and working with a reliable residential interior designer to bring their dream home to life.",
+    "This article provides a technical guide to comparing materials and specifications for interior design projects in Delhi NCR, focusing on factors such as material properties, cost, and durability."
   ],
   "lastAngles": [
-    "step-by-step",
     "cost-guide",
     "case-study",
     "design-ideas",
@@ -922,6 +929,8 @@
     "material-comparison",
     "cost-guide",
     "mistakes-avoid",
+    "material-comparison",
+    "step-by-step",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -943,7 +952,9 @@
     "interior-boq-guide",
     "locality-defence-colony",
     "gurgaon-farmhouse-interior-designer",
-    "interior-boq-guide"
+    "interior-boq-guide",
+    "locality-friends-colony",
+    "interior-execution-process-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -964,7 +975,9 @@
     "/#services",
     "/delhi",
     "/gurgaon",
-    "/#services"
+    "/#services",
+    "/delhi",
+    "/#about"
   ],
   "contentTypes": [
     "LOCATION_PAGE",
@@ -985,6 +998,8 @@
     "BLOG",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1006,6 +1021,8 @@
     "technical",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1023,7 +1040,9 @@
     "gurgaon-villa-interior-designer": "2026-08-13",
     "interior-boq-guide": "2026-08-13",
     "locality-defence-colony": "2026-08-13",
-    "gurgaon-farmhouse-interior-designer": "2026-08-13"
+    "gurgaon-farmhouse-interior-designer": "2026-08-13",
+    "locality-friends-colony": "2026-08-14",
+    "interior-execution-process-guide": "2026-08-14"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1044,6 +1063,8 @@
     "Delhi NCR",
     "Defence Colony",
     "Gurgaon",
+    "Delhi NCR",
+    "Friends Colony",
     "Delhi NCR"
   ]
 }
