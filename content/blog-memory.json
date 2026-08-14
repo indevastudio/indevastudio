@@ -220,7 +220,11 @@
     "Avoiding Costly Mistakes in Farmhouse Interior Design",
     "Understanding Interior BOQ vs Quotation",
     "Finding the Right Residential Interior Designer",
-    "Understanding Interior Execution Timeline India"
+    "Understanding Interior Execution Timeline India",
+    "Decoding the Costs of Luxury Farmhouse Interior Design",
+    "Avoiding Costly Mistakes in Villa Interior Design",
+    "Finding the Right Farmhouse Interior Designer",
+    "Supervising Material Execution in Delhi NCR Homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -443,7 +447,11 @@
     "avoiding-mistakes-in-farmhouse-interior-design",
     "interior-design-boq-quotation",
     "residential-interior-designer-friends-colony",
-    "interior-execution-timeline-india"
+    "interior-execution-timeline-india",
+    "farmhouse-interior-design-cost-guide",
+    "avoiding-costly-mistakes-in-villa-interior-design",
+    "gurgaon-farmhouse-interior-design-process",
+    "material-execution-supervision"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -666,7 +674,11 @@
     "farmhouse interior design Gurgaon",
     "interior BOQ vs quotation",
     "residential interior designer Friends Colony",
-    "interior execution timeline India"
+    "interior execution timeline India",
+    "farmhouse interior design Sainik Farms",
+    "villa interior designer Golf Course Extension Road",
+    "farmhouse interior designer Gurgaon",
+    "site supervision during interior execution"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -889,13 +901,13 @@
     "This article highlights common mistakes to avoid when designing a farmhouse interior in Gurgaon, providing valuable insights and expert advice to help you create your dream space.",
     "This article provides a technical comparison of interior BOQ and quotation, focusing on material properties, cost difference, and durability.",
     "This article guides homeowners in Friends Colony, Delhi through the step-by-step process of finding and working with a reliable residential interior designer to bring their dream home to life.",
-    "This article provides a technical guide to comparing materials and specifications for interior design projects in Delhi NCR, focusing on factors such as material properties, cost, and durability."
+    "This article provides a technical guide to comparing materials and specifications for interior design projects in Delhi NCR, focusing on factors such as material properties, cost, and durability.",
+    "This article provides a comprehensive guide to understanding the costs of luxury farmhouse interior design in India, helping you make informed decisions for your dream home.",
+    "This article highlights common mistakes to avoid in villa interior design, providing valuable insights and practical advice for homeowners in Gurgaon.",
+    "This article guides readers through a step-by-step process to find the right farmhouse interior designer for their luxury apartment in Gurgaon, covering key considerations and potential pitfalls.",
+    "This article compares different material options for home construction in Delhi NCR, focusing on their properties, costs, and durability to help homeowners make informed decisions during site supervision."
   ],
   "lastAngles": [
-    "cost-guide",
-    "case-study",
-    "design-ideas",
-    "cost-guide",
     "case-study",
     "step-by-step",
     "case-study",
@@ -930,6 +942,10 @@
     "cost-guide",
     "mistakes-avoid",
     "material-comparison",
+    "step-by-step",
+    "material-comparison",
+    "cost-guide",
+    "mistakes-avoid",
     "step-by-step",
     "material-comparison"
   ],
@@ -954,6 +970,10 @@
     "gurgaon-farmhouse-interior-designer",
     "interior-boq-guide",
     "locality-friends-colony",
+    "interior-execution-process-guide",
+    "south-delhi-farmhouse-interior-designer",
+    "locality-golf-course-extension-road",
+    "gurgaon-farmhouse-interior-designer",
     "interior-execution-process-guide"
   ],
   "targetUrls": [
@@ -977,6 +997,10 @@
     "/gurgaon",
     "/#services",
     "/delhi",
+    "/#about",
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon",
     "/#about"
   ],
   "contentTypes": [
@@ -1000,6 +1024,10 @@
     "SERVICE_PAGE",
     "BLOG",
     "LOCATION_PAGE",
+    "BLOG",
+    "SERVICE_PAGE",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1023,6 +1051,10 @@
     "commercial",
     "technical",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1040,9 +1072,11 @@
     "gurgaon-villa-interior-designer": "2026-08-13",
     "interior-boq-guide": "2026-08-13",
     "locality-defence-colony": "2026-08-13",
-    "gurgaon-farmhouse-interior-designer": "2026-08-13",
+    "gurgaon-farmhouse-interior-designer": "2026-08-14",
     "locality-friends-colony": "2026-08-14",
-    "interior-execution-process-guide": "2026-08-14"
+    "interior-execution-process-guide": "2026-08-14",
+    "south-delhi-farmhouse-interior-designer": "2026-08-14",
+    "locality-golf-course-extension-road": "2026-08-14"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1065,6 +1099,10 @@
     "Gurgaon",
     "Delhi NCR",
     "Friends Colony",
+    "Delhi NCR",
+    "South Delhi",
+    "Golf Course Extension Road",
+    "Gurgaon",
     "Delhi NCR"
   ]
 }
