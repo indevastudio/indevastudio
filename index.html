@@ -8921,6 +8921,17 @@ function showPageMob(id) {
   document.body.style.overflow='';
   window.scrollTo(0,0);
 }
+function downloadProcessPDF() {
+  try { gtag('event', 'pdf_download', { event_category: 'Process' }); } catch(e) {}
+  var a = document.createElement('a');
+  a.href = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/indeva-studio-process.pdf';
+  a.download = 'Indeva-Studio-Process.pdf';
+  a.target = '_blank';
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 
 </script>
 
