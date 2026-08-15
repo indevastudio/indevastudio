@@ -224,7 +224,11 @@
     "Decoding the Costs of Luxury Farmhouse Interior Design",
     "Avoiding Costly Mistakes in Villa Interior Design",
     "Finding the Right Farmhouse Interior Designer",
-    "Supervising Material Execution in Delhi NCR Homes"
+    "Supervising Material Execution in Delhi NCR Homes",
+    "Decoding Luxury Interior Design Costs in Hauz Khas",
+    "Finding the Right villa interior designer DLF Gurgaon",
+    "Avoiding Costly Mistakes in Luxury Apartment Design",
+    "Choosing the Right Plywood for Your Wardrobe"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -451,7 +455,11 @@
     "farmhouse-interior-design-cost-guide",
     "avoiding-costly-mistakes-in-villa-interior-design",
     "gurgaon-farmhouse-interior-design-process",
-    "material-execution-supervision"
+    "material-execution-supervision",
+    "hauz-khas-interior-design-cost-guide",
+    "luxury-villa-interior-design-gurgaon",
+    "avoiding-mistakes-in-luxury-apartment-design",
+    "plywood-for-wardrobe-material-comparison"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -678,7 +686,11 @@
     "farmhouse interior design Sainik Farms",
     "villa interior designer Golf Course Extension Road",
     "farmhouse interior designer Gurgaon",
-    "site supervision during interior execution"
+    "site supervision during interior execution",
+    "interior designer Hauz Khas",
+    "villa interior designer DLF Gurgaon",
+    "penthouse interior designer Gurgaon",
+    "best plywood for wardrobe"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -905,13 +917,13 @@
     "This article provides a comprehensive guide to understanding the costs of luxury farmhouse interior design in India, helping you make informed decisions for your dream home.",
     "This article highlights common mistakes to avoid in villa interior design, providing valuable insights and practical advice for homeowners in Gurgaon.",
     "This article guides readers through a step-by-step process to find the right farmhouse interior designer for their luxury apartment in Gurgaon, covering key considerations and potential pitfalls.",
-    "This article compares different material options for home construction in Delhi NCR, focusing on their properties, costs, and durability to help homeowners make informed decisions during site supervision."
+    "This article compares different material options for home construction in Delhi NCR, focusing on their properties, costs, and durability to help homeowners make informed decisions during site supervision.",
+    "This article provides a comprehensive cost guide for luxury interior design projects in Hauz Khas, Delhi, helping readers make informed decisions about their budget.",
+    "This article provides a practical guide to finding the right villa interior designer in Gurgaon, walking readers through a step-by-step process to ensure their luxury apartment design meets their needs and budget.",
+    "This article highlights the common mistakes to avoid when designing a luxury apartment in Gurgaon, to ensure a successful and stress-free project.",
+    "This article provides a technical comparison of different plywood materials for wardrobe construction, highlighting their properties, costs, and suitability for various applications."
   ],
   "lastAngles": [
-    "case-study",
-    "step-by-step",
-    "case-study",
-    "mistakes-avoid",
     "design-ideas",
     "case-study",
     "step-by-step",
@@ -947,6 +959,10 @@
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
+    "material-comparison",
+    "cost-guide",
+    "step-by-step",
+    "mistakes-avoid",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -974,7 +990,11 @@
     "south-delhi-farmhouse-interior-designer",
     "locality-golf-course-extension-road",
     "gurgaon-farmhouse-interior-designer",
-    "interior-execution-process-guide"
+    "interior-execution-process-guide",
+    "locality-hauz-khas",
+    "locality-dlf-gurgaon",
+    "gurgaon-penthouse-interior-designer",
+    "plywood-material-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -1001,7 +1021,11 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
-    "/#about"
+    "/#about",
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon",
+    "/#services"
   ],
   "contentTypes": [
     "LOCATION_PAGE",
@@ -1026,6 +1050,10 @@
     "LOCATION_PAGE",
     "BLOG",
     "SERVICE_PAGE",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "BLOG"
@@ -1055,6 +1083,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1063,7 +1095,7 @@
     "turnkey-interior-execution-delhi-ncr": "2026-08-11",
     "interior-flooring-material-guide": "2026-08-11",
     "south-delhi-villa-interior-designer": "2026-08-13",
-    "gurgaon-penthouse-interior-designer": "2026-08-12",
+    "gurgaon-penthouse-interior-designer": "2026-08-15",
     "custom-furniture-delhi-ncr": "2026-08-12",
     "custom-furniture-construction-guide": "2026-08-12",
     "locality-maharani-bagh": "2026-08-12",
@@ -1076,7 +1108,10 @@
     "locality-friends-colony": "2026-08-14",
     "interior-execution-process-guide": "2026-08-14",
     "south-delhi-farmhouse-interior-designer": "2026-08-14",
-    "locality-golf-course-extension-road": "2026-08-14"
+    "locality-golf-course-extension-road": "2026-08-14",
+    "locality-hauz-khas": "2026-08-15",
+    "locality-dlf-gurgaon": "2026-08-15",
+    "plywood-material-guide": "2026-08-15"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1102,6 +1137,10 @@
     "Delhi NCR",
     "South Delhi",
     "Golf Course Extension Road",
+    "Gurgaon",
+    "Delhi NCR",
+    "Hauz Khas",
+    "DLF Gurgaon",
     "Gurgaon",
     "Delhi NCR"
   ]
