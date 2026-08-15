@@ -228,7 +228,11 @@
     "Decoding Luxury Interior Design Costs in Hauz Khas",
     "Finding the Right villa interior designer DLF Gurgaon",
     "Avoiding Costly Mistakes in Luxury Apartment Design",
-    "Choosing the Right Plywood for Your Wardrobe"
+    "Choosing the Right Plywood for Your Wardrobe",
+    "Budgeting for Interior Design in South Delhi",
+    "Finding the Right interior designer Sohna Road for Your Farmhouse",
+    "Avoiding Costly Mistakes in Penthouse Interior Design",
+    "Choosing the Right Plywood for Your Kitchen"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -459,7 +463,11 @@
     "hauz-khas-interior-design-cost-guide",
     "luxury-villa-interior-design-gurgaon",
     "avoiding-mistakes-in-luxury-apartment-design",
-    "plywood-for-wardrobe-material-comparison"
+    "plywood-for-wardrobe-material-comparison",
+    "south-delhi-interior-design-cost-guide",
+    "sohna-road-interior-designer",
+    "penthouse-interior-design-mistakes",
+    "plywood-for-kitchen-comparison"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -690,7 +698,11 @@
     "interior designer Hauz Khas",
     "villa interior designer DLF Gurgaon",
     "penthouse interior designer Gurgaon",
-    "best plywood for wardrobe"
+    "best plywood for wardrobe",
+    "interior designer cost South Delhi",
+    "interior designer Sohna Road",
+    "penthouse interior cost Gurgaon",
+    "BWP plywood for kitchen"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -921,14 +933,14 @@
     "This article provides a comprehensive cost guide for luxury interior design projects in Hauz Khas, Delhi, helping readers make informed decisions about their budget.",
     "This article provides a practical guide to finding the right villa interior designer in Gurgaon, walking readers through a step-by-step process to ensure their luxury apartment design meets their needs and budget.",
     "This article highlights the common mistakes to avoid when designing a luxury apartment in Gurgaon, to ensure a successful and stress-free project.",
-    "This article provides a technical comparison of different plywood materials for wardrobe construction, highlighting their properties, costs, and suitability for various applications."
+    "This article provides a technical comparison of different plywood materials for wardrobe construction, highlighting their properties, costs, and suitability for various applications.",
+    "This article provides a comprehensive guide to budgeting for interior design projects in South Delhi, covering common misconceptions, cost drivers, and negotiation strategies.",
+    "This article provides a step-by-step guide on how to find the right interior designer for your farmhouse in Sohna Road, Gurgaon, with a budget of ₹1–3 crore.",
+    "This article highlights the common mistakes to avoid when designing a luxury penthouse in Gurgaon, providing valuable insights and expert advice to ensure a successful and stylish design.",
+    "This article provides a technical comparison of different types of plywood, including BWP plywood for kitchen, to help homeowners make an informed decision for their kitchen design."
   ],
   "lastAngles": [
     "design-ideas",
-    "case-study",
-    "step-by-step",
-    "case-study",
-    "design-ideas",
     "step-by-step",
     "cost-guide",
     "mistakes-avoid",
@@ -959,6 +971,10 @@
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
+    "material-comparison",
+    "cost-guide",
+    "step-by-step",
+    "mistakes-avoid",
     "material-comparison",
     "cost-guide",
     "step-by-step",
@@ -994,6 +1010,10 @@
     "locality-hauz-khas",
     "locality-dlf-gurgaon",
     "gurgaon-penthouse-interior-designer",
+    "plywood-material-guide",
+    "south-delhi-interior-cost-guide",
+    "locality-sohna-road",
+    "gurgaon-penthouse-interior-designer",
     "plywood-material-guide"
   ],
   "targetUrls": [
@@ -1022,6 +1042,10 @@
     "/gurgaon",
     "/gurgaon",
     "/#about",
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon",
+    "/#services",
     "/delhi",
     "/gurgaon",
     "/gurgaon",
@@ -1056,6 +1080,10 @@
     "LOCATION_PAGE",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1078,6 +1106,10 @@
     "commercial",
     "commercial",
     "technical",
+    "commercial",
+    "technical",
+    "commercial",
+    "commercial",
     "commercial",
     "technical",
     "commercial",
@@ -1111,7 +1143,9 @@
     "locality-golf-course-extension-road": "2026-08-14",
     "locality-hauz-khas": "2026-08-15",
     "locality-dlf-gurgaon": "2026-08-15",
-    "plywood-material-guide": "2026-08-15"
+    "plywood-material-guide": "2026-08-15",
+    "south-delhi-interior-cost-guide": "2026-08-15",
+    "locality-sohna-road": "2026-08-15"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1141,6 +1175,10 @@
     "Delhi NCR",
     "Hauz Khas",
     "DLF Gurgaon",
+    "Gurgaon",
+    "Delhi NCR",
+    "South Delhi",
+    "Sohna Road",
     "Gurgaon",
     "Delhi NCR"
   ]
