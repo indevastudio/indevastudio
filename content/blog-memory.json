@@ -235,7 +235,10 @@
     "Choosing the Right Plywood for Your Kitchen",
     "Avoiding Costly Mistakes in Luxury Interior Design",
     "Cost Guide for Office Interior Design in Gurgaon",
-    "Material Comparison for Delhi NCR Homes"
+    "Material Comparison for Delhi NCR Homes",
+    "Avoiding Costly Mistakes in Residential Interior Design",
+    "Luxury Interior Design Costs in Gurgaon",
+    "Understanding Material Choices for Luxury Homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -473,7 +476,10 @@
     "plywood-for-kitchen-comparison",
     "mistakes-in-luxury-interior-design",
     "office-interior-design-cost-guide",
-    "material-comparison-for-delhi-ncr-homes"
+    "material-comparison-for-delhi-ncr-homes",
+    "residential-interior-design-mistakes",
+    "luxury-interior-design-costs-in-gurgaon",
+    "material-choice-for-luxury-homes"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -711,7 +717,10 @@
     "BWP plywood for kitchen",
     "luxury interior designer Greater Kailash",
     "office interior designer Gurgaon",
-    "HDHMR vs marine plywood"
+    "HDHMR vs marine plywood",
+    "residential interior designer New Gurgaon",
+    "residential interior designer DLF Gurgaon",
+    "MDF vs HDHMR"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -949,12 +958,12 @@
     "This article provides a technical comparison of different types of plywood, including BWP plywood for kitchen, to help homeowners make an informed decision for their kitchen design.",
     "This article highlights common mistakes to avoid when working with a luxury interior designer in Greater Kailash, Delhi, to ensure a successful and stress-free design experience.",
     "This article provides a comprehensive cost guide for office interior design in Gurgaon, covering the factors that drive up costs, cost breakdown by room, and tips for negotiating with an office interior design company Gurgaon.",
-    "This article compares the material properties, cost, and durability of HDHMR and marine plywood to help homeowners make an informed decision."
+    "This article compares the material properties, cost, and durability of HDHMR and marine plywood to help homeowners make an informed decision.",
+    "This article highlights common mistakes to avoid in residential interior design, providing valuable insights and solutions for homeowners in New Gurgaon, Gurgaon, and beyond.",
+    "This article provides a definitive cost guide for luxury interior design in Gurgaon, helping readers understand what drives costs up and how to budget for their project.",
+    "This article provides a technical comparison of material properties, cost, and durability to help homeowners in Delhi NCR make informed decisions for their luxury home projects."
   ],
   "lastAngles": [
-    "mistakes-avoid",
-    "cost-guide",
-    "step-by-step",
     "cost-guide",
     "mistakes-avoid",
     "cost-guide",
@@ -988,6 +997,9 @@
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
+    "material-comparison",
+    "mistakes-avoid",
+    "cost-guide",
     "material-comparison",
     "mistakes-avoid",
     "cost-guide",
@@ -1029,6 +1041,9 @@
     "plywood-material-guide",
     "locality-greater-kailash",
     "gurgaon-commercial-interior-designer",
+    "hdhmr-vs-plywood-comparison",
+    "locality-new-gurgaon",
+    "locality-dlf-gurgaon",
     "hdhmr-vs-plywood-comparison"
   ],
   "targetUrls": [
@@ -1066,6 +1081,9 @@
     "/gurgaon",
     "/#services",
     "/delhi",
+    "/gurgaon",
+    "/#services",
+    "/gurgaon",
     "/gurgaon",
     "/#services"
   ],
@@ -1105,6 +1123,9 @@
     "BLOG",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
+    "LOCATION_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1143,6 +1164,9 @@
     "technical",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1166,13 +1190,14 @@
     "south-delhi-farmhouse-interior-designer": "2026-08-14",
     "locality-golf-course-extension-road": "2026-08-14",
     "locality-hauz-khas": "2026-08-15",
-    "locality-dlf-gurgaon": "2026-08-15",
+    "locality-dlf-gurgaon": "2026-08-16",
     "plywood-material-guide": "2026-08-15",
     "south-delhi-interior-cost-guide": "2026-08-15",
     "locality-sohna-road": "2026-08-15",
     "locality-greater-kailash": "2026-08-16",
     "gurgaon-commercial-interior-designer": "2026-08-16",
-    "hdhmr-vs-plywood-comparison": "2026-08-16"
+    "hdhmr-vs-plywood-comparison": "2026-08-16",
+    "locality-new-gurgaon": "2026-08-16"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1210,6 +1235,9 @@
     "Delhi NCR",
     "Greater Kailash",
     "Gurgaon",
+    "Delhi NCR",
+    "New Gurgaon",
+    "DLF Gurgaon",
     "Delhi NCR"
   ]
 }
