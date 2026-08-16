@@ -232,7 +232,10 @@
     "Budgeting for Interior Design in South Delhi",
     "Finding the Right interior designer Sohna Road for Your Farmhouse",
     "Avoiding Costly Mistakes in Penthouse Interior Design",
-    "Choosing the Right Plywood for Your Kitchen"
+    "Choosing the Right Plywood for Your Kitchen",
+    "Avoiding Costly Mistakes in Luxury Interior Design",
+    "Cost Guide for Office Interior Design in Gurgaon",
+    "Material Comparison for Delhi NCR Homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -467,7 +470,10 @@
     "south-delhi-interior-design-cost-guide",
     "sohna-road-interior-designer",
     "penthouse-interior-design-mistakes",
-    "plywood-for-kitchen-comparison"
+    "plywood-for-kitchen-comparison",
+    "mistakes-in-luxury-interior-design",
+    "office-interior-design-cost-guide",
+    "material-comparison-for-delhi-ncr-homes"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -702,7 +708,10 @@
     "interior designer cost South Delhi",
     "interior designer Sohna Road",
     "penthouse interior cost Gurgaon",
-    "BWP plywood for kitchen"
+    "BWP plywood for kitchen",
+    "luxury interior designer Greater Kailash",
+    "office interior designer Gurgaon",
+    "HDHMR vs marine plywood"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -937,12 +946,12 @@
     "This article provides a comprehensive guide to budgeting for interior design projects in South Delhi, covering common misconceptions, cost drivers, and negotiation strategies.",
     "This article provides a step-by-step guide on how to find the right interior designer for your farmhouse in Sohna Road, Gurgaon, with a budget of ₹1–3 crore.",
     "This article highlights the common mistakes to avoid when designing a luxury penthouse in Gurgaon, providing valuable insights and expert advice to ensure a successful and stylish design.",
-    "This article provides a technical comparison of different types of plywood, including BWP plywood for kitchen, to help homeowners make an informed decision for their kitchen design."
+    "This article provides a technical comparison of different types of plywood, including BWP plywood for kitchen, to help homeowners make an informed decision for their kitchen design.",
+    "This article highlights common mistakes to avoid when working with a luxury interior designer in Greater Kailash, Delhi, to ensure a successful and stress-free design experience.",
+    "This article provides a comprehensive cost guide for office interior design in Gurgaon, covering the factors that drive up costs, cost breakdown by room, and tips for negotiating with an office interior design company Gurgaon.",
+    "This article compares the material properties, cost, and durability of HDHMR and marine plywood to help homeowners make an informed decision."
   ],
   "lastAngles": [
-    "design-ideas",
-    "step-by-step",
-    "cost-guide",
     "mistakes-avoid",
     "cost-guide",
     "step-by-step",
@@ -979,6 +988,9 @@
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
+    "material-comparison",
+    "mistakes-avoid",
+    "cost-guide",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -1014,7 +1026,10 @@
     "south-delhi-interior-cost-guide",
     "locality-sohna-road",
     "gurgaon-penthouse-interior-designer",
-    "plywood-material-guide"
+    "plywood-material-guide",
+    "locality-greater-kailash",
+    "gurgaon-commercial-interior-designer",
+    "hdhmr-vs-plywood-comparison"
   ],
   "targetUrls": [
     "/delhi",
@@ -1049,6 +1064,9 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
     "/#services"
   ],
   "contentTypes": [
@@ -1081,6 +1099,9 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
     "BLOG",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
@@ -1119,6 +1140,9 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1145,7 +1169,10 @@
     "locality-dlf-gurgaon": "2026-08-15",
     "plywood-material-guide": "2026-08-15",
     "south-delhi-interior-cost-guide": "2026-08-15",
-    "locality-sohna-road": "2026-08-15"
+    "locality-sohna-road": "2026-08-15",
+    "locality-greater-kailash": "2026-08-16",
+    "gurgaon-commercial-interior-designer": "2026-08-16",
+    "hdhmr-vs-plywood-comparison": "2026-08-16"
   },
   "lastLocations": [
     "Vasant Vihar",
@@ -1179,6 +1206,9 @@
     "Delhi NCR",
     "South Delhi",
     "Sohna Road",
+    "Gurgaon",
+    "Delhi NCR",
+    "Greater Kailash",
     "Gurgaon",
     "Delhi NCR"
   ]
