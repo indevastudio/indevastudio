@@ -2711,30 +2711,23 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 #projects .fpill:hover{color:var(--p-text);border-color:var(--p-line)}
 #projects .fpill.on{color:var(--p-gold);border-color:var(--p-gold);background:rgba(193,80,46,.07)}
 /* grid */
-#projects .ix-grid{padding:52px 60px 120px;display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+#projects .ix-grid{padding:52px 60px 120px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 #projects .pcard{cursor:pointer;overflow:hidden;background:var(--p-bg3);position:relative;opacity:0;transform:translateY(24px);transition:opacity .75s var(--p-ease),transform .75s var(--p-ease),box-shadow .4s}
 #projects .pcard.vis{opacity:1;transform:translateY(0)}
-#projects .pcard:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 0 1px rgba(193,80,46,.14);z-index:2}
-#projects .pcard:nth-child(6n+1){grid-column:span 7}
-#projects .pcard:nth-child(6n+2){grid-column:span 5}
-#projects .pcard:nth-child(6n+3){grid-column:span 5}
-#projects .pcard:nth-child(6n+4){grid-column:span 7}
-#projects .pcard:nth-child(6n+5){grid-column:span 6}
-#projects .pcard:nth-child(6n+6){grid-column:span 6}
-#projects .pcard-iw{position:relative;height:clamp(240px,26vw,400px);overflow:hidden}
-#projects .pcard-img{width:100%;height:100%;object-fit:cover;filter:brightness(1.0) saturate(0.92);transform:scale(1.04);transition:transform 1.2s var(--p-slow),filter .7s var(--p-ease)}
-#projects .pcard:hover .pcard-img{transform:scale(1.0);filter:brightness(1.0) saturate(1.0)}
-#projects .pcard-dim{position:absolute;inset:0;background:rgba(247,243,236,0);transition:background .45s}
-#projects .pcard:hover .pcard-dim{background:rgba(247,243,236,.2)}
-#projects .pcard-vw{position:absolute;bottom:18px;left:22px;font-family:var(--p-mono);font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(22,20,18,.75);opacity:0;transform:translateY(6px);transition:all .38s}
+#projects .pcard:hover{box-shadow:0 20px 60px rgba(0,0,0,.45),0 0 0 1px rgba(193,80,46,.14);z-index:2}
+#projects .pcard-iw{position:relative;aspect-ratio:4/3;overflow:hidden}
+#projects .pcard-img{width:100%;height:100%;object-fit:cover;filter:brightness(0.82) saturate(0.94);transform:scale(1.04);transition:transform 1.2s var(--p-slow),filter .7s var(--p-ease)}
+#projects .pcard:hover .pcard-img{transform:scale(1.08);filter:brightness(0.7) saturate(1.0)}
+#projects .pcard-dim{position:absolute;inset:0;background:linear-gradient(to top, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.35) 42%, rgba(8,8,8,0) 68%);pointer-events:none}
+#projects .pcard-vw{position:absolute;top:20px;right:22px;font-family:var(--p-mono);font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,235,227,.8);opacity:0;transform:translateY(-4px);transition:all .38s}
 #projects .pcard:hover .pcard-vw{opacity:1;transform:translateY(0)}
-#projects .pcard-info{padding:22px 26px 26px;background:var(--p-bg2);border-top:2px solid transparent;transition:border-color .28s}
-#projects .pcard:hover .pcard-info{border-color:var(--p-gold)}
-#projects .pcard-type{font-family:var(--p-mono);font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:var(--p-gold2);margin-bottom:7px}
-#projects .pcard-name{font-family:var(--p-serif);font-size:clamp(1.1rem,1.6vw,1.5rem);font-weight:300;font-style:italic;color:var(--p-text);line-height:1.15;margin-bottom:5px}
-#projects .pcard-loc{font-family:var(--p-mono);font-size:.46rem;letter-spacing:.12em;color:var(--p-dim)}
-#projects .pcard-arr{position:absolute;bottom:22px;right:22px;width:34px;height:34px;border:1px solid var(--p-line);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--p-dim);opacity:0;transform:translateX(-5px);transition:all .32s}
-#projects .pcard:hover .pcard-arr{opacity:1;transform:translateX(0);border-color:var(--p-gold);color:var(--p-gold)}
+#projects .pcard-info{position:absolute;left:0;right:0;bottom:0;padding:16px 24px 22px;pointer-events:none}
+#projects .pcard-type{display:flex;align-items:center;gap:10px;font-family:var(--p-mono);font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,227,.65);margin-bottom:9px}
+#projects .pcard-type::before{content:'';width:20px;height:1px;background:var(--gold-bright);opacity:.85;flex-shrink:0}
+#projects .pcard-name{font-family:var(--p-serif);font-size:clamp(1.15rem,1.7vw,1.55rem);font-weight:300;color:#f0ebe3;line-height:1.15;margin-bottom:6px}
+#projects .pcard-loc{font-family:var(--p-mono);font-size:.5rem;letter-spacing:.12em;color:rgba(240,235,227,.55)}
+#projects .pcard-arr{position:absolute;bottom:22px;right:22px;width:34px;height:34px;border:1px solid rgba(240,235,227,.35);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:rgba(240,235,227,.8);opacity:0;transform:translateX(-5px);transition:all .32s}
+#projects .pcard:hover .pcard-arr{opacity:1;transform:translateX(0);border-color:var(--gold-bright);color:var(--gold-bright)}
 /* detail hero */
 #projects .dh{position:relative;height:88vh;min-height:560px;overflow:hidden;display:flex;align-items:flex-end;background:var(--p-bg2)}
 #projects .dh-img{position:absolute;inset:0;width:100%;height:130%;top:-15%;object-fit:cover;filter:brightness(1.0) saturate(0.92);will-change:transform}
@@ -3235,13 +3228,13 @@ img {
       <!-- 2. Restaurant, Udaipur -->
       <div class="hero-slide" data-label="restaurant, udaipur"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dance%20floor%20area.webp" alt="restaurant interior, udaipur — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 3. Urban Apartment, Dehradun -->
-      <div class="hero-slide" data-label="urban apartment"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp" alt="urban apartment, dehradun — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="urban apartment"><img src="urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen, dehradun — indéva studio" loading="lazy" width="734" height="744" decoding="async"></div>
       <!-- 4. Studio Workspace, Gurgaon -->
       <div class="hero-slide" data-label="studio workspace"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp" alt="studio workspace office, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 5. Shanti Villa, Goa -->
       <div class="hero-slide" data-label="shanti villa"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp" alt="shanti villa, goa — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 6. Hashtag Restaurant, Noida -->
-      <div class="hero-slide" data-label="hashtag restaurant"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp" alt="hashtag restaurant, noida — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="vasant kunj"><img src="vasant-kunj-bedroom-1.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="1689" height="1080" decoding="async"></div>
       <!-- 7. DLF Crest, Gurgaon -->
       <div class="hero-slide" data-label="dlf crest"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp" alt="dlf crest penthouse, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <div class="hero-space-label" id="hero-space-label">private villa</div>
@@ -3403,7 +3396,7 @@ img {
         </div>
         <!-- Card 3 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp" alt="urban apartment interior design, dehradun — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3432,7 +3425,7 @@ img {
           </div>
         </div>
         <!-- Card 5b: Vasant Kunj -->
-        <div class="project-card" onclick="window.open('vasant-kunj-design-intent.pdf', '_blank')">
+        <div class="project-card" onclick="showPage('projects')">
           <img src="vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">click for sample design.</div>
           <div class="project-card-info">
@@ -3443,12 +3436,12 @@ img {
         </div>
         <!-- Card 6 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp" alt="luxury restaurant interior design, noida — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">restraint as luxury.</div>
+          <img src="vasant-kunj-bedroom-1.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="1689" height="1080" decoding="async" loading="lazy">
+          <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
-            <div class="project-card-type">hospitality</div>
-            <div class="project-card-name">hashtag restaurant</div>
-            <div class="project-card-loc">noida</div>
+            <div class="project-card-type">residential</div>
+            <div class="project-card-name">vasant kunj</div>
+            <div class="project-card-loc">new delhi</div>
           </div>
         </div>
         <!-- Duplicate set for seamless loop -->
@@ -3471,7 +3464,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20room%20lobby.webp" alt="urban apartment interior design, dehradun — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3497,7 +3490,7 @@ img {
             <div class="project-card-loc">goa</div>
           </div>
         </div>
-        <div class="project-card" onclick="window.open('vasant-kunj-design-intent.pdf', '_blank')">
+        <div class="project-card" onclick="showPage('projects')">
           <img src="vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">click for sample design.</div>
           <div class="project-card-info">
@@ -3507,12 +3500,12 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar%20area.webp" alt="luxury restaurant interior design, noida — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">restraint as luxury.</div>
+          <img src="vasant-kunj-bedroom-1.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1689" height="1080" decoding="async" loading="lazy">
+          <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
-            <div class="project-card-type">hospitality</div>
-            <div class="project-card-name">hashtag restaurant</div>
-            <div class="project-card-loc">noida</div>
+            <div class="project-card-type">residential</div>
+            <div class="project-card-name">vasant kunj</div>
+            <div class="project-card-loc">new delhi</div>
           </div>
         </div>
       </div>
@@ -6285,7 +6278,7 @@ function scrollToVendorCat(cat) {
 (function() {
 'use strict';
 const CDN = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/';
-const img = fn => CDN + encodeURIComponent(fn);
+const img = fn => fn.startsWith('./') ? fn : CDN + encodeURIComponent(fn);
 
 const CAPS = {
   'desktop version banner.webp':{t:'Grand Exterior',c:'A statement facade reflecting quiet permanence'},
@@ -6298,6 +6291,14 @@ const CAPS = {
   'kitchen and common washroom.webp':{t:'Kitchen & Utility',c:'Function arranged with precision'},
   'Kitchen Area.webp':{t:'Kitchen Area',c:'A kitchen sized for use, not display'},
   'Kitchen.webp':{t:'Kitchen Detail',c:'Material choices made once and not revisited'},
+  './urban-apartment-kitchen-1.jpg':{t:'Kitchen & Breakfast Bar',c:'A mint-glass kitchen anchored by a curved, brass-fluted bar'},
+  './urban-apartment-kitchen-2.jpg':{t:'Kitchen Cabinetry',c:'Glossy mint cabinetry with warm, backlit display niches'},
+  './urban-apartment-kitchen-3.jpg':{t:'Breakfast Bar Corner',c:'Pendant lighting over a curved, fluted-brass counter'},
+  './urban-apartment-kitchen-4.jpg':{t:'Kitchen Appliances',c:'Integrated black appliances within the mint glass run'},
+  './vasant-kunj-bedroom-1.jpg':{t:'Fluted Headboard Wall',c:'Vertical walnut fluting flanked by concealed LED strips'},
+  './vasant-kunj-bedroom-2.jpg':{t:'Window Seat & TV Wall',c:'Backlit TV panel beside a cushioned reading nook'},
+  './vasant-kunj-bedroom-3.jpg':{t:'Bed Wall, Straight-On',c:'Upholstered headboard framed by wall sconces'},
+  './vasant-kunj-bedroom-4.jpg':{t:'TV Unit Detail',c:'Fluted brass-lit panel with floating drawer unit'},
   'Master washroom.webp':{t:'Master Washroom',c:'Restraint applied to every surface'},
   'foyer area.webp':{t:'Entrance Foyer',c:'The first room sets the tone for all others'},
   'lobby area.webp':{t:'Lobby',c:'Space held in deliberate stillness'},
@@ -6359,21 +6360,21 @@ window.PROJECTS = [
   {id:'urban-apartment',name:'Urban Apartment',location:'Dehradun',typology:'Residential',area:'1,800 sqft',year:'2024',status:'Completed',
    description:'a compact urban apartment where every square foot was planned, not decorated.',
    editorial:'<p>the challenge was density without compromise. <em>rooms were sized for use, not aspiration.</em></p><p>storage was resolved first. then light. then material.</p>',
-   cover:'living room lobby.webp',
-   images:['living room lobby.webp','living area.webp','Master bedroom design.webp','Master washroom.webp','Kitchen.webp','Kitchen Area.webp'],
-   parallax:'living area.webp',parallaxLbl:'living area'},
+   cover:'./urban-apartment-kitchen-1.jpg',
+   images:['./urban-apartment-kitchen-1.jpg','./urban-apartment-kitchen-2.jpg','./urban-apartment-kitchen-3.jpg','./urban-apartment-kitchen-4.jpg'],
+   parallax:'./urban-apartment-kitchen-1.jpg',parallaxLbl:'kitchen'},
   {id:'shanti-villa',name:'Shanti Villa',location:'Goa',typology:'Residential',area:'8,000 sqft',year:'2023',status:'Completed',
    description:'a large private villa where scale was used with discretion, not extravagance.',
    editorial:'<p>the house was large. the design worked against that fact. <em>spaces were made to feel inhabited, not vast.</em></p><p>every room was resolved independently before the whole was considered.</p>',
    cover:'Master bedroom design.webp',
    images:['Master bedroom design.webp','front elevation.webp','Main elevation.webp','side elevation.webp','foyer area.webp',"Daughter's Bedroom.webp",'Master washroom.webp','Kitchen Area.webp'],
    parallax:'front elevation.webp',parallaxLbl:'villa elevation'},
-  {id:'hashtag-restaurant',name:'Hashtag Restaurant',location:'Noida',typology:'Hospitality',area:'1,600 sqft',year:'2024',status:'Completed',
-   description:'a restaurant interior resolved without spectacle. the food remains the subject.',
-   editorial:'<p>no surface was decorative by default. <em>the bar area was positioned for sight lines, not for show.</em></p><p>materials were chosen for how they age, not how they photograph.</p>',
-   cover:'bar area.webp',
-   images:['bar area.webp','dance floor area.webp','main dining area.webp','dining area.webp','Live kitchen Counter.webp','handwash - restaurant.webp','seating area design - restaurant.webp','washroom area.webp'],
-   parallax:'main dining area.webp',parallaxLbl:'main dining'},
+  {id:'vasant-kunj',name:'Vasant Kunj',location:'New Delhi',typology:'Residential',area:'DDA Residence',year:'2025',status:'Completed',
+   description:'a parents\' bedroom built on walnut fluting, warm beige lacquer, and brushed brass — quiet sophistication resolved through joinery, not decoration.',
+   editorial:'<p>the brief was comfort without excess. <em>every surface — the fluted headboard wall, the backlit TV panel, the window seat — was drawn before it was built.</em></p><p>lighting was layered, not applied: cove, panel and pendant sources let the room shift from the clarity of morning to the intimacy of evening.</p>',
+   cover:'./vasant-kunj-bedroom-1.jpg',
+   images:['./vasant-kunj-bedroom-1.jpg','./vasant-kunj-bedroom-2.jpg','./vasant-kunj-bedroom-3.jpg','./vasant-kunj-bedroom-4.jpg'],
+   parallax:'./vasant-kunj-bedroom-1.jpg',parallaxLbl:'parents\' bedroom'},
 ];
 
 let curP=null, lbImgs=[], lbIdx=0;
