@@ -6259,7 +6259,7 @@ function scrollToVendorCat(cat) {
 (function() {
 'use strict';
 const CDN = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/';
-const img = fn => fn.startsWith('./') ? fn : CDN + encodeURIComponent(fn);
+const img = fn => (fn.startsWith('/') || fn.startsWith('./') || fn.startsWith('http')) ? fn : CDN + encodeURIComponent(fn);
 
 const CAPS = {
   'desktop version banner.webp':{t:'Grand Exterior',c:'A statement facade reflecting quiet permanence'},
