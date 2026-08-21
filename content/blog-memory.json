@@ -246,7 +246,11 @@
     "Avoid Costly Pitfalls in Turnkey Interior Projects in South Delhi",
     "How to Choose a Residential Interior Designer on Golf Course Road",
     "Farmhouse Interior Cost Guide for Gurgaon: ₹15‑25 Lakh Budget",
-    "mastering layered lighting in Delhi NCR homes – a material guide"
+    "mastering layered lighting in Delhi NCR homes – a material guide",
+    "Avoid Mistakes with a Home Interior Designer in Friends Colony",
+    "How to Estimate Villa Interior Cost in Gurgaon: A Step‑By‑Step Guide",
+    "Farmhouse Renovation South Delhi: Real Cost Guide for 2024",
+    "Top false ceiling lighting design ideas for Delhi NCR homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -495,7 +499,11 @@
     "turnkey-interior-mistakes-south-delhi",
     "choose-interior-designer-golf-course-road",
     "farmhouse-interior-cost-gurgaon-guide",
-    "layered-lighting-material-comparison-delhi-ncr"
+    "layered-lighting-material-comparison-delhi-ncr",
+    "avoid-mistakes-friends-colony-interior-design",
+    "villa-interior-cost-gurgaon-guide",
+    "farmhouse-renovation-south-delhi-cost-guide",
+    "false-ceiling-lighting-design-ideas"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -744,7 +752,11 @@
     "turnkey interior cost South Delhi",
     "residential interior designer Golf Course Road",
     "farmhouse interior cost Gurgaon",
-    "layered lighting design for Indian homes"
+    "layered lighting design for Indian homes",
+    "home interior designer Friends Colony",
+    "villa interior cost Gurgaon",
+    "farmhouse renovation South Delhi",
+    "false ceiling lighting design ideas"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -993,15 +1005,15 @@
     "The article exposes frequent budgeting mistakes in turnkey interior work and offers practical fixes to protect the client’s pocket.",
     "A clear, numbered process helps first‑time homeowners hire a qualified designer without costly mistakes.",
     "A data‑driven guide that breaks down costs, reveals hidden price drivers, and offers negotiation tactics for a Gurgaon farmhouse makeover.",
-    "A technical comparison of lighting materials helps designers choose the right fixtures for layered lighting in Delhi NCR homes."
+    "A technical comparison of lighting materials helps designers choose the right fixtures for layered lighting in Delhi NCR homes.",
+    "A seasoned designer outlines five common errors in bungalow projects and provides concrete fixes to keep budgets ₹40–80 lakh on track.",
+    "A practical, step‑by‑step process helps first‑time clients budget and plan villa interiors in Gurgaon without hidden costs.",
+    "A data‑backed cost guide that demystifies farmhouse renovation budgets in South Delhi, helping owners control spend and avoid common pitfalls.",
+    "the article compares gypsum, metal, and PVC false ceilings on key technical factors to help Delhi NCR homeowners select the best material for lighting design."
   ],
   "lastAngles": [
     "material-comparison",
     "cost-guide",
-    "step-by-step",
-    "mistakes-avoid",
-    "material-comparison",
-    "cost-guide",
     "mistakes-avoid",
     "step-by-step",
     "material-comparison",
@@ -1030,6 +1042,10 @@
     "material-comparison",
     "step-by-step",
     "mistakes-avoid",
+    "cost-guide",
+    "material-comparison",
+    "mistakes-avoid",
+    "step-by-step",
     "cost-guide",
     "material-comparison",
     "mistakes-avoid",
@@ -1084,6 +1100,10 @@
     "south-delhi-interior-cost-guide",
     "locality-golf-course-road",
     "gurgaon-farmhouse-interior-designer",
+    "interior-lighting-design-guide",
+    "locality-friends-colony",
+    "gurgaon-villa-interior-designer",
+    "south-delhi-farmhouse-interior-designer",
     "interior-lighting-design-guide"
   ],
   "targetUrls": [
@@ -1133,6 +1153,10 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services"
   ],
   "contentTypes": [
@@ -1181,6 +1205,10 @@
     "BLOG",
     "BLOG",
     "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
     "SERVICE_PAGE",
     "BLOG"
   ],
@@ -1231,6 +1259,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1249,7 +1281,7 @@
     "interior-boq-guide": "2026-08-13",
     "locality-defence-colony": "2026-08-13",
     "gurgaon-farmhouse-interior-designer": "2026-08-21",
-    "locality-friends-colony": "2026-08-14",
+    "locality-friends-colony": "2026-08-21",
     "interior-execution-process-guide": "2026-08-14",
     "south-delhi-farmhouse-interior-designer": "2026-08-21",
     "locality-golf-course-extension-road": "2026-08-14",
@@ -1265,10 +1297,6 @@
     "interior-lighting-design-guide": "2026-08-21"
   },
   "lastLocations": [
-    "Delhi NCR",
-    "Maharani Bagh",
-    "Gurgaon",
-    "Delhi NCR",
     "Delhi NCR",
     "Panchsheel Park",
     "Gurgaon",
@@ -1304,6 +1332,10 @@
     "South Delhi",
     "Golf Course Road",
     "Gurgaon",
+    "Delhi NCR",
+    "Friends Colony",
+    "Gurgaon",
+    "South Delhi",
     "Delhi NCR"
   ]
 }
