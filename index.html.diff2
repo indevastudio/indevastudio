@@ -1,4 +1,0 @@
-6262c6262
-< const img = fn => fn.startsWith('./') ? fn : CDN + encodeURIComponent(fn);
----
-> const img = fn => (fn.startsWith('/') || fn.startsWith('./') || fn.startsWith('http')) ? fn : CDN + encodeURIComponent(fn);
