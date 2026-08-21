@@ -23,7 +23,7 @@
  *   GROQ_API_KEY         — get from https://console.groq.com/keys (free, no card)
  *
  * Optional env vars:
- *   GROQ_MODEL           — defaults to llama-3.3-70b-versatile
+ *   GROQ_MODEL           — defaults to openai/gpt-oss-120b
  *   UNSPLASH_ACCESS_KEY  — get from https://unsplash.com/oauth/applications (free,
  *                          50 req/hour). Without it, images fall back to a small
  *                          curated Picsum set (less topic-relevant but still works).
@@ -50,7 +50,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, "..");
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const GROQ_MODEL = process.env.GROQ_MODEL || "llama-3.3-70b-versatile";
+const GROQ_MODEL = process.env.GROQ_MODEL || "openai/gpt-oss-120b";
 const MEMORY_FILE = path.join(REPO_ROOT, "content", "blog-memory.json");
 
 // How many blogs to publish per run.
