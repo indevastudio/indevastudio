@@ -11,6 +11,11 @@
       "source": "/interior-designer-delhi",
       "destination": "/delhi",
       "permanent": true
+    },
+    {
+      "source": "/interior-designer-gurgaon",
+      "destination": "/gurgaon",
+      "permanent": true
     }
   ],
   "rewrites": [

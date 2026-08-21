@@ -1,0 +1,9 @@
+These files should be DELETED from your repo root (they're stray/broken files,
+not used anywhere — removing them is part of the fix, but there's nothing to
+"upload" for a deletion, so just delete them directly on GitHub):
+
+index .html          (note: filename has a space before .html)
+index .diff3
+index.html.diff
+index.html.diff2
+{   "name": "indeva-blog-engine",   "version": "1.0.0",   "type": "module",   "dependencies": {     "@anthropic-ai/   (this is a folder — the whole malformed-named folder, delete it entirely)

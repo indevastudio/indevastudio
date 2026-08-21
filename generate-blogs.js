@@ -1066,7 +1066,7 @@ async function generateBlog(entry, angle, cityData, budgetData, attemptNum = 1) 
   const externalLink1 = EXTERNAL_LINKS[entry.keyword.length % EXTERNAL_LINKS.length];
   const semanticTerms = semanticVariationsFor(entry);
 
-  const prompt = `You are a senior writer for indéva studio (Delhi NCR luxury interior design firm).
+  const prompt = `Write SEO content for indéva studio (Delhi NCR luxury interior design firm)'s blog. Write in third person about the firm ("indéva studio believes...", "the team recommends...") — do NOT write in first person as a staff member, and do NOT claim any job title, byline, or personal experience ("as a senior writer...", "I've seen...", "in my experience...").
 
 WRITE A 1500-WORD SEO BLOG.
 
@@ -1080,8 +1080,9 @@ SCENARIO (use ${cityData.area}, ${cityData.city} naturally — do not invent a f
 DIRECTIVE:
 ${angle.instruction}
 
-CRITICAL — DO NOT FABRICATE (PART 6):
-- Never invent a specific "real" Indéva client, project, or testimonial and present it as fact.
+CRITICAL — DO NOT FABRICATE (PART 6). These are hard bans, not style suggestions — output containing any of them will be automatically rejected before publishing:
+- Never invent a specific "real" Indéva client, project, or testimonial and present it as fact. This includes anecdote openings like "the day a client called us, frantic about..." — do not write this pattern or anything structurally similar (a named crisis moment attributed to an unnamed but specific-sounding client).
+- Never write in first person as a staff member. Do not say "as a senior writer", "as a designer", "I've seen", "in my experience", "our founder told me", or any equivalent personal-narrator framing. Write about indéva studio in third person only.
 - Never claim a specific number of years of experience, a project count, or a client count unless it is a generic, unverifiable-as-false statement (e.g. avoid "15 years of experience" or "500+ projects completed").
 - Never invent exact measurements, lab statistics, or certification numbers.
 - If an example genuinely helps the reader, label it explicitly in the text as "HYPOTHETICAL EXAMPLE" or "ILLUSTRATIVE BUDGET" — do not present it as something that actually happened.
@@ -1219,6 +1220,23 @@ function parseBlogResponse(raw, entry, angle) {
     console.warn(`     Response head: ${raw.slice(0, 200).replace(/\n/g, " | ")}`);
     console.warn(`     Response tail: ${raw.slice(-200).replace(/\n/g, " | ")}`);
     throw new Error(`Malformed model output (missing: ${missing.join(", ")})`);
+  }
+
+  // HARD SAFETY NET — the prompt already bans these (PART 6), but models don't
+  // always comply. This is the fallback that actually stops fabricated content
+  // from publishing: if any of these patterns slip through, fail the generation
+  // so the caller retries with a fresh angle instead of shipping it.
+  const FABRICATION_PATTERNS = [
+    /the day a client called us[^.]*frantic/i,
+    /as a senior writer/i,
+    /as a (senior )?designer,? i(?:'ve| have)/i,
+    /in my experience/i,
+    /\b\d{1,3}\+?\s*(years of experience|projects completed|happy clients)/i,
+  ];
+  const hit = FABRICATION_PATTERNS.find((re) => re.test(articleBody));
+  if (hit) {
+    console.warn(`  ⚠️  Rejected — fabricated-content pattern matched: ${hit}`);
+    throw new Error(`Fabricated-content pattern matched (${hit}) — forcing retry`);
   }
 
   return {

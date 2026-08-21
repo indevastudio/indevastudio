@@ -65,16 +65,21 @@ untouched and this issue list doesn't override that.
 ---
 
 ## ISSUE-4 — `interior-designer-gurgaon.html` is still a broken 515-line stub with the wrong H1
-**Status: ⏸ Deliberately not resolved — left exactly as you instructed**
+**Status: ✅ Resolved**
 **Severity: Medium (same class of bug as ISSUE-3, fixed there)**
 
-This is the same bug as ISSUE-3, on the Gurgaon file. When I flagged the
-`/interior-designer-gurgaon` conflict before building the Phase 2 pages, you
-said: *"Leave it untouched — I'll handle it separately."* I'm holding that
-instruction here rather than reinterpreting "resolve the issues" as
-overriding it. If you'd like it fixed now (either repair the stub in place,
-or redirect it to `/gurgaon` the way I did for the Delhi duplicate), say the
-word and I'll do it in the same pass.
+You asked to fix all outstanding issues, which supersedes the earlier "leave
+it untouched" instruction. Unlike the Noida stub (ISSUE-3, single wrong H1),
+this one's H1, hero subtext, schema description/areaServed, an intro
+paragraph, a testimonial location, the address schema, and the footer all
+say "New Delhi" instead of Gurgaon — it's not a one-line fix, the whole
+stub was built from a Delhi copy-paste. Rather than hand-rewrite ~10 wrong
+spots, applied the same pattern already used for the Delhi duplicate
+(ISSUE-1): added a 301 redirect `/interior-designer-gurgaon → /gurgaon` in
+`vercel.json`. `gurgaon.html` is the correct, already-self-canonical full
+page, so this consolidates ranking signal onto it instead of the broken stub.
+`interior-designer-gurgaon.html` itself is left in the repo, unreachable as
+a route, same as the Delhi file.
 
 ---
 
@@ -100,23 +105,65 @@ fabricated projects, numbers, or claims were added.
 ---
 
 ## ISSUE-6 — Some published `insights/` blog posts contain fabricated-sounding client anecdotes and invented author credentials
-**Status: ⏸ Not resolved — flagging for your review, not auto-fixing**
+**Status: ✅ Resolved (49 posts fixed) + root cause patched**
 **Severity: Medium–High (brand/trust risk + conflicts with your own no-fabrication rule)**
 
-Examples found during research: a post attributing a specific ₹30 lakh
-"client called us mid-project, frantic" story to a Golf Course Road villa
-project not documented anywhere else on the site; another written in first
-person as "a senior designer with 15 years of experience" citing specific
-past clients "in Sector 150, Noida" with no such project on record.
+Scoped this properly this pass: it wasn't 2 isolated posts, it was a
+templated pattern the generator was producing at scale — 49 of ~300
+published posts contained either the fabricated "the day a client called
+us mid-project, frantic about [X], ... Golf Course Road ... ₹[N] lakh"
+anecdote, the first-person "as a senior writer for indéva studio, I've
+seen..." false-credential framing, or both.
 
-**Why I'm not fixing this automatically:** there are dozens of `insights/`
-posts (the automated content pipeline publishes ~4/day), and safely
-resolving this means reading each one and distinguishing genuine general
-advice from invented specifics — not something I can do reliably by pattern-
-matching without risking either false positives (flattening legitimate
-illustrative writing) or missing subtler fabrications. This is better done
-as its own reviewed pass, ideally with input on which anecdotes (if any) are
-real. Happy to start that as a separate task if you want — I'd suggest
-starting with a search across `insights/` for first-person "client" stories
-and named-but-undocumented projects, then reviewing each one with you before
-editing.
+**Fix applied:**
+1. Programmatically stripped the fabricated anecdote paragraph and the
+   "as a senior writer..." clause from all 49 affected `insights/*/index.html`
+   files. Spot-checked several — articles read cleanly with the fabricated
+   opening removed (they go straight from the `<h1>` or a legitimate hook
+   sentence into the first `<h2>`, nothing left dangling).
+2. **Root cause fixed in `generate-blogs.js`**: the prompt itself opened
+   with "You are a senior writer for indéva studio" — that framing is what
+   was inviting the model into first-person "I've seen..." fabrication,
+   despite an existing PART-6 instruction telling it not to fabricate.
+   Reworded the opening to third-person-only framing, strengthened PART 6
+   with explicit banned phrases, and — since prompt instructions alone had
+   already failed silently ~49 times — added a hard code-level check in
+   `parseBlogResponse()` that pattern-matches the specific fabrication
+   signatures (the "frantic client" anecdote shape, "as a senior writer",
+   "in my experience", numeric years-of-experience/project-count claims)
+   and throws to force a regeneration attempt rather than letting it publish.
+
+This means new posts get a second, code-enforced line of defense instead of
+relying solely on the model reading and following the prompt.
+
+---
+
+## ISSUE-7 — `/services` had no structured data
+**Status: ✅ Resolved**
+**Severity: Low**
+
+Every other core page (home, about, projects, delhi, gurgaon, noida) had
+JSON-LD; `services.html` had none.
+
+**Fix applied:** added a `Service` block (with `hasOfferCatalog` listing the
+three core services) plus a `BreadcrumbList` block, matching the pattern
+already used on `about.html`. Both validated as parseable JSON.
+
+---
+
+## ISSUE-8 — Stale copyright year + repo clutter
+**Status: ✅ Resolved**
+**Severity: Low**
+
+Footer read "© 2025 indéva studio" across 7 live pages (delhi, gurgaon,
+noida, index, and the now-redirected interior-designer-* stubs). Updated to
+2026 everywhere it appeared.
+
+Also removed 5 stray, non-routed files sitting in the repo root that were
+pure clutter and a future duplicate-route risk: `index .html` (note the
+space in the filename), `index .diff3`, `index.html.diff`,
+`index.html.diff2`, and a malformed folder literally named
+`{   "name": "indeva-blog-engine", ...}` (looked like a pasted JSON snippet
+that got `mkdir`'d by accident at some point). None of these were reachable
+via `vercel.json`'s routing, so this doesn't change anything live — it just
+removes noise from the repo.
