@@ -1,0 +1,27 @@
+REPLACE this object in index.html (window.PROJECTS array, around line 6354):
+
+  {id:'shanti-villa',name:'Shanti Villa',location:'Goa',typology:'Residential',area:'8,000 sqft',year:'2023',status:'Completed',
+   description:'a large private villa where scale was used with discretion, not extravagance.',
+   editorial:'<p>the house was large. the design worked against that fact. <em>spaces were made to feel inhabited, not vast.</em></p><p>every room was resolved independently before the whole was considered.</p>',
+   cover:'Master bedroom design.webp',
+   images:['Master bedroom design.webp','front elevation.webp','Main elevation.webp','side elevation.webp','foyer area.webp',"Daughter's Bedroom.webp",'Master washroom.webp','Kitchen Area.webp'],
+   parallax:'front elevation.webp',parallaxLbl:'villa elevation'},
+
+WITH:
+
+  {id:'patel-nagar',name:'Patel Nagar Retail Store',location:'Patel Nagar, Delhi',typology:'Commercial',area:'2 floors',year:'2026',status:'Ongoing',
+   description:'a menswear store rebuilt around a Gen Z customer — fast to read, quick to shop, built for the phone camera as much as the rack.',
+   editorial:'<p>the brief was speed and identity, not square footage. <em>fixtures were pulled back so the merchandise — walls of folded color — could do the talking.</em></p><p>the ground floor moves customers up naturally; the first floor slows them down around a branded lounge built to be photographed.</p>',
+   cover:'/patel-nagar-retail-1.jpg',
+   images:['/patel-nagar-retail-1.jpg','/patel-nagar-retail-2.jpg','/patel-nagar-retail-3.jpg','/patel-nagar-retail-4.jpg'],
+   parallax:'/patel-nagar-retail-2.jpg',parallaxLbl:'folded knitwear wall'},
+
+Then upload the 4 attached .jpg files to the repo ROOT (same place vasant-kunj-cover.jpg etc. live) with these exact filenames:
+  patel-nagar-retail-1.jpg
+  patel-nagar-retail-2.jpg
+  patel-nagar-retail-3.jpg
+  patel-nagar-retail-4.jpg
+
+No other file needs changing for the homepage /#projects grid — window.PROJECTS in index.html is the single source it renders from.
+
+SEPARATE (optional) — projects.html and pshow.html/pshow.js are an older/duplicate static "Projects" page + case-study template that still hardcode "Shanti Villa, New Delhi" independently. They aren't wired to window.PROJECTS. Let me know if you want those updated/replaced too, or retired.
