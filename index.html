@@ -129,22 +129,22 @@
 
 <style>
 :root {
-  --black: #f7f3ec;
-  --black-2: #f1ebe0;
-  --black-3: #eae2d2;
-  --black-4: #e2d7c1;
-  --gold: #c1502e;
-  --gold-dim: #96431f;
-  --gold-bright: #d66a3a;
-  --white: #161412;
-  --white-dim: rgba(22,20,18,1.00);
-  --white-muted: rgba(22,20,18,0.85);
+  --black: #F5F1E8;
+  --black-2: #EFE9DC;
+  --black-3: #E8E0CE;
+  --black-4: #E0D7BD;
+  --gold: #9A6A3A;
+  --gold-dim: #7A5530;
+  --gold-bright: #C5A46D;
+  --white: #242424;
+  --white-dim: rgba(36,36,36,1.00);
+  --white-muted: rgba(36,36,36,0.85);
   --serif: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --line: rgba(22,20,18,0.08);
-  --line-gold: rgba(193,80,46,0.2);
+  --line: rgba(36,36,36,0.08);
+  --line-gold: rgba(154,106,58,0.2);
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -1165,11 +1165,15 @@ nav.solid {
   position: relative;
 }
 .service-detail-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.88);
   transition: transform 0.6s ease;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
 }
 .service-detail-image:hover img { transform: scale(1.03); }
 .service-detail-image-cap {
@@ -1904,48 +1908,44 @@ select.form-field option { background: var(--black-3); }
   padding: 130px 60px 60px;
   border-bottom: 1px solid var(--line);
 }
-.furniture-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--line);
-}
-.furniture-teaser-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2px;
-}
 .furniture-item {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 4/5;
   overflow: hidden;
   background: var(--black-3);
+  border: 1px solid var(--line);
 }
 .furniture-item img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: brightness(0.9);
   transition: transform 0.7s ease;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
 }
 .furniture-item:hover img { transform: scale(1.05); }
 .furniture-item-cap {
   position: absolute;
   left: 0; bottom: 0; right: 0;
-  padding: 20px 22px;
+  padding: 16px 18px;
   background: linear-gradient(transparent, rgba(0,0,0,0.6));
   font-family: var(--mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.92);
 }
-@media (max-width: 900px) {
-  .furniture-gallery { grid-template-columns: repeat(2, 1fr); }
-  .furniture-teaser-grid { grid-template-columns: 1fr; }
+.furniture-cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
-@media (max-width: 560px) {
-  .furniture-gallery { grid-template-columns: 1fr; }
+.furniture-cat-grid .furniture-item { aspect-ratio: 4/5; border: 1px solid var(--line); }
+@media (max-width: 700px) {
+  .furniture-cat-grid { grid-template-columns: 1fr; }
 }
 
 /* ════════════════════════════════════
@@ -3101,7 +3101,7 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .footer-nav-link { font-size: 0.7rem !important; padding: 8px 0 !important; min-height: 40px; display: inline-flex !important; align-items: center; }
 
   /* lead popup */
-  #leadPopup {
+  .lp-modal {
     top: auto !important;
     left: 16px !important; right: 16px !important; bottom: 16px !important;
     width: auto !important; max-width: none !important;
@@ -3111,7 +3111,7 @@ a, button, [onclick], .service-row, .project-card, .project-row,
     border-radius: 4px;
     transform: translateY(24px) scale(0.98) !important;
   }
-  #leadPopup.open {
+  .lp-modal.open {
     transform: translateY(0) scale(1) !important;
   }
   .lp-field { font-size: 1rem !important; padding: 14px 16px !important; }
@@ -3524,31 +3524,6 @@ img {
         <div class="offering-card"><span class="offering-icon">📦</span><div class="offering-name">vendor management</div><div class="offering-sub">alignment · accountability · control</div></div>
         <div class="offering-card"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
         <div class="offering-card"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FURNITURE TEASER -->
-  <section style="padding:90px 60px;border-bottom:1px solid var(--line);">
-    <div class="offerings-header" style="margin-bottom:48px;">
-      <div>
-        <div class="label-line label reveal">furniture & joinery</div>
-        <h2 class="display display-md reveal d1" style="margin-top:16px;">a look at the <em class="italic gold">pieces.</em></h2>
-      </div>
-      <button class="btn btn-text reveal d2" onclick="showPage('furniture')">view furniture collection</button>
-    </div>
-    <div class="furniture-teaser-grid">
-      <div class="furniture-item reveal" style="aspect-ratio:3/4;">
-        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/lounge-chair-teak-mountain.jpg" alt="teak-framed lounge chair — indéva studio furniture design" loading="lazy" decoding="async">
-        <div class="furniture-item-cap">lounge chair — teak & bouclé</div>
-      </div>
-      <div class="furniture-item reveal d1" style="aspect-ratio:3/4;">
-        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dining-table-marble-oval.jpg" alt="oval marble dining table — indéva studio furniture design" loading="lazy" decoding="async">
-        <div class="furniture-item-cap">dining table — marble & oak</div>
-      </div>
-      <div class="furniture-item reveal d2" style="aspect-ratio:3/4;">
-        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar-cabinet-arched-cane.jpg" alt="arched cane bar cabinet — indéva studio furniture design" loading="lazy" decoding="async">
-        <div class="furniture-item-cap">bar cabinet — arched cane</div>
       </div>
     </div>
   </section>
@@ -4264,7 +4239,7 @@ img {
         <div class="service-item reveal d4"><div class="service-item-dot"></div><span class="service-item-text">material specification</span></div>
         <div class="service-item reveal d5"><div class="service-item-dot"></div><span class="service-item-text">longevity detailing</span></div>
       </div>
-      <a href="/furniture" onclick="showPage('furniture');return false;" style="display:inline-block;margin-top:32px;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);text-decoration:none;">view our furniture collection →</a>
+      <a href="/furniture" onclick="showPage('furniture');return false;" class="btn btn-primary" style="margin-top:32px;text-decoration:none;">view our furniture collection →</a>
     </div>
   </div>
 
@@ -5082,44 +5057,129 @@ img {
     </div>
   </section>
 
-  <div class="furniture-gallery">
-    <div class="furniture-item reveal">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/lounge-chair-teak-mountain.jpg" alt="teak-framed lounge chair — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">lounge chair — teak & bouclé</div>
+  <div class="service-detail">
+    <div class="service-detail-header">
+      <div class="service-detail-num reveal">01</div>
+      <h2 class="service-detail-title reveal d1">seating</h2>
+      <p class="service-detail-stmt reveal d2">built to be sat in,<br>not just seen.</p>
     </div>
-    <div class="furniture-item reveal d1">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dining-table-marble-oval.jpg" alt="oval marble dining table with wooden base — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">dining table — marble & oak</div>
-    </div>
-    <div class="furniture-item reveal d2">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/coffee-table-round-cane.jpg" alt="round two-tier cane coffee table — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">coffee table — cane & walnut</div>
-    </div>
-    <div class="furniture-item reveal d3">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/armchair-brass-velvet.jpg" alt="brass-framed velvet armchair — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">armchair — brass & velvet</div>
-    </div>
-    <div class="furniture-item reveal d4">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/accent-chair-rattan.jpg" alt="woven cane accent chair — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">accent chair — woven cane</div>
-    </div>
-    <div class="furniture-item reveal">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar-cabinet-arched-cane.jpg" alt="arched cane bar cabinet — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">bar cabinet — arched cane</div>
-    </div>
-    <div class="furniture-item reveal d1">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/lounge-chair-boucle.jpg" alt="sculptural bouclé lounge chair — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">lounge chair — sculptural bouclé</div>
-    </div>
-    <div class="furniture-item reveal d2">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/sideboard-cane-console.jpg" alt="cane-fronted sideboard console — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">sideboard — cane & teak</div>
-    </div>
-    <div class="furniture-item reveal d3">
-      <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/daybed-cane.jpg" alt="cane-backed daybed — indéva studio furniture design" loading="lazy" decoding="async">
-      <div class="furniture-item-cap">daybed — cane & linen</div>
+    <div class="service-detail-body">
+      <div class="furniture-cat-grid">
+        <div class="furniture-item reveal">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/lounge-chair-teak-mountain.webp" alt="teak-framed lounge chair — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">lounge chair — teak & bouclé</div>
+        </div>
+        <div class="furniture-item reveal d1">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/armchair-brass-velvet.webp" alt="brass-framed velvet armchair — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">armchair — brass & velvet</div>
+        </div>
+        <div class="furniture-item reveal d2">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/accent-chair-rattan.webp" alt="woven cane accent chair — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">accent chair — woven cane</div>
+        </div>
+        <div class="furniture-item reveal d3">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/lounge-chair-boucle.webp" alt="sculptural bouclé lounge chair — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">lounge chair — sculptural bouclé</div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="service-detail">
+    <div class="service-detail-header">
+      <div class="service-detail-num reveal">02</div>
+      <h2 class="service-detail-title reveal d1">tables</h2>
+      <p class="service-detail-stmt reveal d2">the surface everything<br>else gathers around.</p>
+    </div>
+    <div class="service-detail-body">
+      <div class="furniture-cat-grid">
+        <div class="furniture-item reveal">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dining-table-marble-oval.webp" alt="oval marble dining table with wooden base — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">dining table — marble & oak</div>
+        </div>
+        <div class="furniture-item reveal d1">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/coffee-table-round-cane.webp" alt="round two-tier cane coffee table — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">coffee table — cane & walnut</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <div class="service-detail-header">
+      <div class="service-detail-num reveal">03</div>
+      <h2 class="service-detail-title reveal d1">storage &<br>casegoods</h2>
+      <p class="service-detail-stmt reveal d2">closed doors,<br>open thinking.</p>
+    </div>
+    <div class="service-detail-body">
+      <div class="furniture-cat-grid">
+        <div class="furniture-item reveal">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/bar-cabinet-arched-cane.webp" alt="arched cane bar cabinet — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">bar cabinet — arched cane</div>
+        </div>
+        <div class="furniture-item reveal d1">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/sideboard-cane-console.webp" alt="cane-fronted sideboard console — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">sideboard — cane & teak</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-detail" style="border-bottom:none;">
+    <div class="service-detail-header">
+      <div class="service-detail-num reveal">04</div>
+      <h2 class="service-detail-title reveal d1">daybeds &<br>lounging</h2>
+      <p class="service-detail-stmt reveal d2">furniture for staying,<br>not just visiting.</p>
+    </div>
+    <div class="service-detail-body">
+      <div class="furniture-cat-grid" style="grid-template-columns:1fr;max-width:520px;">
+        <div class="furniture-item reveal" style="aspect-ratio:4/3;">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/daybed-cane.webp" alt="cane-backed daybed — indéva studio furniture design" loading="lazy" decoding="async">
+          <div class="furniture-item-cap">daybed — cane & linen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BESPOKE / MANUFACTURING FACILITY -->
+  <section style="padding:90px 60px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:0.85fr 1.15fr;gap:80px;">
+    <div>
+      <div class="label-line label reveal">beyond the collection</div>
+      <h3 class="display display-md reveal d1" style="margin-top:20px;">curated in our<br>own facility.</h3>
+    </div>
+    <div class="reveal d2" style="font-family:var(--sans);font-size:0.95rem;line-height:1.8;color:var(--white-muted);display:flex;flex-direction:column;justify-content:center;">
+      <p style="margin-bottom:24px;">every piece shown here can be adapted — or built entirely from scratch — in our own furniture manufacturing facility. dimensions, material, upholstery, finish: if you can specify it, we can curate it.</p>
+      <p style="margin-bottom:28px;">this isn't a fixed catalogue. it's a starting point for a conversation about the piece you actually need.</p>
+      <a href="/contact" onclick="showPage('contact');return false;" class="btn btn-primary" style="text-decoration:none;align-self:flex-start;">discuss a custom piece →</a>
+    </div>
+  </section>
+
+  <!-- CATALOG DOWNLOADS -->
+  <section style="padding:90px 60px;border-bottom:1px solid var(--line);">
+    <div class="label-line label reveal">download</div>
+    <h3 class="display display-md reveal d1" style="margin-top:20px;margin-bottom:12px;">our furniture<br>catalogues.</h3>
+    <p class="reveal d2" style="font-family:var(--sans);font-size:0.9rem;color:var(--white-muted);max-width:600px;margin-bottom:48px;">browse our full range by category — download any catalogue below as a PDF.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <button class="btn reveal" onclick="downloadCatalog('furniture-catalogue', 'Indeva-Furniture-Catalogue.pdf', 'Furniture Catalogue')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>furniture catalogue</span><span style="opacity:0.6;">↓</span>
+      </button>
+      <button class="btn reveal d1" onclick="downloadCatalog('luxury-furniture-catalogue', 'Indeva-Luxury-Furniture-Catalogue.pdf', 'Luxury Collection')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>luxury collection</span><span style="opacity:0.6;">↓</span>
+      </button>
+      <button class="btn reveal d2" onclick="downloadCatalog('office-furniture-catalogue', 'Indeva-Office-Furniture-Catalogue.pdf', 'Office Furniture')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>office furniture</span><span style="opacity:0.6;">↓</span>
+      </button>
+      <button class="btn reveal d3" onclick="downloadCatalog('hospital-furniture-catalogue', 'Indeva-Hospital-Furniture-Catalogue.pdf', 'Hospital Furniture')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>hospital furniture</span><span style="opacity:0.6;">↓</span>
+      </button>
+      <button class="btn reveal d4" onclick="downloadCatalog('restaurant-furniture-catalogue', 'Indeva-Restaurant-Furniture-Catalogue.pdf', 'Restaurant Furniture')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>restaurant furniture</span><span style="opacity:0.6;">↓</span>
+      </button>
+      <button class="btn reveal" onclick="downloadCatalog('outdoor-furniture-catalogue', 'Indeva-Outdoor-Furniture-Catalogue.pdf', 'Outdoor Furniture')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
+        <span>outdoor furniture</span><span style="opacity:0.6;">↓</span>
+      </button>
+    </div>
+  </section>
 
   <section style="padding:100px 60px;text-align:center;border-bottom:1px solid var(--line);">
     <div class="label-line label reveal" style="justify-content:center;">custom furniture & joinery</div>
@@ -7020,7 +7080,7 @@ triggerReveal();
 .call-fab:hover {
   transform: scale(1.05);
   box-shadow: 0 12px 36px rgba(193,80,46,0.55), 0 4px 12px rgba(0,0,0,0.4);
-  background: #d66a3a;
+  background: #C5A46D;
 }
 .call-fab-number {
   font-family: var(--mono, monospace);
@@ -8287,8 +8347,8 @@ function restartStoryNarration() { StoryNarrator.restart(); }
   font-family: var(--mono, monospace);
 }
 .feq-close:hover {
-  border-color: var(--gold, #c1502e);
-  color: var(--gold, #c1502e);
+  border-color: var(--gold, #9A6A3A);
+  color: var(--gold, #9A6A3A);
   background: rgba(193,80,46,0.06);
 }
 
@@ -8301,7 +8361,7 @@ function restartStoryNarration() { StoryNarrator.restart(); }
 .feq-grid input,
 .feq-grid select,
 .feq-grid textarea {
-  background: var(--black-3, #eae2d2);
+  background: var(--black-3, #E8E0CE);
   border: 1px solid var(--line, #2a2a2a);
   color: var(--white, #fff);
   font-family: var(--mono, monospace);
@@ -8457,14 +8517,27 @@ function feqSubmit() {
 }
 #leadPopupBackdrop.open { opacity: 1; pointer-events: all; }
 
-#leadPopup {
+#catalogGateBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 29998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#catalogGateBackdrop.open { opacity: 1; pointer-events: all; }
+
+.lp-modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -46%) scale(0.96);
   z-index: 29999;
   width: min(460px, 92vw);
-  background: #f1ebe0;
+  background: #EFE9DC;
   border: 1px solid rgba(193,80,46,0.18);
   box-shadow: 0 40px 100px rgba(0,0,0,0.8);
   padding: 52px 48px 44px;
@@ -8472,12 +8545,12 @@ function feqSubmit() {
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
 }
-#leadPopup.open {
+.lp-modal.open {
   opacity: 1;
   pointer-events: all;
   transform: translate(-50%, -50%) scale(1);
 }
-#leadPopup .lp-close {
+.lp-modal .lp-close {
   position: absolute;
   top: 16px; right: 18px;
   background: none;
@@ -8489,32 +8562,32 @@ function feqSubmit() {
   display: flex; align-items: center; justify-content: center;
   transition: border-color 0.2s, color 0.2s;
 }
-#leadPopup .lp-close:hover { border-color: #c1502e; color: #c1502e; }
-#leadPopup .lp-label {
+.lp-modal .lp-close:hover { border-color: #9A6A3A; color: #9A6A3A; }
+.lp-modal .lp-label {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.55rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #96431f;
+  color: #7A5530;
   margin-bottom: 16px;
   display: flex; align-items: center; gap: 12px;
 }
-#leadPopup .lp-label::before {
+.lp-modal .lp-label::before {
   content: '';
   width: 24px; height: 1px;
-  background: #96431f;
+  background: #7A5530;
   flex-shrink: 0;
 }
-#leadPopup .lp-heading {
+.lp-modal .lp-heading {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: clamp(1.7rem, 3vw, 2.2rem);
   font-weight: 300;
   line-height: 1.15;
-  color: #161412;
+  color: #242424;
   margin-bottom: 8px;
 }
-#leadPopup .lp-heading em { font-style: italic; color: #c1502e; }
-#leadPopup .lp-sub {
+.lp-modal .lp-heading em { font-style: italic; color: #9A6A3A; }
+.lp-modal .lp-sub {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.06em;
@@ -8522,11 +8595,11 @@ function feqSubmit() {
   margin-bottom: 32px;
   line-height: 1.7;
 }
-#leadPopup .lp-field {
+.lp-modal .lp-field {
   width: 100%;
-  background: #eae2d2;
+  background: #E8E0CE;
   border: 1px solid rgba(22,20,18,0.08);
-  color: #161412;
+  color: #242424;
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -8536,12 +8609,12 @@ function feqSubmit() {
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
-#leadPopup .lp-field::placeholder { color: rgba(22,20,18,0.28); }
-#leadPopup .lp-field:focus { border-color: rgba(193,80,46,0.5); }
-#leadPopup .lp-btn {
+.lp-modal .lp-field::placeholder { color: rgba(22,20,18,0.28); }
+.lp-modal .lp-field:focus { border-color: rgba(193,80,46,0.5); }
+.lp-modal .lp-btn {
   width: 100%;
-  background: #c1502e;
-  color: #f7f3ec;
+  background: #9A6A3A;
+  color: #F5F1E8;
   border: none;
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.62rem;
@@ -8552,9 +8625,9 @@ function feqSubmit() {
   margin-top: 8px;
   transition: background 0.2s;
 }
-#leadPopup .lp-btn:hover { background: #d66a3a; }
-#leadPopup .lp-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-#leadPopup .lp-status {
+.lp-modal .lp-btn:hover { background: #C5A46D; }
+.lp-modal .lp-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.lp-modal .lp-status {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
@@ -8563,7 +8636,7 @@ function feqSubmit() {
   text-align: center;
   min-height: 16px;
 }
-#leadPopup .lp-privacy {
+.lp-modal .lp-privacy {
   font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 0.5rem;
   letter-spacing: 0.12em;
@@ -8573,7 +8646,7 @@ function feqSubmit() {
   text-align: center;
 }
 @media (max-width: 520px) {
-  #leadPopup { padding: 44px 28px 36px; }
+  .lp-modal { padding: 44px 28px 36px; }
 }
 
 /* ══ PROJECT SHOWCASE ══════════════════════════════════════════════ */
@@ -9214,7 +9287,7 @@ function feqSubmit() {
 </div>
 
 <div id="leadPopupBackdrop" onclick="closeLeadPopup()"></div>
-<div id="leadPopup" role="dialog" aria-modal="true" aria-label="Quick enquiry">
+<div id="leadPopup" class="lp-modal" role="dialog" aria-modal="true" aria-label="Quick enquiry">
   <button class="lp-close" onclick="closeLeadPopup()" aria-label="close">✕</button>
   <div class="lp-label">let's connect</div>
   <h2 class="lp-heading">tell us who<br>you <em>are.</em></h2>
@@ -9224,6 +9297,20 @@ function feqSubmit() {
   <input class="lp-field" id="lp-email" type="email" placeholder="email address *" autocomplete="email">
   <button class="lp-btn" id="lpBtn" onclick="lpSubmit()">get in touch →</button>
   <div class="lp-status" id="lpStatus"></div>
+  <p class="lp-privacy">no obligations · no sales pressure · just a conversation</p>
+</div>
+
+<div id="catalogGateBackdrop" onclick="closeCatalogGate()"></div>
+<div id="catalogGateModal" class="lp-modal" role="dialog" aria-modal="true" aria-label="Download catalogue">
+  <button class="lp-close" onclick="closeCatalogGate()" aria-label="close">✕</button>
+  <div class="lp-label">get the catalogue</div>
+  <h2 class="lp-heading" id="catalogGateHeading">download the<br><em>catalogue.</em></h2>
+  <p class="lp-sub">leave your details and we'll send the PDF straight to your download — plus we'll follow up if you have questions.</p>
+  <input class="lp-field" id="cg-name"  type="text"  placeholder="your name *" autocomplete="name">
+  <input class="lp-field" id="cg-phone" type="tel"   placeholder="phone number *" autocomplete="tel">
+  <input class="lp-field" id="cg-email" type="email" placeholder="email address *" autocomplete="email">
+  <button class="lp-btn" id="cgBtn" onclick="catalogGateSubmit()">download catalogue →</button>
+  <div class="lp-status" id="cgStatus"></div>
   <p class="lp-privacy">no obligations · no sales pressure · just a conversation</p>
 </div>
 <script>
@@ -9279,13 +9366,13 @@ function lpSubmit() {
   .then(function(res) {
     if (res.error) throw res.error;
     sendLpEmailNotification();
-    if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#c1502e'; }
+    if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#9A6A3A'; }
     setTimeout(closeLeadPopup, 2000);
   })
   .catch(function(err) {
     console.error('Supabase insert failed, falling back to EmailJS', err);
     sendLpEmailNotification().then(function() {
-      if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#c1502e'; }
+      if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#9A6A3A'; }
       setTimeout(closeLeadPopup, 2000);
     });
   });
@@ -9322,6 +9409,95 @@ function showPageMob(id) {
   document.body.style.overflow='';
   window.scrollTo(0,0);
 }
+var pendingCatalog = null;
+
+function downloadCatalog(fileSlug, downloadName, label) {
+  pendingCatalog = { fileSlug: fileSlug, downloadName: downloadName, label: label };
+  var heading = document.getElementById('catalogGateHeading');
+  if (heading) heading.innerHTML = 'download the<br><em>' + label.toLowerCase() + '</em>.';
+  document.getElementById('catalogGateBackdrop').classList.add('open');
+  document.getElementById('catalogGateModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  try { gtag('event', 'catalog_gate_open', { event_category: 'engagement', event_label: label }); } catch(e) {}
+}
+
+function closeCatalogGate() {
+  document.getElementById('catalogGateBackdrop').classList.remove('open');
+  document.getElementById('catalogGateModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function triggerCatalogFileDownload() {
+  if (!pendingCatalog) return;
+  var a = document.createElement('a');
+  a.href = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/' + pendingCatalog.fileSlug + '.pdf';
+  a.download = pendingCatalog.downloadName;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  try { gtag('event', 'pdf_download', { event_category: 'Furniture Catalogue', event_label: pendingCatalog.label }); } catch(e) {}
+}
+
+function catalogGateSubmit() {
+  var name  = (document.getElementById('cg-name').value  || '').trim();
+  var phone = (document.getElementById('cg-phone').value || '').trim();
+  var email = (document.getElementById('cg-email').value || '').trim();
+  var status = document.getElementById('cgStatus');
+  var btn    = document.getElementById('cgBtn');
+  if (!name || !phone || !email) {
+    if (status) { status.textContent = 'please fill in all fields.'; status.style.color='#e88'; }
+    return;
+  }
+  if (!email.includes('@')) {
+    if (status) { status.textContent = 'please enter a valid email.'; status.style.color='#e88'; }
+    return;
+  }
+  if (btn) btn.disabled = true;
+  var catalogLabel = pendingCatalog ? pendingCatalog.label : 'Furniture Catalogue';
+
+  function sendGateEmailNotification() {
+    if (typeof emailjs === 'undefined') return Promise.resolve();
+    var params = {
+      to_name: 'Indéva studio', to_email: 'hello@indevastudio.com',
+      from_name: name, from_email: email, reply_to: email,
+      user_name: name, user_email: email, phone: phone,
+      subject: 'catalogue request: ' + catalogLabel + ' — ' + name,
+      message: 'Name: ' + name + ' | Phone: ' + phone + ' | Email: ' + email + ' | Catalogue: ' + catalogLabel
+    };
+    return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
+  }
+
+  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, source: 'furniture_catalog_' + (pendingCatalog ? pendingCatalog.fileSlug : 'unknown') }])
+  .then(function(res) {
+    if (res.error) throw res.error;
+    sendGateEmailNotification();
+    triggerCatalogFileDownload();
+    if (status) { status.textContent = 'thank you — your download is starting.'; status.style.color='#9A6A3A'; }
+    setTimeout(function() {
+      closeCatalogGate();
+      if (btn) btn.disabled = false;
+      if (status) status.textContent = '';
+      document.getElementById('cg-name').value = '';
+      document.getElementById('cg-phone').value = '';
+      document.getElementById('cg-email').value = '';
+    }, 1800);
+  })
+  .catch(function(err) {
+    console.error('Supabase insert failed, falling back to EmailJS', err);
+    sendGateEmailNotification().then(function() {
+      triggerCatalogFileDownload();
+      if (status) { status.textContent = 'thank you — your download is starting.'; status.style.color='#9A6A3A'; }
+      setTimeout(function() {
+        closeCatalogGate();
+        if (btn) btn.disabled = false;
+        if (status) status.textContent = '';
+      }, 1800);
+    });
+  });
+}
+
 function downloadProcessPDF() {
   try { gtag('event', 'pdf_download', { event_category: 'Process' }); } catch(e) {}
   var a = document.createElement('a');
