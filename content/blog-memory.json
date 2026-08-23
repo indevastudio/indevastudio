@@ -262,7 +262,11 @@
     "Farmhouse interior design South Delhi: 5 costly mistakes to avoid",
     "Hiring a Residential Designer for Golf Course Extension Road",
     "Cost guide for hiring a villa interior designer in New Gurgaon",
-    "Carcass construction explained: technical guide for Delhi NCR homes"
+    "Carcass construction explained: technical guide for Delhi NCR homes",
+    "Avoid Costly Mistakes with a Home Interior Designer in Panchsheel",
+    "Complete Villa Furniture Design Gurgaon Guide for Luxury Spaces",
+    "cost guide for hiring a commercial interior designer South Delhi",
+    "Understanding Carcass Construction for Delhi NCR Homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -527,7 +531,11 @@
     "farmhouse-design-south-delhi-mistakes",
     "hiring-residential-designer-golf-course-extension-road",
     "villa-interior-cost-guide-new-gurgaon",
-    "carcass-construction-guide-delhi-ncr"
+    "carcass-construction-guide-delhi-ncr",
+    "avoid-mistakes-home-interior-designer-panchsheel",
+    "villa-furniture-design-gurgaon-guide",
+    "cost-guide-commercial-interior-designer-south-delhi",
+    "carcass-construction-comparison-delhi-ncr"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -792,6 +800,10 @@
     "farmhouse interior design South Delhi",
     "residential interior designer Golf Course Extension Road",
     "villa interior designer New Gurgaon",
+    "carcass construction explained",
+    "home interior designer Panchsheel Park",
+    "villa furniture design Gurgaon",
+    "commercial interior designer South Delhi",
     "carcass construction explained"
   ],
   "summaries": [
@@ -1057,13 +1069,13 @@
     "Avoid five recurring errors that drain budgets and compromise style in South Delhi farmhouse projects.",
     "A clear, step‑by‑step process helps first‑time clients select and work with a residential interior designer on Golf Course Extension Road, ensuring smooth execution within a ₹15–25 lakh budget.",
     "Understanding the cost structure helps homeowners in New Gurgaon make informed decisions and stay within a ₹1–3 crore budget.",
-    "The article compares carcass construction with conventional blockwork, focusing on material specs, cost, durability and appropriate applications in Delhi NCR homes."
+    "The article compares carcass construction with conventional blockwork, focusing on material specs, cost, durability and appropriate applications in Delhi NCR homes.",
+    "Knowing the common traps lets you protect your budget and achieve a design you love.",
+    "A practical, numbered guide walks first‑time clients through every stage of villa furniture design Gurgaon, from concept to completion.",
+    "Understanding cost drivers, realistic budgets, and negotiation tactics helps you avoid surprise bills when fitting out a South Delhi office.",
+    "A technical comparison shows why indéva studio prefers carcass construction for most Delhi NCR interior projects."
   ],
   "lastAngles": [
-    "step-by-step",
-    "material-comparison",
-    "cost-guide",
-    "step-by-step",
     "mistakes-avoid",
     "material-comparison",
     "cost-guide",
@@ -1095,6 +1107,10 @@
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
+    "material-comparison",
+    "mistakes-avoid",
+    "step-by-step",
+    "cost-guide",
     "material-comparison",
     "mistakes-avoid",
     "step-by-step",
@@ -1164,6 +1180,10 @@
     "south-delhi-farmhouse-interior-designer",
     "locality-golf-course-extension-road",
     "locality-new-gurgaon",
+    "custom-furniture-construction-guide",
+    "locality-panchsheel-park",
+    "gurgaon-villa-interior-designer",
+    "south-delhi-commercial-interior-designer",
     "custom-furniture-construction-guide"
   ],
   "targetUrls": [
@@ -1229,6 +1249,10 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services"
   ],
   "contentTypes": [
@@ -1294,6 +1318,10 @@
     "SERVICE_PAGE",
     "LOCATION_PAGE",
     "LOCATION_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1359,6 +1387,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1372,8 +1404,8 @@
     "custom-furniture-construction-guide": "2026-08-23",
     "locality-maharani-bagh": "2026-08-12",
     "gurgaon-interior-cost-guide": "2026-08-12",
-    "locality-panchsheel-park": "2026-08-13",
-    "gurgaon-villa-interior-designer": "2026-08-21",
+    "locality-panchsheel-park": "2026-08-23",
+    "gurgaon-villa-interior-designer": "2026-08-23",
     "interior-boq-guide": "2026-08-13",
     "locality-defence-colony": "2026-08-13",
     "gurgaon-farmhouse-interior-designer": "2026-08-22",
@@ -1390,13 +1422,10 @@
     "gurgaon-commercial-interior-designer": "2026-08-16",
     "hdhmr-vs-plywood-comparison": "2026-08-16",
     "locality-new-gurgaon": "2026-08-23",
-    "interior-lighting-design-guide": "2026-08-21"
+    "interior-lighting-design-guide": "2026-08-21",
+    "south-delhi-commercial-interior-designer": "2026-08-23"
   },
   "lastLocations": [
-    "Gurgaon",
-    "Delhi NCR",
-    "Hauz Khas",
-    "DLF Gurgaon",
     "Gurgaon",
     "Delhi NCR",
     "South Delhi",
@@ -1432,6 +1461,10 @@
     "South Delhi",
     "Golf Course Extension Road",
     "New Gurgaon",
+    "Delhi NCR",
+    "Panchsheel Park",
+    "Gurgaon",
+    "South Delhi",
     "Delhi NCR"
   ]
 }
