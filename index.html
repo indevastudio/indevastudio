@@ -9474,26 +9474,24 @@ function catalogGateSubmit() {
     if (res.error) throw res.error;
     sendGateEmailNotification();
     triggerCatalogFileDownload();
-    if (status) { status.textContent = 'thank you — your download is starting.'; status.style.color='#9A6A3A'; }
-    setTimeout(function() {
-      closeCatalogGate();
-      if (btn) btn.disabled = false;
-      if (status) status.textContent = '';
-      document.getElementById('cg-name').value = '';
-      document.getElementById('cg-phone').value = '';
-      document.getElementById('cg-email').value = '';
-    }, 1800);
+    closeCatalogGate();
+    var ty = document.getElementById('thankYouModal');
+    if (ty) ty.classList.add('open');
+    if (btn) btn.disabled = false;
+    if (status) status.textContent = '';
+    document.getElementById('cg-name').value = '';
+    document.getElementById('cg-phone').value = '';
+    document.getElementById('cg-email').value = '';
   })
   .catch(function(err) {
     console.error('Supabase insert failed, falling back to EmailJS', err);
     sendGateEmailNotification().then(function() {
       triggerCatalogFileDownload();
-      if (status) { status.textContent = 'thank you — your download is starting.'; status.style.color='#9A6A3A'; }
-      setTimeout(function() {
-        closeCatalogGate();
-        if (btn) btn.disabled = false;
-        if (status) status.textContent = '';
-      }, 1800);
+      closeCatalogGate();
+      var ty = document.getElementById('thankYouModal');
+      if (ty) ty.classList.add('open');
+      if (btn) btn.disabled = false;
+      if (status) status.textContent = '';
     });
   });
 }
