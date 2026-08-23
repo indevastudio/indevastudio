@@ -204,23 +204,34 @@ nav.solid {
 
 .nav-center {
   display: flex;
-  gap: 36px;
+  gap: 40px;
 }
 .nav-link {
   font-family: var(--mono);
-  font-size: 0.62rem;
-  font-weight: 300;
-  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--white);
   cursor: pointer;
   transition: color 0.25s;
   background: none;
   border: none;
-  padding: 0;
+  padding: 0 0 4px;
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--gold);
+  transition: right 0.25s ease;
 }
 .nav-link:hover, .nav-link.active-link { color: var(--gold); }
 .nav-link.active-link { color: var(--gold); }
+.nav-link:hover::after, .nav-link.active-link::after { right: 0; }
 
 .nav-cta {
   font-family: var(--mono);
@@ -625,13 +636,17 @@ nav.solid {
 .project-card:hover .project-card-info { transform: translateY(0); }
 .project-card-type {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.56rem;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold-bright);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.7), 0 1px 10px rgba(0,0,0,0.45);
-  margin-bottom: 8px;
+  color: #fff;
+  background: var(--gold-bright);
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 2px;
+  text-shadow: none;
+  margin-bottom: 10px;
 }
 .project-card-name {
   font-family: var(--serif);
@@ -925,10 +940,10 @@ nav.solid {
 #about { background: var(--black); }
 
 .about-hero {
-  padding: 160px 60px 100px;
+  padding: 130px 60px 70px;
   border-bottom: 1px solid var(--line);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: 80px;
   align-items: end;
 }
@@ -942,6 +957,29 @@ nav.solid {
   font-weight: 300;
   line-height: 1.7;
   color: var(--white-dim);
+}
+.about-scroll-cue {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.about-scroll-cue-line {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  animation: aboutScrollPulse 2s ease-in-out infinite;
+}
+.about-scroll-cue span {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(22,20,18,0.35);
+}
+@keyframes aboutScrollPulse {
+  0%,100% { opacity: 0.35; transform: scaleX(1); }
+  50%      { opacity: 0.9;  transform: scaleX(1.2); }
 }
 
 .founder-section {
@@ -1061,7 +1099,7 @@ nav.solid {
 #services { background: var(--black); }
 
 .services-hero {
-  padding: 160px 60px 80px;
+  padding: 130px 60px 30px;
   border-bottom: 1px solid var(--line);
 }
 .services-hero-tagline {
@@ -1074,7 +1112,7 @@ nav.solid {
 }
 
 .service-detail {
-  padding: 80px 60px;
+  padding: 44px 60px;
   border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: 1fr 1.8fr;
@@ -1552,7 +1590,7 @@ nav.solid {
 #contact { background: var(--black); }
 
 .contact-hero {
-  padding: 160px 60px 80px;
+  padding: 130px 60px 30px;
   border-bottom: 1px solid var(--line);
 }
 .contact-sub {
@@ -1565,7 +1603,7 @@ nav.solid {
 }
 
 .contact-body {
-  padding: 80px 60px 120px;
+  padding: 40px 60px 120px;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 100px;
@@ -1579,7 +1617,14 @@ nav.solid {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold-dim);
-  margin-bottom: 48px;
+  margin-bottom: 14px;
+}
+.contact-form-headline {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 36px;
 }
 
 .form-row {
@@ -3234,13 +3279,13 @@ img {
       <!-- 2. Restaurant, Udaipur -->
       <div class="hero-slide" data-label="restaurant, udaipur"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/dance%20floor%20area.webp" alt="restaurant interior, udaipur — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 3. Urban Apartment, Dehradun -->
-      <div class="hero-slide" data-label="urban apartment"><img src="/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen, dehradun — indéva studio" loading="lazy" width="734" height="744" decoding="async"></div>
+      <div class="hero-slide" data-label="urban apartment"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen, dehradun — indéva studio" loading="lazy" width="734" height="744" decoding="async"></div>
       <!-- 4. Studio Workspace, Gurgaon -->
       <div class="hero-slide" data-label="studio workspace"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Studio%20Workspace.webp" alt="studio workspace office, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 5. Shanti Villa, Goa -->
       <div class="hero-slide" data-label="shanti villa"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp" alt="shanti villa, goa — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 6. Hashtag Restaurant, Noida -->
-      <div class="hero-slide" data-label="vasant kunj"><img src="/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async"></div>
+      <div class="hero-slide" data-label="vasant kunj"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async"></div>
       <!-- 7. DLF Crest, Gurgaon -->
       <div class="hero-slide" data-label="dlf crest"><img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/living%20area.webp" alt="dlf crest penthouse, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <div class="hero-space-label" id="hero-space-label">private villa</div>
@@ -3402,7 +3447,7 @@ img {
         </div>
         <!-- Card 3 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3420,19 +3465,9 @@ img {
             <div class="project-card-loc">gurgaon</div>
           </div>
         </div>
-        <!-- Card 5 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp" alt="shanti villa interior design, goa — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">light as material.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">shanti villa</div>
-            <div class="project-card-loc">goa</div>
-          </div>
-        </div>
         <!-- Card 6 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3460,7 +3495,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg" alt="urban apartment kitchen interior design, dehradun — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3478,16 +3513,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/Master%20bedroom%20design.webp" alt="shanti villa interior design, goa — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">light as material.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">shanti villa</div>
-            <div class="project-card-loc">goa</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3539,7 +3565,7 @@ img {
         </div>
       </div>
       <div class="reveal d2" style="aspect-ratio:4/3; overflow:hidden; background:var(--black-3);">
-        <img src="/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;">
       </div>
     </div>
   </section>
@@ -3823,6 +3849,7 @@ img {
         <a class="footer-nav-link" href="/#philosophy" onclick="showPage('philosophy');return false;">philosophy</a>
         <a class="footer-nav-link" href="/#process" onclick="showPage('process');return false;">process</a>
         <a class="footer-nav-link" href="/insights">insights</a>
+        <a class="footer-nav-link" href="/vendors" onclick="showPage('vendors');return false;">vendors</a>
         <a class="footer-nav-link" href="/#contact" onclick="showPage('contact');return false;">contact</a>
       </div>
       <div class="footer-nav-links" style="margin-top:20px;">
@@ -3840,6 +3867,7 @@ img {
         <a href="tel:+919717881083" class="footer-contact-item">+91 9717881083</a>
         <a href="https://www.instagram.com/indevastudio" class="footer-contact-item" target="_blank" rel="noopener">@indevastudio</a>
         <address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address>
       </div>
     </div>
   </footer>
@@ -3860,14 +3888,18 @@ img {
   <section class="about-hero pt-nav">
     <div>
       <div class="label-line label reveal">about indé</div>
-      <h2 class="display display-xl reveal d1" style="margin-top:32px;">
-        we don't have<br>a legacy.<br><em class="italic gold">we have opinions.</em>
+      <h2 class="display display-lg reveal d1" style="margin-top:20px;">
+        we don't have a legacy.<br><em class="italic gold">we have opinions.</em>
       </h2>
     </div>
     <div class="about-intro reveal d2">
       <p class="about-intro-text">
         indéva studio was founded to challenge how interiors are commonly designed and delivered. too many projects are built on surface aesthetics and unrealistic promises. we operate with conviction, clarity, and responsibility — from brief to handover, without exception.
       </p>
+      <div class="about-scroll-cue">
+        <div class="about-scroll-cue-line"></div>
+        <span>keep scrolling</span>
+      </div>
     </div>
   </section>
 
@@ -4003,6 +4035,7 @@ img {
         <button class="footer-nav-link" onclick="showPage('home')">home</button>
         <button class="footer-nav-link" onclick="showPage('services')">services</button>
         <button class="footer-nav-link" onclick="showPage('process')">process</button>
+        <button class="footer-nav-link" onclick="showPage('vendors')">vendors</button>
         <button class="footer-nav-link" onclick="showPage('contact')">contact</button>
       </div>
     </div>
@@ -4010,6 +4043,7 @@ img {
       <div class="footer-contact-info">
         <a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a>
         <address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address>
       </div>
     </div>
   </footer>
@@ -4027,10 +4061,14 @@ img {
 
   <section class="services-hero pt-nav">
     <div class="label-line label reveal">what we offer</div>
-    <h2 class="display display-xl reveal d1" style="margin-top:32px;">
-      clear decisions.<br>controlled execution.<br><em class="italic gold">reliable delivery.</em>
+    <h2 class="display display-lg reveal d1" style="margin-top:20px;">
+      clear decisions. controlled execution.<br><em class="italic gold">reliable delivery.</em>
     </h2>
     <p class="services-hero-tagline reveal d2">architecture & interior design · furniture & joinery · project execution</p>
+    <div class="about-scroll-cue">
+      <div class="about-scroll-cue-line"></div>
+      <span>keep scrolling</span>
+    </div>
   </section>
 
   <div class="service-detail">
@@ -4093,7 +4131,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">designed to last. not to impress.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /services -->
@@ -4213,7 +4252,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">designed to last. not to impress.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /process -->
@@ -4423,7 +4463,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">designed to last. not to impress.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">indéva studio · indéva studio · designed for living, not applause.</span></div>
 </div><!-- /philosophy -->
@@ -4436,15 +4477,20 @@ img {
 
   <section class="contact-hero pt-nav">
     <div class="label-line label reveal">start a conversation</div>
-    <h2 class="display display-xl reveal d1" style="margin-top:32px;">
-      if you're serious<br>about building,<br><em class="italic gold">so are we.</em>
+    <h2 class="display display-lg reveal d1" style="margin-top:20px;">
+      if you're serious about building,<br><em class="italic gold">so are we.</em>
     </h2>
     <p class="contact-sub reveal d2">new delhi, india · <a href="mailto:hello@indevastudio.com" style="color:inherit;">hello@indevastudio.com</a></p>
+    <div class="about-scroll-cue">
+      <div class="about-scroll-cue-line"></div>
+      <span>keep scrolling</span>
+    </div>
   </section>
 
   <div class="contact-body">
     <div class="contact-form">
       <div class="contact-form-title reveal">project enquiry form</div>
+      <h3 class="contact-form-headline reveal">tell us about your project.</h3>
       <!-- honeypot: hidden from users, bots fill this -->
       <input type="text" id="cf-hp" name="cf-hp" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="form-row">
@@ -4464,9 +4510,8 @@ img {
           <option>other</option>
         </select>
       </div>
-      <div class="form-row-2">
-        <input type="text" id="cf-location" class="form-field reveal" placeholder="site location">
-        <input type="text" id="cf-area" class="form-field reveal d1" placeholder="approximate area (sqft)">
+      <div class="form-row">
+        <input type="text" id="cf-area" class="form-field reveal" placeholder="approximate area (sqft)">
       </div>
       <div class="form-row">
         <select id="cf-budget" class="form-field reveal">
@@ -4507,6 +4552,7 @@ img {
         <div class="contact-detail-item">
           <div class="contact-detail-label">phone</div>
           <a href="tel:+919717881083" class="contact-detail-value">+91 9717881083</a>
+          <a href="tel:+919958471083" class="contact-detail-value">+91 9958471083</a>
           <a href="https://wa.me/919717881083" class="contact-detail-value">whatsapp →</a>
         </div>
         <div class="contact-detail-item">
@@ -4520,6 +4566,7 @@ img {
         <div class="contact-detail-item">
           <div class="contact-detail-label">location</div>
           <span class="contact-detail-value">new delhi, india</span>
+          <span class="contact-detail-value">34/11, lampur rd, industrial area, narela, delhi, 110040</span>
         </div>
       </div>
       <div class="contact-bottom-stmt">
@@ -4535,7 +4582,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">designed to last. not to impress.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">get in touch</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><a href="tel:+919717881083" class="footer-contact-item">+91 9717881083</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">get in touch</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><a href="tel:+919717881083" class="footer-contact-item">+91 9717881083</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /contact -->
@@ -4823,7 +4871,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">designed to last. not to impress.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /blog -->
@@ -5370,7 +5419,8 @@ img {
   <footer class="site-footer">
     <div class="footer-logo-wrap"><div class="footer-logo" onclick="showPage('home')">indéva studio</div><p class="footer-tagline">beyond the visuals.</p></div>
     <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><button class="footer-nav-link" onclick="showPage('home')">home</button><button class="footer-nav-link" onclick="showPage('about')">about</button><button class="footer-nav-link" onclick="showPage('projects')">projects</button><button class="footer-nav-link" onclick="showPage('services')">services</button><button class="footer-nav-link" onclick="showPage('philosophy')">philosophy</button><button class="footer-nav-link" onclick="showPage('process')">process</button><a class="footer-nav-link" href="/insights">insights</a><button class="footer-nav-link" onclick="showPage('vendors')">vendors</button><button class="footer-nav-link" onclick="showPage('contact')">contact</button></div></div>
-    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address></div></div>
+    <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
+        <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /vendors -->
@@ -6278,15 +6328,15 @@ const CAPS = {
   'kitchen and common washroom.webp':{t:'Kitchen & Utility',c:'Function arranged with precision'},
   'Kitchen Area.webp':{t:'Kitchen Area',c:'A kitchen sized for use, not display'},
   'Kitchen.webp':{t:'Kitchen Detail',c:'Material choices made once and not revisited'},
-  '/urban-apartment-kitchen-1.jpg':{t:'Kitchen & Breakfast Bar',c:'A mint-glass kitchen anchored by a curved, brass-fluted bar'},
-  '/urban-apartment-kitchen-2.jpg':{t:'Kitchen Cabinetry',c:'Glossy mint cabinetry with warm, backlit display niches'},
-  '/urban-apartment-kitchen-3.jpg':{t:'Breakfast Bar Corner',c:'Pendant lighting over a curved, fluted-brass counter'},
-  '/urban-apartment-kitchen-4.jpg':{t:'Kitchen Appliances',c:'Integrated black appliances within the mint glass run'},
-  '/vasant-kunj-cover.jpg':{t:'Parents\' Bedroom — Full View',c:'Walnut fluting, brushed brass, and layered warm lighting'},
-  '/vasant-kunj-bedroom-1.jpg':{t:'Fluted Headboard Wall',c:'Vertical walnut fluting flanked by concealed LED strips'},
-  '/vasant-kunj-bedroom-2.jpg':{t:'Window Seat & TV Wall',c:'Backlit TV panel beside a cushioned reading nook'},
-  '/vasant-kunj-bedroom-3.jpg':{t:'Bed Wall, Straight-On',c:'Upholstered headboard framed by wall sconces'},
-  '/vasant-kunj-bedroom-4.jpg':{t:'TV Unit Detail',c:'Fluted brass-lit panel with floating drawer unit'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg':{t:'Kitchen & Breakfast Bar',c:'A mint-glass kitchen anchored by a curved, brass-fluted bar'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-2.jpg':{t:'Kitchen Cabinetry',c:'Glossy mint cabinetry with warm, backlit display niches'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-3.jpg':{t:'Breakfast Bar Corner',c:'Pendant lighting over a curved, fluted-brass counter'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-4.jpg':{t:'Kitchen Appliances',c:'Integrated black appliances within the mint glass run'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg':{t:'Parents\' Bedroom — Full View',c:'Walnut fluting, brushed brass, and layered warm lighting'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-1.jpg':{t:'Fluted Headboard Wall',c:'Vertical walnut fluting flanked by concealed LED strips'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-2.jpg':{t:'Window Seat & TV Wall',c:'Backlit TV panel beside a cushioned reading nook'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-3.jpg':{t:'Bed Wall, Straight-On',c:'Upholstered headboard framed by wall sconces'},
+  'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-4.jpg':{t:'TV Unit Detail',c:'Fluted brass-lit panel with floating drawer unit'},
   'Master washroom.webp':{t:'Master Washroom',c:'Restraint applied to every surface'},
   'foyer area.webp':{t:'Entrance Foyer',c:'The first room sets the tone for all others'},
   'lobby area.webp':{t:'Lobby',c:'Space held in deliberate stillness'},
@@ -6348,21 +6398,21 @@ window.PROJECTS = [
   {id:'urban-apartment',name:'Urban Apartment',location:'Dehradun',typology:'Residential',area:'1,800 sqft',year:'2024',status:'Completed',
    description:'a compact urban apartment where every square foot was planned, not decorated.',
    editorial:'<p>the challenge was density without compromise. <em>rooms were sized for use, not aspiration.</em></p><p>storage was resolved first. then light. then material.</p>',
-   cover:'/urban-apartment-kitchen-1.jpg',
-   images:['/urban-apartment-kitchen-1.jpg','/urban-apartment-kitchen-2.jpg','/urban-apartment-kitchen-3.jpg','/urban-apartment-kitchen-4.jpg'],
-   parallax:'/urban-apartment-kitchen-1.jpg',parallaxLbl:'kitchen'},
+   cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg',
+   images:['https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-2.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-3.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-4.jpg'],
+   parallax:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg',parallaxLbl:'kitchen'},
   {id:'patel-nagar',name:'Patel Nagar Retail Store',location:'Patel Nagar, Delhi',typology:'Commercial',area:'2 floors',year:'2026',status:'Ongoing',
    description:'a menswear store rebuilt around a Gen Z customer — fast to read, quick to shop, built for the phone camera as much as the rack.',
    editorial:'<p>the brief was speed and identity, not square footage. <em>fixtures were pulled back so the merchandise — walls of folded color — could do the talking.</em></p><p>the ground floor moves customers up naturally; the first floor slows them down around a branded lounge built to be photographed.</p>',
-   cover:'/patel-nagar-retail-1.jpg',
-   images:['/patel-nagar-retail-1.jpg','/patel-nagar-retail-2.jpg','/patel-nagar-retail-3.jpg','/patel-nagar-retail-4.jpg'],
-   parallax:'/patel-nagar-retail-2.jpg',parallaxLbl:'folded knitwear wall'},
+   cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-1.jpg',
+   images:['https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-1.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-2.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-3.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-4.jpg'],
+   parallax:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-2.jpg',parallaxLbl:'folded knitwear wall'},
   {id:'vasant-kunj',name:'Vasant Kunj',location:'New Delhi',typology:'Residential',area:'DDA Residence',year:'2025',status:'Completed',
    description:'a parents\' bedroom built on walnut fluting, warm beige lacquer, and brushed brass — quiet sophistication resolved through joinery, not decoration.',
    editorial:'<p>the brief was comfort without excess. <em>every surface — the fluted headboard wall, the backlit TV panel, the window seat — was drawn before it was built.</em></p><p>lighting was layered, not applied: cove, panel and pendant sources let the room shift from the clarity of morning to the intimacy of evening.</p>',
-   cover:'/vasant-kunj-cover.jpg',
-   images:['/vasant-kunj-bedroom-1.jpg','/vasant-kunj-bedroom-2.jpg','/vasant-kunj-bedroom-3.jpg','/vasant-kunj-bedroom-4.jpg'],
-   parallax:'/vasant-kunj-bedroom-1.jpg',parallaxLbl:'parents\' bedroom'},
+   cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg',
+   images:['https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-1.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-2.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-3.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-4.jpg'],
+   parallax:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-bedroom-1.jpg',parallaxLbl:'parents\' bedroom'},
 ];
 
 let curP=null, lbImgs=[], lbIdx=0;
@@ -7177,7 +7227,6 @@ function submitEnquiry() {
   var email    = (document.getElementById('cf-email').value    || '').trim();
   var phone    = (document.getElementById('cf-phone').value    || '').trim();
   var type     = (document.getElementById('cf-type').value     || '');
-  var location = (document.getElementById('cf-location').value || '').trim();
   var area     = (document.getElementById('cf-area').value     || '').trim();
   var budget   = (document.getElementById('cf-budget').value   || '');
   var timeline = (document.getElementById('cf-timeline').value || '');
@@ -7198,7 +7247,7 @@ function submitEnquiry() {
   if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fieldErr('cf-email', 'please enter a valid email address.');
 
   // Clear error states
-  ['cf-name','cf-email','cf-phone','cf-location','cf-area'].forEach(function(id){
+  ['cf-name','cf-email','cf-phone','cf-area'].forEach(function(id){
     var el = document.getElementById(id); if (el) el.classList.remove('error');
   });
 
@@ -7208,7 +7257,7 @@ function submitEnquiry() {
   statusMsg.textContent = '';
 
   var leadRow = {
-    name: name, email: email, phone: phone, city: location || null,
+    name: name, email: email, phone: phone,
     project_type: type || null, budget: budget || null, area: area || null,
     timeline: timeline || null, source: 'contact-page'
   };
@@ -7218,10 +7267,10 @@ function submitEnquiry() {
     var params = {
       to_name: 'Indéva studio', to_email: 'ceo@indevastudio.com',
       from_name: name, from_email: email, reply_to: email,
-      phone: phone, project_type: type||'—', location: location||'—',
+      phone: phone, project_type: type||'—',
       area: area||'—', budget: budget||'—', timeline: timeline||'—',
       subject: 'new enquiry from ' + name,
-      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nType: '+(type||'—')+'\nLocation: '+(location||'—')+'\nArea: '+(area||'—')+'\nBudget: '+(budget||'—')+'\nTimeline: '+(timeline||'—')
+      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nType: '+(type||'—')+'\nArea: '+(area||'—')+'\nBudget: '+(budget||'—')+'\nTimeline: '+(timeline||'—')
     };
     return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
   }
@@ -7249,7 +7298,7 @@ function submitEnquiry() {
   }
 
   function resetForm() {
-    ['cf-name','cf-email','cf-phone','cf-location','cf-area'].forEach(function(id){
+    ['cf-name','cf-email','cf-phone','cf-area'].forEach(function(id){
       var el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('error'); }
     });
     ['cf-type','cf-budget','cf-timeline'].forEach(function(id){
@@ -7274,7 +7323,6 @@ function _unused_old_submitEnquiry() {
   var email    = document.getElementById('cf-email').value.trim();
   var phone    = document.getElementById('cf-phone').value.trim();
   var type     = document.getElementById('cf-type').value;
-  var location = document.getElementById('cf-location').value.trim();
   var area     = document.getElementById('cf-area').value.trim();
   var budget   = document.getElementById('cf-budget').value;
   var timeline = document.getElementById('cf-timeline').value;
@@ -7338,7 +7386,7 @@ function _unused_old_submitEnquiry() {
     });
 
   function resetAndRedirect() {
-    ['cf-name','cf-email','cf-phone','cf-location','cf-area'].forEach(function(id){
+    ['cf-name','cf-email','cf-phone','cf-area'].forEach(function(id){
       var el = document.getElementById(id); if (el) el.value = '';
     });
     ['cf-type','cf-budget','cf-timeline'].forEach(function(id){
@@ -8923,6 +8971,7 @@ function feqSubmit() {
   <p class="lp-sub">leave your details and we'll reach out<br>within 24 hours. no spam, ever.</p>
   <input class="lp-field" id="lp-name"  type="text"  placeholder="your name *" autocomplete="name">
   <input class="lp-field" id="lp-phone" type="tel"   placeholder="phone number *" autocomplete="tel">
+  <input class="lp-field" id="lp-email" type="email" placeholder="email address *" autocomplete="email">
   <button class="lp-btn" id="lpBtn" onclick="lpSubmit()">get in touch →</button>
   <div class="lp-status" id="lpStatus"></div>
   <p class="lp-privacy">no obligations · no sales pressure · just a conversation</p>
@@ -8951,23 +9000,44 @@ document.addEventListener('keydown', function(e) {
 function lpSubmit() {
   var name  = (document.getElementById('lp-name').value  || '').trim();
   var phone = (document.getElementById('lp-phone').value || '').trim();
+  var email = (document.getElementById('lp-email').value || '').trim();
   var status = document.getElementById('lpStatus');
   var btn    = document.getElementById('lpBtn');
-  if (!name || !phone) {
-    if (status) { status.textContent = 'please fill in both fields.'; status.style.color='#e88'; }
+  if (!name || !phone || !email) {
+    if (status) { status.textContent = 'please fill in all fields.'; status.style.color='#e88'; }
+    return;
+  }
+  if (!email.includes('@')) {
+    if (status) { status.textContent = 'please enter a valid email.'; status.style.color='#e88'; }
     return;
   }
   if (btn) btn.disabled = true;
-  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, source: 'lead_popup' }])
+
+  function sendLpEmailNotification() {
+    if (typeof emailjs === 'undefined') return Promise.resolve();
+    var params = {
+      to_name: 'Indéva studio', to_email: 'hello@indevastudio.com',
+      from_name: name, from_email: email, reply_to: email,
+      user_name: name, user_email: email, phone: phone,
+      subject: 'new quick enquiry from ' + name,
+      message: 'Name: ' + name + ' | Phone: ' + phone + ' | Email: ' + email + ' | Source: lead popup'
+    };
+    return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
+  }
+
+  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, source: 'lead_popup' }])
   .then(function(res) {
     if (res.error) throw res.error;
+    sendLpEmailNotification();
     if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#c1502e'; }
     setTimeout(closeLeadPopup, 2000);
   })
   .catch(function(err) {
-    console.error('Supabase insert failed', err);
-    if (status) { status.textContent = 'something went wrong. please try again.'; status.style.color='#e88'; }
-    if (btn) btn.disabled = false;
+    console.error('Supabase insert failed, falling back to EmailJS', err);
+    sendLpEmailNotification().then(function() {
+      if (status) { status.textContent = 'thank you — we will be in touch.'; status.style.color='#c1502e'; }
+      setTimeout(closeLeadPopup, 2000);
+    });
   });
 }
 
