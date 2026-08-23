@@ -743,7 +743,7 @@ nav.solid {
   align-items: stretch;
 }
 .home-studio-photo { aspect-ratio: 4/5; overflow: hidden; background: var(--black-3); }
-.home-studio-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; filter:brightness(0.92); }
+.home-studio-photo img { width:100%; height:100%; object-fit:cover; object-position:center 15%; filter:brightness(0.92); }
 .home-studio-items { display:flex; flex-direction:column; justify-content:center; padding: 60px; gap: 40px; }
 .home-studio-item { display:flex; gap:20px; align-items:flex-start; padding-bottom:36px; border-bottom:1px solid var(--line); }
 .home-studio-item:last-child { border-bottom:none; padding-bottom:0; }
@@ -771,8 +771,8 @@ nav.solid {
 @media (max-width: 900px) {
   .home-phil-inner { grid-template-columns: 1fr; gap: 40px; }
   .home-studio-grid { grid-template-columns: 1fr; }
-  .home-studio-photo { aspect-ratio: 3/4; max-height: 420px; }
-  .home-studio-photo img { object-position: center 20%; }
+  .home-studio-photo { aspect-ratio: 1/1; max-height: 420px; }
+  .home-studio-photo img { object-position: center 15%; }
   .home-studio-items { padding: 40px 24px; }
 }
 
@@ -3578,7 +3578,7 @@ img {
     </div>
     <div class="home-studio-grid">
       <div class="home-studio-photo reveal">
-        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="900" height="1125" loading="lazy" decoding="async">
+        <img src="https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="eager" decoding="async">
       </div>
       <div class="home-studio-items">
         <div class="home-studio-item reveal">
