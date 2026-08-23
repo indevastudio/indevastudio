@@ -7715,6 +7715,8 @@ function _unused_old_submitEnquiry() {
 function closeThankyou() {
   var modal = document.getElementById('thankYouModal');
   if (modal) modal.classList.remove('open');
+  var catLink = document.getElementById('ty-catalog-link');
+  if (catLink) catLink.style.display = 'none';
 }
 
 // Close thank you modal on overlay click
@@ -9427,17 +9429,17 @@ function closeCatalogGate() {
   document.body.style.overflow = '';
 }
 
-function triggerCatalogFileDownload() {
+function showCatalogDownloadLink() {
   if (!pendingCatalog) return;
-  var a = document.createElement('a');
-  a.href = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/' + pendingCatalog.fileSlug + '.pdf';
-  a.download = pendingCatalog.downloadName;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  try { gtag('event', 'pdf_download', { event_category: 'Furniture Catalogue', event_label: pendingCatalog.label }); } catch(e) {}
+  var link = document.getElementById('ty-catalog-link');
+  if (!link) return;
+  link.href = 'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/project-images-for-website/' + pendingCatalog.fileSlug + '.pdf';
+  link.download = pendingCatalog.downloadName;
+  link.textContent = 'download your catalogue →';
+  link.style.display = 'block';
+  link.onclick = function() {
+    try { gtag('event', 'pdf_download', { event_category: 'Furniture Catalogue', event_label: pendingCatalog.label }); } catch(e) {}
+  };
 }
 
 function catalogGateSubmit() {
@@ -9473,8 +9475,8 @@ function catalogGateSubmit() {
   .then(function(res) {
     if (res.error) throw res.error;
     sendGateEmailNotification();
-    triggerCatalogFileDownload();
     closeCatalogGate();
+    showCatalogDownloadLink();
     var ty = document.getElementById('thankYouModal');
     if (ty) ty.classList.add('open');
     if (btn) btn.disabled = false;
@@ -9486,8 +9488,8 @@ function catalogGateSubmit() {
   .catch(function(err) {
     console.error('Supabase insert failed, falling back to EmailJS', err);
     sendGateEmailNotification().then(function() {
-      triggerCatalogFileDownload();
       closeCatalogGate();
+      showCatalogDownloadLink();
       var ty = document.getElementById('thankYouModal');
       if (ty) ty.classList.add('open');
       if (btn) btn.disabled = false;
@@ -9546,6 +9548,7 @@ function downloadProcessPDF() {
     <div class="ty-label">received</div>
     <h2 class="ty-heading">thank you for<br><em>reaching out.</em></h2>
     <p class="ty-body">we've received your enquiry and will respond within 24 hours.<br>if it's urgent, whatsapp us directly.</p>
+    <a href="#" id="ty-catalog-link" class="ty-action" style="display:none;margin-bottom:10px;" target="_blank" rel="noopener">download your catalogue →</a>
     <a href="https://wa.me/919717881083" class="ty-action" target="_blank" rel="noopener">message us on whatsapp →</a>
   </div>
 </div>
