@@ -789,7 +789,6 @@ nav.solid {
 .testi-strip {
   padding: 120px 60px;
   border-top: 1px solid var(--line);
-  overflow: hidden;
 }
 .testi-header {
   display: flex;
@@ -826,66 +825,75 @@ nav.solid {
   transition: background 0.3s, transform 0.3s;
 }
 .testi-dot.active { background: var(--gold); transform: scale(1.4); }
-.testi-track-wrap {
+.testi-stage {
   position: relative;
-  overflow: hidden;
+  max-width: 880px;
+  margin: 0 auto;
+  min-height: 480px;
 }
-.testi-track {
-  display: flex;
-  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+.testi-card {
+  position: absolute;
+  top: 0; left: 50%;
+  width: min(620px, 94%);
+  background: var(--black-2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 56px 60px;
+  box-sizing: border-box;
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.55s ease;
+  will-change: transform, opacity;
+  cursor: default;
 }
-.testi-slide {
-  min-width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 80px;
-  align-items: center;
-  padding-bottom: 8px;
-}
-.testi-meta { }
-.testi-quote-mark {
+.testi-card.is-peek { cursor: pointer; }
+.testi-card-mark {
   font-family: var(--serif);
-  font-size: 5rem;
+  font-size: 3.4rem;
   color: var(--line-gold);
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
-.testi-client {
+.testi-card-quote {
   font-family: var(--serif);
-  font-size: 1.4rem;
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--white-dim);
+  min-height: 3.3em;
+}
+.testi-card-divider {
+  width: 40px; height: 1px;
+  background: var(--line-gold);
+  margin: 32px 0 24px;
+}
+.testi-card-meta {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.testi-card-client {
+  font-family: var(--serif);
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--white);
   margin-bottom: 4px;
 }
-.testi-project {
+.testi-card-project {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold-dim);
 }
-.testi-stars {
-  display: flex;
-  gap: 4px;
-  margin-top: 20px;
-}
-.testi-star {
-  color: var(--gold);
-  font-size: 0.75rem;
-}
-.testi-quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.15rem, 1.9vw, 1.6rem);
-  font-weight: 300;
-  line-height: 1.6;
-  color: var(--white-dim);
-  position: relative;
-}
+.testi-card-stars { display: flex; gap: 3px; }
+.testi-card-stars .testi-star { color: var(--gold); font-size: 0.7rem; }
 @media(max-width:768px){
-  .testi-slide { grid-template-columns:1fr; gap:32px; }
   .testi-strip { padding:80px 24px; }
   .testi-header { flex-direction:column; gap:24px; align-items:flex-start; }
+  .testi-stage { min-height: 420px; }
+  .testi-card { padding: 36px 28px; width: 88%; }
+  .testi-card-quote { font-size: 0.95rem; }
 }
 
 /* CTA STRIP */
@@ -3060,8 +3068,9 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 
   /* testimonials */
   .testi-strip { padding: 64px 20px !important; }
-  .testi-slide { grid-template-columns: 1fr !important; gap: 24px !important; }
   .testi-header { flex-direction: column !important; gap: 16px !important; }
+  .testi-stage { min-height: 440px !important; }
+  .testi-card { padding: 32px 24px !important; width: 90% !important; }
 
   /* CTA strip */
   .cta-strip { padding: 64px 20px !important; }
@@ -3437,61 +3446,6 @@ img {
     </div>
   </div>
 
-  <div class="hr"></div>
-
-  <!-- SERVICES -->
-  <section class="services-strip">
-    <div class="services-header">
-      <div class="services-header-inner">
-        <div>
-          <div class="label-line label reveal">our core services</div>
-          <h2 class="display display-md reveal d1" style="margin-top:20px;">what we do</h2>
-        </div>
-        <p class="services-tagline reveal d2">
-          architecture leads.<br>
-          interiors follow.<br>
-          execution completes the idea.
-        </p>
-      </div>
-    </div>
-
-    <div class="service-row reveal" onclick="showPage('services')">
-      <span class="service-row-num">01</span>
-      <span class="service-row-name">architecture & interior design</span>
-      <div class="service-row-tags">
-        <span class="tag">spatial planning</span>
-        <span class="tag">material strategy</span>
-        <span class="tag">lighting</span>
-      </div>
-      <span class="service-row-arrow">↗</span>
-    </div>
-    <div class="service-row reveal d1" onclick="showPage('services')">
-      <span class="service-row-num">02</span>
-      <span class="service-row-name">furniture & joinery</span>
-      <div class="service-row-tags">
-        <span class="tag">custom furniture</span>
-        <span class="tag">built-ins</span>
-        <span class="tag">detailing</span>
-      </div>
-      <span class="service-row-arrow">↗</span>
-    </div>
-    <div class="service-row reveal d2" onclick="showPage('services')">
-      <span class="service-row-num">03</span>
-      <span class="service-row-name">project execution & delivery</span>
-      <div class="service-row-tags">
-        <span class="tag">site control</span>
-        <span class="tag">vendor alignment</span>
-        <span class="tag">handover</span>
-      </div>
-      <span class="service-row-arrow">↗</span>
-    </div>
-
-    <div style="margin-top:40px;" class="reveal d3">
-      <button class="btn btn-text" onclick="showPage('services')">explore services</button>
-    </div>
-  </section>
-
-
   <!-- ANIMATED OFFERINGS -->
   <section class="offerings-section">
     <div class="offerings-header">
@@ -3734,108 +3688,124 @@ img {
       </div>
     </div>
 
-    <div class="testi-track-wrap">
-      <div class="testi-track" id="testiTrack">
+    <div class="testi-stage" id="testiStage">
 
-        <!-- 1. Pranav Gaur -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Pranav Gaur</div>
-            <div class="testi-project">residential · new delhi</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 1. Pranav Gaur -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional. Walking into the completed home for the first time was a proud and emotional moment for us.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Pranav Gaur</div>
+            <div class="testi-card-project">residential · new delhi</div>
           </div>
-          <div class="testi-quote">
-            When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional. Walking into the completed home for the first time was a proud and emotional moment for us.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-        <!-- 2. Manogya Singh -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Manogya Singh</div>
-            <div class="testi-project">residential · india</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 2. Manogya Singh -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours. Warm, functional, and beautifully balanced. We were genuinely happy and relieved to see everything come together so perfectly.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Manogya Singh</div>
+            <div class="testi-card-project">residential · india</div>
           </div>
-          <div class="testi-quote">
-            The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours. Warm, functional, and beautifully balanced. We were genuinely happy and relieved to see everything come together so perfectly.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-        <!-- 3. Rahat Gera -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Rahat Gera</div>
-            <div class="testi-project">residential · india</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 3. Rahat Gera -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding. The space feels refined, and every time someone visits, we feel proud and excited to show it.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Rahat Gera</div>
+            <div class="testi-card-project">residential · india</div>
           </div>
-          <div class="testi-quote">
-            I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding. The space feels refined, and every time someone visits, we feel proud and excited to show it.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-        <!-- 4. Sumit Kumar -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Sumit Kumar</div>
-            <div class="testi-project">residential · india</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 4. Sumit Kumar -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication. The day we received the handover, it felt complete and thoughtfully done. That sense of satisfaction and relief meant a lot to us.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Sumit Kumar</div>
+            <div class="testi-card-project">residential · india</div>
           </div>
-          <div class="testi-quote">
-            What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication. The day we received the handover, it felt complete and thoughtfully done. That sense of satisfaction and relief meant a lot to us.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-        <!-- 5. Sonali Jain -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Sonali Jain</div>
-            <div class="testi-project">residential · india</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 5. Sonali Jain -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. As the space started taking shape, our excitement kept growing. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Sonali Jain</div>
+            <div class="testi-card-project">residential · india</div>
           </div>
-          <div class="testi-quote">
-            I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. As the space started taking shape, our excitement kept growing. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-        <!-- 6. Areeb Sami -->
-        <div class="testi-slide">
-          <div class="testi-meta">
-            <div class="testi-quote-mark">"</div>
-            <div class="testi-client">Areeb Sami</div>
-            <div class="testi-project">residential · india</div>
-            <div class="testi-stars">
-              <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-            </div>
+      <!-- 6. Areeb Sami -->
+      <div class="testi-card">
+        <div class="testi-card-mark">"</div>
+        <div class="testi-card-quote">
+          From the first discussion to the final walkthrough, the process felt organized and reassuring. Seeing the finished result was genuinely exciting for all of us. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.
+        </div>
+        <div class="testi-card-divider"></div>
+        <div class="testi-card-meta">
+          <div>
+            <div class="testi-card-client">Areeb Sami</div>
+            <div class="testi-card-project">residential · india</div>
           </div>
-          <div class="testi-quote">
-            From the first discussion to the final walkthrough, the process felt organized and reassuring. Seeing the finished result was genuinely exciting for all of us. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.
+          <div class="testi-card-stars">
+            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
           </div>
         </div>
+      </div>
 
-      </div><!-- /testi-track -->
-    </div><!-- /testi-track-wrap -->
+    </div><!-- /testi-stage -->
 
     <script>
     (function(){
-      var track  = document.getElementById('testiTrack');
+      var stage  = document.getElementById('testiStage');
       var dotsEl = document.getElementById('testiDots');
-      var slides = track ? track.querySelectorAll('.testi-slide') : [];
-      var total  = slides.length;
+      var cards  = stage ? stage.querySelectorAll('.testi-card') : [];
+      var total  = cards.length;
       var cur    = 0;
       var timer;
 
@@ -3848,14 +3818,52 @@ img {
         dotsEl.appendChild(d);
       }
 
+      function layout() {
+        cards.forEach(function(card, i){
+          var diff = i - cur;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+
+          var tx, ty, scale, rot, opacity, z, pe, peek = false;
+          if (diff === 0) {
+            tx = 0; ty = 0; scale = 1; rot = 0; opacity = 1; z = 50; pe = 'auto';
+          } else if (diff === 1) {
+            tx = 44; ty = 26; scale = 0.9; rot = 3; opacity = 0.55; z = 40; pe = 'auto'; peek = true;
+          } else if (diff === -1) {
+            tx = -44; ty = 26; scale = 0.9; rot = -3; opacity = 0.55; z = 40; pe = 'auto'; peek = true;
+          } else if (diff === 2) {
+            tx = 82; ty = 46; scale = 0.82; rot = 6; opacity = 0; z = 30; pe = 'none';
+          } else if (diff === -2) {
+            tx = -82; ty = 46; scale = 0.82; rot = -6; opacity = 0; z = 30; pe = 'none';
+          } else {
+            tx = diff > 0 ? 130 : -130; ty = 60; scale = 0.78; rot = diff > 0 ? 8 : -8; opacity = 0; z = 10; pe = 'none';
+          }
+
+          card.style.transform = 'translate(-50%, 0) translate(' + tx + '%, ' + ty + 'px) scale(' + scale + ') rotate(' + rot + 'deg)';
+          card.style.opacity = opacity;
+          card.style.zIndex = z;
+          card.style.pointerEvents = pe;
+          card.classList.toggle('is-peek', peek);
+        });
+      }
+
       function goTo(idx) {
         cur = (idx + total) % total;
-        track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+        layout();
         dotsEl.querySelectorAll('.testi-dot').forEach(function(d, i){
           d.classList.toggle('active', i === cur);
         });
         resetTimer();
       }
+
+      cards.forEach(function(card, i){
+        card.addEventListener('click', function(){
+          var diff = i - cur;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+          if (diff !== 0) goTo(i);
+        });
+      });
 
       function resetTimer() {
         clearInterval(timer);
@@ -3867,13 +3875,13 @@ img {
       if (prevBtn) prevBtn.addEventListener('click', function(){ goTo(cur - 1); });
       if (nextBtn) nextBtn.addEventListener('click', function(){ goTo(cur + 1); });
 
-      // Auto-advance
+      layout();
       resetTimer();
 
       // Touch/swipe
       var startX = null;
-      track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-      track.addEventListener('touchend', function(e){
+      stage.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+      stage.addEventListener('touchend', function(e){
         if (startX === null) return;
         var dx = e.changedTouches[0].clientX - startX;
         if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
