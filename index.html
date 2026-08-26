@@ -428,22 +428,43 @@ nav.solid {
   margin-bottom: 28px;
   text-align: left;
 }
-.hero-rating {
-  display: inline-flex;
+.hero-credibility {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--display);
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--white-muted);
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  padding: 9px 18px;
+  gap: 28px;
   margin-bottom: 32px;
-  width: fit-content;
+  flex-wrap: wrap;
+  row-gap: 16px;
 }
-.hero-rating-stars { color: var(--gold); letter-spacing: 2px; font-size: 0.75rem; }
-.hero-rating b { color: var(--white); font-weight: 700; }
+.hero-cred-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.hero-cred-num {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+}
+.hero-cred-stars { color: var(--gold); font-size: 0.68rem; letter-spacing: 1.5px; }
+.hero-cred-label {
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-muted);
+}
+.hero-cred-div { width: 1px; height: 32px; background: var(--line); flex-shrink: 0; }
+@media(max-width:520px){
+  .hero-credibility { gap: 18px; row-gap: 14px; }
+  .hero-cred-div { height: 26px; }
+  .hero-cred-num { font-size: 1.15rem; }
+}
 .hero-diamond {
   width: 42px;
   height: 42px;
@@ -628,8 +649,8 @@ nav.solid {
 .project-card-info {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  padding: 32px 28px;
-  background: linear-gradient(transparent, rgba(247,243,236,0.96));
+  padding: 24px 28px 28px;
+  background: linear-gradient(to top, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.4) 48%, rgba(10,10,10,0) 82%);
   transform: translateY(8px);
   transition: transform 0.4s ease;
 }
@@ -652,14 +673,23 @@ nav.solid {
   font-family: var(--serif);
   font-size: 1.2rem;
   font-weight: 300;
-  color: var(--white);
+  color: #f5f1e8;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 .project-card-loc {
   font-family: var(--mono);
   font-size: 0.55rem;
   letter-spacing: 0.12em;
-  color: var(--white-muted);
+  color: rgba(245,241,232,0.72);
   margin-top: 4px;
+}
+.project-card-scope {
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.02em;
+  color: var(--gold-bright);
+  margin-top: 10px;
+  line-height: 1.5;
 }
 .project-hover-line {
   position: absolute;
@@ -668,7 +698,8 @@ nav.solid {
   font-family: var(--serif);
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--white);
+  color: #f5f1e8;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.55);
   opacity: 0;
   text-align: center;
   transition: opacity 0.35s;
@@ -787,113 +818,152 @@ nav.solid {
 
 /* TESTIMONIAL STRIP */
 .testi-strip {
-  padding: 120px 60px;
+  padding: 120px 0;
   border-top: 1px solid var(--line);
+  overflow: hidden;
 }
 .testi-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 72px;
+  padding: 0 60px;
 }
-.testi-controls {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.testi-arrow {
-  width: 44px; height: 44px;
-  border: 1px solid var(--line);
-  background: none;
+.testi-hint {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   color: var(--white-muted);
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  opacity: 0.7;
 }
-.testi-arrow:hover { border-color: var(--gold); color: var(--gold); }
-.testi-dots {
+.testi-marquee {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  flex-direction: column;
+  gap: 28px;
 }
-.testi-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--white-muted);
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+.testi-mrow {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
 }
-.testi-dot.active { background: var(--gold); transform: scale(1.4); }
-.testi-stage {
-  position: relative;
-  max-width: 880px;
-  margin: 0 auto;
-  min-height: 480px;
+.testi-mtrack {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
 }
-.testi-card {
-  position: absolute;
-  top: 0; left: 50%;
-  width: min(620px, 94%);
+.testi-anim-left { animation: testiScrollLeft 46s linear infinite; }
+.testi-anim-right { animation: testiScrollRight 52s linear infinite; }
+.testi-mrow:hover .testi-mtrack { animation-play-state: paused; }
+@keyframes testiScrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes testiScrollRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.testi-mcard {
+  flex: 0 0 auto;
+  width: 400px;
   background: var(--black-2);
   border: 1px solid var(--line);
   border-radius: 3px;
-  padding: 56px 60px;
+  padding: 36px 40px;
   box-sizing: border-box;
-  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.55s ease;
-  will-change: transform, opacity;
-  cursor: default;
+  transition: border-color 0.3s, transform 0.3s;
 }
-.testi-card.is-peek { cursor: pointer; }
-.testi-card-mark {
+.testi-mcard:hover {
+  border-color: var(--line-gold);
+  transform: translateY(-4px);
+}
+.testi-mcard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.testi-mcard-mark {
   font-family: var(--serif);
-  font-size: 3.4rem;
+  font-size: 2.6rem;
   color: var(--line-gold);
   line-height: 1;
-  margin-bottom: 16px;
 }
-.testi-card-quote {
+.testi-mcard-stars { display: flex; gap: 3px; margin-top: 10px; }
+.testi-mcard-stars .testi-star { color: var(--gold); font-size: 0.65rem; }
+.testi-mcard-quote {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-size: 1rem;
   font-weight: 300;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--white-dim);
-  min-height: 3.3em;
+  margin: 0 0 24px;
 }
-.testi-card-divider {
-  width: 40px; height: 1px;
-  background: var(--line-gold);
-  margin: 32px 0 24px;
-}
-.testi-card-meta {
+.testi-mcard-foot {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
-.testi-card-client {
+.testi-mcard-name {
   font-family: var(--serif);
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1rem;
   color: var(--white);
-  margin-bottom: 4px;
 }
-.testi-card-project {
+.testi-mcard-project {
   font-family: var(--mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-dim);
 }
-.testi-card-stars { display: flex; gap: 3px; }
-.testi-card-stars .testi-star { color: var(--gold); font-size: 0.7rem; }
 @media(max-width:768px){
-  .testi-strip { padding:80px 24px; }
-  .testi-header { flex-direction:column; gap:24px; align-items:flex-start; }
-  .testi-stage { min-height: 420px; }
-  .testi-card { padding: 36px 28px; width: 88%; }
-  .testi-card-quote { font-size: 0.95rem; }
+  .testi-strip { padding:80px 0; }
+  .testi-header { flex-direction:column; gap:16px; align-items:flex-start; padding: 0 24px; }
+  .testi-mcard { width: 300px; padding: 28px 26px; }
+  .testi-mcard-quote { font-size: 0.9rem; }
+  .testi-anim-left { animation-duration: 32s; }
+  .testi-anim-right { animation-duration: 36s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testi-anim-left, .testi-anim-right { animation: none; }
+}
+.testi-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  margin: 56px 60px 0;
+  border: 1px solid var(--line);
+}
+.testi-proof-card {
+  background: var(--black-1, var(--black-2));
+  padding: 32px 28px;
+}
+.testi-proof-cat {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.testi-proof-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--white-dim);
+  margin: 0;
+}
+@media(max-width:900px){
+  .testi-proof-grid { grid-template-columns: 1fr 1fr; margin: 40px 24px 0; }
+}
+@media(max-width:520px){
+  .testi-proof-grid { grid-template-columns: 1fr; margin: 32px 20px 0; }
 }
 
 /* CTA STRIP */
@@ -1013,7 +1083,17 @@ nav.solid {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--gold-dim);
-  margin-bottom: 36px;
+  margin-bottom: 28px;
+}
+.founder-position {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--white);
+  margin-bottom: 32px;
+  max-width: 480px;
 }
 .founder-body {
   font-family: var(--sans);
@@ -2930,6 +3010,14 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 #projects .de-b{font-family:var(--p-serif);font-size:clamp(1.25rem,1.9vw,1.7rem);font-weight:300;line-height:1.8;color:rgba(22,20,18,.52)}
 #projects .de-b em{font-style:italic;color:var(--p-text)}
 #projects .de-b p+p{margin-top:1.35em}
+/* project facts panel */
+#projects .pf{background:var(--p-bg);border-bottom:1px solid var(--p-line)}
+#projects .pf-row{padding:44px 80px;display:grid;grid-template-columns:190px 1fr;gap:96px;border-bottom:1px solid var(--p-line)}
+#projects .pf-row:last-child{border-bottom:none}
+#projects .pf-l{font-family:var(--p-mono);font-size:.4rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(22,20,18,.28);padding-top:5px}
+#projects .pf-v{font-family:var(--p-serif);font-size:clamp(1.02rem,1.4vw,1.2rem);font-weight:300;line-height:1.75;color:rgba(22,20,18,.62)}
+#projects .pf-tags{display:flex;flex-wrap:wrap;gap:10px}
+#projects .pf-tag{font-family:var(--p-mono);font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(22,20,18,.55);border:1px solid var(--p-line);padding:8px 14px}
 /* gallery */
 #projects .dg{background:var(--p-bg);padding:0 52px 96px}
 #projects .dg-hdr{display:flex;justify-content:space-between;align-items:baseline;padding:68px 0 40px;border-bottom:1px solid var(--p-line);margin-bottom:40px}
@@ -2982,6 +3070,7 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   #projects .ds-i:nth-child(3){border-top:1px solid var(--p-line)}
   #projects .ds-i:nth-child(4){border-top:1px solid var(--p-line);border-right:none}
   #projects .de{padding:64px 24px;grid-template-columns:1fr;gap:24px}
+  #projects .pf-row{padding:32px 24px;grid-template-columns:1fr;gap:12px}
   #projects .dg{padding:0 16px 72px}
   #projects .dg-grid{grid-template-columns:1fr;gap:10px}
   #projects .gimg:nth-child(5n){grid-column:span 1;aspect-ratio:4/3}
@@ -3067,10 +3156,9 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .approach-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
 
   /* testimonials */
-  .testi-strip { padding: 64px 20px !important; }
-  .testi-header { flex-direction: column !important; gap: 16px !important; }
-  .testi-stage { min-height: 440px !important; }
-  .testi-card { padding: 32px 24px !important; width: 90% !important; }
+  .testi-strip { padding: 64px 0 !important; }
+  .testi-header { flex-direction: column !important; gap: 16px !important; padding: 0 20px !important; }
+  .testi-mcard { width: 280px !important; padding: 24px 22px !important; }
 
   /* CTA strip */
   .cta-strip { padding: 64px 20px !important; }
@@ -3389,7 +3477,22 @@ img {
         Where every<br>detail has a purpose.
       </h1>
       <p class="hero-sub reveal d2">Designed to last, not to impress. An architectural interior design studio operating across India — from Sonipat, Delhi, Noida and Gurgaon.</p>
-      <div class="hero-rating reveal d2"><span class="hero-rating-stars">★★★★★</span> <b>4.9</b>&nbsp;Google Reviews</div>
+      <div class="hero-credibility reveal d2">
+        <div class="hero-cred-item">
+          <div class="hero-cred-num"><span class="hero-cred-stars">★★★★★</span> 4.9</div>
+          <div class="hero-cred-label">Google Reviews</div>
+        </div>
+        <div class="hero-cred-div"></div>
+        <div class="hero-cred-item">
+          <div class="hero-cred-num">100+</div>
+          <div class="hero-cred-label">Projects Delivered</div>
+        </div>
+        <div class="hero-cred-div"></div>
+        <div class="hero-cred-item">
+          <div class="hero-cred-num">4</div>
+          <div class="hero-cred-label">Cities, Delhi NCR</div>
+        </div>
+      </div>
       <div class="hero-actions reveal d3">
         <div class="hero-diamond" onclick="showPage('contact'); window.scrollTo(0,0);" title="start a project" role="button" tabindex="0">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" transform="rotate(45 7 7)" stroke="currentColor" stroke-width="1.3"/></svg>
@@ -3501,7 +3604,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">mini farmhouse</div>
-            <div class="project-card-loc">delhi</div>
+            <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
+            <div class="project-card-scope">Interior Design + Furniture + Execution</div>
           </div>
         </div>
         <!-- Card 2 -->
@@ -3511,7 +3615,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
             <div class="project-card-name">restaurant</div>
-            <div class="project-card-loc">udaipur</div>
+            <div class="project-card-loc">udaipur &middot; 2,200 sqft</div>
+            <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
           </div>
         </div>
         <!-- Card 3 -->
@@ -3521,7 +3626,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">urban apartment</div>
-            <div class="project-card-loc">dehradun</div>
+            <div class="project-card-loc">dehradun &middot; 1,800 sqft</div>
+            <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
           </div>
         </div>
         <!-- Card 4 -->
@@ -3531,7 +3637,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">commercial</div>
             <div class="project-card-name">studio workspace</div>
-            <div class="project-card-loc">gurgaon</div>
+            <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
+            <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
           </div>
         </div>
         <!-- Card 6 -->
@@ -3541,7 +3648,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">vasant kunj</div>
-            <div class="project-card-loc">new delhi</div>
+            <div class="project-card-loc">new delhi &middot; dda residence</div>
+            <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
           </div>
         </div>
         <!-- Duplicate set for seamless loop -->
@@ -3551,7 +3659,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">mini farmhouse</div>
-            <div class="project-card-loc">delhi</div>
+            <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
+            <div class="project-card-scope">Interior Design + Furniture + Execution</div>
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
@@ -3560,7 +3669,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
             <div class="project-card-name">restaurant</div>
-            <div class="project-card-loc">udaipur</div>
+            <div class="project-card-loc">udaipur &middot; 2,200 sqft</div>
+            <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
@@ -3569,7 +3679,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">urban apartment</div>
-            <div class="project-card-loc">dehradun</div>
+            <div class="project-card-loc">dehradun &middot; 1,800 sqft</div>
+            <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
@@ -3578,7 +3689,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">commercial</div>
             <div class="project-card-name">studio workspace</div>
-            <div class="project-card-loc">gurgaon</div>
+            <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
+            <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
@@ -3587,7 +3699,8 @@ img {
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
             <div class="project-card-name">vasant kunj</div>
-            <div class="project-card-loc">new delhi</div>
+            <div class="project-card-loc">new delhi &middot; dda residence</div>
+            <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
           </div>
         </div>
       </div>
@@ -3628,9 +3741,10 @@ img {
       <div>
         <div class="label-line label reveal">philosophy</div>
         <h2 class="home-phil-headline reveal d1">We design from structure,<br>proportion and movement.</h2>
-        <p class="home-phil-body reveal d2">No surface styling. No trend-chasing. Every decision — spatial, material, structural — is made with execution in mind, and judged by how it performs once the space is actually lived in.</p>
+        <p class="label-line label reveal d2" style="margin:18px 0 0;color:var(--gold-dim);font-style:italic;">Architecture-led interiors. Designed to be built.</p>
+        <p class="home-phil-body reveal d2" style="margin-top:14px;">No surface styling. Every decision — spatial, material, structural — is made with execution in mind, and judged by how it performs once the space is actually lived in.</p>
         <div style="margin-top:36px;" class="reveal d3">
-          <button class="btn btn-primary" onclick="window.open('/vasant-kunj-design-intent.pdf', '_blank')" style="font-size:0.62rem;padding:16px 36px;letter-spacing:0.2em;">click for sample design</button>
+          <button class="btn btn-primary" onclick="window.open('/vasant-kunj-design-intent.pdf', '_blank')" style="font-size:0.62rem;padding:16px 36px;letter-spacing:0.2em;">See How We Develop a Project →</button>
         </div>
       </div>
       <div class="reveal d2" style="aspect-ratio:4/3; overflow:hidden; background:var(--black-3);">
@@ -3681,214 +3795,170 @@ img {
         <div class="label-line label" style="margin-bottom:16px;">client reviews</div>
         <h2 class="display" style="font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;">what our clients <em class="italic gold">say.</em></h2>
       </div>
-      <div class="testi-controls">
-        <button class="testi-arrow" id="testiPrev" aria-label="previous">←</button>
-        <div class="testi-dots" id="testiDots"></div>
-        <button class="testi-arrow" id="testiNext" aria-label="next">→</button>
+      <div class="testi-hint">hover to pause</div>
+    </div>
+
+    <div class="testi-marquee">
+      <div class="testi-mrow testi-mrow-1">
+        <div class="testi-mtrack testi-anim-left">
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Pranav Gaur</span>
+            <span class="testi-mcard-project">residential · new delhi</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Manogya Singh</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Rahat Gera</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Pranav Gaur</span>
+            <span class="testi-mcard-project">residential · new delhi</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Manogya Singh</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Rahat Gera</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="testi-mrow testi-mrow-2">
+        <div class="testi-mtrack testi-anim-right">
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Sumit Kumar</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Sonali Jain</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">From the first discussion to the final walkthrough, the process felt organized and reassuring. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Areeb Sami</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Sumit Kumar</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Sonali Jain</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        <div class="testi-mcard">
+          <div class="testi-mcard-top">
+            <span class="testi-mcard-mark">&ldquo;</span>
+            <span class="testi-mcard-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></span>
+          </div>
+          <p class="testi-mcard-quote">From the first discussion to the final walkthrough, the process felt organized and reassuring. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.</p>
+          <div class="testi-mcard-foot">
+            <span class="testi-mcard-name">Areeb Sami</span>
+            <span class="testi-mcard-project">residential · india</span>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
 
-    <div class="testi-stage" id="testiStage">
-
-      <!-- 1. Pranav Gaur -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional. Walking into the completed home for the first time was a proud and emotional moment for us.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Pranav Gaur</div>
-            <div class="testi-card-project">residential · new delhi</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
+    <div class="testi-proof-grid">
+      <div class="testi-proof-card">
+        <div class="testi-proof-cat">design clarity</div>
+        <p class="testi-proof-quote">"They solved problems in the layout we hadn't even noticed."</p>
       </div>
-
-      <!-- 2. Manogya Singh -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours. Warm, functional, and beautifully balanced. We were genuinely happy and relieved to see everything come together so perfectly.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Manogya Singh</div>
-            <div class="testi-card-project">residential · india</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
+      <div class="testi-proof-card">
+        <div class="testi-proof-cat">execution</div>
+        <p class="testi-proof-quote">"The team stayed involved on site and caught issues before they became expensive."</p>
       </div>
-
-      <!-- 3. Rahat Gera -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding. The space feels refined, and every time someone visits, we feel proud and excited to show it.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Rahat Gera</div>
-            <div class="testi-card-project">residential · india</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
+      <div class="testi-proof-card">
+        <div class="testi-proof-cat">communication</div>
+        <p class="testi-proof-quote">"We always knew what was happening and why decisions were being made."</p>
       </div>
-
-      <!-- 4. Sumit Kumar -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication. The day we received the handover, it felt complete and thoughtfully done. That sense of satisfaction and relief meant a lot to us.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Sumit Kumar</div>
-            <div class="testi-card-project">residential · india</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
+      <div class="testi-proof-card">
+        <div class="testi-proof-cat">custom furniture</div>
+        <p class="testi-proof-quote">"The detailing and fit of the furniture felt completely considered."</p>
       </div>
-
-      <!-- 5. Sonali Jain -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. As the space started taking shape, our excitement kept growing. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Sonali Jain</div>
-            <div class="testi-card-project">residential · india</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Areeb Sami -->
-      <div class="testi-card">
-        <div class="testi-card-mark">"</div>
-        <div class="testi-card-quote">
-          From the first discussion to the final walkthrough, the process felt organized and reassuring. Seeing the finished result was genuinely exciting for all of us. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.
-        </div>
-        <div class="testi-card-divider"></div>
-        <div class="testi-card-meta">
-          <div>
-            <div class="testi-card-client">Areeb Sami</div>
-            <div class="testi-card-project">residential · india</div>
-          </div>
-          <div class="testi-card-stars">
-            <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /testi-stage -->
-
-    <script>
-    (function(){
-      var stage  = document.getElementById('testiStage');
-      var dotsEl = document.getElementById('testiDots');
-      var cards  = stage ? stage.querySelectorAll('.testi-card') : [];
-      var total  = cards.length;
-      var cur    = 0;
-      var timer;
-
-      // Build dots
-      for (var i = 0; i < total; i++) {
-        var d = document.createElement('div');
-        d.className = 'testi-dot' + (i === 0 ? ' active' : '');
-        d.setAttribute('data-i', i);
-        d.addEventListener('click', (function(idx){ return function(){ goTo(idx); }; })(i));
-        dotsEl.appendChild(d);
-      }
-
-      function layout() {
-        cards.forEach(function(card, i){
-          var diff = i - cur;
-          if (diff > total / 2) diff -= total;
-          if (diff < -total / 2) diff += total;
-
-          var tx, ty, scale, rot, opacity, z, pe, peek = false;
-          if (diff === 0) {
-            tx = 0; ty = 0; scale = 1; rot = 0; opacity = 1; z = 50; pe = 'auto';
-          } else if (diff === 1) {
-            tx = 44; ty = 26; scale = 0.9; rot = 3; opacity = 0.55; z = 40; pe = 'auto'; peek = true;
-          } else if (diff === -1) {
-            tx = -44; ty = 26; scale = 0.9; rot = -3; opacity = 0.55; z = 40; pe = 'auto'; peek = true;
-          } else if (diff === 2) {
-            tx = 82; ty = 46; scale = 0.82; rot = 6; opacity = 0; z = 30; pe = 'none';
-          } else if (diff === -2) {
-            tx = -82; ty = 46; scale = 0.82; rot = -6; opacity = 0; z = 30; pe = 'none';
-          } else {
-            tx = diff > 0 ? 130 : -130; ty = 60; scale = 0.78; rot = diff > 0 ? 8 : -8; opacity = 0; z = 10; pe = 'none';
-          }
-
-          card.style.transform = 'translate(-50%, 0) translate(' + tx + '%, ' + ty + 'px) scale(' + scale + ') rotate(' + rot + 'deg)';
-          card.style.opacity = opacity;
-          card.style.zIndex = z;
-          card.style.pointerEvents = pe;
-          card.classList.toggle('is-peek', peek);
-        });
-      }
-
-      function goTo(idx) {
-        cur = (idx + total) % total;
-        layout();
-        dotsEl.querySelectorAll('.testi-dot').forEach(function(d, i){
-          d.classList.toggle('active', i === cur);
-        });
-        resetTimer();
-      }
-
-      cards.forEach(function(card, i){
-        card.addEventListener('click', function(){
-          var diff = i - cur;
-          if (diff > total / 2) diff -= total;
-          if (diff < -total / 2) diff += total;
-          if (diff !== 0) goTo(i);
-        });
-      });
-
-      function resetTimer() {
-        clearInterval(timer);
-        timer = setInterval(function(){ goTo(cur + 1); }, 6000);
-      }
-
-      var prevBtn = document.getElementById('testiPrev');
-      var nextBtn = document.getElementById('testiNext');
-      if (prevBtn) prevBtn.addEventListener('click', function(){ goTo(cur - 1); });
-      if (nextBtn) nextBtn.addEventListener('click', function(){ goTo(cur + 1); });
-
-      layout();
-      resetTimer();
-
-      // Touch/swipe
-      var startX = null;
-      stage.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-      stage.addEventListener('touchend', function(e){
-        if (startX === null) return;
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
-        startX = null;
-      }, {passive:true});
-    })();
-    </script>
+    </div>
 
   </section>
 
@@ -4032,6 +4102,7 @@ img {
       <div class="label-line label founder-label reveal">founder</div>
       <div class="founder-name-display reveal d1">arpit saini</div>
       <div class="founder-title-tag reveal d2">founder & ceo, indéva studio</div>
+      <div class="founder-position reveal d2">Built on generations of understanding how things are made.</div>
       <p class="founder-body reveal d3">
         arpit saini comes from a family where building has been part of everyday life for generations. his grandfather was involved in construction and the family brick manufacturing business, with a legacy dating back to 1939. his father continued that connection through construction.<br><br>
         growing up around sites, materials, contractors, and the realities of execution gave arpit an early understanding of how things are actually built. he learned that an idea has little value if it cannot be executed properly.<br><br>
@@ -4132,7 +4203,7 @@ img {
     <div class="process-stage reveal">
       <div class="process-stage-num">02</div>
       <div><div class="process-stage-label">stage two</div><div class="process-stage-name">alignment</div><div class="process-stage-tagline">brief, budget &amp; intent set</div></div>
-      <div><p class="process-stage-desc">before aesthetics, we establish clarity. brief, budget, site realities, constraints — all discussed openly. roles and responsibilities locked.</p><div class="process-stage-blunt">we don't start with moodboards.<br>we start with truth.</div></div>
+      <div><p class="process-stage-desc">before aesthetics, we establish clarity. brief, budget, site realities, constraints — all discussed openly. roles and responsibilities locked.</p></div>
     </div>
     <div class="process-stage reveal">
       <div class="process-stage-num">03</div>
@@ -4142,12 +4213,12 @@ img {
     <div class="process-stage reveal">
       <div class="process-stage-num">04</div>
       <div><div class="process-stage-label">stage four</div><div class="process-stage-name">design</div><div class="process-stage-tagline">layouts, concept &amp; furniture</div></div>
-      <div><p class="process-stage-desc">spatial planning, concept development, furniture logic, material language, lighting strategy — all developed as a coherent system. 3d visualization used for proportion validation and client alignment before build.</p><div class="process-stage-blunt">renders are not marketing tools.<br>they are execution documents.</div></div>
+      <div><p class="process-stage-desc">spatial planning, concept development, furniture logic, material language, lighting strategy — all developed as a coherent system. 3d visualization used for proportion validation and client alignment before build.</p></div>
     </div>
     <div class="process-stage reveal">
       <div class="process-stage-num">05</div>
       <div><div class="process-stage-label">stage five</div><div class="process-stage-name">execution</div><div class="process-stage-tagline">drawings, site control &amp; coordination</div></div>
-      <div><p class="process-stage-desc">detailed working drawings, joinery detailing, electrical coordination, ceiling plans, wall elevations. vendor alignment, regular site reviews, design protection during build.</p><div class="process-stage-blunt">we draw for contractors,<br>not for applause.<br>execution is part of the thinking.</div></div>
+      <div><p class="process-stage-desc">detailed working drawings, joinery detailing, electrical coordination, ceiling plans, wall elevations. vendor alignment, regular site reviews, design protection during build.</p><div class="process-stage-blunt">we draw for contractors,<br>not for applause.</div></div>
     </div>
     <div class="process-stage reveal" style="border-bottom:none;">
       <div class="process-stage-num">06</div>
@@ -4215,7 +4286,7 @@ img {
         <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — architecture and interior design by indéva studio" loading="lazy" decoding="async">
         <div class="service-detail-image-cap">vasant kunj dda residence — new delhi</div>
       </div>
-      <p class="service-detail-desc reveal">spatial planning, structural coordination, material and lighting strategy — defining how a space works, moves, and lives. architecture leads. interiors follow. we design from structure, proportion, and movement, not from aesthetics.</p>
+      <p class="service-detail-desc reveal">spatial planning, structural coordination, material and lighting strategy — defining how a space works, moves, and lives. architecture-led interiors, designed to be built. we design from structure, proportion, and movement, not from aesthetics.</p>
       <div class="service-items-grid">
         <div class="service-item reveal"><div class="service-item-dot"></div><span class="service-item-text">spatial planning & zoning</span></div>
         <div class="service-item reveal d1"><div class="service-item-dot"></div><span class="service-item-text">structural coordination</span></div>
@@ -4319,7 +4390,6 @@ img {
       </div>
       <div>
         <p class="process-stage-desc">before aesthetics, we establish clarity. brief, budget, site realities, constraints — all discussed openly. roles and responsibilities locked.</p>
-        <div class="process-stage-blunt">we don't start with moodboards.<br>we start with truth.</div>
       </div>
     </div>
     <div class="process-stage reveal">
@@ -4343,7 +4413,6 @@ img {
       </div>
       <div>
         <p class="process-stage-desc">spatial planning, concept development, furniture logic, material language, lighting strategy — all developed as a coherent system. 3d visualization used for proportion validation and client alignment before build.</p>
-        <div class="process-stage-blunt">renders are not marketing tools.<br>they are execution documents.</div>
       </div>
     </div>
     <div class="process-stage reveal">
@@ -4355,7 +4424,7 @@ img {
       </div>
       <div>
         <p class="process-stage-desc">detailed working drawings, joinery detailing, electrical coordination, ceiling plans, wall elevations. vendor alignment, regular site reviews, design protection during build.</p>
-        <div class="process-stage-blunt">we draw for contractors,<br>not for applause.<br>execution is part of the thinking.</div>
+        <div class="process-stage-blunt">we draw for contractors,<br>not for applause.</div>
       </div>
     </div>
     <div class="process-stage reveal" style="border-bottom:none;">
@@ -4464,6 +4533,9 @@ img {
 
     <!-- strip -->
     <div class="ds" id="pdet-strip"></div>
+
+    <!-- project facts -->
+    <div class="pf" id="pdet-facts"></div>
 
     <!-- editorial -->
     <div class="de">
@@ -5212,11 +5284,12 @@ img {
 <div class="page" id="vendors">
 
   <section class="vendors-hero pt-nav">
-    <div class="label-line label reveal">trusted partners</div>
+    <div class="label-line label reveal">material & vendor network</div>
     <h2 class="display display-xl reveal d1" style="margin-top:32px;">
-      our vendor<br><em class="italic gold">ecosystem.</em>
+      our material &amp;<br><em class="italic gold">vendor network.</em>
     </h2>
-    <p class="statement reveal d2" style="margin-top:24px; max-width:580px;">every material, fitting, and finish we specify comes from brands we trust — selected for quality, reliability, and integrity of craft.</p>
+    <p class="statement reveal d2" style="margin-top:24px; max-width:640px;">We select suppliers based on project requirements — not brand agreements. Our network gives us access to trusted manufacturers, technical specialists and material partners across categories.</p>
+    <p class="reveal d2" style="margin-top:16px;max-width:640px;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.04em;line-height:1.7;color:var(--white-muted);">Note: the brands shown below are ones we regularly work with and specify on projects. Their inclusion here does not imply a formal partnership, sponsorship, or endorsement arrangement.</p>
     <div class="vendors-nav-tabs reveal d3">
       <button class="vendors-tab-btn active" onclick="scrollToVendorCat('hardware')">hardware & fittings</button>
       <button class="vendors-tab-btn" onclick="scrollToVendorCat('kitchen')">kitchen appliances</button>
@@ -5239,7 +5312,7 @@ img {
         <div class="vendor-cat-num">category 01</div>
         <div class="vendor-cat-title">Hardware &amp; Fittings</div>
       </div>
-      <div class="vendor-cat-count">8 partners</div>
+      <div class="vendor-cat-count">8 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5292,7 +5365,7 @@ img {
         <div class="vendor-cat-num">category 02</div>
         <div class="vendor-cat-title">Kitchen Appliances &amp; Fittings</div>
       </div>
-      <div class="vendor-cat-count">8 partners</div>
+      <div class="vendor-cat-count">8 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5345,7 +5418,7 @@ img {
         <div class="vendor-cat-num">category 03</div>
         <div class="vendor-cat-title">Sanitaryware &amp; Bathroom Fittings</div>
       </div>
-      <div class="vendor-cat-count">8 partners</div>
+      <div class="vendor-cat-count">8 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5398,7 +5471,7 @@ img {
         <div class="vendor-cat-num">category 04</div>
         <div class="vendor-cat-title">Paints &amp; Surface Treatments</div>
       </div>
-      <div class="vendor-cat-count">5 partners</div>
+      <div class="vendor-cat-count">5 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5436,7 +5509,7 @@ img {
         <div class="vendor-cat-num">category 05</div>
         <div class="vendor-cat-title">Smart Home &amp; Automation</div>
       </div>
-      <div class="vendor-cat-count">4 partners</div>
+      <div class="vendor-cat-count">4 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5469,7 +5542,7 @@ img {
         <div class="vendor-cat-num">category 06</div>
         <div class="vendor-cat-title">Lighting &amp; Fixtures</div>
       </div>
-      <div class="vendor-cat-count">6 partners</div>
+      <div class="vendor-cat-count">6 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5512,7 +5585,7 @@ img {
         <div class="vendor-cat-num">category 07</div>
         <div class="vendor-cat-title">Tiles, Stone &amp; Surfaces</div>
       </div>
-      <div class="vendor-cat-count">7 partners</div>
+      <div class="vendor-cat-count">7 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5560,7 +5633,7 @@ img {
         <div class="vendor-cat-num">category 08</div>
         <div class="vendor-cat-title">Wood, Plywood &amp; Laminates</div>
       </div>
-      <div class="vendor-cat-count">6 partners</div>
+      <div class="vendor-cat-count">6 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5603,7 +5676,7 @@ img {
         <div class="vendor-cat-num">category 09</div>
         <div class="vendor-cat-title">Lift / Elevator Companies</div>
       </div>
-      <div class="vendor-cat-count">5 partners</div>
+      <div class="vendor-cat-count">5 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5646,7 +5719,7 @@ img {
         <div class="vendor-cat-num">category 10</div>
         <div class="vendor-cat-title">HVAC Equipment Brands</div>
       </div>
-      <div class="vendor-cat-count">6 partners</div>
+      <div class="vendor-cat-count">6 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -5695,7 +5768,7 @@ img {
         <div class="vendor-cat-num">category 11</div>
         <div class="vendor-cat-title">Fire Fighting System Brands</div>
       </div>
-      <div class="vendor-cat-count">5 partners</div>
+      <div class="vendor-cat-count">5 brands</div>
     </div>
     <div class="vendor-grid">
       <div class="vendor-card">
@@ -6693,36 +6766,60 @@ const cap = fn => CAPS[fn] || {t:fn.replace(/\.webp$/,'').replace(/[-_]/g,' '),c
 ─────────────────────────────────────────────────────────── */
 window.PROJECTS = [
   {id:'mini-farmhouse',name:'Mini Farmhouse',location:'Delhi',typology:'Residential',area:'4,800 sqft',year:'2024',status:'Completed',
+   duration:'5 months',scope:'Interior Design + Furniture + Execution',
+   services:['Space Planning','Interior Design','Custom Furniture','Site Execution'],
+   challenge:'Holding a large open volume together while still giving each family zone — living, dining, bedrooms — a distinct identity without breaking sightlines or adding unnecessary partitions.',
+   approach:'Every material and dimension was locked into working drawings before site work began. The layout followed structure first; nothing was decided on-site by improvisation.',
    description:'a residence built on restraint. light, material, and proportion \u2014 nothing else.',
    editorial:'<p>planned from structure. built without deviation. <em>material decisions followed function.</em></p><p>the brief: a home that holds light without chasing it. rooms sized for use, not impression. every surface chosen once.</p>',
    cover:'desktop version banner.webp',
    images:['desktop version banner.webp','Main elevation.webp','side elevation.webp','living room lobby.webp','Kitchen Area.webp','Kitchen.webp','kitchen and common washroom.webp','Master washroom.webp','foyer area.webp','lobby area.webp','living area.webp','mobile version banner.webp','Master bedroom design.webp',"Daughter's Bedroom.webp"],
    parallax:'front elevation.webp',parallaxLbl:'front elevation'},
   {id:'restaurant-udaipur',name:'Restaurant',location:'Udaipur',typology:'Hospitality',area:'2,200 sqft',year:'2024',status:'Completed',
+   duration:'4 months',scope:'Concept + Interior Design + Site Execution',
+   services:['Concept Design','Interior Design','Site Execution'],
+   challenge:'Keeping the open, visible kitchen central to the guest experience without letting back-of-house operations disrupt comfort or service flow.',
+   approach:'Service flow was mapped before the floor plan — the design followed function. The bar was positioned for conversation; the kitchen stayed visible because there was nothing to hide.',
    description:'an interior for a restaurant that does not perform. material, light, and service \u2014 in that order.',
    editorial:'<p>the space was planned for the guest, not the photograph. <em>every decision deferred to comfort and function.</em></p><p>the bar is positioned for conversation. the kitchen is visible because there is nothing to hide.</p>',
    cover:'Main lobby area design.webp',
    images:['Main lobby area design.webp','dance floor area.webp','bar area.webp','main dining area.webp','dining area.webp','Live kitchen Counter.webp','seating area design - restaurant.webp','handwash - restaurant.webp','washroom area.webp'],
    parallax:'bar area.webp',parallaxLbl:'bar counter'},
   {id:'studio-workspace',name:'Studio Workspace',location:'Gurgaon',typology:'Commercial',area:'3,200 sqft',year:'2023',status:'Completed',
+   duration:'3 months',scope:'Space Planning + Interiors + Custom Furniture',
+   services:['Space Planning','Interior Design','Custom Furniture'],
+   challenge:'Fitting focused individual workstations, meeting rooms, and a cafeteria into a mid-size floor plate without the space feeling cramped or corridor-driven.',
+   approach:'Daylight access drove the layout — workstations were placed first, everything else followed. Conference rooms were sized for their actual use, not for appearance.',
    description:'a workplace designed for sustained focus. natural light, spatial clarity, no excess.',
    editorial:'<p>the brief asked for a space that enables work without distraction. <em>the layout followed.</em></p><p>workstations positioned for light. conference rooms sized for their actual use.</p>',
    cover:'Studio Workspace.webp',
    images:['Studio Workspace.webp','Workstation Area.webp','Conference Room.webp','Cafeteria Area.webp','Entrance area.webp'],
    parallax:'Workstation Area.webp',parallaxLbl:'workstation zone'},
   {id:'urban-apartment',name:'Urban Apartment',location:'Dehradun',typology:'Residential',area:'1,800 sqft',year:'2024',status:'Completed',
+   duration:'3 months',scope:'Space Planning + Interior Design + Execution',
+   services:['Space Planning','Interior Design','Site Execution'],
+   challenge:'Achieving density without compromise — fitting full storage, kitchen, and living function into a compact 1,800 sqft footprint.',
+   approach:'Storage was resolved first, then light, then material. Rooms were sized for use, not aspiration.',
    description:'a compact urban apartment where every square foot was planned, not decorated.',
    editorial:'<p>the challenge was density without compromise. <em>rooms were sized for use, not aspiration.</em></p><p>storage was resolved first. then light. then material.</p>',
    cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg',
    images:['https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-2.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-3.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-4.jpg'],
    parallax:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/urban-apartment-kitchen-1.jpg',parallaxLbl:'kitchen'},
   {id:'patel-nagar',name:'Patel Nagar Retail Store',location:'Patel Nagar, Delhi',typology:'Commercial',area:'2 floors',year:'2026',status:'Ongoing',
+   duration:'In progress',scope:'Concept + Retail Interior Design + Execution',
+   services:['Concept Design','Retail Interior Design','Site Execution'],
+   challenge:'Building a fast, Gen Z-legible retail identity across two floors without relying on a large footprint or heavy fixtures.',
+   approach:'Fixtures were pulled back so the merchandise \u2014 walls of folded color \u2014 could do the talking. The ground floor moves customers up naturally; the first floor slows them down around a branded, photograph-ready lounge.',
    description:'a menswear store rebuilt around a Gen Z customer — fast to read, quick to shop, built for the phone camera as much as the rack.',
    editorial:'<p>the brief was speed and identity, not square footage. <em>fixtures were pulled back so the merchandise — walls of folded color — could do the talking.</em></p><p>the ground floor moves customers up naturally; the first floor slows them down around a branded lounge built to be photographed.</p>',
    cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-1.jpg',
    images:['https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-1.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-2.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-3.jpg','https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-4.jpg'],
    parallax:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/patel-nagar-retail-2.jpg',parallaxLbl:'folded knitwear wall'},
   {id:'vasant-kunj',name:'Vasant Kunj',location:'New Delhi',typology:'Residential',area:'DDA Residence',year:'2025',status:'Completed',
+   duration:'2 months',scope:'Interior Design + Custom Joinery + Execution',
+   services:['Interior Design','Custom Furniture & Joinery','Site Execution'],
+   challenge:'Achieving a sophisticated, quiet material palette resolved almost entirely through joinery and lighting — with no reliance on applied decoration.',
+   approach:'Every surface — the fluted headboard wall, the backlit TV panel, the window seat — was drawn before it was built. Lighting was layered, not applied: cove, panel and pendant sources let the room shift from morning clarity to evening intimacy.',
    description:'a parents\' bedroom built on walnut fluting, warm beige lacquer, and brushed brass — quiet sophistication resolved through joinery, not decoration.',
    editorial:'<p>the brief was comfort without excess. <em>every surface — the fluted headboard wall, the backlit TV panel, the window seat — was drawn before it was built.</em></p><p>lighting was layered, not applied: cove, panel and pendant sources let the room shift from the clarity of morning to the intimacy of evening.</p>',
    cover:'https://cdn.jsdelivr.net/gh/indevastudio/indevastudio@main/vasant-kunj-cover.jpg',
@@ -6802,15 +6899,23 @@ window.pOpenProject = function(id) {
   document.getElementById('pdet-title').textContent = p.name;
   document.getElementById('pdet-desc').textContent = p.description;
   document.getElementById('pdet-meta').innerHTML =
-    [['location',p.location],['area',p.area],['year',p.year]]
+    [['location',p.location],['area',p.area],['duration',p.duration]]
     .map(([l,v]) => `<div class="dh-mi"><span class="dh-ml">${l}</span><span class="dh-mv">${v}</span></div>`)
     .join('');
 
   /* strip */
   document.getElementById('pdet-strip').innerHTML =
-    [['year',p.year],['typology',p.typology],['area',p.area],['status',p.status]]
+    [['type',p.typology],['year',p.year],['area',p.area],['status',p.status]]
     .map(([l,v]) => `<div class="ds-i"><div class="ds-l">${l}</div><div class="ds-v">${v}</div></div>`)
     .join('');
+
+  /* project facts */
+  document.getElementById('pdet-facts').innerHTML = `
+    <div class="pf-row"><div class="pf-l">scope of work</div><div class="pf-v">${p.scope}</div></div>
+    <div class="pf-row"><div class="pf-l">key challenge</div><div class="pf-v">${p.challenge}</div></div>
+    <div class="pf-row"><div class="pf-l">design approach</div><div class="pf-v">${p.approach}</div></div>
+    <div class="pf-row"><div class="pf-l">services provided</div><div class="pf-v pf-tags">${p.services.map(s=>`<span class="pf-tag">${s}</span>`).join('')}</div></div>
+  `;
 
   /* editorial */
   document.getElementById('pdet-editorial').innerHTML = p.editorial;
@@ -7007,7 +7112,7 @@ function showPage(id, pushState) {
     'projects':   { title: 'projects — indéva studio', desc: 'selected interior design and architecture projects by indéva studio across luxury residences, villas, restaurants and commercial spaces.' },
     'philosophy': { title: 'our philosophy — indéva studio', desc: 'design with conviction. the design philosophy underpinning every project at indéva studio, new delhi.' },
     'blog':       { title: 'insights — indéva studio', desc: 'expert insights on luxury interior design, architecture, materials and process from indéva studio, new delhi.' },
-    'vendors':    { title: 'our vendors — indéva studio', desc: 'the curated network of suppliers, craftspeople and material vendors that indéva studio works with.' },
+    'vendors':    { title: 'material & vendor network — indéva studio', desc: 'the material and vendor network indéva studio works with — trusted manufacturers, technical specialists and material partners across categories.' },
     'furniture':  { title: 'furniture & collection — indéva studio', desc: 'custom furniture and joinery by indéva studio — form, function, and durability, conceived to survive life, not just a photoshoot.' },
     'contact':    { title: 'contact — indéva studio', desc: 'start a conversation with indéva studio. reach out to discuss your interior design or architecture project in new delhi.' }
   };
@@ -7437,7 +7542,7 @@ triggerReveal();
 
   <!-- Phone Call FAB -->
   <div style="position:relative; display:flex; align-items:center;">
-    <a class="call-fab" id="callFab" href="tel:+919717881083" aria-label="call us" onclick="trackPhoneClick()">
+    <a class="call-fab" id="callFab" href="tel:+919717881083" aria-label="call us" onclick="trackPhoneClick()" onmouseenter="openLeadPopup()">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;fill:#fff;flex-shrink:0;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
     </a>
     <div class="call-tooltip">call us now</div>
