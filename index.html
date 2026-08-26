@@ -465,6 +465,86 @@ nav.solid {
   .hero-cred-div { height: 26px; }
   .hero-cred-num { font-size: 1.15rem; }
 }
+
+/* ── HERO CTAs ── */
+.hero-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 18px 38px;
+  border-radius: 100px;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  white-space: nowrap;
+  transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s cubic-bezier(.22,1,.36,1), border-color 0.35s ease, color 0.35s ease;
+}
+.hero-cta:active { transform: translateY(-1px) scale(0.98) !important; }
+.hero-cta-primary {
+  border: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-bright) 50%, var(--gold) 100%);
+  background-size: 240% 240%;
+  background-position: 0% 50%;
+  box-shadow: 0 6px 20px rgba(154,106,58,0.35), 0 2px 8px rgba(154,106,58,0.22);
+  animation: heroCtaBreathe 3.2s ease-in-out infinite;
+}
+.hero-cta-primary:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(154,106,58,0.48), 0 5px 12px rgba(154,106,58,0.3);
+  background-position: 100% 50%;
+  animation-play-state: paused;
+}
+.hero-cta-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 45%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.85s cubic-bezier(.22,1,.36,1);
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-cta-primary:hover::before { left: 130%; }
+.hero-cta-primary span, .hero-cta-primary .hero-cta-arrow { position: relative; z-index: 2; }
+.hero-cta-arrow { display: inline-block; transition: transform 0.4s cubic-bezier(.22,1,.36,1); }
+.hero-cta-primary:hover .hero-cta-arrow { transform: translateX(6px); }
+@keyframes heroCtaBreathe {
+  0%, 100% { box-shadow: 0 6px 20px rgba(154,106,58,0.35), 0 2px 8px rgba(154,106,58,0.22); }
+  50%      { box-shadow: 0 8px 26px rgba(154,106,58,0.48), 0 3px 10px rgba(154,106,58,0.3); }
+}
+.hero-cta-secondary {
+  border: 1.5px solid var(--line);
+  color: var(--white);
+  background: var(--black-2);
+}
+.hero-cta-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold-dim);
+  background: var(--black-3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(36,36,36,0.10);
+}
+.hero-cta:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta-primary { animation: none; }
+  .hero-cta, .hero-cta-arrow, .hero-cta-primary::before { transition: none; }
+}
+@media(max-width:520px){
+  .hero-cta { padding: 16px 28px; font-size: 0.62rem; }
+}
+
 .hero-diamond {
   width: 42px;
   height: 42px;
@@ -3494,8 +3574,8 @@ img {
         </div>
       </div>
       <div class="hero-actions reveal d3">
-        <button class="btn btn-outline" onclick="showPage('projects'); window.scrollTo(0,0);" style="font-size:0.68rem;padding:16px 36px;letter-spacing:0.2em;font-weight:700;">view our work</button>
-        <button class="btn btn-primary" onclick="showPage('contact'); window.scrollTo(0,0);" style="font-size:0.68rem;padding:16px 36px;letter-spacing:0.2em;font-weight:700;box-shadow:0 4px 22px rgba(193,80,46,0.45);transition:transform 0.2s,box-shadow 0.2s,background 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 30px rgba(193,80,46,0.60)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 22px rgba(193,80,46,0.45)';">discuss your project →</button>
+        <button class="hero-cta hero-cta-secondary" onclick="showPage('projects'); window.scrollTo(0,0);"><span>view our work</span></button>
+        <button class="hero-cta hero-cta-primary" onclick="showPage('contact'); window.scrollTo(0,0);"><span>discuss your project</span><span class="hero-cta-arrow">→</span></button>
       </div>
     </div>
     <div class="hero-visual">
