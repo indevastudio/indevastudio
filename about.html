@@ -3196,7 +3196,11 @@ a, button, [onclick], .service-row, .project-card, .project-row,
     object-fit: cover !important;
     object-position: center !important;
   }
-  .hero-actions { margin-top: 8px; flex-direction: row; gap: 14px; align-items: center; }
+  .hero-actions { margin-top: 8px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-cta { width: 100%; white-space: normal; }
+  .hero-left { min-width: 0; }
+  .hero-credibility { min-width: 0; }
+  .hero-cred-item { min-width: 0; }
 
   /* sections — strip 60px padding to 20px */
   .pt-nav { padding-top: 80px !important; }
@@ -3432,8 +3436,7 @@ img {
   gap: 8px;
 }
 @media (max-width: 768px) {
-  .mobile-cta-bar { display: flex; }
-  body { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); } /* prevent content/footer hiding behind bar */
+  .mobile-cta-bar { display: none; }
 }
 .mobile-cta-bar .mob-btn {
   flex: 1;
@@ -8730,6 +8733,8 @@ function feqSubmit() {
   transform: translate(-50%, -46%) scale(0.96);
   z-index: 29999;
   width: min(460px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
   background: #EFE9DC;
   border: 1px solid rgba(193,80,46,0.18);
   box-shadow: 0 40px 100px rgba(0,0,0,0.8);
