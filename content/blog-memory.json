@@ -290,7 +290,11 @@
     "Avoid Mistakes with Residential Interior Designer Hauz Khas",
     "Step‑by‑step guide from a residential interior designer Sohna Road",
     "Modern Villa Interior Designer South Delhi: Cost Guide 2026",
-    "HDHMR vs plywood kitchen: which material fits Delhi NCR homes?"
+    "HDHMR vs plywood kitchen: which material fits Delhi NCR homes?",
+    "Avoid Mistakes with a Farmhouse Interior Designer South Delhi",
+    "How Much Does a 2 BHK Interior Cost in Gurgaon? A Step‑by‑Step Guide",
+    "Luxury Villa Interior Designer Gurgaon: Real Cost Guide",
+    "HDHMR vs plywood wardrobe: technical guide for Delhi NCR homes"
   ],
   "slugs": [
     "master-bedroom-interior-design-ideas",
@@ -583,7 +587,11 @@
     "avoid-mistakes-hauz-khas-interior-design",
     "step-by-step-sohna-road-farmhouse-design",
     "modern-villa-interior-cost-south-delhi",
-    "hdhmr-plywood-kitchen-comparison"
+    "hdhmr-plywood-kitchen-comparison",
+    "avoid-farmhouse-design-mistakes",
+    "2-bhk-interior-cost-gurgaon-guide",
+    "luxury-villa-interior-cost-gurgaon",
+    "hdhmr-vs-plywood-wardrobe-guide"
   ],
   "usedKeywords": [
     "master bedroom interior design ideas India",
@@ -876,7 +884,11 @@
     "residential interior designer Hauz Khas",
     "residential interior designer Sohna Road",
     "modern villa interior designer South Delhi",
-    "HDHMR vs plywood kitchen"
+    "HDHMR vs plywood kitchen",
+    "farmhouse interior designer South Delhi",
+    "2 BHK interior cost Gurgaon",
+    "luxury villa interior designer Gurgaon",
+    "HDHMR vs plywood wardrobe"
   ],
   "summaries": [
     "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
@@ -1169,17 +1181,17 @@
     "The article warns of frequent cost‑draining mistakes in duplex projects and shows how a seasoned team can prevent them.",
     "A practical, numbered roadmap shows first‑time clients how to work with a designer on Sohna Road, ensuring budget control and design clarity.",
     "A data‑driven cost guide shows how design choices, negotiations, and hidden fees shape the ₹40–80 lakh budget for a South Delhi villa.",
-    "The guide explains how material properties, cost, and durability determine the right choice between HDHMR and plywood for a Delhi NCR kitchen."
+    "The guide explains how material properties, cost, and durability determine the right choice between HDHMR and plywood for a Delhi NCR kitchen.",
+    "The article warns against typical blunders in farmhouse projects and offers concrete fixes for each.",
+    "A clear, ordered process helps first‑time owners budget and execute a luxury 2 BHK interior without hidden costs.",
+    "A data‑backed guide shows where money goes in a Gurgaon villa project and how to keep costs under control.",
+    "The article compares HDHMR and plywood wardrobes on material properties, cost, durability, and suitable applications, showing why indéva studio prefers one over the other in most cases."
   ],
   "lastAngles": [
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
     "material-comparison",
-    "cost-guide",
-    "mistakes-avoid",
-    "step-by-step",
-    "material-comparison",
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
@@ -1203,6 +1215,10 @@
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
+    "material-comparison",
+    "mistakes-avoid",
+    "step-by-step",
+    "cost-guide",
     "material-comparison",
     "mistakes-avoid",
     "step-by-step",
@@ -1304,6 +1320,10 @@
     "locality-hauz-khas",
     "locality-sohna-road",
     "south-delhi-villa-interior-designer",
+    "hdhmr-vs-plywood-comparison",
+    "south-delhi-farmhouse-interior-designer",
+    "gurgaon-interior-cost-guide",
+    "gurgaon-villa-interior-designer",
     "hdhmr-vs-plywood-comparison"
   ],
   "targetUrls": [
@@ -1397,6 +1417,10 @@
     "/delhi",
     "/gurgaon",
     "/delhi",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon",
     "/#services"
   ],
   "contentTypes": [
@@ -1489,6 +1513,10 @@
     "BLOG",
     "LOCATION_PAGE",
     "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
+    "SERVICE_PAGE",
+    "BLOG",
     "SERVICE_PAGE",
     "BLOG"
   ],
@@ -1583,6 +1611,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1595,15 +1627,15 @@
     "custom-furniture-delhi-ncr": "2026-08-26",
     "custom-furniture-construction-guide": "2026-08-23",
     "locality-maharani-bagh": "2026-08-26",
-    "gurgaon-interior-cost-guide": "2026-08-26",
+    "gurgaon-interior-cost-guide": "2026-08-27",
     "locality-panchsheel-park": "2026-08-25",
-    "gurgaon-villa-interior-designer": "2026-08-24",
+    "gurgaon-villa-interior-designer": "2026-08-27",
     "interior-boq-guide": "2026-08-24",
     "locality-defence-colony": "2026-08-13",
     "gurgaon-farmhouse-interior-designer": "2026-08-22",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
-    "south-delhi-farmhouse-interior-designer": "2026-08-23",
+    "south-delhi-farmhouse-interior-designer": "2026-08-27",
     "locality-golf-course-extension-road": "2026-08-24",
     "locality-hauz-khas": "2026-08-27",
     "locality-dlf-gurgaon": "2026-08-16",
@@ -1618,10 +1650,6 @@
     "south-delhi-commercial-interior-designer": "2026-08-23"
   },
   "lastLocations": [
-    "Greater Kailash",
-    "New Gurgaon",
-    "Gurgaon",
-    "Delhi NCR",
     "South Delhi",
     "Gurgaon",
     "Gurgaon",
@@ -1657,6 +1685,10 @@
     "Hauz Khas",
     "Sohna Road",
     "South Delhi",
+    "Delhi NCR",
+    "South Delhi",
+    "Gurgaon",
+    "Gurgaon",
     "Delhi NCR"
   ]
 }
