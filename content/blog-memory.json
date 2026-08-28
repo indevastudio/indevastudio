@@ -1,8 +1,5 @@
 {
   "titles": [
-    "master bedroom interior design ideas india",
-    "living room interior cost estimate Delhi guide",
-    "kids bedroom luxury design ideas india",
     "couple bedroom interior design Delhi cost guide",
     "affordable luxury interior design Delhi NCR",
     "premium restaurant design ideas india 2025",
@@ -298,12 +295,13 @@
     "Avoid Costly Mistakes in Your Villa Renovation South Delhi",
     "Villa Interior Design Cost Guide – Golf Course Extension Road",
     "How to Navigate Farmhouse Design and Execution Gurgaon for Luxury Apartments",
-    "Choosing the Best Laminate Brands in India for Delhi NCR Homes"
+    "Choosing the Best Laminate Brands in India for Delhi NCR Homes",
+    "Avoid Costly Mistakes When Hiring Farmhouse Designer Sainik Farms",
+    "Farmhouse Renovation Gurgaon: Cost Guide for Luxury Homes 2024",
+    "Step-by-Step Guide to Farmhouse Renovation Sainik Farms in South Delhi",
+    "Veneer vs Laminate Interiors: Technical Comparison for Delhi NCR Homes"
   ],
   "slugs": [
-    "master-bedroom-interior-design-ideas",
-    "living-room-interior-cost-estimate",
-    "kids-bedroom-luxury-design-mistakes",
     "couple-bedroom-interior-design-delhi",
     "affordable-luxury-interior-design-delhi-ncr",
     "premium-restaurant-design-ideas",
@@ -599,12 +597,13 @@
     "villa-renovation-mistakes-south-delhi",
     "villa-interior-design-cost-guide-golf-course-extension",
     "farmhouse-design-process-gurgaon",
-    "laminate-brand-comparison-delhi-ncr"
+    "laminate-brand-comparison-delhi-ncr",
+    "farmhouse-designer-mistakes-guide",
+    "farmhouse-renovation-gurgaon-cost-guide",
+    "farmhouse-renovation-sainik-farms-guide",
+    "veneer-laminate-interiors-comparison"
   ],
   "usedKeywords": [
-    "master bedroom interior design ideas India",
-    "living room interior cost estimate Delhi",
-    "kids bedroom luxury design ideas India",
     "couple bedroom interior design Delhi",
     "affordable luxury interior design Delhi NCR",
     "premium restaurant design ideas India 2025",
@@ -900,12 +899,13 @@
     "villa renovation South Delhi",
     "interior designer Golf Course Extension Road",
     "farmhouse design and execution Gurgaon",
-    "best laminate brands India"
+    "best laminate brands India",
+    "farmhouse interior designer Sainik Farms",
+    "farmhouse renovation Gurgaon",
+    "farmhouse renovation Sainik Farms",
+    "veneer vs laminate interiors"
   ],
   "summaries": [
-    "This article provides a step-by-step guide to master bedroom interior design ideas in India, helping you navigate the process with ease and stay within your budget of ₹25-50 lakh.",
-    "This article provides a comprehensive cost guide for designing a living room in a villa on Golf Course Road, Gurgaon, with a budget of ₹25-50 lakh.",
-    "this article highlights common mistakes to avoid when designing a luxury kids bedroom in india, providing valuable insights and solutions for a successful project.",
     "This article provides a comprehensive cost guide for couple bedroom interior design in Delhi, covering the biggest cost misconceptions, cost breakdown, and negotiation tips for a villa in Golf Course Road, Gurgaon with a budget of ₹25-50 lakh.",
     "This article explores affordable luxury interior design ideas for villas in Delhi NCR, focusing on design directions, materials, and cost ranges to suit various tastes and budgets.",
     "This article provides a practical step-by-step guide to designing a premium restaurant in India with a budget of ₹15-25 lakh.",
@@ -1201,17 +1201,17 @@
     "A seasoned designer outlines the frequent errors in villa renovation and offers clear fixes to protect your budget.",
     "Transparent cost breakdowns and smart negotiation can make a high‑end villa interior on Golf Course Extension Road affordable.",
     "A practical, numbered process helps first‑time clients turn a farmhouse‑style vision into reality without costly missteps.",
-    "A side‑by‑side technical comparison helps homeowners and designers pick the right laminate based on performance, cost and local conditions."
+    "A side‑by‑side technical comparison helps homeowners and designers pick the right laminate based on performance, cost and local conditions.",
+    "The article warns homeowners about frequent budgeting and planning errors when hiring a farmhouse interior designer and offers precise corrective steps.",
+    "A data‑backed cost breakdown shows how to control expenses on a Gurgaon farmhouse renovation while avoiding common pitfalls.",
+    "A clear, step‑by‑step process helps first‑time owners manage expectations and get the most out of their renovation budget.",
+    "A side‑by‑side technical review shows when veneer or laminate is the smarter choice for a Delhi NCR home."
   ],
   "lastAngles": [
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
     "material-comparison",
-    "mistakes-avoid",
-    "step-by-step",
-    "cost-guide",
-    "material-comparison",
     "step-by-step",
     "mistakes-avoid",
     "cost-guide",
@@ -1239,6 +1239,10 @@
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
+    "material-comparison",
+    "mistakes-avoid",
+    "cost-guide",
+    "step-by-step",
     "material-comparison",
     "mistakes-avoid",
     "cost-guide",
@@ -1344,6 +1348,10 @@
     "south-delhi-villa-interior-designer",
     "locality-golf-course-extension-road",
     "gurgaon-farmhouse-interior-designer",
+    "laminate-veneer-comparison-guide",
+    "south-delhi-farmhouse-interior-designer",
+    "gurgaon-farmhouse-interior-designer",
+    "south-delhi-farmhouse-interior-designer",
     "laminate-veneer-comparison-guide"
   ],
   "targetUrls": [
@@ -1445,6 +1453,10 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services"
   ],
   "contentTypes": [
@@ -1545,6 +1557,10 @@
     "BLOG",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
     "SERVICE_PAGE",
     "BLOG"
   ],
@@ -1647,6 +1663,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1667,7 +1687,7 @@
     "gurgaon-farmhouse-interior-designer": "2026-08-28",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
-    "south-delhi-farmhouse-interior-designer": "2026-08-27",
+    "south-delhi-farmhouse-interior-designer": "2026-08-28",
     "locality-golf-course-extension-road": "2026-08-28",
     "locality-hauz-khas": "2026-08-27",
     "locality-dlf-gurgaon": "2026-08-16",
@@ -1683,10 +1703,6 @@
     "laminate-veneer-comparison-guide": "2026-08-28"
   },
   "lastLocations": [
-    "South Delhi",
-    "Golf Course Extension Road",
-    "New Gurgaon",
-    "Delhi NCR",
     "Panchsheel Park",
     "Gurgaon",
     "South Delhi",
@@ -1722,6 +1738,10 @@
     "South Delhi",
     "Golf Course Extension Road",
     "Gurgaon",
+    "Delhi NCR",
+    "South Delhi",
+    "Gurgaon",
+    "South Delhi",
     "Delhi NCR"
   ]
 }
