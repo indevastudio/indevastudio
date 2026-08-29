@@ -1,9 +1,5 @@
 {
   "titles": [
-    "modern villa design ideas indian homes",
-    "interior design services Delhi NCR reviews",
-    "luxury home interior design cost Delhi 2025",
-    "best luxury interior designers near me Delhi",
     "plotted home interior design Sonipat ideas",
     "premium master suite design india mistakes",
     "farmhouse living room design ideas India",
@@ -299,13 +295,13 @@
     "Hiring an interior designer Defence Colony: step‑by‑step guide",
     "Key Mistakes When Hiring a Luxury Interior Designer on Sohna Road",
     "penthouse interior design Gurgaon: true cost guide",
-    "Understanding modular kitchen cost Delhi: material guide"
+    "Understanding modular kitchen cost Delhi: material guide",
+    "How to Choose a Luxury Farmhouse Interior Designer in Delhi",
+    "Luxury Interior Designer in New Gurgaon: Mistakes to Dodge Today",
+    "Penthouse interior design Gurgaon: realistic cost guide",
+    "kitchen cabinet material comparison for Delhi NCR homes budget"
   ],
   "slugs": [
-    "modern-villa-design-ideas",
-    "interior-design-services-delhi-ncr",
-    "luxury-home-interior-design-cost-delhi",
-    "luxury-interior-designers-near-me-delhi",
     "plotted-home-interior-design-sonipat",
     "premium-master-suite-design-mistakes",
     "farmhouse-living-room-design-ideas",
@@ -601,13 +597,13 @@
     "hire-interior-designer-defence-colony",
     "luxury-interior-designer-sohna-road-mistakes",
     "penthouse-cost-guide-gurgaon",
-    "modular-kitchen-material-cost-guide"
+    "modular-kitchen-material-cost-guide",
+    "choose-luxury-farmhouse-designer",
+    "luxury-interior-mistakes-new-gurgaon",
+    "penthouse-cost-guide-gurgaon-cost-guide",
+    "kitchen-cabinet-material-comparison-delhi-ncr"
   ],
   "usedKeywords": [
-    "modern villa design ideas Indian homes",
-    "interior design services Delhi NCR reviews",
-    "luxury home interior design cost Delhi 2025",
-    "best luxury interior designers near me Delhi",
     "plotted home interior design Sonipat",
     "premium master suite design India",
     "farmhouse living room design ideas India",
@@ -903,13 +899,13 @@
     "interior designer Defence Colony",
     "luxury interior designer Sohna Road",
     "penthouse interior design Gurgaon",
-    "modular kitchen cost Delhi"
+    "modular kitchen cost Delhi",
+    "luxury farmhouse interior designer Delhi",
+    "luxury interior designer New Gurgaon",
+    "penthouse interior design Gurgaon",
+    "kitchen cabinet material comparison"
   ],
   "summaries": [
-    "this article highlights common mistakes to avoid when designing a modern villa in india, with a focus on duplex projects in the ₹40-80 lakh range.",
-    "This article provides a comprehensive cost guide for interior design services in Delhi NCR, covering the biggest cost misconceptions, cost breakdown by room, and negotiation tips.",
-    "This article exposes common mistakes to avoid in luxury home interior design in Delhi, with a focus on farmhouses in Kundli, Sonipat, and a budget of ₹1-3 crore.",
-    "This article provides a definitive cost guide for luxury interior design in Delhi, covering the biggest cost misconceptions, what drives costs up, and a breakdown of costs by room.",
     "This article presents a curated collection of interior design ideas for plotted homes in Sonipat, catering to a budget of ₹8-15 lakh and incorporating Indian aesthetics and materials.",
     "This article exposes costly mistakes to avoid in premium master suite design in India, providing practical solutions for a serene and functional retreat.",
     "indéva studio challenges conventional wisdom on farmhouse living room design in india, offering a fresh perspective on creating luxurious and modern spaces within a budget of ₹25-50 lakh.",
@@ -1205,17 +1201,17 @@
     "A clear, numbered process helps homeowners in Defence Colony collaborate confidently with an interior designer.",
     "The article outlines frequent mistakes in luxury interior projects on Sohna Road and offers practical fixes to keep budgets realistic.",
     "A data‑backed cost guide helps buyers understand and control expenses for penthouse interior design Gurgaon.",
-    "The article explains how material selection impacts cost, durability and suitability for Delhi NCR kitchens."
+    "The article explains how material selection impacts cost, durability and suitability for Delhi NCR kitchens.",
+    "A clear, step‑by‑step process helps first‑time clients confidently hire a luxury farmhouse interior designer in Delhi.",
+    "Avoiding typical mistakes saves budget and ensures a smoother luxury interior design experience in New Gurgaon.",
+    "A data‑driven cost guide that reveals what truly drives penthouse interior expenses in Gurgaon and how to control them.",
+    "A technical side‑by‑side look at wood, MDF and metal cabinets helps Delhi NCR homeowners balance cost, durability and design goals."
   ],
   "lastAngles": [
     "step-by-step",
     "mistakes-avoid",
     "cost-guide",
     "material-comparison",
-    "step-by-step",
-    "mistakes-avoid",
-    "cost-guide",
-    "material-comparison",
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
@@ -1243,6 +1239,10 @@
     "mistakes-avoid",
     "cost-guide",
     "step-by-step",
+    "material-comparison",
+    "step-by-step",
+    "mistakes-avoid",
+    "cost-guide",
     "material-comparison",
     "step-by-step",
     "mistakes-avoid",
@@ -1356,6 +1356,10 @@
     "locality-defence-colony",
     "locality-sohna-road",
     "gurgaon-penthouse-interior-designer",
+    "kitchen-material-cost-guide",
+    "south-delhi-farmhouse-interior-designer",
+    "locality-new-gurgaon",
+    "gurgaon-penthouse-interior-designer",
     "kitchen-material-cost-guide"
   ],
   "targetUrls": [
@@ -1461,6 +1465,10 @@
     "/delhi",
     "/gurgaon",
     "/delhi",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon",
     "/#services",
     "/delhi",
     "/gurgaon",
@@ -1574,6 +1582,10 @@
     "LOCATION_PAGE",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "SERVICE_PAGE",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1683,6 +1695,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1703,7 +1719,7 @@
     "gurgaon-farmhouse-interior-designer": "2026-08-28",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
-    "south-delhi-farmhouse-interior-designer": "2026-08-28",
+    "south-delhi-farmhouse-interior-designer": "2026-08-29",
     "locality-golf-course-extension-road": "2026-08-28",
     "locality-hauz-khas": "2026-08-27",
     "locality-dlf-gurgaon": "2026-08-16",
@@ -1713,17 +1729,13 @@
     "locality-greater-kailash": "2026-08-22",
     "gurgaon-commercial-interior-designer": "2026-08-24",
     "hdhmr-vs-plywood-comparison": "2026-08-27",
-    "locality-new-gurgaon": "2026-08-23",
+    "locality-new-gurgaon": "2026-08-29",
     "interior-lighting-design-guide": "2026-08-21",
     "south-delhi-commercial-interior-designer": "2026-08-23",
     "laminate-veneer-comparison-guide": "2026-08-28",
     "kitchen-material-cost-guide": "2026-08-29"
   },
   "lastLocations": [
-    "South Delhi",
-    "Gurgaon",
-    "Gurgaon",
-    "Delhi NCR",
     "Friends Colony",
     "Golf Course Extension Road",
     "Gurgaon",
@@ -1758,6 +1770,10 @@
     "Delhi NCR",
     "Defence Colony",
     "Sohna Road",
+    "Gurgaon",
+    "Delhi NCR",
+    "South Delhi",
+    "New Gurgaon",
     "Gurgaon",
     "Delhi NCR"
   ]
