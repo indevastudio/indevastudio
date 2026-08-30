@@ -1,9 +1,5 @@
 {
   "titles": [
-    "high end cafe and restaurant design delhi — Design Ideas & Inspiration",
-    "luxury farmhouse design Delhi NCR cost guide",
-    "false ceiling design for living room India — Step-by-Step Process",
-    "sofa set design ideas Indian living room",
     "open plan living room design india inspiration",
     "restaurant interior design cost Delhi case study — Case Study Style",
     "living room tv unit design ideas india",
@@ -299,13 +295,13 @@
     "Guide to 2 BHK interior cost South Delhi: step‑by‑step budgeting",
     "How Much Does a Luxury Apartment in DLF Gurgaon Really Cost?",
     "Avoid Costly Mistakes in Luxury Wardrobe Design Gurgaon for Home",
-    "Understanding Wardrobe Cost Delhi: Material Choices Explained"
+    "Understanding Wardrobe Cost Delhi: Material Choices Explained",
+    "Bungalow makeover with a residential interior designer Maharani Bagh",
+    "Cost guide for farmhouse furniture design Gurgaon – budget tips",
+    "Avoid Mistakes Hiring a Villa Interior Designer South Delhi Today",
+    "wardrobe material comparison: guide for Delhi NCR homes"
   ],
   "slugs": [
-    "high-end-cafe-and-restaurant-design-delhi-design",
-    "luxury-farmhouse-design-delhi-ncr-cost",
-    "false-ceiling-design-for-living-room-india-step",
-    "sofa-set-design-ideas-indian-living-room",
     "open-plan-living-room-design-india",
     "restaurant-interior-design-cost-delhi-case-study-case",
     "living-room-tv-unit-design-ideas",
@@ -601,13 +597,13 @@
     "2-bhk-interior-cost-south-delhi-guide",
     "luxury-apartment-cost-dlf-gurgaon",
     "avoid-wardrobe-mistakes-gurgaon",
-    "wardrobe-material-cost-delhi"
+    "wardrobe-material-cost-delhi",
+    "bungalow-makeover-maharani-bagh",
+    "farmhouse-furniture-cost-guide-gurgaon",
+    "villa-designer-mistakes-south-delhi",
+    "wardrobe-material-comparison-delhi-ncr"
   ],
   "usedKeywords": [
-    "high end cafe and restaurant design Delhi",
-    "luxury farmhouse design Delhi NCR",
-    "false ceiling design for living room India",
-    "sofa set design ideas Indian living room",
     "open plan living room design India",
     "restaurant interior design cost Delhi",
     "living room TV unit design ideas India",
@@ -903,13 +899,13 @@
     "2 BHK interior cost South Delhi",
     "luxury interior designer DLF Gurgaon",
     "luxury wardrobe design Gurgaon",
-    "wardrobe cost Delhi"
+    "wardrobe cost Delhi",
+    "residential interior designer Maharani Bagh",
+    "farmhouse furniture design Gurgaon",
+    "villa interior designer South Delhi",
+    "wardrobe material comparison"
   ],
   "summaries": [
-    "indéva studio presents curated design ideas for high-end cafes and restaurants in Delhi, blending Indian aesthetics with global luxury standards.",
-    "This article provides a definitive cost guide for luxury farmhouse design in Delhi NCR, covering the biggest cost misconceptions, cost breakdown by room, and negotiation tips to help you achieve your dream home within your budget of ₹40–80 lakh.",
-    "This article provides a step-by-step guide on designing a false ceiling for a luxury living room in India, focusing on the process, budget, and common pitfalls to avoid.",
-    "This article challenges conventional wisdom on sofa set design in indian living rooms, offering a provocative expert perspective on creating unique and luxurious spaces.",
     "this article explores curated design ideas and inspiration for open plan living rooms in indian penthouses, focusing on luxury materials and aesthetics within the ₹1-3 crore budget range.",
     "This case study explores the design process and challenges of a restaurant interior design project in a heritage bungalow in Lutyens Delhi, Delhi, with a budget of ₹8-15 lakh.",
     "this article provides a definitive cost guide for living room tv unit design ideas in india, with a focus on heritage bungalows in Lutyens Delhi, Delhi, and a budget of ₹8-15 lakh.",
@@ -1205,17 +1201,17 @@
     "A clear, step‑by‑step method helps first‑time owners budget and avoid common mistakes when redesigning a 2 BHK in South Delhi.",
     "A data‑driven cost guide reveals what truly drives expenses in a luxury DLF Gurgaon interior project and how to stay within a ₹1–3 crore budget.",
     "This guide exposes the most common pitfalls in luxury wardrobe design Gurgaon and shows how to avoid them.",
-    "Material selection determines price, durability and suitability for Delhi’s climate, so a technical comparison is essential."
+    "Material selection determines price, durability and suitability for Delhi’s climate, so a technical comparison is essential.",
+    "A clear, step‑by‑step roadmap helps you collaborate with a designer and stay within a realistic budget for a Maharani Bagh bungalow.",
+    "A data‑driven breakdown shows where money goes and how to control it when styling a Gurgaon farmhouse‑inspired home.",
+    "A seasoned designer outlines the top costly mistakes and practical fixes for South Delhi villa projects.",
+    "A clear, technical side‑by‑side look at the common wardrobe materials helps you pick the most suitable option for your budget and climate."
   ],
   "lastAngles": [
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
     "material-comparison",
-    "cost-guide",
-    "step-by-step",
-    "mistakes-avoid",
-    "material-comparison",
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
@@ -1243,6 +1239,10 @@
     "step-by-step",
     "mistakes-avoid",
     "cost-guide",
+    "material-comparison",
+    "step-by-step",
+    "cost-guide",
+    "mistakes-avoid",
     "material-comparison",
     "step-by-step",
     "cost-guide",
@@ -1364,6 +1364,10 @@
     "south-delhi-interior-cost-guide",
     "locality-dlf-gurgaon",
     "custom-furniture-delhi-ncr",
+    "wardrobe-material-cost-guide",
+    "locality-maharani-bagh",
+    "gurgaon-farmhouse-interior-designer",
+    "south-delhi-villa-interior-designer",
     "wardrobe-material-cost-guide"
   ],
   "targetUrls": [
@@ -1481,6 +1485,10 @@
     "/delhi",
     "/gurgaon",
     "/#services",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services"
   ],
   "contentTypes": [
@@ -1598,6 +1606,10 @@
     "BLOG",
     "LOCATION_PAGE",
     "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1715,6 +1727,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1722,17 +1738,17 @@
     "locality-golf-course-road": "2026-08-21",
     "turnkey-interior-execution-delhi-ncr": "2026-08-25",
     "interior-flooring-material-guide": "2026-08-22",
-    "south-delhi-villa-interior-designer": "2026-08-28",
+    "south-delhi-villa-interior-designer": "2026-08-30",
     "gurgaon-penthouse-interior-designer": "2026-08-29",
     "custom-furniture-delhi-ncr": "2026-08-30",
     "custom-furniture-construction-guide": "2026-08-23",
-    "locality-maharani-bagh": "2026-08-26",
+    "locality-maharani-bagh": "2026-08-30",
     "gurgaon-interior-cost-guide": "2026-08-27",
     "locality-panchsheel-park": "2026-08-25",
     "gurgaon-villa-interior-designer": "2026-08-27",
     "interior-boq-guide": "2026-08-24",
     "locality-defence-colony": "2026-08-29",
-    "gurgaon-farmhouse-interior-designer": "2026-08-28",
+    "gurgaon-farmhouse-interior-designer": "2026-08-30",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
     "south-delhi-farmhouse-interior-designer": "2026-08-29",
@@ -1753,10 +1769,6 @@
     "wardrobe-material-cost-guide": "2026-08-30"
   },
   "lastLocations": [
-    "Panchsheel Park",
-    "Gurgaon",
-    "Delhi NCR",
-    "Delhi NCR",
     "Maharani Bagh",
     "Gurgaon",
     "Delhi NCR",
@@ -1792,6 +1804,10 @@
     "South Delhi",
     "DLF Gurgaon",
     "Delhi NCR",
+    "Delhi NCR",
+    "Maharani Bagh",
+    "Gurgaon",
+    "South Delhi",
     "Delhi NCR"
   ]
 }
