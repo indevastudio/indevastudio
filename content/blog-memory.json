@@ -1,9 +1,5 @@
 {
   "titles": [
-    "plotted home interior design Sonipat ideas",
-    "premium master suite design india mistakes",
-    "farmhouse living room design ideas India",
-    "luxury restaurant interior design India case study — Case Study Style",
     "high end cafe and restaurant design delhi — Design Ideas & Inspiration",
     "luxury farmhouse design Delhi NCR cost guide",
     "false ceiling design for living room India — Step-by-Step Process",
@@ -299,13 +295,13 @@
     "How to Choose a Luxury Farmhouse Interior Designer in Delhi",
     "Luxury Interior Designer in New Gurgaon: Mistakes to Dodge Today",
     "Penthouse interior design Gurgaon: realistic cost guide",
-    "kitchen cabinet material comparison for Delhi NCR homes budget"
+    "kitchen cabinet material comparison for Delhi NCR homes budget",
+    "Guide to 2 BHK interior cost South Delhi: step‑by‑step budgeting",
+    "How Much Does a Luxury Apartment in DLF Gurgaon Really Cost?",
+    "Avoid Costly Mistakes in Luxury Wardrobe Design Gurgaon for Home",
+    "Understanding Wardrobe Cost Delhi: Material Choices Explained"
   ],
   "slugs": [
-    "plotted-home-interior-design-sonipat",
-    "premium-master-suite-design-mistakes",
-    "farmhouse-living-room-design-ideas",
-    "luxury-restaurant-interior-design-india-case-study-case",
     "high-end-cafe-and-restaurant-design-delhi-design",
     "luxury-farmhouse-design-delhi-ncr-cost",
     "false-ceiling-design-for-living-room-india-step",
@@ -601,13 +597,13 @@
     "choose-luxury-farmhouse-designer",
     "luxury-interior-mistakes-new-gurgaon",
     "penthouse-cost-guide-gurgaon-cost-guide",
-    "kitchen-cabinet-material-comparison-delhi-ncr"
+    "kitchen-cabinet-material-comparison-delhi-ncr",
+    "2-bhk-interior-cost-south-delhi-guide",
+    "luxury-apartment-cost-dlf-gurgaon",
+    "avoid-wardrobe-mistakes-gurgaon",
+    "wardrobe-material-cost-delhi"
   ],
   "usedKeywords": [
-    "plotted home interior design Sonipat",
-    "premium master suite design India",
-    "farmhouse living room design ideas India",
-    "luxury restaurant interior design India",
     "high end cafe and restaurant design Delhi",
     "luxury farmhouse design Delhi NCR",
     "false ceiling design for living room India",
@@ -903,13 +899,13 @@
     "luxury farmhouse interior designer Delhi",
     "luxury interior designer New Gurgaon",
     "penthouse interior design Gurgaon",
-    "kitchen cabinet material comparison"
+    "kitchen cabinet material comparison",
+    "2 BHK interior cost South Delhi",
+    "luxury interior designer DLF Gurgaon",
+    "luxury wardrobe design Gurgaon",
+    "wardrobe cost Delhi"
   ],
   "summaries": [
-    "This article presents a curated collection of interior design ideas for plotted homes in Sonipat, catering to a budget of ₹8-15 lakh and incorporating Indian aesthetics and materials.",
-    "This article exposes costly mistakes to avoid in premium master suite design in India, providing practical solutions for a serene and functional retreat.",
-    "indéva studio challenges conventional wisdom on farmhouse living room design in india, offering a fresh perspective on creating luxurious and modern spaces within a budget of ₹25-50 lakh.",
-    "this case study highlights the journey of designing a luxury restaurant in Rai, Sonipat with a budget of ₹25-50 lakh, from brief to completion.",
     "indéva studio presents curated design ideas for high-end cafes and restaurants in Delhi, blending Indian aesthetics with global luxury standards.",
     "This article provides a definitive cost guide for luxury farmhouse design in Delhi NCR, covering the biggest cost misconceptions, cost breakdown by room, and negotiation tips to help you achieve your dream home within your budget of ₹40–80 lakh.",
     "This article provides a step-by-step guide on designing a false ceiling for a luxury living room in India, focusing on the process, budget, and common pitfalls to avoid.",
@@ -1205,13 +1201,13 @@
     "A clear, step‑by‑step process helps first‑time clients confidently hire a luxury farmhouse interior designer in Delhi.",
     "Avoiding typical mistakes saves budget and ensures a smoother luxury interior design experience in New Gurgaon.",
     "A data‑driven cost guide that reveals what truly drives penthouse interior expenses in Gurgaon and how to control them.",
-    "A technical side‑by‑side look at wood, MDF and metal cabinets helps Delhi NCR homeowners balance cost, durability and design goals."
+    "A technical side‑by‑side look at wood, MDF and metal cabinets helps Delhi NCR homeowners balance cost, durability and design goals.",
+    "A clear, step‑by‑step method helps first‑time owners budget and avoid common mistakes when redesigning a 2 BHK in South Delhi.",
+    "A data‑driven cost guide reveals what truly drives expenses in a luxury DLF Gurgaon interior project and how to stay within a ₹1–3 crore budget.",
+    "This guide exposes the most common pitfalls in luxury wardrobe design Gurgaon and shows how to avoid them.",
+    "Material selection determines price, durability and suitability for Delhi’s climate, so a technical comparison is essential."
   ],
   "lastAngles": [
-    "step-by-step",
-    "mistakes-avoid",
-    "cost-guide",
-    "material-comparison",
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
@@ -1247,6 +1243,10 @@
     "step-by-step",
     "mistakes-avoid",
     "cost-guide",
+    "material-comparison",
+    "step-by-step",
+    "cost-guide",
+    "mistakes-avoid",
     "material-comparison"
   ],
   "canonicalGroups": [
@@ -1360,7 +1360,11 @@
     "south-delhi-farmhouse-interior-designer",
     "locality-new-gurgaon",
     "gurgaon-penthouse-interior-designer",
-    "kitchen-material-cost-guide"
+    "kitchen-material-cost-guide",
+    "south-delhi-interior-cost-guide",
+    "locality-dlf-gurgaon",
+    "custom-furniture-delhi-ncr",
+    "wardrobe-material-cost-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -1473,6 +1477,10 @@
     "/delhi",
     "/gurgaon",
     "/gurgaon",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/#services",
     "/#services"
   ],
   "contentTypes": [
@@ -1586,6 +1594,10 @@
     "SERVICE_PAGE",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "BLOG",
     "BLOG"
   ],
   "searchIntents": [
@@ -1699,6 +1711,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1708,7 +1724,7 @@
     "interior-flooring-material-guide": "2026-08-22",
     "south-delhi-villa-interior-designer": "2026-08-28",
     "gurgaon-penthouse-interior-designer": "2026-08-29",
-    "custom-furniture-delhi-ncr": "2026-08-26",
+    "custom-furniture-delhi-ncr": "2026-08-30",
     "custom-furniture-construction-guide": "2026-08-23",
     "locality-maharani-bagh": "2026-08-26",
     "gurgaon-interior-cost-guide": "2026-08-27",
@@ -1722,9 +1738,9 @@
     "south-delhi-farmhouse-interior-designer": "2026-08-29",
     "locality-golf-course-extension-road": "2026-08-28",
     "locality-hauz-khas": "2026-08-27",
-    "locality-dlf-gurgaon": "2026-08-16",
+    "locality-dlf-gurgaon": "2026-08-30",
     "plywood-material-guide": "2026-08-26",
-    "south-delhi-interior-cost-guide": "2026-08-24",
+    "south-delhi-interior-cost-guide": "2026-08-30",
     "locality-sohna-road": "2026-08-29",
     "locality-greater-kailash": "2026-08-22",
     "gurgaon-commercial-interior-designer": "2026-08-24",
@@ -1733,13 +1749,10 @@
     "interior-lighting-design-guide": "2026-08-21",
     "south-delhi-commercial-interior-designer": "2026-08-23",
     "laminate-veneer-comparison-guide": "2026-08-28",
-    "kitchen-material-cost-guide": "2026-08-29"
+    "kitchen-material-cost-guide": "2026-08-29",
+    "wardrobe-material-cost-guide": "2026-08-30"
   },
   "lastLocations": [
-    "Friends Colony",
-    "Golf Course Extension Road",
-    "Gurgaon",
-    "Delhi NCR",
     "Panchsheel Park",
     "Gurgaon",
     "Delhi NCR",
@@ -1775,6 +1788,10 @@
     "South Delhi",
     "New Gurgaon",
     "Gurgaon",
+    "Delhi NCR",
+    "South Delhi",
+    "DLF Gurgaon",
+    "Delhi NCR",
     "Delhi NCR"
   ]
 }
