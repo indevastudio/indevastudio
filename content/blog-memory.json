@@ -1,9 +1,5 @@
 {
   "titles": [
-    "luxury bedroom design cost Delhi NCR — Step-by-Step Process",
-    "farmhouse villa interior design Gurgaon ideas",
-    "fine dining restaurant design ideas india — Case Study Style",
-    "top interior designers Delhi farmhouse cost guide",
     "best interior designer Dehradun farmhouse mistakes",
     "luxury living room interior design Delhi",
     "bespoke villa interior design Noida cost guide",
@@ -299,13 +295,13 @@
     "avoid costly design pitfalls when hiring an interior designer Greater Kailash",
     "Step‑by‑step guide from a villa interior designer on Sohna Road",
     "How Much Does a Cafe Interior Design Cost in South Delhi?",
-    "Choosing the Best Hardware Brands for Interiors: A Technical Guide"
+    "Choosing the Best Hardware Brands for Interiors: A Technical Guide",
+    "Avoid these costly interior design mistakes in Defence Colony",
+    "How much does interior design cost per sq ft Gurgaon?",
+    "Corporate interior designer South Delhi: cost guide businesses",
+    "comparing drawer channel brands india for high‑end homes"
   ],
   "slugs": [
-    "luxury-bedroom-design-cost-delhi-ncr-step-by",
-    "farmhouse-villa-interior-design-gurgaon",
-    "fine-dining-restaurant-design-ideas-india-case-study",
-    "delhi-farmhouse-interior-design-cost",
     "dehradun-farmhouse-interior-designer-mistakes",
     "luxury-living-room-interior-design-delhi-case-study",
     "bespoke-villa-interior-design-noida-cost",
@@ -601,13 +597,13 @@
     "avoid-design-mistakes-greater-kailash",
     "villa-interior-design-sohna-road",
     "cost-guide-cafe-interior-south-delhi",
-    "hardware-brands-interior-comparison"
+    "hardware-brands-interior-comparison",
+    "avoid-costly-interior-design-mistakes-defence-colony",
+    "interior-design-cost-gurgaon",
+    "corporate-interior-cost-guide-south-delhi",
+    "drawer-channel-comparison-india"
   ],
   "usedKeywords": [
-    "luxury bedroom design cost Delhi NCR",
-    "farmhouse villa interior design Gurgaon",
-    "fine dining restaurant design ideas India",
-    "top interior designers Delhi farmhouse",
     "best interior designer Dehradun farmhouse",
     "luxury living room interior design Delhi",
     "bespoke villa interior design Noida",
@@ -903,13 +899,13 @@
     "interior designer Greater Kailash",
     "villa interior designer Sohna Road",
     "cafe interior designer South Delhi",
-    "best hardware brands for interiors"
+    "best hardware brands for interiors",
+    "residential interior designer Defence Colony",
+    "interior design cost per sq ft Gurgaon",
+    "corporate interior designer South Delhi",
+    "drawer channel brands India"
   ],
   "summaries": [
-    "This article provides a step-by-step guide to designing a luxury bedroom in Delhi NCR, focusing on the process and budget of ₹25–50 lakh.",
-    "This article provides a comprehensive guide to designing a beautiful farmhouse villa interior in Gurgaon, covering various styles and budget options.",
-    "This case study explores the design process and challenges of creating a fine dining restaurant in Noida, highlighting the importance of thoughtful design decisions and budget planning.",
-    "This article provides a comprehensive cost guide for hiring top interior designers in Delhi for a farmhouse project, covering common misconceptions, cost drivers, and negotiation strategies.",
     "This article exposes common mistakes to avoid when hiring an interior designer for a Dehradun farmhouse or a duplex in Greater Kailash, Delhi, with a budget of ₹40-80 lakh.",
     "This case study explores the design journey of a luxury living room interior design project in Delhi, from brief to completion, with a focus on the challenges and solutions that led to a successful outcome.",
     "This article provides a definitive cost guide for bespoke villa interior design in Noida, covering common misconceptions, cost drivers, and a breakdown of expenses by room.",
@@ -1205,7 +1201,11 @@
     "the article outlines frequent design errors in Greater Kailash duplex projects and provides clear fixes to keep budgets between ₹40–80 lakh.",
     "A practical, numbered guide shows first‑time clients how to collaborate with a villa interior designer on Sohna Road, avoid common mistakes, and stay within an ₹8–15 lakh budget.",
     "A data‑driven cost guide shows where money goes in a South Delhi cafe fit‑out and how to control it.",
-    "The article compares key hardware material choices, their costs and performance, and explains why indéva studio prefers certain specifications for luxury homes."
+    "The article compares key hardware material choices, their costs and performance, and explains why indéva studio prefers certain specifications for luxury homes.",
+    "The article outlines frequent design errors in Defence Colony projects and offers clear fixes to keep budgets realistic.",
+    "A clear, stepwise roadmap helps first‑time owners estimate and control interior design expenses per square foot in Gurgaon.",
+    "Understanding the real cost drivers and negotiation tactics helps you plan a realistic budget for a corporate interior project in South Delhi.",
+    "the article evaluates steel, aluminum and PVC drawer channels, highlighting which indéva studio prefers for premium Delhi NCR interiors."
   ],
   "lastAngles": [
     "mistakes-avoid",
@@ -1217,10 +1217,6 @@
     "cost-guide",
     "material-comparison",
     "mistakes-avoid",
-    "step-by-step",
-    "cost-guide",
-    "material-comparison",
-    "mistakes-avoid",
     "cost-guide",
     "step-by-step",
     "material-comparison",
@@ -1243,6 +1239,10 @@
     "step-by-step",
     "cost-guide",
     "mistakes-avoid",
+    "material-comparison",
+    "mistakes-avoid",
+    "step-by-step",
+    "cost-guide",
     "material-comparison",
     "mistakes-avoid",
     "step-by-step",
@@ -1372,6 +1372,10 @@
     "locality-greater-kailash",
     "locality-sohna-road",
     "south-delhi-commercial-interior-designer",
+    "interior-hardware-fittings-guide",
+    "locality-defence-colony",
+    "gurgaon-interior-cost-guide",
+    "south-delhi-commercial-interior-designer",
     "interior-hardware-fittings-guide"
   ],
   "targetUrls": [
@@ -1489,6 +1493,10 @@
     "/delhi",
     "/gurgaon",
     "/#services",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/delhi",
     "/#services",
     "/delhi",
     "/gurgaon",
@@ -1622,6 +1630,10 @@
     "LOCATION_PAGE",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
+    "LOCATION_PAGE",
+    "BLOG",
+    "SERVICE_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1747,6 +1759,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1759,11 +1775,11 @@
     "custom-furniture-delhi-ncr": "2026-08-30",
     "custom-furniture-construction-guide": "2026-08-23",
     "locality-maharani-bagh": "2026-08-30",
-    "gurgaon-interior-cost-guide": "2026-08-27",
+    "gurgaon-interior-cost-guide": "2026-08-31",
     "locality-panchsheel-park": "2026-08-25",
     "gurgaon-villa-interior-designer": "2026-08-27",
     "interior-boq-guide": "2026-08-24",
-    "locality-defence-colony": "2026-08-29",
+    "locality-defence-colony": "2026-08-31",
     "gurgaon-farmhouse-interior-designer": "2026-08-30",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
@@ -1786,10 +1802,6 @@
     "interior-hardware-fittings-guide": "2026-08-31"
   },
   "lastLocations": [
-    "Maharani Bagh",
-    "Gurgaon",
-    "Delhi NCR",
-    "Delhi NCR",
     "Hauz Khas",
     "Sohna Road",
     "South Delhi",
@@ -1824,6 +1836,10 @@
     "Delhi NCR",
     "Greater Kailash",
     "Sohna Road",
+    "South Delhi",
+    "Delhi NCR",
+    "Defence Colony",
+    "Gurgaon",
     "South Delhi",
     "Delhi NCR"
   ]
