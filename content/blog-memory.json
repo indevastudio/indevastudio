@@ -1,9 +1,5 @@
 {
   "titles": [
-    "villa interior designers Delhi NCR price guide — Cost & Budget Guide",
-    "flat interior design Delhi cost per sqft",
-    "interior designer in Gurgaon for villa design",
-    "restaurant interior designers Gurgaon ideas",
     "farmhouse interior design ideas india — Case Study Style",
     "high end interior design services India",
     "modern farmhouse interior design cost india — Design Ideas & Inspiration",
@@ -299,13 +295,13 @@
     "How a luxury interior designer Vasant Vihar guides your bungalow makeover",
     "Interior Designer Cost in Gurgaon: A Clear Budget Guide 2024",
     "Avoid Costly Mistakes with an Interior Execution Company Gurgaon",
-    "false ceiling lighting design ideas: material guide for Delhi"
+    "false ceiling lighting design ideas: material guide for Delhi",
+    "Residential interior designer Greater Kailash guides home revamp",
+    "Turnkey interior cost Gurgaon: budget guide for luxury homes",
+    "Avoid Costly Pitfalls with Turnkey Interior Design in Delhi",
+    "Practical false ceiling lighting design ideas for Delhi NCR homes"
   ],
   "slugs": [
-    "villa-interior-designers-delhi-ncr-price-guide-cost",
-    "flat-interior-design-delhi-cost",
-    "interior-designer-for-villa-in-gurgaon",
-    "restaurant-interior-designers-gurgaon-design-ideas",
     "farmhouse-interior-design-ideas-india-case-study-style",
     "high-end-interior-design-services",
     "modern-farmhouse-interior-design-cost-india-design-ideas",
@@ -601,13 +597,13 @@
     "luxury-interior-design-vasant-virar-guide",
     "interior-designer-cost-gurgaon-budget-guide",
     "avoid-costly-mistakes-interior-execution-gurgaon",
-    "false-ceiling-lighting-material-comparison"
+    "false-ceiling-lighting-material-comparison",
+    "residential-interior-designer-greater-kailash-guide",
+    "turnkey-interior-cost-gurgaon-guide",
+    "avoid-turnkey-mistakes-delhi",
+    "false-ceiling-lighting-guide-delhi-ncr"
   ],
   "usedKeywords": [
-    "villa interior designers Delhi NCR price",
-    "flat interior design Delhi cost per sqft",
-    "interior designer in Gurgaon for villa",
-    "restaurant interior designers Gurgaon",
     "farmhouse interior design ideas India",
     "high end interior design services India",
     "modern farmhouse interior design cost India",
@@ -903,13 +899,13 @@
     "luxury interior designer Vasant Vihar",
     "interior designer cost Gurgaon",
     "interior execution company Gurgaon",
+    "false ceiling lighting design ideas",
+    "residential interior designer Greater Kailash",
+    "turnkey interior cost Gurgaon",
+    "turnkey interior design Delhi",
     "false ceiling lighting design ideas"
   ],
   "summaries": [
-    "This article provides a definitive cost guide for villa interior designers in Delhi NCR, covering the biggest cost misconceptions, what drives costs up, and a breakdown of costs by room, to help you budget for your ₹8-15 lakh project.",
-    "this article explores different design ideas and inspiration for flat interior design in delhi, with a focus on costs per square foot, to help you create your dream home within a budget of ₹25-50 lakh.",
-    "This article guides you through the step-by-step process of hiring an interior designer in Gurgaon to design your villa in Rai, Sonipat with a budget of ₹25-50 lakh.",
-    "This article explores various design ideas and inspiration for restaurant interior designers in Gurgaon, covering different styles and budget options.",
     "this case study explores the journey of designing a luxurious farmhouse interior in south delhi, delhi, within a budget of ₹15–25 lakh.",
     "This article provides a step-by-step guide on how to approach high-end interior design services in India, specifically for a luxury apartment in DLF Phase 5, Gurgaon, with a budget of ₹40-80 lakh.",
     "This article explores the design ideas and cost estimates for a modern farmhouse interior in India, specifically in the luxury apartment context of DLF Phase 5, Gurgaon, with a budget range of ₹40-80 lakh.",
@@ -1205,14 +1201,14 @@
     "A practical, numbered roadmap shows first‑time clients how indéva studio transforms a Vasant Haur bungalow with luxury interior design.",
     "A data‑driven guide that demystifies interior designer cost Gurgaon by breaking down fees, explaining drivers, and offering negotiation tactics.",
     "The article warns against common errors in hiring and managing an interior execution company Gurgaon and offers concrete fixes for a smoother, cost‑effective renovation.",
-    "A side‑by‑side technical comparison of gypsum and metal false ceiling systems for Delhi NCR homes, focusing on material properties, cost, and durability."
+    "A side‑by‑side technical comparison of gypsum and metal false ceiling systems for Delhi NCR homes, focusing on material properties, cost, and durability.",
+    "A clear, step‑by‑step process helps first‑time clients collaborate effectively with a residential interior designer in Greater Kailash.",
+    "A data‑driven look at what really determines the price of a turnkey interior project in Gurgaon, with actionable tips to stay within budget.",
+    "The article highlights common costly mistakes in Delhi turnkey interior projects and provides concrete fixes to protect the client’s budget and timeline.",
+    "The guide compares gypsum, metal and POP false ceilings on material, cost and durability to help you pick the best option for lighting."
   ],
   "lastAngles": [
     "mistakes-avoid",
-    "step-by-step",
-    "cost-guide",
-    "material-comparison",
-    "mistakes-avoid",
     "cost-guide",
     "step-by-step",
     "material-comparison",
@@ -1243,6 +1239,10 @@
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
+    "material-comparison",
+    "step-by-step",
+    "cost-guide",
+    "mistakes-avoid",
     "material-comparison",
     "step-by-step",
     "cost-guide",
@@ -1380,6 +1380,10 @@
     "locality-vasant-vihar",
     "gurgaon-interior-cost-guide",
     "turnkey-interior-execution-delhi-ncr",
+    "interior-lighting-design-guide",
+    "locality-greater-kailash",
+    "gurgaon-interior-cost-guide",
+    "turnkey-interior-execution-delhi-ncr",
     "interior-lighting-design-guide"
   ],
   "targetUrls": [
@@ -1509,6 +1513,10 @@
     "/delhi",
     "/gurgaon",
     "/delhi",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
+    "/#about",
     "/#services",
     "/delhi",
     "/gurgaon",
@@ -1646,6 +1654,10 @@
     "LOCATION_PAGE",
     "BLOG",
     "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "BLOG",
+    "BLOG",
     "BLOG"
   ],
   "searchIntents": [
@@ -1779,6 +1791,10 @@
     "commercial",
     "commercial",
     "commercial",
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial",
     "technical"
   ],
   "lastUsedDate": {
@@ -1806,7 +1822,7 @@
     "plywood-material-guide": "2026-08-26",
     "south-delhi-interior-cost-guide": "2026-08-30",
     "locality-sohna-road": "2026-08-31",
-    "locality-greater-kailash": "2026-08-31",
+    "locality-greater-kailash": "2026-09-01",
     "gurgaon-commercial-interior-designer": "2026-08-24",
     "hdhmr-vs-plywood-comparison": "2026-08-27",
     "locality-new-gurgaon": "2026-08-29",
@@ -1818,10 +1834,6 @@
     "interior-hardware-fittings-guide": "2026-08-31"
   },
   "lastLocations": [
-    "South Delhi",
-    "Gurgaon",
-    "Gurgaon",
-    "Delhi NCR",
     "South Delhi",
     "Golf Course Extension Road",
     "Gurgaon",
@@ -1855,6 +1867,10 @@
     "South Delhi",
     "Delhi NCR",
     "Vasant Vihar",
+    "Gurgaon",
+    "Delhi NCR",
+    "Delhi NCR",
+    "Greater Kailash",
     "Gurgaon",
     "Delhi NCR",
     "Delhi NCR"
