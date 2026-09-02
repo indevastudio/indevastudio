@@ -263,6 +263,7 @@ const LOCALITY_DATA = {
   "Hauz Khas":                   { city: "Delhi",   area: "Hauz Khas",                      property: "duplex" },
   "Maharani Bagh":               { city: "Delhi",   area: "Maharani Bagh",                  property: "independent bungalow" },
   "Friends Colony":              { city: "Delhi",   area: "Friends Colony",                 property: "independent bungalow" },
+  "Vasant Kunj":                 { city: "Delhi",   area: "Vasant Kunj",                    property: "DDA residence" },
   "Sainik Farms":                { city: "Delhi",   area: "Sainik Farms",                   property: "farmhouse" },
   "Gurgaon":                     { city: "Gurgaon", area: "Gurgaon",                        property: "luxury apartment" },
   "DLF Gurgaon":                 { city: "Gurgaon", area: "DLF Phase 5",                    property: "luxury apartment" },
@@ -416,14 +417,180 @@ const KEYWORD_DATABASE = [
       "farmhouse renovation Sainik Farms",
     ],
   }),
+  // ============================================================
+  // DELHI (city-wide — distinct from South Delhi above)
+  // NEW (2026-09) — audit found ZERO Delhi-wide, Delhi NCR, or Noida coverage in
+  // this file; every existing Delhi-side keyword was South-Delhi-specific. Both
+  // clusters below target /delhi (the same real landing page South Delhi keywords
+  // already target) — this is intentional, not cannibalisation: Indéva has one
+  // Delhi page, and "interior designer Delhi" / "interior designer South Delhi"
+  // are different real query strings for the same authoritative destination.
+  // ============================================================
+  ...cluster({
+    cluster: "delhi-core",
+    canonicalGroup: "delhi-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/delhi", category: "delhi",
+    keywords: [
+      "interior designer Delhi", "interior designers Delhi", "interior design company Delhi",
+      "interior design firm Delhi", "interior design studio Delhi", "luxury interior designer Delhi",
+      "residential interior designer Delhi", "home interior designer Delhi",
+      "best interior designer Delhi", "top interior designers Delhi",
+      "turnkey interior designer Delhi",
+      "interior decorator Delhi", "interior design consultant Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-property",
+    canonicalGroup: "delhi-property-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/delhi", category: "delhi",
+    keywords: [
+      "villa interior designer Delhi",
+      "builder floor interior designer Delhi", "apartment interior designer Delhi",
+      "bungalow interior designer Delhi", "penthouse interior designer Delhi",
+      "duplex interior designer Delhi", "independent house interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-cost",
+    canonicalGroup: "delhi-interior-cost-guide",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "BLOG", targetUrl: "/delhi", category: "delhi",
+    keywords: [
+      "interior design cost Delhi", "interior designer cost Delhi",
+      "interior design cost per sq ft Delhi", "interior design price Delhi",
+      "interior designer fees Delhi", "interior designer charges Delhi",
+      "home interior cost Delhi", "luxury interior design cost Delhi",
+      "2 BHK interior cost Delhi", "3 BHK interior cost Delhi", "4 BHK interior cost Delhi",
+      "5 BHK interior cost Delhi", "builder floor interior cost Delhi",
+      "renovation cost Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-commercial",
+    canonicalGroup: "delhi-commercial-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "B", niche: "office",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi", category: "commercial",
+    keywords: [
+      "office interior designer Delhi", "office interior design Delhi",
+      "commercial interior designer Delhi", "corporate interior designer Delhi",
+      "retail interior designer Delhi", "showroom interior designer Delhi",
+      "restaurant interior designer Delhi", "cafe interior designer Delhi",
+      "hospitality interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-ncr-generic",
+    canonicalGroup: "delhi-ncr-interior-designer",
+    location: "Delhi NCR", intent: "commercial", priority: "B",
+    contentType: "LANDING_PAGE", targetUrl: "/", category: "delhi_ncr",
+    keywords: [
+      "interior designer Delhi NCR", "interior design company Delhi NCR",
+      "luxury interior designer Delhi NCR", "interior design and execution Delhi NCR",
+    ],
+  }),
+
+  // ============================================================
+  // NOIDA — NEW (2026-09), previously zero coverage despite an existing /noida page
+  // ============================================================
+  ...cluster({
+    cluster: "noida-core",
+    canonicalGroup: "noida-interior-designer",
+    location: "Noida", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE", targetUrl: "/noida",
+    proposedLandingUrl: "/noida", category: "noida",
+    keywords: [
+      "interior designer Noida", "interior designers Noida", "interior design company Noida",
+      "interior design firm Noida", "luxury interior designer Noida",
+      "residential interior designer Noida", "home interior designer Noida",
+      "best interior designer Noida", "turnkey interior designer Noida",
+      "interior designer Noida Extension", "interior designer Greater Noida",
+    ],
+  }),
+  ...cluster({
+    cluster: "noida-cost",
+    canonicalGroup: "noida-interior-cost-guide",
+    location: "Noida", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/noida", category: "noida",
+    keywords: [
+      "interior design cost Noida", "interior designer cost Noida",
+      "2 BHK interior cost Noida", "3 BHK interior cost Noida", "4 BHK interior cost Noida",
+      "flat interior design cost Noida",
+    ],
+  }),
+
   ...localityClusters(
-    ["Vasant Vihar", "Greater Kailash", "Defence Colony", "Panchsheel Park", "Hauz Khas", "Maharani Bagh", "Friends Colony"],
+    ["Vasant Vihar", "Greater Kailash", "Defence Colony", "Panchsheel Park", "Hauz Khas", "Maharani Bagh", "Friends Colony", "Vasant Kunj"],
     "South Delhi", "south_delhi",
     name => [
       `interior designer ${name}`, `luxury interior designer ${name}`,
       `residential interior designer ${name}`, `home interior designer ${name}`,
     ],
   ),
+  // NEW (2026-09) — property-type and hiring-intent gaps found in a keyword audit.
+  // Builder floor / DDA apartment / bungalow renovation match real South Delhi
+  // housing stock (see LOCALITY_DATA property types above) and, for DDA apartment
+  // specifically, two real completed projects (/projects/vasant-kunj/,
+  // /projects/dda-apartment/). Kept to property-type and hiring-intent variants only —
+  // deliberately NOT more "avoid mistakes in [locality]" pages or new micro-localities
+  // beyond Vasant Kunj, which already has genuine project evidence.
+  ...cluster({
+    cluster: "south-delhi-builder-floor",
+    canonicalGroup: "south-delhi-builder-floor-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "builder-floor",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "builder floor interior designer South Delhi", "builder floor interior design South Delhi",
+      "independent floor interior designer South Delhi", "builder floor renovation South Delhi",
+      "builder floor interior cost South Delhi", "3 floor builder house interior South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-dda-apartment",
+    canonicalGroup: "south-delhi-dda-apartment-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "dda-apartment",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "DDA flat interior designer Delhi", "DDA apartment interior design Delhi",
+      "DDA flat renovation Delhi", "DDA apartment interior cost Delhi",
+      "government housing interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-bungalow-renovation",
+    canonicalGroup: "south-delhi-bungalow-renovation",
+    location: "South Delhi", intent: "commercial", priority: "B", niche: "bungalow",
+    contentType: "BLOG", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "bungalow renovation South Delhi", "independent bungalow interior designer South Delhi",
+      "bungalow interior design cost South Delhi", "old bungalow renovation Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-kitchen-wardrobe",
+    canonicalGroup: "south-delhi-kitchen-wardrobe-material",
+    location: "South Delhi", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "modular kitchen designer South Delhi", "modular kitchen cost South Delhi",
+      "wardrobe design South Delhi", "wardrobe cost South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-bhk-hiring",
+    canonicalGroup: "south-delhi-bhk-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "2 BHK interior designer South Delhi", "3 BHK interior designer South Delhi",
+      "4 BHK interior designer South Delhi", "1 BHK interior designer South Delhi",
+    ],
+  }),
 
   // ============================================================
   // GURGAON
