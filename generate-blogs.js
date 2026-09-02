@@ -2,7 +2,7 @@
  * INDEVA STUDIO — AUTOMATED BLOG ENGINE v9
  *
  * Generates SEO-optimized luxury interior design blogs using Groq's free API
- * (running OpenAI's GPT-OSS 120B). Topic-relevant images via Unsplash.
+ * (running Meta's Llama 3.3 70B). Topic-relevant images via Unsplash.
  *
  * v9 CHANGE SUMMARY (structured SEO content engine — South Delhi / Gurgaon
  * focused, see the walkthrough given alongside this file for full detail):
@@ -23,8 +23,7 @@
  *   GROQ_API_KEY         — get from https://console.groq.com/keys (free, no card)
  *
  * Optional env vars:
- *   GROQ_MODEL           — defaults to openai/gpt-oss-120b (llama-3.3-70b-versatile
- *                           was retired by Groq on 08/16/26 — see console.groq.com/docs/deprecations)
+ *   GROQ_MODEL           — defaults to openai/gpt-oss-120b
  *   UNSPLASH_ACCESS_KEY  — get from https://unsplash.com/oauth/applications (free,
  *                          50 req/hour). Without it, images fall back to a small
  *                          curated Picsum set (less topic-relevant but still works).
@@ -264,6 +263,7 @@ const LOCALITY_DATA = {
   "Hauz Khas":                   { city: "Delhi",   area: "Hauz Khas",                      property: "duplex" },
   "Maharani Bagh":               { city: "Delhi",   area: "Maharani Bagh",                  property: "independent bungalow" },
   "Friends Colony":              { city: "Delhi",   area: "Friends Colony",                 property: "independent bungalow" },
+  "Vasant Kunj":                 { city: "Delhi",   area: "Vasant Kunj",                    property: "DDA residence" },
   "Sainik Farms":                { city: "Delhi",   area: "Sainik Farms",                   property: "farmhouse" },
   "Gurgaon":                     { city: "Gurgaon", area: "Gurgaon",                        property: "luxury apartment" },
   "DLF Gurgaon":                 { city: "Gurgaon", area: "DLF Phase 5",                    property: "luxury apartment" },
@@ -417,14 +417,180 @@ const KEYWORD_DATABASE = [
       "farmhouse renovation Sainik Farms",
     ],
   }),
+  // ============================================================
+  // DELHI (city-wide — distinct from South Delhi above)
+  // NEW (2026-09) — audit found ZERO Delhi-wide, Delhi NCR, or Noida coverage in
+  // this file; every existing Delhi-side keyword was South-Delhi-specific. Both
+  // clusters below target /delhi (the same real landing page South Delhi keywords
+  // already target) — this is intentional, not cannibalisation: Indéva has one
+  // Delhi page, and "interior designer Delhi" / "interior designer South Delhi"
+  // are different real query strings for the same authoritative destination.
+  // ============================================================
+  ...cluster({
+    cluster: "delhi-core",
+    canonicalGroup: "delhi-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/delhi", category: "delhi",
+    keywords: [
+      "interior designer Delhi", "interior designers Delhi", "interior design company Delhi",
+      "interior design firm Delhi", "interior design studio Delhi", "luxury interior designer Delhi",
+      "residential interior designer Delhi", "home interior designer Delhi",
+      "best interior designer Delhi", "top interior designers Delhi",
+      "turnkey interior designer Delhi",
+      "interior decorator Delhi", "interior design consultant Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-property",
+    canonicalGroup: "delhi-property-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/delhi", category: "delhi",
+    keywords: [
+      "villa interior designer Delhi",
+      "builder floor interior designer Delhi", "apartment interior designer Delhi",
+      "bungalow interior designer Delhi", "penthouse interior designer Delhi",
+      "duplex interior designer Delhi", "independent house interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-cost",
+    canonicalGroup: "delhi-interior-cost-guide",
+    location: "Delhi", intent: "commercial", priority: "A",
+    contentType: "BLOG", targetUrl: "/delhi", category: "delhi",
+    keywords: [
+      "interior design cost Delhi", "interior designer cost Delhi",
+      "interior design cost per sq ft Delhi", "interior design price Delhi",
+      "interior designer fees Delhi", "interior designer charges Delhi",
+      "home interior cost Delhi", "luxury interior design cost Delhi",
+      "2 BHK interior cost Delhi", "3 BHK interior cost Delhi", "4 BHK interior cost Delhi",
+      "5 BHK interior cost Delhi", "builder floor interior cost Delhi",
+      "renovation cost Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-commercial",
+    canonicalGroup: "delhi-commercial-interior-designer",
+    location: "Delhi", intent: "commercial", priority: "B", niche: "office",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi", category: "commercial",
+    keywords: [
+      "office interior designer Delhi", "office interior design Delhi",
+      "commercial interior designer Delhi", "corporate interior designer Delhi",
+      "retail interior designer Delhi", "showroom interior designer Delhi",
+      "restaurant interior designer Delhi", "cafe interior designer Delhi",
+      "hospitality interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "delhi-ncr-generic",
+    canonicalGroup: "delhi-ncr-interior-designer",
+    location: "Delhi NCR", intent: "commercial", priority: "B",
+    contentType: "LANDING_PAGE", targetUrl: "/", category: "delhi_ncr",
+    keywords: [
+      "interior designer Delhi NCR", "interior design company Delhi NCR",
+      "luxury interior designer Delhi NCR", "interior design and execution Delhi NCR",
+    ],
+  }),
+
+  // ============================================================
+  // NOIDA — NEW (2026-09), previously zero coverage despite an existing /noida page
+  // ============================================================
+  ...cluster({
+    cluster: "noida-core",
+    canonicalGroup: "noida-interior-designer",
+    location: "Noida", intent: "commercial", priority: "A",
+    contentType: "LANDING_PAGE", targetUrl: "/noida",
+    proposedLandingUrl: "/noida", category: "noida",
+    keywords: [
+      "interior designer Noida", "interior designers Noida", "interior design company Noida",
+      "interior design firm Noida", "luxury interior designer Noida",
+      "residential interior designer Noida", "home interior designer Noida",
+      "best interior designer Noida", "turnkey interior designer Noida",
+      "interior designer Noida Extension", "interior designer Greater Noida",
+    ],
+  }),
+  ...cluster({
+    cluster: "noida-cost",
+    canonicalGroup: "noida-interior-cost-guide",
+    location: "Noida", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/noida", category: "noida",
+    keywords: [
+      "interior design cost Noida", "interior designer cost Noida",
+      "2 BHK interior cost Noida", "3 BHK interior cost Noida", "4 BHK interior cost Noida",
+      "flat interior design cost Noida",
+    ],
+  }),
+
   ...localityClusters(
-    ["Vasant Vihar", "Greater Kailash", "Defence Colony", "Panchsheel Park", "Hauz Khas", "Maharani Bagh", "Friends Colony"],
+    ["Vasant Vihar", "Greater Kailash", "Defence Colony", "Panchsheel Park", "Hauz Khas", "Maharani Bagh", "Friends Colony", "Vasant Kunj"],
     "South Delhi", "south_delhi",
     name => [
       `interior designer ${name}`, `luxury interior designer ${name}`,
       `residential interior designer ${name}`, `home interior designer ${name}`,
     ],
   ),
+  // NEW (2026-09) — property-type and hiring-intent gaps found in a keyword audit.
+  // Builder floor / DDA apartment / bungalow renovation match real South Delhi
+  // housing stock (see LOCALITY_DATA property types above) and, for DDA apartment
+  // specifically, two real completed projects (/projects/vasant-kunj/,
+  // /projects/dda-apartment/). Kept to property-type and hiring-intent variants only —
+  // deliberately NOT more "avoid mistakes in [locality]" pages or new micro-localities
+  // beyond Vasant Kunj, which already has genuine project evidence.
+  ...cluster({
+    cluster: "south-delhi-builder-floor",
+    canonicalGroup: "south-delhi-builder-floor-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "builder-floor",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "builder floor interior designer South Delhi", "builder floor interior design South Delhi",
+      "independent floor interior designer South Delhi", "builder floor renovation South Delhi",
+      "builder floor interior cost South Delhi", "3 floor builder house interior South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-dda-apartment",
+    canonicalGroup: "south-delhi-dda-apartment-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A", niche: "dda-apartment",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi",
+    proposedLandingUrl: "/interior-designer-south-delhi", category: "south_delhi",
+    keywords: [
+      "DDA flat interior designer Delhi", "DDA apartment interior design Delhi",
+      "DDA flat renovation Delhi", "DDA apartment interior cost Delhi",
+      "government housing interior designer Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-bungalow-renovation",
+    canonicalGroup: "south-delhi-bungalow-renovation",
+    location: "South Delhi", intent: "commercial", priority: "B", niche: "bungalow",
+    contentType: "BLOG", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "bungalow renovation South Delhi", "independent bungalow interior designer South Delhi",
+      "bungalow interior design cost South Delhi", "old bungalow renovation Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-kitchen-wardrobe",
+    canonicalGroup: "south-delhi-kitchen-wardrobe-material",
+    location: "South Delhi", intent: "commercial", priority: "B",
+    contentType: "BLOG", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "modular kitchen designer South Delhi", "modular kitchen cost South Delhi",
+      "wardrobe design South Delhi", "wardrobe cost South Delhi",
+    ],
+  }),
+  ...cluster({
+    cluster: "south-delhi-bhk-hiring",
+    canonicalGroup: "south-delhi-bhk-interior-designer",
+    location: "South Delhi", intent: "commercial", priority: "A",
+    contentType: "SERVICE_PAGE", targetUrl: "/delhi", category: "south_delhi",
+    keywords: [
+      "2 BHK interior designer South Delhi", "3 BHK interior designer South Delhi",
+      "4 BHK interior designer South Delhi", "1 BHK interior designer South Delhi",
+    ],
+  }),
 
   // ============================================================
   // GURGAON
@@ -1066,7 +1232,12 @@ async function generateBlog(entry, angle, cityData, budgetData, attemptNum = 1) 
   const externalLink1 = EXTERNAL_LINKS[entry.keyword.length % EXTERNAL_LINKS.length];
   const semanticTerms = semanticVariationsFor(entry);
 
-  const prompt = `Write SEO content for indéva studio (Delhi NCR luxury interior design firm)'s blog. Write in third person about the firm ("indéva studio believes...", "the team recommends...") — do NOT write in first person as a staff member, and do NOT claim any job title, byline, or personal experience ("as a senior writer...", "I've seen...", "in my experience...").
+  const prompt = `Write a 1500-word SEO blog article for indéva studio (a Delhi NCR luxury interior design firm) in third person.
+Do not write as "I" or claim personal authorship, a job title, or years of first-hand professional experience — write about
+indéva studio and the topic from an informed, third-person, editorial voice instead. (Audit note, 2026-09-01: this prompt
+previously opened with "You are a senior writer for indéva studio", a first-person framing that repeatedly produced fabricated
+"as a senior designer with 15 years of experience" claims in published articles despite the PART 6 rule below telling the
+model not to do this — reworded to close that loophole at the source rather than relying on the instruction alone.)
 
 WRITE A 1500-WORD SEO BLOG.
 
@@ -1080,13 +1251,14 @@ SCENARIO (use ${cityData.area}, ${cityData.city} naturally — do not invent a f
 DIRECTIVE:
 ${angle.instruction}
 
-CRITICAL — DO NOT FABRICATE (PART 6). These are hard bans, not style suggestions — output containing any of them will be automatically rejected before publishing:
-- Never invent a specific "real" Indéva client, project, or testimonial and present it as fact. This includes anecdote openings like "the day a client called us, frantic about..." — do not write this pattern or anything structurally similar (a named crisis moment attributed to an unnamed but specific-sounding client).
-- Never write in first person as a staff member. Do not say "as a senior writer", "as a designer", "I've seen", "in my experience", "our founder told me", or any equivalent personal-narrator framing. Write about indéva studio in third person only.
+CRITICAL — DO NOT FABRICATE (PART 6):
+- Never invent a specific "real" Indéva client, project, or testimonial and present it as fact.
 - Never claim a specific number of years of experience, a project count, or a client count unless it is a generic, unverifiable-as-false statement (e.g. avoid "15 years of experience" or "500+ projects completed").
 - Never invent exact measurements, lab statistics, or certification numbers.
 - If an example genuinely helps the reader, label it explicitly in the text as "HYPOTHETICAL EXAMPLE" or "ILLUSTRATIVE BUDGET" — do not present it as something that actually happened.
 - Use ₹ pricing only where pricing is genuinely relevant to the topic.
+- BANNED PHRASES — do not write any of these or close variants of them: "as a senior designer", "as a senior writer",
+  "with 15 years of experience", "in my X years of experience", "I've worked with numerous clients", "the day a client called us".
 
 VOICE: Lowercase brand name "indéva studio". Authoritative, warm, Indian market fluent. Grade 7-8 readability. No clichés like "delve", "in the realm of", "at the end of the day", "transformative", "seamless", "leverage", "holistic", "cutting-edge".
 
@@ -1222,23 +1394,6 @@ function parseBlogResponse(raw, entry, angle) {
     throw new Error(`Malformed model output (missing: ${missing.join(", ")})`);
   }
 
-  // HARD SAFETY NET — the prompt already bans these (PART 6), but models don't
-  // always comply. This is the fallback that actually stops fabricated content
-  // from publishing: if any of these patterns slip through, fail the generation
-  // so the caller retries with a fresh angle instead of shipping it.
-  const FABRICATION_PATTERNS = [
-    /the day a client called us[^.]*frantic/i,
-    /as a senior writer/i,
-    /as a (senior )?designer,? i(?:'ve| have)/i,
-    /in my experience/i,
-    /\b\d{1,3}\+?\s*(years of experience|projects completed|happy clients)/i,
-  ];
-  const hit = FABRICATION_PATTERNS.find((re) => re.test(articleBody));
-  if (hit) {
-    console.warn(`  ⚠️  Rejected — fabricated-content pattern matched: ${hit}`);
-    throw new Error(`Fabricated-content pattern matched (${hit}) — forcing retry`);
-  }
-
   return {
     title: titleMatch[1].trim(),
     meta: metaMatch ? metaMatch[1].trim() : "",
@@ -1275,6 +1430,19 @@ function validateBlog(parsed, entry, allKnownTitles, allKnownSlugs) {
   if (/lorem ipsum/i.test(plainText)) problems.push("contains placeholder lorem ipsum text");
   if (/```/.test(parsed.article)) problems.push("contains markdown code fences");
   if (/\[PLACEHOLDER|\[INSERT|\[TODO/i.test(parsed.article)) problems.push("contains placeholder brackets");
+
+  // FABRICATION SIGNATURE CHECK (audit 2026-09-01, hard code-level backstop for PART 6).
+  // Prompt-level instructions alone already failed silently on live pages (11 confirmed
+  // as of this audit) — this is a second line of defense that forces a regeneration
+  // attempt instead of letting the pattern reach publish.
+  const fabricationSignatures = [
+    /as a senior (designer|writer)/i,
+    /\b\d+\s*years? of experience/i,
+    /i(?:'ve| have) worked with (numerous|many|hundreds of) clients/i,
+    /the day a client called us/i,
+  ];
+  const fabricationHits = fabricationSignatures.filter((re) => re.test(plainText));
+  if (fabricationHits.length > 0) problems.push(`fabricated-credential/anecdote signature detected (${fabricationHits.length} pattern match(es))`);
 
   // Basic broken-internal-link check: any /#... or /delhi /gurgaon style hrefs
   // should match a known INTERNAL_LINKS url.
@@ -1643,9 +1811,28 @@ async function main() {
         }
 
         // SLUG UNIQUENESS — memory AND filesystem (protects if memory.json resets)
-        const slugDir = path.join(REPO_ROOT, "insights", parsed.slug);
-        if (memory.slugs.includes(parsed.slug) || fs.existsSync(path.join(slugDir, "index.html"))) {
-          parsed.slug = `${parsed.slug}-${angle.id}`;
+        // BUGFIX (audit 2026-09-01): this used to be a single-shot check that
+        // unconditionally appended `-${angle.id}` on collision. If a slug had
+        // ALREADY been auto-suffixed on a previous run (e.g. "...-case-study")
+        // and collided again today with the same angle, it appended the same
+        // suffix a second time, producing live URLs like
+        // "...-case-study-case-study" / "...-cost-guide-cost-guide" /
+        // "...-mistakes-mistakes-to". Now: never re-append a suffix already
+        // present at the end of the slug, and loop with a numeric fallback
+        // until the slug is actually unique instead of trusting one check.
+        const slugExists = (slug) => {
+          const dir = path.join(REPO_ROOT, "insights", slug);
+          return memory.slugs.includes(slug) || fs.existsSync(path.join(dir, "index.html"));
+        };
+        if (slugExists(parsed.slug)) {
+          if (!parsed.slug.endsWith(`-${angle.id}`)) {
+            parsed.slug = `${parsed.slug}-${angle.id}`;
+          }
+          let disambiguator = 2;
+          while (slugExists(parsed.slug)) {
+            parsed.slug = `${parsed.slug}-${disambiguator}`;
+            disambiguator++;
+          }
         }
 
         blogData = parsed;
