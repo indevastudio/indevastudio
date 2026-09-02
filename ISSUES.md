@@ -10,6 +10,21 @@ All of these were discovered during the Phase 2 SEO landing-page build
 
 ---
 
+## CORRECTION — 2026-09-01 audit
+
+A fresh SEO audit + fresh `git clone` this session found that **ISSUE-5, ISSUE-6, and
+ISSUE-7 below were marked "✅ Resolved" but the fixes did not actually exist in this
+repo** — no `services.html`, no `/projects/<slug>/` pages, and no fabrication-signature
+regex check in `validateBlog()`. Whether that work was done in a different session's
+local sandbox and never uploaded, or something else, is unclear — but treat this file's
+"Resolved" markers with caution and verify against the actual files before trusting them.
+This session verified everything against real file contents (not against this changelog)
+before making any change, and the entries below are what was actually confirmed and
+fixed as of 2026-09-01. See ISSUE-9 through ISSUE-12 for what was done this session,
+including the parts of ISSUE-5/6/7 that are now genuinely built.
+
+---
+
 ## ISSUE-1 — `delhi.html` and `interior-designer-delhi.html` are byte-identical duplicate pages
 **Status: ✅ Resolved**
 **Severity: High (confirmed live duplicate content, both indexed)**
@@ -167,3 +182,93 @@ space in the filename), `index .diff3`, `index.html.diff`,
 that got `mkdir`'d by accident at some point). None of these were reachable
 via `vercel.json`'s routing, so this doesn't change anything live — it just
 removes noise from the repo.
+## ISSUE-9 — `generate-blogs.js` slug auto-suffix could stack the same suffix twice
+**Status: ✅ Resolved (2026-09-01)**
+**Severity: High — confirmed live, producing indexed doorway-pattern URLs**
+
+Found via a full sitemap crawl: 9 live URLs had a suffix appended twice, e.g.
+`.../luxury-bedroom-design-cost-delhi-ncr-case-study-case-study/`,
+`.../bespoke-villa-interior-design-noida-mistakes-mistakes-to/`. Root cause in
+`scripts/generate-blogs.js`: the slug-collision check was single-shot — it appended
+`-${angle.id}` unconditionally on collision, so a slug that had *already* been
+auto-suffixed on a previous run could collide again with the same angle and get the
+same suffix appended a second time.
+
+**Fix applied:** the check is now a loop that (a) never re-appends a suffix already
+present at the end of the slug, and (b) falls back to a numeric disambiguator if it's
+still colliding after that, instead of trusting a single check.
+
+**Also fixed:** 9 already-published stacked-suffix URLs are 301-redirected to their
+root article in `vercel.json`, and removed from `sitemap.xml`.
+
+**Note on scope:** confirmed the body text of these variant pages is genuinely
+different from their root article (similarity ~0.15 on a sample), not copy-paste
+duplicate content — so this is a doorway-page/keyword-cannibalization problem, not a
+literal duplicate-content one. The other ~170 near-duplicate variants a full audit
+found (rotating suffixes with distinct but repetitive content) still need manual
+review/merging into one authoritative page per topic — that's editorial work, not
+something to batch-redirect blindly. See the audit spreadsheet for the full list.
+
+---
+
+## ISSUE-10 — Fabricated "15 years of experience" / "as a senior designer" claims still live
+**Status: ✅ Resolved (2026-09-01) — for real this time**
+**Severity: Medium-High — brand/trust risk, conflicts with the no-fabrication rule**
+
+ISSUE-6 above claimed this was fixed (49 posts + root cause). It wasn't, in this repo.
+Re-scanned all of `insights/*/index.html` directly: 11 files matched, 9 were genuine
+fabricated first-person credential claims (e.g. *"as a senior designer with 15 years of
+experience, I've worked with numerous clients in Sector 150, Noida..."*), 2 were false
+positives on inspection (generic, non-first-person mentions of "years of experience").
+
+**Fix applied:**
+1. Stripped the fabricated-credential clause from the 9 real matches, keeping the
+   substantive point that followed each one so the sentence still reads cleanly.
+2. **Root cause fixed in `scripts/generate-blogs.js`**: reworded the prompt out of
+   first-person "You are a senior writer for indéva studio" framing into third-person,
+   added an explicit banned-phrase list to the PART 6 anti-fabrication instructions.
+3. **Added the missing hard-coded backstop** in `validateBlog()`: a regex check for the
+   fabrication signatures (senior designer/writer framing, "N years of experience",
+   "I've worked with numerous clients", "the day a client called us") that forces a
+   regeneration attempt instead of letting a match through, since the prompt-level
+   instruction alone had already failed silently on 9+ live posts.
+
+---
+
+## ISSUE-11 — `/projects/<slug>` case-study pages and `/services` genuinely built
+**Status: ✅ Resolved (2026-09-01)**
+**Severity: High — real project photography existed with nowhere to live**
+
+Confirmed `projects.html` (a static, disconnected duplicate — see `patel-nagar-project-entry.txt`
+for the note explaining this) links to 6 project URLs that didn't exist as files:
+`/projects/mini-farmhouse/`, `/projects/resham-hotel/`, `/projects/studio-workspace/`,
+`/projects/dda-apartment/`, `/projects/patel-nagar/`, `/projects/vasant-kunj/`.
+
+**Fix applied:** built all 6 as real static pages, plus a `/projects/` index and a
+`/services/` page — using only the real project data already in `window.PROJECTS` in
+`index.html` (the actual current source of truth, confirmed via `patel-nagar-project-entry.txt`,
+not the stale `projects.html` copy) and the real service copy already live in `index.html`'s
+`#services` section. No fabricated projects, numbers, or claims were added. Each project
+page has Article + BreadcrumbList JSON-LD; `/services/` has Service + hasOfferCatalog +
+BreadcrumbList JSON-LD. Added all 8 new URLs to `sitemap.xml`.
+
+**Not done:** `projects.html` (the old duplicate) and `pshow.html`/`pshow.js` (an older
+case-study viewer template, also disconnected from `window.PROJECTS`) are unchanged —
+flagged as cleanup debt, not touched this pass since they're not currently linked from
+primary navigation and touching them wasn't necessary to ship the real project pages.
+
+---
+
+## ISSUE-12 — Audit found ~51% of `/insights/` URLs in near-duplicate clusters; not fixed this pass
+**Status: 🟡 Documented, not resolved — needs a decision, not a mechanical fix**
+**Severity: High (SEO), but high-risk to batch-fix blindly**
+
+A full sitemap crawl (393 URLs) found 386 `/insights/` articles, of which 196 sit inside
+59 "duplication clusters" — one root topic republished with rotating suffixes
+(`-case-study`, `-cost-guide`, `-design-ideas`, `-expert-perspective`, `-step-by-step`,
+`-mistakes-to`). Content-similarity checks on a sample show these are NOT copy-paste
+duplicates (body text differs, ~0.15 similarity) — they're a doorway-page/keyword-
+cannibalization pattern, not literal duplication, so they can't be safely mass-redirected
+without reading and merging content. Full classification (KEEP/REWRITE/CONSOLIDATE/
+DELETE/NOINDEX per URL) is in the separate audit spreadsheet shared with the owner —
+this is flagged here so it isn't lost, but it's deliberately not auto-applied.

@@ -1065,7 +1065,12 @@ async function generateBlog(entry, angle, cityData, budgetData, attemptNum = 1) 
   const externalLink1 = EXTERNAL_LINKS[entry.keyword.length % EXTERNAL_LINKS.length];
   const semanticTerms = semanticVariationsFor(entry);
 
-  const prompt = `You are a senior writer for indéva studio (Delhi NCR luxury interior design firm).
+  const prompt = `Write a 1500-word SEO blog article for indéva studio (a Delhi NCR luxury interior design firm) in third person.
+Do not write as "I" or claim personal authorship, a job title, or years of first-hand professional experience — write about
+indéva studio and the topic from an informed, third-person, editorial voice instead. (Audit note, 2026-09-01: this prompt
+previously opened with "You are a senior writer for indéva studio", a first-person framing that repeatedly produced fabricated
+"as a senior designer with 15 years of experience" claims in published articles despite the PART 6 rule below telling the
+model not to do this — reworded to close that loophole at the source rather than relying on the instruction alone.)
 
 WRITE A 1500-WORD SEO BLOG.
 
@@ -1085,6 +1090,8 @@ CRITICAL — DO NOT FABRICATE (PART 6):
 - Never invent exact measurements, lab statistics, or certification numbers.
 - If an example genuinely helps the reader, label it explicitly in the text as "HYPOTHETICAL EXAMPLE" or "ILLUSTRATIVE BUDGET" — do not present it as something that actually happened.
 - Use ₹ pricing only where pricing is genuinely relevant to the topic.
+- BANNED PHRASES — do not write any of these or close variants of them: "as a senior designer", "as a senior writer",
+  "with 15 years of experience", "in my X years of experience", "I've worked with numerous clients", "the day a client called us".
 
 VOICE: Lowercase brand name "indéva studio". Authoritative, warm, Indian market fluent. Grade 7-8 readability. No clichés like "delve", "in the realm of", "at the end of the day", "transformative", "seamless", "leverage", "holistic", "cutting-edge".
 
@@ -1256,6 +1263,19 @@ function validateBlog(parsed, entry, allKnownTitles, allKnownSlugs) {
   if (/lorem ipsum/i.test(plainText)) problems.push("contains placeholder lorem ipsum text");
   if (/```/.test(parsed.article)) problems.push("contains markdown code fences");
   if (/\[PLACEHOLDER|\[INSERT|\[TODO/i.test(parsed.article)) problems.push("contains placeholder brackets");
+
+  // FABRICATION SIGNATURE CHECK (audit 2026-09-01, hard code-level backstop for PART 6).
+  // Prompt-level instructions alone already failed silently on live pages (11 confirmed
+  // as of this audit) — this is a second line of defense that forces a regeneration
+  // attempt instead of letting the pattern reach publish.
+  const fabricationSignatures = [
+    /as a senior (designer|writer)/i,
+    /\b\d+\s*years? of experience/i,
+    /i(?:'ve| have) worked with (numerous|many|hundreds of) clients/i,
+    /the day a client called us/i,
+  ];
+  const fabricationHits = fabricationSignatures.filter((re) => re.test(plainText));
+  if (fabricationHits.length > 0) problems.push(`fabricated-credential/anecdote signature detected (${fabricationHits.length} pattern match(es))`);
 
   // Basic broken-internal-link check: any /#... or /delhi /gurgaon style hrefs
   // should match a known INTERNAL_LINKS url.
@@ -1624,9 +1644,28 @@ async function main() {
         }
 
         // SLUG UNIQUENESS — memory AND filesystem (protects if memory.json resets)
-        const slugDir = path.join(REPO_ROOT, "insights", parsed.slug);
-        if (memory.slugs.includes(parsed.slug) || fs.existsSync(path.join(slugDir, "index.html"))) {
-          parsed.slug = `${parsed.slug}-${angle.id}`;
+        // BUGFIX (audit 2026-09-01): this used to be a single-shot check that
+        // unconditionally appended `-${angle.id}` on collision. If a slug had
+        // ALREADY been auto-suffixed on a previous run (e.g. "...-case-study")
+        // and collided again today with the same angle, it appended the same
+        // suffix a second time, producing live URLs like
+        // "...-case-study-case-study" / "...-cost-guide-cost-guide" /
+        // "...-mistakes-mistakes-to". Now: never re-append a suffix already
+        // present at the end of the slug, and loop with a numeric fallback
+        // until the slug is actually unique instead of trusting one check.
+        const slugExists = (slug) => {
+          const dir = path.join(REPO_ROOT, "insights", slug);
+          return memory.slugs.includes(slug) || fs.existsSync(path.join(dir, "index.html"));
+        };
+        if (slugExists(parsed.slug)) {
+          if (!parsed.slug.endsWith(`-${angle.id}`)) {
+            parsed.slug = `${parsed.slug}-${angle.id}`;
+          }
+          let disambiguator = 2;
+          while (slugExists(parsed.slug)) {
+            parsed.slug = `${parsed.slug}-${disambiguator}`;
+            disambiguator++;
+          }
         }
 
         blogData = parsed;

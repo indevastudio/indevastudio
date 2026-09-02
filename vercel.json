@@ -11,6 +11,51 @@
       "source": "/interior-designer-gurgaon",
       "destination": "/gurgaon",
       "permanent": true
+    },
+    {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study",
+      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step",
+      "destination": "/insights/bedroom-false-ceiling-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to",
+      "destination": "/insights/bespoke-villa-interior-design-noida",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to",
+      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study",
+      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to",
+      "destination": "/insights/luxury-interior-design-company-noida",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide",
+      "destination": "/insights/luxury-living-room-interior-design-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas-design-ideas",
+      "destination": "/insights/luxury-villa-bedroom-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/premium-restaurant-design-ideas-design-ideas",
+      "destination": "/insights/premium-restaurant-design-ideas",
+      "permanent": true
     }
   ],
   "rewrites": [
