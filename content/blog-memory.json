@@ -1,8 +1,5 @@
 {
   "titles": [
-    "full home interior design cost Gurgaon revealed",
-    "bedroom false ceiling design ideas India — Step-by-Step Process",
-    "interior designer Udaipur luxury villas case study",
     "farmhouse bedroom interior design india cost guide",
     "villa interior design cost Delhi NCR mistakes — Mistakes to Avoid",
     "luxury villa interior design India guide",
@@ -299,12 +296,12 @@
     "Cost Guide for Hiring a Luxury Interior Designer in Hauz Khas",
     "Step-by-step guide from an interior designer DLF Gurgaon today",
     "Avoid Costly Mistakes When Selecting Custom Furniture Delhi Today",
-    "Choosing the Right Flooring for Indian Homes: A Technical Guide"
+    "Choosing the Right Flooring for Indian Homes: A Technical Guide",
+    "How Much Does a Luxury Interior Designer in Defence Colony Really Cost?",
+    "Guide from a luxury interior designer Golf Course Road for villas",
+    "Avoid Costly Mistakes When Planning a Custom Wardrobe in Gurgaon"
   ],
   "slugs": [
-    "gurgaon-full-home-interior-design-cost",
-    "bedroom-false-ceiling-design-ideas-india-step-by",
-    "luxury-villa-interior-designer-gurgaon",
     "farmhouse-bedroom-interior-design-cost",
     "villa-interior-design-cost-delhi-ncr-mistakes-mistakes",
     "luxury-villa-interior-design-india-step-by-step",
@@ -601,12 +598,12 @@
     "hauz-khas-interior-design-cost-guide-cost-guide",
     "interior-designer-dlf-gurgaon-step-guide",
     "avoid-mistakes-custom-furniture-delhi",
-    "choose-flooring-indian-homes"
+    "choose-flooring-indian-homes",
+    "luxury-interior-designer-defence-colony-cost",
+    "luxury-interior-designer-golf-course-road-guide",
+    "avoid-mistakes-custom-wardrobe-gurgaon"
   ],
   "usedKeywords": [
-    "full home interior design cost Gurgaon",
-    "bedroom false ceiling design ideas India",
-    "interior designer Udaipur luxury villas",
     "farmhouse bedroom interior design India",
     "villa interior design cost Delhi NCR",
     "luxury villa interior design India",
@@ -903,12 +900,12 @@
     "luxury interior designer Hauz Khas",
     "interior designer DLF Gurgaon",
     "custom furniture Delhi",
-    "best flooring material for Indian homes"
+    "best flooring material for Indian homes",
+    "luxury interior designer Defence Colony",
+    "luxury interior designer Golf Course Road",
+    "custom wardrobe Gurgaon"
   ],
   "summaries": [
-    "The cost of full home interior design in Gurgaon can range from ₹8-15 lakh, and it's essential to understand the factors that affect the pricing to make an informed decision.",
-    "This article provides a step-by-step guide to designing a false ceiling for a bedroom in a heritage bungalow in Lutyens Delhi, Delhi, with a budget of ₹8-15 lakh.",
-    "This case study explores the design journey of a luxury villa in Gurgaon, from brief to completion, highlighting the challenges, solutions, and final result.",
     "This article provides a comprehensive cost guide for farmhouse bedroom interior design in India, covering the biggest cost misconceptions, cost breakdown, negotiation strategies, and red flags to watch out for.",
     "This article exposes the most common mistakes in villa interior design in Delhi NCR and provides expert advice on how to avoid them, ensuring a successful project within your budget of ₹15–25 lakh.",
     "This article provides a practical step-by-step guide to luxury villa interior design in India, covering the key steps and considerations for a successful project.",
@@ -1205,12 +1202,12 @@
     "A data‑backed breakdown shows how to plan, negotiate and avoid hidden fees when hiring a luxury interior designer in Hauz Khas.",
     "A practical, step‑by‑step process helps first‑time clients collaborate with an interior designer in DLF Gurgaon without costly missteps.",
     "This guide warns against common errors in ordering custom furniture Delhi and offers exact fixes to protect a ₹1–3 crore budget.",
-    "A side‑by‑side technical comparison helps you pick the flooring that fits Delhi NCR climates, budgets and design goals."
+    "A side‑by‑side technical comparison helps you pick the flooring that fits Delhi NCR climates, budgets and design goals.",
+    "A data‑driven cost guide reveals the true expenses of luxury interior design in Defence Colony and how to control them.",
+    "A practical, numbered roadmap helps first‑time clients navigate hiring a designer and budgeting for a high‑end home on Golf Course Road.",
+    "The article warns against typical mistakes in designing a custom wardrobe in Gurgaon and offers clear, actionable fixes."
   ],
   "lastAngles": [
-    "mistakes-avoid",
-    "cost-guide",
-    "step-by-step",
     "material-comparison",
     "step-by-step",
     "mistakes-avoid",
@@ -1247,7 +1244,10 @@
     "cost-guide",
     "step-by-step",
     "mistakes-avoid",
-    "material-comparison"
+    "material-comparison",
+    "cost-guide",
+    "step-by-step",
+    "mistakes-avoid"
   ],
   "canonicalGroups": [
     "locality-vasant-vihar",
@@ -1388,7 +1388,10 @@
     "locality-hauz-khas",
     "locality-dlf-gurgaon",
     "custom-furniture-delhi-ncr",
-    "interior-flooring-material-guide"
+    "interior-flooring-material-guide",
+    "locality-defence-colony",
+    "locality-golf-course-road",
+    "custom-furniture-delhi-ncr"
   ],
   "targetUrls": [
     "/delhi",
@@ -1529,6 +1532,9 @@
     "/delhi",
     "/gurgaon",
     "/#services",
+    "/#services",
+    "/delhi",
+    "/gurgaon",
     "/#services"
   ],
   "contentTypes": [
@@ -1670,6 +1676,9 @@
     "LOCATION_PAGE",
     "LOCATION_PAGE",
     "BLOG",
+    "BLOG",
+    "LOCATION_PAGE",
+    "LOCATION_PAGE",
     "BLOG"
   ],
   "searchIntents": [
@@ -1811,11 +1820,14 @@
     "commercial",
     "commercial",
     "commercial",
-    "technical"
+    "technical",
+    "commercial",
+    "commercial",
+    "commercial"
   ],
   "lastUsedDate": {
     "locality-vasant-vihar": "2026-09-01",
-    "locality-golf-course-road": "2026-08-21",
+    "locality-golf-course-road": "2026-09-02",
     "turnkey-interior-execution-delhi-ncr": "2026-09-01",
     "interior-flooring-material-guide": "2026-09-02",
     "south-delhi-villa-interior-designer": "2026-08-30",
@@ -1827,7 +1839,7 @@
     "locality-panchsheel-park": "2026-08-25",
     "gurgaon-villa-interior-designer": "2026-08-27",
     "interior-boq-guide": "2026-08-24",
-    "locality-defence-colony": "2026-08-31",
+    "locality-defence-colony": "2026-09-02",
     "gurgaon-farmhouse-interior-designer": "2026-08-30",
     "locality-friends-colony": "2026-08-24",
     "interior-execution-process-guide": "2026-08-25",
@@ -1850,9 +1862,6 @@
     "interior-hardware-fittings-guide": "2026-08-31"
   },
   "lastLocations": [
-    "South Delhi",
-    "Gurgaon",
-    "South Delhi",
     "Delhi NCR",
     "Defence Colony",
     "Sohna Road",
@@ -1889,6 +1898,9 @@
     "Hauz Khas",
     "DLF Gurgaon",
     "Delhi NCR",
+    "Delhi NCR",
+    "Defence Colony",
+    "Golf Course Road",
     "Delhi NCR"
   ]
 }
