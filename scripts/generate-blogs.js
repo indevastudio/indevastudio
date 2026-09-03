@@ -1273,14 +1273,13 @@ CATEGORY: [pick one: spatial logic / design intelligence / india market / kitche
 EXCERPT: [2 plain-text sentences for the card preview]
 CONTENT_SUMMARY: [1 sentence on the main argument]
 ---ARTICLE---
-<h1>...</h1>
-<p>opening matching the angle...</p>
+<p class="lead">opening line matching the angle...</p>
 <h2>...</h2>
 ... 4-5 H2 sections, H3 subsections where useful, at least one <ul>, one <blockquote> with a non-obvious insight ...
 <h2>frequently asked questions</h2>
 <details><summary>Q1?</summary><p>A1</p></details>
 ... 4 FAQs total ...
-<p>Closing line with <a href="/#contact">start a project</a>.</p>
+<p>Closing line with <a href="/contact">start a project</a>.</p>
 ---END---
 
 In the article body, naturally include:
@@ -1479,10 +1478,12 @@ function buildInsightPage(blogData, image) {
   const wordCount = blogData.article.replace(/<[^>]+>/g, "").split(/\s+/).length;
   const readTime = Math.ceil(wordCount / 200);
 
-  // Photographer credit (Unsplash license requires it). Empty string if from fallback.
-  const photoCredit = image.photographer
-    ? `<div class="photo-credit">photo by <a href="${image.photographerUrl}?utm_source=indeva_studio&utm_medium=referral" target="_blank" rel="noopener">${image.photographer}</a> on <a href="https://unsplash.com/?utm_source=indeva_studio&utm_medium=referral" target="_blank" rel="noopener">unsplash</a></div>`
-    : "";
+  // Note: Unsplash's API terms appreciate (but the Unsplash License does not legally
+  // require) on-page attribution. Per indeva studio's instruction, we no longer render
+  // a visible credit line under the image. If this needs to be reinstated for API
+  // compliance, reintroduce a `<div class="photo-credit">` here keyed off
+  // `image.photographer` / `image.photographerUrl` as before.
+  const photoCredit = "";
 
   const schema = JSON.stringify({
     "@context": "https://schema.org",
@@ -1514,9 +1515,9 @@ function buildInsightPage(blogData, image) {
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Founders+Grotesk:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--black:#0a0a0a;--black-2:#111111;--gold:#b89a6a;--gold-dim:#8a7250;--gold-bright:#c9ac7e;--white:#f0ebe3;--white-dim:rgba(240,235,227,0.55);--white-muted:rgba(240,235,227,0.28);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Founders Grotesk',sans-serif;--mono:'DM Mono',monospace;--line:rgba(240,235,227,0.08);--line-gold:rgba(184,154,106,0.2);}
+:root{--black:#f7f3ec;--black-2:#f1ebe0;--gold:#c1502e;--gold-dim:#96431f;--gold-bright:#d66a3a;--white:#161412;--white-dim:rgba(22,20,18,1.00);--white-muted:rgba(22,20,18,0.85);--serif:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;--sans:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;--mono:'Plus Jakarta Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;--line:rgba(22,20,18,0.08);--line-gold:rgba(193,80,46,0.2);}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;}
@@ -1542,7 +1543,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .photo-credit a{color:var(--white-muted);text-decoration:none;border-bottom:1px solid rgba(240,235,227,0.15);}
 .photo-credit a:hover{color:var(--gold);}
 .article-body{max-width:720px;padding:64px 60px 120px;}
-.article-body h1{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:2rem;font-style:italic;}
+.article-body h1,.article-body .lead{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:2rem;font-style:italic;}
 .article-body h2{font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.9rem);font-weight:300;color:var(--white);line-height:1.2;margin:3.5rem 0 1.25rem;}
 .article-body h3{font-family:var(--serif);font-size:1.15rem;font-weight:400;color:var(--gold-bright);margin:2.5rem 0 1rem;font-style:italic;}
 .article-body p{font-family:var(--sans);font-size:0.95rem;line-height:1.9;color:var(--white-dim);margin-bottom:1.5rem;}
@@ -1577,15 +1578,15 @@ footer{background:var(--black-2);border-top:1px solid var(--line);padding:60px;d
 </head>
 <body>
 <nav>
-  <a class="nav-logo" href="/">indéva studio<sub>luxury interior design · new delhi</sub></a>
+  <a class="nav-logo" href="/">indéva studio</a>
   <div class="nav-center">
     <a class="nav-link" href="/">home</a>
-    <a class="nav-link" href="/#about">about</a>
-    <a class="nav-link" href="/#services">services</a>
-    <a class="nav-link" href="/#projects">projects</a>
+    <a class="nav-link" href="/about">about</a>
+    <a class="nav-link" href="/services">services</a>
+    <a class="nav-link" href="/projects">projects</a>
     <a class="nav-link active" href="/insights/">insights</a>
   </div>
-  <a class="nav-cta" href="/#contact">start a project</a>
+  <a class="nav-cta" href="/contact">start a project</a>
 </nav>
 <div class="article-nav">
   <a href="/insights/">← back to insights</a>
@@ -1613,7 +1614,7 @@ ${blogData.article}
   <span class="article-cta-label">indéva studio · new delhi</span>
   <h2>ready to transform your space?</h2>
   <p>our design consultants are available for a complimentary discovery session.</p>
-  <a href="/#contact">start a project ↗</a>
+  <a href="/contact">start a project ↗</a>
 </div>
 <footer>
   <a class="footer-logo" href="/">indéva studio</a>
