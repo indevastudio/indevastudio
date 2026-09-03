@@ -31,12 +31,6 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/south-delhi-interior-designer</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/noida</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -2264,6 +2258,12 @@
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/villa-interior-cost-gurgaon-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/villa-interior-cost-south-delhi-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
