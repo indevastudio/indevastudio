@@ -2,56 +2,67 @@
   "titles": [
     "Villa interior cost South Delhi – budgeting guide for a luxury villa",
     "Farmhouse Interior Design South Delhi: A Real‑World Cost Guide",
-    "How to Read an Interior Design BOQ: Delhi NCR Home Guide"
+    "How to Read an Interior Design BOQ: Delhi NCR Home Guide",
+    "Avoid Costly Pitfalls with an Interior Designer in Friends Colony"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
     "farmhouse-interior-cost-guide",
-    "read-interior-design-boq-guide"
+    "read-interior-design-boq-guide",
+    "avoid-mistakes-interior-designer-friends-colony"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
     "farmhouse interior design South Delhi",
-    "how to read an interior design BOQ"
+    "how to read an interior design BOQ",
+    "interior designer Friends Colony"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
     "Understanding cost drivers and negotiation tactics helps homeowners avoid surprise bills in farmhouse projects.",
-    "A clear, material‑focused comparison helps readers master the technicalities of reading an interior design BOQ."
+    "A clear, material‑focused comparison helps readers master the technicalities of reading an interior design BOQ.",
+    "Understanding typical design errors prevents costly overruns and ensures a cohesive luxury interior in Friends Colony."
   ],
   "lastAngles": [
     "cost-guide",
     "cost-guide",
-    "material-comparison"
+    "material-comparison",
+    "mistakes-avoid"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
     "south-delhi-farmhouse-interior-designer",
-    "interior-boq-guide"
+    "interior-boq-guide",
+    "locality-friends-colony"
   ],
   "targetUrls": [
     "/delhi",
     "/delhi",
-    "/#services"
+    "/#services",
+    "/delhi"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
     "SERVICE_PAGE",
-    "BLOG"
+    "BLOG",
+    "LOCATION_PAGE"
   ],
   "searchIntents": [
     "commercial",
     "commercial",
-    "technical"
+    "technical",
+    "commercial"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
     "south-delhi-farmhouse-interior-designer": "2026-09-04",
-    "interior-boq-guide": "2026-09-04"
+    "interior-boq-guide": "2026-09-04",
+    "locality-friends-colony": "2026-09-04"
   },
   "lastLocations": [
     "South Delhi",
     "South Delhi",
-    "Delhi NCR"
+    "Delhi NCR",
+    "Friends Colony"
   ]
 }
