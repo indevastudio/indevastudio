@@ -1,35 +1,57 @@
 {
   "titles": [
-    "Villa interior cost South Delhi – budgeting guide for a luxury villa"
+    "Villa interior cost South Delhi – budgeting guide for a luxury villa",
+    "Farmhouse Interior Design South Delhi: A Real‑World Cost Guide",
+    "How to Read an Interior Design BOQ: Delhi NCR Home Guide"
   ],
   "slugs": [
-    "villa-interior-cost-south-delhi-guide"
+    "villa-interior-cost-south-delhi-guide",
+    "farmhouse-interior-cost-guide",
+    "read-interior-design-boq-guide"
   ],
   "usedKeywords": [
-    "villa interior cost South Delhi"
+    "villa interior cost South Delhi",
+    "farmhouse interior design South Delhi",
+    "how to read an interior design BOQ"
   ],
   "summaries": [
-    "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely."
+    "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
+    "Understanding cost drivers and negotiation tactics helps homeowners avoid surprise bills in farmhouse projects.",
+    "A clear, material‑focused comparison helps readers master the technicalities of reading an interior design BOQ."
   ],
   "lastAngles": [
-    "cost-guide"
+    "cost-guide",
+    "cost-guide",
+    "material-comparison"
   ],
   "canonicalGroups": [
-    "south-delhi-villa-interior-designer"
+    "south-delhi-villa-interior-designer",
+    "south-delhi-farmhouse-interior-designer",
+    "interior-boq-guide"
   ],
   "targetUrls": [
-    "/delhi"
+    "/delhi",
+    "/delhi",
+    "/#services"
   ],
   "contentTypes": [
-    "SERVICE_PAGE"
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
-    "commercial"
+    "commercial",
+    "commercial",
+    "technical"
   ],
   "lastUsedDate": {
-    "south-delhi-villa-interior-designer": "2026-09-03"
+    "south-delhi-villa-interior-designer": "2026-09-03",
+    "south-delhi-farmhouse-interior-designer": "2026-09-04",
+    "interior-boq-guide": "2026-09-04"
   },
   "lastLocations": [
-    "South Delhi"
+    "South Delhi",
+    "South Delhi",
+    "Delhi NCR"
   ]
 }
