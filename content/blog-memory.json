@@ -39,7 +39,9 @@
     "Avoid Costly Mistakes with a Residential Designer in Maharani Bagh",
     "DDA flat renovation Delhi: cost guide for South Delhi homes 2024",
     "Modular Kitchen Cost in South Delhi: Complete Step‑by‑Step Guide",
-    "Cost Guide for Hiring a Bungalow Interior Designer in Delhi"
+    "Cost Guide for Hiring a Bungalow Interior Designer in Delhi",
+    "How a residential interior designer on Sohna Road guides your farmhouse makeover",
+    "Corporate Interior Designer Gurgaon: A Clear Cost Guide"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -81,7 +83,9 @@
     "avoid-costly-mistakes-maharani-bagh",
     "dda-flat-renovation-cost-guide",
     "modular-kitchen-cost-south-delhi",
-    "bungalow-interior-designer-cost-guide-delhi"
+    "bungalow-interior-designer-cost-guide-delhi",
+    "farmhouse-interior-guide-sohna-road",
+    "corporate-interior-designer-gurgaon-cost-guide"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -123,7 +127,9 @@
     "residential interior designer Maharani Bagh",
     "DDA flat renovation Delhi",
     "modular kitchen cost South Delhi",
-    "bungalow interior designer Delhi"
+    "bungalow interior designer Delhi",
+    "residential interior designer Sohna Road",
+    "corporate interior designer Gurgaon"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -165,11 +171,11 @@
     "The article warns of common renovation traps in Maharani Bagh and offers precise fixes that indéva studio consistently applies.",
     "The article debunks myths, details cost drivers, and offers a realistic budget framework for DDA flat renovations in South Delhi.",
     "The article outlines a logical, step‑by‑step process to estimate and control modular kitchen costs in South Delhi.",
-    "The article demystifies bungalow interior costs, showing where money goes, how to keep the budget in check, and what warning signs to avoid."
+    "The article demystifies bungalow interior costs, showing where money goes, how to keep the budget in check, and what warning signs to avoid.",
+    "indéva studio’s structured process ensures a smooth, transparent journey for luxury farmhouse interiors on Sohna Road.",
+    "The article demystifies corporate interior design costs in Gurgaon, offering a data‑backed budget framework and negotiation tactics."
   ],
   "lastAngles": [
-    "cost-guide",
-    "cost-guide",
     "material-comparison",
     "mistakes-avoid",
     "mistakes-avoid",
@@ -205,6 +211,8 @@
     "mistakes-avoid",
     "cost-guide",
     "mistakes-avoid",
+    "cost-guide",
+    "step-by-step",
     "cost-guide",
     "step-by-step",
     "cost-guide"
@@ -249,7 +257,9 @@
     "locality-maharani-bagh",
     "south-delhi-dda-apartment-interior-designer",
     "south-delhi-kitchen-wardrobe-material",
-    "delhi-property-interior-designer"
+    "delhi-property-interior-designer",
+    "locality-sohna-road",
+    "gurgaon-commercial-interior-designer"
   ],
   "targetUrls": [
     "/delhi",
@@ -291,7 +301,9 @@
     "/delhi",
     "/delhi",
     "/delhi",
-    "/delhi"
+    "/delhi",
+    "/gurgaon",
+    "/gurgaon"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -333,6 +345,8 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "BLOG",
+    "SERVICE_PAGE",
+    "LOCATION_PAGE",
     "SERVICE_PAGE"
   ],
   "searchIntents": [
@@ -375,6 +389,8 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
@@ -397,7 +413,7 @@
     "gurgaon-farmhouse-interior-designer": "2026-09-08",
     "laminate-veneer-comparison-guide": "2026-09-08",
     "south-delhi-interior-cost-guide": "2026-09-08",
-    "locality-sohna-road": "2026-09-08",
+    "locality-sohna-road": "2026-09-14",
     "turnkey-interior-execution-delhi-ncr": "2026-09-08",
     "locality-dlf-gurgaon": "2026-09-10",
     "custom-furniture-delhi-ncr": "2026-09-09",
@@ -411,11 +427,10 @@
     "locality-maharani-bagh": "2026-09-13",
     "south-delhi-dda-apartment-interior-designer": "2026-09-13",
     "south-delhi-kitchen-wardrobe-material": "2026-09-13",
-    "delhi-property-interior-designer": "2026-09-13"
+    "delhi-property-interior-designer": "2026-09-13",
+    "gurgaon-commercial-interior-designer": "2026-09-14"
   },
   "lastLocations": [
-    "South Delhi",
-    "South Delhi",
     "Delhi NCR",
     "Friends Colony",
     "Gurgaon",
@@ -453,6 +468,8 @@
     "Maharani Bagh",
     "South Delhi",
     "South Delhi",
-    "Delhi"
+    "Delhi",
+    "Sohna Road",
+    "Gurgaon"
   ]
 }
