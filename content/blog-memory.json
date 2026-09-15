@@ -43,7 +43,8 @@
     "How a residential interior designer on Sohna Road guides your farmhouse makeover",
     "Corporate Interior Designer Gurgaon: A Clear Cost Guide",
     "Avoid Costly Mistakes with Luxury Interior Designer Vasant Vihar",
-    "Choosing a Villa Interior Designer on Golf Course Extension Road"
+    "Choosing a Villa Interior Designer on Golf Course Extension Road",
+    "Understanding interior BOQ vs quotation for Delhi NCR homes"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -89,7 +90,8 @@
     "farmhouse-interior-guide-sohna-road",
     "corporate-interior-designer-gurgaon-cost-guide",
     "avoid-mistakes-luxury-interior-vasant-vihar",
-    "villa-interior-designer-golf-course-extension-road"
+    "villa-interior-designer-golf-course-extension-road",
+    "interior-boq-vs-quotation-guide-material-comparison-2"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -135,7 +137,8 @@
     "residential interior designer Sohna Road",
     "corporate interior designer Gurgaon",
     "luxury interior designer Vasant Vihar",
-    "villa interior designer Golf Course Extension Road"
+    "villa interior designer Golf Course Extension Road",
+    "interior BOQ vs quotation"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -181,10 +184,10 @@
     "indéva studio’s structured process ensures a smooth, transparent journey for luxury farmhouse interiors on Sohna Road.",
     "The article demystifies corporate interior design costs in Gurgaon, offering a data‑backed budget framework and negotiation tactics.",
     "The article outlines five typical mistakes in luxury villa projects and offers concrete fixes to protect budget and design intent.",
-    "A clear, step‑by‑step framework helps clients on Golf Course Extension Road choose a reliable designer and keep the project within an illustrative budget."
+    "A clear, step‑by‑step framework helps clients on Golf Course Extension Road choose a reliable designer and keep the project within an illustrative budget.",
+    "The article explains how interior BOQ and quotation differ in scope, cost, and durability considerations, and why indéva studio prefers a specific approach."
   ],
   "lastAngles": [
-    "mistakes-avoid",
     "cost-guide",
     "step-by-step",
     "cost-guide",
@@ -223,7 +226,8 @@
     "step-by-step",
     "cost-guide",
     "mistakes-avoid",
-    "step-by-step"
+    "step-by-step",
+    "material-comparison"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -269,7 +273,8 @@
     "locality-sohna-road",
     "gurgaon-commercial-interior-designer",
     "locality-vasant-vihar",
-    "locality-golf-course-extension-road"
+    "locality-golf-course-extension-road",
+    "interior-boq-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -315,7 +320,8 @@
     "/gurgaon",
     "/gurgaon",
     "/delhi",
-    "/gurgaon"
+    "/gurgaon",
+    "/#services"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -361,7 +367,8 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
-    "LOCATION_PAGE"
+    "LOCATION_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
     "commercial",
@@ -407,12 +414,13 @@
     "commercial",
     "commercial",
     "commercial",
-    "commercial"
+    "commercial",
+    "technical"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
     "south-delhi-farmhouse-interior-designer": "2026-09-11",
-    "interior-boq-guide": "2026-09-04",
+    "interior-boq-guide": "2026-09-15",
     "locality-friends-colony": "2026-09-04",
     "gurgaon-interior-cost-guide": "2026-09-05",
     "gurgaon-penthouse-interior-designer": "2026-09-12",
@@ -448,7 +456,6 @@
     "locality-vasant-vihar": "2026-09-14"
   },
   "lastLocations": [
-    "Gurgaon",
     "Gurgaon",
     "South Delhi",
     "Gurgaon",
@@ -487,6 +494,7 @@
     "Sohna Road",
     "Gurgaon",
     "Vasant Vihar",
-    "Golf Course Extension Road"
+    "Golf Course Extension Road",
+    "Delhi NCR"
   ]
 }
