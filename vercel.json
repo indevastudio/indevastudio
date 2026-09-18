@@ -65,7 +65,7 @@
     },
     {
       "source": "/services",
-      "destination": "/index.html"
+      "destination": "/services/index.html"
     },
     {
       "source": "/process",
@@ -73,7 +73,11 @@
     },
     {
       "source": "/projects",
-      "destination": "/index.html"
+      "destination": "/projects/index.html"
+    },
+    {
+      "source": "/projects/:slug",
+      "destination": "/projects/:slug/index.html"
     },
     {
       "source": "/philosophy",
