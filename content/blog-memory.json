@@ -49,7 +49,9 @@
     "Key Mistakes to Avoid with a Golf Course Road Residential Designer",
     "Builder Floor Interior Designer South Delhi: Mistakes to Avoid",
     "Choosing a Home Interior Designer in Vasant Vihar: Step‑by‑Step",
-    "Villa Interior Designer Gurgaon: Real Cost Guide for Luxury Homes"
+    "Villa Interior Designer Gurgaon: Real Cost Guide for Luxury Homes",
+    "How Much Does Farmhouse Furniture Design in Gurgaon Really Cost?",
+    "Avoid Costly Mistakes in Farmhouse Interior Cost South Delhi"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -101,7 +103,9 @@
     "golf-course-road-residential-design-mistakes",
     "builder-floor-interior-mistakes-south-delhi",
     "choose-home-interior-designer-vasant-vihar",
-    "villa-interior-cost-guide-gurgaon"
+    "villa-interior-cost-guide-gurgaon",
+    "farmhouse-furniture-cost-guide-gurgaon-cost-guide",
+    "farmhouse-interior-cost-south-delhi-mistakes"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -153,7 +157,9 @@
     "residential interior designer Golf Course Road",
     "builder floor interior designer South Delhi",
     "home interior designer Vasant Vihar",
-    "villa interior designer Gurgaon"
+    "villa interior designer Gurgaon",
+    "farmhouse furniture design Gurgaon",
+    "farmhouse interior cost South Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -205,11 +211,11 @@
     "The article warns against common errors in luxury villa projects on Golf Course Road and shows how a seasoned firm can keep designs on track and on budget.",
     "The article warns about frequent mistakes in builder‑floor projects and offers practical fixes from indéva studio’s perspective.",
     "A clear, step‑by‑step process helps clients confidently select a home interior designer Vasant Vihar and avoid common pitfalls.",
-    "A data‑driven cost guide helps homeowners budget wisely for a luxury villa interior design project in Gurgaon."
+    "A data‑driven cost guide helps homeowners budget wisely for a luxury villa interior design project in Gurgaon.",
+    "The article demystifies cost myths and provides a clear budget framework for luxury Gurgaon farmhouse interiors.",
+    "The article outlines common budgeting errors in South Delhi farmhouse projects and provides concrete fixes to keep costs within ₹8–15 lakh."
   ],
   "lastAngles": [
-    "mistakes-avoid",
-    "cost-guide",
     "material-comparison",
     "step-by-step",
     "mistakes-avoid",
@@ -247,7 +253,9 @@
     "mistakes-avoid",
     "mistakes-avoid",
     "step-by-step",
-    "cost-guide"
+    "cost-guide",
+    "cost-guide",
+    "mistakes-avoid"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -299,7 +307,9 @@
     "locality-golf-course-road",
     "south-delhi-builder-floor-interior-designer",
     "locality-vasant-vihar",
-    "gurgaon-villa-interior-designer"
+    "gurgaon-villa-interior-designer",
+    "gurgaon-farmhouse-interior-designer",
+    "south-delhi-farmhouse-interior-designer"
   ],
   "targetUrls": [
     "/delhi",
@@ -351,7 +361,9 @@
     "/gurgaon",
     "/delhi",
     "/delhi",
-    "/gurgaon"
+    "/gurgaon",
+    "/gurgaon",
+    "/delhi"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -403,6 +415,8 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
     "SERVICE_PAGE"
   ],
   "searchIntents": [
@@ -455,11 +469,13 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
-    "south-delhi-farmhouse-interior-designer": "2026-09-11",
+    "south-delhi-farmhouse-interior-designer": "2026-09-18",
     "interior-boq-guide": "2026-09-15",
     "locality-friends-colony": "2026-09-04",
     "gurgaon-interior-cost-guide": "2026-09-05",
@@ -474,7 +490,7 @@
     "delhi-commercial-interior-designer": "2026-09-07",
     "hdhmr-vs-plywood-comparison": "2026-09-07",
     "locality-greater-kailash": "2026-09-08",
-    "gurgaon-farmhouse-interior-designer": "2026-09-08",
+    "gurgaon-farmhouse-interior-designer": "2026-09-18",
     "laminate-veneer-comparison-guide": "2026-09-08",
     "south-delhi-interior-cost-guide": "2026-09-08",
     "locality-sohna-road": "2026-09-14",
@@ -497,8 +513,6 @@
     "south-delhi-builder-floor-interior-designer": "2026-09-17"
   },
   "lastLocations": [
-    "Vasant Kunj",
-    "New Gurgaon",
     "Delhi NCR",
     "Hauz Khas",
     "South Delhi",
@@ -536,6 +550,8 @@
     "Golf Course Road",
     "South Delhi",
     "Vasant Vihar",
-    "Gurgaon"
+    "Gurgaon",
+    "Gurgaon",
+    "South Delhi"
   ]
 }
