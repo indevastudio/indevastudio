@@ -55,7 +55,8 @@
     "How Much Does a Luxury Villa Cost on Golf Course Extension Road?",
     "How to Choose a Luxury Farmhouse Interior Designer in Delhi",
     "How to Hire a Luxury Interior Designer in Panchsheel Park, Delhi",
-    "Avoid Costly Mistakes When Hiring an Interior Designer in Delhi"
+    "Avoid Costly Mistakes When Hiring an Interior Designer in Delhi",
+    "Finding the Right Interior Designer for Your Friends Colony Home"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -113,7 +114,8 @@
     "golf-course-extension-road-villa-cost-guide",
     "choose-luxury-farmhouse-designer-delhi",
     "hire-luxury-designer-panchsheel-park",
-    "avoid-costly-mistakes-interior-designer-delhi"
+    "avoid-costly-mistakes-interior-designer-delhi",
+    "friends-colony-interior-design-guide"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -171,7 +173,8 @@
     "residential interior designer Golf Course Extension Road",
     "luxury farmhouse interior designer Delhi",
     "luxury interior designer Panchsheel Park",
-    "interior designer cost Delhi"
+    "interior designer cost Delhi",
+    "residential interior designer Friends Colony"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -229,10 +232,10 @@
     "The guide breaks down the true cost factors for a luxury villa on Golf Course Extension Road, offering negotiation tips and red‑flag alerts.",
     "A clear, step‑by‑step process helps clients select a qualified luxury farmhouse interior design company Delhi without costly mistakes.",
     "A step‑by‑step guide helps clients in Panchsheel Park navigate the selection and planning process for a luxury interior project without costly mistakes.",
-    "The article outlines frequent budgeting mistakes in Delhi interior design and offers practical fixes to protect a ₹15–25 lakh budget."
+    "The article outlines frequent budgeting mistakes in Delhi interior design and offers practical fixes to protect a ₹15–25 lakh budget.",
+    "A practical, step‑by‑step roadmap helps clients select a qualified residential interior designer in Friends Colony while staying on budget."
   ],
   "lastAngles": [
-    "material-comparison",
     "cost-guide",
     "mistakes-avoid",
     "material-comparison",
@@ -271,7 +274,8 @@
     "cost-guide",
     "step-by-step",
     "step-by-step",
-    "mistakes-avoid"
+    "mistakes-avoid",
+    "step-by-step"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -329,7 +333,8 @@
     "locality-golf-course-extension-road",
     "south-delhi-farmhouse-interior-designer",
     "locality-panchsheel-park",
-    "delhi-interior-cost-guide"
+    "delhi-interior-cost-guide",
+    "locality-friends-colony"
   ],
   "targetUrls": [
     "/delhi",
@@ -385,6 +390,7 @@
     "/gurgaon",
     "/delhi",
     "/gurgaon",
+    "/delhi",
     "/delhi",
     "/delhi",
     "/delhi"
@@ -445,7 +451,8 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
-    "BLOG"
+    "BLOG",
+    "LOCATION_PAGE"
   ],
   "searchIntents": [
     "commercial",
@@ -503,13 +510,14 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
     "south-delhi-farmhouse-interior-designer": "2026-09-19",
     "interior-boq-guide": "2026-09-15",
-    "locality-friends-colony": "2026-09-04",
+    "locality-friends-colony": "2026-09-20",
     "gurgaon-interior-cost-guide": "2026-09-05",
     "gurgaon-penthouse-interior-designer": "2026-09-12",
     "south-delhi-bhk-interior-designer": "2026-09-05",
@@ -546,7 +554,6 @@
     "delhi-interior-cost-guide": "2026-09-20"
   },
   "lastLocations": [
-    "Delhi NCR",
     "Greater Kailash",
     "Gurgaon",
     "Delhi NCR",
@@ -585,6 +592,7 @@
     "Golf Course Extension Road",
     "South Delhi",
     "Panchsheel Park",
-    "Delhi"
+    "Delhi",
+    "Friends Colony"
   ]
 }
