@@ -53,7 +53,9 @@
     "How Much Does Farmhouse Furniture Design in Gurgaon Really Cost?",
     "Avoid Costly Mistakes in Farmhouse Interior Cost South Delhi",
     "How Much Does a Luxury Villa Cost on Golf Course Extension Road?",
-    "How to Choose a Luxury Farmhouse Interior Designer in Delhi"
+    "How to Choose a Luxury Farmhouse Interior Designer in Delhi",
+    "How to Hire a Luxury Interior Designer in Panchsheel Park, Delhi",
+    "Avoid Costly Mistakes When Hiring an Interior Designer in Delhi"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -109,7 +111,9 @@
     "farmhouse-furniture-cost-guide-gurgaon-cost-guide",
     "farmhouse-interior-cost-south-delhi-mistakes",
     "golf-course-extension-road-villa-cost-guide",
-    "choose-luxury-farmhouse-designer-delhi"
+    "choose-luxury-farmhouse-designer-delhi",
+    "hire-luxury-designer-panchsheel-park",
+    "avoid-costly-mistakes-interior-designer-delhi"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -165,7 +169,9 @@
     "farmhouse furniture design Gurgaon",
     "farmhouse interior cost South Delhi",
     "residential interior designer Golf Course Extension Road",
-    "luxury farmhouse interior designer Delhi"
+    "luxury farmhouse interior designer Delhi",
+    "luxury interior designer Panchsheel Park",
+    "interior designer cost Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -221,11 +227,11 @@
     "The article demystifies cost myths and provides a clear budget framework for luxury Gurgaon farmhouse interiors.",
     "The article outlines common budgeting errors in South Delhi farmhouse projects and provides concrete fixes to keep costs within ₹8–15 lakh.",
     "The guide breaks down the true cost factors for a luxury villa on Golf Course Extension Road, offering negotiation tips and red‑flag alerts.",
-    "A clear, step‑by‑step process helps clients select a qualified luxury farmhouse interior design company Delhi without costly mistakes."
+    "A clear, step‑by‑step process helps clients select a qualified luxury farmhouse interior design company Delhi without costly mistakes.",
+    "A step‑by‑step guide helps clients in Panchsheel Park navigate the selection and planning process for a luxury interior project without costly mistakes.",
+    "The article outlines frequent budgeting mistakes in Delhi interior design and offers practical fixes to protect a ₹15–25 lakh budget."
   ],
   "lastAngles": [
-    "mistakes-avoid",
-    "step-by-step",
     "material-comparison",
     "cost-guide",
     "mistakes-avoid",
@@ -263,7 +269,9 @@
     "cost-guide",
     "mistakes-avoid",
     "cost-guide",
-    "step-by-step"
+    "step-by-step",
+    "step-by-step",
+    "mistakes-avoid"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -319,7 +327,9 @@
     "gurgaon-farmhouse-interior-designer",
     "south-delhi-farmhouse-interior-designer",
     "locality-golf-course-extension-road",
-    "south-delhi-farmhouse-interior-designer"
+    "south-delhi-farmhouse-interior-designer",
+    "locality-panchsheel-park",
+    "delhi-interior-cost-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -375,6 +385,8 @@
     "/gurgaon",
     "/delhi",
     "/gurgaon",
+    "/delhi",
+    "/delhi",
     "/delhi"
   ],
   "contentTypes": [
@@ -431,7 +443,9 @@
     "SERVICE_PAGE",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
-    "SERVICE_PAGE"
+    "SERVICE_PAGE",
+    "LOCATION_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
     "commercial",
@@ -487,6 +501,8 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
@@ -519,18 +535,17 @@
     "south-delhi-bungalow-renovation": "2026-09-10",
     "wardrobe-material-cost-guide": "2026-09-10",
     "locality-defence-colony": "2026-09-11",
-    "locality-panchsheel-park": "2026-09-12",
+    "locality-panchsheel-park": "2026-09-20",
     "locality-maharani-bagh": "2026-09-13",
     "south-delhi-dda-apartment-interior-designer": "2026-09-13",
     "south-delhi-kitchen-wardrobe-material": "2026-09-13",
     "delhi-property-interior-designer": "2026-09-13",
     "gurgaon-commercial-interior-designer": "2026-09-14",
     "locality-vasant-vihar": "2026-09-17",
-    "south-delhi-builder-floor-interior-designer": "2026-09-17"
+    "south-delhi-builder-floor-interior-designer": "2026-09-17",
+    "delhi-interior-cost-guide": "2026-09-20"
   },
   "lastLocations": [
-    "South Delhi",
-    "Delhi",
     "Delhi NCR",
     "Greater Kailash",
     "Gurgaon",
@@ -568,6 +583,8 @@
     "Gurgaon",
     "South Delhi",
     "Golf Course Extension Road",
-    "South Delhi"
+    "South Delhi",
+    "Panchsheel Park",
+    "Delhi"
   ]
 }
