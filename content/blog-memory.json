@@ -56,7 +56,9 @@
     "How to Choose a Luxury Farmhouse Interior Designer in Delhi",
     "How to Hire a Luxury Interior Designer in Panchsheel Park, Delhi",
     "Avoid Costly Mistakes When Hiring an Interior Designer in Delhi",
-    "Finding the Right Interior Designer for Your Friends Colony Home"
+    "Finding the Right Interior Designer for Your Friends Colony Home",
+    "Defence Colony interior design cost guide for luxury homes 2026",
+    "How to Choose a Commercial Interior Designer in Delhi: A Step‑by‑Step Guide"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -115,7 +117,9 @@
     "choose-luxury-farmhouse-designer-delhi",
     "hire-luxury-designer-panchsheel-park",
     "avoid-costly-mistakes-interior-designer-delhi",
-    "friends-colony-interior-design-guide"
+    "friends-colony-interior-design-guide",
+    "defence-colony-interior-design-cost-guide",
+    "choose-commercial-interior-designer-delhi"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -174,7 +178,9 @@
     "luxury farmhouse interior designer Delhi",
     "luxury interior designer Panchsheel Park",
     "interior designer cost Delhi",
-    "residential interior designer Friends Colony"
+    "residential interior designer Friends Colony",
+    "interior designer Defence Colony",
+    "commercial interior designer Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -233,11 +239,11 @@
     "A clear, step‑by‑step process helps clients select a qualified luxury farmhouse interior design company Delhi without costly mistakes.",
     "A step‑by‑step guide helps clients in Panchsheel Park navigate the selection and planning process for a luxury interior project without costly mistakes.",
     "The article outlines frequent budgeting mistakes in Delhi interior design and offers practical fixes to protect a ₹15–25 lakh budget.",
-    "A practical, step‑by‑step roadmap helps clients select a qualified residential interior designer in Friends Colony while staying on budget."
+    "A practical, step‑by‑step roadmap helps clients select a qualified residential interior designer in Friends Colony while staying on budget.",
+    "A data‑driven cost guide reveals the true drivers of price, offers a detailed room‑wise budget, and provides negotiation tactics to avoid hidden fees.",
+    "A clear, step‑by‑step process helps clients select a commercial interior designer in Delhi while staying on budget and avoiding typical mistakes."
   ],
   "lastAngles": [
-    "cost-guide",
-    "mistakes-avoid",
     "material-comparison",
     "step-by-step",
     "cost-guide",
@@ -275,6 +281,8 @@
     "step-by-step",
     "step-by-step",
     "mistakes-avoid",
+    "step-by-step",
+    "cost-guide",
     "step-by-step"
   ],
   "canonicalGroups": [
@@ -334,7 +342,9 @@
     "south-delhi-farmhouse-interior-designer",
     "locality-panchsheel-park",
     "delhi-interior-cost-guide",
-    "locality-friends-colony"
+    "locality-friends-colony",
+    "locality-defence-colony",
+    "delhi-commercial-interior-designer"
   ],
   "targetUrls": [
     "/delhi",
@@ -390,6 +400,8 @@
     "/gurgaon",
     "/delhi",
     "/gurgaon",
+    "/delhi",
+    "/delhi",
     "/delhi",
     "/delhi",
     "/delhi",
@@ -452,7 +464,9 @@
     "SERVICE_PAGE",
     "LOCATION_PAGE",
     "BLOG",
-    "LOCATION_PAGE"
+    "LOCATION_PAGE",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE"
   ],
   "searchIntents": [
     "commercial",
@@ -511,6 +525,8 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
@@ -527,7 +543,7 @@
     "locality-new-gurgaon": "2026-09-06",
     "locality-hauz-khas": "2026-09-07",
     "south-delhi-commercial-interior-designer": "2026-09-07",
-    "delhi-commercial-interior-designer": "2026-09-07",
+    "delhi-commercial-interior-designer": "2026-09-21",
     "hdhmr-vs-plywood-comparison": "2026-09-07",
     "locality-greater-kailash": "2026-09-08",
     "gurgaon-farmhouse-interior-designer": "2026-09-18",
@@ -542,7 +558,7 @@
     "gurgaon-villa-interior-designer": "2026-09-17",
     "south-delhi-bungalow-renovation": "2026-09-10",
     "wardrobe-material-cost-guide": "2026-09-10",
-    "locality-defence-colony": "2026-09-11",
+    "locality-defence-colony": "2026-09-21",
     "locality-panchsheel-park": "2026-09-20",
     "locality-maharani-bagh": "2026-09-13",
     "south-delhi-dda-apartment-interior-designer": "2026-09-13",
@@ -554,8 +570,6 @@
     "delhi-interior-cost-guide": "2026-09-20"
   },
   "lastLocations": [
-    "Greater Kailash",
-    "Gurgaon",
     "Delhi NCR",
     "South Delhi",
     "Sohna Road",
@@ -593,6 +607,8 @@
     "South Delhi",
     "Panchsheel Park",
     "Delhi",
-    "Friends Colony"
+    "Friends Colony",
+    "Defence Colony",
+    "Delhi"
   ]
 }
