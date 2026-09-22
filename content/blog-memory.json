@@ -58,7 +58,8 @@
     "Avoid Costly Mistakes When Hiring an Interior Designer in Delhi",
     "Finding the Right Interior Designer for Your Friends Colony Home",
     "Defence Colony interior design cost guide for luxury homes 2026",
-    "How to Choose a Commercial Interior Designer in Delhi: A Step‑by‑Step Guide"
+    "How to Choose a Commercial Interior Designer in Delhi: A Step‑by‑Step Guide",
+    "Choosing the Right Hardware: A Technical Guide for Interiors"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -119,7 +120,8 @@
     "avoid-costly-mistakes-interior-designer-delhi",
     "friends-colony-interior-design-guide",
     "defence-colony-interior-design-cost-guide",
-    "choose-commercial-interior-designer-delhi"
+    "choose-commercial-interior-designer-delhi",
+    "hardware-comparison-interior-materials"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -180,7 +182,8 @@
     "interior designer cost Delhi",
     "residential interior designer Friends Colony",
     "interior designer Defence Colony",
-    "commercial interior designer Delhi"
+    "commercial interior designer Delhi",
+    "best hardware brands for interiors"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -241,10 +244,10 @@
     "The article outlines frequent budgeting mistakes in Delhi interior design and offers practical fixes to protect a ₹15–25 lakh budget.",
     "A practical, step‑by‑step roadmap helps clients select a qualified residential interior designer in Friends Colony while staying on budget.",
     "A data‑driven cost guide reveals the true drivers of price, offers a detailed room‑wise budget, and provides negotiation tactics to avoid hidden fees.",
-    "A clear, step‑by‑step process helps clients select a commercial interior designer in Delhi while staying on budget and avoiding typical mistakes."
+    "A clear, step‑by‑step process helps clients select a commercial interior designer in Delhi while staying on budget and avoiding typical mistakes.",
+    "The article breaks down material properties, cost, durability, and typical use cases to guide informed hardware selection for high‑end Delhi NCR projects."
   ],
   "lastAngles": [
-    "material-comparison",
     "step-by-step",
     "cost-guide",
     "mistakes-avoid",
@@ -283,7 +286,8 @@
     "mistakes-avoid",
     "step-by-step",
     "cost-guide",
-    "step-by-step"
+    "step-by-step",
+    "material-comparison"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -344,7 +348,8 @@
     "delhi-interior-cost-guide",
     "locality-friends-colony",
     "locality-defence-colony",
-    "delhi-commercial-interior-designer"
+    "delhi-commercial-interior-designer",
+    "interior-hardware-fittings-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -405,7 +410,8 @@
     "/delhi",
     "/delhi",
     "/delhi",
-    "/delhi"
+    "/delhi",
+    "/#services"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -466,7 +472,8 @@
     "BLOG",
     "LOCATION_PAGE",
     "LOCATION_PAGE",
-    "SERVICE_PAGE"
+    "SERVICE_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
     "commercial",
@@ -527,7 +534,8 @@
     "commercial",
     "commercial",
     "commercial",
-    "commercial"
+    "commercial",
+    "technical"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
@@ -567,10 +575,10 @@
     "gurgaon-commercial-interior-designer": "2026-09-14",
     "locality-vasant-vihar": "2026-09-17",
     "south-delhi-builder-floor-interior-designer": "2026-09-17",
-    "delhi-interior-cost-guide": "2026-09-20"
+    "delhi-interior-cost-guide": "2026-09-20",
+    "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "Delhi NCR",
     "South Delhi",
     "Sohna Road",
     "Delhi NCR",
@@ -609,6 +617,7 @@
     "Delhi",
     "Friends Colony",
     "Defence Colony",
-    "Delhi"
+    "Delhi",
+    "Delhi NCR"
   ]
 }
