@@ -59,7 +59,9 @@
     "Finding the Right Interior Designer for Your Friends Colony Home",
     "Defence Colony interior design cost guide for luxury homes 2026",
     "How to Choose a Commercial Interior Designer in Delhi: A Step‑by‑Step Guide",
-    "Choosing the Right Hardware: A Technical Guide for Interiors"
+    "Choosing the Right Hardware: A Technical Guide for Interiors",
+    "Hiring a Farmhouse Interior Designer in Gurgaon: Step‑by‑Step",
+    "Delhi Luxury Home Interior Cost Guide: Budgeting Custom Furniture"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -121,7 +123,9 @@
     "friends-colony-interior-design-guide",
     "defence-colony-interior-design-cost-guide",
     "choose-commercial-interior-designer-delhi",
-    "hardware-comparison-interior-materials"
+    "hardware-comparison-interior-materials",
+    "hiring-farmhouse-interior-designer-gurgaon",
+    "delhi-luxury-interior-cost-guide"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -183,7 +187,9 @@
     "residential interior designer Friends Colony",
     "interior designer Defence Colony",
     "commercial interior designer Delhi",
-    "best hardware brands for interiors"
+    "best hardware brands for interiors",
+    "farmhouse interior designer Gurgaon",
+    "custom furniture manufacturer Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -245,11 +251,11 @@
     "A practical, step‑by‑step roadmap helps clients select a qualified residential interior designer in Friends Colony while staying on budget.",
     "A data‑driven cost guide reveals the true drivers of price, offers a detailed room‑wise budget, and provides negotiation tactics to avoid hidden fees.",
     "A clear, step‑by‑step process helps clients select a commercial interior designer in Delhi while staying on budget and avoiding typical mistakes.",
-    "The article breaks down material properties, cost, durability, and typical use cases to guide informed hardware selection for high‑end Delhi NCR projects."
+    "The article breaks down material properties, cost, durability, and typical use cases to guide informed hardware selection for high‑end Delhi NCR projects.",
+    "A practical, sequential process helps first‑time clients hire a farmhouse interior designer in Gurgaon while staying on budget and avoiding typical mistakes.",
+    "A data‑driven cost guide reveals where money is spent in luxury Delhi homes and how to control it without compromising style."
   ],
   "lastAngles": [
-    "step-by-step",
-    "cost-guide",
     "mistakes-avoid",
     "cost-guide",
     "mistakes-avoid",
@@ -287,7 +293,9 @@
     "step-by-step",
     "cost-guide",
     "step-by-step",
-    "material-comparison"
+    "material-comparison",
+    "step-by-step",
+    "cost-guide"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -349,7 +357,9 @@
     "locality-friends-colony",
     "locality-defence-colony",
     "delhi-commercial-interior-designer",
-    "interior-hardware-fittings-guide"
+    "interior-hardware-fittings-guide",
+    "gurgaon-farmhouse-interior-designer",
+    "custom-furniture-delhi-ncr"
   ],
   "targetUrls": [
     "/delhi",
@@ -411,6 +421,8 @@
     "/delhi",
     "/delhi",
     "/delhi",
+    "/#services",
+    "/gurgaon",
     "/#services"
   ],
   "contentTypes": [
@@ -472,6 +484,8 @@
     "BLOG",
     "LOCATION_PAGE",
     "LOCATION_PAGE",
+    "SERVICE_PAGE",
+    "BLOG",
     "SERVICE_PAGE",
     "BLOG"
   ],
@@ -535,7 +549,9 @@
     "commercial",
     "commercial",
     "commercial",
-    "technical"
+    "technical",
+    "commercial",
+    "commercial"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-03",
@@ -554,13 +570,13 @@
     "delhi-commercial-interior-designer": "2026-09-21",
     "hdhmr-vs-plywood-comparison": "2026-09-07",
     "locality-greater-kailash": "2026-09-08",
-    "gurgaon-farmhouse-interior-designer": "2026-09-18",
+    "gurgaon-farmhouse-interior-designer": "2026-09-23",
     "laminate-veneer-comparison-guide": "2026-09-08",
     "south-delhi-interior-cost-guide": "2026-09-08",
     "locality-sohna-road": "2026-09-14",
     "turnkey-interior-execution-delhi-ncr": "2026-09-15",
     "locality-dlf-gurgaon": "2026-09-10",
-    "custom-furniture-delhi-ncr": "2026-09-09",
+    "custom-furniture-delhi-ncr": "2026-09-23",
     "kitchen-material-cost-guide": "2026-09-09",
     "locality-golf-course-extension-road": "2026-09-18",
     "gurgaon-villa-interior-designer": "2026-09-17",
@@ -579,8 +595,6 @@
     "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "South Delhi",
-    "Sohna Road",
     "Delhi NCR",
     "DLF Gurgaon",
     "Delhi NCR",
@@ -618,6 +632,8 @@
     "Friends Colony",
     "Defence Colony",
     "Delhi",
+    "Delhi NCR",
+    "Gurgaon",
     "Delhi NCR"
   ]
 }
