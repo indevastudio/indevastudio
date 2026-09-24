@@ -234,7 +234,7 @@
   }
 
   @media print{
-    nav.tabs, .sticky-total, .actions, .toggle-row input, header.top .brandline{ display:none !important; }
+    nav.tabs, .showall-bar, .sticky-total, .actions, .toggle-row .switch, header.top .brandline{ display:none !important; }
     section.panel{ display:block !important; }
     section.panel:not(#panel-costsheet){ display:none !important; }
     body{ background:#fff; }
@@ -371,7 +371,7 @@ const livingWoodworkItems = [
    selected:"Essential"},
 ];
 
-// ---- C. False Ceiling (POP), area-wise, all rooms except balcony — Standard / Economy tier
+// ---- C. False Ceiling (gypsum board, POP finish), area-wise, all rooms except balcony — Standard / Economy tier
 const ceilingItems = [
   {room:"Living / Dining", name:"False Ceiling", unit:"sq.ft.", qty:238, on:true,
    tiers:{ Standard:{rate:140, desc:"Gypsum board false ceiling with cove/pelmet detail for concealed LED lighting, POP punning and primer finish."},
@@ -424,8 +424,8 @@ const kitchenGraniteItem = {room:"Kitchen", name:"Granite Countertop (no backspl
 // ---- Bedroom furniture sets — Master Bedroom & Second Bedroom (2 of 3 bedrooms get full furniture)
 function bedroomFurnitureSet(room){
   return [
-    {room:room, name:"Wardrobe (7 ft × 10 ft height)", unit:"sq.ft.", qty:70, on:true, kind:"woodwork",
-     tiers:{ Essential:{rate:1620, desc:"18mm MR ply carcass + shutters, ceiling-height (7ft x 10ft), soft-close hinges, laminate/veneer finish."},
+    {room:room, name:"Wardrobe (7 ft wide × 10 ft high)", unit:"sq.ft.", qty:70, on:true, kind:"woodwork",
+     tiers:{ Essential:{rate:1620, desc:"18mm MR ply carcass + shutters, ceiling-height (7 ft W × 10 ft H), soft-close hinges, laminate/veneer finish."},
              Economy:{rate:1150, desc:"12mm ply carcass, single-face laminate shutters, standard hardware — same size, lighter-grade materials."} },
      selected:"Essential"},
     {room:room, name:"Bedside Tables (pair)", unit:"set", qty:1, on:true, kind:"furniture",
@@ -461,47 +461,32 @@ const livingFurnitureItems = [
    selected:"Essential"},
 ];
 
-// ---- Sanitaryware & Mirrors (Kohler) — 3 toilets, brand-tier pattern (Essential vs Prime collection)
+// ---- Sanitaryware & Mirrors — 3 toilets, brand option (Colston vs Kohler Prime)
 const sanitaryItems = [
-  {room:"Toilet 1", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1,
+  {room:"Toilet 1", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1, on:true,
    brands:{ "Colston":{rate:51400}, "Kohler Prime":{rate:74390} }, selected:"Colston"},
-  {room:"Toilet 2", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1,
+  {room:"Toilet 2", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1, on:true,
    brands:{ "Colston":{rate:51400}, "Kohler Prime":{rate:74390} }, selected:"Colston"},
-  {room:"Toilet 3", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1,
+  {room:"Toilet 3", name:"Complete Sanitaryware Set (WC, Basin, Faucets, Mirror, Accessories)", unit:"set", qty:1, on:true,
    brands:{ "Colston":{rate:51400}, "Kohler Prime":{rate:74390} }, selected:"Colston"},
-];
-
-// ---- G2. Bathroom Vanities (per toilet) — Essential / Economy tier
-const vanityItems = [
-  {room:"Toilet 1", name:"Bathroom Vanity Unit (under-counter storage)", unit:"No.", qty:1, on:true,
-   tiers:{ Essential:{rate:21500, desc:"18mm BWR ply carcass, laminate/acrylic shutter finish, soft-close hinges, countertop cut-out for basin (basin/faucet costed under Sanitaryware)."},
-           Economy:{rate:14200, desc:"12mm ply carcass, standard laminate shutter, non-soft-close hardware — same footprint, lighter-grade materials."} },
-   selected:"Essential"},
-  {room:"Toilet 2", name:"Bathroom Vanity Unit (under-counter storage)", unit:"No.", qty:1, on:true,
-   tiers:{ Essential:{rate:21500, desc:"18mm BWR ply carcass, laminate/acrylic shutter finish, soft-close hinges, countertop cut-out for basin (basin/faucet costed under Sanitaryware)."},
-           Economy:{rate:14200, desc:"12mm ply carcass, standard laminate shutter, non-soft-close hardware — same footprint, lighter-grade materials."} },
-   selected:"Essential"},
-  {room:"Toilet 3", name:"Bathroom Vanity Unit (under-counter storage)", unit:"No.", qty:1, on:true,
-   tiers:{ Essential:{rate:21500, desc:"18mm BWR ply carcass, laminate/acrylic shutter finish, soft-close hinges, countertop cut-out for basin (basin/faucet costed under Sanitaryware)."},
-           Economy:{rate:14200, desc:"12mm ply carcass, standard laminate shutter, non-soft-close hardware — same footprint, lighter-grade materials."} },
-   selected:"Essential"},
 ];
 
 // ---- Design & Execution — fixed lumpsum, on/off toggle only
-const designExecItem = {name:"Design Consultancy & Site Execution Management", unit:"lumpsum", qty:1, rate:105650, on:true};
-
-// ---- I. Paint, Electrical & Basic Ceiling Lights — project-wide, per sq.ft.
-// Quantity (779 sq.ft.) reuses the same room footprint already used for False Ceiling —
-// all rooms except balcony and bathrooms (bathroom walls are tiled, not painted).
-// Confirm/adjust this figure once final site measurement is available.
-const paintElectricalItems = [
-  {room:"Project-wide (all rooms, excl. balcony & bathrooms)", name:"Paint Finishes — walls & ceiling", unit:"sq.ft.", qty:779, rate:50, on:true,
-   desc:"Two coats premium emulsion paint on walls and ceiling after putty and primer. Same footprint as the False Ceiling scope."},
-  {room:"Project-wide (all rooms, excl. balcony & bathrooms)", name:"Electrical — New Points & Shifting of Existing Points (with material)", unit:"sq.ft.", qty:779, rate:100, on:true,
-   desc:"Creation of new electrical points and shifting of existing points — wiring, conduit, boxes, switches/sockets; material included."},
-  {room:"Project-wide (all rooms, excl. balcony & bathrooms)", name:"Basic Ceiling Lights — Philips + LED Profile Lights", unit:"sq.ft.", qty:779, rate:45, on:true,
-   desc:"Philips ceiling/panel lights plus LED profile lighting with diffuser and driver — fixtures, driver, diffuser and installation included. Indicative rate — confirm final light count and brand mix before ordering."},
+// ---- Services & Lighting — paint, electrical, plumbing, Philips lighting (single rate, on/off toggle)
+const serviceItems = [
+  {room:"Whole Apartment", name:"Paint Work", unit:"sq.ft.", qty:2520, rate:45, on:true,
+   note:"Paintable area = 900 sq.ft. × 2.8 = 2,520 sq.ft. — putty, primer and 2 coats of emulsion on walls & ceilings."},
+  {room:"Whole Apartment", name:"Electrical Work", unit:"", qty:0, rate:0, on:true, actuals:true,
+   note:"Wiring, points, switches & DB work — billed as per actuals on site measurement; not included in the total."},
+  {room:"2 Bathrooms", name:"Plumbing Work", unit:"bathrooms", qty:2, rate:25000, on:true,
+   note:"₹25,000 per bathroom for 2 bathrooms — concealed supply & drainage lines, same fixture positions retained."},
+  {room:"Whole Apartment", name:"Philips Cove Lighting (LED strip)", unit:"rft", qty:260, rate:180, on:true,
+   note:"Philips LED strip with driver & profile for all false-ceiling coves — Living/Dining, 3 bedrooms, kitchen, mandir. Quantity is an estimate; confirm on site."},
+  {room:"Whole Apartment", name:"Philips Spotlights (COB)", unit:"No.", qty:34, rate:650, on:true,
+   note:"Basic Philips COB spotlights — approx. Living/Dining 10, bedrooms 18, kitchen 4, mandir 2. Quantity is an estimate; confirm on site."},
 ];
+
+const designExecItem = {name:"Design Consultancy & Site Execution Management", unit:"lumpsum", qty:1, rate:105650, on:true};
 
 /* =====================================================================
    TABS
@@ -514,7 +499,7 @@ const TABS = [
   {id:"bedrooms", label:"Bedrooms"},
   {id:"sanitary", label:"Sanitaryware"},
   {id:"livingroom", label:"Living Room"},
-  {id:"paintelec", label:"Paint & Electrical"},
+  {id:"services", label:"Services & Lighting"},
   {id:"costsheet", label:"Cost Sheet"},
 ];
 
@@ -531,8 +516,8 @@ function tierOptionsHtml(item, arrName, idx, tierNames){
   return `<div class="options tier-options">${tierNames.map(tn=>{
     const t = item.tiers[tn];
     const sel = item.selected===tn ? 'selected' : '';
-    return `<label class="opt tier-opt ${sel}" onclick="setTier('${arrName}',${idx},'${tn}')">
-      <input type="radio" name="${arrName}${idx}">
+    return `<label class="opt tier-opt ${sel}">
+      <input type="radio" name="${arrName}${idx}" ${sel?'checked':''} onchange="setTier('${arrName}',${idx},'${tn}')">
       <span class="brand">${tn} — ${fmt(t.rate)}${item.unit!=="set"&&item.unit!=="No."&&item.unit!=="lumpsum"?("/"+item.unit):""}</span>
       <span class="tier-desc">${t.desc}</span>
     </label>`;
@@ -565,13 +550,16 @@ function renderSanitaryItem(item, idx){
         <div class="item-room">${item.room}</div>
         <div class="item-title">${item.name}</div>
       </div>
-      <div class="amount">${fmt(amt)}</div>
+      <div class="toggle-row">
+        <span class="amount ${item.on?'':'off'}">${fmt(amt)}</span>
+        <label class="switch"><input type="checkbox" ${item.on?'checked':''} onchange="toggleSanitary(${idx},this.checked)"><span class="slider"></span></label>
+      </div>
     </div>
-    <div class="item-spec">${item.qty} ${item.unit} × ${fmt(item.brands[item.selected].rate)}</div>
+    <div class="item-spec">${item.qty} ${item.unit} × ${fmt(item.brands[item.selected].rate)} — ${item.selected}</div>
     <div class="options">${Object.keys(item.brands).map(bn=>{
       const sel = item.selected===bn ? 'selected' : '';
-      return `<label class="opt ${sel}" onclick="setSanitaryBrand(${idx},'${bn}')">
-        <input type="radio" name="sanitary${idx}">
+      return `<label class="opt ${sel}">
+        <input type="radio" name="sanitary${idx}" ${sel?'checked':''} onchange="setSanitaryBrand(${idx},'${bn}')">
         <span class="brand">${bn}</span>
         <span class="rate">${fmt(item.brands[bn].rate)}</span>
       </label>`;
@@ -579,22 +567,26 @@ function renderSanitaryItem(item, idx){
   </div>`;
 }
 
-function renderFlatItem(item, arrName, idx){
+function renderServiceItem(item, idx){
   const amt = item.qty * item.rate;
+  const right = item.actuals
+    ? `<span class="amount">As per actuals</span>`
+    : `<span class="amount ${item.on?'':'off'}">${fmt(amt)}</span>
+        <label class="switch"><input type="checkbox" ${item.on?'checked':''} onchange="toggleService(${idx},this.checked)"><span class="slider"></span></label>`;
+  const spec = item.actuals ? item.note
+    : `${item.qty.toLocaleString('en-IN')} ${item.unit} × ${fmt(item.rate)} — ${item.note}`;
   return `<div class="item">
     <div class="item-top">
       <div>
         <div class="item-room">${item.room}</div>
         <div class="item-title">${item.name}</div>
       </div>
-      <div class="toggle-row">
-        <span class="amount ${item.on?'':'off'}">${fmt(amt)}</span>
-        <label class="switch"><input type="checkbox" ${item.on?'checked':''} onchange="toggleFlatItem('${arrName}',${idx},this.checked)"><span class="slider"></span></label>
-      </div>
+      <div class="toggle-row">${right}</div>
     </div>
-    <div class="item-spec">${item.qty} ${item.unit} × ${fmt(item.rate)}/${item.unit} — ${item.desc}</div>
+    <div class="item-spec">${spec}</div>
   </div>`;
 }
+function serviceSubtotal(arr){ return arr.reduce((s,i)=> s + (i.on && !i.actuals ? i.qty*i.rate : 0), 0); }
 
 function renderFixedItem(item){
   const amt = item.qty * item.rate;
@@ -616,10 +608,8 @@ function renderFixedItem(item){
 /* =====================================================================
    SUBTOTAL HELPERS
    ===================================================================== */
-
 function tierSubtotal(arr){ return arr.reduce((s,i)=> s + (i.on ? i.qty*i.tiers[i.selected].rate : 0), 0); }
-function sanitarySubtotal(arr){ return arr.reduce((s,i)=> s + i.qty*i.brands[i.selected].rate, 0); }
-function flatSubtotal(arr){ return arr.reduce((s,i)=> s + (i.on ? i.qty*i.rate : 0), 0); }
+function sanitarySubtotal(arr){ return arr.reduce((s,i)=> s + (i.on ? i.qty*i.brands[i.selected].rate : 0), 0); }
 
 function subtotalStrip(total){
   return `<div class="subtotal-strip"><span>Section subtotal</span><span class="val">${fmt(total)}</span></div>`;
@@ -650,20 +640,22 @@ function panelOverview(){
       <div class="item-spec" style="margin-top:8px;">
         • Mandir area — new puja unit (design to be finalized with client)<br>
         • Living Room — TV unit with ceiling-height storage, wall paneling, sofa + coffee table<br>
-        • False ceiling (POP) — all rooms, area-wise, except balcony<br>
+        • False ceiling (gypsum board, POP finish) — all rooms, area-wise, except balcony<br>
         • Master Bedroom flooring — remove wood, retile; all 3 bathrooms retiled with same plumbing layout<br>
-        • Sanitaryware &amp; mirrors — Kohler, all 3 bathrooms<br>
-        • Bathroom vanities — under-counter storage unit, all 3 bathrooms<br>
+        • Sanitaryware &amp; mirrors — Colston or Kohler Prime, all 3 bathrooms<br>
         • Kitchen + separate pantry — ceiling-height + low cabinets, granite countertop, double-door fridge provision (no backsplash tile, no chimney, no hob)<br>
         • 2 Bedrooms — complete furniture (wardrobe, bedside tables, dressing unit, bed, TV-cum-dressing panel)<br>
         • 1 Bedroom (near Living Room) — false ceiling only, no furniture<br>
-        • Paint, electrical (new/shifted points) &amp; basic ceiling lights — priced per sq.ft., all rooms except balcony and bathrooms
+        • Paint work — 900 sq.ft. × 2.8 = 2,520 sq.ft. @ ₹45/sq.ft.<br>
+        • Electrical work — billed as per actuals<br>
+        • Plumbing — ₹25,000 per bathroom, 2 bathrooms<br>
+        • Philips lighting — cove lights &amp; spotlights for the whole apartment
       </div>
     </div>
     <div class="item">
       <div class="item-title">How to use this tool</div>
       <div class="item-spec" style="margin-top:8px;">
-        Every line item can be switched on/off and moved between Essential and Economy (or Budget) tiers. The Cost Sheet tab always reflects your current selections and can be printed to PDF for sharing.
+        Every line item can be switched on/off and moved between a recommended tier (Essential / Standard) and a lighter tier (Economy / Budget); sanitaryware sets switch between Colston and Kohler Prime. The Cost Sheet tab always reflects your current selections and can be printed to PDF for sharing.
       </div>
     </div>
   </section>`;
@@ -691,9 +683,9 @@ function panelCeiling(){
   return `<section class="panel" id="panel-ceiling">
     <div class="panel-head">
       <h2>False Ceiling &amp; Flooring</h2>
-      <p>POP false ceiling is priced area-wise across every room except the balcony. Flooring covers the Master Bedroom retile and all 3 bathrooms (walls + floor), with the same plumbing fixture positions retained.</p>
+      <p>Gypsum board false ceiling (POP punning finish) is priced area-wise across every room except the balcony. Flooring covers the Master Bedroom retile and all 3 bathrooms (walls + floor), with the same plumbing fixture positions retained.</p>
     </div>
-    <h3 class="serif" style="margin:4px 0 10px;">False Ceiling (POP) — by room</h3>
+    <h3 class="serif" style="margin:4px 0 10px;">False Ceiling (Gypsum) — by room</h3>
     ${ceilingRows}
     <div class="divider-note">Flooring &amp; bathroom tiling</div>
     ${flooringRows}
@@ -737,16 +729,13 @@ function panelBedrooms(){
 
 function panelSanitary(){
   const rows = sanitaryItems.map((it,i)=>renderSanitaryItem(it,i)).join('');
-  const vanityRows = vanityItems.map((it,i)=>renderTierItem(it,'vanityItems',i,['Essential','Economy'])).join('');
-  const total = sanitarySubtotal(sanitaryItems) + tierSubtotal(vanityItems);
+  const total = sanitarySubtotal(sanitaryItems);
   return `<section class="panel" id="panel-sanitary">
     <div class="panel-head">
-      <h2>Sanitaryware &amp; Mirrors — Kohler</h2>
-      <p>All 3 bathrooms get a complete Kohler set — WC, basin, faucets, mirror, and accessories. Existing plumbing point positions are retained. Choose Essential or Prime collection per bathroom. Each bathroom also gets an under-counter vanity unit, priced separately below.</p>
+      <h2>Sanitaryware &amp; Mirrors</h2>
+      <p>All 3 bathrooms get a complete set — WC, basin, faucets, mirror, and accessories. Existing plumbing point positions are retained. Choose Colston or Kohler Prime per bathroom.</p>
     </div>
     ${rows}
-    <div class="divider-note">Bathroom vanities</div>
-    ${vanityRows}
     ${subtotalStrip(total)}
   </section>`;
 }
@@ -765,16 +754,17 @@ function panelLivingRoom(){
   </section>`;
 }
 
-function panelPaintElectrical(){
-  const rows = paintElectricalItems.map((it,i)=>renderFlatItem(it,'paintElectricalItems',i)).join('');
-  const total = flatSubtotal(paintElectricalItems);
-  return `<section class="panel" id="panel-paintelec">
+function panelServices(){
+  const rows = serviceItems.map((it,i)=>renderServiceItem(it,i)).join('');
+  return `<section class="panel" id="panel-services">
     <div class="panel-head">
-      <h2>Paint, Electrical &amp; Basic Lighting</h2>
-      <p>Priced per sq.ft. across the same footprint as the False Ceiling scope — all rooms except the balcony and bathrooms (bathroom walls are tiled). Confirm the exact area once final site measurement is available.</p>
+      <h2>Services &amp; Lighting</h2>
+      <p>Paint work across the apartment, electrical work (billed as per actuals), plumbing for 2 bathrooms, and basic Philips cove lights and spotlights for the whole apartment.</p>
     </div>
-    ${rows}
-    ${subtotalStrip(total)}
+    ${serviceItems.slice(0,3).map((it,i)=>renderServiceItem(it,i)).join('')}
+    <div class="divider-note">Lighting — Philips</div>
+    ${serviceItems.slice(3).map((it,i)=>renderServiceItem(it,i+3)).join('')}
+    ${subtotalStrip(serviceSubtotal(serviceItems))}
   </section>`;
 }
 
@@ -784,9 +774,9 @@ function grandTotal(){
        + (kitchenCabinetItem.on ? kitchenCabinetItem.qty*kitchenCabinetItem.tiers[kitchenCabinetItem.selected].rate : 0)
        + (kitchenGraniteItem.on ? kitchenGraniteItem.qty*kitchenGraniteItem.tiers[kitchenGraniteItem.selected].rate : 0)
        + tierSubtotal(masterBedroomItems) + tierSubtotal(secondBedroomItems)
-       + sanitarySubtotal(sanitaryItems) + tierSubtotal(vanityItems)
+       + sanitarySubtotal(sanitaryItems)
        + tierSubtotal(livingFurnitureItems)
-       + flatSubtotal(paintElectricalItems)
+       + serviceSubtotal(serviceItems)
        + (designExecItem.on ? designExecItem.qty*designExecItem.rate : 0);
 }
 
@@ -800,10 +790,9 @@ function panelCostSheet(){
       {name:`${kitchenGraniteItem.room} — ${kitchenGraniteItem.name}`, detail:`${kitchenGraniteItem.selected} tier · ${kitchenGraniteItem.qty} sq.ft. × ${fmt(kitchenGraniteItem.tiers[kitchenGraniteItem.selected].rate)}`, amt:kitchenGraniteItem.qty*kitchenGraniteItem.tiers[kitchenGraniteItem.selected].rate, on:kitchenGraniteItem.on},
     ]},
     {title:"E. Bedroom Furniture (2 rooms)", items: masterBedroomItems.concat(secondBedroomItems).map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} ${i.unit} × ${fmt(i.tiers[i.selected].rate)}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on}))},
-    {title:"F. Sanitaryware, Mirrors & Vanities", items: sanitaryItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} · ${i.qty} ${i.unit} × ${fmt(i.brands[i.selected].rate)}`, amt:i.qty*i.brands[i.selected].rate, on:true}))
-      .concat(vanityItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} ${i.unit} × ${fmt(i.tiers[i.selected].rate)}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on})))},
+    {title:"F. Sanitaryware & Mirrors", items: sanitaryItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} · ${i.qty} ${i.unit} × ${fmt(i.brands[i.selected].rate)}`, amt:i.qty*i.brands[i.selected].rate, on:i.on}))},
     {title:"G. Living Room Furniture", items: livingFurnitureItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} ${i.unit} × ${fmt(i.tiers[i.selected].rate)}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on}))},
-    {title:"H. Paint, Electrical & Lighting", items: paintElectricalItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.qty} ${i.unit} × ${fmt(i.rate)}`, amt:i.qty*i.rate, on:i.on}))},
+    {title:"H. Services & Lighting", items: serviceItems.map(i=>({name:`${i.room} — ${i.name}`, detail: i.actuals ? 'Billed as per actuals — not included in total' : `${i.qty.toLocaleString('en-IN')} ${i.unit} × ${fmt(i.rate)}`, amt:i.qty*i.rate, on:i.on, actuals:!!i.actuals}))},
     {title:"I. Design & Execution", items:[
       {name:designExecItem.name, detail:`${designExecItem.qty} ${designExecItem.unit}`, amt:designExecItem.qty*designExecItem.rate, on:designExecItem.on},
     ]},
@@ -813,9 +802,9 @@ function panelCostSheet(){
     const rows = g.items.map(it=>`
       <tr class="${it.on?'':'excluded'}">
         <td>${it.name}<br><span style="color:#9a9184;font-size:11px;">${it.detail}</span></td>
-        <td class="num">${fmt(it.amt)}</td>
+        <td class="num">${it.actuals ? "As per actuals" : fmt(it.amt)}</td>
       </tr>`).join('');
-    const subtotal = g.items.reduce((s,it)=> s + (it.on?it.amt:0), 0);
+    const subtotal = g.items.reduce((s,it)=> s + (it.on && !it.actuals ? it.amt : 0), 0);
     return `<div class="cs-group">
       <h3>${g.title} <span style="float:right;color:var(--brass-dark);">${fmt(subtotal)}</span></h3>
       <table class="cs"><thead><tr><th>Item</th><th class="num">Amount</th></tr></thead><tbody>${rows}</tbody></table>
@@ -839,8 +828,8 @@ function panelCostSheet(){
       <button class="cta ghost" onclick="resetAll()">Reset to defaults</button>
     </div>
     <p class="foot-note">
-      Excludes GST, transportation, mattresses, loose decor, appliances (other than the double-door fridge provision), glass &amp; mirror work beyond what's itemised above, and civil/structural work beyond the scope listed.
-      Rates are 2026 Delhi NCR indicative market rates for good-quality branded execution (Hettich/Ebco hardware, Kajaria/Somany tile, Kohler sanitaryware) — confirm exact SKU and dealer price before ordering.
+      Excludes GST, electrical work (billed as per actuals), transportation, mattresses, loose decor, appliances (other than the double-door fridge provision), glass &amp; mirror work beyond what's itemised above, and civil/structural work beyond the scope listed.
+      Rates are 2026 Delhi NCR indicative market rates for good-quality branded execution (Hettich/Ebco hardware, Kajaria/Somany tile, Colston / Kohler sanitaryware, Philips lighting) — confirm exact SKU and dealer price before ordering.
       Your selections are saved automatically on this device/browser — use "Reset to defaults" above to start over.
     </p>
   </section>`;
@@ -850,10 +839,13 @@ function panelCostSheet(){
    MAIN RENDER
    ===================================================================== */
 function renderMain(){
+  const keepY = window.scrollY;
   document.getElementById('main').innerHTML =
     panelOverview() + panelMandir() + panelCeiling() + panelKitchen() +
-    panelBedrooms() + panelSanitary() + panelLivingRoom() + panelPaintElectrical() + panelCostSheet();
+    panelBedrooms() + panelSanitary() + panelLivingRoom() + panelServices() + panelCostSheet();
   updateStickyTotal();
+  applyView(false);
+  window.scrollTo(0, keepY);
 }
 
 /* =====================================================================
@@ -861,9 +853,8 @@ function renderMain(){
    ===================================================================== */
 const arrays = {
   mandirItems, livingWoodworkItems, ceilingItems, flooringItems,
-  masterBedroomItems, secondBedroomItems, livingFurnitureItems, vanityItems,
+  masterBedroomItems, secondBedroomItems, livingFurnitureItems,
 };
-const flatArrays = { paintElectricalItems };
 const kitchenSingleArr = [kitchenCabinetItem, kitchenGraniteItem];
 
 function toggleItem(arrName, idx, val){
@@ -880,12 +871,16 @@ function setSanitaryBrand(idx, brand){
   sanitaryItems[idx].selected = brand;
   saveState(); renderMain(); restoreTab();
 }
-function toggleDesignExec(val){
-  designExecItem.on = val;
+function toggleSanitary(idx, val){
+  sanitaryItems[idx].on = val;
   saveState(); renderMain(); restoreTab();
 }
-function toggleFlatItem(arrName, idx, val){
-  flatArrays[arrName][idx].on = val;
+function toggleService(idx, val){
+  serviceItems[idx].on = val;
+  saveState(); renderMain(); restoreTab();
+}
+function toggleDesignExec(val){
+  designExecItem.on = val;
   saveState(); renderMain(); restoreTab();
 }
 
@@ -908,10 +903,9 @@ function saveState(){
       kitchenGranite: {on:kitchenGraniteItem.on, selected:kitchenGraniteItem.selected},
       master: masterBedroomItems.map(i=>({on:i.on, selected:i.selected})),
       second: secondBedroomItems.map(i=>({on:i.on, selected:i.selected})),
-      sanitary: sanitaryItems.map(i=>i.selected),
-      vanity: vanityItems.map(i=>({on:i.on, selected:i.selected})),
+      sanitary: sanitaryItems.map(i=>({on:i.on, selected:i.selected})),
       livingFurniture: livingFurnitureItems.map(i=>({on:i.on, selected:i.selected})),
-      paintElectrical: paintElectricalItems.map(i=>({on:i.on})),
+      services: serviceItems.map(i=>i.on),
       designExecOn: designExecItem.on,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -934,11 +928,10 @@ function loadState(){
     apply(masterBedroomItems, s.master);
     apply(secondBedroomItems, s.second);
     apply(livingFurnitureItems, s.livingFurniture);
-    apply(vanityItems, s.vanity);
     if(s.kitchenCabinet && s.kitchenCabinet.selected in kitchenCabinetItem.tiers){ kitchenCabinetItem.selected=s.kitchenCabinet.selected; kitchenCabinetItem.on=!!s.kitchenCabinet.on; }
     if(s.kitchenGranite && s.kitchenGranite.selected in kitchenGraniteItem.tiers){ kitchenGraniteItem.selected=s.kitchenGranite.selected; kitchenGraniteItem.on=!!s.kitchenGranite.on; }
-    if(Array.isArray(s.sanitary) && s.sanitary.length===sanitaryItems.length) s.sanitary.forEach((sel,i)=>{ if(sanitaryItems[i].brands[sel]) sanitaryItems[i].selected=sel; });
-    if(Array.isArray(s.paintElectrical) && s.paintElectrical.length===paintElectricalItems.length) s.paintElectrical.forEach((v,i)=>{ paintElectricalItems[i].on=!!v.on; });
+    if(Array.isArray(s.sanitary) && s.sanitary.length===sanitaryItems.length) s.sanitary.forEach((v,i)=>{ const sel = typeof v==='string' ? v : (v && v.selected); if(sanitaryItems[i].brands[sel]) sanitaryItems[i].selected=sel; if(v && typeof v==='object') sanitaryItems[i].on=!!v.on; });
+    if(Array.isArray(s.services) && s.services.length===serviceItems.length) s.services.forEach((v,i)=>{ serviceItems[i].on=!!v; });
     if(typeof s.designExecOn === 'boolean') designExecItem.on = s.designExecOn;
   }catch(e){ /* malformed saved state — ignore and continue with defaults */ }
 }
@@ -949,13 +942,13 @@ let showAllMode = false;
 function goTo(id){
   showAllMode = false;
   currentTab = id;
-  applyView();
+  applyView(true);
 }
 function toggleShowAll(){
   showAllMode = !showAllMode;
-  applyView();
+  applyView(true);
 }
-function applyView(){
+function applyView(scrollTop){
   const btn = document.getElementById('showAllBtn');
   if(showAllMode){
     document.querySelectorAll('nav.tabs button').forEach(b=> b.classList.remove('active'));
@@ -966,9 +959,9 @@ function applyView(){
     document.querySelectorAll('section.panel').forEach(p=> p.classList.toggle('active', p.id === 'panel-'+currentTab));
     if(btn){ btn.classList.remove('active'); btn.textContent = '☰ Show All Categories'; }
   }
-  window.scrollTo({top:0, behavior:'instant'});
+  if(scrollTop) window.scrollTo({top:0, behavior:'auto'});
 }
-function restoreTab(){ applyView(); }
+function restoreTab(){ /* view is re-applied inside renderMain */ }
 
 function resetAll(){
   if(!confirm('Reset all selections to the recommended defaults?')) return;
@@ -980,10 +973,9 @@ function resetAll(){
   kitchenGraniteItem.on=true; kitchenGraniteItem.selected='Essential';
   masterBedroomItems.forEach(i=>{i.on=true; i.selected='Essential';});
   secondBedroomItems.forEach(i=>{i.on=true; i.selected='Essential';});
-  sanitaryItems.forEach(i=>i.selected='Colston');
-  vanityItems.forEach(i=>{i.on=true; i.selected='Essential';});
+  sanitaryItems.forEach(i=>{i.on=true; i.selected='Colston';});
   livingFurnitureItems.forEach(i=>{i.on=true; i.selected='Essential';});
-  paintElectricalItems.forEach(i=>{i.on=true;});
+  serviceItems.forEach(i=>{i.on=true;});
   designExecItem.on=true;
   try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
   renderMain(); restoreTab();
