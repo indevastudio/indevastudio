@@ -358,16 +358,16 @@ function heroBlock(keys){
 // ---- A. Mandir (design intent to be finalized) — Essential / Economy tier
 const mandirItems = [
   {room:"Mandir Area", name:"Puja Unit (new mandir)", unit:"No.", qty:1, on:true,
-   tiers:{ Essential:{rate:40580, desc:"Marble-top mandir unit, MR ply carcass, brass-finish fittings, LED lighting provision. Final design to be finalized with client in a separate design session."},
-           Economy:{rate:27050, desc:"MR ply carcass, laminate finish (no marble top), simpler profile without brass fittings — same footprint, lighter-grade finish."} },
+   tiers:{ Essential:{rate:40580, desc:"Marble-top mandir unit, HDHMR carcass, brass-finish fittings, LED lighting provision. Final design to be finalized with client in a separate design session."},
+           Economy:{rate:27050, desc:"HDHMR carcass, laminate finish (no marble top), simpler profile without brass fittings — same footprint, lighter-grade finish."} },
    selected:"Essential"},
 ];
 
 // ---- B. Living Room — TV Unit & Wall Paneling (fixed woodwork) — Essential / Economy tier
 const livingWoodworkItems = [
   {room:"Living Room", name:"TV Unit + Wall Paneling (ceiling-height storage)", unit:"sq.ft.", qty:100, on:true,
-   tiers:{ Essential:{rate:1830, desc:"18mm MR ply carcass, ceiling-height storage with laminate/veneer finish, LED profile lighting, soft-close hardware."},
-           Economy:{rate:1280, desc:"12mm MR ply carcass, single-face laminate, no LED profile lighting, standard hardware — same coverage, lighter-grade materials."} },
+   tiers:{ Essential:{rate:1830, desc:"18mm HDHMR carcass, ceiling-height storage with laminate/veneer finish, LED profile lighting, soft-close hardware."},
+           Economy:{rate:1280, desc:"12mm HDHMR carcass, single-face laminate, no LED profile lighting, standard hardware — same coverage, lighter-grade materials."} },
    selected:"Essential"},
 ];
 
@@ -425,7 +425,7 @@ const kitchenGraniteItem = {room:"Kitchen", name:"Granite Countertop (no backspl
 function bedroomFurnitureSet(room){
   return [
     {room:room, name:"Wardrobe (7 ft wide × 10 ft high)", unit:"sq.ft.", qty:70, on:true, kind:"woodwork",
-     tiers:{ Essential:{rate:1620, desc:"18mm MR ply carcass + shutters, ceiling-height (7 ft W × 10 ft H), soft-close hinges, laminate/veneer finish."},
+     tiers:{ Essential:{rate:1620, desc:"18mm HDHMR carcass + shutters, ceiling-height (7 ft W × 10 ft H), soft-close hinges, laminate/veneer finish."},
              Economy:{rate:1150, desc:"12mm ply carcass, single-face laminate shutters, standard hardware — same size, lighter-grade materials."} },
      selected:"Essential"},
     {room:room, name:"Bedside Tables (pair)", unit:"set", qty:1, on:true, kind:"furniture",
@@ -438,7 +438,7 @@ function bedroomFurnitureSet(room){
      selected:"Essential"},
     {room:room, name:"Bed — Queen, upholstered w/ storage", unit:"No.", qty:1, on:true, kind:"furniture",
      tiers:{ Essential:{rate:40580, desc:"BWR ply frame, hydraulic lift-up storage, upholstered headboard — modern minimalist silhouette."},
-             Budget:{rate:27050, desc:"MR ply frame, fixed base (no hydraulic storage), plain upholstered headboard."} },
+             Budget:{rate:27050, desc:"HDHMR frame, fixed base (no hydraulic storage), plain upholstered headboard."} },
      selected:"Essential"},
     {room:room, name:"TV cum Dressing Panel Unit", unit:"sq.ft.", qty:35, on:true, kind:"woodwork",
      tiers:{ Essential:{rate:1620, desc:"Combined TV console + dressing-mirror wall panel, laminate/veneer finish, LED accent lighting."},
