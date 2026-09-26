@@ -63,7 +63,9 @@
     "Hiring a Farmhouse Interior Designer in Gurgaon: Step‑by‑Step",
     "Delhi Luxury Home Interior Cost Guide: Budgeting Custom Furniture",
     "Cost Guide for Villa Furniture Design South Delhi – Budget Tips",
-    "Avoid Costly Mistakes in Farmhouse Furniture Design Delhi Guide"
+    "Avoid Costly Mistakes in Farmhouse Furniture Design Delhi Guide",
+    "How Much Does a 3 BHK Interior Redesign Really Cost in South Delhi?",
+    "Reading Material BOQs: Delhi NCR Home Design Guide and Cost Planning"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -129,7 +131,9 @@
     "hiring-farmhouse-interior-designer-gurgaon",
     "delhi-luxury-interior-cost-guide",
     "villa-furniture-cost-guide-south-delhi",
-    "avoid-farmhouse-furniture-mistakes"
+    "avoid-farmhouse-furniture-mistakes",
+    "cost-guide-3bhk-south-delhi",
+    "reading-material-boq-guide"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -195,7 +199,9 @@
     "farmhouse interior designer Gurgaon",
     "custom furniture manufacturer Delhi",
     "villa furniture design South Delhi",
-    "farmhouse furniture design Delhi"
+    "farmhouse furniture design Delhi",
+    "3 BHK interior designer South Delhi",
+    "how to read an interior design BOQ"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -261,11 +267,11 @@
     "A practical, sequential process helps first‑time clients hire a farmhouse interior designer in Gurgaon while staying on budget and avoiding typical mistakes.",
     "A data‑driven cost guide reveals where money is spent in luxury Delhi homes and how to control it without compromising style.",
     "Understanding the true cost drivers helps homeowners set a realistic budget for luxury villa interiors.",
-    "Understanding and avoiding typical design errors saves money and creates cohesive farmhouse interiors."
+    "Understanding and avoiding typical design errors saves money and creates cohesive farmhouse interiors.",
+    "The article breaks down every cost factor for a 3 BHK interior project in South Delhi, offering a realistic budget range, negotiation advice, and red‑flag detection.",
+    "The article explains how to read an interior design BOQ while comparing material options to help clients make informed choices."
   ],
   "lastAngles": [
-    "mistakes-avoid",
-    "material-comparison",
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
@@ -303,7 +309,9 @@
     "step-by-step",
     "cost-guide",
     "cost-guide",
-    "mistakes-avoid"
+    "mistakes-avoid",
+    "cost-guide",
+    "material-comparison"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -369,7 +377,9 @@
     "gurgaon-farmhouse-interior-designer",
     "custom-furniture-delhi-ncr",
     "south-delhi-villa-interior-designer",
-    "south-delhi-farmhouse-interior-designer"
+    "south-delhi-farmhouse-interior-designer",
+    "south-delhi-bhk-interior-designer",
+    "interior-boq-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -435,7 +445,9 @@
     "/gurgaon",
     "/#services",
     "/delhi",
-    "/delhi"
+    "/delhi",
+    "/delhi",
+    "/#services"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -501,7 +513,9 @@
     "SERVICE_PAGE",
     "BLOG",
     "SERVICE_PAGE",
-    "SERVICE_PAGE"
+    "SERVICE_PAGE",
+    "SERVICE_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
     "commercial",
@@ -567,16 +581,18 @@
     "commercial",
     "commercial",
     "commercial",
-    "commercial"
+    "commercial",
+    "commercial",
+    "technical"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-24",
     "south-delhi-farmhouse-interior-designer": "2026-09-25",
-    "interior-boq-guide": "2026-09-15",
+    "interior-boq-guide": "2026-09-26",
     "locality-friends-colony": "2026-09-20",
     "gurgaon-interior-cost-guide": "2026-09-05",
     "gurgaon-penthouse-interior-designer": "2026-09-12",
-    "south-delhi-bhk-interior-designer": "2026-09-05",
+    "south-delhi-bhk-interior-designer": "2026-09-26",
     "locality-golf-course-road": "2026-09-16",
     "plywood-material-guide": "2026-09-06",
     "locality-vasant-kunj": "2026-09-06",
@@ -611,8 +627,6 @@
     "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "Delhi NCR",
-    "Delhi NCR",
     "Golf Course Extension Road",
     "Gurgaon",
     "South Delhi",
@@ -650,6 +664,8 @@
     "Gurgaon",
     "Delhi NCR",
     "South Delhi",
-    "South Delhi"
+    "South Delhi",
+    "South Delhi",
+    "Delhi NCR"
   ]
 }
