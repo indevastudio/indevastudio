@@ -1,9 +1,7 @@
-# indevastudio.com — robots.txt
-# NOTE: I could not fetch the current live robots.txt from this environment
-# (tooling restriction, see report). This is a proposed clean baseline —
-# diff it against whatever is actually live before replacing it.
-
 User-agent: *
 Allow: /
+Disallow: /Sahil_Mann_Cost_Builder
+Disallow: /deepanshi-cost-builder
+Disallow: /nitin-jain-cost-builder
 
 Sitemap: https://www.indevastudio.com/sitemap.xml
