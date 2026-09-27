@@ -401,112 +401,117 @@ const IMAGES = {
 
 // ---- Section A: Fixed woodwork — Essential vs Economy tier, with on/off toggle
 const woodworkItems = [
-  {room:"Living Room", name:"TV + Pooja Wall Unit", unit:"sq.ft.", qty:85, on:true, category:"unit",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass, 1mm commercial laminate, profile-light channel for niche/shelving, standard hardware."},
-           Economy:{rate:1000, desc:"12mm MR ply carcass, single-face laminate, no profile-light channel, standard non-soft-close hardware — same layout, lighter-grade materials."} },
-   selected:"Essential"},
+  {room:"Living Room", name:"Pooja + Storage Unit", unit:"sq.ft.", qty:25, on:true, category:"unit",
+   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass, 1mm commercial laminate, profile-light channel for the pooja niche, standard hardware. Same spec as before; the storage portion of the old TV + Pooja wall is now priced on its own."},
+           Economy:{rate:1000, desc:"12mm MR ply carcass, single-face laminate, no profile-light channel, non-soft-close hardware."} },
+   selected:"Essential", def:"Essential"},
+  {room:"Living Room", name:"TV Wall Panelling", unit:"sq.ft.", qty:60, on:true, category:"panel",
+   tiers:{ "PVC panelling":{rate:100, desc:"PVC wall panelling (fluted / moulding-profile PVC panels, 8–10mm) with PVC trims and beading, fixed on the wall with adhesive and screws. Water-resistant, termite-proof, wipe-clean."} },
+   selected:"PVC panelling", def:"PVC panelling"},
   {room:"Entry Foyer", name:"Fluted Panel Strip + Console", unit:"sq.ft.", qty:20, on:true, category:"panel",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply/HDHMR backing, 1mm laminate finish, routed fluted profile."},
-           Economy:{rate:1000, desc:"12mm ply backing, printed fluted-look laminate instead of routed profile — visually similar, less durable edge detail."} },
-   selected:"Essential"},
+   tiers:{ "PVC panelling":{rate:100, desc:"PVC wall panelling (fluted / moulding-profile PVC panels, 8–10mm) with PVC trims and beading, fixed on the wall with adhesive and screws. Water-resistant, termite-proof, wipe-clean."} },
+   selected:"PVC panelling", def:"PVC panelling"},
   {room:"Master Bedroom", name:"Wardrobe", unit:"sq.ft.", qty:68, on:true, category:"unit",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass + shutters, 5-drawer bank, standard hardware. Glass-fronted bay excluded (closed shutter substituted)."},
+   tiers:{ Essential:{rate:1100, desc:"18mm MR ply carcass + shutters, 5-drawer bank, standard hardware. Glass-fronted bay excluded (closed shutter substituted)."},
            Economy:{rate:1000, desc:"12mm ply carcass, single-face laminate shutters, 5-drawer bank on economy channels, non-soft-close hinges."} },
-   selected:"Essential"},
-  {room:"Master Bedroom", name:"Fluted Partition", unit:"sq.ft.", qty:21, on:true, category:"panel",
-   tiers:{ Essential:{rate:1400, desc:"Free-standing full-height fluted MDF panel, WPC/18mm ply substrate, finished both faces."},
-           Economy:{rate:1000, desc:"12mm ply substrate, printed fluted-look laminate on one face only (back face plain) — reduces cost where the reverse isn't seen."} },
-   selected:"Essential"},
+   selected:"Essential", def:"Essential"},
+  {room:"Master Bedroom", name:"Fluted Partition", unit:"sq.ft.", qty:42, on:true, category:"panel",
+   tiers:{ "PVC panelling":{rate:100, desc:"PVC fluted / profile panels (both faces, 21 sq.ft. × 2 = 42 sq.ft.) on a light frame, with PVC trims and beading, fixed with adhesive and screws."} },
+   selected:"PVC panelling", def:"PVC panelling"},
   {room:"Second Bedroom", name:"TV-wall Panelling", unit:"sq.ft.", qty:85, on:true, category:"panel",
-   tiers:{ Essential:{rate:1400, desc:"3-panel raised classical moulding, 18mm MR ply/HDHMR backing, 1mm laminate finish."},
-           Economy:{rate:1000, desc:"Single flat panel with printed moulding-look laminate instead of routed raised mouldings — same wall covered, less dimensional detail."} },
-   selected:"Essential"},
+   tiers:{ "PVC panelling":{rate:100, desc:"PVC wall panelling (fluted / moulding-profile PVC panels, 8–10mm) with PVC trims and beading, fixed on the wall with adhesive and screws. Water-resistant, termite-proof, wipe-clean."} },
+   selected:"PVC panelling", def:"PVC panelling"},
   {room:"Second Bedroom", name:"Wardrobe", unit:"sq.ft.", qty:48, on:true, category:"unit",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass + shutters, 4-drawer bank, standard hardware. Glass-fronted bay excluded."},
+   tiers:{ Essential:{rate:1100, desc:"18mm MR ply carcass + shutters, 4-drawer bank, standard hardware. Glass-fronted bay excluded."},
            Economy:{rate:1000, desc:"12mm ply carcass, single-face laminate shutters, 4-drawer bank on economy channels, non-soft-close hinges."} },
-   selected:"Essential"},
-  {room:"Kitchen", name:"Base + Wall Unit Carcass & Shutters", unit:"RFT", qty:18, on:true, category:"kitchen",
-   tiers:{ Essential:{rate:9500, desc:"18mm BWR ply carcass, 1mm commercial laminate shutters, standard hinges, cutlery-tray provision."},
-           Economy:{rate:7200, desc:"12mm BWR ply carcass, economy laminate shutters, standard hinges, no cutlery-tray provision."} },
-   selected:"Essential"},
+   selected:"Essential", def:"Essential"},
+  {room:"Kitchen", name:"Base + Wall Unit Carcass & Shutters (18 rft run) — laminate", unit:"sq.ft.", qty:93, on:true, category:"kitchen",
+   tiers:{ Essential:{rate:1050, desc:"Laminate finish kitchen at ₹1,050/sq.ft. of front area: 18mm BWR ply carcass, 1mm laminate shutters (Merino / Greenlam), PVC edge banding. 18 rft × (2'8\" base + 2'6\" wall) = 93 sq.ft. Hardware listed separately below."},
+           Economy:{rate:1000, desc:"12mm BWR ply carcass, economy laminate shutters, no cutlery-tray provision."} },
+   selected:"Essential", def:"Essential"},
+  {room:"Kitchen", name:"Kitchen Hardware — basic Hettich set", unit:"set", qty:1, on:true, category:"kitchen",
+   tiers:{ Essential:{rate:23064, desc:"Hettich Sensys 8645i soft-close hinges, 8 pairs × ₹882 = ₹7,056 · 1 Hettich InnoTech Atira cutlery drawer with Quadro soft-close runners = ₹5,904 · 1 Hettich InnoTech Atira pot & pan drawer = ₹7,104 · SS handles allowance = ₹3,000. Hettich rates are Hettich India online MRP."} },
+   selected:"Essential", def:"Essential"},
   {room:"Kitchen", name:"Backsplash", unit:"sq.ft.", qty:40, on:true, category:"kitchen",
    tiers:{ Essential:{rate:65, desc:"Patterned ceramic tile, ~4 ft height along counter run."},
            Economy:{rate:40, desc:"Plain solid-colour ceramic tile instead of patterned tile — same coverage, simpler look."} },
-   selected:"Essential"},
-  {room:"Additional (location TBD)", name:"Wardrobe — New, 6 ft × 8 ft", unit:"sq.ft.", qty:48, on:true, category:"unit",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass + shutters, 2 ft depth (standard). Wall/room location to be confirmed with client."},
-           Economy:{rate:1000, desc:"12mm ply carcass, single-face laminate, non-soft-close hardware — same size, lighter-grade materials."} },
-   selected:"Essential"},
-  {room:"Additional (location TBD)", name:"Wardrobe — New, 8 ft × 8 ft", unit:"sq.ft.", qty:64, on:true, category:"unit",
-   tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass + shutters, 6 ft depth (deep/walk-in style) — priced on face elevation only. Wall/room location to be confirmed."},
-           Economy:{rate:1000, desc:"12mm ply carcass, single-face laminate, non-soft-close hardware — same size, lighter-grade materials."} },
-   selected:"Essential"},
+   selected:"Essential", def:"Essential"},
   {room:"Kitchen", name:"Crockery Unit / Cupboard", unit:"sq.ft.", qty:32, on:true, category:"unit",
    tiers:{ Essential:{rate:1400, desc:"18mm MR ply carcass + shutters + open display shelving, 2 ft depth."},
            Economy:{rate:1000, desc:"12mm ply carcass, single-face laminate, no open-shelf profile lighting."} },
-   selected:"Essential"},
+   selected:"Essential", def:"Essential"},
 ];
 
 // ---- Section B: Loose furniture — Essential vs Budget tier, with on/off toggle
 const furnitureItems = [
   {room:"Living Room", name:"L-shaped Fabric Sofa (5–6 seater)", unit:"No.", qty:1, on:true, imgKey:"sofa",
-   tiers:{ Essential:{rate:55000, desc:"Kiln-dried solid timber frame, 32D high-resilience foam, poly-cotton blend upholstery."},
+   tiers:{ "Buy online":{rate:33305, desc:"Wakefit Skiver L-shape 6-seater fabric sofa (with lounger) — high-GSM scratch-resistant fabric, high-density HR foam. <a href=\"https://www.wakefit.co/sofa-set/skiver-l-shape-sofa/WSFASKRR3CFJAC\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:55000, desc:"Kiln-dried solid timber frame, 32D high-resilience foam, poly-cotton blend upholstery."},
            Budget:{rate:38000, desc:"Engineered wood frame, 25D foam (softer, shorter life), plain polyester fabric."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Living Room", name:"Coffee Table", unit:"No.", qty:1, on:true, imgKey:"coffee",
-   tiers:{ Essential:{rate:12000, desc:"Marble-finish stone top, MS powder-coated frame with brass-finish trim."},
+   tiers:{ "Buy online":{rate:4499, desc:"Wakefit Level coffee table, 18mm engineered wood. <a href=\"https://www.wakefit.co/coffee-tables/level-coffee-table/WCFTLEVEL\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:12000, desc:"Marble-finish stone top, MS powder-coated frame with brass-finish trim."},
            Budget:{rate:7500, desc:"MDF top with laminate finish (no marble look), plain black MS frame, no brass trim."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Living Room", name:"Round Side Table", unit:"No.", qty:1, on:true, imgKey:"sidetable",
-   tiers:{ Essential:{rate:6500, desc:"MS frame, brass-finish plating."},
+   tiers:{ "Buy online":{rate:3000, desc:"Metal round side table, brass / gold finish — Pepperfry range; budget allowance, pick on selection. <a href=\"https://www.pepperfry.com/discover/metal-side-tables.html\" target=\"_blank\" rel=\"noopener\">Browse on Pepperfry ↗</a>"},
+           Essential:{rate:6500, desc:"MS frame, brass-finish plating."},
            Budget:{rate:4000, desc:"MS frame, plain powder-coat finish — no brass plating."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Living Room", name:"Round Ottoman / Pouffe", unit:"No.", qty:1, on:true, imgKey:"ottoman",
-   tiers:{ Essential:{rate:5500, desc:"Ply base, 35D foam, boucle/linen upholstery."},
+   tiers:{ "Buy online":{rate:2500, desc:"Round upholstered pouffe — Pepperfry range; budget allowance, pick on selection. <a href=\"https://www.pepperfry.com/category/pouffes.html\" target=\"_blank\" rel=\"noopener\">Browse on Pepperfry ↗</a>"},
+           Essential:{rate:5500, desc:"Ply base, 35D foam, boucle/linen upholstery."},
            Budget:{rate:3500, desc:"Ply base, 28D foam, plain polyester fabric."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Master Bedroom", name:"Upholstered Bed w/ Storage (Queen)", unit:"No.", qty:1, on:true, imgKey:"masterbed",
-   tiers:{ Essential:{rate:32000, desc:"BWR ply frame, hydraulic lift-up storage, diamond-tufted upholstered headboard."},
+   tiers:{ "Buy online":{rate:24448, desc:"Wakefit Orion queen bed with hydraulic storage, engineered wood, 300 kg capacity. <a href=\"https://www.wakefit.co/bed/engineered-wood-bed-with-hydraulic-storage-orion/WEWB7860HYSORIONR4\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:32000, desc:"BWR ply frame, hydraulic lift-up storage, diamond-tufted upholstered headboard."},
            Budget:{rate:22000, desc:"MR ply frame, fixed base (no hydraulic storage), plain (non-tufted) upholstered headboard."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Master Bedroom", name:"Bedside Table (pair)", unit:"No.", qty:2, on:true, imgKey:"master_bedside",
-   tiers:{ Essential:{rate:6000, desc:"Lacquer finish, brass ring-pull handle, 2-drawer unit each."},
+   tiers:{ "Buy online":{rate:2589, desc:"Urban Ladder Lavista engineered-wood bedside table, Classic Walnut (price per piece). <a href=\"https://www.urbanladder.com/open-and-closed-bedside-tables\" target=\"_blank\" rel=\"noopener\">View on Urban Ladder ↗</a>"},
+           Essential:{rate:6000, desc:"Lacquer finish, brass ring-pull handle, 2-drawer unit each."},
            Budget:{rate:4000, desc:"Laminate finish (no lacquer), plain SS handle, 2-drawer unit each."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Master Bedroom", name:"TV Console", unit:"No.", qty:1, on:true, imgKey:"master_console",
-   tiers:{ Essential:{rate:16000, desc:"Lacquer-finish hinged shutters + open cubby."},
+   tiers:{ "Buy online":{rate:3989, desc:"Wakefit Hitch engineered-wood TV unit — closed compartment + floating shelves. <a href=\"https://www.wakefit.co/tv-units/hitch-tv-unit/WTVUHITCH\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:16000, desc:"Lacquer-finish hinged shutters + open cubby."},
            Budget:{rate:11000, desc:"Laminate-finish shutters (no lacquer) — same layout."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Second Bedroom", name:"Upholstered Bed (Queen/Double)", unit:"No.", qty:1, on:true, imgKey:"secondbed",
-   tiers:{ Essential:{rate:28000, desc:"BWR ply frame, diamond-tufted upholstered headboard."},
+   tiers:{ "Buy online":{rate:13469, desc:"Wakefit Taurus queen bed with box storage, engineered wood. <a href=\"https://www.wakefit.co/bed/engineered-wood-bed-with-storage-taurus/WEWB7860STAURUSR2\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:28000, desc:"BWR ply frame, diamond-tufted upholstered headboard."},
            Budget:{rate:19000, desc:"MR ply frame, plain (non-tufted) upholstered headboard, no storage."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Second Bedroom", name:"Bedside Table (pair)", unit:"No.", qty:2, on:true, imgKey:"second_bedside",
-   tiers:{ Essential:{rate:5500, desc:"Lacquer finish, brass ring-pull handle, 2-drawer unit each."},
+   tiers:{ "Buy online":{rate:1999, desc:"Urban Ladder Zoey (SimplyWud) engineered-wood bedside table, Classic Walnut (price per piece). <a href=\"https://www.urbanladder.com/open-and-closed-bedside-tables\" target=\"_blank\" rel=\"noopener\">View on Urban Ladder ↗</a>"},
+           Essential:{rate:5500, desc:"Lacquer finish, brass ring-pull handle, 2-drawer unit each."},
            Budget:{rate:3700, desc:"Laminate finish (no lacquer), plain SS handle, 2-drawer unit each."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
   {room:"Second Bedroom", name:"TV Console", unit:"No.", qty:1, on:true, imgKey:"second_console",
-   tiers:{ Essential:{rate:14000, desc:"Lacquer-finish hinged shutters + open cubby."},
+   tiers:{ "Buy online":{rate:2755, desc:"Wakefit Heist engineered-wood TV unit, compact with open storage. <a href=\"https://www.wakefit.co/tv-units/heist-tv-unit/WTVUHEIST\" target=\"_blank\" rel=\"noopener\">View on Wakefit ↗</a>"},
+           Essential:{rate:14000, desc:"Lacquer-finish hinged shutters + open cubby."},
            Budget:{rate:9500, desc:"Laminate-finish shutters (no lacquer) — same layout."} },
-   selected:"Essential"},
+   selected:"Buy online", def:"Buy online"},
 ];
 
 // ---- Section C: False ceiling — Standard vs Economy tier, with on/off toggle
 const ceilingItems = [
   {room:"Living / Dining", name:"Peripheral Box Ceiling + Cove", unit:"sq.ft.", qty:269, optional:false, on:true,
-   tiers:{ Standard:{rate:100, desc:"Gypsum board on GI channel framework, jointing + POP finish, cove recess ready for LED strip."},
+   tiers:{ Standard:{rate:120, desc:"POP false ceiling on GI channel framework with chicken mesh, POP finish, cove recess ready for LED strip."},
            Economy:{rate:65, desc:"PVC panel ceiling — no gypsum/POP, flat finish only, faster install, cannot support a cove-light recess."} },
    selected:"Standard"},
   {room:"Master Bedroom", name:"Box Ceiling + Cove at Fluted Panel Head", unit:"sq.ft.", qty:152, optional:false, on:true,
-   tiers:{ Standard:{rate:100, desc:"Gypsum board on GI channel framework, jointing + POP finish, cove recess, centre kept open for fan."},
+   tiers:{ Standard:{rate:120, desc:"POP false ceiling on GI channel framework with chicken mesh, POP finish, cove recess, centre kept open for fan."},
            Economy:{rate:65, desc:"PVC panel ceiling — no cove/POP detailing, flat finish only."} },
    selected:"Standard"},
   {room:"Second Bedroom", name:"Box Ceiling + Cove", unit:"sq.ft.", qty:132, optional:false, on:true,
-   tiers:{ Standard:{rate:100, desc:"Gypsum board on GI channel framework, jointing + POP finish, cove recess, centre kept open for fan."},
+   tiers:{ Standard:{rate:120, desc:"POP false ceiling on GI channel framework with chicken mesh, POP finish, cove recess, centre kept open for fan."},
            Economy:{rate:65, desc:"PVC panel ceiling — no cove/POP detailing, flat finish only."} },
    selected:"Standard"},
   {room:"Kitchen", name:"Flat POP Punning (optional)", unit:"sq.ft.", qty:77, optional:true, on:false,
-   tiers:{ Standard:{rate:100, desc:"Flat POP punning + primer only, no box/cove."},
+   tiers:{ Standard:{rate:120, desc:"Flat POP ceiling + primer, no box/cove."},
            Economy:{rate:65, desc:"PVC panel ceiling — quicker install, wipeable surface, no POP finishing needed."} },
    selected:"Standard"},
 ];
@@ -519,23 +524,38 @@ const lightingItems = [
    brands:{
      Philips:{rate:320, warranty:2}, Havells:{rate:260, warranty:2}, Wipro:{rate:190, warranty:2},
      Syska:{rate:150, warranty:1}, Crompton:{rate:220, warranty:2},
-   }, selected:"Wipro"},
+   }, selected:"Wipro", def:"Wipro"},
   {name:"Track Light — 2nd Bedroom niche (3 ft, 2-head)",
    spec:"Accent track for wardrobe/display niche.",
    unit:"No.", qty:1,
    brands:{
      Philips:{rate:2200, warranty:2}, Havells:{rate:1900, warranty:2}, Wipro:{rate:1500, warranty:2},
      Syska:{rate:1200, warranty:1}, Crompton:{rate:1700, warranty:2},
-   }, selected:"Wipro"},
+   }, selected:"Wipro", def:"Wipro"},
   {name:"LED Strip / Cove Light (per RFT, incl. driver share)",
    spec:"Concealed cove behind curtain pelmet + open shelving, warm white.",
    unit:"RFT", qty:34,
    brands:{
      Philips:{rate:220, warranty:2}, Havells:{rate:190, warranty:2}, Wipro:{rate:150, warranty:2},
      Syska:{rate:120, warranty:1}, Crompton:{rate:170, warranty:2},
-   }, selected:"Wipro"},
+   }, selected:"Wipro", def:"Wipro"},
 ];
-const electricalExecution = {qty:58, rate:450, dbLumpsum:3500, on:true};
+const electricalExecution = {qty:1, rate:25000, dbLumpsum:0, on:true};
+// Electrical material — good, budget-friendly brands (default), quantities for ~58 points
+lightingItems.push(
+  {name:"Wires — FR PVC copper (5 × 1.5 sq.mm, 2 × 2.5 sq.mm, 1 × 4 sq.mm, 1 × 1.5 sq.mm earth; 90 m coils)",
+   spec:"Fire-retardant PVC-insulated copper wire for ~58 points. Market rates; confirm on dealer quote.", unit:"set", qty:1, def:"RR Kabel",
+   brands:{ Polycab:{rate:22000, warranty:null}, Finolex:{rate:23500, warranty:null}, "RR Kabel":{rate:19800, warranty:null} }, selected:"RR Kabel"},
+  {name:"Conduits & accessories — PVC 20/25mm pipes, bends, junction boxes",
+   spec:"Approx. 40 lengths of 3 m plus bends, couplers and junction boxes. Market rates.", unit:"set", qty:1, def:"AKG",
+   brands:{ AKG:{rate:3600, warranty:null}, Precision:{rate:3200, warranty:null} }, selected:"AKG"},
+  {name:"Switches, sockets, regulators, plates & boxes (modular)",
+   spec:"~40 switches, 12 × 6A sockets, 6 × 16A switch-socket sets, 4 fan regulators, ~22 plates with metal boxes. Market rates.", unit:"set", qty:1, def:"Anchor Roma",
+   brands:{ "Anchor Roma":{rate:9900, warranty:null}, "Havells Coral":{rate:11800, warranty:null}, "Legrand Myrius":{rate:12500, warranty:null} }, selected:"Anchor Roma"},
+  {name:"MCBs for DB modification (6 × SP)",
+   spec:"Single-pole MCBs for the modified distribution board circuits. Market rates.", unit:"set", qty:1, def:"Havells",
+   brands:{ Havells:{rate:1500, warranty:null}, Anchor:{rate:1320, warranty:null}, Legrand:{rate:1650, warranty:null} }, selected:"Havells"}
+);
 
 // ---- Section E: Painting (Asian Paints Royale line selector, plus a non-Royale economy comparison)
 const paintOptions = {
@@ -555,19 +575,19 @@ const paintFixed = [
 const doorHardwareItems = [
   {name:"Mortise Lock + Handle Set", spec:"Master Bedroom & Second Bedroom doors, 6-lever mechanism.", unit:"No.", qty:2, imgKey:"lock",
    brands:{ Godrej:{rate:1272, warranty:5}, Dorset:{rate:1601, warranty:2}, Yale:{rate:2200, warranty:2}, "Budget/Generic":{rate:950, warranty:0} },
-   selected:"Dorset"},
+   selected:"Godrej"},
   {name:"Toilet Privacy Latch / Tower Bolt Set", spec:"Toilet 1 & Toilet 2 doors.", unit:"No.", qty:2, imgKey:"bolt",
    brands:{ Godrej:{rate:350, warranty:5}, Dorset:{rate:300, warranty:2}, Yale:null, "Budget/Generic":{rate:120, warranty:0} },
-   selected:"Dorset"},
+   selected:"Godrej"},
   {name:"Door Hinges (3 per door × 5 doors)", spec:"SS butt hinges, 4 inch, all 5 internal doors.", unit:"No.", qty:15, imgKey:"hinge",
    brands:{ Godrej:{rate:45, warranty:5}, Dorset:{rate:55, warranty:2}, Yale:{rate:65, warranty:2}, "Budget/Generic":{rate:25, warranty:0} },
-   selected:"Dorset"},
+   selected:"Godrej"},
   {name:"Door Stopper", spec:"Floor/wall-mounted, all 5 doors.", unit:"No.", qty:5, imgKey:"stopper",
    brands:{ Godrej:{rate:80, warranty:5}, Dorset:{rate:90, warranty:2}, Yale:{rate:120, warranty:2}, "Budget/Generic":{rate:40, warranty:0} },
-   selected:"Dorset"},
+   selected:"Godrej"},
   {name:"Kitchen/Utility Door Latch", spec:"Simple latch + handle, no full mortise needed.", unit:"No.", qty:1, imgKey:"latch",
    brands:{ Godrej:{rate:400, warranty:5}, Dorset:{rate:450, warranty:2}, Yale:null, "Budget/Generic":{rate:180, warranty:0} },
-   selected:"Dorset"},
+   selected:"Godrej"},
 ];
 
 // Door refurbishment — 4 existing doors, 8 ft × 4 ft each, PU polish (fixed rate, on/off)
@@ -589,9 +609,7 @@ const TABS = [
   {id:"overview", label:"Overview"},
   {id:"woodwork", label:"Woodwork"},
   {id:"furniture", label:"Furniture"},
-  {id:"ceiling", label:"False Ceiling"},
-  {id:"lighting", label:"Lighting"},
-  {id:"paint", label:"Painting"},
+  {id:"civil", label:"Civil Work"},
   {id:"hardware", label:"Door Hardware"},
   {id:"costsheet", label:"Cost Sheet"},
 ];
@@ -622,8 +640,104 @@ function doorHardwareTotal(){
   if(doorRefurbish.on) t += doorRefurbish.qty*doorRefurbish.rate;
   return t;
 }
+
+/* =====================================================================
+   CIVIL WORK — false ceiling, painting, mouldings, electrical (order quantities)
+   ===================================================================== */
+const CARPET_SQFT = 796;           // 73.938 sq.m carpet area
+const civilPaint = {name:"Painting — Asian Paints Royale (material + labour)", area: Math.round(CARPET_SQFT*2.8), rate:30, on:true};
+const civilMould = {name:"Wall mouldings (neoclassical panels)", rft:200, pieceLen:8, pieceRate:100, on:true};
+const civilElecInstall = {name:"Electrical installation — labour", amt:25000, on:true};
+
+// Point schedule used to calculate the order quantities below
+const POINT_SCHEDULE = [
+  // room, light pts, fan, exhaust, 6A sockets, 16A power, boards
+  ["Living / Dining", 14, 1, 0, 4, 1, "12M ×1, 6M ×1, 3M ×1"],
+  ["Foyer", 2, 0, 0, 0, 0, "3M ×1"],
+  ["Master Bedroom", 8, 1, 0, 3, 1, "8M ×1, 3M ×2 (bedside)"],
+  ["Second Bedroom", 7, 1, 0, 3, 1, "8M ×1, 3M ×2 (bedside)"],
+  ["Kitchen", 4, 0, 1, 2, 3, "6M ×2"],
+  ["Toilet 1 + Toilet 2", 4, 0, 2, 0, 2, "6M ×2 (incl. geyser)"],
+  ["Balcony", 1, 0, 0, 1, 0, "3M ×1"],
+  ["Utility (washing machine)", 0, 0, 0, 0, 1, "3M ×1"],
+];
+
+const elecOrder = [
+  // ---- Lights (Wipro)
+  {g:"Lights — Wipro", item:"COB / downlight / spotlight, 9–12W", unit:"No.", qty:36, rate:190},
+  {g:"Lights — Wipro", item:"Track light, 3 ft 2-head (second bedroom niche)", unit:"No.", qty:1, rate:1500},
+  {g:"Lights — Wipro", item:"LED cove strip with driver share (living + master)", unit:"rft", qty:34, rate:150},
+  // ---- Wires (RR Kabel FR, 90 m coils)
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"1.5 sq.mm — red (phase), lights / fans / 6A", unit:"coil", qty:4, rate:1700},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"1.5 sq.mm — black (neutral)", unit:"coil", qty:4, rate:1700},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"1.5 sq.mm — green (earth)", unit:"coil", qty:2, rate:1700},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"2.5 sq.mm — red, 16A power circuits", unit:"coil", qty:2, rate:2750},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"2.5 sq.mm — black", unit:"coil", qty:2, rate:2750},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"2.5 sq.mm — green (earth for 16A)", unit:"coil", qty:1, rate:2750},
+  {g:"Wires — RR Kabel FR, 90 m coils", item:"4 sq.mm — red + black, AC and geyser runs", unit:"coil", qty:2, rate:4350},
+  // ---- Pipes & accessories (AKG)
+  {g:"Pipes & accessories — AKG", item:"PVC conduit 25mm, 3 m lengths (wall chases)", unit:"length", qty:40, rate:60},
+  {g:"Pipes & accessories — AKG", item:"PVC conduit 20mm, 3 m lengths", unit:"length", qty:40, rate:45},
+  {g:"Pipes & accessories — AKG", item:"Bends, couplers, reducers", unit:"No.", qty:60, rate:8},
+  {g:"Pipes & accessories — AKG", item:"Deep junction boxes (ceiling / light points)", unit:"No.", qty:45, rate:18},
+  {g:"Pipes & accessories — AKG", item:"Flexible conduit 20mm for false ceiling (50 m roll)", unit:"roll", qty:2, rate:550},
+  {g:"Pipes & accessories — AKG", item:"Saddles, screws, PVC tape, gitti", unit:"lot", qty:1, rate:800},
+  // ---- Switches & sockets (Anchor Roma)
+  {g:"Switches & sockets — Anchor Roma", item:"6A one-way switch (lights, fans, exhausts, socket control)", unit:"No.", qty:38, rate:45},
+  {g:"Switches & sockets — Anchor Roma", item:"6A two-way switch (bedroom door / bed)", unit:"No.", qty:4, rate:70},
+  {g:"Switches & sockets — Anchor Roma", item:"6A 3-pin socket", unit:"No.", qty:13, rate:95},
+  {g:"Switches & sockets — Anchor Roma", item:"16A switch (AC, geyser, kitchen, washing machine)", unit:"No.", qty:9, rate:115},
+  {g:"Switches & sockets — Anchor Roma", item:"16A 3-pin socket", unit:"No.", qty:9, rate:170},
+  {g:"Switches & sockets — Anchor Roma", item:"Fan regulator (step type)", unit:"No.", qty:3, rate:380},
+  {g:"Switches & sockets — Anchor Roma", item:"Bell push + door bell", unit:"set", qty:1, rate:310},
+  {g:"Switches & sockets — Anchor Roma", item:"Cover plates — 12M ×1, 8M ×2, 6M ×5, 3M ×8", unit:"lot", qty:1, rate:1710},
+  {g:"Switches & sockets — Anchor Roma", item:"Metal back boxes — 12M ×1, 8M ×2, 6M ×5, 3M ×8", unit:"lot", qty:1, rate:775},
+  {g:"Switches & sockets — Anchor Roma", item:"Blank modules", unit:"No.", qty:10, rate:20},
+  // ---- Protection (Havells)
+  {g:"Protection — Havells", item:"SP MCB 6–20A (lights, sockets, AC, geyser circuits)", unit:"No.", qty:10, rate:230},
+  {g:"Protection — Havells", item:"RCCB 2-pole 40A 30mA", unit:"No.", qty:1, rate:2600},
+  {g:"Protection — Havells", item:"Distribution board 12-way SPN (if existing DB can't be reused)", unit:"No.", qty:1, rate:2400},
+];
+function elecMaterialTotal(){ return elecOrder.reduce((s,i)=>s+i.qty*i.rate,0); }
+function paintCivil(){ return civilPaint.on ? civilPaint.area*civilPaint.rate : 0; }
+function mouldCivil(){ return civilMould.on ? Math.ceil(civilMould.rft/civilMould.pieceLen)*civilMould.pieceRate : 0; }
+function civilTotal(){ return ceilingTotal() + paintCivil() + mouldCivil() + (civilElecInstall.on ? civilElecInstall.amt : 0) + elecMaterialTotal(); }
+function toggleCivil(key,val){ ({paint:civilPaint, mould:civilMould, inst:civilElecInstall})[key].on=val; renderMain(); restoreTab(); }
+
+function civilFixed(key, title, spec, amt, on){
+  return `<div class="item"><div class="item-top"><div class="item-left"><div><div class="item-title">${title}</div></div></div>
+    <div class="toggle-row"><div class="amount ${on?'':'off'}">${fmt(amt)}</div>
+    <label class="switch"><input type="checkbox" ${on?'checked':''} onchange="toggleCivil('${key}',this.checked)"><span class="slider"></span></label></div></div>
+    <div class="item-spec">${spec}</div></div>`;
+}
+function renderCivilPanel(){
+  const pts = POINT_SCHEDULE.reduce((a,r)=>{for(let k=1;k<=5;k++)a[k]+=r[k];return a;},[0,0,0,0,0,0]);
+  const schedule = `<div class="cs-group"><h3>Electrical point schedule (basis for the order quantities)</h3>
+    <div style="overflow-x:auto"><table class="cs"><thead><tr><th>Room</th><th class="num">Light pts</th><th class="num">Fan</th><th class="num">Exhaust</th><th class="num">6A sockets</th><th class="num">16A power</th><th>Switch boards</th></tr></thead><tbody>
+    ${POINT_SCHEDULE.map(r=>`<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td class="num">${r[3]}</td><td class="num">${r[4]}</td><td class="num">${r[5]}</td><td>${r[6]}</td></tr>`).join('')}
+    <tr><td><b>Total — ${pts.slice(1).reduce((a,b)=>a+b,0)} points</b></td><td class="num"><b>${pts[1]}</b></td><td class="num"><b>${pts[2]}</b></td><td class="num"><b>${pts[3]}</b></td><td class="num"><b>${pts[4]}</b></td><td class="num"><b>${pts[5]}</b></td><td>12M ×1, 8M ×2, 6M ×5, 3M ×8</td></tr>
+    </tbody></table></div></div>`;
+  const groups=[...new Set(elecOrder.map(i=>i.g))];
+  const order = `<div class="cs-group"><h3>Electrical order quantity — material <span style="float:right;color:var(--brass-dark);">${fmt(elecMaterialTotal())}</span></h3>
+    <div style="overflow-x:auto"><table class="cs"><thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead><tbody>
+    ${groups.map(g=>`<tr><td colspan="4" style="font-weight:700;background:#faf6ef">${g}</td></tr>`+elecOrder.filter(i=>i.g===g).map(i=>`<tr><td>${i.item}</td><td class="num">${i.qty} ${i.unit}</td><td class="num">${fmt(i.rate)}</td><td class="num">${fmt(i.qty*i.rate)}</td></tr>`).join('')).join('')}
+    </tbody></table></div></div>`;
+  const pcs=Math.ceil(civilMould.rft/civilMould.pieceLen);
+  return panel('civil','Civil Work','False ceiling, painting, wall mouldings and electrical — installation plus a calculated order list of lights, switches, wires and pipes.',
+    heroBanner('master')
+    + `<div class="divider-note" style="margin:6px 0 10px;font-size:12px;color:#8a7f70;font-style:italic">False ceiling — POP at ₹120/sq.ft.</div>`
+    + ceilingItems.map((it,i)=>renderTierItem(it,i,'ceilingItems')).join('')
+    + `<div class="divider-note" style="margin:14px 0 10px;font-size:12px;color:#8a7f70;font-style:italic">Painting & mouldings</div>`
+    + civilFixed('paint', civilPaint.name, `Asian Paints Royale emulsion, 2 coats with putty and primer — material + labour at ₹30/sq.ft. Area: ${CARPET_SQFT} sq.ft. carpet (73.938 sq.m) × 2.8 = ${civilPaint.area.toLocaleString('en-IN')} sq.ft. of walls and ceilings.`, paintCivil(), civilPaint.on)
+    + civilFixed('mould', civilMould.name, `Approx. ${civilMould.rft} rft of moulding in ${civilMould.pieceLen} ft lengths = ${pcs} pieces × ₹${civilMould.pieceRate}. Material; fixed by the carpenter / POP team.`, mouldCivil(), civilMould.on)
+    + `<div class="divider-note" style="margin:14px 0 10px;font-size:12px;color:#8a7f70;font-style:italic">Electrical</div>`
+    + civilFixed('inst', civilElecInstall.name, 'Lumpsum ₹25,000: concealed wiring, chasing, conduit laying, fixing of boards, lights and DB for all points in the schedule below.', civilElecInstall.on?civilElecInstall.amt:0, civilElecInstall.on)
+    + schedule + order
+    + subtotalStrip('Civil Work', civilTotal));
+}
+
 function grandTotal(){
-  return woodworkTotal()+furnitureTotal()+ceilingTotal()+lightingTotal()+paintTotal()+doorHardwareTotal();
+  return woodworkTotal()+furnitureTotal()+civilTotal()+doorHardwareTotal();
 }
 
 function renderTabs(){
@@ -673,7 +787,7 @@ function renderTierItem(item, idx, arrName){
         ${thumb}
         <div>
           <div class="item-room">${item.room}</div>
-          <div class="item-title">${item.name}${item.optional?' <span class="opt-tag">optional</span>':''}</div>
+          <div class="item-title">${item.name}${item.optional?' <span class="opt-tag">optional</span>':''}${item.tag?' <span class="opt-tag">'+item.tag+'</span>':''}</div>
         </div>
       </div>
       <div class="toggle-row">
@@ -695,6 +809,16 @@ const BRAND_NOTES = {
   Wipro: "Best brightness-per-rupee in independent comparisons — cheapest reliable pick.",
   Syska: "Cheapest listed, but shorter component life reported — weigh against the 1-yr warranty.",
   Crompton: "Reliable mid-range alternative to Havells.",
+  Polycab: "India's largest wire brand — premium-priced FR wire.",
+  Finolex: "Long-established, premium-priced FR wire.",
+  "RR Kabel": "ISI-marked FR wire from a major manufacturer — best value of the three.",
+  AKG: "Standard Indéva conduit spec (master BOQ).",
+  Precision: "Comparable ISI PVC conduit, slightly cheaper.",
+  "Anchor Roma": "Anchor by Panasonic — reliable, widely serviced, most budget-friendly.",
+  "Havells Coral": "Mid-range modular range.",
+  "Legrand Myrius": "Premium finish, highest price.",
+  Anchor: "Anchor by Panasonic — cheapest of the three.",
+  Legrand: "Premium brand, highest price.",
   Godrej: "Trusted Indian brand, longest warranty of the options here.",
   Dorset: "Stylish finishes, solid mid-range durability.",
   Yale: "International brand with advanced security features — priced accordingly.",
@@ -708,7 +832,7 @@ function renderBrandItem(item, idx, kind){
     const sel = item.selected===b ? 'selected':'';
     return `<label class="opt tier-opt ${sel}">
       <input type="radio" name="${kind}-${idx}" ${sel?'checked':''} onchange="setBrand('${kind}',${idx},'${b}')">
-      <span class="brand">${b} — ${fmt(d.rate)}${item.unit==='RFT'?'/RFT':(item.unit==='No.'?'/pc':'')} ${warrantyPill(d.warranty)}</span>
+      <span class="brand">${b} — ${fmt(d.rate)}${item.unit==='RFT'?'/RFT':(item.unit==='No.'?'/pc':'')} ${d.warranty===null?'':warrantyPill(d.warranty)}</span>
       <span class="tier-desc">${BRAND_NOTES[b] || ''}</span>
     </label>`;
   }).join('');
@@ -764,19 +888,12 @@ function renderMain(){
     ${panel('woodwork', 'Fixed Woodwork', 'Floor-to-ceiling panelling, TV/pooja unit, wardrobes and kitchen carcass. Pick Essential or Economy per item, or switch one off entirely.',
       heroBanner('living_tv') + woodworkItems.map((it,i)=>renderTierItem(it,i,'woodworkItems')).join('') + subtotalStrip('Fixed Woodwork', woodworkTotal))}
 
-    ${panel('furniture', 'Loose Furniture', 'Sofa, tables, beds, bedside and TV consoles. Pick Essential or Budget per item to see where the savings are.',
+    ${panel('furniture', 'Loose Furniture', 'Sofa, tables, beds, bedside and TV consoles. "Buy online" (pre-selected) is the most economical ready-made piece from Wakefit, Urban Ladder or Pepperfry, with a link to the product; Essential and Budget are the custom-made options.',
       heroBanner('living_wide') + furnitureItems.map((it,i)=>renderTierItem(it,i,'furnitureItems')).join('') + subtotalStrip('Loose Furniture', furnitureTotal))}
 
-    ${panel('ceiling', 'False Ceiling', 'Standard gypsum or Economy PVC panel, per room. Toilets and balconies carry no false ceiling; kitchen is optional.',
-      heroBanner('master') + ceilingItems.map((it,i)=>renderTierItem(it,i,'ceilingItems')).join('') + subtotalStrip('False Ceiling', ceilingTotal))}
+    ${renderCivilPanel()}
 
-    ${panel('lighting', 'Electrical & Lighting', 'Tap a brand for each fixture type to compare price and warranty. Wipro is pre-selected as the cheapest reliable option.',
-      heroBanner('living_tv') + lightingItems.map((it,i)=>renderBrandItem(it,i,'light')).join('') + renderElecExecution() + subtotalStrip('Electrical & Lighting', lightingTotal))}
-
-    ${panel('paint', 'Painting', 'Asian Paints Royale line for the full unit, plus primer, putty and labour.',
-      heroBanner('foyer') + renderPaintLine() + paintFixed.map((it,i)=>renderSimpleItem(it,i,'paintFixed')).join('') + subtotalStrip('Painting', paintTotal))}
-
-    ${panel('hardware', 'Door Hardware', '5 internal doors, Dorset hardware by default. Tap a brand to compare price and warranty. Includes refurbishing 4 existing doors.',
+    ${panel('hardware', 'Door Hardware', '5 internal doors, Godrej hardware by default (lower price than Dorset, 5-yr warranty). Tap a brand to compare price and warranty. Includes refurbishing 4 existing doors.',
       heroBanner('wardrobe') + doorHardwareItems.map((it,i)=>renderBrandItem(it,i,'door')).join('') + renderDoorRefurbish() + subtotalStrip('Door Hardware', doorHardwareTotal))}
 
     ${renderCostSheet()}
@@ -840,7 +957,7 @@ function renderElecExecution(){
   <div class="item">
     <div class="item-top">
       <div>
-        <div class="item-title">Electrical Point Wiring & Execution</div>
+        <div class="item-title">Electrical Labour — wiring & execution</div>
       </div>
       <div class="toggle-row">
         <div class="amount ${electricalExecution.on?'':'off'}">${fmt(amt)}</div>
@@ -850,7 +967,7 @@ function renderElecExecution(){
         </label>
       </div>
     </div>
-    <div class="item-spec">Labour only, brand-neutral — 58 points (light + fan + socket + power, provisional) at ₹450/point, plus ₹3,500 DB modification/concealed wiring lumpsum.</div>
+    <div class="item-spec">Labour lumpsum ₹25,000 for ~58 points (light + fan + socket + power), concealed wiring and DB modification. Material is listed above in budget-friendly good brands.</div>
   </div>`;
 }
 
@@ -880,16 +997,14 @@ function renderCostSheet(){
   const groups = [
     {title:"A. Fixed Woodwork", items:woodworkItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} ${i.unit} × ${fmt(i.tiers[i.selected].rate)}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on}))},
     {title:"B. Loose Furniture", items:furnitureItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} ${i.unit} × ${fmt(i.tiers[i.selected].rate)}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on}))},
-    {title:"C. False Ceiling", items:ceilingItems.map(i=>({name:`${i.room} — ${i.name}`, detail:`${i.selected} tier · ${i.qty} sq.ft. × ₹${i.tiers[i.selected].rate}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on}))},
-    {title:"D. Electrical & Lighting", items:[
-      ...lightingItems.map(i=>({name:i.name, detail:`${i.selected} · ${i.qty} ${i.unit} × ${fmt(i.brands[i.selected].rate)}`, amt:i.qty*i.brands[i.selected].rate, on:true})),
-      {name:"Electrical Point Wiring & Execution", detail:`${electricalExecution.qty} pts × ${fmt(electricalExecution.rate)} + ${fmt(electricalExecution.dbLumpsum)} DB lumpsum`, amt:electricalExecution.qty*electricalExecution.rate+electricalExecution.dbLumpsum, on:electricalExecution.on},
+    {title:"C. Civil Work", items:[
+      ...ceilingItems.map(i=>({name:`False ceiling — ${i.room}`, detail:`${i.selected} · ${i.qty} sq.ft. × ₹${i.tiers[i.selected].rate}`, amt:i.qty*i.tiers[i.selected].rate, on:i.on})),
+      {name:civilPaint.name, detail:`${civilPaint.area} sq.ft. × ₹${civilPaint.rate}`, amt:civilPaint.area*civilPaint.rate, on:civilPaint.on},
+      {name:civilMould.name, detail:`${Math.ceil(civilMould.rft/civilMould.pieceLen)} pcs of ${civilMould.pieceLen} ft × ₹${civilMould.pieceRate}`, amt:Math.ceil(civilMould.rft/civilMould.pieceLen)*civilMould.pieceRate, on:civilMould.on},
+      {name:civilElecInstall.name, detail:"Lumpsum", amt:civilElecInstall.amt, on:civilElecInstall.on},
+      ...[...new Set(elecOrder.map(i=>i.g))].map(g=>({name:"Electrical material — "+g, detail:elecOrder.filter(i=>i.g===g).length+" line items (see Civil Work tab)", amt:elecOrder.filter(i=>i.g===g).reduce((s,i)=>s+i.qty*i.rate,0), on:true})),
     ]},
-    {title:"E. Painting", items:[
-      {name:`Asian Paints ${paintLine.selected}`, detail:`${paintLine.qty} L × ${fmt(paintOptions[paintLine.selected].rate)}`, amt:paintLine.qty*paintOptions[paintLine.selected].rate, on:true},
-      ...paintFixed.map(i=>({name:i.name, detail:`${i.qty} ${i.unit} × ${fmt(i.rate)}`, amt:i.qty*i.rate, on:i.on})),
-    ]},
-    {title:"F. Door Hardware", items:[
+    {title:"D. Door Hardware", items:[
       ...doorHardwareItems.map(i=>({name:i.name, detail:`${i.selected} · ${i.qty} × ${fmt(i.brands[i.selected].rate)}`, amt:i.qty*i.brands[i.selected].rate, on:true})),
       {name:doorRefurbish.name, detail:`${doorRefurbish.qty} sq.ft. × ${fmt(doorRefurbish.rate)}`, amt:doorRefurbish.qty*doorRefurbish.rate, on:doorRefurbish.on},
     ]},
@@ -923,6 +1038,7 @@ function renderCostSheet(){
       <button class="cta ghost" onclick="resetAll()">Reset to defaults</button>
     </div>
     <p class="foot-note">
+      Full scope is included at the Essential specification. Loose furniture is priced at the most economical ready-made options found online (Wakefit, Urban Ladder, Pepperfry, September 2026 listing prices, free delivery); online prices change often — confirm at purchase. Side table and pouffe are budget allowances.<br>
       Excludes GST, transportation, countertop/backsplash/sink vendor items already itemised above, mattresses, loose decor, appliances, glass &amp; mirror work, and civil/structural/plumbing work.
       Rates are 2026 Delhi NCR indicative market rates — confirm exact SKU and dealer price before ordering. Warranty periods shown are typical manufacturer terms and should be confirmed against the specific product at purchase.
     </p>
@@ -962,18 +1078,19 @@ function goTo(id){
   document.querySelectorAll('section.panel').forEach(p=> p.classList.toggle('active', p.id === 'panel-'+id));
   window.scrollTo({top:0, behavior:'instant'});
 }
-function restoreTab(){ goTo(currentTab); }
+function restoreTab(){ const y=window.scrollY; goTo(currentTab); window.scrollTo(0,y); }
 
 function resetAll(){
   if(!confirm('Reset all selections to the recommended defaults?')) return;
-  woodworkItems.forEach(i=>{i.on=true; i.selected='Essential';});
-  furnitureItems.forEach(i=>{i.on=true; i.selected='Essential';});
+  woodworkItems.forEach(i=>{i.on=true; i.selected=i.def;});
+  furnitureItems.forEach(i=>{i.on=true; i.selected=i.def;});
   ceilingItems.forEach(i=>{i.on = !i.optional; i.selected='Standard';});
-  lightingItems.forEach(i=>i.selected='Wipro');
+  civilPaint.on=true; civilMould.on=true; civilElecInstall.on=true;
+  lightingItems.forEach(i=>i.selected=i.def);
   electricalExecution.on = true;
   paintLine.selected = 'Royale Matt Luxury Emulsion';
   paintFixed.forEach(i=>i.on=true);
-  doorHardwareItems.forEach(i=>i.selected='Dorset');
+  doorHardwareItems.forEach(i=>i.selected='Godrej');
   doorRefurbish.on = true;
   renderMain(); restoreTab();
 }
