@@ -68,7 +68,8 @@
     "Reading Material BOQs: Delhi NCR Home Design Guide and Cost Planning",
     "Step‑by‑Step Guide from a Home Interior Designer Vasant Kunj",
     "How to Choose a Restaurant Interior Designer in South Delhi",
-    "The Real Cost of Turnkey Interior Design Delhi: A Budget Guide"
+    "The Real Cost of Turnkey Interior Design Delhi: A Budget Guide",
+    "Avoid Costly Mistakes in Home Renovation Cost South Delhi"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -139,7 +140,8 @@
     "reading-material-boq-guide",
     "step-by-step-vasant-kunj-interior",
     "choose-restaurant-designer-south-delhi",
-    "turnkey-interior-cost-guide-delhi"
+    "turnkey-interior-cost-guide-delhi",
+    "avoid-renovation-mistakes-south-delhi"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -210,7 +212,8 @@
     "how to read an interior design BOQ",
     "home interior designer Vasant Kunj",
     "restaurant interior designer South Delhi",
-    "turnkey interior design Delhi"
+    "turnkey interior design Delhi",
+    "home renovation cost South Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -281,10 +284,10 @@
     "The article explains how to read an interior design BOQ while comparing material options to help clients make informed choices.",
     "The article outlines a practical, step‑by‑step process that indéva studio uses to deliver luxury interiors in Vasant Kunj, Delhi.",
     "A practical, numbered roadmap helps first‑time clients select a restaurant interior designer in South Delhi without common pitfalls.",
-    "The article breaks down true cost drivers, room‑wise budgets, negotiation tactics, and warning signs to help homeowners plan a ₹25–50 lakh turnkey project."
+    "The article breaks down true cost drivers, room‑wise budgets, negotiation tactics, and warning signs to help homeowners plan a ₹25–50 lakh turnkey project.",
+    "The article warns against typical budgeting blunders in South Delhi home renovations and offers precise corrective steps."
   ],
   "lastAngles": [
-    "cost-guide",
     "material-comparison",
     "cost-guide",
     "mistakes-avoid",
@@ -323,7 +326,8 @@
     "material-comparison",
     "step-by-step",
     "step-by-step",
-    "cost-guide"
+    "cost-guide",
+    "mistakes-avoid"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -394,7 +398,8 @@
     "interior-boq-guide",
     "locality-vasant-kunj",
     "south-delhi-commercial-interior-designer",
-    "turnkey-interior-execution-delhi-ncr"
+    "turnkey-interior-execution-delhi-ncr",
+    "south-delhi-interior-cost-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -465,7 +470,8 @@
     "/#services",
     "/delhi",
     "/delhi",
-    "/#about"
+    "/#about",
+    "/delhi"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -536,6 +542,7 @@
     "BLOG",
     "LOCATION_PAGE",
     "SERVICE_PAGE",
+    "BLOG",
     "BLOG"
   ],
   "searchIntents": [
@@ -607,6 +614,7 @@
     "technical",
     "commercial",
     "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
@@ -628,7 +636,7 @@
     "locality-greater-kailash": "2026-09-08",
     "gurgaon-farmhouse-interior-designer": "2026-09-23",
     "laminate-veneer-comparison-guide": "2026-09-08",
-    "south-delhi-interior-cost-guide": "2026-09-08",
+    "south-delhi-interior-cost-guide": "2026-09-29",
     "locality-sohna-road": "2026-09-14",
     "turnkey-interior-execution-delhi-ncr": "2026-09-29",
     "locality-dlf-gurgaon": "2026-09-10",
@@ -651,7 +659,6 @@
     "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "DLF Gurgaon",
     "Delhi NCR",
     "South Delhi",
     "Defence Colony",
@@ -690,6 +697,7 @@
     "Delhi NCR",
     "Vasant Kunj",
     "South Delhi",
-    "Delhi NCR"
+    "Delhi NCR",
+    "South Delhi"
   ]
 }
