@@ -308,7 +308,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Nitin Jain — 4 BHK Residence Renovation</h1>
-  <p>Revision 1 — every item with its actual materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Revision 2 — every item with its actual materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -402,11 +402,11 @@ const SECTIONS = [
        }},
       {id:"cfabric", room:"6 openings", name:"Curtain fabric — blackout + sheer, stitched", unit:"openings", qty:6, rate:14000, on:true, src:"Allowance",
        spec:"Blackout curtain with lining + sheer, ripple-fold stitched, avg. opening 8 ft wide × 9 ft drop. Fabric from the standard range (D'Decor / Sarom); final per selection."},
-      {id:"pelmet", room:"6 openings", name:"Curtain pelmets in POP", unit:"rft", qty:60, rate:400, on:true,
-       spec:"POP curtain pelmet for concealed tracks, approx. 10 rft per opening. Rate as per Indéva master BOQ."},
+      {id:"pelmet", room:"6 openings", name:"Curtain pelmets in POP", unit:"rft", qty:60, rate:400, on:false, src:"Rev 2 · covered by false ceiling", discount:true,
+       spec:"POP curtain pelmet for concealed tracks, approx. 10 rft per opening. Rate as per Indéva master BOQ. Revision 2: switched off by default, since all 6 openings sit in rooms getting the gypsum false ceiling, whose rate already includes the pelmet / pocket detail. Switch on if a separate pelmet is wanted."},
     ]},
     {note:"Paint — extra coat, if required", items:[
-      {id:"paint", room:"Whole Apartment", name:"Paint — extra coat", unit:"sq.ft.", qty:3500, on:true, selected:"Premium",
+      {id:"paint", room:"Whole Apartment", name:"Paint — extra coat", unit:"sq.ft.", qty:3500, on:true, selected:"Standard", src:"Rev 2 · master BOQ value option", discount:true,
        options:{
         Premium:{rate:45, spec:"Asian Paints Royale / Dulux Velvet Touch / Berger Silk plastic emulsion, roller finish, with surface preparation. Area = 1,250 sq.ft. × 2.8 = 3,500 sq.ft. Rate as per Indéva master BOQ."},
         Standard:{rate:30, spec:"Berger Rangoli acrylic emulsion, roller finish, with surface preparation. Same area. Rate as per Indéva master BOQ."}
@@ -441,7 +441,7 @@ const SECTIONS = [
         Premium:{rate:95000, spec:"8-seater, sintered-stone / marble top on solid-wood or powder-coated metal base, 8 upholstered chairs."},
         Standard:{rate:60000, spec:"6-seater, veneer top on solid-wood base, 6 upholstered chairs."}
        }},
-      {id:"crockery", room:"Dining", name:"Crockery + storage unit (6 ft × 7 ft)", unit:"sq.ft.", qty:42, on:true, selected:"Premium",
+      {id:"crockery", room:"Dining", name:"Crockery + storage unit (6 ft × 7 ft)", unit:"sq.ft.", qty:42, on:true, selected:"Standard", src:"Rev 2 · master BOQ rate", discount:true,
        options:{
         Premium:{rate:1620, spec:"18mm HDHMR carcass, 0.8mm inner laminate, 2mm Rehau edge banding. Base storage in 1mm laminate / acrylic, upper display with fluted-glass shutters in aluminium profile, Philips LED profile, Hettich Sensys hinges and Quadro drawers."},
         Standard:{rate:1400, spec:"16.75mm pre-laminated HDHMR carcass, HDF shutters with 1mm laminate, clear-glass display shutters, Ozone hardware. Rate as per Indéva master BOQ."}
@@ -628,7 +628,7 @@ const SECTIONS = [
        spec:"Outdoor lounge set (2-seater + 2 chairs + coffee table), weatherproof, with planters."},
     ]},
     {note:"Entry", items:[
-      {id:"shoe", room:"Outside, in front of lift", name:"Shoe storage (4 ft × 6 ft)", unit:"sq.ft.", qty:24, on:true, selected:"Premium",
+      {id:"shoe", room:"Outside, in front of lift", name:"Shoe storage (4 ft × 6 ft)", unit:"sq.ft.", qty:24, on:true, selected:"Standard", src:"Rev 2 · master BOQ rate", discount:true,
        options:{
         Premium:{rate:1620, spec:"18mm HDHMR carcass, tilt-out shoe racks, 1mm laminate / acrylic shutters, ventilation grooves, seat ledge, Hettich hardware."},
         Standard:{rate:1400, spec:"16.75mm pre-laminated HDHMR, HDF laminate shutters, fixed slanted shelves, Ozone hardware. Rate as per Indéva master BOQ."}
@@ -674,7 +674,7 @@ function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec;
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
 function grandTotal(){ return SECTIONS.reduce((t,s)=>t+secTotal(s),0); }
 
-const STORAGE_KEY = 'nitinJainCostBuilder_v2';
+const STORAGE_KEY = 'nitinJainCostBuilder_v3';
 function saveState(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on,selected:i.selected}])))); }catch(e){}
 }
@@ -769,7 +769,7 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
-    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mr. Nitin Jain · 4 BHK · Revision 1</div></div><div class="value">${fmt(grandTotal())}</div></div>
+    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mr. Nitin Jain · 4 BHK · Revision 2</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
     <p class="foot-note">Excludes GST, transportation, kitchen work, wardrobes (new, extra and sectioning), all appliances (including the second fridge), mattresses, switch plates, MCBs and light fixtures other than the Philips lighting and chandelier listed, and civil or structural work beyond the scope listed. Civil, ceiling, paint, tiling, plumbing, electrical and demolition rates follow the Indéva master BOQ (labour + material). Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site measurement. Hettich rates are current online MRP.</p>
   </section>`;
