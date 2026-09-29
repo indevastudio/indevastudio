@@ -308,7 +308,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Deepanshi — 3 BHK Residence Renovation</h1>
-  <p>Revision 3 — every item with its actual materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Revision 4 — every item with its actual materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -394,7 +394,7 @@ const SECTIONS = [
       {id:"tv", room:"Living Room", name:"TV Unit + Wall Paneling", unit:"lumpsum", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:150000, spec:"Ceiling-height storage on both sides of the TV. "+STD.carcass+" Shutters: 1.2mm acrylic (Rehau / Merino Luxe) on 18mm HDHMR, ABS edge. TV back panel in fluted laminate, wall-hung console with 2 drawers ("+STD.channels+"), "+STD.hinges+", Philips LED profile lighting."},
-        Standard:{rate:90000, spec:"Basic storage with console. "+STD.carcass+" Finish: 1mm laminate (Merino / Greenlam). TV back panel in laminate, wall-hung console with 2 drawers ("+STD.channels+") and 2 shutters ("+STD.hinges+")."}
+        Standard:{rate:75000, spec:"Rate as per Indéva master BOQ (drawing room TV unit), Revision 4. Basic storage with console. "+STD.carcass+" Finish: 1mm laminate (Merino / Greenlam). TV back panel in laminate, wall-hung console with 2 drawers ("+STD.channels+") and 2 shutters ("+STD.hinges+")."}
        }},
     ]},
   ]
@@ -445,16 +445,16 @@ const SECTIONS = [
        }},
     ]},
     {note:"Hardware — Hettich, standard quantity for the configuration above", items:[
-      {id:"hw_hinge", room:"All shutters (19 shutters)", name:"Hettich Sensys 8645i soft-close hinges", unit:"pair", qty:19, rate:882, on:true,
-       spec:"Sensys 8645i, 110°, for 15–24mm doors, with mounting plate. Rate: Hettich India online MRP ₹882 per pair.", src:"Hettich MRP"},
-      {id:"hw_cutlery", room:"Drawer stack", name:"Hettich InnoTech Atira drawer — cutlery", unit:"set", qty:1, rate:5904, on:true,
-       spec:"InnoTech Atira 70mm drawer set with Quadro full-extension soft-close runners. Rate: Hettich India online MRP ₹5,904.", src:"Hettich MRP"},
-      {id:"hw_cutins", room:"Drawer stack", name:"Hettich Atira cutlery organiser insert", unit:"No.", qty:1, rate:2820, on:true,
-       spec:"Internal cutlery organiser for the Atira drawer. Rate from Hettich India online internal-organiser range; exact size to be confirmed on drawing.", src:"Hettich MRP · size to confirm"},
-      {id:"hw_potpan", room:"Drawer stack", name:"Hettich InnoTech Atira pot & pan drawers", unit:"set", qty:2, rate:7104, on:true,
-       spec:"InnoTech Atira pot & pan drawer, 144mm with railing, Quadro full-extension soft-close. Rate: Hettich India online MRP ₹7,104 each.", src:"Hettich MRP"},
-      {id:"hw_bottle", room:"Base unit", name:"Hettich bottle / oil pull-out (200mm)", unit:"No.", qty:1, rate:4331, on:true,
-       spec:"Bottle pull-out for 200mm cabinet with full-extension ball-bearing runners. Rate: Hettich India online MRP ₹4,331.", src:"Hettich MRP"},
+      {id:"hw_hinge", room:"All shutters (19 shutters)", name:"Hettich soft-close hinges", unit:"pair", qty:19, rate:460, on:true,
+       spec:"Hettich soft-close concealed hinges with mounting plate. Rev 4: Indéva vendor rate ₹460 per pair (was Hettich Sensys at online MRP ₹882). Sensys can be quoted on request.", src:"Rev 4 · Indéva vendor rate"},
+      {id:"hw_cutlery", room:"Drawer stack", name:"Hettich InnoTech drawer — cutlery", unit:"set", qty:1, rate:4250, on:true,
+       spec:"Hettich InnoTech drawer set with full-extension soft-close runners. Rev 4: Indéva vendor rate ₹4,250 (was online MRP ₹5,904).", src:"Rev 4 · Indéva vendor rate"},
+      {id:"hw_cutins", room:"Drawer stack", name:"Cutlery organiser insert (Ebco PVC)", unit:"No.", qty:1, rate:1950, on:true,
+       spec:"Ebco PVC cutlery organiser for the cutlery drawer. Rev 4: Indéva vendor rate ₹1,950 (was Hettich insert at ₹2,820); exact size to be confirmed on drawing.", src:"Rev 4 · vendor rate · size to confirm"},
+      {id:"hw_potpan", room:"Drawer stack", name:"Hettich pot & pan drawers", unit:"set", qty:2, rate:4650, on:true,
+       spec:"Hettich pot & pan drawer with full-extension soft-close runners. Rev 4: Indéva vendor rate ₹4,650 each (was online MRP ₹7,104).", src:"Rev 4 · Indéva vendor rate"},
+      {id:"hw_bottle", room:"Base unit", name:"Bottle / oil pull-out (Ebco / Peacock wire)", unit:"No.", qty:1, rate:3580, on:true,
+       spec:"Wire bottle pull-out with full-extension runners. Rev 4: Indéva vendor rate ₹3,580 (was Hettich at online MRP ₹4,331).", src:"Rev 4 · Indéva vendor rate"},
       {id:"hw_larder", room:"Tall pantry unit", name:"Hettich Cargo Larder — 450mm, 6-tier", unit:"set", qty:1, rate:48655, on:true,
        spec:"Cargo Larder soft-close pull-out pantry for 450mm carcass, 6 baskets, 120 kg capacity. Hettich India's online store did not list a price; rate taken from an authorised Hettich dealer listing.", src:"Dealer rate · to confirm"},
       {id:"hw_gtpt", room:"Base unit", name:"GTPT basket (glass, thali, plate, tumbler)", unit:"No.", qty:1, rate:6500, on:true,
@@ -480,14 +480,14 @@ const SECTIONS = [
   intro:"Each of the two bedrooms gets a wardrobe, a pair of bedside tables, a bed, one combined TV-cum-dresser wall unit and a bed-back wall design. The separate Dressing Unit in the earlier estimate duplicated the dresser already built into the TV panel, so it has been removed.",
   hero:["wardrobe1","bedroom1","bedroom2"],
   groups: ["Master Bedroom","Bedroom 2"].map((room,ri)=>({note:room, items:[
-      {id:"ward"+ri, room:room, name:"Wardrobe (7 ft wide × 10 ft high)", unit:"sq.ft.", qty:70, on:true, selected:"Premium",
+      {id:"ward"+ri, room:room, name:"Wardrobe (7 ft wide × 10 ft high)", unit:"sq.ft.", qty:70, on:true, selected:"Standard", src:"Rev 4 · master BOQ rate",
        options:{
         Premium:{rate:1620, spec:STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam), both faces. "+STD.hinges+", Hettich 3-point lock, SS oval wardrobe tube, internal drawers on "+STD.channels+", handles up to ₹500 each."},
         Standard:{rate:1400, spec:"Carcass: 16.75mm pre-laminated HDHMR (Action TESA / Greenpanel). Shutters: HDF with 1mm high-gloss / matt laminate (Merino / Greenlam). Ozone soft-close hinges and channels, SS wardrobe tube, standard handles. Rate as per Indéva master BOQ."}
        }},
-      {id:"tvdress"+ri, room:room, name:"TV-cum-Dresser Wall Unit (35 sq.ft.)", unit:"sq.ft.", qty:35, on:true, selected:"Premium",
+      {id:"tvdress"+ri, room:room, name:"TV-cum-Dresser Wall Unit (35 sq.ft.)", unit:"sq.ft.", qty:35, on:true, selected:"Premium", src:"Rev 4 · master BOQ rate",
        options:{
-        Premium:{rate:1620, spec:"One combined wall unit facing the bed: TV back panel + dresser mirror (5mm Saint-Gobain mirror) + 4 ft floating console with 2 drawers. "+STD.carcass+" Finish: 1mm laminate / veneer-look laminate (Merino / Greenlam), "+STD.channels+", Philips LED accent strip."},
+        Premium:{rate:1400, spec:"Rev 4: rate as per Indéva master BOQ (modular woodwork ₹1,400/sq.ft.). One combined wall unit facing the bed: TV back panel + dresser mirror (5mm Saint-Gobain mirror) + 4 ft floating console with 2 drawers. "+STD.carcass+" Finish: 1mm laminate / veneer-look laminate (Merino / Greenlam), "+STD.channels+", Philips LED accent strip."},
         Standard:{rate:1150, spec:"Same combined unit (TV panel + dresser mirror + console with 2 drawers). "+STD.carcassStd+" Finish: 0.8mm laminate, Hettich telescopic channels, no LED accent."}
        }},
       {id:"bedside"+ri, room:room, name:"Bedside Tables (pair)", unit:"set", qty:1, on:true, selected:"Premium",
@@ -577,8 +577,8 @@ const SECTIONS = [
        spec:"Fibreglass mosquito mesh, 1 roll of 10 ft × 12.5 ft (approx. 120 sq.ft.) at ₹500. Mesh material only; frames and fixing to be confirmed. Other mesh types are quoted on selection."},
     ]},
     {note:"Services", items:[
-      {id:"paint", room:"Whole Apartment", name:"Paint Work", unit:"sq.ft.", qty:2520, rate:45, on:true,
-       spec:"Paintable area = 900 sq.ft. × 2.8 = 2,520 sq.ft. Asian Paints Royale (or Dulux Velvet Touch / Berger Silk) plastic emulsion, 2 coats, over 2 coats of putty and primer."},
+      {id:"paint", room:"Whole Apartment", name:"Paint Work", unit:"sq.ft.", qty:2520, rate:30, on:true, src:"Rev 4 · master BOQ rate",
+       spec:"Paintable area = 900 sq.ft. × 2.8 = 2,520 sq.ft. Berger Rangoli acrylic emulsion, roller finish, 2 coats, over putty and primer. Rate as per Indéva master BOQ (₹30/sq.ft.). Asian Paints Royale is ₹45/sq.ft. if preferred."},
       {id:"elec", room:"Whole Apartment", name:"Electrical Work (existing conduits)", unit:"sq.ft.", qty:900, rate:100, on:true,
        spec:"New points, relocation of existing points and use of existing conduits and wiring: internal chiselling, AKG PVC conduits, boxing, Finolex / Polycab / KEI wires, and labour for fitting lights, exhaust fans, switches and MCBs. 900 sq.ft. apartment area × ₹100/sq.ft. (Indéva master BOQ). Switches, fixtures, MCBs and DB box are excluded."},
       {id:"plumb", room:"2 Bathrooms", name:"Plumbing Work (existing points only)", unit:"bathrooms", qty:2, rate:12000, on:true,
@@ -636,7 +636,7 @@ function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec;
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
 function grandTotal(){ return SECTIONS.reduce((t,s)=>t+secTotal(s),0); }
 
-const STORAGE_KEY = 'deepanshiCostBuilder_rev3c';
+const STORAGE_KEY = 'deepanshiCostBuilder_rev4';
 function saveState(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on,selected:i.selected}])))); }catch(e){}
 }
@@ -704,9 +704,14 @@ function renderSection(s){
 }
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
-    <div class="panel-head"><h2>Project Overview — Revision 3</h2>
+    <div class="panel-head"><h2>Project Overview — Revision 4</h2>
       <p>Mrs. Deepanshi · Signature Global City 37D2 · 3 BHK + Puja. Every line now states the actual material, board, finish and hardware brand. <b>Premium</b> is the higher specification and <b>Standard</b> the value specification; kitchen and vanities are priced by finish (Laminate / Acrylic / PU).</p></div>
     <div class="floorplan-wrap"><img src="${REF_IMAGES.floorplan.src}" onclick="openLightbox('floorplan')" alt="Floor plan"><div class="cap">${REF_IMAGES.floorplan.cap}</div></div>
+    <div class="item"><div class="item-title">What changed in Revision 4 — cost reduction</div><div class="item-spec" style="margin-bottom:0">
+      1. Living room TV unit (Standard) at the Indéva master BOQ rate of ₹75,000.<br>
+      2. Wardrobes default to the master BOQ modular rate (₹1,400/sq.ft.); TV-cum-Dresser units revised to ₹1,400/sq.ft.<br>
+      3. Paint at the master BOQ rate (Berger Rangoli, ₹30/sq.ft.).<br>
+      4. Kitchen hardware re-priced at Indéva vendor rates (hinges, cutlery drawer and insert, pot &amp; pan drawers, bottle pull-out).</div></div>
     <div class="item"><div class="item-title">What changed in Revision 3</div><div class="item-spec" style="margin-bottom:0">
       1. Material specifications and brands added to every item (carcass board, shutter finish, hardware, tiles, sanitaryware).<br>
       2. Kitchen broken down unit by unit (see Kitchen tab) with a Hettich hardware schedule; cabinetry priced at ₹1,400 (laminate) / ₹1,800 (acrylic) / ₹2,200 (PU) per sq.ft., hardware extra.<br>
@@ -732,7 +737,7 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
-    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mrs. Deepanshi · Signature Global City 37D2 · Revision 3</div></div><div class="value">${fmt(grandTotal())}</div></div>
+    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mrs. Deepanshi · Signature Global City 37D2 · Revision 4</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
     <p class="foot-note">Excludes GST, transportation, mattresses, loose decor, appliances (other than the double-door fridge provision), switches, MCBs, DB box and light fixtures other than the Philips cove and spotlights listed, and civil/structural work beyond the scope listed. Rates marked "to confirm" (Hettich Cargo Larder, GTPT basket, wicker baskets, tambour shutter, handles) are dealer or market rates and will be fixed on the final hardware quote. Hettich and Jaquar rates are current online MRP. Civil, ceiling, paint and demolition rates follow the Indéva master BOQ (labour + material). Quantities for wall designs and lighting are estimates and will be confirmed on site measurement.</p>
   </section>`;
