@@ -67,7 +67,8 @@
     "How Much Does a 3 BHK Interior Redesign Really Cost in South Delhi?",
     "Reading Material BOQs: Delhi NCR Home Design Guide and Cost Planning",
     "Step‑by‑Step Guide from a Home Interior Designer Vasant Kunj",
-    "How to Choose a Restaurant Interior Designer in South Delhi"
+    "How to Choose a Restaurant Interior Designer in South Delhi",
+    "The Real Cost of Turnkey Interior Design Delhi: A Budget Guide"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -137,7 +138,8 @@
     "cost-guide-3bhk-south-delhi",
     "reading-material-boq-guide",
     "step-by-step-vasant-kunj-interior",
-    "choose-restaurant-designer-south-delhi"
+    "choose-restaurant-designer-south-delhi",
+    "turnkey-interior-cost-guide-delhi"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -207,7 +209,8 @@
     "3 BHK interior designer South Delhi",
     "how to read an interior design BOQ",
     "home interior designer Vasant Kunj",
-    "restaurant interior designer South Delhi"
+    "restaurant interior designer South Delhi",
+    "turnkey interior design Delhi"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -277,10 +280,10 @@
     "The article breaks down every cost factor for a 3 BHK interior project in South Delhi, offering a realistic budget range, negotiation advice, and red‑flag detection.",
     "The article explains how to read an interior design BOQ while comparing material options to help clients make informed choices.",
     "The article outlines a practical, step‑by‑step process that indéva studio uses to deliver luxury interiors in Vasant Kunj, Delhi.",
-    "A practical, numbered roadmap helps first‑time clients select a restaurant interior designer in South Delhi without common pitfalls."
+    "A practical, numbered roadmap helps first‑time clients select a restaurant interior designer in South Delhi without common pitfalls.",
+    "The article breaks down true cost drivers, room‑wise budgets, negotiation tactics, and warning signs to help homeowners plan a ₹25–50 lakh turnkey project."
   ],
   "lastAngles": [
-    "step-by-step",
     "cost-guide",
     "material-comparison",
     "cost-guide",
@@ -319,7 +322,8 @@
     "cost-guide",
     "material-comparison",
     "step-by-step",
-    "step-by-step"
+    "step-by-step",
+    "cost-guide"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -389,7 +393,8 @@
     "south-delhi-bhk-interior-designer",
     "interior-boq-guide",
     "locality-vasant-kunj",
-    "south-delhi-commercial-interior-designer"
+    "south-delhi-commercial-interior-designer",
+    "turnkey-interior-execution-delhi-ncr"
   ],
   "targetUrls": [
     "/delhi",
@@ -459,7 +464,8 @@
     "/delhi",
     "/#services",
     "/delhi",
-    "/delhi"
+    "/delhi",
+    "/#about"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -529,7 +535,8 @@
     "SERVICE_PAGE",
     "BLOG",
     "LOCATION_PAGE",
-    "SERVICE_PAGE"
+    "SERVICE_PAGE",
+    "BLOG"
   ],
   "searchIntents": [
     "commercial",
@@ -599,6 +606,7 @@
     "commercial",
     "technical",
     "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
@@ -622,7 +630,7 @@
     "laminate-veneer-comparison-guide": "2026-09-08",
     "south-delhi-interior-cost-guide": "2026-09-08",
     "locality-sohna-road": "2026-09-14",
-    "turnkey-interior-execution-delhi-ncr": "2026-09-15",
+    "turnkey-interior-execution-delhi-ncr": "2026-09-29",
     "locality-dlf-gurgaon": "2026-09-10",
     "custom-furniture-delhi-ncr": "2026-09-23",
     "kitchen-material-cost-guide": "2026-09-09",
@@ -643,7 +651,6 @@
     "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "South Delhi",
     "DLF Gurgaon",
     "Delhi NCR",
     "South Delhi",
@@ -682,6 +689,7 @@
     "South Delhi",
     "Delhi NCR",
     "Vasant Kunj",
-    "South Delhi"
+    "South Delhi",
+    "Delhi NCR"
   ]
 }
