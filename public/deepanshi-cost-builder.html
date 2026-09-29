@@ -376,7 +376,7 @@ const SECTIONS = [
   hero:["tvwall1","tvwall2"],
   groups:[
     {note:null, items:[
-      {id:"mandir", room:"Mandir Area", name:"Puja Unit (new mandir)", unit:"No.", qty:1, on:true, selected:"Premium",
+      {id:"mandir", room:"Mandir Area", name:"Puja Unit (new mandir)", unit:"No.", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:40580, spec:STD.carcass+" Top: white Makrana marble slab. Shutters: 1mm laminate (Merino / Greenlam) with brass-finish handles. "+STD.hinges+". Concealed LED strip provision (Philips)."},
         Standard:{rate:27050, spec:STD.carcassStd+" Top and shutters in 1mm laminate (Merino / Greenlam), no marble top, standard SS handles, "+STD.hinges+"."}
@@ -422,7 +422,7 @@ const SECTIONS = [
        }},
     ]},
     {note:"Bathrooms — floor and wall tiles in all 3 bathrooms", items:[
-      {id:"bathtile", room:"All 3 Bathrooms", name:"Wall & Floor Tiling (incl. waterproofing)", unit:"sq.ft.", qty:570, on:true, selected:"Premium",
+      {id:"bathtile", room:"All 3 Bathrooms", name:"Wall & Floor Tiling (incl. waterproofing)", unit:"sq.ft.", qty:570, on:true, selected:"Standard",
        options:{
         Premium:{rate:160, spec:"Kajaria / Somany glazed vitrified tiles (tile cost up to ₹60/sq.ft. within this rate), floor and walls up to false-ceiling height. Waterproofing: Dr. Fixit Pidifin 2K on floor + 1 ft up the walls. Epoxy grout."},
         Standard:{rate:130, spec:"Kajaria / Somany ceramic tiles (tile cost up to ₹60/sq.ft. within this rate), same coverage. Waterproofing: Dr. Fixit Pidifin 2K. Cementitious grout."}
@@ -467,7 +467,7 @@ const SECTIONS = [
        spec:"Aluminium G-profile handles for base units and SS bar handles for wall units, loft and tall units. Allowance; final as per selection.", src:"Allowance"},
     ]},
     {note:"Countertop", items:[
-      {id:"granite", room:"Kitchen", name:"Granite Countertop (no backsplash tiles — per brief)", unit:"sq.ft.", qty:35, on:true, selected:"Premium",
+      {id:"granite", room:"Kitchen", name:"Granite Countertop (no backsplash tiles — per brief)", unit:"sq.ft.", qty:35, on:true, selected:"Standard",
        options:{
         Premium:{rate:200, spec:"Black Galaxy granite, 18–20mm, polished, edge moulding and sink cut-out included. No chimney, no hob, no backsplash tiles — per brief."},
         Standard:{rate:140, spec:"Rajasthan Black / Steel Grey granite, 18mm, polished, edge moulding and sink cut-out included. Same coverage."}
@@ -485,17 +485,17 @@ const SECTIONS = [
         Premium:{rate:1620, spec:STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam), both faces. "+STD.hinges+", Hettich 3-point lock, SS oval wardrobe tube, internal drawers on "+STD.channels+", handles up to ₹500 each."},
         Standard:{rate:1400, spec:"Carcass: 16.75mm pre-laminated HDHMR (Action TESA / Greenpanel). Shutters: HDF with 1mm high-gloss / matt laminate (Merino / Greenlam). Ozone soft-close hinges and channels, SS wardrobe tube, standard handles. Rate as per Indéva master BOQ."}
        }},
-      {id:"tvdress"+ri, room:room, name:"TV-cum-Dresser Wall Unit (35 sq.ft.)", unit:"sq.ft.", qty:35, on:true, selected:"Premium", src:"Rev 4 · master BOQ rate",
+      {id:"tvdress"+ri, room:room, name:"TV-cum-Dresser Wall Unit (35 sq.ft.)", unit:"sq.ft.", qty:35, on:true, selected:"Standard", src:"Rev 4 · master BOQ rate",
        options:{
         Premium:{rate:1400, spec:"Rev 4: rate as per Indéva master BOQ (modular woodwork ₹1,400/sq.ft.). One combined wall unit facing the bed: TV back panel + dresser mirror (5mm Saint-Gobain mirror) + 4 ft floating console with 2 drawers. "+STD.carcass+" Finish: 1mm laminate / veneer-look laminate (Merino / Greenlam), "+STD.channels+", Philips LED accent strip."},
         Standard:{rate:1150, spec:"Same combined unit (TV panel + dresser mirror + console with 2 drawers). "+STD.carcassStd+" Finish: 0.8mm laminate, Hettich telescopic channels, no LED accent."}
        }},
-      {id:"bedside"+ri, room:room, name:"Bedside Tables (pair)", unit:"set", qty:1, on:true, selected:"Premium",
+      {id:"bedside"+ri, room:room, name:"Bedside Tables (pair)", unit:"set", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:10820, spec:"Two units, approx. 18\"W × 16\"D. 18mm HDHMR in matt PU paint finish, 1 drawer each on "+STD.channels+"."},
         Standard:{rate:6760, spec:"Two units, approx. 18\"W × 16\"D. 18mm HDHMR with 1mm laminate (Merino / Greenlam), 1 drawer each on Hettich telescopic channels."}
        }},
-      {id:"bed"+ri, room:room, name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Premium",
+      {id:"bed"+ri, room:room, name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:40580, spec:"Frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. Mattress excluded."},
         Standard:{rate:27050, spec:"Frame in 18mm HDHMR, box storage with top-opening flaps (no hydraulic), plain upholstered headboard, fabric from the standard range. Mattress excluded."}
@@ -544,12 +544,12 @@ const SECTIONS = [
   hero:["sofa1","sofa2","sofa3"],
   groups:[
     {note:null, items:[
-      {id:"sofa", room:"Living Room", name:"Sofa (3-seater, fabric)", unit:"No.", qty:1, on:true, selected:"Premium",
+      {id:"sofa", room:"Living Room", name:"Sofa (3-seater, fabric)", unit:"No.", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:64920, spec:"Kiln-dried hardwood frame, 40-density HR foam with fibre wrap, no-sag springs, fabric from the standard range (D'Decor / Sarom), modern minimalist silhouette."},
         Standard:{rate:43280, spec:"Engineered-wood frame, 32-density foam, fabric from the standard range. Same footprint."}
        }},
-      {id:"coffee", room:"Living Room", name:"Coffee Table", unit:"No.", qty:1, on:true, selected:"Premium",
+      {id:"coffee", room:"Living Room", name:"Coffee Table", unit:"No.", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:16230, spec:"Marble / sintered-stone top on powder-coated MS frame."},
         Standard:{rate:10140, spec:"Laminate top on 18mm HDHMR, powder-coated MS frame. Same footprint."}
@@ -568,7 +568,7 @@ const SECTIONS = [
   hero:[],
   groups:[
     {note:"Doors & openings", items:[
-      {id:"doors", room:"All 7 doors", name:"Door polishing — both sides", unit:"doors", qty:7, on:true, selected:"Premium",
+      {id:"doors", room:"All 7 doors", name:"Door polishing — both sides", unit:"doors", qty:7, on:true, selected:"Standard",
        options:{
         Premium:{rate:9240, spec:"Sirca PU finish on both faces: sanding, sealer, 2K PU top coat (matt / satin). Approx. 42 sq.ft. per door (3 ft × 7 ft × 2 faces) at ₹220/sq.ft. (Indéva master BOQ). Add ½ rft for carvings or mouldings."},
         Standard:{rate:4200, spec:"Melamine polish on both faces (approx. 42 sq.ft. per door at ₹100/sq.ft., Indéva item master)."}
@@ -636,7 +636,7 @@ function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec;
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
 function grandTotal(){ return SECTIONS.reduce((t,s)=>t+secTotal(s),0); }
 
-const STORAGE_KEY = 'deepanshiCostBuilder_rev4';
+const STORAGE_KEY = 'deepanshiCostBuilder_rev4s';
 function saveState(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on,selected:i.selected}])))); }catch(e){}
 }
@@ -739,7 +739,7 @@ function panelCostSheet(){
     ${rows}
     <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mrs. Deepanshi · Signature Global City 37D2 · Revision 4</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
-    <p class="foot-note">Excludes GST, transportation, mattresses, loose decor, appliances (other than the double-door fridge provision), switches, MCBs, DB box and light fixtures other than the Philips cove and spotlights listed, and civil/structural work beyond the scope listed. Rates marked "to confirm" (Hettich Cargo Larder, GTPT basket, wicker baskets, tambour shutter, handles) are dealer or market rates and will be fixed on the final hardware quote. Hettich and Jaquar rates are current online MRP. Civil, ceiling, paint and demolition rates follow the Indéva master BOQ (labour + material). Quantities for wall designs and lighting are estimates and will be confirmed on site measurement.</p>
+    <p class="foot-note">Excludes GST, transportation, mattresses, loose decor, appliances (other than the double-door fridge provision), switches, MCBs, DB box and light fixtures other than the Philips cove and spotlights listed, and civil/structural work beyond the scope listed. Rates marked "to confirm" (Hettich Cargo Larder, GTPT basket, wicker baskets, tambour shutter, handles) are dealer or market rates and will be fixed on the final hardware quote. Jaquar rates are current online MRP; kitchen hardware marked "Indéva vendor rate" follows our current supplier quote. Civil, ceiling, paint and demolition rates follow the Indéva master BOQ (labour + material). Quantities for wall designs and lighting are estimates and will be confirmed on site measurement.</p>
   </section>`;
 }
 let currentTab='overview', showAllMode=false;
