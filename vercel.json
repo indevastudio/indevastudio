@@ -13,51 +13,6 @@
       "permanent": true
     },
     {
-      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study",
-      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
-      "permanent": true
-    },
-    {
-      "source": "/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step",
-      "destination": "/insights/bedroom-false-ceiling-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to",
-      "destination": "/insights/bespoke-villa-interior-design-noida",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to",
-      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study",
-      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to",
-      "destination": "/insights/luxury-interior-design-company-noida",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide",
-      "destination": "/insights/luxury-living-room-interior-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas-design-ideas",
-      "destination": "/insights/luxury-villa-bedroom-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/premium-restaurant-design-ideas-design-ideas",
-      "destination": "/insights/premium-restaurant-design-ideas",
-      "permanent": true
-    },
-    {
       "source": "/interior-designer-noida",
       "destination": "/noida",
       "permanent": true
@@ -73,8 +28,18 @@
       "permanent": true
     },
     {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study",
+      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
+      "permanent": true
+    },
+    {
       "source": "/insights/affordable-luxury-interior-design-delhi-ncr-cost-budget",
       "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/avoid-mistakes-luxury-interior-vasant-vihar",
+      "destination": "/insights/mistakes-in-vasant-vihar-home-design",
       "permanent": true
     },
     {
@@ -84,6 +49,11 @@
     },
     {
       "source": "/insights/bedroom-false-ceiling-design-ideas-india-mistakes-to",
+      "destination": "/insights/bedroom-false-ceiling-design-ideas-india-step-by",
+      "permanent": true
+    },
+    {
+      "source": "/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step",
       "destination": "/insights/bedroom-false-ceiling-design-ideas-india-step-by",
       "permanent": true
     },
@@ -99,7 +69,12 @@
     },
     {
       "source": "/insights/bespoke-villa-interior-design-mistakes",
-      "destination": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to",
+      "destination": "/insights/bespoke-villa-interior-design-noida",
+      "permanent": true
+    },
+    {
+      "source": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to",
+      "destination": "/insights/bespoke-villa-interior-design-noida",
       "permanent": true
     },
     {
@@ -144,7 +119,12 @@
     },
     {
       "source": "/insights/couple-bedroom-interior-design-delhi-case-study-style",
-      "destination": "/insights/couple-bedroom-interior-design-delhi-step-by-step",
+      "destination": "/insights/couple-bedroom-interior-design-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/couple-bedroom-interior-design-delhi-step-by-step",
+      "destination": "/insights/couple-bedroom-interior-design-delhi",
       "permanent": true
     },
     {
@@ -163,8 +143,43 @@
       "permanent": true
     },
     {
+      "source": "/insights/false-ceiling-lighting-guide-delhi-ncr",
+      "destination": "/insights/false-ceiling-lighting-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/false-ceiling-lighting-material-comparison",
+      "destination": "/insights/false-ceiling-lighting-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-bedroom-interior-design",
+      "destination": "/insights/farmhouse-bedroom-interior-design-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-bedroom-interior-design-india-expert-insights",
+      "destination": "/insights/farmhouse-bedroom-interior-design-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-furniture-cost-guide-gurgaon",
+      "destination": "/insights/farmhouse-furniture-cost-guide-gurgaon-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-interior-cost-south-delhi-mistakes",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide",
+      "permanent": true
+    },
+    {
       "source": "/insights/farmhouse-interior-design-ideas-india-case-study-style",
       "destination": "/insights/farmhouse-interior-design-ideas-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-interior-design-ideas-india-cost-guide",
+      "destination": "/insights/farmhouse-interior-cost-guide",
       "permanent": true
     },
     {
@@ -178,6 +193,11 @@
       "permanent": true
     },
     {
+      "source": "/insights/farmhouse-living-room-design-ideas-india",
+      "destination": "/insights/farmhouse-living-room-design-ideas",
+      "permanent": true
+    },
+    {
       "source": "/insights/farmhouse-living-room-design-ideas-india-mistakes-to",
       "destination": "/insights/farmhouse-living-room-design-ideas",
       "permanent": true
@@ -188,8 +208,18 @@
       "permanent": true
     },
     {
+      "source": "/insights/farmhouse-villa-interior-design-gurgaon-case-study",
+      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to",
+      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
+      "permanent": true
+    },
+    {
       "source": "/insights/farmhouse-villa-interior-design-mistakes",
-      "destination": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to",
+      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
       "permanent": true
     },
     {
@@ -213,6 +243,11 @@
       "permanent": true
     },
     {
+      "source": "/insights/flat-interior-design-cost-delhi",
+      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
+      "permanent": true
+    },
+    {
       "source": "/insights/flat-interior-design-delhi-cost",
       "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
       "permanent": true
@@ -228,8 +263,33 @@
       "permanent": true
     },
     {
+      "source": "/insights/full-home-interior-design-cost",
+      "destination": "/insights/interior-design-cost-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/insights/full-home-interior-design-cost-gurgaon",
+      "destination": "/insights/interior-design-cost-gurgaon",
+      "permanent": true
+    },
+    {
       "source": "/insights/full-home-interior-design-cost-gurgaon-step-by",
-      "destination": "/insights/full-home-interior-design-cost",
+      "destination": "/insights/interior-design-cost-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/insights/gurgaon-full-home-interior-design-cost",
+      "destination": "/insights/interior-design-cost-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/insights/gurgaon-villa-interior-design-cost",
+      "destination": "/insights/gurgaon-villa-interior-design-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/insights/hauz-khas-interior-design-cost-guide-cost-guide",
+      "destination": "/insights/hauz-khas-interior-design-cost-guide",
       "permanent": true
     },
     {
@@ -258,7 +318,17 @@
       "permanent": true
     },
     {
+      "source": "/insights/home-interior-design-costs-defence-colony",
+      "destination": "/insights/defence-colony-interior-design-cost-guide",
+      "permanent": true
+    },
+    {
       "source": "/insights/interior-boq-vs-quotation-guide",
+      "destination": "/insights/interior-boq-vs-quotation-guide-material-comparison-2",
+      "permanent": true
+    },
+    {
+      "source": "/insights/interior-boq-vs-quotation-guide-material-comparison",
       "destination": "/insights/interior-boq-vs-quotation-guide-material-comparison-2",
       "permanent": true
     },
@@ -278,6 +348,11 @@
       "permanent": true
     },
     {
+      "source": "/insights/interior-execution-timeline-material-choice",
+      "destination": "/insights/interior-execution-timeline-india",
+      "permanent": true
+    },
+    {
       "source": "/insights/kids-bedroom-luxury-design-ideas-india-case-study",
       "destination": "/insights/kids-bedroom-luxury-design-ideas-india-step-by",
       "permanent": true
@@ -290,6 +365,16 @@
     {
       "source": "/insights/kids-bedroom-luxury-design-mistakes",
       "destination": "/insights/kids-bedroom-luxury-design-ideas-india-step-by",
+      "permanent": true
+    },
+    {
+      "source": "/insights/kitchen-cabinet-material-comparison",
+      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
+      "permanent": true
+    },
+    {
+      "source": "/insights/kitchen-cabinet-material-comparison-delhi-ncr",
+      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
       "permanent": true
     },
     {
@@ -318,6 +403,16 @@
       "permanent": true
     },
     {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study",
+      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr-step-by",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-ideas-india",
+      "destination": "/insights/luxury-bedroom-design-ideas",
+      "permanent": true
+    },
+    {
       "source": "/insights/luxury-bedroom-design-ideas-indian-homes-mistakes-to",
       "destination": "/insights/luxury-bedroom-design-mistakes",
       "permanent": true
@@ -329,32 +424,77 @@
     },
     {
       "source": "/insights/luxury-farmhouse-design-delhi-ncr-design-ideas",
-      "destination": "/insights/luxury-farmhouse-design-delhi-ncr-ideas-design-ideas",
+      "destination": "/insights/luxury-farmhouse-design-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-farmhouse-design-delhi-ncr-ideas-design-ideas",
+      "destination": "/insights/luxury-farmhouse-design-delhi-ncr",
       "permanent": true
     },
     {
       "source": "/insights/luxury-home-interior-design-cost-delhi",
-      "destination": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
+      "destination": "/insights/luxury-interior-design-costs-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
+      "destination": "/insights/luxury-interior-design-costs-delhi",
       "permanent": true
     },
     {
       "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost-cost-guide",
-      "destination": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
+      "destination": "/insights/luxury-interior-design-costs-delhi",
       "permanent": true
     },
     {
       "source": "/insights/luxury-home-interior-design-cost-delhi-2025-mistakes",
-      "destination": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
+      "destination": "/insights/luxury-interior-design-costs-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-guide",
+      "destination": "/insights/luxury-interior-design-costs-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to",
+      "destination": "/insights/luxury-interior-design-company-noida",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-interior-design-costs-in-gurgaon",
+      "destination": "/insights/interior-design-cost-gurgaon",
       "permanent": true
     },
     {
       "source": "/insights/luxury-interior-design-mistakes-noida",
-      "destination": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to",
+      "destination": "/insights/luxury-interior-design-company-noida",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-living-room-interior-design-delhi",
+      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
       "permanent": true
     },
     {
       "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide",
-      "destination": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide",
+      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide",
+      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-restaurant-interior-design",
+      "destination": "/insights/luxury-restaurant-interior-design-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-restaurant-interior-design-india-case-study-case",
+      "destination": "/insights/luxury-restaurant-interior-design-india",
       "permanent": true
     },
     {
@@ -368,6 +508,26 @@
       "permanent": true
     },
     {
+      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas-design-ideas",
+      "destination": "/insights/luxury-villa-bedroom-design-ideas-india-step-by",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-india-expert-insights",
+      "destination": "/insights/luxury-villa-interior-design-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-india-step-by-step",
+      "destination": "/insights/luxury-villa-interior-design-india",
+      "permanent": true
+    },
+    {
+      "source": "/insights/master-bedroom-interior-design",
+      "destination": "/insights/master-bedroom-interior-design-ideas",
+      "permanent": true
+    },
+    {
       "source": "/insights/master-bedroom-interior-design-ideas-india-design-ideas",
       "destination": "/insights/master-bedroom-interior-design-ideas",
       "permanent": true
@@ -375,6 +535,11 @@
     {
       "source": "/insights/master-bedroom-interior-design-ideas-india-expert-perspective",
       "destination": "/insights/master-bedroom-interior-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/materials-false-ceiling-lighting-delhi-ncr",
+      "destination": "/insights/false-ceiling-lighting-design-ideas",
       "permanent": true
     },
     {
@@ -393,8 +558,18 @@
       "permanent": true
     },
     {
+      "source": "/insights/modern-farmhouse-interior-design-cost-cost-guide",
+      "destination": "/insights/modern-farmhouse-interior-design-cost-india-design-ideas",
+      "permanent": true
+    },
+    {
       "source": "/insights/modern-farmhouse-interior-design-cost-india-expert-perspective",
       "destination": "/insights/modern-farmhouse-interior-design-cost-india-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/modern-living-room-design-ideas",
+      "destination": "/insights/modern-living-room-design-ideas-india",
       "permanent": true
     },
     {
@@ -413,12 +588,52 @@
       "permanent": true
     },
     {
+      "source": "/insights/penthouse-cost-guide-gurgaon",
+      "destination": "/insights/penthouse-cost-guide-gurgaon-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/insights/plotted-home-interior-design-sonipat",
+      "destination": "/insights/plotted-home-interior-design-sonipat-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/plotted-home-interior-design-sonipat-expert-insights",
+      "destination": "/insights/plotted-home-interior-design-sonipat-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/plywood-for-kitchen-comparison",
+      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
+      "permanent": true
+    },
+    {
+      "source": "/insights/plywood-for-wardrobe-material-comparison",
+      "destination": "/insights/best-plywood-wardrobe-guide",
+      "permanent": true
+    },
+    {
       "source": "/insights/premium-interior-designers-delhi-ncr-cost",
       "destination": "/insights/premium-interior-designers-delhi-ncr-cost-guide-cost",
       "permanent": true
     },
     {
+      "source": "/insights/premium-interior-designers-delhi-ncr-step-by-step",
+      "destination": "/insights/premium-interior-designers-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/premium-master-suite-design-mistakes",
+      "destination": "/insights/premium-master-suite-design",
+      "permanent": true
+    },
+    {
       "source": "/insights/premium-restaurant-design-ideas",
+      "destination": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget",
+      "permanent": true
+    },
+    {
+      "source": "/insights/premium-restaurant-design-ideas-design-ideas",
       "destination": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget",
       "permanent": true
     },
@@ -443,13 +658,48 @@
       "permanent": true
     },
     {
+      "source": "/insights/restaurant-interior-design-cost-delhi-case-study",
+      "destination": "/insights/restaurant-interior-design-cost-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-case-study-case",
+      "destination": "/insights/restaurant-interior-design-cost-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-expert-insights",
+      "destination": "/insights/restaurant-interior-design-cost-delhi",
+      "permanent": true
+    },
+    {
       "source": "/insights/restaurant-interior-design-cost-delhi-guide-cost-budget",
       "destination": "/insights/restaurant-interior-design-cost-delhi",
       "permanent": true
     },
     {
+      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study",
+      "destination": "/insights/restaurant-interior-designer-delhi-ncr",
+      "permanent": true
+    },
+    {
       "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study-case",
       "destination": "/insights/restaurant-interior-designer-delhi-ncr",
+      "permanent": true
+    },
+    {
+      "source": "/insights/restaurant-interior-designers-gurgaon",
+      "destination": "/insights/restaurant-interior-designers-gurgaon-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/restaurant-interior-designers-gurgaon-step-by-step",
+      "destination": "/insights/restaurant-interior-designers-gurgaon-design-ideas",
+      "permanent": true
+    },
+    {
+      "source": "/insights/rustic-luxury-farmhouse-design-delhi-expert-insights",
+      "destination": "/insights/rustic-luxury-farmhouse-design-delhi",
       "permanent": true
     },
     {
@@ -463,8 +713,23 @@
       "permanent": true
     },
     {
+      "source": "/insights/south-delhi-interior-design-cost-guide",
+      "destination": "/insights/interior-design-cost-south-delhi-guide",
+      "permanent": true
+    },
+    {
+      "source": "/insights/top-interior-designers-delhi-farmhouse-step-by-step",
+      "destination": "/insights/top-interior-designers-delhi-farmhouse",
+      "permanent": true
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-delhi-ncr-design-ideas",
+      "destination": "/insights/villa-interior-design-cost-delhi-ncr",
+      "permanent": true
+    },
+    {
       "source": "/insights/villa-interior-design-cost-delhi-ncr-expert-perspective",
-      "destination": "/insights/villa-interior-design-cost-delhi-ncr-design-ideas",
+      "destination": "/insights/villa-interior-design-cost-delhi-ncr",
       "permanent": true
     },
     {
@@ -493,8 +758,38 @@
       "permanent": true
     },
     {
+      "source": "/insights/wardrobe-design-ideas-india",
+      "destination": "/insights/wardrobe-design-ideas-for-bedroom-india-step-by",
+      "permanent": true
+    },
+    {
       "source": "/insights/weekend-farmhouse-interior-design-gurgaon-costs-cost-budget",
       "destination": "/insights/weekend-farmhouse-interior-design-cost",
+      "permanent": true
+    },
+    {
+      "source": "/projects/mini-farmhouse",
+      "destination": "/projects/mini-farmhouse-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/projects/resham-hotel",
+      "destination": "/projects/hotel-silk-murthal",
+      "permanent": true
+    },
+    {
+      "source": "/projects/dda-apartment",
+      "destination": "/projects/dda-apartment-delhi",
+      "permanent": true
+    },
+    {
+      "source": "/projects/studio-workspace",
+      "destination": "/projects/studio-workspace-gurgaon",
+      "permanent": true
+    },
+    {
+      "source": "/projects/vasant-kunj",
+      "destination": "/projects/vasant-kunj-dda-residence",
       "permanent": true
     }
   ],
@@ -575,11 +870,11 @@
       ]
     },
     {
-      "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|gif|ico|woff2?|ttf|css|js)",
+      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|gif|ico)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=2592000"
         }
       ]
     },
@@ -603,6 +898,15 @@
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
         },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js|woff2?|ttf)",
+      "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400"

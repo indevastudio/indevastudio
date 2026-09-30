@@ -992,7 +992,7 @@ const cap = fn => { const b = String(fn).split('?')[0].split('/').pop(); return 
    Then add its image captions to CAPS above.
 ─────────────────────────────────────────────────────────── */
 window.PROJECTS = [
-  {id:'mini-farmhouse',name:'Mini Farmhouse',location:'Delhi',typology:'Residential',area:'4,800 sqft',year:'2024',status:'Completed',
+  {id:'mini-farmhouse-delhi',name:'Mini Farmhouse',location:'Delhi',typology:'Residential',area:'4,800 sqft',year:'2024',status:'Completed',
    duration:'5 months',scope:'Interior Design + Furniture + Execution',
    services:['Space Planning','Interior Design','Custom Furniture','Site Execution'],
    challenge:'Holding a large open volume together while still giving each family zone — living, dining, bedrooms — a distinct identity without breaking sightlines or adding unnecessary partitions.',
@@ -1002,8 +1002,8 @@ window.PROJECTS = [
    cover:'desktop version banner.webp',
    images:['desktop version banner.webp','Main elevation.webp','side elevation.webp','living room lobby.webp','Kitchen Area.webp','Kitchen.webp','kitchen and common washroom.webp','Master washroom.webp','foyer area.webp','lobby area.webp','living area.webp','mobile version banner.webp','Master bedroom design.webp',"Daughter's Bedroom.webp"],
    parallax:'front elevation.webp',parallaxLbl:'front elevation'},
-  {id:'resham-hotel',name:'Resham Hotel',location:'Murthal',typology:'Hospitality',area:'23 rooms',year:'2026',status:'Completed',
-   duration:'6 months',scope:'Concept + Interior Design + Site Execution',
+  {id:'hotel-silk-murthal',name:'Hotel Silk by Resham',location:'Murthal',typology:'Hospitality',area:'23 rooms',year:'2026',status:'Completed',
+   duration:'12 months',scope:'Concept + Interior Design + Site Execution',
    services:['Concept Design','Interior Design','Custom Furniture','Site Execution'],
    challenge:'Delivering a consistent, elevated guest experience across 23 rooms and shared lobby/lounge areas near a major highway landmark, without the material palette feeling repetitive room to room.',
    approach:'A restrained material kit — Italian marble, MDF wall mouldings, and PU-finished furniture — was standardised across all 23 rooms and corridors, then varied through lighting and layout so each space still reads as considered rather than templated.',
@@ -1012,7 +1012,7 @@ window.PROJECTS = [
    cover:'https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp',
    images:['https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp','https://www.indevastudio.com/resham%20lobby%20seating%20area.webp','https://www.indevastudio.com/resham%20guest%20room%20corridor.webp','https://www.indevastudio.com/resham%20corridor%20view.webp','https://www.indevastudio.com/resham%20suite%20bedroom.webp','https://www.indevastudio.com/resham%20room%20dining%20nook.webp','https://www.indevastudio.com/resham%20room%20entry%20and%20wardrobe.webp','https://www.indevastudio.com/resham%20bathroom%20with%20jacuzzi.webp','https://www.indevastudio.com/resham%20bedroom%20and%20ensuite%20bath.webp','https://www.indevastudio.com/resham%20meeting%20room.webp'],
    parallax:'https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp',parallaxLbl:'lobby ceiling installation'},
-  {id:'studio-workspace',name:'Studio Workspace',location:'Gurgaon',typology:'Commercial',area:'3,200 sqft',year:'2023',status:'Completed',
+  {id:'studio-workspace-gurgaon',name:'Studio Workspace',location:'Gurgaon',typology:'Commercial',area:'3,200 sqft',year:'2023',status:'Completed',
    duration:'3 months',scope:'Space Planning + Interiors + Custom Furniture',
    services:['Space Planning','Interior Design','Custom Furniture'],
    challenge:'Fitting focused individual workstations, meeting rooms, and a cafeteria into a mid-size floor plate without the space feeling cramped or corridor-driven.',
@@ -1022,7 +1022,7 @@ window.PROJECTS = [
    cover:'Studio Workspace.webp',
    images:['Studio Workspace.webp','Workstation Area.webp','Conference Room.webp','Cafeteria Area.webp','Entrance area.webp'],
    parallax:'Workstation Area.webp',parallaxLbl:'workstation zone'},
-  {id:'dda-apartment',name:'DDA Apartment',location:'Delhi',typology:'Residential',area:'1,800 sqft',year:'2024',status:'Completed',
+  {id:'dda-apartment-delhi',name:'DDA Apartment',location:'Delhi',typology:'Residential',area:'1,800 sqft',year:'2024',status:'Completed',
    duration:'3 months',scope:'Space Planning + Interior Design + Execution',
    services:['Space Planning','Interior Design','Site Execution'],
    challenge:'Achieving density without compromise — fitting full storage, kitchen, and living function into a compact 1,800 sqft footprint.',
@@ -1042,7 +1042,7 @@ window.PROJECTS = [
    cover:'https://www.indevastudio.com/patel-nagar-retail-1.jpg',
    images:['https://www.indevastudio.com/patel-nagar-retail-1.jpg','https://www.indevastudio.com/patel-nagar-retail-2.jpg','https://www.indevastudio.com/patel-nagar-retail-3.jpg','https://www.indevastudio.com/patel-nagar-retail-4.jpg'],
    parallax:'https://www.indevastudio.com/patel-nagar-retail-2.jpg',parallaxLbl:'folded knitwear wall'},
-  {id:'vasant-kunj',name:'Vasant Kunj',location:'New Delhi',typology:'Residential',area:'DDA Residence',year:'2025',status:'Completed',
+  {id:'vasant-kunj-dda-residence',name:'Vasant Kunj',location:'New Delhi',typology:'Residential',area:'DDA Residence',year:'2025',status:'Completed',
    duration:'2 months',scope:'Interior Design + Custom Joinery + Execution',
    services:['Interior Design','Custom Furniture & Joinery','Site Execution'],
    challenge:'Achieving a sophisticated, quiet material palette resolved almost entirely through joinery and lighting — with no reliance on applied decoration.',
@@ -1111,6 +1111,8 @@ function initFilters() {
 
 /* ── OPEN PROJECT DETAIL ──────────────────────────────────── */
 window.pOpenProject = function(id) {
+  /* SEO: every project has a static, crawlable page at /projects/<id> */
+  if (location.pathname.replace(/\/$/,'') !== '/projects/' + id) { location.href = '/projects/' + id; return; }
   const p = window.PROJECTS.find(x => x.id===id);
   if (!p) return;
   curP = p;
@@ -1300,6 +1302,8 @@ setTimeout(pReveal, 150);
 
 
 function showPage(id, pushState) {
+  /* SEO: /projects is a static page; navigate instead of showing the in-page copy */
+  if (id === 'projects') { location.href = '/projects'; return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-link'));
 

@@ -24,7 +24,10 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "InteriorDesigner"],
+  "@type": [
+    "LocalBusiness",
+    "InteriorDesigner"
+  ],
   "@id": "https://www.indevastudio.com/#business",
   "name": "Indéva Studio",
   "url": "https://www.indevastudio.com",
@@ -34,25 +37,41 @@
   "description": "Luxury interior designer in Noida. Architecture-led design for apartments, villas, restaurants and offices across Noida and Greater Noida. Full-service delivery from brief to handover.",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "New Delhi",
+    "streetAddress": "34/11, Lampur Rd, Industrial Area, Narela",
+    "addressLocality": "Delhi",
     "addressRegion": "Delhi",
+    "postalCode": "110040",
     "addressCountry": "IN"
   },
   "areaServed": [
-    {"@type": "Place", "name": "Noida"},
-    {"@type": "Place", "name": "Greater Noida"},
-    {"@type": "Place", "name": "Sector 150"},
-    {"@type": "Place", "name": "Jaypee Greens"},
-    {"@type": "Place", "name": "ATS"},
-    {"@type": "Place", "name": "Lotus Boulevard"}
+    {
+      "@type": "Place",
+      "name": "Noida"
+    },
+    {
+      "@type": "Place",
+      "name": "Greater Noida"
+    },
+    {
+      "@type": "Place",
+      "name": "Sector 150"
+    },
+    {
+      "@type": "Place",
+      "name": "Jaypee Greens"
+    },
+    {
+      "@type": "Place",
+      "name": "ATS"
+    },
+    {
+      "@type": "Place",
+      "name": "Lotus Boulevard"
+    }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "6",
-    "bestRating": "5"
-  },
-  "sameAs": ["https://www.instagram.com/indevastudio"]
+  "sameAs": [
+    "https://www.instagram.com/indeva.studio"
+  ]
 }
 </script>
 
@@ -474,7 +493,7 @@ body.pshow-lock{overflow:hidden;}
         <div class="pshow-sub"><b>Design Style</b><span>Moody contemporary, tactile materials</span></div>
         <div class="pshow-sub"><b>Materials</b><span>Walnut veneer, brass, leather, terrazzo</span></div>
         <div class="pshow-actions">
-          <a href="/projects/hashtag-restaurant" class="btn-gold">View Complete Case Study →</a>
+          <a href="/projects" class="btn-gold">View Complete Case Study →</a>
           <a href="#start" class="btn-outline">Book Similar Project</a>
           <a class="btn-wa" target="_blank" rel="noopener"
              href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project%20similar%20to%20Hashtag%20Restaurant.">WhatsApp</a>
@@ -536,7 +555,7 @@ body.pshow-lock{overflow:hidden;}
         <div class="pshow-sub"><b>Design Style</b><span>Contemporary minimal, soft neutrals</span></div>
         <div class="pshow-sub"><b>Materials</b><span>Oak veneer, marble, linen, blackened metal</span></div>
         <div class="pshow-actions">
-          <a href="/projects/jaypee-penthouse" class="btn-gold">View Complete Case Study →</a>
+          <a href="/projects" class="btn-gold">View Complete Case Study →</a>
           <a href="#start" class="btn-outline">Book Similar Project</a>
           <a class="btn-wa" target="_blank" rel="noopener"
              href="https://wa.me/919717881083?text=Hi%20Ind%C3%A9va%20Studio%2C%20I%27d%20like%20to%20discuss%20a%20project%20similar%20to%20Jaypee%20Penthouse.">WhatsApp</a>
@@ -767,9 +786,24 @@ document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.addEventLis
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.indevastudio.com/"},
-    {"@type":"ListItem","position":2,"name":"Interior Designer in Noida","item":"https://www.indevastudio.com/noida"},
-    {"@type":"ListItem","position":3,"name":"Projects","item":"https://www.indevastudio.com/noida#projects"}
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.indevastudio.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Interior Designer in Noida",
+      "item": "https://www.indevastudio.com/noida"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Projects",
+      "item": "https://www.indevastudio.com/noida#projects"
+    }
   ]
 }
 </script>
@@ -786,7 +820,10 @@ document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.addEventLis
         "name": "Hashtag Restaurant",
         "url": "https://www.indevastudio.com/projects/hashtag-restaurant",
         "description": "A full-service restaurant fit-out in Noida designed around guest experience, service flow, and acoustics, 1,600 sq.ft, completed 2024.",
-        "locationCreated": {"@type": "Place", "name": "Noida"},
+        "locationCreated": {
+          "@type": "Place",
+          "name": "Noida"
+        },
         "dateCreated": "2024",
         "image": [
           {
@@ -815,7 +852,10 @@ document.querySelectorAll('a[href^="tel:"]').forEach(function(el){el.addEventLis
         "name": "Jaypee Penthouse",
         "url": "https://www.indevastudio.com/projects/jaypee-penthouse",
         "description": "A duplex penthouse in Jaypee Greens, Noida, replanned around a daylight-forward living wing and home study, 3,800 sq.ft, completed 2024.",
-        "locationCreated": {"@type": "Place", "name": "Jaypee Greens, Noida"},
+        "locationCreated": {
+          "@type": "Place",
+          "name": "Jaypee Greens, Noida"
+        },
         "dateCreated": "2024",
         "image": [
           {
