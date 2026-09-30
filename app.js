@@ -920,6 +920,20 @@ const CDN = 'https://www.indevastudio.com/project-images-for-website/';
 const img = fn => (fn.startsWith('/') || fn.startsWith('./') || fn.startsWith('http')) ? fn : CDN + encodeURIComponent(fn);
 
 const CAPS = {
+  'https://www.indevastudio.com/images/south-delhi/living-room-seating.webp':{t:'Living Room',c:'Neo-classical seating, softly layered'},
+  'https://www.indevastudio.com/images/south-delhi/living-room-entrance-view.webp':{t:'Living Room — Entrance View',c:'The first view on arrival'},
+  'https://www.indevastudio.com/images/south-delhi/living-room-wall-panelling.webp':{t:'Wall Panelling',c:'Classical mouldings, restrained detailing'},
+  'https://www.indevastudio.com/images/south-delhi/living-room-tv-unit-pooja.webp':{t:'TV Unit & Pooja',c:'Media wall with an integrated pooja niche'},
+  'https://www.indevastudio.com/images/south-delhi/kitchen.webp':{t:'Kitchen',c:'Clean lines for everyday use'},
+  'https://www.indevastudio.com/images/south-delhi/master-bedroom-balcony-view.webp':{t:'Master Bedroom — Balcony View',c:'Light drawn in from the balcony'},
+  'https://www.indevastudio.com/images/south-delhi/master-bedroom-bed-view.webp':{t:'Master Bedroom',c:'A calm, panelled backdrop to rest'},
+  'https://www.indevastudio.com/images/south-delhi/master-bedroom-tv-unit.webp':{t:'Master Bedroom — TV Unit',c:'Storage and media, resolved as one'},
+  'https://www.indevastudio.com/images/south-delhi/master-bedroom-hallway.webp':{t:'Master Bedroom Hallway',c:'A quiet passage between spaces'},
+  'https://www.indevastudio.com/images/south-delhi/bedroom-headboard-view.webp':{t:'Bedroom — Headboard',c:'Upholstery and panelling in balance'},
+  'https://www.indevastudio.com/images/south-delhi/bedroom-window-seating.webp':{t:'Bedroom — Window Seating',c:'A reading nook by the light'},
+  'https://www.indevastudio.com/images/south-delhi/bedroom-tv-unit.webp':{t:'Bedroom — TV Unit',c:'Compact media wall with storage'},
+  'https://www.indevastudio.com/images/south-delhi/bedroom-wardrobe-entry.webp':{t:'Bedroom — Wardrobe Entry',c:'Full-height wardrobes, framed entry'},
+  'https://www.indevastudio.com/images/south-delhi/wardrobe-interior-detail.webp':{t:'Wardrobe Interior',c:'Detailing inside the joinery'},
   'desktop version banner.webp':{t:'Grand Exterior',c:'A statement facade reflecting quiet permanence'},
   'mobile version banner.webp':{t:'Exterior — Alternate',c:'The structure in a different light'},
   'front elevation.webp':{t:'Front Elevation',c:'Proportions drawn from first principles'},
@@ -958,7 +972,7 @@ const CAPS = {
   'https://www.indevastudio.com/resham%20bedroom%20and%20ensuite%20bath.webp':{t:'Bedroom & Ensuite Bath',c:'The bedroom opens directly onto a marble-clad soaking tub'},
   'https://www.indevastudio.com/resham%20meeting%20room.webp':{t:'Meeting Room',c:'A small conference space finished in marble and brass-legged seating'},
 };
-const cap = fn => CAPS[fn] || {t:fn.replace(/\.webp$/,'').replace(/[-_]/g,' '),c:'ind\u00e9va studio'};
+const cap = fn => { const b = String(fn).split('?')[0].split('/').pop(); return CAPS[fn] || CAPS[b] || {t:decodeURIComponent(b).replace(/\.(webp|jpe?g|png)$/i,'').replace(/[-_]/g,' '),c:'ind\u00e9va studio'}; };
 
 /* ─── TO ADD A NEW PROJECT ───────────────────────────────────
    Copy one object in PROJECTS below, update:
@@ -1046,9 +1060,9 @@ window.PROJECTS = [
    approach:'Classic proportions and detailing were paired with contemporary, streamlined furniture rather than heavy period pieces. Storage was built into the architecture itself — wardrobes and units resolved as part of the wall panelling rather than added afterward — and lighting was layered across ambient, accent and functional sources through both bedrooms and the living space.',
    description:'a 1,500 sqft 2 BHK in South Delhi in a contemporary neo-classical style — warm neutrals, wall mouldings and bespoke furniture, built for understated, everyday luxury rather than ornament.',
    editorial:'<p>the house was compact. the detailing was not sacrificed for it. <em>classic mouldings and panelling were paired with streamlined, contemporary furniture so the home read as timeless, not ornate.</em></p><p>storage and lighting were resolved as part of the architecture — built into the panelling, layered across ambient, accent and functional sources in every room.</p>',
-   cover:'https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-seating.webp?v=20260930',
-   images:['https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-seating.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-entrance-view.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-wall-panelling.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-tv-unit-pooja.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-kitchen.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-master-bedroom-balcony-view.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-master-bedroom-bed-view.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-master-bedroom-tv-unit.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-master-bedroom-hallway.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-bedroom-headboard-view.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-bedroom-window-seating.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-bedroom-tv-unit.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-bedroom-wardrobe-entry.webp?v=20260930','https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-wardrobe-interior-detail.webp?v=20260930'],
-   parallax:'https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-master-bedroom-bed-view.webp?v=20260930',parallaxLbl:'master bedroom'},
+   cover:'https://www.indevastudio.com/images/south-delhi/living-room-seating.webp',
+   images:['https://www.indevastudio.com/images/south-delhi/living-room-seating.webp','https://www.indevastudio.com/images/south-delhi/living-room-entrance-view.webp','https://www.indevastudio.com/images/south-delhi/living-room-wall-panelling.webp','https://www.indevastudio.com/images/south-delhi/living-room-tv-unit-pooja.webp','https://www.indevastudio.com/images/south-delhi/kitchen.webp','https://www.indevastudio.com/images/south-delhi/master-bedroom-balcony-view.webp','https://www.indevastudio.com/images/south-delhi/master-bedroom-bed-view.webp','https://www.indevastudio.com/images/south-delhi/master-bedroom-tv-unit.webp','https://www.indevastudio.com/images/south-delhi/master-bedroom-hallway.webp','https://www.indevastudio.com/images/south-delhi/bedroom-headboard-view.webp','https://www.indevastudio.com/images/south-delhi/bedroom-window-seating.webp','https://www.indevastudio.com/images/south-delhi/bedroom-tv-unit.webp','https://www.indevastudio.com/images/south-delhi/bedroom-wardrobe-entry.webp','https://www.indevastudio.com/images/south-delhi/wardrobe-interior-detail.webp'],
+   parallax:'https://www.indevastudio.com/images/south-delhi/master-bedroom-bed-view.webp',parallaxLbl:'master bedroom'},
 ];
 
 let curP=null, lbImgs=[], lbIdx=0;
@@ -1701,7 +1715,7 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() { openArticle(slug); }, 150);
     }
   } else {
-    var initialPage = urlToPage[currentPath] || 'home';
+    var initialPage = urlToPage[currentPath] || (/^\/projects\/[a-z0-9-]+$/.test(currentPath) ? 'projects' : 'home');
     if (initialPage !== 'home') {
       showPage(initialPage, false);
     }
@@ -1714,7 +1728,7 @@ document.addEventListener('DOMContentLoaded', function() {
       showPage(e.state.page, false);
     } else {
       var path = window.location.pathname.replace(/\/$/, '') || '/';
-      var pg = urlToPage[path] || 'home';
+      var pg = urlToPage[path] || (/^\/projects\/[a-z0-9-]+$/.test(path) ? 'projects' : 'home');
       showPage(pg, false);
     }
   });
