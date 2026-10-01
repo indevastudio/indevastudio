@@ -1304,6 +1304,7 @@ setTimeout(pReveal, 150);
 function showPage(id, pushState) {
   /* SEO: /projects is a static page; navigate instead of showing the in-page copy */
   if (id === 'projects') { location.href = '/projects'; return; }
+  if (id === 'blog') { location.href = '/insights'; return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-link'));
 
