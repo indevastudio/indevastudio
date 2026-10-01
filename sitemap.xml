@@ -49,11 +49,15 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/dda-apartment-delhi</loc>
+    <loc>https://www.indevastudio.com/projects/hotel-silk-murthal</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/hotel-silk-murthal</loc>
+    <loc>https://www.indevastudio.com/projects/south-delhi-neoclassical-residence</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/vasant-kunj-dda-residence</loc>
     <priority>0.8</priority>
   </url>
   <url>
@@ -61,11 +65,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/patel-nagar</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/projects/south-delhi-neoclassical</loc>
+    <loc>https://www.indevastudio.com/projects/dda-apartment-delhi</loc>
     <priority>0.8</priority>
   </url>
   <url>
@@ -73,7 +73,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/vasant-kunj-dda-residence</loc>
+    <loc>https://www.indevastudio.com/projects/patel-nagar-retail-store</loc>
     <priority>0.8</priority>
   </url>
   <url>

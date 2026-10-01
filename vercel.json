@@ -791,9 +791,47 @@
       "source": "/projects/vasant-kunj",
       "destination": "/projects/vasant-kunj-dda-residence",
       "permanent": true
+    },
+    {
+      "source": "/projects/patel-nagar",
+      "destination": "/projects/patel-nagar-retail-store",
+      "permanent": true
+    },
+    {
+      "source": "/projects/south-delhi-neoclassical",
+      "destination": "/projects/south-delhi-neoclassical-residence",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/projects/hotel-silk-murthal",
+      "destination": "/project-hotel-silk-murthal.html"
+    },
+    {
+      "source": "/projects/south-delhi-neoclassical-residence",
+      "destination": "/project-south-delhi-neoclassical-residence.html"
+    },
+    {
+      "source": "/projects/vasant-kunj-dda-residence",
+      "destination": "/project-vasant-kunj-dda-residence.html"
+    },
+    {
+      "source": "/projects/mini-farmhouse-delhi",
+      "destination": "/project-mini-farmhouse-delhi.html"
+    },
+    {
+      "source": "/projects/dda-apartment-delhi",
+      "destination": "/project-dda-apartment-delhi.html"
+    },
+    {
+      "source": "/projects/studio-workspace-gurgaon",
+      "destination": "/project-studio-workspace-gurgaon.html"
+    },
+    {
+      "source": "/projects/patel-nagar-retail-store",
+      "destination": "/project-patel-nagar-retail-store.html"
+    },
     {
       "source": "/about",
       "destination": "/index.html"
