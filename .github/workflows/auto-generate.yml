@@ -35,66 +35,22 @@ jobs:
           INDEXNOW_KEY:        ${{ secrets.INDEXNOW_KEY }}
         run: node scripts/generate-blogs.js
 
-      - name: Rebuild sitemap.xml from all insight pages
+      # Sitemap is built by build-sitemap.cjs (repo root): it lists only
+      # canonical, indexable URLs — no redirected or noindex pages, no
+      # trailing slashes — and includes the project pages. If the script
+      # is missing, the committed sitemap.xml is left untouched.
+      - name: Rebuild sitemap.xml (canonical, indexable URLs only)
         run: |
-          node - << 'JS'
-          const fs   = require('fs');
-          const path = require('path');
-
-          const ORIGIN   = 'https://www.indevastudio.com';
-          const TODAY    = new Date().toISOString().split('T')[0];
-          const INSIGHTS = path.join(process.cwd(), 'insights');
-
-          const staticPages = [
-            { loc: '/',         priority: '1.00', changefreq: 'weekly'  },
-            { loc: '/about',    priority: '0.90', changefreq: 'monthly' },
-            { loc: '/insights/',priority: '0.90', changefreq: 'daily'   },
-            { loc: '/delhi',    priority: '0.95', changefreq: 'monthly' },
-            { loc: '/gurgaon',  priority: '0.95', changefreq: 'monthly' },
-            { loc: '/noida',    priority: '0.95', changefreq: 'monthly' },
-            { loc: '/sonipat',  priority: '0.95', changefreq: 'monthly' },
-          ];
-
-          function urlEntry(loc, priority, changefreq, lastmod) {
-            return [
-              '  <url>',
-              `    <loc>${ORIGIN}${loc}</loc>`,
-              `    <lastmod>${lastmod || TODAY}</lastmod>`,
-              `    <changefreq>${changefreq}</changefreq>`,
-              `    <priority>${priority}</priority>`,
-              '  </url>',
-            ].join('\n');
-          }
-
-          const entries = staticPages.map(p => urlEntry(p.loc, p.priority, p.changefreq));
-
-          // scan insights/*/index.html for blog posts
-          let blogCount = 0;
-          if (fs.existsSync(INSIGHTS)) {
-            for (const slug of fs.readdirSync(INSIGHTS)) {
-              const fp = path.join(INSIGHTS, slug, 'index.html');
-              if (!fs.existsSync(fp)) continue;
-              const mtime = fs.statSync(fp).mtime.toISOString().split('T')[0];
-              entries.push(urlEntry(`/insights/${slug}/`, '0.80', 'monthly', mtime));
-              blogCount++;
-            }
-          }
-
-          const xml = [
-            '<?xml version="1.0" encoding="UTF-8"?>',
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-            ...entries,
-            '</urlset>',
-          ].join('\n');
-
-          fs.writeFileSync(path.join(process.cwd(), 'sitemap.xml'), xml + '\n');
-          console.log(`sitemap.xml written — ${staticPages.length} static + ${blogCount} blog posts`);
-          JS
+          if [ -f build-sitemap.cjs ]; then
+            node build-sitemap.cjs
+          else
+            echo "⚠️  build-sitemap.cjs not found — keeping existing sitemap.xml"
+          fi
 
       # ── NEW: feed.xml was never part of this pipeline — nothing wrote
       # it, which is why it froze at whatever it last was manually built
       # to. This step keeps it in sync with insights/ on every run,
-      # same as the sitemap step above.
+      # like the sitemap step above.
       - name: Rebuild feed.xml from all insight pages
         run: node scripts/feed.js
 
@@ -162,7 +118,7 @@ jobs:
           fi
           URL_LIST=""
           for SLUG in $SLUGS; do
-            URL_LIST="${URL_LIST}\"https://www.indevastudio.com/insights/${SLUG}/\","
+            URL_LIST="${URL_LIST}\"https://www.indevastudio.com/insights/${SLUG}\","
           done
           URL_LIST="${URL_LIST%,}"  # remove trailing comma
 
@@ -198,7 +154,7 @@ jobs:
                 \"from\":    \"indéva automation <${FROM}>\",
                 \"to\":      [\"${TO}\"],
                 \"subject\": \"✓ blog published — ${DATE}\",
-                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights/'>indevastudio.com/insights</a>.</p><p>Sitemap updated. Feed updated. IndexNow pinged.</p>\"
+                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights'>indevastudio.com/insights</a>.</p><p>Sitemap updated. Feed updated. IndexNow pinged.</p>\"
               }" && echo "Success email sent." || echo "Email send failed (non-fatal)."
           fi
 
