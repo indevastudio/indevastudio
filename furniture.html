@@ -3497,6 +3497,17 @@ img {
 .about-visual-title{font-weight:300;font-size:clamp(2.6rem,7vw,6rem);line-height:1;letter-spacing:-.02em;color:#fff;margin:0}
 .about-visual-meta{display:block;margin-top:16px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#fff}
 </style>
+<style id="lp-mobile-fix">
+.lp-modal{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overscroll-behavior:contain}
+.lp-modal .lp-close{position:sticky!important;top:0;float:right;margin:-28px -14px 0 0;width:44px!important;height:44px!important;z-index:3;background:#FAF9F6!important;border:1px solid rgba(22,20,18,.18)!important;color:#242424!important;font-size:1.05rem!important;border-radius:50%}
+.lp-modal .lp-sub{margin-bottom:22px}
+.lp-modal .lp-field{font-size:16px!important;letter-spacing:.02em!important}
+.lp-modal .lp-status{color:#9b2c2c}
+@media(max-width:760px){.lp-modal{padding:32px 22px 24px!important}}
+.lp-modal .lp-btn:hover{background:#7A5530!important}
+html,body{overflow-x:clip}
+@media(max-width:480px){.nav-cta-primary{padding:10px 12px!important;font-size:.52rem!important;letter-spacing:.12em!important}}
+</style>
 </head>
 <body>
 <!-- ══ INTRO ANIMATION ══ -->
@@ -4759,7 +4770,7 @@ img {
       </div>
       <div class="form-row-2">
         <input type="email" id="cf-email" class="form-field reveal" placeholder="email address *" autocomplete="email">
-        <input type="tel" id="cf-phone" class="form-field reveal d1" placeholder="phone number *" autocomplete="tel">
+        <input type="tel" id="cf-phone" class="form-field reveal d1" placeholder="mobile number *" autocomplete="tel" inputmode="tel">
       </div>
       <div class="form-row">
         <select aria-label="Project type" id="cf-type" class="form-field reveal">
@@ -7266,27 +7277,10 @@ img {
   <button class="lp-close" onclick="closeLeadPopup()" aria-label="close">✕</button>
   <div class="lp-label">let's connect</div>
   <h2 class="lp-heading">tell us who<br>you <em>are.</em></h2>
-  <p class="lp-sub">leave your details and we'll reach out<br>within 24 hours. no spam, ever.</p>
+  <p class="lp-sub">name, mobile and email — we'll call you within 24 hours.</p>
   <input class="lp-field" id="lp-name"  type="text"  placeholder="your name *" autocomplete="name">
-  <input class="lp-field" id="lp-phone" type="tel"   placeholder="phone number *" autocomplete="tel">
+  <input class="lp-field" id="lp-phone" type="tel"   placeholder="mobile number *" autocomplete="tel" inputmode="tel">
   <input class="lp-field" id="lp-email" type="email" placeholder="email address *" autocomplete="email">
-  <input class="lp-field" id="lp-location" type="text" placeholder="project location (city)" autocomplete="address-level2">
-  <select aria-label="Project type" class="lp-field" id="lp-type" style="cursor:pointer;appearance:none;">
-    <option value="" disabled selected>project type</option>
-    <option>residential</option>
-    <option>hospitality</option>
-    <option>commercial</option>
-    <option>architecture</option>
-    <option>other</option>
-  </select>
-  <select aria-label="Budget" class="lp-field" id="lp-budget" style="cursor:pointer;appearance:none;">
-    <option value="" disabled selected>budget range</option>
-    <option>below ₹25 lakhs</option>
-    <option>₹25 – 50 lakhs</option>
-    <option>₹50 lakhs – 1 crore</option>
-    <option>above ₹1 crore</option>
-    <option>to be discussed</option>
-  </select>
   <button class="lp-btn" id="lpBtn" onclick="lpSubmit()">get in touch →</button>
   <div class="lp-status" id="lpStatus"></div>
   <p class="lp-privacy">no obligations · no sales pressure · just a conversation</p>
@@ -7299,7 +7293,7 @@ img {
   <h2 class="lp-heading" id="catalogGateHeading">download the<br><em>catalogue.</em></h2>
   <p class="lp-sub">leave your details and we'll send the PDF straight to your download — plus we'll follow up if you have questions.</p>
   <input class="lp-field" id="cg-name"  type="text"  placeholder="your name *" autocomplete="name">
-  <input class="lp-field" id="cg-phone" type="tel"   placeholder="phone number *" autocomplete="tel">
+  <input class="lp-field" id="cg-phone" type="tel"   placeholder="mobile number *" autocomplete="tel" inputmode="tel">
   <input class="lp-field" id="cg-email" type="email" placeholder="email address *" autocomplete="email">
   <button class="lp-btn" id="cgBtn" onclick="catalogGateSubmit()">download catalogue →</button>
   <div class="lp-status" id="cgStatus"></div>
@@ -7348,6 +7342,6 @@ img {
   </div>
 </div>
 
-<script defer src="/app.js?v=20261001b"></script>
+<script defer src="/app.js?v=20261001c"></script>
 </body>
 </html>

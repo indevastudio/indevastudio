@@ -52,7 +52,7 @@ CORE.forEach(([loc, pri]) => add(loc, pri, null));
 // Project case studies are flat files (project-<slug>.html) served at
 // /projects/<slug> through rewrites in vercel.json.
 for (const r of (vercel.rewrites || [])) {
-  const m = r.destination.match(/^\/project-([a-z0-9-]+)\.html$/);
+  const m = r.destination.match(/^\/project-([a-z0-9-]+)(?:\.html)?$/);
   if (m && r.source === `/projects/${m[1]}`) add(r.source, '0.8', path.join(ROOT, `project-${m[1]}.html`));
 }
 

@@ -806,31 +806,31 @@
   "rewrites": [
     {
       "source": "/projects/hotel-silk-murthal",
-      "destination": "/project-hotel-silk-murthal.html"
+      "destination": "/project-hotel-silk-murthal"
     },
     {
       "source": "/projects/south-delhi-neoclassical-residence",
-      "destination": "/project-south-delhi-neoclassical-residence.html"
+      "destination": "/project-south-delhi-neoclassical-residence"
     },
     {
       "source": "/projects/vasant-kunj-dda-residence",
-      "destination": "/project-vasant-kunj-dda-residence.html"
+      "destination": "/project-vasant-kunj-dda-residence"
     },
     {
       "source": "/projects/mini-farmhouse-delhi",
-      "destination": "/project-mini-farmhouse-delhi.html"
+      "destination": "/project-mini-farmhouse-delhi"
     },
     {
       "source": "/projects/dda-apartment-delhi",
-      "destination": "/project-dda-apartment-delhi.html"
+      "destination": "/project-dda-apartment-delhi"
     },
     {
       "source": "/projects/studio-workspace-gurgaon",
-      "destination": "/project-studio-workspace-gurgaon.html"
+      "destination": "/project-studio-workspace-gurgaon"
     },
     {
       "source": "/projects/patel-nagar-retail-store",
-      "destination": "/project-patel-nagar-retail-store.html"
+      "destination": "/project-patel-nagar-retail-store"
     },
     {
       "source": "/about",

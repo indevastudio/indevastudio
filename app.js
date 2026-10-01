@@ -2275,17 +2275,17 @@ function lpSubmit() {
   var name     = (document.getElementById('lp-name').value  || '').trim();
   var phone    = (document.getElementById('lp-phone').value || '').trim();
   var email    = (document.getElementById('lp-email').value || '').trim();
-  var location = (document.getElementById('lp-location').value || '').trim();
-  var type     = (document.getElementById('lp-type').value || '').trim();
-  var budget   = (document.getElementById('lp-budget').value || '').trim();
+  var location = ((document.getElementById('lp-location')||{}).value || '').trim();
+  var type     = ((document.getElementById('lp-type')||{}).value || '').trim();
+  var budget   = ((document.getElementById('lp-budget')||{}).value || '').trim();
   var status = document.getElementById('lpStatus');
   var btn    = document.getElementById('lpBtn');
   if (!name || !phone || !email) {
-    if (status) { status.textContent = 'please fill in all fields.'; status.style.color='#e88'; }
+    if (status) { status.textContent = 'please add your name, mobile and email.'; status.style.color='#9b2c2c'; }
     return;
   }
   if (!email.includes('@')) {
-    if (status) { status.textContent = 'please enter a valid email.'; status.style.color='#e88'; }
+    if (status) { status.textContent = 'please enter a valid email.'; status.style.color='#9b2c2c'; }
     return;
   }
   if (btn) btn.disabled = true;
