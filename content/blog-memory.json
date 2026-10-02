@@ -69,7 +69,9 @@
     "Step‑by‑Step Guide from a Home Interior Designer Vasant Kunj",
     "How to Choose a Restaurant Interior Designer in South Delhi",
     "The Real Cost of Turnkey Interior Design Delhi: A Budget Guide",
-    "Avoid Costly Mistakes in Home Renovation Cost South Delhi"
+    "Avoid Costly Mistakes in Home Renovation Cost South Delhi",
+    "Cost Guide for Hiring a Villa Interior Designer in New Gurgaon",
+    "Avoid Costly Mistakes in Farmhouse Interior Design Sainik Farms"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -141,7 +143,9 @@
     "step-by-step-vasant-kunj-interior",
     "choose-restaurant-designer-south-delhi",
     "turnkey-interior-cost-guide-delhi",
-    "avoid-renovation-mistakes-south-delhi"
+    "avoid-renovation-mistakes-south-delhi",
+    "cost-guide-villa-interior-new-gurgaon",
+    "farmhouse-interior-mistakes-sainik-farms"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -213,7 +217,9 @@
     "home interior designer Vasant Kunj",
     "restaurant interior designer South Delhi",
     "turnkey interior design Delhi",
-    "home renovation cost South Delhi"
+    "home renovation cost South Delhi",
+    "villa interior designer New Gurgaon",
+    "farmhouse interior design Sainik Farms"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -285,11 +291,11 @@
     "The article outlines a practical, step‑by‑step process that indéva studio uses to deliver luxury interiors in Vasant Kunj, Delhi.",
     "A practical, numbered roadmap helps first‑time clients select a restaurant interior designer in South Delhi without common pitfalls.",
     "The article breaks down true cost drivers, room‑wise budgets, negotiation tactics, and warning signs to help homeowners plan a ₹25–50 lakh turnkey project.",
-    "The article warns against typical budgeting blunders in South Delhi home renovations and offers precise corrective steps."
+    "The article warns against typical budgeting blunders in South Delhi home renovations and offers precise corrective steps.",
+    "Understanding cost drivers and smart negotiation can keep a villa interior design project within a ₹15–25 lakh budget in New Gurgaon.",
+    "The article lists common budgeting and design mistakes in farmhouse interior design Sainik Farms and offers precise fixes."
   ],
   "lastAngles": [
-    "material-comparison",
-    "cost-guide",
     "mistakes-avoid",
     "step-by-step",
     "mistakes-avoid",
@@ -326,6 +332,8 @@
     "material-comparison",
     "step-by-step",
     "step-by-step",
+    "cost-guide",
+    "mistakes-avoid",
     "cost-guide",
     "mistakes-avoid"
   ],
@@ -399,7 +407,9 @@
     "locality-vasant-kunj",
     "south-delhi-commercial-interior-designer",
     "turnkey-interior-execution-delhi-ncr",
-    "south-delhi-interior-cost-guide"
+    "south-delhi-interior-cost-guide",
+    "locality-new-gurgaon",
+    "south-delhi-farmhouse-interior-designer"
   ],
   "targetUrls": [
     "/delhi",
@@ -471,6 +481,8 @@
     "/delhi",
     "/delhi",
     "/#about",
+    "/delhi",
+    "/gurgaon",
     "/delhi"
   ],
   "contentTypes": [
@@ -543,7 +555,9 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "BLOG",
-    "BLOG"
+    "BLOG",
+    "LOCATION_PAGE",
+    "SERVICE_PAGE"
   ],
   "searchIntents": [
     "commercial",
@@ -615,11 +629,13 @@
     "commercial",
     "commercial",
     "commercial",
+    "commercial",
+    "commercial",
     "commercial"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-24",
-    "south-delhi-farmhouse-interior-designer": "2026-09-25",
+    "south-delhi-farmhouse-interior-designer": "2026-10-02",
     "interior-boq-guide": "2026-09-26",
     "locality-friends-colony": "2026-09-20",
     "gurgaon-interior-cost-guide": "2026-09-05",
@@ -628,7 +644,7 @@
     "locality-golf-course-road": "2026-09-16",
     "plywood-material-guide": "2026-09-06",
     "locality-vasant-kunj": "2026-09-27",
-    "locality-new-gurgaon": "2026-09-06",
+    "locality-new-gurgaon": "2026-10-02",
     "locality-hauz-khas": "2026-09-07",
     "south-delhi-commercial-interior-designer": "2026-09-28",
     "delhi-commercial-interior-designer": "2026-09-21",
@@ -659,8 +675,6 @@
     "interior-hardware-fittings-guide": "2026-09-22"
   },
   "lastLocations": [
-    "Delhi NCR",
-    "South Delhi",
     "Defence Colony",
     "Panchsheel Park",
     "Gurgaon",
@@ -698,6 +712,8 @@
     "Vasant Kunj",
     "South Delhi",
     "Delhi NCR",
+    "South Delhi",
+    "New Gurgaon",
     "South Delhi"
   ]
 }
