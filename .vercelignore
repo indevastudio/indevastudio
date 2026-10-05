@@ -1,1 +1,29 @@
+# Files that live in the repo but must not be served on indevastudio.com.
+# (Vercel: "Non-targeted files are prevented from being deployed and served.")
+
+# Old hosting folder. The site is now served from the repo root (vercel.json outputDirectory ".").
+public
+
+# Duplicate route files. The live versions are projects.html + project-*.html and insights/index.html.
+projects
+insights.html
+new-update-03 Sept
+images-only
+
+# Tooling, automation and internal notes
+.github
+scripts
+node_modules
+content
+package.json
+package-lock.json
+blogs.config.js
+build-sitemap.cjs
+vercel.json.reference
+*.md
+!llms.txt
+*.patch
+*.zip
+*.csv
+patel-nagar-project-entry.txt
 
