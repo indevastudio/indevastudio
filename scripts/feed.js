@@ -58,11 +58,26 @@ if (!fs.existsSync(INSIGHTS)) {
 
 const posts = [];
 
+// Skip articles that are not indexable: merged into another post (redirect
+// source in vercel.json), marked noindex via an X-Robots-Tag header rule in
+// vercel.json, or carrying a robots noindex meta tag.
+let vercel = {};
+try { vercel = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'vercel.json'), 'utf8')); } catch {}
+const strip = s => s.replace(/\/$/, '');
+const redirected = new Set((vercel.redirects || []).map(r => strip(r.source)));
+const noindexed = new Set((vercel.headers || [])
+  .filter(h => (h.headers || []).some(x => /^x-robots-tag$/i.test(x.key) && /noindex/i.test(x.value)))
+  .map(h => strip(h.source)));
+const hasNoindexMeta = html => /<meta\s+name=["']robots["'][^>]*noindex/i.test(html);
+
 for (const slug of fs.readdirSync(INSIGHTS)) {
   const fp = path.join(INSIGHTS, slug, 'index.html');
   if (!fs.existsSync(fp)) continue;
 
+  const route = `/insights/${slug}`;
+  if (redirected.has(route) || noindexed.has(route)) continue;
   const html = fs.readFileSync(fp, 'utf8');
+  if (hasNoindexMeta(html)) continue;
   const relPath = path.relative(process.cwd(), fp);
 
   let title =
@@ -79,13 +94,17 @@ for (const slug of fs.readdirSync(INSIGHTS)) {
   // current run (not committed yet at the point this script runs — it
   // runs BEFORE the commit step), git log won't find it. In that case
   // fall back to "now", which is correct since it's genuinely new today.
-  const gitDate = getFirstCommitDate(relPath);
+  // The page's own datePublished wins; git history is the fallback.
+  const declared = (html.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1];
+  const declaredDate = declared && !isNaN(new Date(declared)) ? new Date(declared) : null;
+  const gitDate = declaredDate || getFirstCommitDate(relPath);
+  if (!gitDate) continue;  // no date anywhere: leave it out rather than fake "today"
 
   posts.push({
     title: title.replace(/\s*—\s*indéva studio.*$/i, '').trim(),
-    link: `${ORIGIN}/insights/${slug}/`,
+    link: `${ORIGIN}/insights/${slug}`,  // no trailing slash (vercel.json trailingSlash: false)
     description: description || '',
-    pubDate: gitDate || new Date(),
+    pubDate: gitDate,
   });
 }
 

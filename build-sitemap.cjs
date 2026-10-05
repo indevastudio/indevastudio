@@ -19,13 +19,18 @@ const ORIGIN = 'https://www.indevastudio.com';
 
 const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 const redirected = new Set((vercel.redirects || []).map(r => r.source.replace(/\/$/, '')));
+// Pages kept out of the index by an X-Robots-Tag: noindex header rule in vercel.json.
+const noindexHeader = new Set((vercel.headers || [])
+  .filter(h => (h.headers || []).some(x => /^x-robots-tag$/i.test(x.key) && /noindex/i.test(x.value)))
+  .map(h => h.source.replace(/\/$/, '')));
 
 const CORE = [
   ['/', '1.0'], ['/about', '0.8'], ['/services', '0.9'], ['/projects', '0.9'],
   ['/contact', '0.7'], ['/furniture', '0.6'], ['/insights', '0.8'],
   ['/delhi', '0.9'], ['/south-delhi-interior-designer', '0.9'], ['/gurgaon', '0.9'],
-  ['/noida', '0.8'], ['/sonipat', '0.8'],
+  ['/noida', '0.8'], ['/sonipat', '0.8'], ['/vendors', '0.5'], ['/process', '0.6'], ['/philosophy', '0.5'],
 ];
+const CORE_FILES = { '/': 'index.html', '/projects': 'projects.html', '/insights': 'insights/index.html' };
 
 function read(p) { try { return fs.readFileSync(p, 'utf8'); } catch { return null; } }
 function isNoindex(html) { return /<meta\s+name=["']robots["'][^>]*noindex/i.test(html); }
@@ -42,12 +47,16 @@ function entry(loc, priority, lastmod) {
 const out = [];
 const seen = new Set();
 function add(loc, pri, file) {
-  if (seen.has(loc) || redirected.has(loc)) return;
+  if (seen.has(loc) || redirected.has(loc) || noindexHeader.has(loc)) return;
   if (file) { const h = read(file); if (!h || isNoindex(h)) return; }
   seen.add(loc); out.push(entry(loc, pri, file ? dateOf(read(file)) : null));
 }
 
-CORE.forEach(([loc, pri]) => add(loc, pri, null));
+CORE.forEach(([loc, pri]) => {
+  const file = path.join(ROOT, CORE_FILES[loc] || `${loc.slice(1)}.html`);
+  if (!fs.existsSync(file)) { console.warn(`  ! core page missing, skipped: ${loc}`); return; }
+  add(loc, pri, file);
+});
 
 // Project case studies are flat files (project-<slug>.html) served at
 // /projects/<slug> through rewrites in vercel.json.

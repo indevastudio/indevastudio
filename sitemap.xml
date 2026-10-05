@@ -49,6 +49,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.indevastudio.com/vendors</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/process</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/philosophy</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/dda-apartment-delhi</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/mini-farmhouse-delhi</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/patel-nagar-retail-store</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.indevastudio.com/projects/hotel-silk-murthal</loc>
     <priority>0.8</priority>
   </url>
@@ -57,23 +81,11 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/vasant-kunj-dda-residence</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/projects/mini-farmhouse-delhi</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/projects/dda-apartment-delhi</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/projects/studio-workspace-gurgaon</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/projects/patel-nagar-retail-store</loc>
+    <loc>https://www.indevastudio.com/projects/vasant-kunj-dda-residence</loc>
     <priority>0.8</priority>
   </url>
   <url>
@@ -92,48 +104,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/affordable-luxury-interior-design-delhi-ncr</loc>
-    <lastmod>2026-05-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-bespoke-furniture-mistakes-delhi</loc>
-    <lastmod>2026-09-09</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-costly-interior-design-mistakes-defence-colony</loc>
-    <lastmod>2026-08-31</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-costly-mistakes-interior-designer-delhi</loc>
-    <lastmod>2026-09-20</lastmod>
+    <loc>https://www.indevastudio.com/insights/affordable-luxury-interior-design-delhi-ncr-case-study</loc>
+    <lastmod>2026-06-11</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/avoid-costly-mistakes-interior-execution-gurgaon</loc>
     <lastmod>2026-09-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-costly-mistakes-maharani-bagh</loc>
-    <lastmod>2026-09-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-costly-mistakes-vasant-kunj</loc>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-design-mistakes-greater-kailash</loc>
-    <lastmod>2026-08-31</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-farmhouse-design-mistakes</loc>
-    <lastmod>2026-08-27</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -152,41 +129,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-friends-colony-interior-design</loc>
-    <lastmod>2026-08-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-hauz-khas-interior-design</loc>
-    <lastmod>2026-08-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-home-interior-designer-panchsheel</loc>
-    <lastmod>2026-08-23</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-interior-designer-friends-colony</loc>
-    <lastmod>2026-09-04</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-interior-renovation-gurgaon</loc>
-    <lastmod>2026-08-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-modern-villa-designer-gurgaon</loc>
-    <lastmod>2026-09-03</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoid-mistakes-villa-design-gurgaon</loc>
-    <lastmod>2026-08-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/avoid-renovation-mistakes-south-delhi</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.6</priority>
@@ -197,53 +139,23 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/avoid-wardrobe-mistakes-gurgaon</loc>
-    <lastmod>2026-08-30</lastmod>
+    <loc>https://www.indevastudio.com/insights/bedroom-false-ceiling-design-ideas</loc>
+    <lastmod>2026-05-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/avoiding-costly-mistakes-in-villa-interior-design</loc>
-    <lastmod>2026-08-14</lastmod>
+    <loc>https://www.indevastudio.com/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step</loc>
+    <lastmod>2026-06-29</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/avoiding-mistakes-in-farmhouse-interior-design</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://www.indevastudio.com/insights/bespoke-interior-design-ideas-indian-homes-design-ideas</loc>
+    <lastmod>2026-06-04</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/avoiding-mistakes-in-luxury-apartment-design</loc>
-    <lastmod>2026-08-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/avoiding-villa-renovation-mistakes</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/bedroom-false-ceiling-design-ideas-india-step-by</loc>
-    <lastmod>2026-05-30</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/bespoke-interior-design-ideas</loc>
-    <lastmod>2026-04-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/bespoke-interior-design-ideas-for-indian-homes-design</loc>
-    <lastmod>2026-07-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/bespoke-villa-interior-design-noida</loc>
-    <lastmod>2026-04-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/bespoke-villa-interior-design-noida-cost</loc>
-    <lastmod>2026-05-24</lastmod>
+    <loc>https://www.indevastudio.com/insights/bespoke-villa-interior-design-mistakes</loc>
+    <lastmod>2026-06-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -252,8 +164,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/best-luxury-interior-designers-near-me</loc>
-    <lastmod>2026-07-10</lastmod>
+    <loc>https://www.indevastudio.com/insights/best-luxury-interior-designers-near-me-delhi-case</loc>
+    <lastmod>2026-06-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -291,38 +203,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/carcass-construction-comparison-delhi-ncr</loc>
-    <lastmod>2026-08-23</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/carcass-construction-guide-delhi</loc>
-    <lastmod>2026-09-03</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/carcass-construction-guide-delhi-ncr</loc>
     <lastmod>2026-08-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/carcass-construction-material-comparison</loc>
-    <lastmod>2026-08-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/choose-commercial-interior-designer-delhi</loc>
     <lastmod>2026-09-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/choose-flooring-indian-homes</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/choose-home-interior-designer-panchsheel-park</loc>
-    <lastmod>2026-09-12</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -336,18 +223,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/choose-luxury-farmhouse-designer</loc>
-    <lastmod>2026-08-29</lastmod>
+    <loc>https://www.indevastudio.com/insights/choose-luxury-farmhouse-designer-delhi</loc>
+    <lastmod>2026-09-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/choose-penthouse-furniture-gurgaon</loc>
     <lastmod>2026-08-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/choose-plywood-delhi-ncr</loc>
-    <lastmod>2026-09-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -369,38 +251,28 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/common-mistakes-in-luxury-furniture-delhi</loc>
-    <lastmod>2026-08-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/common-mistakes-interior-delhi</loc>
     <lastmod>2026-09-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/contemporary-interior-design-trends-india-2025-cost-budget-cost-guide</loc>
-    <lastmod>2026-07-24</lastmod>
+    <loc>https://www.indevastudio.com/insights/contemporary-interior-design-trends</loc>
+    <lastmod>2026-05-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/contemporary-villa-living-room-design-cost-guide</loc>
-    <lastmod>2026-05-29</lastmod>
+    <loc>https://www.indevastudio.com/insights/contemporary-interior-design-trends-india-2025-case-study</loc>
+    <lastmod>2026-06-04</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/contemporary-villa-living-room-design-india-expert-perspective</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://www.indevastudio.com/insights/contemporary-villa-living-room-design</loc>
+    <lastmod>2026-05-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/corporate-interior-cost-guide-south-delhi</loc>
-    <lastmod>2026-08-31</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/corporate-interior-cost-gurgaon-guide</loc>
-    <lastmod>2026-08-24</lastmod>
+    <loc>https://www.indevastudio.com/insights/contemporary-villa-living-room-design-india-design-ideas</loc>
+    <lastmod>2026-06-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -429,33 +301,18 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/cost-guide-farmhouse-designer-sainik-farms</loc>
-    <lastmod>2026-09-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/cost-guide-residential-interior-designer-new-gurgaon</loc>
     <lastmod>2026-09-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/cost-guide-villa-interior-new-gurgaon</loc>
-    <lastmod>2026-10-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/couple-bedroom-interior-design-delhi</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/couple-bedroom-interior-design-delhi-step-by-step</loc>
+    <lastmod>2026-07-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/custom-furniture-construction-guide</loc>
     <lastmod>2026-08-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/custom-wardrobe-material-comparison</loc>
-    <lastmod>2026-09-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -469,18 +326,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/delhi-farmhouse-interior-design-cost</loc>
-    <lastmod>2026-05-23</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/delhi-luxury-interior-cost-guide</loc>
     <lastmod>2026-09-23</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/dlf-gurgaon-apartment-cost-guide</loc>
-    <lastmod>2026-09-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -494,18 +341,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/estimate-2bhk-interior-south-delhi</loc>
-    <lastmod>2026-09-08</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/estimate-3bhk-interior-gurgaon</loc>
     <lastmod>2026-08-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/estimating-home-renovation-south-delhi</loc>
-    <lastmod>2026-08-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -513,28 +350,23 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/false-ceiling-design-cost-guide</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.indevastudio.com/insights/false-ceiling-design-for-living-room-india-step</loc>
+    <lastmod>2026-05-18</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/false-ceiling-design-living-room</loc>
-    <lastmod>2026-08-08</lastmod>
+    <loc>https://www.indevastudio.com/insights/false-ceiling-design-for-living-room-india-step-step-by-step</loc>
+    <lastmod>2026-06-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/false-ceiling-lighting-design-ideas</loc>
-    <lastmod>2026-08-21</lastmod>
+    <loc>https://www.indevastudio.com/insights/false-ceiling-lighting-guide-delhi-ncr</loc>
+    <lastmod>2026-09-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-bedroom-interior-design-cost</loc>
-    <lastmod>2026-05-31</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-bedroom-interior-design-india</loc>
-    <lastmod>2026-05-05</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-bedroom-interior-design</loc>
+    <lastmod>2026-07-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -543,28 +375,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-design-process-gurgaon</loc>
-    <lastmod>2026-08-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/farmhouse-design-south-delhi-mistakes</loc>
     <lastmod>2026-08-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-designer-mistakes-guide</loc>
-    <lastmod>2026-08-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-furniture-cost-guide-gurgaon-cost-guide</loc>
-    <lastmod>2026-09-18</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-cost-guide</loc>
-    <lastmod>2026-09-04</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-furniture-cost-guide-gurgaon</loc>
+    <lastmod>2026-08-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -578,33 +395,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-cost-guide</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-ideas-india</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-mistakes</loc>
-    <lastmod>2026-06-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-sonipat</loc>
-    <lastmod>2026-05-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-designer-mistakes</loc>
-    <lastmod>2026-06-07</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-designer-sonipat</loc>
-    <lastmod>2026-07-07</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-interior-design-ideas-india-case-study-style</loc>
+    <lastmod>2026-05-27</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -613,28 +405,18 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-mistakes-gurgaon</loc>
-    <lastmod>2026-09-05</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-kitchen-design-ideas</loc>
+    <lastmod>2026-05-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-interior-mistakes-sainik-farms</loc>
-    <lastmod>2026-10-02</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration</loc>
+    <lastmod>2026-06-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration-design-ideas</loc>
-    <lastmod>2026-07-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-living-room-design-ideas</loc>
-    <lastmod>2026-05-16</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-renovation-gurgaon-cost-guide</loc>
-    <lastmod>2026-08-28</lastmod>
+    <loc>https://www.indevastudio.com/insights/farmhouse-living-room-design-ideas-india-mistakes-to</loc>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -643,28 +425,33 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-renovation-south-delhi-cost-guide</loc>
-    <lastmod>2026-08-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/farmhouse-villa-interior-design-gurgaon</loc>
-    <lastmod>2026-05-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/fine-dining-restaurant-design-ideas</loc>
+    <loc>https://www.indevastudio.com/insights/farmhouse-villa-interior-design-mistakes</loc>
     <lastmod>2026-04-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/flat-interior-design-delhi-cost-per-sqft</loc>
-    <lastmod>2026-04-13</lastmod>
+    <loc>https://www.indevastudio.com/insights/fine-dining-restaurant-design-ideas-india-case-study</loc>
+    <lastmod>2026-05-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/flooring-material-comparison</loc>
-    <lastmod>2026-08-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/fine-dining-restaurant-design-ideas-india-mistakes-to</loc>
+    <lastmod>2026-06-21</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/flat-interior-design-cost-delhi</loc>
+    <lastmod>2026-04-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/flat-interior-design-delhi-cost</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/flat-interior-design-delhi-cost-per-sqft-design</loc>
+    <lastmod>2026-06-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -673,53 +460,23 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/golf-course-extension-road-villa-cost-guide</loc>
-    <lastmod>2026-09-18</lastmod>
+    <loc>https://www.indevastudio.com/insights/full-home-interior-design-cost</loc>
+    <lastmod>2026-05-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/golf-course-road-residential-design-mistakes</loc>
-    <lastmod>2026-09-16</lastmod>
+    <loc>https://www.indevastudio.com/insights/gurgaon-full-home-interior-design-cost</loc>
+    <lastmod>2026-05-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/greater-kailash-budget-interior-design</loc>
-    <lastmod>2026-08-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/gurgaon-farmhouse-interior-design-process</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/gurgaon-interior-cost-guide</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/gurgaon-villa-interior-design-cost-guide</loc>
-    <lastmod>2026-08-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/gurgaon-villa-interior-designer-cost</loc>
-    <lastmod>2026-06-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/hardware-brands-interior-comparison</loc>
-    <lastmod>2026-08-31</lastmod>
+    <loc>https://www.indevastudio.com/insights/gurgaon-villa-interior-design-cost</loc>
+    <lastmod>2026-04-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/hardware-comparison-interior-materials</loc>
     <lastmod>2026-09-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/hauz-khas-interior-design-cost-guide</loc>
-    <lastmod>2026-08-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -733,28 +490,18 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/high-end-cafe-design-delhi</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.indevastudio.com/insights/high-end-cafe-and-restaurant-design-delhi-case</loc>
+    <lastmod>2026-06-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/high-end-interior-design-mistakes</loc>
-    <lastmod>2026-07-19</lastmod>
+    <loc>https://www.indevastudio.com/insights/high-end-cafe-and-restaurant-design-delhi-design</loc>
+    <lastmod>2026-05-17</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/high-end-interior-design-services</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/high-end-interior-design-services-india-cost-guide</loc>
-    <lastmod>2026-06-29</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/hire-interior-designer-defence-colony</loc>
-    <lastmod>2026-08-29</lastmod>
+    <loc>https://www.indevastudio.com/insights/high-end-interior-design-cost-guide</loc>
+    <lastmod>2026-04-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -768,11 +515,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/hiring-1bhk-interior-designer-south-delhi</loc>
-    <lastmod>2026-09-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/hiring-farmhouse-interior-designer-gurgaon</loc>
     <lastmod>2026-09-23</lastmod>
     <priority>0.6</priority>
@@ -780,11 +522,6 @@
   <url>
     <loc>https://www.indevastudio.com/insights/hiring-home-interior-designer-hauz-khas</loc>
     <lastmod>2026-09-07</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/hiring-residential-designer-golf-course-extension-road</loc>
-    <lastmod>2026-08-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -797,13 +534,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/interior-boq-vs-quotation-guide-material-comparison-2</loc>
-    <lastmod>2026-09-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-design-boq-quotation</loc>
-    <lastmod>2026-08-13</lastmod>
+    <loc>https://www.indevastudio.com/insights/interior-boq-vs-quotation-guide</loc>
+    <lastmod>2026-08-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -817,43 +549,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/interior-design-delhi-ncr-mistakes</loc>
-    <lastmod>2026-07-08</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-design-services-delhi-ncr-reviews-cost-budget</loc>
-    <lastmod>2026-06-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-cost-gurgaon-budget-guide</loc>
-    <lastmod>2026-09-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-dlf-gurgaon-step-guide</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-for-villa-in-gurgaon</loc>
-    <lastmod>2026-05-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-friends-colony-guide</loc>
-    <lastmod>2026-08-24</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-in-gurgaon-villa</loc>
-    <lastmod>2026-07-17</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/interior-designer-sonipat-ncr</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/interior-design-services-delhi-ncr</loc>
+    <lastmod>2026-05-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -867,13 +564,18 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/kids-bedroom-luxury-design-ideas-india-step-by</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.indevastudio.com/insights/kids-bedroom-luxury-design-ideas-india-cost-budget</loc>
+    <lastmod>2026-06-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/laminate-brand-comparison-delhi-ncr</loc>
-    <lastmod>2026-08-28</lastmod>
+    <loc>https://www.indevastudio.com/insights/kids-bedroom-luxury-design-mistakes</loc>
+    <lastmod>2026-05-11</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/kitchen-cabinet-material-comparison</loc>
+    <lastmod>2026-09-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -891,113 +593,43 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/living-room-interior-cost-delhi</loc>
-    <lastmod>2026-06-08</lastmod>
+    <loc>https://www.indevastudio.com/insights/living-room-tv-unit-design-ideas</loc>
+    <lastmod>2026-05-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/living-room-interior-cost-estimate</loc>
-    <lastmod>2026-05-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/living-room-interior-cost-estimate-delhi</loc>
-    <lastmod>2026-07-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/living-room-tv-unit-design-ideas-cost-guide</loc>
-    <lastmod>2026-08-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/living-room-tv-unit-design-ideas-india-step</loc>
-    <lastmod>2026-06-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/living-room-tv-unit-design-mistakes</loc>
+    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-cost-delhi-ncr</loc>
     <lastmod>2026-04-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-apartment-cost-dlf-gurgaon</loc>
-    <lastmod>2026-08-30</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-cost-delhi-ncr-case-study</loc>
+    <lastmod>2026-06-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-cost-delhi-ncr-mistakes-avoid</loc>
-    <lastmod>2026-08-09</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-ideas-indian-homes-mistakes-to</loc>
+    <lastmod>2026-06-20</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-cost-delhi-ncr-step-by</loc>
-    <lastmod>2026-05-21</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-farmhouse-design-delhi-ncr-design-ideas</loc>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-ideas</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-home-interior-design-cost-delhi</loc>
+    <lastmod>2026-05-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-ideas-india-cost-guide</loc>
-    <lastmod>2026-08-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-home-interior-design-cost-delhi-2025-cost</loc>
+    <lastmod>2026-06-16</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-bedroom-design-mistakes</loc>
-    <lastmod>2026-05-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-farmhouse-design-delhi-ncr</loc>
-    <lastmod>2026-04-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-farmhouse-design-delhi-ncr-cost</loc>
-    <lastmod>2026-05-18</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-farmhouse-designer-mistakes</loc>
-    <lastmod>2026-08-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-furniture-design-mistakes</loc>
-    <lastmod>2026-08-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-design-company-noida</loc>
-    <lastmod>2026-07-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-design-costs-delhi</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-design-noida</loc>
-    <lastmod>2026-05-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-design-vasant-virar-guide</loc>
-    <lastmod>2026-09-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-defence-colony-cost</loc>
-    <lastmod>2026-09-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-golf-course-road-guide</loc>
-    <lastmod>2026-09-02</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-interior-design-mistakes-noida</loc>
+    <lastmod>2026-06-06</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1006,88 +638,28 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-hauz-khas-guide</loc>
-    <lastmod>2026-10-02</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-maharani-bagh-cost-guide</loc>
-    <lastmod>2026-08-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-panchsheel-park-cost-guide</loc>
-    <lastmod>2026-08-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-pitfalls-golf-course-extension-road</loc>
-    <lastmod>2026-08-24</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designer-sohna-road-mistakes</loc>
-    <lastmod>2026-08-29</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-interior-designers-near-me-delhi</loc>
-    <lastmod>2026-05-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/luxury-interior-mistakes-new-gurgaon</loc>
     <lastmod>2026-08-29</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-living-room-interior-design-delhi-case-study</loc>
-    <lastmod>2026-05-24</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-living-room-interior-design-delhi-cost-guide</loc>
+    <lastmod>2026-06-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-penthouse-interior-design-gurgaon</loc>
-    <lastmod>2026-08-12</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-villa-bedroom-design-ideas</loc>
+    <lastmod>2026-05-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-restaurant-interior-design-cost</loc>
-    <lastmod>2026-07-12</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-india-expert-insights</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/luxury-restaurant-interior-design-india</loc>
-    <lastmod>2026-06-19</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-villa-bedroom-design-ideas-india-step-by</loc>
-    <lastmod>2026-06-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-cost-gurgaon</loc>
-    <lastmod>2026-08-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-gurgaon</loc>
-    <lastmod>2026-08-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-ideas</loc>
-    <lastmod>2026-07-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-india</loc>
-    <lastmod>2026-05-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/maharani-bagh-interior-mistakes</loc>
-    <lastmod>2026-08-26</lastmod>
+    <loc>https://www.indevastudio.com/insights/luxury-villa-interior-design-india-step-by-step</loc>
+    <lastmod>2026-06-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1096,22 +668,12 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/marble-vs-tile-flooring-cost-guide</loc>
-    <lastmod>2026-10-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/master-bedroom-interior-design-ideas</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/master-bedroom-interior-design-ideas-india-design-ideas</loc>
+    <lastmod>2026-06-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/material-choice-for-luxury-homes</loc>
-    <lastmod>2026-08-16</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/material-comparison-for-delhi-ncr-homes</loc>
     <lastmod>2026-08-16</lastmod>
     <priority>0.6</priority>
   </url>
@@ -1121,58 +683,33 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/mistakes-avoid-interior-designer-defence-colony</loc>
-    <lastmod>2026-09-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-cafe-interior-design-delhi-ncr</loc>
+    <lastmod>2026-05-07</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/mistakes-hiring-interior-designer-new-gurgaon</loc>
-    <lastmod>2026-08-22</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-farmhouse-interior-design-cost</loc>
+    <lastmod>2026-05-02</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/mistakes-in-luxury-interior-design</loc>
-    <lastmod>2026-08-16</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-farmhouse-interior-design-cost-india-expert-perspective</loc>
+    <lastmod>2026-06-28</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/mistakes-in-vasant-vihar-home-design</loc>
-    <lastmod>2026-08-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-living-room-design-ideas</loc>
+    <lastmod>2026-04-29</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/modern-cafe-interior-design-cost</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-living-room-design-india-2025-expert-perspective</loc>
+    <lastmod>2026-06-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/modern-cafe-interior-design-delhi-ncr-costs-cost</loc>
-    <lastmod>2026-06-08</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/modern-farmhouse-interior-design-cost-india-design-ideas</loc>
-    <lastmod>2026-05-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/modern-living-room-design-ideas-india</loc>
-    <lastmod>2026-05-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/modern-living-room-design-mistakes</loc>
-    <lastmod>2026-07-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/modern-villa-design-ideas</loc>
-    <lastmod>2026-05-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/modern-villa-interior-cost-south-delhi</loc>
-    <lastmod>2026-08-27</lastmod>
+    <loc>https://www.indevastudio.com/insights/modern-villa-design-ideas-indian-homes-design-ideas</loc>
+    <lastmod>2026-06-13</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1181,68 +718,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/modular-kitchen-material-cost-guide</loc>
-    <lastmod>2026-08-29</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/office-interior-design-cost-guide</loc>
-    <lastmod>2026-08-16</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/office-interior-design-delhi-guide</loc>
     <lastmod>2026-09-07</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/open-plan-living-room-design-ideas</loc>
-    <lastmod>2026-04-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/open-plan-living-room-design-india</loc>
-    <lastmod>2026-05-19</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/open-plan-living-room-design-india-cost-guide</loc>
-    <lastmod>2026-07-15</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/open-plan-living-room-design-india-ideas-design</loc>
-    <lastmod>2026-06-18</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/penthouse-cost-guide-gurgaon-cost-guide</loc>
-    <lastmod>2026-08-29</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/penthouse-design-cost-guide-gurgaon</loc>
-    <lastmod>2026-09-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/penthouse-furniture-cost-guide</loc>
-    <lastmod>2026-09-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/penthouse-interior-cost-gurgaon-guide</loc>
     <lastmod>2026-09-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/penthouse-interior-design-gurgaon-guide</loc>
-    <lastmod>2026-08-22</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/penthouse-interior-design-mistakes</loc>
-    <lastmod>2026-08-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1260,13 +742,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/planning-luxury-apartment-gurgaon</loc>
-    <lastmod>2026-08-12</lastmod>
+    <loc>https://www.indevastudio.com/insights/plotted-home-interior-design-sonipat</loc>
+    <lastmod>2026-05-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/plotted-home-interior-design-sonipat-design-ideas</loc>
-    <lastmod>2026-07-13</lastmod>
+    <loc>https://www.indevastudio.com/insights/plotted-home-interior-design-sonipat-expert-insights</loc>
+    <lastmod>2026-06-14</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1275,48 +757,18 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/premium-interior-designers-delhi-ncr</loc>
-    <lastmod>2026-07-04</lastmod>
+    <loc>https://www.indevastudio.com/insights/premium-interior-designers-delhi-ncr-cost</loc>
+    <lastmod>2026-05-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/premium-interior-designers-delhi-ncr-cost-guide-cost</loc>
-    <lastmod>2026-06-04</lastmod>
+    <loc>https://www.indevastudio.com/insights/premium-master-suite-design-mistakes</loc>
+    <lastmod>2026-05-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/premium-living-room-design</loc>
-    <lastmod>2026-07-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-living-room-design-gurgaon</loc>
-    <lastmod>2026-05-07</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-living-room-design-gurgaon-cost-guide</loc>
-    <lastmod>2026-07-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-master-suite-design</loc>
-    <lastmod>2026-07-09</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-master-suite-design-cost</loc>
-    <lastmod>2026-06-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-master-suite-design-ideas</loc>
-    <lastmod>2026-08-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/premium-restaurant-design-ideas-india-2025-cost-budget</loc>
-    <lastmod>2026-06-10</lastmod>
+    <loc>https://www.indevastudio.com/insights/premium-restaurant-design-ideas</loc>
+    <lastmod>2026-05-12</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1325,38 +777,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/reading-interior-design-boq</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/reading-material-boq-guide</loc>
-    <lastmod>2026-09-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/renovating-home-in-delhi-ncr</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/residential-interior-design-mistakes</loc>
-    <lastmod>2026-08-16</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/residential-interior-designer-friends-colony</loc>
-    <lastmod>2026-08-14</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/residential-interior-designer-greater-kailash-guide</loc>
-    <lastmod>2026-09-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-ambience-design-cost-india-step-by-step</loc>
-    <lastmod>2026-06-03</lastmod>
+    <loc>https://www.indevastudio.com/insights/restaurant-ambience-design-cost</loc>
+    <lastmod>2026-05-05</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1365,78 +792,33 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-interior-design-cost-delhi</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-design-cost-delhi-guide-cost-budget</loc>
+    <lastmod>2026-06-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-interior-design-cost-guide</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-designer-delhi-ncr-case-study-case</loc>
+    <lastmod>2026-06-09</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-interior-designer-delhi-ncr</loc>
-    <lastmod>2026-05-11</lastmod>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-designers-gurgaon</loc>
+    <lastmod>2026-05-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-interior-designer-delhi-ncr-cost-guide</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.indevastudio.com/insights/restaurant-interior-designers-gurgaon-step-by-step</loc>
+    <lastmod>2026-06-26</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/restaurant-interior-designers-gurgaon-design-ideas</loc>
-    <lastmod>2026-05-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/rustic-luxury-farmhouse-design</loc>
-    <lastmod>2026-05-09</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/rustic-luxury-farmhouse-design-delhi</loc>
-    <lastmod>2026-06-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/rustic-luxury-farmhouse-design-delhi-cost-guide</loc>
-    <lastmod>2026-07-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/sofa-set-design-ideas-indian-living-room-cost</loc>
-    <lastmod>2026-08-09</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/sohna-road-interior-designer</loc>
-    <lastmod>2026-08-15</lastmod>
+    <loc>https://www.indevastudio.com/insights/sofa-set-design-ideas-indian-living-room</loc>
+    <lastmod>2026-05-19</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/solid-vs-engineered-wood-flooring-guide</loc>
     <lastmod>2026-08-25</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/sonipat-farmhouse-interior-design-cost</loc>
-    <lastmod>2026-07-30</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/sonipat-ncr-interior-design-cost</loc>
-    <lastmod>2026-06-07</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/sonipat-ncr-interior-designer-insights</loc>
-    <lastmod>2026-08-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/step-by-step-sohna-road-farmhouse-design</loc>
-    <lastmod>2026-08-27</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1453,38 +835,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/top-interior-designers-delhi-farmhouse</loc>
-    <lastmod>2026-04-26</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/turnkey-interior-cost-guide-delhi</loc>
-    <lastmod>2026-09-29</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/turnkey-interior-cost-gurgaon-guide</loc>
-    <lastmod>2026-09-01</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/turnkey-interior-cost-gurgaon-mistakes</loc>
-    <lastmod>2026-10-03</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/turnkey-interior-mistakes-south-delhi</loc>
-    <lastmod>2026-08-21</lastmod>
+    <loc>https://www.indevastudio.com/insights/top-interior-designers-delhi-farmhouse-step-by-step</loc>
+    <lastmod>2026-07-22</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/veneer-laminate-interiors-comparison</loc>
     <lastmod>2026-08-28</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-designer-mistakes-south-delhi</loc>
-    <lastmod>2026-08-30</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1498,28 +855,8 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-furniture-design-south-delhi</loc>
-    <lastmod>2026-08-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-cost-golf-course-extension-road</loc>
-    <lastmod>2026-09-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-cost-golf-course-road-gurgaon</loc>
-    <lastmod>2026-09-06</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/villa-interior-cost-guide-gurgaon</loc>
     <lastmod>2026-09-17</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-cost-guide-new-gurgaon</loc>
-    <lastmod>2026-08-23</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1528,38 +865,23 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-cost-guide-south-delhi</loc>
-    <lastmod>2026-08-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-cost-gurgaon-guide</loc>
-    <lastmod>2026-08-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://www.indevastudio.com/insights/villa-interior-cost-south-delhi-guide</loc>
     <lastmod>2026-09-03</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-design-cost-delhi-ncr</loc>
-    <lastmod>2026-05-04</lastmod>
+    <loc>https://www.indevastudio.com/insights/villa-interior-design-cost-delhi-ncr-design-ideas</loc>
+    <lastmod>2026-07-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-design-cost-guide-golf-course-extension</loc>
-    <lastmod>2026-08-28</lastmod>
+    <loc>https://www.indevastudio.com/insights/villa-interior-design-cost-delhi-ncr-mistakes-mistakes</loc>
+    <lastmod>2026-06-01</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/villa-interior-design-gurgaon-mistakes</loc>
     <lastmod>2026-09-10</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-design-sohna-road</loc>
-    <lastmod>2026-08-31</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1573,13 +895,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-designers-delhi-ncr-price</loc>
-    <lastmod>2026-04-29</lastmod>
+    <loc>https://www.indevastudio.com/insights/villa-interior-designers-delhi-ncr-price-guide-cost</loc>
+    <lastmod>2026-05-25</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/villa-interior-mistakes-gurgaon</loc>
-    <lastmod>2026-08-24</lastmod>
+    <loc>https://www.indevastudio.com/insights/villa-interior-designers-delhi-ncr-price-guide-cost-cost-guide</loc>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
@@ -1588,33 +910,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.indevastudio.com/insights/wardrobe-design-ideas-for-bedroom-india-step-by</loc>
-    <lastmod>2026-06-06</lastmod>
+    <loc>https://www.indevastudio.com/insights/wardrobe-design-ideas-for-bedroom</loc>
+    <lastmod>2026-05-10</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/wardrobe-material-comparison-delhi-ncr</loc>
     <lastmod>2026-08-30</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/wardrobe-material-cost-delhi</loc>
-    <lastmod>2026-08-30</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/weekend-farmhouse-interior-design-cost</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/weekend-farmhouse-interior-design-gurgaon</loc>
-    <lastmod>2026-06-13</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.indevastudio.com/insights/weekend-farmhouse-interior-design-mistakes</loc>
-    <lastmod>2026-07-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>

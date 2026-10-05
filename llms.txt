@@ -1,23 +1,35 @@
 # Indéva Studio
 
-> Indéva Studio is a Delhi-based premium interior design, construction, custom furniture manufacturing, and turnkey execution practice serving clients across Delhi NCR. Founded and led by Principal Designer Arpit Saini, the studio combines an advertising and brand-building background with end-to-end design execution.
+> Indéva Studio is a Delhi-based interior design, construction, custom furniture and turnkey execution studio serving Delhi NCR. It is founded and led by Arpit Saini, and its work spans residential, hospitality and commercial projects, from planning and design through site execution and handover.
 
-## About
-- [Homepage](https://www.indevastudio.com/): Overview of Indéva Studio's interior design and turnkey execution practice.
-- [Insights](https://www.indevastudio.com/insights): Articles and design insights on interior design, materials, and execution.
+## Pages
+- [Home](https://www.indevastudio.com/): Overview of the studio, services and selected work.
+- [About](https://www.indevastudio.com/about): The founder and the studio's approach.
+- [Services](https://www.indevastudio.com/services): Architecture and interior design, furniture and joinery, project execution.
+- [Projects](https://www.indevastudio.com/projects): Completed residential, hospitality and commercial projects.
+- [Process](https://www.indevastudio.com/process): How a project runs, from enquiry to handover.
+- [Insights](https://www.indevastudio.com/insights): Articles on interior design costs, materials and planning in Delhi NCR.
+- [Contact](https://www.indevastudio.com/contact): Enquiry form, phone and studio address.
 
-## Services
-- Interior Design (residential and premium builder-floor projects)
-- Turnkey Construction & Execution
-- Custom Furniture Manufacturing
+## Projects
+- [Hotel Silk by Resham, Murthal](https://www.indevastudio.com/projects/hotel-silk-murthal)
+- [South Delhi neo-classical residence](https://www.indevastudio.com/projects/south-delhi-neoclassical-residence)
+- [Vasant Kunj DDA residence](https://www.indevastudio.com/projects/vasant-kunj-dda-residence)
+- [Mini farmhouse, Delhi](https://www.indevastudio.com/projects/mini-farmhouse-delhi)
+- [DDA apartment, Delhi](https://www.indevastudio.com/projects/dda-apartment-delhi)
+- [Studio workspace, Gurgaon](https://www.indevastudio.com/projects/studio-workspace-gurgaon)
+- [Patel Nagar retail store](https://www.indevastudio.com/projects/patel-nagar-retail-store)
 
-## Locations Served
-- Delhi
-- Gurgaon
-- Noida
-- Sonipat
+## Areas served
+- [Delhi](https://www.indevastudio.com/delhi)
+- [South Delhi](https://www.indevastudio.com/south-delhi-interior-designer)
+- [Gurgaon](https://www.indevastudio.com/gurgaon)
+- [Noida](https://www.indevastudio.com/noida)
+- [Sonipat](https://www.indevastudio.com/sonipat)
+- Narela
 
 ## Contact
+- Address: 34/11, Lampur Rd, Industrial Area, Narela, Delhi 110040
 - Phone: +91 97178 81083
 - Email: hello@indevastudio.com
-- Website: https://www.indevastudio.com
+- Instagram: https://www.instagram.com/indeva.studio

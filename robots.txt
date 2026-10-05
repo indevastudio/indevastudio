@@ -1,7 +1,8 @@
+# indevastudio.com
+# Everything public is crawlable. Private client pages (cost builders) and
+# thin articles are kept out of search with X-Robots-Tag: noindex headers in
+# vercel.json, which crawlers can only see if they are allowed to fetch them.
 User-agent: *
 Allow: /
-Disallow: /Sahil_Mann_Cost_Builder
-Disallow: /deepanshi-cost-builder
-Disallow: /nitin-jain-cost-builder
 
 Sitemap: https://www.indevastudio.com/sitemap.xml
