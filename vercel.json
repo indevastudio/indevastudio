@@ -1,931 +1,2105 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "redirects": [
     {
-      "source": "/interior-designer-delhi",
-      "destination": "/delhi",
-      "permanent": true
+      "source": "/insights/penthouse-cost-guide-gurgaon",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/interior-designer-gurgaon",
-      "destination": "/gurgaon",
-      "permanent": true
+      "source": "/insights/penthouse-cost-guide-gurgaon/",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/interior-designer-noida",
-      "destination": "/noida",
-      "permanent": true
+      "source": "/insights/penthouse-cost-guide-gurgaon-cost-guide",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/interior-designer-south-delhi",
-      "destination": "/south-delhi-interior-designer",
-      "permanent": true
+      "source": "/insights/penthouse-cost-guide-gurgaon-cost-guide/",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study",
-      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
-      "permanent": true
+      "source": "/insights/penthouse-design-cost-guide-gurgaon",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study",
-      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
-      "permanent": true
+      "source": "/insights/penthouse-design-cost-guide-gurgaon/",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-cost-budget",
-      "destination": "/insights/affordable-luxury-interior-design-delhi-ncr",
-      "permanent": true
+      "source": "/insights/penthouse-furniture-cost-guide",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/avoid-mistakes-luxury-interior-vasant-vihar",
-      "destination": "/insights/mistakes-in-vasant-vihar-home-design",
-      "permanent": true
+      "source": "/insights/penthouse-furniture-cost-guide/",
+      "destination": "/insights/penthouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bedroom-false-ceiling-design-ideas",
-      "destination": "/insights/bedroom-false-ceiling-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/penthouse-interior-design-mistakes",
+      "destination": "/insights/penthouse-renovation-mistakes-gurgaon/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bedroom-false-ceiling-design-ideas-india-mistakes-to",
-      "destination": "/insights/bedroom-false-ceiling-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/penthouse-interior-design-mistakes/",
+      "destination": "/insights/penthouse-renovation-mistakes-gurgaon/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step",
-      "destination": "/insights/bedroom-false-ceiling-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/avoiding-mistakes-in-luxury-apartment-design",
+      "destination": "/insights/penthouse-renovation-mistakes-gurgaon/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bespoke-interior-design-ideas-indian-homes",
-      "destination": "/insights/bespoke-interior-design-ideas-for-indian-homes-design",
-      "permanent": true
+      "source": "/insights/avoiding-mistakes-in-luxury-apartment-design/",
+      "destination": "/insights/penthouse-renovation-mistakes-gurgaon/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bespoke-interior-design-ideas-indian-homes-design-ideas",
-      "destination": "/insights/bespoke-interior-design-ideas",
-      "permanent": true
+      "source": "/insights/penthouse-interior-design-gurgaon-guide",
+      "destination": "/insights/penthouse-renovation-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bespoke-villa-interior-design-mistakes",
-      "destination": "/insights/bespoke-villa-interior-design-noida",
-      "permanent": true
+      "source": "/insights/penthouse-interior-design-gurgaon-guide/",
+      "destination": "/insights/penthouse-renovation-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to",
-      "destination": "/insights/bespoke-villa-interior-design-noida",
-      "permanent": true
+      "source": "/insights/luxury-penthouse-interior-design-gurgaon",
+      "destination": "/insights/penthouse-renovation-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/best-luxury-interior-designers-near-me-delhi-case",
-      "destination": "/insights/luxury-interior-designers-near-me-delhi",
-      "permanent": true
+      "source": "/insights/luxury-penthouse-interior-design-gurgaon/",
+      "destination": "/insights/penthouse-renovation-gurgaon-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/best-luxury-interior-designers-near-me-delhi-case-case-study",
-      "destination": "/insights/luxury-interior-designers-near-me-delhi",
-      "permanent": true
+      "source": "/insights/interior-boq-vs-quotation-guide-material-comparison-2",
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/choose-luxury-farmhouse-designer-delhi",
-      "destination": "/insights/choose-luxury-farmhouse-designer",
-      "permanent": true
-    },
-    {
-      "source": "/insights/contemporary-interior-design-trends",
-      "destination": "/insights/contemporary-interior-design-trends-india-2025-cost-budget-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/contemporary-interior-design-trends-india-2025-case-study",
-      "destination": "/insights/contemporary-interior-design-trends-india-2025-cost-budget-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/contemporary-interior-design-trends-india-2025-cost-budget",
-      "destination": "/insights/contemporary-interior-design-trends-india-2025-cost-budget-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/contemporary-villa-living-room-design",
-      "destination": "/insights/contemporary-villa-living-room-design-india-expert-perspective",
-      "permanent": true
-    },
-    {
-      "source": "/insights/contemporary-villa-living-room-design-india-design-ideas",
-      "destination": "/insights/contemporary-villa-living-room-design-india-expert-perspective",
-      "permanent": true
-    },
-    {
-      "source": "/insights/couple-bedroom-interior-design-delhi-case-study-style",
-      "destination": "/insights/couple-bedroom-interior-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/couple-bedroom-interior-design-delhi-step-by-step",
-      "destination": "/insights/couple-bedroom-interior-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/false-ceiling-design-for-living-room-india-expert",
-      "destination": "/insights/false-ceiling-design-living-room",
-      "permanent": true
-    },
-    {
-      "source": "/insights/false-ceiling-design-for-living-room-india-step",
-      "destination": "/insights/false-ceiling-design-living-room",
-      "permanent": true
-    },
-    {
-      "source": "/insights/false-ceiling-design-for-living-room-india-step-step-by-step",
-      "destination": "/insights/false-ceiling-design-living-room",
-      "permanent": true
-    },
-    {
-      "source": "/insights/false-ceiling-lighting-guide-delhi-ncr",
-      "destination": "/insights/false-ceiling-lighting-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/false-ceiling-lighting-material-comparison",
-      "destination": "/insights/false-ceiling-lighting-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-bedroom-interior-design",
-      "destination": "/insights/farmhouse-bedroom-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-bedroom-interior-design-india-expert-insights",
-      "destination": "/insights/farmhouse-bedroom-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-furniture-cost-guide-gurgaon",
-      "destination": "/insights/farmhouse-furniture-cost-guide-gurgaon-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-interior-cost-south-delhi-mistakes",
-      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-interior-design-ideas-india-case-study-style",
-      "destination": "/insights/farmhouse-interior-design-ideas-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-interior-design-ideas-india-cost-guide",
-      "destination": "/insights/farmhouse-interior-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-kitchen-design-ideas",
-      "destination": "/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration",
-      "destination": "/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-living-room-design-ideas-india",
-      "destination": "/insights/farmhouse-living-room-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-living-room-design-ideas-india-mistakes-to",
-      "destination": "/insights/farmhouse-living-room-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-living-room-design-ideas-india-step-by",
-      "destination": "/insights/farmhouse-living-room-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-villa-interior-design-gurgaon-case-study",
-      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to",
-      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/farmhouse-villa-interior-design-mistakes",
-      "destination": "/insights/farmhouse-villa-interior-design-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/fine-dining-restaurant-design-ideas-india-case-study",
-      "destination": "/insights/fine-dining-restaurant-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/fine-dining-restaurant-design-ideas-india-expert-perspective",
-      "destination": "/insights/fine-dining-restaurant-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/fine-dining-restaurant-design-ideas-india-mistakes-to",
-      "destination": "/insights/fine-dining-restaurant-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/fine-dining-restaurant-design-ideas-step-by-step",
-      "destination": "/insights/fine-dining-restaurant-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/flat-interior-design-cost-delhi",
-      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
-      "permanent": true
-    },
-    {
-      "source": "/insights/flat-interior-design-delhi-cost",
-      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
-      "permanent": true
-    },
-    {
-      "source": "/insights/flat-interior-design-delhi-cost-per-sqft-design",
-      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
-      "permanent": true
-    },
-    {
-      "source": "/insights/flat-interior-design-delhi-cost-per-sqft-step",
-      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
-      "permanent": true
-    },
-    {
-      "source": "/insights/full-home-interior-design-cost",
-      "destination": "/insights/interior-design-cost-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/full-home-interior-design-cost-gurgaon",
-      "destination": "/insights/interior-design-cost-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/full-home-interior-design-cost-gurgaon-step-by",
-      "destination": "/insights/interior-design-cost-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/gurgaon-full-home-interior-design-cost",
-      "destination": "/insights/interior-design-cost-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/gurgaon-villa-interior-design-cost",
-      "destination": "/insights/gurgaon-villa-interior-design-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/hauz-khas-interior-design-cost-guide-cost-guide",
-      "destination": "/insights/hauz-khas-interior-design-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-case",
-      "destination": "/insights/high-end-cafe-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-case-case-study",
-      "destination": "/insights/high-end-cafe-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-design",
-      "destination": "/insights/high-end-cafe-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/high-end-cafe-design-delhi-design-ideas",
-      "destination": "/insights/high-end-cafe-design-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/high-end-interior-design-cost-guide",
-      "destination": "/insights/high-end-interior-design-services-india-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/home-interior-design-costs-defence-colony",
-      "destination": "/insights/defence-colony-interior-design-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/interior-boq-vs-quotation-guide",
-      "destination": "/insights/interior-boq-vs-quotation-guide-material-comparison-2",
-      "permanent": true
+      "source": "/insights/interior-boq-vs-quotation-guide-material-comparison-2/",
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
       "source": "/insights/interior-boq-vs-quotation-guide-material-comparison",
-      "destination": "/insights/interior-boq-vs-quotation-guide-material-comparison-2",
-      "permanent": true
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/interior-design-services-delhi-ncr",
-      "destination": "/insights/interior-design-services-delhi-ncr-reviews-cost-budget",
-      "permanent": true
+      "source": "/insights/interior-boq-vs-quotation-guide-material-comparison/",
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/interior-design-services-delhi-ncr-reviews-step-by",
-      "destination": "/insights/interior-design-services-delhi-ncr-reviews-cost-budget",
-      "permanent": true
+      "source": "/insights/interior-design-boq-quotation",
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/interior-designer-sonipat-ncr-expert-opinion-expert-perspective",
-      "destination": "/insights/interior-designer-sonipat-ncr",
-      "permanent": true
+      "source": "/insights/interior-design-boq-quotation/",
+      "destination": "/insights/interior-boq-vs-quotation-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/interior-execution-timeline-material-choice",
-      "destination": "/insights/interior-execution-timeline-india",
-      "permanent": true
+      "source": "/insights/reading-material-boq-guide",
+      "destination": "/insights/read-interior-design-boq-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/kids-bedroom-luxury-design-ideas-india-case-study",
-      "destination": "/insights/kids-bedroom-luxury-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/reading-material-boq-guide/",
+      "destination": "/insights/read-interior-design-boq-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/kids-bedroom-luxury-design-ideas-india-cost-budget",
-      "destination": "/insights/kids-bedroom-luxury-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/reading-interior-design-boq",
+      "destination": "/insights/read-interior-design-boq-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/kids-bedroom-luxury-design-mistakes",
-      "destination": "/insights/kids-bedroom-luxury-design-ideas-india-step-by",
-      "permanent": true
+      "source": "/insights/reading-interior-design-boq/",
+      "destination": "/insights/read-interior-design-boq-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/kitchen-cabinet-material-comparison",
-      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
-      "permanent": true
+      "source": "/insights/carcass-construction-guide-delhi",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/kitchen-cabinet-material-comparison-delhi-ncr",
-      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
-      "permanent": true
+      "source": "/insights/carcass-construction-guide-delhi/",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/living-room-interior-cost-estimate-delhi-case-study",
-      "destination": "/insights/living-room-interior-cost-delhi",
-      "permanent": true
+      "source": "/insights/carcass-construction-comparison-delhi-ncr",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/living-room-tv-unit-design-ideas",
-      "destination": "/insights/living-room-tv-unit-design-ideas-india-step",
-      "permanent": true
+      "source": "/insights/carcass-construction-comparison-delhi-ncr/",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/living-room-tv-unit-design-ideas-india-design",
-      "destination": "/insights/living-room-tv-unit-design-ideas-india-step",
-      "permanent": true
+      "source": "/insights/carcass-construction-material-comparison",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr",
-      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr-step-by",
-      "permanent": true
+      "source": "/insights/carcass-construction-material-comparison/",
+      "destination": "/insights/carcass-construction-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study",
-      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr-step-by",
-      "permanent": true
+      "source": "/insights/material-comparison-for-delhi-ncr-homes",
+      "destination": "/insights/plywood-hdhmr-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study",
-      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr-step-by",
-      "permanent": true
+      "source": "/insights/material-comparison-for-delhi-ncr-homes/",
+      "destination": "/insights/plywood-hdhmr-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/luxury-bedroom-design-ideas-india",
-      "destination": "/insights/luxury-bedroom-design-ideas",
-      "permanent": true
+      "source": "/insights/choose-plywood-delhi-ncr",
+      "destination": "/insights/best-plywood-brands-india-comparison/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/luxury-bedroom-design-ideas-indian-homes-mistakes-to",
-      "destination": "/insights/luxury-bedroom-design-mistakes",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-farmhouse-design-delhi-ncr-case-study-case",
-      "destination": "/insights/luxury-farmhouse-design-delhi-ncr",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-farmhouse-design-delhi-ncr-design-ideas",
-      "destination": "/insights/luxury-farmhouse-design-delhi-ncr",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-farmhouse-design-delhi-ncr-ideas-design-ideas",
-      "destination": "/insights/luxury-farmhouse-design-delhi-ncr",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-home-interior-design-cost-delhi",
-      "destination": "/insights/luxury-interior-design-costs-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
-      "destination": "/insights/luxury-interior-design-costs-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost-cost-guide",
-      "destination": "/insights/luxury-interior-design-costs-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-mistakes",
-      "destination": "/insights/luxury-interior-design-costs-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-home-interior-design-cost-guide",
-      "destination": "/insights/luxury-interior-design-costs-delhi",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to",
-      "destination": "/insights/luxury-interior-design-company-noida",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-interior-design-costs-in-gurgaon",
-      "destination": "/insights/interior-design-cost-gurgaon",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-interior-design-mistakes-noida",
-      "destination": "/insights/luxury-interior-design-company-noida",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-living-room-interior-design-delhi",
-      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide",
-      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide",
-      "destination": "/insights/luxury-living-room-interior-design-delhi-case-study",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-restaurant-interior-design",
-      "destination": "/insights/luxury-restaurant-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-restaurant-interior-design-india-case-study-case",
-      "destination": "/insights/luxury-restaurant-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-bedroom-design-ideas",
-      "destination": "/insights/luxury-villa-bedroom-design-ideas-india-step-by",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas",
-      "destination": "/insights/luxury-villa-bedroom-design-ideas-india-step-by",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas-design-ideas",
-      "destination": "/insights/luxury-villa-bedroom-design-ideas-india-step-by",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-interior-design-india-expert-insights",
-      "destination": "/insights/luxury-villa-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/luxury-villa-interior-design-india-step-by-step",
-      "destination": "/insights/luxury-villa-interior-design-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/master-bedroom-interior-design",
-      "destination": "/insights/master-bedroom-interior-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/master-bedroom-interior-design-ideas-india-design-ideas",
-      "destination": "/insights/master-bedroom-interior-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/master-bedroom-interior-design-ideas-india-expert-perspective",
-      "destination": "/insights/master-bedroom-interior-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/materials-false-ceiling-lighting-delhi-ncr",
-      "destination": "/insights/false-ceiling-lighting-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-cafe-interior-design-delhi-ncr",
-      "destination": "/insights/modern-cafe-interior-design-delhi-ncr-costs-cost",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-cafe-interior-design-delhi-ncr-cost-guide",
-      "destination": "/insights/modern-cafe-interior-design-cost",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-farmhouse-interior-design-cost",
-      "destination": "/insights/modern-farmhouse-interior-design-cost-india-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-farmhouse-interior-design-cost-cost-guide",
-      "destination": "/insights/modern-farmhouse-interior-design-cost-india-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-farmhouse-interior-design-cost-india-expert-perspective",
-      "destination": "/insights/modern-farmhouse-interior-design-cost-india-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-living-room-design-ideas",
-      "destination": "/insights/modern-living-room-design-ideas-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-living-room-design-india-2025-expert-perspective",
-      "destination": "/insights/modern-living-room-design-ideas-india",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-villa-design-ideas-indian-homes-case-study",
-      "destination": "/insights/modern-villa-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/modern-villa-design-ideas-indian-homes-design-ideas",
-      "destination": "/insights/modern-villa-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/penthouse-cost-guide-gurgaon",
-      "destination": "/insights/penthouse-cost-guide-gurgaon-cost-guide",
-      "permanent": true
-    },
-    {
-      "source": "/insights/plotted-home-interior-design-sonipat",
-      "destination": "/insights/plotted-home-interior-design-sonipat-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/plotted-home-interior-design-sonipat-expert-insights",
-      "destination": "/insights/plotted-home-interior-design-sonipat-design-ideas",
-      "permanent": true
-    },
-    {
-      "source": "/insights/plywood-for-kitchen-comparison",
-      "destination": "/insights/hdhmr-plywood-kitchen-comparison",
-      "permanent": true
+      "source": "/insights/choose-plywood-delhi-ncr/",
+      "destination": "/insights/best-plywood-brands-india-comparison/",
+      "statusCode": 301
     },
     {
       "source": "/insights/plywood-for-wardrobe-material-comparison",
-      "destination": "/insights/best-plywood-wardrobe-guide",
-      "permanent": true
+      "destination": "/insights/best-plywood-wardrobe-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-interior-designers-delhi-ncr-cost",
-      "destination": "/insights/premium-interior-designers-delhi-ncr-cost-guide-cost",
-      "permanent": true
+      "source": "/insights/plywood-for-wardrobe-material-comparison/",
+      "destination": "/insights/best-plywood-wardrobe-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-interior-designers-delhi-ncr-step-by-step",
-      "destination": "/insights/premium-interior-designers-delhi-ncr",
-      "permanent": true
+      "source": "/insights/plywood-for-kitchen-comparison",
+      "destination": "/insights/hdhmr-plywood-kitchen-comparison/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-master-suite-design-mistakes",
-      "destination": "/insights/premium-master-suite-design",
-      "permanent": true
+      "source": "/insights/plywood-for-kitchen-comparison/",
+      "destination": "/insights/hdhmr-plywood-kitchen-comparison/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-restaurant-design-ideas",
-      "destination": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget",
-      "permanent": true
+      "source": "/insights/kitchen-cabinet-material-comparison-delhi-ncr",
+      "destination": "/insights/kitchen-cabinet-material-comparison/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-restaurant-design-ideas-design-ideas",
-      "destination": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget",
-      "permanent": true
+      "source": "/insights/kitchen-cabinet-material-comparison-delhi-ncr/",
+      "destination": "/insights/kitchen-cabinet-material-comparison/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget-cost-guide",
-      "destination": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget",
-      "permanent": true
+      "source": "/insights/wardrobe-material-cost-delhi",
+      "destination": "/insights/wardrobe-material-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-ambience-design-cost",
-      "destination": "/insights/restaurant-ambience-design-cost-india-step-by-step",
-      "permanent": true
+      "source": "/insights/wardrobe-material-cost-delhi/",
+      "destination": "/insights/wardrobe-material-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-ambience-design-cost-india-case-study-style",
-      "destination": "/insights/restaurant-ambience-design-cost-india-step-by-step",
-      "permanent": true
+      "source": "/insights/custom-wardrobe-material-comparison",
+      "destination": "/insights/wardrobe-material-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-ambience-design-cost-india-design-ideas-inspiration",
-      "destination": "/insights/restaurant-ambience-design-cost-india-step-by-step",
-      "permanent": true
+      "source": "/insights/custom-wardrobe-material-comparison/",
+      "destination": "/insights/wardrobe-material-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-design-cost-delhi-case-study",
-      "destination": "/insights/restaurant-interior-design-cost-delhi",
-      "permanent": true
+      "source": "/insights/laminate-brand-comparison-delhi-ncr",
+      "destination": "/insights/laminate-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-design-cost-delhi-case-study-case",
-      "destination": "/insights/restaurant-interior-design-cost-delhi",
-      "permanent": true
+      "source": "/insights/laminate-brand-comparison-delhi-ncr/",
+      "destination": "/insights/laminate-comparison-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-design-cost-delhi-expert-insights",
-      "destination": "/insights/restaurant-interior-design-cost-delhi",
-      "permanent": true
+      "source": "/insights/hardware-brands-interior-comparison",
+      "destination": "/insights/hardware-comparison-interior-materials/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-design-cost-delhi-guide-cost-budget",
-      "destination": "/insights/restaurant-interior-design-cost-delhi",
-      "permanent": true
+      "source": "/insights/hardware-brands-interior-comparison/",
+      "destination": "/insights/hardware-comparison-interior-materials/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study",
-      "destination": "/insights/restaurant-interior-designer-delhi-ncr",
-      "permanent": true
+      "source": "/insights/choose-flooring-indian-homes",
+      "destination": "/insights/best-flooring-material-indian-homes/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study-case",
-      "destination": "/insights/restaurant-interior-designer-delhi-ncr",
-      "permanent": true
+      "source": "/insights/choose-flooring-indian-homes/",
+      "destination": "/insights/best-flooring-material-indian-homes/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-designers-gurgaon",
-      "destination": "/insights/restaurant-interior-designers-gurgaon-design-ideas",
-      "permanent": true
+      "source": "/insights/flooring-material-comparison",
+      "destination": "/insights/best-flooring-material-indian-homes/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/restaurant-interior-designers-gurgaon-step-by-step",
-      "destination": "/insights/restaurant-interior-designers-gurgaon-design-ideas",
-      "permanent": true
+      "source": "/insights/flooring-material-comparison/",
+      "destination": "/insights/best-flooring-material-indian-homes/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/rustic-luxury-farmhouse-design-delhi-expert-insights",
-      "destination": "/insights/rustic-luxury-farmhouse-design-delhi",
-      "permanent": true
+      "source": "/insights/false-ceiling-lighting-material-comparison",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/sofa-set-design-ideas-indian-living-room",
-      "destination": "/insights/sofa-set-design-ideas-indian-living-room-cost",
-      "permanent": true
+      "source": "/insights/false-ceiling-lighting-material-comparison/",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/sofa-set-design-ideas-indian-living-room-design",
-      "destination": "/insights/sofa-set-design-ideas-indian-living-room-cost",
-      "permanent": true
+      "source": "/insights/false-ceiling-lighting-design-ideas",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/false-ceiling-lighting-design-ideas/",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/materials-false-ceiling-lighting-delhi-ncr",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/materials-false-ceiling-lighting-delhi-ncr/",
+      "destination": "/insights/false-ceiling-lighting-guide-delhi-ncr/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-execution-timeline-material-choice",
+      "destination": "/insights/interior-execution-timeline-india/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-execution-timeline-material-choice/",
+      "destination": "/insights/interior-execution-timeline-india/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modular-kitchen-material-cost-guide",
+      "destination": "/insights/modular-kitchen-cost-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modular-kitchen-material-cost-guide/",
+      "destination": "/insights/modular-kitchen-cost-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-gurgaon-guide",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-gurgaon-guide/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-cost-gurgaon",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-cost-gurgaon/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-villa-interior-design-cost-guide",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-villa-interior-design-cost-guide/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-golf-course-road-gurgaon",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-golf-course-road-gurgaon/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-golf-course-extension-road",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-golf-course-extension-road/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-guide-golf-course-extension",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-guide-golf-course-extension/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/golf-course-extension-road-villa-cost-guide",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/golf-course-extension-road-villa-cost-guide/",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-mistakes-gurgaon",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-mistakes-gurgaon/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-villa-design-gurgaon",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-villa-design-gurgaon/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-modern-villa-designer-gurgaon",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-modern-villa-designer-gurgaon/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-costly-mistakes-in-villa-interior-design",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-costly-mistakes-in-villa-interior-design/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/golf-course-road-residential-design-mistakes",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/golf-course-road-residential-design-mistakes/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-pitfalls-golf-course-extension-road",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-pitfalls-golf-course-extension-road/",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-guide-south-delhi",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-guide-south-delhi/",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-interior-cost-south-delhi",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-interior-cost-south-delhi/",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-designer-mistakes-south-delhi",
+      "destination": "/insights/villa-renovation-mistakes-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-designer-mistakes-south-delhi/",
+      "destination": "/insights/villa-renovation-mistakes-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-villa-renovation-mistakes",
+      "destination": "/insights/villa-renovation-mistakes-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-villa-renovation-mistakes/",
+      "destination": "/insights/villa-renovation-mistakes-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-furniture-design-south-delhi",
+      "destination": "/insights/villa-furniture-cost-guide-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-furniture-design-south-delhi/",
+      "destination": "/insights/villa-furniture-cost-guide-south-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-cost-guide",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-cost-guide/",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-renovation-south-delhi-cost-guide",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-renovation-south-delhi-cost-guide/",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-design-cost-guide",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-design-cost-guide/",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/cost-guide-farmhouse-designer-sainik-farms",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/cost-guide-farmhouse-designer-sainik-farms/",
+      "destination": "/insights/farmhouse-interior-cost-south-delhi-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-cost-south-delhi-mistakes",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-cost-south-delhi-mistakes/",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-farmhouse-design-mistakes",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-farmhouse-design-mistakes/",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-designer-mistakes-guide",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-designer-mistakes-guide/",
+      "destination": "/insights/farmhouse-design-south-delhi-mistakes/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-renovation-gurgaon-cost-guide",
+      "destination": "/insights/farmhouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-renovation-gurgaon-cost-guide/",
+      "destination": "/insights/farmhouse-interior-cost-gurgaon-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-furniture-cost-guide-gurgaon-cost-guide",
+      "destination": "/insights/farmhouse-furniture-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-furniture-cost-guide-gurgaon-cost-guide/",
+      "destination": "/insights/farmhouse-furniture-cost-guide-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-mistakes-gurgaon",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-interior-mistakes-gurgaon/",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-farmhouse-designer-mistakes",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-farmhouse-designer-mistakes/",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-mistakes-in-farmhouse-interior-design",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoiding-mistakes-in-farmhouse-interior-design/",
+      "destination": "/insights/farmhouse-design-mistakes-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/choose-luxury-farmhouse-designer",
+      "destination": "/insights/choose-luxury-farmhouse-designer-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/choose-luxury-farmhouse-designer/",
+      "destination": "/insights/choose-luxury-farmhouse-designer-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-farmhouse-interior-design-process",
+      "destination": "/insights/hiring-farmhouse-interior-designer-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-farmhouse-interior-design-process/",
+      "destination": "/insights/hiring-farmhouse-interior-designer-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-design-process-gurgaon",
+      "destination": "/insights/hiring-farmhouse-interior-designer-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-design-process-gurgaon/",
+      "destination": "/insights/hiring-farmhouse-interior-designer-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/step-by-step-sohna-road-farmhouse-design",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/step-by-step-sohna-road-farmhouse-design/",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-sohna-road",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-sohna-road/",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/sohna-road-interior-designer",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/sohna-road-interior-designer/",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-sohna-road-mistakes",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-sohna-road-mistakes/",
+      "destination": "/insights/farmhouse-interior-guide-sohna-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-interior-cost-guide",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-interior-cost-guide/",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-cost-gurgaon-budget-guide",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-cost-gurgaon-budget-guide/",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-costs-in-gurgaon",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-costs-in-gurgaon/",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/planning-luxury-apartment-gurgaon",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/planning-luxury-apartment-gurgaon/",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/turnkey-interior-cost-gurgaon-guide",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/turnkey-interior-cost-gurgaon-guide/",
+      "destination": "/insights/interior-design-cost-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/dlf-gurgaon-apartment-cost-guide",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/dlf-gurgaon-apartment-cost-guide/",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-apartment-cost-dlf-gurgaon",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-apartment-cost-dlf-gurgaon/",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-dlf-gurgaon-step-guide",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-dlf-gurgaon-step-guide/",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-gurgaon",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-gurgaon/",
+      "destination": "/insights/dlf-gurgaon-interior-design-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-guide-new-gurgaon",
+      "destination": "/insights/cost-guide-residential-interior-designer-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-cost-guide-new-gurgaon/",
+      "destination": "/insights/cost-guide-residential-interior-designer-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-hiring-interior-designer-new-gurgaon",
+      "destination": "/insights/luxury-interior-mistakes-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-hiring-interior-designer-new-gurgaon/",
+      "destination": "/insights/luxury-interior-mistakes-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/residential-interior-design-mistakes",
+      "destination": "/insights/luxury-interior-mistakes-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/residential-interior-design-mistakes/",
+      "destination": "/insights/luxury-interior-mistakes-new-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/corporate-interior-cost-gurgaon-guide",
+      "destination": "/insights/corporate-interior-designer-gurgaon-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/corporate-interior-cost-gurgaon-guide/",
+      "destination": "/insights/corporate-interior-designer-gurgaon-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/office-interior-design-cost-guide",
+      "destination": "/insights/corporate-interior-designer-gurgaon-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/office-interior-design-cost-guide/",
+      "destination": "/insights/corporate-interior-designer-gurgaon-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-wardrobe-mistakes-gurgaon",
+      "destination": "/insights/avoid-mistakes-custom-wardrobe-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-wardrobe-mistakes-gurgaon/",
+      "destination": "/insights/avoid-mistakes-custom-wardrobe-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-interior-renovation-gurgaon",
+      "destination": "/insights/avoid-costly-mistakes-interior-execution-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-interior-renovation-gurgaon/",
+      "destination": "/insights/avoid-costly-mistakes-interior-execution-gurgaon/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-interior-designer-delhi",
+      "destination": "/insights/common-mistakes-interior-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-interior-designer-delhi/",
+      "destination": "/insights/common-mistakes-interior-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-in-luxury-interior-design",
+      "destination": "/insights/common-mistakes-interior-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-in-luxury-interior-design/",
+      "destination": "/insights/common-mistakes-interior-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-costs-delhi",
+      "destination": "/insights/delhi-luxury-interior-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-costs-delhi/",
+      "destination": "/insights/delhi-luxury-interior-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-guide",
+      "destination": "/insights/delhi-luxury-interior-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-guide/",
+      "destination": "/insights/delhi-luxury-interior-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-bespoke-furniture-mistakes-delhi",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-bespoke-furniture-mistakes-delhi/",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-furniture-design-mistakes",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-furniture-design-mistakes/",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/common-mistakes-in-luxury-furniture-delhi",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/common-mistakes-in-luxury-furniture-delhi/",
+      "destination": "/insights/avoid-mistakes-custom-furniture-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/turnkey-interior-mistakes-south-delhi",
+      "destination": "/insights/avoid-turnkey-mistakes-delhi/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/turnkey-interior-mistakes-south-delhi/",
+      "destination": "/insights/avoid-turnkey-mistakes-delhi/",
+      "statusCode": 301
     },
     {
       "source": "/insights/south-delhi-interior-design-cost-guide",
-      "destination": "/insights/interior-design-cost-south-delhi-guide",
-      "permanent": true
+      "destination": "/insights/interior-design-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/top-interior-designers-delhi-farmhouse-step-by-step",
-      "destination": "/insights/top-interior-designers-delhi-farmhouse",
-      "permanent": true
+      "source": "/insights/south-delhi-interior-design-cost-guide/",
+      "destination": "/insights/interior-design-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/villa-interior-design-cost-delhi-ncr-design-ideas",
-      "destination": "/insights/villa-interior-design-cost-delhi-ncr",
-      "permanent": true
+      "source": "/insights/estimating-home-renovation-south-delhi",
+      "destination": "/insights/interior-design-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/villa-interior-design-cost-delhi-ncr-expert-perspective",
-      "destination": "/insights/villa-interior-design-cost-delhi-ncr",
-      "permanent": true
+      "source": "/insights/estimating-home-renovation-south-delhi/",
+      "destination": "/insights/interior-design-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/villa-interior-design-cost-delhi-ncr-mistakes-mistakes",
-      "destination": "/insights/villa-interior-design-cost-delhi-ncr",
-      "permanent": true
+      "source": "/insights/estimate-2bhk-interior-south-delhi",
+      "destination": "/insights/2-bhk-interior-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost",
-      "destination": "/insights/villa-interior-designers-delhi-ncr-price",
-      "permanent": true
+      "source": "/insights/estimate-2bhk-interior-south-delhi/",
+      "destination": "/insights/2-bhk-interior-cost-south-delhi-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost-cost-guide",
-      "destination": "/insights/villa-interior-designers-delhi-ncr-price",
-      "permanent": true
+      "source": "/insights/hiring-1bhk-interior-designer-south-delhi",
+      "destination": "/insights/cost-guide-1bhk-interior-designer-south-delhi/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/wardrobe-design-ideas-for-bedroom",
-      "destination": "/insights/wardrobe-design-ideas-for-bedroom-india-step-by",
-      "permanent": true
+      "source": "/insights/hiring-1bhk-interior-designer-south-delhi/",
+      "destination": "/insights/cost-guide-1bhk-interior-designer-south-delhi/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/wardrobe-design-ideas-for-bedroom-india-design-ideas",
-      "destination": "/insights/wardrobe-design-ideas-for-bedroom-india-step-by",
-      "permanent": true
+      "source": "/insights/corporate-interior-cost-guide-south-delhi",
+      "destination": "/insights/cost-guide-commercial-interior-designer-south-delhi/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/wardrobe-design-ideas-india",
-      "destination": "/insights/wardrobe-design-ideas-for-bedroom-india-step-by",
-      "permanent": true
+      "source": "/insights/corporate-interior-cost-guide-south-delhi/",
+      "destination": "/insights/cost-guide-commercial-interior-designer-south-delhi/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/weekend-farmhouse-interior-design-gurgaon-costs-cost-budget",
-      "destination": "/insights/weekend-farmhouse-interior-design-cost",
-      "permanent": true
+      "source": "/insights/luxury-interior-designer-defence-colony-cost",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/mini-farmhouse",
-      "destination": "/projects/mini-farmhouse-delhi",
-      "permanent": true
+      "source": "/insights/luxury-interior-designer-defence-colony-cost/",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/resham-hotel",
-      "destination": "/projects/hotel-silk-murthal",
-      "permanent": true
+      "source": "/insights/home-interior-design-costs-defence-colony",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/dda-apartment",
-      "destination": "/projects/dda-apartment-delhi",
-      "permanent": true
+      "source": "/insights/home-interior-design-costs-defence-colony/",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/studio-workspace",
-      "destination": "/projects/studio-workspace-gurgaon",
-      "permanent": true
+      "source": "/insights/mistakes-avoid-interior-designer-defence-colony",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/vasant-kunj",
-      "destination": "/projects/vasant-kunj-dda-residence",
-      "permanent": true
+      "source": "/insights/mistakes-avoid-interior-designer-defence-colony/",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/patel-nagar",
-      "destination": "/projects/patel-nagar-retail-store",
-      "permanent": true
+      "source": "/insights/avoid-costly-interior-design-mistakes-defence-colony",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/south-delhi-neoclassical",
-      "destination": "/projects/south-delhi-neoclassical-residence",
-      "permanent": true
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/projects/hotel-silk-murthal",
-      "destination": "/project-hotel-silk-murthal"
+      "source": "/insights/avoid-costly-interior-design-mistakes-defence-colony/",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/south-delhi-neoclassical-residence",
-      "destination": "/project-south-delhi-neoclassical-residence"
+      "source": "/insights/hire-interior-designer-defence-colony",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/vasant-kunj-dda-residence",
-      "destination": "/project-vasant-kunj-dda-residence"
+      "source": "/insights/hire-interior-designer-defence-colony/",
+      "destination": "/insights/defence-colony-interior-design-cost-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/mini-farmhouse-delhi",
-      "destination": "/project-mini-farmhouse-delhi"
+      "source": "/insights/avoid-mistakes-interior-designer-friends-colony",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/dda-apartment-delhi",
-      "destination": "/project-dda-apartment-delhi"
+      "source": "/insights/avoid-mistakes-interior-designer-friends-colony/",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/studio-workspace-gurgaon",
-      "destination": "/project-studio-workspace-gurgaon"
+      "source": "/insights/interior-designer-friends-colony-guide",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/patel-nagar-retail-store",
-      "destination": "/project-patel-nagar-retail-store"
+      "source": "/insights/interior-designer-friends-colony-guide/",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/about",
-      "destination": "/index.html"
+      "source": "/insights/avoid-mistakes-friends-colony-interior-design",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/services",
-      "destination": "/services/index.html"
+      "source": "/insights/avoid-mistakes-friends-colony-interior-design/",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/process",
-      "destination": "/index.html"
+      "source": "/insights/residential-interior-designer-friends-colony",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects",
-      "destination": "/projects/index.html"
+      "source": "/insights/residential-interior-designer-friends-colony/",
+      "destination": "/insights/friends-colony-interior-design-guide/",
+      "statusCode": 301
     },
     {
-      "source": "/projects/:slug",
-      "destination": "/projects/:slug/index.html"
+      "source": "/insights/choose-home-interior-designer-panchsheel-park",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/philosophy",
-      "destination": "/index.html"
+      "source": "/insights/choose-home-interior-designer-panchsheel-park/",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/insights",
-      "destination": "/index.html"
+      "source": "/insights/luxury-interior-designer-panchsheel-park-cost-guide",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/:slug",
-      "destination": "/insights/:slug/index.html"
+      "source": "/insights/luxury-interior-designer-panchsheel-park-cost-guide/",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/insights/:slug*",
-      "destination": "/index.html"
+      "source": "/insights/avoid-mistakes-home-interior-designer-panchsheel",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/vendors",
-      "destination": "/index.html"
+      "source": "/insights/avoid-mistakes-home-interior-designer-panchsheel/",
+      "destination": "/insights/hire-luxury-designer-panchsheel-park/",
+      "statusCode": 301
     },
     {
-      "source": "/furniture",
-      "destination": "/index.html"
+      "source": "/insights/avoid-mistakes-luxury-interior-vasant-vihar",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
     },
     {
-      "source": "/contact",
-      "destination": "/index.html"
+      "source": "/insights/avoid-mistakes-luxury-interior-vasant-vihar/",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-vasant-virar-guide",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-design-vasant-virar-guide/",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-in-vasant-vihar-home-design",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/mistakes-in-vasant-vihar-home-design/",
+      "destination": "/insights/choose-home-interior-designer-vasant-vihar/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-vasant-kunj",
+      "destination": "/insights/step-by-step-vasant-kunj-interior/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-vasant-kunj/",
+      "destination": "/insights/step-by-step-vasant-kunj-interior/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hauz-khas-interior-design-cost-guide-cost-guide",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hauz-khas-interior-design-cost-guide-cost-guide/",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hauz-khas-interior-design-cost-guide",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hauz-khas-interior-design-cost-guide/",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-hauz-khas-interior-design",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-mistakes-hauz-khas-interior-design/",
+      "destination": "/insights/hiring-home-interior-designer-hauz-khas/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/residential-interior-designer-greater-kailash-guide",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/residential-interior-designer-greater-kailash-guide/",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-design-mistakes-greater-kailash",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-design-mistakes-greater-kailash/",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/greater-kailash-budget-interior-design",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/greater-kailash-budget-interior-design/",
+      "destination": "/insights/luxury-interior-designer-greater-kailash-cost-guide/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-maharani-bagh",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/avoid-costly-mistakes-maharani-bagh/",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/maharani-bagh-interior-mistakes",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/maharani-bagh-interior-mistakes/",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-maharani-bagh-cost-guide",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-maharani-bagh-cost-guide/",
+      "destination": "/insights/bungalow-makeover-maharani-bagh/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-golf-course-road-guide",
+      "destination": "/insights/choose-interior-designer-golf-course-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-interior-designer-golf-course-road-guide/",
+      "destination": "/insights/choose-interior-designer-golf-course-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hiring-residential-designer-golf-course-extension-road",
+      "destination": "/insights/villa-interior-designer-golf-course-extension-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/hiring-residential-designer-golf-course-extension-road/",
+      "destination": "/insights/villa-interior-designer-golf-course-extension-road/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/bespoke-interior-design-ideas-indian-homes",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/bespoke-interior-design-ideas-indian-homes/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/best-interior-designer-dehradun-farmhouse-step-by-step",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/best-interior-designer-dehradun-farmhouse-step-by-step/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/best-luxury-interior-designers-near-me-delhi-case-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/best-luxury-interior-designers-near-me-delhi-case-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/couple-bedroom-interior-design-delhi-case-study-style",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/couple-bedroom-interior-design-delhi-case-study-style/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-case-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-case-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-design-services-delhi-ncr-reviews-step-by",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-design-services-delhi-ncr-reviews-step-by/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-in-gurgaon-villa",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-in-gurgaon-villa/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-sonipat-ncr-expert-opinion-expert-perspective",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/interior-designer-sonipat-ncr-expert-opinion-expert-perspective/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/kids-bedroom-luxury-design-ideas-india-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/kids-bedroom-luxury-design-ideas-india-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/living-room-interior-cost-estimate-delhi-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/living-room-interior-cost-estimate-delhi-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-farmhouse-design-delhi-ncr-case-study-case",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-farmhouse-design-delhi-ncr-case-study-case/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-designer-gurgaon-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-designer-gurgaon-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-design-ideas-indian-homes",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-design-ideas-indian-homes/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-design-ideas-indian-homes-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-villa-design-ideas-indian-homes-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-ambience-design-cost-india-case-study-style",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-ambience-design-cost-india-case-study-style/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-expert-insights",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-delhi-expert-insights/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study/",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/sonipat-ncr-interior-designer-insights",
+      "destination": "/insights/",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/sonipat-ncr-interior-designer-insights/",
+      "destination": "/insights/",
+      "statusCode": 301
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/insights/luxury-bedroom-design-ideas-india-cost-guide/",
       "headers": [
         {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },
     {
-      "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|svg|gif|ico)",
+      "source": "/insights/fine-dining-restaurant-design-ideas-step-by-step/",
       "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=2592000"
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },
     {
-      "source": "/sitemap.xml",
+      "source": "/insights/living-room-tv-unit-design-ideas-cost-guide/",
       "headers": [
         {
-          "key": "Content-Type",
-          "value": "application/xml; charset=utf-8"
-        },
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-mistakes-avoid/",
+      "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600"
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/sofa-set-design-ideas-indian-living-room-cost/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/false-ceiling-design-living-room/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/high-end-cafe-design-delhi-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-restaurant-interior-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-master-suite-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-mistakes/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-living-room-design-ideas-india-step-by/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/modern-cafe-interior-design-delhi-ncr-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-restaurant-design-ideas-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/weekend-farmhouse-interior-design-gurgaon-costs-cost-budget/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/master-bedroom-interior-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/sonipat-farmhouse-interior-design-cost/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/living-room-interior-cost-estimate-delhi/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/rustic-luxury-farmhouse-design-delhi-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/wardrobe-design-ideas-for-bedroom-india-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-interior-design-company-noida/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-living-room-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/bespoke-interior-design-ideas-for-indian-homes-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-interior-designers-delhi-ncr-step-by-step/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/contemporary-interior-design-trends-india-2025-cost-budget-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/full-home-interior-design-cost-gurgaon/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-bedroom-interior-design-india-expert-insights/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/flat-interior-design-delhi-cost-per-sqft-step/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-delhi-ncr-expert-perspective/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/bedroom-false-ceiling-design-ideas-india-mistakes-to/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/contemporary-villa-living-room-design-india-expert-perspective/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/high-end-interior-design-mistakes/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/modern-farmhouse-interior-design-cost-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-interior-design-ideas-india-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/restaurant-interior-design-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/bespoke-villa-interior-design-noida-mistakes-mistakes-to/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/modern-living-room-design-mistakes/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/open-plan-living-room-design-india-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-villa-interior-design-gurgaon-mistakes-mistakes-to/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-living-room-interior-design-delhi-cost-guide-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/fine-dining-restaurant-design-ideas-india-expert-perspective/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/living-room-tv-unit-design-ideas-india-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-ideas-india/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/plotted-home-interior-design-sonipat-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-restaurant-interior-design-cost/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/sofa-set-design-ideas-indian-living-room-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/false-ceiling-design-for-living-room-india-expert/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-farmhouse-design-delhi-ncr-ideas-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-living-room-design-ideas-india/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/best-luxury-interior-designers-near-me/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-cost-budget/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-master-suite-design/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/weekend-farmhouse-interior-design-mistakes/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/modern-cafe-interior-design-cost/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/interior-design-delhi-ncr-mistakes/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-restaurant-design-ideas-india-2025-cost-budget-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/master-bedroom-interior-design-ideas-india-expert-perspective/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/kids-bedroom-luxury-design-ideas-india-step-by/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/restaurant-interior-designer-delhi-ncr-cost-guide/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-interior-designer-sonipat/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/wardrobe-design-ideas-india/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/rustic-luxury-farmhouse-design-delhi-expert-insights/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-villa-bedroom-design-ideas-india-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/luxury-interior-design-company-noida-mistakes-mistakes-to/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/restaurant-ambience-design-cost-india-design-ideas-inspiration/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/premium-interior-designers-delhi-ncr/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/contemporary-interior-design-trends-india-2025-cost-budget/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/full-home-interior-design-cost-gurgaon-step-by/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration-design-ideas/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     },
@@ -935,19 +2109,6 @@
         {
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(css|js|woff2?|ttf)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
         }
       ]
     }
