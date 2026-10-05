@@ -73,7 +73,8 @@
     "Cost Guide for Hiring a Villa Interior Designer in New Gurgaon",
     "Avoid Costly Mistakes in Farmhouse Interior Design Sainik Farms",
     "Step‑by‑Step Guide from a Luxury Interior Designer Hauz Khas",
-    "Avoid Costly Pitfalls: Guide to Turnkey Interior Cost Gurgaon"
+    "Avoid Costly Pitfalls: Guide to Turnkey Interior Cost Gurgaon",
+    "Marble vs Tile Flooring Cost: Technical Guide for Delhi NCR"
   ],
   "slugs": [
     "villa-interior-cost-south-delhi-guide",
@@ -149,7 +150,8 @@
     "cost-guide-villa-interior-new-gurgaon",
     "farmhouse-interior-mistakes-sainik-farms",
     "luxury-interior-designer-hauz-khas-guide",
-    "turnkey-interior-cost-gurgaon-mistakes"
+    "turnkey-interior-cost-gurgaon-mistakes",
+    "marble-vs-tile-flooring-cost-guide"
   ],
   "usedKeywords": [
     "villa interior cost South Delhi",
@@ -225,7 +227,8 @@
     "villa interior designer New Gurgaon",
     "farmhouse interior design Sainik Farms",
     "luxury interior designer Hauz Khas",
-    "turnkey interior cost Gurgaon"
+    "turnkey interior cost Gurgaon",
+    "marble vs tile flooring cost"
   ],
   "summaries": [
     "A data‑focused guide reveals what really drives villa interior expenses in South Delhi and shows how to budget ₹25‑50 lakh wisely.",
@@ -301,10 +304,10 @@
     "Understanding cost drivers and smart negotiation can keep a villa interior design project within a ₹15–25 lakh budget in New Gurgaon.",
     "The article lists common budgeting and design mistakes in farmhouse interior design Sainik Farms and offers precise fixes.",
     "A practical, numbered process helps first‑time clients work with indéva studio to achieve a high‑end interior in Hauz Khas without surprise costs.",
-    "The article exposes frequent budgeting mistakes in Gurgaon interior projects and provides concrete fixes to protect the client’s wallet."
+    "The article exposes frequent budgeting mistakes in Gurgaon interior projects and provides concrete fixes to protect the client’s wallet.",
+    "The article explains how marble and tile differ in material properties, cost structures, and long‑term performance, helping Delhi NCR homeowners make an informed flooring decision."
   ],
   "lastAngles": [
-    "mistakes-avoid",
     "cost-guide",
     "mistakes-avoid",
     "cost-guide",
@@ -343,7 +346,8 @@
     "cost-guide",
     "mistakes-avoid",
     "step-by-step",
-    "mistakes-avoid"
+    "mistakes-avoid",
+    "material-comparison"
   ],
   "canonicalGroups": [
     "south-delhi-villa-interior-designer",
@@ -419,7 +423,8 @@
     "locality-new-gurgaon",
     "south-delhi-farmhouse-interior-designer",
     "locality-hauz-khas",
-    "gurgaon-interior-cost-guide"
+    "gurgaon-interior-cost-guide",
+    "interior-flooring-material-guide"
   ],
   "targetUrls": [
     "/delhi",
@@ -495,7 +500,8 @@
     "/gurgaon",
     "/delhi",
     "/delhi",
-    "/gurgaon"
+    "/gurgaon",
+    "/#services"
   ],
   "contentTypes": [
     "SERVICE_PAGE",
@@ -571,6 +577,7 @@
     "LOCATION_PAGE",
     "SERVICE_PAGE",
     "LOCATION_PAGE",
+    "BLOG",
     "BLOG"
   ],
   "searchIntents": [
@@ -647,7 +654,8 @@
     "commercial",
     "commercial",
     "commercial",
-    "commercial"
+    "commercial",
+    "technical"
   ],
   "lastUsedDate": {
     "south-delhi-villa-interior-designer": "2026-09-24",
@@ -688,10 +696,10 @@
     "locality-vasant-vihar": "2026-09-17",
     "south-delhi-builder-floor-interior-designer": "2026-09-17",
     "delhi-interior-cost-guide": "2026-09-20",
-    "interior-hardware-fittings-guide": "2026-09-22"
+    "interior-hardware-fittings-guide": "2026-09-22",
+    "interior-flooring-material-guide": "2026-10-05"
   },
   "lastLocations": [
-    "Gurgaon",
     "Gurgaon",
     "Maharani Bagh",
     "South Delhi",
@@ -730,6 +738,7 @@
     "New Gurgaon",
     "South Delhi",
     "Hauz Khas",
-    "Gurgaon"
+    "Gurgaon",
+    "Delhi NCR"
   ]
 }
