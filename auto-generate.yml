@@ -1,0 +1,186 @@
+name: Auto Blog Publisher
+
+on:
+  schedule:
+    - cron: '30 22 * * *'   # 04:00 IST — post 1 (morning)
+    - cron: '30 10 * * *'   # 16:00 IST — post 2 (afternoon)
+  workflow_dispatch:         # Manual trigger from GitHub UI
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # full history so duplicate-slug check can scan existing files
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies (safe even if package.json absent)
+        run: |
+          if [ -f package.json ]; then npm install --no-audit --no-fund; fi
+
+      - name: Generate blog post
+        id: generate
+        env:
+          GROQ_API_KEY:        ${{ secrets.GROQ_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          INDEXNOW_KEY:        ${{ secrets.INDEXNOW_KEY }}
+        run: node scripts/generate-blogs.js
+
+      # Link, canonical and /insights listing fixes for the new post
+      # (one <h1>, no trailing slashes, no links to redirected URLs).
+      - name: Site-wide SEO fixes
+        run: |
+          if [ -f scripts/seo-apply.cjs ]; then node scripts/seo-apply.cjs; fi
+
+      # Sitemap is built by build-sitemap.cjs (repo root): it lists only
+      # canonical, indexable URLs — no redirected or noindex pages, no
+      # trailing slashes — and includes the project pages. If the script
+      # is missing, the committed sitemap.xml is left untouched.
+      - name: Rebuild sitemap.xml (canonical, indexable URLs only)
+        run: |
+          if [ -f build-sitemap.cjs ]; then
+            node build-sitemap.cjs
+          else
+            echo "⚠️  build-sitemap.cjs not found — keeping existing sitemap.xml"
+          fi
+
+      # ── NEW: feed.xml was never part of this pipeline — nothing wrote
+      # it, which is why it froze at whatever it last was manually built
+      # to. This step keeps it in sync with insights/ on every run,
+      # like the sitemap step above.
+      - name: Rebuild feed.xml from all insight pages
+        run: node scripts/feed.js
+
+      - name: Show what was generated
+        run: |
+          echo "── New files in insights/ ──"
+          git status --short insights/ || true
+          echo "── sitemap.xml entry count ──"
+          grep -c '<loc>' sitemap.xml 2>/dev/null || echo "0"
+          echo "── feed.xml item count ──"
+          grep -c '<item>' feed.xml 2>/dev/null || echo "0"
+          echo "── blog-memory.json head ──"
+          head -c 800 content/blog-memory.json 2>/dev/null || echo "(no memory file yet)"
+
+      - name: Pull latest before committing (avoid push races)
+        run: git pull --rebase origin main || true
+
+      - name: Commit and push
+        id: commit
+        run: |
+          git config user.name  "Indeva Bot"
+          git config user.email "bot@indevastudio.com"
+          git add insights/ insights.html sitemap*.xml feed.xml content/blog-memory.json
+          if git diff --staged --quiet; then
+            echo "⚠️  No changes to commit — script ran but produced nothing. Check logs above."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "auto: publish blog $(date +'%Y-%m-%d %H:%M IST')"
+          git push
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      # ── THE FIX: Trigger Vercel via Deploy Hook ───────────────────
+      # GitHub push alone doesn't trigger Vercel on this project (manual
+      # upload history overrode the GitHub connection). Without this step,
+      # posts commit successfully to GitHub but never go live — 404 on site.
+      - name: 🚀  Trigger Vercel deployment via Deploy Hook
+        if: steps.commit.outputs.committed == 'true'
+        run: |
+          echo "Triggering Vercel deployment..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}")
+          if [ "$RESPONSE" = "201" ]; then
+            echo "✅ Vercel deployment triggered successfully."
+          else
+            echo "⚠️  Deploy hook returned HTTP $RESPONSE"
+            echo "    Check your VERCEL_DEPLOY_HOOK secret is correct."
+          fi
+
+      - name: ⏳  Wait for Vercel to deploy (90s)
+        if: steps.commit.outputs.committed == 'true'
+        run: sleep 90
+
+      - name: Ping IndexNow (Bing / Yandex instant indexing)
+        if: steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: |
+          # Collect newly added insight URLs from the commit
+          SLUGS=$(git diff HEAD~1 --name-only 2>/dev/null | grep '^insights/' | grep 'index.html$' | sed 's|insights/\(.*\)/index.html|\1|')
+          if [ -z "$SLUGS" ]; then
+            echo "No new insight URLs to ping."
+            exit 0
+          fi
+          URL_LIST=""
+          for SLUG in $SLUGS; do
+            URL_LIST="${URL_LIST}\"https://www.indevastudio.com/insights/${SLUG}\","
+          done
+          URL_LIST="${URL_LIST%,}"  # remove trailing comma
+
+          echo "Pinging IndexNow for: $URL_LIST"
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"www.indevastudio.com\",
+              \"key\": \"${INDEXNOW_KEY}\",
+              \"keyLocation\": \"https://www.indevastudio.com/${INDEXNOW_KEY}.txt\",
+              \"urlList\": [${URL_LIST}]
+            }" && echo "IndexNow ping sent." || echo "IndexNow ping failed (non-fatal)."
+
+      - name: Send success email notification
+        if: success() && steps.commit.outputs.committed == 'true'
+        continue-on-error: true
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_TO:      ${{ secrets.NOTIFY_TO }}
+          NOTIFY_FROM:    ${{ secrets.NOTIFY_FROM }}
+        run: |
+          if [ -f scripts/email-notifier.js ]; then
+            node scripts/email-notifier.js
+          else
+            # Inline fallback notification via Resend
+            TO="${NOTIFY_TO:-ceo@indevastudio.com}"
+            FROM="${NOTIFY_FROM:-hello@indevastudio.com}"
+            DATE=$(date +'%Y-%m-%d %H:%M IST')
+            curl -s -X POST "https://api.resend.com/emails" \
+              -H "Authorization: Bearer ${RESEND_API_KEY}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"from\":    \"indéva automation <${FROM}>\",
+                \"to\":      [\"${TO}\"],
+                \"subject\": \"✓ blog published — ${DATE}\",
+                \"html\":    \"<p>A new blog post was published on <a href='https://www.indevastudio.com/insights'>indevastudio.com/insights</a>.</p><p>Sitemap updated. Feed updated. IndexNow pinged.</p>\"
+              }" && echo "Success email sent." || echo "Email send failed (non-fatal)."
+          fi
+
+      - name: Send failure email notification
+        if: failure()
+        continue-on-error: true
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_TO:      ${{ secrets.NOTIFY_TO }}
+          NOTIFY_FROM:    ${{ secrets.NOTIFY_FROM }}
+        run: |
+          TO="${NOTIFY_TO:-ceo@indevastudio.com}"
+          FROM="${NOTIFY_FROM:-hello@indevastudio.com}"
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -s -X POST "https://api.resend.com/emails" \
+            -H "Authorization: Bearer ${RESEND_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"from\":    \"indéva automation <${FROM}>\",
+              \"to\":      [\"${TO}\"],
+              \"subject\": \"✗ blog automation FAILED — $(date +'%Y-%m-%d')\",
+              \"html\":    \"<p>The scheduled blog automation run <strong>failed</strong>.</p><p><a href='${RUN_URL}'>View the GitHub Actions log</a> to diagnose the issue.</p><p>No blog was published today for this run.</p>\"
+            }" && echo "Failure email sent." || echo "Could not send failure email."

@@ -1,4 +1,7 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -766,9 +769,417 @@
       "source": "/insights/sonipat-ncr-interior-designer-insights",
       "destination": "/insights",
       "statusCode": 301
+    },
+    {
+      "source": "/interior-designer-delhi",
+      "destination": "/delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/interior-designer-gurgaon",
+      "destination": "/gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/interior-designer-noida",
+      "destination": "/noida",
+      "statusCode": 301
+    },
+    {
+      "source": "/interior-designer-south-delhi",
+      "destination": "/south-delhi-interior-designer",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/dda-apartment",
+      "destination": "/projects/dda-apartment-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/mini-farmhouse",
+      "destination": "/projects/mini-farmhouse-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/patel-nagar",
+      "destination": "/projects/patel-nagar-retail-store",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/resham-hotel",
+      "destination": "/projects/hotel-silk-murthal",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/south-delhi-neoclassical",
+      "destination": "/projects/south-delhi-neoclassical-residence",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/studio-workspace",
+      "destination": "/projects/studio-workspace-gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/projects/vasant-kunj",
+      "destination": "/projects/vasant-kunj-dda-residence",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-dda-apartment-delhi",
+      "destination": "/projects/dda-apartment-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-mini-farmhouse-delhi",
+      "destination": "/projects/mini-farmhouse-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-patel-nagar-retail-store",
+      "destination": "/projects/patel-nagar-retail-store",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-hotel-silk-murthal",
+      "destination": "/projects/hotel-silk-murthal",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-south-delhi-neoclassical-residence",
+      "destination": "/projects/south-delhi-neoclassical-residence",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-studio-workspace-gurgaon",
+      "destination": "/projects/studio-workspace-gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/project-vasant-kunj-dda-residence",
+      "destination": "/projects/vasant-kunj-dda-residence",
+      "statusCode": 301
+    },
+    {
+      "source": "/public/:path*",
+      "destination": "/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study/2-bhk-interior-cost-gurgaon-guide",
+      "destination": "/insights/2-bhk-interior-cost-gurgaon-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step",
+      "destination": "/insights/bedroom-false-ceiling-design-ideas",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/contemporary-interior-design-trends-india-2025-case-study",
+      "destination": "/insights/contemporary-interior-design-trends",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/contemporary-villa-living-room-design-india-design-ideas",
+      "destination": "/insights/contemporary-villa-living-room-design",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/false-ceiling-design-for-living-room-india-step-step-by-step",
+      "destination": "/insights/false-ceiling-design-for-living-room-india-step",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration",
+      "destination": "/insights/farmhouse-kitchen-design-ideas",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-living-room-design-ideas-india-mistakes-to",
+      "destination": "/insights/avoid-farmhouse-furniture-mistakes",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/farmhouse-villa-interior-design-mistakes",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/fine-dining-restaurant-design-ideas-india-case-study",
+      "destination": "/insights/fine-dining-restaurant-design-ideas-india-mistakes-to",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/flat-interior-design-cost-delhi",
+      "destination": "/insights/flat-interior-design-delhi-cost",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/flat-interior-design-delhi-cost-per-sqft-design",
+      "destination": "/insights/flat-interior-design-delhi-cost",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/gurgaon-villa-interior-design-cost",
+      "destination": "/insights/villa-interior-cost-guide-gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/high-end-cafe-and-restaurant-design-delhi-case",
+      "destination": "/insights/high-end-cafe-and-restaurant-design-delhi-design",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-bedroom-design-cost-delhi-ncr-case-study",
+      "destination": "/insights/luxury-bedroom-design-cost-delhi-ncr",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-farmhouse-design-delhi-ncr-design-ideas",
+      "destination": "/insights/choose-luxury-farmhouse-designer-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-home-interior-design-cost-delhi-2025-cost",
+      "destination": "/insights/luxury-home-interior-design-cost-delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-bedroom-design-ideas",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-india-expert-insights",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/luxury-villa-interior-design-india-step-by-step",
+      "destination": "/insights/villa-interior-cost-south-delhi-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-farmhouse-interior-design-cost-india-expert-perspective",
+      "destination": "/insights/modern-farmhouse-interior-design-cost",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/modern-living-room-design-india-2025-expert-perspective",
+      "destination": "/insights/modern-living-room-design-ideas",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/plotted-home-interior-design-sonipat-expert-insights",
+      "destination": "/insights/plotted-home-interior-design-sonipat",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/restaurant-interior-designers-gurgaon-step-by-step",
+      "destination": "/insights/restaurant-interior-cost-guide-gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-delhi-ncr-design-ideas",
+      "destination": "/insights/villa-interior-design-south-delhi-guide",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-design-cost-delhi-ncr-mistakes-mistakes",
+      "destination": "/insights/villa-interior-design-gurgaon-mistakes",
+      "statusCode": 301
+    },
+    {
+      "source": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost-cost-guide",
+      "destination": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/projects/dda-apartment-delhi",
+      "destination": "/project-dda-apartment-delhi.html"
+    },
+    {
+      "source": "/projects/mini-farmhouse-delhi",
+      "destination": "/project-mini-farmhouse-delhi.html"
+    },
+    {
+      "source": "/projects/patel-nagar-retail-store",
+      "destination": "/project-patel-nagar-retail-store.html"
+    },
+    {
+      "source": "/projects/hotel-silk-murthal",
+      "destination": "/project-hotel-silk-murthal.html"
+    },
+    {
+      "source": "/projects/south-delhi-neoclassical-residence",
+      "destination": "/project-south-delhi-neoclassical-residence.html"
+    },
+    {
+      "source": "/projects/studio-workspace-gurgaon",
+      "destination": "/project-studio-workspace-gurgaon.html"
+    },
+    {
+      "source": "/projects/vasant-kunj-dda-residence",
+      "destination": "/project-vasant-kunj-dda-residence.html"
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(webp|jpg|jpeg|png|gif|svg|ico|avif|woff2?|ttf|otf|css|js|pdf|mp4)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap(.*).xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/feed.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/site.webmanifest",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
+      ]
+    },
+    {
+      "source": "/Sahil_Mann_Cost_Builder",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/deepanshi-cost-builder",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/Deepanshi_Cost_Builder",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/nitin-jain-cost-builder",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/tools/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/404",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
     {
       "source": "/insights/luxury-bedroom-design-ideas-india-cost-guide",
       "headers": [
@@ -2003,11 +2414,38 @@
       ]
     },
     {
-      "source": "/robots.txt",
+      "source": "/insights/affordable-luxury-interior-design-delhi-ncr-case-study",
       "headers": [
         {
-          "key": "Content-Type",
-          "value": "text/plain; charset=utf-8"
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/best-luxury-interior-designers-near-me-delhi-case",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/farmhouse-interior-design-ideas-india-case-study-style",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/insights/restaurant-interior-designer-delhi-ncr-case-study-case",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
         }
       ]
     }

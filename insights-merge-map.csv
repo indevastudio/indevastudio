@@ -391,3 +391,73 @@ old_url,action,new_url,reason
 /insights/why-we-refuse-to-start-with-moodboards,keep,,
 /insights/avoid-renovation-mistakes-south-delhi,keep,,
 /insights/choose-restaurant-designer-south-delhi,keep,,
+/insights/affordable-luxury-interior-design-delhi-ncr-case-study,noindex,,2026-10-06 audit: presented as a case study of a project that can't be verified; rewrite before indexing
+/insights/affordable-luxury-interior-design-delhi-ncr-case-study/2-bhk-interior-cost-gurgaon-guide,301,/insights/2-bhk-interior-cost-gurgaon-guide,2026-10-06 audit: duplicate copy in a nested folder
+/insights/bedroom-false-ceiling-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/bedroom-false-ceiling-design-ideas-india-step-by-step-by-step,301,/insights/bedroom-false-ceiling-design-ideas,2026-10-06 audit: slug variant of the same article topic
+/insights/bespoke-interior-design-ideas-indian-homes-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/bespoke-villa-interior-design-mistakes,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/best-luxury-interior-designers-near-me-delhi-case,noindex,,2026-10-06 audit: presented as a case study of a project that can't be verified; rewrite before indexing
+/insights/contemporary-interior-design-trends,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/contemporary-interior-design-trends-india-2025-case-study,301,/insights/contemporary-interior-design-trends,2026-10-06 audit: slug variant of the same article topic
+/insights/contemporary-villa-living-room-design,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/contemporary-villa-living-room-design-india-design-ideas,301,/insights/contemporary-villa-living-room-design,2026-10-06 audit: slug variant of the same article topic
+/insights/couple-bedroom-interior-design-delhi-step-by-step,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/false-ceiling-design-for-living-room-india-step,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/false-ceiling-design-for-living-room-india-step-step-by-step,301,/insights/false-ceiling-design-for-living-room-india-step,2026-10-06 audit: slug variant of the same article topic
+/insights/farmhouse-bedroom-interior-design,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/farmhouse-interior-design-ideas-india-case-study-style,noindex,,2026-10-06 audit: presented as a case study of a project that can't be verified; rewrite before indexing
+/insights/farmhouse-kitchen-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/farmhouse-kitchen-design-ideas-india-design-ideas-inspiration,301,/insights/farmhouse-kitchen-design-ideas,2026-10-06 audit: slug variant of the same article topic
+/insights/farmhouse-living-room-design-ideas-india-mistakes-to,301,/insights/avoid-farmhouse-furniture-mistakes,2026-10-06 audit: same search intent as kept article (title overlap 0.6)
+/insights/farmhouse-villa-interior-design-mistakes,301,/insights/villa-interior-design-gurgaon-mistakes,2026-10-06 audit: same search intent as kept article (title overlap 0.67)
+/insights/fine-dining-restaurant-design-ideas-india-case-study,301,/insights/fine-dining-restaurant-design-ideas-india-mistakes-to,2026-10-06 audit: case-study variant of the same topic
+/insights/fine-dining-restaurant-design-ideas-india-mistakes-to,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/flat-interior-design-cost-delhi,301,/insights/flat-interior-design-delhi-cost,2026-10-06 audit: same topic as flat-interior-design-delhi-cost
+/insights/flat-interior-design-delhi-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/flat-interior-design-delhi-cost-per-sqft-design,301,/insights/flat-interior-design-delhi-cost,2026-10-06 audit: same topic as flat-interior-design-delhi-cost
+/insights/full-home-interior-design-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/gurgaon-full-home-interior-design-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/gurgaon-villa-interior-design-cost,301,/insights/villa-interior-cost-guide-gurgaon,2026-10-06 audit: same search intent as kept article (title overlap 0.67)
+/insights/high-end-cafe-and-restaurant-design-delhi-case,301,/insights/high-end-cafe-and-restaurant-design-delhi-design,2026-10-06 audit: case-study variant of the same topic
+/insights/high-end-cafe-and-restaurant-design-delhi-design,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/high-end-interior-design-cost-guide,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/interior-design-services-delhi-ncr,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/kids-bedroom-luxury-design-ideas-india-cost-budget,keep,,2026-10-06 audit: different search intent from the mistakes article
+/insights/kids-bedroom-luxury-design-mistakes,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/living-room-tv-unit-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-bedroom-design-cost-delhi-ncr,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-bedroom-design-cost-delhi-ncr-case-study,301,/insights/luxury-bedroom-design-cost-delhi-ncr,2026-10-06 audit: slug variant of the same article topic
+/insights/luxury-bedroom-design-ideas-indian-homes-mistakes-to,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-farmhouse-design-delhi-ncr-design-ideas,301,/insights/choose-luxury-farmhouse-designer-delhi,2026-10-06 audit: same search intent as kept article (title overlap 0.71)
+/insights/luxury-home-interior-design-cost-delhi,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-home-interior-design-cost-delhi-2025-cost,301,/insights/luxury-home-interior-design-cost-delhi,2026-10-06 audit: slug variant of the same article topic
+/insights/luxury-interior-design-mistakes-noida,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-living-room-interior-design-delhi-cost-guide,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/luxury-villa-bedroom-design-ideas,301,/insights/villa-interior-cost-south-delhi-guide,2026-10-06 audit: same search intent as kept article (title overlap 0.62)
+/insights/luxury-villa-interior-design-india-expert-insights,301,/insights/villa-interior-cost-south-delhi-guide,2026-10-06 audit: same search intent as kept article (title overlap 0.62)
+/insights/luxury-villa-interior-design-india-step-by-step,301,/insights/villa-interior-cost-south-delhi-guide,2026-10-06 audit: same search intent as kept article (title overlap 0.71)
+/insights/master-bedroom-interior-design-ideas-india-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/modern-cafe-interior-design-delhi-ncr,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/modern-farmhouse-interior-design-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/modern-farmhouse-interior-design-cost-india-expert-perspective,301,/insights/modern-farmhouse-interior-design-cost,2026-10-06 audit: slug variant of the same article topic
+/insights/modern-living-room-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/modern-living-room-design-india-2025-expert-perspective,301,/insights/modern-living-room-design-ideas,2026-10-06 audit: slug variant of the same article topic
+/insights/modern-villa-design-ideas-indian-homes-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/plotted-home-interior-design-sonipat,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/plotted-home-interior-design-sonipat-expert-insights,301,/insights/plotted-home-interior-design-sonipat,2026-10-06 audit: slug variant of the same article topic
+/insights/premium-interior-designers-delhi-ncr-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/premium-master-suite-design-mistakes,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/premium-restaurant-design-ideas,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/restaurant-ambience-design-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/restaurant-interior-design-cost-delhi-guide-cost-budget,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/restaurant-interior-designer-delhi-ncr-case-study-case,noindex,,2026-10-06 audit: presented as a case study of a project that can't be verified; rewrite before indexing
+/insights/restaurant-interior-designers-gurgaon,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/restaurant-interior-designers-gurgaon-step-by-step,301,/insights/restaurant-interior-cost-guide-gurgaon,2026-10-06 audit: same search intent as kept article (title overlap 0.62)
+/insights/sofa-set-design-ideas-indian-living-room,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/top-interior-designers-delhi-farmhouse-step-by-step,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/villa-interior-design-cost-delhi-ncr-design-ideas,301,/insights/villa-interior-design-south-delhi-guide,2026-10-06 audit: same search intent as kept article (title overlap 0.8)
+/insights/villa-interior-design-cost-delhi-ncr-mistakes-mistakes,301,/insights/villa-interior-design-gurgaon-mistakes,2026-10-06 audit: same search intent as kept article (title overlap 0.75)
+/insights/villa-interior-designers-delhi-ncr-price-guide-cost,keep,,2026-10-06 audit: unique topic; kept and linked from /insights
+/insights/villa-interior-designers-delhi-ncr-price-guide-cost-cost-guide,301,/insights/villa-interior-designers-delhi-ncr-price-guide-cost,2026-10-06 audit: slug variant with an identical title
+/insights/wardrobe-design-ideas-for-bedroom,keep,,2026-10-06 audit: unique topic; kept and linked from /insights

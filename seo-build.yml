@@ -1,0 +1,70 @@
+name: SEO build (pages, links, sitemap, feed)
+
+# Rebuilds everything derived from the source files and deploys to Vercel.
+# Runs automatically when a source file changes, or manually:
+# GitHub -> Actions -> "SEO build" -> Run workflow.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'site-app.html'
+      - 'vercel.json'
+      - 'build-pages.cjs'
+      - 'build-sitemap.cjs'
+      - 'scripts/seo-apply.cjs'
+      - 'scripts/feed.js'
+
+concurrency:
+  group: seo-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # feed.js reads first-commit dates from git history
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Site-wide link, canonical and listing fixes
+        run: node scripts/seo-apply.cjs
+
+      - name: Build pages from site-app.html
+        run: node build-pages.cjs
+
+      - name: Build sitemaps
+        run: node build-sitemap.cjs
+
+      - name: Build feed.xml
+        run: node scripts/feed.js
+
+      - name: Commit and push
+        run: |
+          git config user.name  "Indeva Bot"
+          git config user.email "bot@indevastudio.com"
+          git add -A -- '*.html' 'insights' 'sitemap*.xml' feed.xml
+          if git diff --staged --quiet; then
+            echo "Nothing to commit — everything already up to date."
+          else
+            git commit -m "seo-build: rebuild pages, links, sitemaps and feed"
+            git pull --rebase origin main
+            git push
+          fi
+
+      # Pushes to GitHub do not deploy this Vercel project on their own,
+      # so always call the deploy hook (also covers the commit that triggered this run).
+      - name: Deploy to Vercel
+        run: |
+          if [ -z "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
+            echo "::warning::VERCEL_DEPLOY_HOOK secret is not set — deploy manually from the Vercel dashboard."
+            exit 0
+          fi
+          CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}")
+          echo "Vercel deploy hook returned HTTP $CODE"

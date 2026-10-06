@@ -1,83 +1,93 @@
 #!/usr/bin/env node
 /**
  * indéva studio — sitemap builder (single source of truth)
- * Lives in the repo root. Run by .github/workflows/auto-generate.yml: node build-sitemap.cjs
+ * Run from the repo root: node build-sitemap.cjs
+ * Run by .github/workflows/auto-generate.yml and seo-build.yml.
  *
- * Includes only canonical, indexable URLs:
- *   - core pages, location pages, /projects and every project page
- *   - every insights/<slug>/index.html
- * Excludes:
- *   - any path that is a redirect source in vercel.json (consolidated / renamed URLs)
- *   - any page carrying <meta name="robots" content="noindex">
- * URLs have no trailing slash, matching vercel.json "trailingSlash": false.
+ * Writes a sitemap index plus one sitemap per content type:
+ *   sitemap.xml            -> index of the four files below
+ *   sitemap-pages.xml      -> home and core pages
+ *   sitemap-locations.xml  -> city / area landing pages
+ *   sitemap-projects.xml   -> /projects and every project page
+ *   sitemap-insights.xml   -> /insights and every indexable article
+ *
+ * A URL is listed only if it is canonical, indexable and live:
+ *   - its file exists
+ *   - it is not a redirect source in vercel.json
+ *   - it has no X-Robots-Tag noindex rule in vercel.json and no robots noindex meta
+ *   - its own <link rel="canonical"> points at itself
+ * URLs are absolute https://www, lowercase paths, no trailing slash.
  */
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = __dirname;
 const ORIGIN = 'https://www.indevastudio.com';
-
 const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
-const redirected = new Set((vercel.redirects || []).map(r => r.source.replace(/\/$/, '')));
-// Pages kept out of the index by an X-Robots-Tag: noindex header rule in vercel.json.
+const strip = s => (s.length > 1 ? s.replace(/\/+$/, '') : s);
+const redirected = new Set((vercel.redirects || []).map(r => strip(r.source)));
 const noindexHeader = new Set((vercel.headers || [])
   .filter(h => (h.headers || []).some(x => /^x-robots-tag$/i.test(x.key) && /noindex/i.test(x.value)))
-  .map(h => h.source.replace(/\/$/, '')));
+  .map(h => strip(h.source)));
+const rewrites = new Map((vercel.rewrites || []).map(r => [strip(r.source), r.destination.replace(/^\//, '')]));
 
-const CORE = [
-  ['/', '1.0'], ['/about', '0.8'], ['/services', '0.9'], ['/projects', '0.9'],
-  ['/contact', '0.7'], ['/furniture', '0.6'], ['/insights', '0.8'],
-  ['/delhi', '0.9'], ['/south-delhi-interior-designer', '0.9'], ['/gurgaon', '0.9'],
-  ['/noida', '0.8'], ['/sonipat', '0.8'], ['/vendors', '0.5'], ['/process', '0.6'], ['/philosophy', '0.5'],
-];
-const CORE_FILES = { '/': 'index.html', '/projects': 'projects.html', '/insights': 'insights/index.html' };
+const read = f => { try { return fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { return null; } };
+const isNoindexMeta = html => /<meta\s+name=["']robots["'][^>]*noindex/i.test(html);
+const canonicalOf = html => ((html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i) || [])[1] || '');
+const lastmodOf = html => ((html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/) ||
+                            html.match(/"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/) || [])[1] || null);
 
-function read(p) { try { return fs.readFileSync(p, 'utf8'); } catch { return null; } }
-function isNoindex(html) { return /<meta\s+name=["']robots["'][^>]*noindex/i.test(html); }
-function dateOf(html) {
-  const m = html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/) || html.match(/"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/);
-  return m ? m[1] : null;
-}
-function entry(loc, priority, lastmod) {
-  return ['  <url>', `    <loc>${ORIGIN}${loc === '/' ? '/' : loc}</loc>`,
-    lastmod ? `    <lastmod>${lastmod}</lastmod>` : null,
-    `    <priority>${priority}</priority>`, '  </url>'].filter(Boolean).join('\n');
-}
-
-const out = [];
-const seen = new Set();
-function add(loc, pri, file) {
-  if (seen.has(loc) || redirected.has(loc) || noindexHeader.has(loc)) return;
-  if (file) { const h = read(file); if (!h || isNoindex(h)) return; }
-  seen.add(loc); out.push(entry(loc, pri, file ? dateOf(read(file)) : null));
+const skipped = [];
+function entry(loc, file, priority) {
+  if (redirected.has(loc) || noindexHeader.has(loc)) return null;
+  if (loc !== loc.toLowerCase()) { skipped.push(`${loc} (uppercase)`); return null; }
+  const html = read(file);
+  if (!html) { skipped.push(`${loc} (no file ${file})`); return null; }
+  if (isNoindexMeta(html)) return null;
+  const want = ORIGIN + (loc === '/' ? '/' : loc);
+  if (canonicalOf(html) !== want) { skipped.push(`${loc} (canonical is ${canonicalOf(html) || 'missing'})`); return null; }
+  return { loc: want, lastmod: lastmodOf(html), priority };
 }
 
-CORE.forEach(([loc, pri]) => {
-  const file = path.join(ROOT, CORE_FILES[loc] || `${loc.slice(1)}.html`);
-  if (!fs.existsSync(file)) { console.warn(`  ! core page missing, skipped: ${loc}`); return; }
-  add(loc, pri, file);
-});
+const groups = { pages: [], locations: [], projects: [], insights: [] };
+const push = (g, e) => e && groups[g].push(e);
 
-// Project case studies are flat files (project-<slug>.html) served at
-// /projects/<slug> through rewrites in vercel.json.
-for (const r of (vercel.rewrites || [])) {
-  const m = r.destination.match(/^\/project-([a-z0-9-]+)(?:\.html)?$/);
-  if (m && r.source === `/projects/${m[1]}`) add(r.source, '0.8', path.join(ROOT, `project-${m[1]}.html`));
+[['/', 'index.html', '1.0'], ['/about', 'about.html', '0.8'], ['/services', 'services.html', '0.9'],
+ ['/process', 'process.html', '0.6'], ['/philosophy', 'philosophy.html', '0.5'], ['/furniture', 'furniture.html', '0.6'],
+ ['/vendors', 'vendors.html', '0.5'], ['/contact', 'contact.html', '0.7']]
+  .forEach(([loc, f, p]) => push('pages', entry(loc, f, p)));
+
+[['/delhi', '0.9'], ['/south-delhi-interior-designer', '0.9'], ['/gurgaon', '0.9'], ['/noida', '0.8'], ['/sonipat', '0.8']]
+  .forEach(([loc, p]) => push('locations', entry(loc, `${loc.slice(1)}.html`, p)));
+
+push('projects', entry('/projects', rewrites.get('/projects') || 'projects.html', '0.9'));
+for (const [src, dest] of rewrites) {
+  if (src.startsWith('/projects/')) push('projects', entry(src, dest, '0.8'));
 }
 
+push('insights', entry('/insights', 'insights/index.html', '0.8'));
 const insDir = path.join(ROOT, 'insights');
-let blogs = 0;
-if (fs.existsSync(insDir)) {
-  for (const slug of fs.readdirSync(insDir).sort()) {
-    const f = path.join(insDir, slug, 'index.html');
-    if (!fs.existsSync(f)) continue;
-    const before = out.length;
-    add(`/insights/${slug}`, '0.6', f);
-    if (out.length > before) blogs++;
-  }
+for (const slug of fs.existsSync(insDir) ? fs.readdirSync(insDir).sort() : []) {
+  if (!fs.existsSync(path.join(insDir, slug, 'index.html'))) continue;
+  push('insights', entry(`/insights/${slug}`, `insights/${slug}/index.html`, '0.6'));
 }
 
-const xml = ['<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ...out, '</urlset>', ''].join('\n');
-fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml);
-console.log(`sitemap.xml written — ${out.length} URLs (${blogs} insights); skipped redirected + noindex pages`);
+const xmlUrlset = list => ['<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...list.map(e => ['  <url>', `    <loc>${e.loc}</loc>`, e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
+    `    <priority>${e.priority}</priority>`, '  </url>'].filter(Boolean).join('\n')),
+  '</urlset>', ''].join('\n');
+
+const index = [];
+for (const [name, list] of Object.entries(groups)) {
+  const file = `sitemap-${name}.xml`;
+  fs.writeFileSync(path.join(ROOT, file), xmlUrlset(list));
+  const newest = list.map(e => e.lastmod).filter(Boolean).sort().pop();
+  index.push(['  <sitemap>', `    <loc>${ORIGIN}/${file}</loc>`, newest ? `    <lastmod>${newest}</lastmod>` : null, '  </sitemap>'].filter(Boolean).join('\n'));
+  console.log(`  ${file.padEnd(24)} ${list.length} URLs`);
+}
+fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), ['<?xml version="1.0" encoding="UTF-8"?>',
+  '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ...index, '</sitemapindex>', ''].join('\n'));
+const total = Object.values(groups).reduce((n, l) => n + l.length, 0);
+console.log(`sitemap.xml (index) written — ${total} URLs in ${index.length} sitemaps`);
+if (skipped.length) console.log('  skipped (fix these if they should be indexed):\n   - ' + skipped.join('\n   - '));

@@ -1,0 +1,37 @@
+# Files in the repo that must NOT be served on indevastudio.com.
+# Vercel: "Non-targeted files are prevented from being deployed and served."
+# Leading "/" = repo root only.
+
+# Old hosting folder (the site is served from the repo root, vercel.json "outputDirectory": ".")
+/public
+
+# Sources and duplicates of live pages
+/site-app.html
+/projects
+/services
+/insights.html
+/new-update-03 Sept
+/images-only
+/pshow.html
+/pshow-schema.html
+# old flat copies that would override the real articles in insights/<slug>/index.html
+/insights/modern-cafe-interior-design-delhi-ncr.html
+/insights/premium-living-room-design-gurgaon.html
+/insights/affordable-luxury-interior-design-delhi-ncr-case-study/2-bhk-interior-cost-gurgaon-guide
+
+# Tooling, automation and internal notes
+/.github
+/scripts
+/node_modules
+/content
+/package.json
+/package-lock.json
+/blogs.config.js
+/build-pages.cjs
+/build-sitemap.cjs
+/vercel.json.reference
+/patel-nagar-project-entry.txt
+*.md
+*.patch
+*.zip
+*.csv
