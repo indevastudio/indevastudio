@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F5F5F0">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Ledger">
 <title>Project Ledger | Indeva Studio</title>
+<link rel="manifest" href="/ledger.webmanifest">
+<link rel="icon" href="/ledger-icon-192.png">
+<link rel="apple-touch-icon" href="/ledger-icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,349 +21,475 @@
 :root{
   --paper:#F5F5F0; --card:#FFFFFF; --ink:#1E2422; --muted:#6B706C; --line:#DCDDD5;
   --brass:#8C6A2E; --brass-deep:#6F531F; --brass-soft:#EFE8D8;
-  --in:#2E6A4C; --in-soft:#E3EFE8; --out:#A5432F; --out-soft:#F5E4DF;
-  --focus:#2B5FA8;
+  --in:#2E6A4C; --in-soft:#E3EFE8; --out:#A5432F; --out-soft:#F5E4DF; --warn:#8A5A00; --warn-soft:#F6EBD3;
+  --focus:#2B5FA8; --nav-h:64px; --say-h:58px;
   font-family:"Schibsted Grotesk","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color:var(--ink); background:var(--paper);
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;min-height:100%}
-body{background:var(--paper);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.45}
+body{background:var(--paper);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.45;overscroll-behavior-y:contain}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums}
-.muted{color:var(--muted)}
-.in{color:var(--in)} .out{color:var(--out)}
+.muted{color:var(--muted)} .in{color:var(--in)} .out{color:var(--out)}
 [hidden]{display:none !important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Login */
+/* ---------- Login ---------- */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px}
-.login form{width:100%;max-width:360px;display:grid;gap:14px}
-.login h1{font-size:30px;line-height:1.1;margin:0 0 4px;font-weight:800;letter-spacing:-.02em}
+.login form{width:100%;max-width:380px;display:grid;gap:14px}
+.login h1{font-size:32px;line-height:1.1;margin:0 0 4px;font-weight:800;letter-spacing:-.02em}
+.check{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted);font-weight:500}
+.check input{width:18px;height:18px}
 
-/* Shell */
-header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
-  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 0}
+/* ---------- Header ---------- */
+header.top{position:sticky;top:0;z-index:20;background:rgba(245,245,240,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px}
 .top-row{display:flex;align-items:center;gap:10px;max-width:960px;margin:0 auto}
-.brand{font-weight:800;font-size:18px;letter-spacing:-.01em;margin-right:auto}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.01em;margin-right:auto;line-height:1.15}
 .brand small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
-.tabs{display:flex;gap:4px;max-width:960px;margin:10px auto 0}
-.tabs button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brass)}
-main{max-width:960px;margin:0 auto;padding:18px 16px calc(150px + env(safe-area-inset-bottom,0px))}
+.pill{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);white-space:nowrap}
+.pill.warn{background:var(--warn-soft);border-color:#E5D2A8;color:var(--warn)}
+.pill.ai{background:var(--brass-soft);border-color:#E2D3B3;color:var(--brass-deep)}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer;flex:none}
+.iconbtn svg{width:20px;height:20px}
 
-.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+main{max-width:960px;margin:0 auto;padding:16px 16px calc(var(--nav-h) + var(--say-h) + 40px + env(safe-area-inset-bottom,0px))}
+h2.page{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.btn{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer;white-space:nowrap;min-height:44px}
 .btn:hover{border-color:var(--ink)}
 .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
-.btn.small{padding:6px 10px;font-size:13px}
+.btn.brass{background:var(--brass);color:#fff;border-color:var(--brass)}
+.btn.small{padding:6px 12px;font-size:13px;min-height:36px}
 .btn.ghost{background:none;border-color:transparent}
 .btn.danger{color:var(--out)}
+.btn.block{width:100%}
 .btn:disabled{opacity:.5;cursor:default}
 
 label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
-input,select,textarea{width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px 12px;font-size:16px;font-weight:500}
-textarea{resize:vertical;min-height:64px}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:11px 12px;font-size:16px;font-weight:500;min-height:46px}
+textarea{resize:vertical;min-height:70px}
+input[type="date"]{-webkit-appearance:none;appearance:none;display:block;min-width:0;max-width:100%;text-align:left}
+input[type="date"]::-webkit-date-and-time-value{text-align:left}
+.grid2>*{min-width:0}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media (max-width:560px){.grid2{grid-template-columns:1fr}}
 
-/* Today */
-.day-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.day-head h2{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em}
-.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:16px 0 8px;border-top:2px solid var(--ink)}
-.flow div{padding:12px 12px 12px 0}
-.flow div+div{padding-left:12px;border-left:1px solid var(--line)}
-.flow span{display:block;font-size:12px;color:var(--muted);font-weight:600}
-.flow b{font-size:22px;font-weight:700;letter-spacing:-.01em}
-@media (max-width:480px){.flow b{font-size:17px}}
-.modes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.chip{font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+/* ---------- Today ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin:14px 0 10px;border-top:2px solid var(--ink)}
+.stats div{padding:10px 8px 10px 0}
+.stats div+div{padding-left:10px;border-left:1px solid var(--line)}
+.stats span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.stats b{font-size:22px;font-weight:700;letter-spacing:-.01em;display:block;overflow-wrap:anywhere}
+@media (max-width:480px){.stats b{font-size:17px}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+button.chip{cursor:pointer}
+.chip.warn{background:var(--warn-soft);border-color:#E5D2A8;color:var(--warn)}
+.chip.bad{background:var(--out-soft);border-color:#EAC9C0;color:var(--out)}
 
-.entries{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.entries li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
-.entries .what{font-weight:600}
-.entries .meta{font-size:13px;color:var(--muted);grid-column:1}
-.entries .amt{grid-row:1 / span 2;grid-column:2;align-self:center;font-weight:700;font-size:16px;text-align:right}
-.empty{padding:28px 0;color:var(--muted)}
-.try{display:flex;flex-direction:column;gap:8px;margin-top:12px;align-items:flex-start}
-.try button{border:1px dashed var(--brass);background:var(--brass-soft);color:var(--brass-deep);border-radius:8px;padding:8px 12px;cursor:pointer;text-align:left;font-weight:500}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list li{border-bottom:1px solid var(--line)}
+.entry{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 2px;width:100%;background:none;border:0;text-align:left;cursor:pointer}
+.entry:active{background:rgba(0,0,0,.03)}
+.entry .what{font-weight:600;overflow-wrap:anywhere}
+.entry .meta{font-size:13px;color:var(--muted);grid-column:1;overflow-wrap:anywhere}
+.entry .amt{grid-row:1 / span 2;grid-column:2;align-self:center;font-weight:700;font-size:16px;text-align:right}
+.entry .sync{font-size:11px;font-weight:700;color:var(--warn)}
+.dayhead{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted);padding:16px 2px 6px;border-bottom:1px solid var(--line)}
+.empty{padding:24px 0;color:var(--muted)}
+.try{display:flex;flex-direction:column;gap:8px;margin-top:12px;align-items:stretch}
+.try button{border:1px dashed var(--brass);background:var(--brass-soft);color:var(--brass-deep);border-radius:10px;padding:10px 12px;cursor:pointer;text-align:left;font-weight:500}
 
-/* Projects */
-.proj{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
-.proj-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.proj h3{margin:0;font-size:18px;font-weight:700}
+/* ---------- Projects ---------- */
+details.proj{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+details.proj summary{list-style:none;cursor:pointer;padding:14px 16px}
+details.proj summary::-webkit-details-marker{display:none}
+.proj h3{margin:0;font-size:17px;font-weight:700}
 .proj .sub{font-size:13px;color:var(--muted)}
-.status{font-size:12px;font-weight:600;color:var(--muted)}
-.bar{height:6px;background:var(--paper);border-radius:3px;margin:12px 0 4px;overflow:hidden}
+.bar{height:6px;background:var(--paper);border-radius:3px;margin:10px 0 6px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--in)}
+.kpis{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+.kpis b{font-size:15px;display:block}
+.proj-body{padding:0 16px 16px;border-top:1px solid var(--line)}
 .ledgerbox{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
 @media (max-width:640px){.ledgerbox{grid-template-columns:1fr}}
 .ledgerbox h4{margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:700}
 .ledgerbox dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:14px}
 .ledgerbox dt{color:var(--muted)} .ledgerbox dd{margin:0;text-align:right;font-weight:600}
-.ledgerbox .key dd{font-size:16px}
-.warn{margin-top:10px;font-size:13px;color:var(--out);font-weight:600}
+.warnline{margin-top:10px;font-size:13px;color:var(--out);font-weight:600}
 .items{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
 .items th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:6px 4px}
 .items td{border-bottom:1px solid var(--line);padding:6px 4px}
-.items td.r,.items th.r{text-align:right}
+.items .r{text-align:right}
+.scrollx{overflow-x:auto}
 
-/* Ledger */
-.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px}
-@media (max-width:760px){.filters{grid-template-columns:1fr 1fr}}
-.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-table.lg{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
-table.lg th{text-align:left;font-size:12px;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);background:var(--paper)}
-table.lg td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-table.lg td.r,table.lg th.r{text-align:right}
-.totals{display:flex;flex-wrap:wrap;gap:18px;margin:12px 0;font-weight:600}
+/* ---------- Ledger ---------- */
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.filters .wide{grid-column:1 / -1}
+@media (min-width:760px){.filters{grid-template-columns:2fr 1.4fr 1.2fr 1fr}.filters .wide{grid-column:auto}}
+.totals{display:flex;flex-wrap:wrap;gap:6px 16px;margin:8px 0 4px;font-weight:600;font-size:14px}
 
-/* Voice dock */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:linear-gradient(to top,var(--paper) 70%,rgba(245,245,240,0));
-  padding:18px 16px calc(14px + env(safe-area-inset-bottom,0px))}
-.dock-in{max-width:960px;margin:0 auto;display:flex;gap:10px;align-items:center}
-.dock .say{flex:1;display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 4px 4px 14px;min-height:56px}
-.dock .say input{border:0;padding:8px 6px 8px 0;background:none;font-size:16px}
-.dock .say input:focus-visible{outline:none}
-.dock .say:focus-within{border-color:var(--ink)}
-.mic{width:68px;height:68px;border-radius:50%;border:0;cursor:pointer;flex:none;position:relative;
+/* ---------- Bottom dock ---------- */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--line);
+  padding:8px 12px calc(6px + env(safe-area-inset-bottom,0px))}
+.dock-in{max-width:720px;margin:0 auto}
+.say{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 4px 4px 12px;min-height:50px}
+.say:focus-within{border-color:var(--ink)}
+.say input{border:0;padding:8px 0;background:none;min-height:40px}
+.say input:focus-visible{outline:none}
+.lang,.send{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--paper);font-weight:700;font-size:14px;cursor:pointer;flex:none;display:grid;place-items:center}
+.send{background:var(--ink);color:#fff;border-color:var(--ink)}
+.send svg{width:18px;height:18px}
+.hint{font-size:12px;color:var(--muted);padding:5px 4px 2px;min-height:22px;text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.hint.busy::before{content:"";display:inline-block;width:10px;height:10px;border:2px solid var(--brass);border-right-color:transparent;border-radius:50%;margin-right:6px;vertical-align:-1px;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+nav.bnav{display:grid;grid-template-columns:1fr 1fr 84px 1fr 1fr;align-items:end;height:var(--nav-h)}
+nav.bnav button.tab{border:0;background:none;display:grid;justify-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;padding:6px 0;min-height:52px}
+nav.bnav button.tab svg{width:22px;height:22px}
+nav.bnav button.tab[aria-selected="true"]{color:var(--ink)}
+nav.bnav button.tab[aria-selected="true"] svg{color:var(--brass)}
+.mic{justify-self:center;width:70px;height:70px;border-radius:50%;border:4px solid var(--paper);cursor:pointer;position:relative;margin-bottom:6px;
   background:radial-gradient(circle at 35% 30%,#B8955A,var(--brass) 55%,var(--brass-deep));color:#fff;
-  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 6px 16px rgba(111,83,31,.35);display:grid;place-items:center}
+  box-shadow:0 6px 16px rgba(111,83,31,.35);display:grid;place-items:center;touch-action:manipulation}
 .mic svg{width:28px;height:28px}
 .mic[aria-pressed="true"]{background:radial-gradient(circle at 35% 30%,#C9644F,var(--out) 60%,#7D2F20)}
-.mic[aria-pressed="true"]::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--out);animation:ring 1.2s ease-out infinite}
+.mic[aria-pressed="true"]::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--out);animation:ring 1.2s ease-out infinite}
+.mic.busy{opacity:.75}
 @keyframes ring{from{transform:scale(.92);opacity:1}to{transform:scale(1.25);opacity:0}}
-@media (prefers-reduced-motion:reduce){.mic[aria-pressed="true"]::after{animation:none}}
-.lang{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:15px;cursor:pointer;flex:none}
-.lang:hover{border-color:var(--ink)}
-.hint{max-width:960px;margin:6px auto 0;font-size:12px;color:var(--muted);padding-left:4px;min-height:16px}
+@media (prefers-reduced-motion:reduce){.mic[aria-pressed="true"]::after,.hint.busy::before{animation:none}}
 
-/* Dialogs */
-dialog{border:0;border-radius:16px;padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 40px);background:var(--card);color:var(--ink)}
-dialog::backdrop{background:rgba(30,36,34,.45)}
-.dlg{padding:20px;display:grid;gap:14px;overflow:auto;max-height:calc(100vh - 40px)}
-.dlg h3{margin:0;font-size:20px;font-weight:800}
-.heard{font-size:13px;background:var(--paper);border-radius:8px;padding:8px 10px;color:var(--muted)}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.seg input{position:absolute;opacity:0;width:1px;height:1px}
-.seg label{display:block;text-align:center;padding:10px 4px;font-size:14px;color:var(--ink);cursor:pointer;font-weight:600}
+/* ---------- Bottom sheets ---------- */
+dialog.sheet{border:0;padding:0;background:var(--card);color:var(--ink);width:100%;max-width:560px;max-height:min(92vh,92dvh);
+  margin:auto auto 0;border-radius:20px 20px 0 0;overflow:hidden}
+@media (min-width:700px){dialog.sheet{margin:auto;border-radius:18px}}
+dialog.sheet::backdrop{background:rgba(30,36,34,.45)}
+dialog.sheet[open]{animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){dialog.sheet[open]{animation:none}}
+.sheet form,.sheet .wrap{display:flex;flex-direction:column;max-height:min(92vh,92dvh)}
+.sheet-head{padding:10px 18px 0;display:flex;align-items:center;gap:10px}
+.sheet-head::before{content:"";position:absolute;left:50%;top:7px;width:40px;height:4px;border-radius:2px;background:var(--line);transform:translateX(-50%)}
+.sheet-head h3{margin:14px 0 4px;font-size:20px;font-weight:800;flex:1}
+.counter{font-size:12px;font-weight:700;color:var(--muted)}
+.sheet-body{padding:8px 18px 16px;overflow:auto;display:flex;flex-direction:column;gap:14px;min-height:0;flex:1 1 auto}
+.sheet-body>*{flex:none}
+.sheet-actions{display:flex;gap:10px;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--card)}
+.sheet-actions .grow{flex:1}
+.heard{font-size:13px;background:var(--paper);border-radius:10px;padding:8px 10px;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.seg label{display:block;text-align:center;padding:12px 4px;font-size:14px;color:var(--ink);cursor:pointer;font-weight:600;position:relative}
 .seg label+label{border-left:1px solid var(--line)}
-.seg input:checked+span{display:block}
+.seg input,.modes input{position:absolute;opacity:0;width:1px;height:1px}
 .seg label:has(input:checked){background:var(--ink);color:#fff}
-.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:-2px}
-.amount-in{font-size:26px !important;font-weight:700 !important}
-.ref{font-size:13px;color:var(--muted);background:var(--brass-soft);border-radius:8px;padding:8px 10px}
-.actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
-.item-row{display:grid;grid-template-columns:2fr 1fr 1.4fr 1fr auto;gap:6px;margin-bottom:6px}
-.item-row input{padding:8px;font-size:14px}
-@media (max-width:560px){.item-row{grid-template-columns:1fr 1fr}.item-row input:first-child{grid-column:1 / -1}}
+.seg label:has(input:focus-visible),.modes label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:-2px}
+.modes{display:flex;flex-wrap:wrap;gap:6px}
+.modes label{display:block;padding:9px 12px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink);cursor:pointer;position:relative}
+.modes label:has(input:checked){background:var(--brass);border-color:var(--brass);color:#fff}
+.amount-in{font-size:28px !important;font-weight:700 !important}
+.ref{font-size:13px;color:var(--brass-deep);background:var(--brass-soft);border-radius:10px;padding:9px 11px}
+.ref.bad{color:var(--out);background:var(--out-soft)}
+.item-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+.item-row input{min-height:40px;padding:8px;font-size:15px}
+.item-row .full{grid-column:1 / -1}
+.menu{display:grid;gap:4px}
+.menu button,.menu label.mi{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 4px;border:0;border-bottom:1px solid var(--line);background:none;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;text-align:left}
+.menu small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.switch{width:46px;height:28px;flex:none;appearance:none;-webkit-appearance:none;border-radius:999px;background:var(--line);position:relative;cursor:pointer;min-height:0;padding:0;border:0}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}
+.switch:checked{background:var(--in)} .switch:checked::after{left:21px}
+.answer{font-size:20px;line-height:1.45;font-weight:600}
+.answer .muted{font-size:14px;font-weight:500}
 
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom,0px));z-index:50;
-  background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;max-width:90vw}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-h) + var(--say-h) + 44px + env(safe-area-inset-bottom,0px));z-index:60;
+  background:var(--ink);color:#fff;padding:10px 12px 10px 16px;border-radius:12px;font-weight:600;font-size:14px;width:max-content;max-width:min(92vw,520px);display:flex;gap:12px;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.toast button{background:none;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer}
 </style>
 </head>
 <body>
 
-<!-- Sign in -->
 <section class="login" id="login" hidden>
   <form id="loginForm">
     <div>
       <h1>Project ledger</h1>
-      <div class="muted">Indeva Studio. Sign in to record and review payments.</div>
+      <div class="muted">Indeva Studio · sign in once, stays signed in on this phone.</div>
     </div>
-    <label>Email <input type="email" id="lgEmail" autocomplete="username" required></label>
+    <label>Email <input type="email" id="lgEmail" autocomplete="username" inputmode="email" required></label>
     <label>Password <input type="password" id="lgPass" autocomplete="current-password" required></label>
-    <button class="btn primary" type="submit">Sign in</button>
+    <label class="check"><input type="checkbox" id="showPass"> Show password</label>
+    <button class="btn primary" type="submit" id="lgBtn">Sign in</button>
     <div id="loginMsg" class="out" role="alert"></div>
   </form>
 </section>
 
-<!-- App -->
 <div id="app" hidden>
   <header class="top">
     <div class="top-row">
       <div class="brand">Project ledger<small>Indeva Studio</small></div>
-      <button class="btn small" id="sendNow" title="Email today's PDF now">Send today's report</button>
-      <button class="btn small ghost" id="signOut">Sign out</button>
+      <span class="pill warn" id="syncPill" hidden></span>
+      <span class="pill ai" id="aiPill" hidden title="AI understanding is on">AI</span>
+      <button class="iconbtn" id="refreshBtn" aria-label="Refresh">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+      </button>
     </div>
-    <nav class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" data-tab="today">Today</button>
-      <button role="tab" aria-selected="false" data-tab="projects">Projects</button>
-      <button role="tab" aria-selected="false" data-tab="ledger">Ledger</button>
-    </nav>
   </header>
 
   <main>
     <section id="tab-today">
-      <div class="day-head">
-        <h2 id="todayTitle">Today</h2>
-        <span class="muted" style="font-size:13px">PDF goes to ceo@indevastudio.com at 9:00 pm</span>
+      <div class="row">
+        <h2 class="page" id="todayTitle">Today</h2>
+        <span class="muted" style="font-size:12px">Report to CEO at 9:00 pm</span>
       </div>
-      <div class="flow num">
+      <div class="stats num">
         <div><span>Received</span><b class="in" id="tIn">₹0</b></div>
         <div><span>Paid to vendors</span><b class="out" id="tPaid">₹0</b></div>
         <div><span>Expenses</span><b class="out" id="tExp">₹0</b></div>
       </div>
-      <div class="modes" id="tModes"></div>
-      <ul class="entries" id="tList"></ul>
+      <div class="chips" id="tChips"></div>
+      <ul class="list" id="tList"></ul>
     </section>
 
     <section id="tab-projects" hidden>
-      <div class="day-head" style="margin-bottom:14px">
-        <h2>Projects</h2>
-        <button class="btn primary" id="addProject">Add project</button>
+      <div class="row" style="margin-bottom:12px">
+        <h2 class="page">Projects</h2>
+        <button class="btn primary small" id="addProject">Add project</button>
       </div>
+      <div class="chips" id="pChips"></div>
       <div id="projList"></div>
     </section>
 
     <section id="tab-ledger" hidden>
-      <div class="day-head" style="margin-bottom:14px"><h2>Ledger</h2></div>
+      <div class="row"><h2 class="page">Ledger</h2><button class="btn small" id="exportCsv">Export CSV</button></div>
       <div class="filters">
+        <label class="wide">Search <input type="search" id="fSearch" placeholder="Vendor, note, category…"></label>
         <label>Project <select id="fProject"></select></label>
-        <label>From <input type="date" id="fFrom"></label>
-        <label>To <input type="date" id="fTo"></label>
+        <label>Period
+          <select id="fPeriod">
+            <option value="today">Today</option><option value="7">Last 7 days</option>
+            <option value="month" selected>This month</option><option value="lastmonth">Last month</option>
+            <option value="90">Last 90 days</option><option value="all">All time</option>
+          </select>
+        </label>
         <label>Type
           <select id="fKind">
             <option value="">All</option><option value="received">Received</option>
             <option value="vendor_payment">Vendor payment</option><option value="expense">Expense</option>
           </select>
         </label>
-        <button class="btn" id="exportCsv">Export CSV</button>
       </div>
       <div class="totals num" id="lgTotals"></div>
-      <div class="tablewrap">
-        <table class="lg">
-          <thead><tr><th>Date</th><th>Project</th><th>Type</th><th>Party</th><th>Item / category</th><th>Mode</th><th class="r">Amount</th><th>Note</th><th></th></tr></thead>
-          <tbody id="lgBody"></tbody>
-        </table>
-      </div>
+      <div id="lgList"></div>
     </section>
   </main>
 
-  <!-- Voice dock -->
   <div class="dock">
-    <form class="dock-in" id="sayForm">
-      <div class="say">
-        <input id="sayInput" type="text" autocomplete="off" enterkeyhint="done"
-          placeholder="रमेश को 25 हज़ार UPI से दिए / Paid 25,000 to Ramesh by UPI" aria-label="Say or type an entry">
-      </div>
-      <button type="button" class="lang" id="lang" aria-label="Voice language"></button>
-      <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Speak an entry">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>
-      </button>
-    </form>
-    <div class="hint" id="hint"></div>
+    <div class="dock-in">
+      <form class="say" id="sayForm" autocomplete="off">
+        <button type="button" class="lang" id="lang" aria-label="Voice language"></button>
+        <input id="sayInput" type="text" enterkeyhint="send" aria-label="Type an entry or a question" placeholder="Type or tap the mic…">
+        <button type="submit" class="send" aria-label="Submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+      <div class="hint" id="hint" aria-live="polite"></div>
+      <nav class="bnav" aria-label="Main">
+        <button class="tab" data-tab="today" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Today</button>
+        <button class="tab" data-tab="projects" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-7h6v7"/></svg>Projects</button>
+        <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Speak an entry or a question">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>
+        </button>
+        <button class="tab" data-tab="ledger" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Ledger</button>
+        <button class="tab" id="moreBtn" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>More</button>
+      </nav>
+    </div>
   </div>
 </div>
 
-<!-- Confirm entry -->
-<dialog id="entryDlg">
-  <form class="dlg" id="entryForm" method="dialog">
-    <h3 id="entryTitle">Check and save</h3>
-    <div class="heard" id="heard"></div>
-    <div class="seg" role="radiogroup" aria-label="Type">
-      <label><input type="radio" name="kind" value="received">Received</label>
-      <label><input type="radio" name="kind" value="vendor_payment">Vendor payment</label>
-      <label><input type="radio" name="kind" value="expense">Expense</label>
-    </div>
-    <label>Amount (₹) <input id="eAmount" class="amount-in num" type="number" inputmode="decimal" min="1" step="0.01" required></label>
-    <div class="grid2">
+<!-- Entry sheet -->
+<dialog class="sheet" id="entryDlg">
+  <form id="entryForm" method="dialog">
+    <div class="sheet-head"><h3 id="entryTitle">Check and save</h3><span class="counter" id="entryCounter"></span></div>
+    <div class="sheet-body">
+      <div class="heard" id="heard" hidden></div>
+      <div class="seg" role="radiogroup" aria-label="Type">
+        <label><input type="radio" name="kind" value="received">Received</label>
+        <label><input type="radio" name="kind" value="vendor_payment">Vendor paid</label>
+        <label><input type="radio" name="kind" value="expense">Expense</label>
+      </div>
+      <label>Amount (₹) <input id="eAmount" class="amount-in num" type="number" inputmode="decimal" min="1" step="0.01" required></label>
+      <div class="ref" id="eRef" hidden></div>
       <label>Project <select id="eProject"></select></label>
-      <label>Contract item <select id="eItem"></select></label>
+      <label id="eItemLbl">Contract item <select id="eItem"></select></label>
+      <label id="ePartyLbl"><span id="ePartyTxt">Paid to</span> <input id="eParty" type="text" list="parties" autocapitalize="words"></label>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px">Mode of payment</div>
+        <div class="modes" role="radiogroup" aria-label="Mode of payment">
+          <label><input type="radio" name="mode" value="cash">Cash</label>
+          <label><input type="radio" name="mode" value="upi">UPI</label>
+          <label><input type="radio" name="mode" value="bank_transfer">Bank</label>
+          <label><input type="radio" name="mode" value="cheque">Cheque</label>
+          <label><input type="radio" name="mode" value="card">Card</label>
+          <label><input type="radio" name="mode" value="other">Other</label>
+        </div>
+      </div>
+      <div class="grid2">
+        <label>Category <input id="eCategory" type="text" list="cats"></label>
+        <label>Date <input id="eDate" type="date" required></label>
+      </div>
+      <label>Note <input id="eNote" type="text"></label>
     </div>
-    <div class="ref" id="eRef" hidden></div>
-    <div class="grid2">
-      <label id="ePartyLbl">Paid to <input id="eParty" type="text"></label>
-      <label>Mode of payment
-        <select id="eMode">
-          <option value="cash">Cash</option><option value="upi">UPI</option><option value="bank_transfer">Bank transfer</option>
-          <option value="cheque">Cheque</option><option value="card">Card</option><option value="other">Other</option>
-        </select>
+    <div class="sheet-actions">
+      <button class="btn danger" type="button" id="eDelete" hidden>Delete</button>
+      <button class="btn ghost" value="cancel" formnovalidate id="eCancel">Skip</button>
+      <button class="btn primary grow" value="save" id="eSave">Save entry</button>
+    </div>
+  </form>
+</dialog>
+<datalist id="cats"><option>Material</option><option>Labour</option><option>Transport</option><option>Food &amp; tea</option><option>Site misc</option><option>Office</option><option>Advance</option></datalist>
+<datalist id="parties"></datalist>
+
+<!-- Project sheet -->
+<dialog class="sheet" id="projDlg">
+  <form id="projForm" method="dialog">
+    <div class="sheet-head"><h3 id="projTitle">Add project</h3></div>
+    <div class="sheet-body">
+      <label>Project name <input id="pName" required placeholder="Nitin Jain 4 BHK"></label>
+      <div class="grid2">
+        <label>Client <input id="pClient" autocapitalize="words"></label>
+        <label>Site <input id="pSite"></label>
+      </div>
+      <div class="grid2">
+        <label>Contract / LOI ref <input id="pRef"></label>
+        <label>Contract date <input id="pDate" type="date"></label>
+      </div>
+      <div class="grid2">
+        <label>Client value (₹) <input id="pValue" type="number" inputmode="decimal" min="0" step="0.01"></label>
+        <label>Vendor value (₹) <input id="pVendor" type="number" inputmode="decimal" min="0" step="0.01"></label>
+      </div>
+      <div class="ref" id="pMargin"></div>
+      <label>Status
+        <select id="pStatus"><option value="active">Active</option><option value="on_hold">On hold</option><option value="completed">Completed</option></select>
       </label>
+      <label>Payment terms / notes <textarea id="pNotes" placeholder="40% advance, 40% on carcass, 20% on handover"></textarea></label>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:4px">Contract items (optional)</div>
+        <div class="muted" style="font-size:12px;margin-bottom:8px">Add each vendor's scope so payments are checked item by item.</div>
+        <div id="itemRows"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" class="btn small" id="addItem">Add item</button>
+          <button type="button" class="btn small ghost" id="sumItems">Fill totals from items</button>
+        </div>
+      </div>
     </div>
-    <div class="grid2">
-      <label>Category <input id="eCategory" type="text" list="cats"></label>
-      <label>Date <input id="eDate" type="date" required></label>
-    </div>
-    <datalist id="cats"><option>Material</option><option>Labour</option><option>Transport</option><option>Food &amp; tea</option><option>Site misc</option><option>Office</option><option>Advance</option></datalist>
-    <label>Note <input id="eNote" type="text"></label>
-    <div class="actions">
-      <button class="btn ghost" value="cancel" formnovalidate>Discard</button>
-      <button class="btn primary" id="eSave" value="save">Save entry</button>
+    <div class="sheet-actions">
+      <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary grow" value="save">Save project</button>
     </div>
   </form>
 </dialog>
 
-<!-- Project editor -->
-<dialog id="projDlg">
-  <form class="dlg" id="projForm" method="dialog">
-    <h3 id="projTitle">Add project</h3>
-    <label>Project name <input id="pName" required placeholder="Nitin Jain 4 BHK"></label>
-    <div class="grid2">
-      <label>Client <input id="pClient"></label>
-      <label>Site <input id="pSite"></label>
+<!-- Answer sheet -->
+<dialog class="sheet" id="answerDlg">
+  <div class="wrap">
+    <div class="sheet-head"><h3>Answer</h3></div>
+    <div class="sheet-body"><div class="heard" id="aHeard"></div><div class="answer num" id="aText"></div></div>
+    <div class="sheet-actions">
+      <button class="btn" type="button" id="aSpeak">Read aloud</button>
+      <button class="btn primary grow" type="button" id="aClose">Done</button>
     </div>
-    <div class="grid2">
-      <label>Contract / LOI ref <input id="pRef"></label>
-      <label>Contract date <input id="pDate" type="date"></label>
+  </div>
+</dialog>
+
+<!-- More sheet -->
+<dialog class="sheet" id="moreDlg">
+  <div class="wrap">
+    <div class="sheet-head"><h3>More</h3></div>
+    <div class="sheet-body">
+      <div class="menu">
+        <button type="button" id="mSend"><span>Send today's report now<small>Emails the PDF to ceo@indevastudio.com</small></span>›</button>
+        <label class="mi"><span>Instant save<small>Save clear entries straight away, with Undo. Unclear ones still ask.</small></span><input type="checkbox" class="switch" id="mInstant"></label>
+        <label class="mi"><span>Read back entries<small>Speaks a short confirmation after saving</small></span><input type="checkbox" class="switch" id="mSpeak"></label>
+        <button type="button" id="mInstall"><span>Install as an app<small id="mInstallSub">Adds Ledger to your home screen</small></span>›</button>
+        <button type="button" id="mHelp"><span>What can I say?<small>Examples in Hindi and English</small></span>›</button>
+        <button type="button" id="mSignOut"><span>Sign out<small id="mWho"></small></span>›</button>
+      </div>
+      <div class="muted" style="font-size:12px" id="mStatus"></div>
     </div>
-    <div class="grid2">
-      <label>Client value (agreed, ₹) <input id="pValue" type="number" inputmode="decimal" min="0" step="0.01"></label>
-      <label>Vendor value (agreed, ₹) <input id="pVendor" type="number" inputmode="decimal" min="0" step="0.01"></label>
-    </div>
-    <div class="ref" id="pMargin"></div>
-    <label>Status
-      <select id="pStatus"><option value="active">Active</option><option value="on_hold">On hold</option><option value="completed">Completed</option></select>
-    </label>
-    <label>Contract notes / payment terms <textarea id="pNotes" placeholder="40% advance, 40% on carcass, 20% on handover"></textarea></label>
-    <div>
-      <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px">Contract items (optional)</div>
-      <div class="muted" style="font-size:12px;margin-bottom:8px">Item, client amount, vendor, vendor amount. Payments can then be tracked per item.</div>
-      <div id="itemRows"></div>
-      <button type="button" class="btn small" id="addItem">Add item</button>
-      <button type="button" class="btn small ghost" id="sumItems">Fill totals from items</button>
-    </div>
-    <div class="actions">
-      <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
-      <button class="btn primary" value="save">Save project</button>
-    </div>
-  </form>
+    <div class="sheet-actions"><button class="btn primary grow" type="button" id="mClose">Close</button></div>
+  </div>
 </dialog>
 
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script>
-/* ========= CONFIG: fill these two values ========= */
+/* ========= CONFIG ========= */
 const CONFIG = {
   SUPABASE_URL: "https://rolarfaotykmprzvcmgh.supabase.co",
   SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI",
   REPORT_FUNCTION: "daily-expense-report",
+  AI_FUNCTION: "ledger-ai",
 };
-/* ================================================= */
+/* ========================== */
 
 const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
-const $ = (s) => document.querySelector(s);
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
 const istToday = () => new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
 const shiftDay = (d, k) => { const x = new Date(d + "T00:00:00Z"); x.setUTCDate(x.getUTCDate() + k); return x.toISOString().slice(0, 10); };
+const fmtDay = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
 const KIND = { received: "Received", vendor_payment: "Vendor payment", expense: "Expense" };
 const MODE = { cash: "Cash", upi: "UPI", bank_transfer: "Bank transfer", cheque: "Cheque", card: "Card", other: "Other" };
-const store = { get: (k, d) => { try { return localStorage.getItem(k) ?? d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+const store = {
+  get: (k, d) => { try { return localStorage.getItem(k) ?? d; } catch { return d; } },
+  set: (k, v) => { try { localStorage.setItem(k, v); } catch {} },
+  json: (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+};
+const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
+  : "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => { const r = (Math.random() * 16) | 0; return (c === "x" ? r : (r & 3) | 8).toString(16); }));
+const buzz = (p = 15) => { try { navigator.vibrate && navigator.vibrate(p); } catch {} };
+const isNetErr = (e) => !navigator.onLine || /fetch|network|load failed|timeout|ECONN/i.test(String(e?.message || e));
 
-const state = { projects: [], items: [], today: [], ledger: [], entered: false, editingProject: null };
+const state = {
+  projects: [], items: [], itemPaid: {}, today: [], ledger: [], memory: new Map(),
+  ai: false, entered: false, email: "", pending: [], pendingIndex: 0, pendingTotal: 0,
+  editing: null, editingProject: null,
+  instant: store.get("et_instant", "0") === "1", speakBack: store.get("et_speak", "0") === "1",
+};
 
-function toast(msg, ms = 2600) {
-  const t = $("#toast"); t.textContent = msg; t.hidden = false;
-  clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms);
+/* ---------- Toast (with optional action) ---------- */
+function toast(msg, opts = {}) {
+  const t = $("#toast");
+  t.innerHTML = `<span>${esc(msg)}</span>` + (opts.action ? `<button type="button">${esc(opts.action)}</button>` : "");
+  t.hidden = false;
+  if (opts.action) t.querySelector("button").onclick = () => { t.hidden = true; opts.onAction(); };
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => (t.hidden = true), opts.ms || (opts.action ? 7000 : 2800));
+}
+function say(text) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text).replace(/₹\s?([\d,.]+)/g, "$1 rupees").replace(/,/g, ""));
+    u.lang = "en-IN"; u.rate = 1.02; speechSynthesis.speak(u);
+  } catch {}
 }
 
 /* ---------- Auth ---------- */
 $("#loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault(); $("#loginMsg").textContent = "";
+  e.preventDefault(); $("#loginMsg").textContent = ""; $("#lgBtn").disabled = true;
   const { error } = await sb.auth.signInWithPassword({ email: $("#lgEmail").value.trim(), password: $("#lgPass").value });
-  if (error) $("#loginMsg").textContent = "Sign-in failed: " + error.message;
+  $("#lgBtn").disabled = false;
+  if (error) $("#loginMsg").textContent = /invalid/i.test(error.message) ? "Wrong email or password." : "Sign-in failed: " + error.message;
 });
-$("#signOut").addEventListener("click", () => sb.auth.signOut());
+$("#showPass").addEventListener("change", (e) => ($("#lgPass").type = e.target.checked ? "text" : "password"));
 
 sb.auth.onAuthStateChange((_evt, session) => {
   if (session && !state.entered) enter(session);
@@ -366,172 +498,270 @@ sb.auth.onAuthStateChange((_evt, session) => {
 
 async function enter(session) {
   state.entered = true;
-  const email = session.user.email.toLowerCase();
-  const { data } = await sb.from("et_admins").select("email").eq("email", email).maybeSingle();
-  if (!data) {
-    $("#login").hidden = false; $("#app").hidden = true;
-    $("#loginMsg").textContent = email + " is not on the ledger access list. Add it to the et_admins table in Supabase.";
-    await sb.auth.signOut(); return;
+  state.email = (session.user.email || "").toLowerCase();
+  if (navigator.onLine) {
+    const { data, error } = await sb.from("et_admins").select("email").eq("email", state.email).maybeSingle();
+    if (!error && !data) {
+      $("#loginMsg").textContent = state.email + " is not on the ledger access list. Ask the admin to add it.";
+      await sb.auth.signOut(); return;
+    }
   }
   $("#login").hidden = true; $("#app").hidden = false;
-  $("#fFrom").value = shiftDay(istToday(), -30); $("#fTo").value = istToday();
+  $("#mWho").textContent = state.email;
+  loadCache(); renderAll();
   await refreshAll();
+  flushQueue(); checkAI();
 }
 
-async function refreshAll() {
-  await loadProjects();
-  await Promise.all([loadToday(), loadLedger()]);
+/* ---------- Offline cache + sync queue ---------- */
+function saveCache() { store.set("et_cache", JSON.stringify({ projects: state.projects, items: state.items, itemPaid: state.itemPaid, memory: [...state.memory.entries()] })); }
+function loadCache() {
+  const c = store.json("et_cache", null); if (!c) return;
+  state.projects = c.projects || []; state.items = c.items || []; state.itemPaid = c.itemPaid || {};
+  state.memory = new Map(c.memory || []);
 }
+const queue = { get: () => store.json("et_queue", []), set: (a) => { store.set("et_queue", JSON.stringify(a)); renderSync(); } };
+function renderSync() {
+  const n = queue.get().length, pill = $("#syncPill");
+  pill.hidden = !n && navigator.onLine;
+  pill.textContent = n ? `${n} waiting to sync` : "Offline";
+}
+async function flushQueue() {
+  const q = queue.get(); if (!q.length || !navigator.onLine) return renderSync();
+  const left = [];
+  for (const row of q) {
+    const { error } = await sb.from("et_entries").upsert(row, { onConflict: "id", ignoreDuplicates: true });
+    if (error) left.push(row);
+  }
+  queue.set(left);
+  if (q.length !== left.length) { toast(`${q.length - left.length} offline ${q.length - left.length === 1 ? "entry" : "entries"} synced`); refreshAll(); }
+}
+window.addEventListener("online", () => { renderSync(); flushQueue(); checkAI(); });
+window.addEventListener("offline", renderSync);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && state.entered) { flushQueue(); refreshAll(); } });
+$("#refreshBtn").addEventListener("click", async () => { buzz(); await flushQueue(); await refreshAll(); toast("Up to date"); });
 
 /* ---------- Data ---------- */
+async function refreshAll() {
+  if (!navigator.onLine) { renderAll(); return; }
+  await loadProjects();
+  await Promise.all([loadToday(), loadLedger(), loadMemory()]);
+}
 async function loadProjects() {
-  const [{ data: p, error }, { data: it }] = await Promise.all([
+  const [{ data: p, error }, { data: it }, { data: paid }] = await Promise.all([
     sb.from("et_project_summary").select("*").order("status").order("name"),
     sb.from("et_contract_items").select("*").order("created_at"),
+    sb.from("et_entries").select("contract_item_id,amount").not("contract_item_id", "is", null),
   ]);
-  if (error) return toast("Could not load projects: " + error.message);
-  state.projects = p || []; state.items = it || [];
-  // item-wise vendor payments
-  const { data: paid } = await sb.from("et_entries").select("contract_item_id,amount").not("contract_item_id", "is", null);
-  state.itemPaid = {};
+  if (error) { if (!isNetErr(error)) toast("Could not load projects: " + error.message); return; }
+  state.projects = p || []; state.items = it || []; state.itemPaid = {};
   (paid || []).forEach((r) => (state.itemPaid[r.contract_item_id] = (state.itemPaid[r.contract_item_id] || 0) + Number(r.amount)));
-  renderProjects(); fillProjectSelects();
+  saveCache(); renderProjects(); fillProjectSelects();
 }
 async function loadToday() {
   const { data, error } = await sb.from("et_entries").select("*").eq("entry_date", istToday()).order("created_at", { ascending: false });
-  if (error) return toast(error.message);
+  if (error) return;
   state.today = data || []; renderToday();
 }
+function periodRange(v) {
+  const t = istToday();
+  if (v === "today") return [t, t];
+  if (v === "7") return [shiftDay(t, -6), t];
+  if (v === "90") return [shiftDay(t, -89), t];
+  if (v === "month") return [t.slice(0, 8) + "01", t];
+  if (v === "lastmonth") { const end = shiftDay(t.slice(0, 8) + "01", -1); return [end.slice(0, 8) + "01", end]; }
+  return [null, t];
+}
 async function loadLedger() {
-  let q = sb.from("et_entries").select("*").gte("entry_date", $("#fFrom").value).lte("entry_date", $("#fTo").value)
-    .order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(1000);
+  const [from, to] = periodRange($("#fPeriod").value);
+  let q = sb.from("et_entries").select("*").lte("entry_date", to).order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(1500);
+  if (from) q = q.gte("entry_date", from);
   const pid = $("#fProject").value, kind = $("#fKind").value;
   if (pid === "none") q = q.is("project_id", null); else if (pid) q = q.eq("project_id", pid);
   if (kind) q = q.eq("kind", kind);
   const { data, error } = await q;
-  if (error) return toast(error.message);
+  if (error) return;
   state.ledger = data || []; renderLedger();
 }
-["#fProject", "#fFrom", "#fTo", "#fKind"].forEach((s) => $(s).addEventListener("change", loadLedger));
+["#fProject", "#fPeriod", "#fKind"].forEach((s) => $(s).addEventListener("change", loadLedger));
+$("#fSearch").addEventListener("input", renderLedger);
 
-const projName = (id) => (id ? state.projects.find((p) => p.id === id)?.name ?? "Unknown project" : "Studio overhead");
-const itemName = (id) => state.items.find((i) => i.id === id)?.item;
-
-/* ---------- Render: Today ---------- */
-function renderToday() {
-  $("#todayTitle").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" });
-  const sum = { received: 0, vendor_payment: 0, expense: 0 }, modes = {};
-  state.today.forEach((e) => { sum[e.kind] += Number(e.amount); modes[e.mode] = (modes[e.mode] || 0) + Number(e.amount) * (e.kind === "received" ? 1 : -1); });
-  $("#tIn").textContent = inr(sum.received); $("#tPaid").textContent = inr(sum.vendor_payment); $("#tExp").textContent = inr(sum.expense);
-  $("#tModes").innerHTML = Object.entries(modes).map(([m, v]) => `<span class="chip num">${MODE[m]} ${v < 0 ? "−" : "+"}${inr(Math.abs(v))}</span>`).join("");
-  if (!state.today.length) {
-    $("#tList").innerHTML = `<li class="empty" style="display:block">Nothing recorded today. Tap the mic and say what happened, for example:
-      <div class="try">
-        <button type="button">Received 2 lakh from Mr. Nitin Jain by NEFT</button>
-        <button type="button">Paid 25000 to Ramesh carpenter for Deepanshi by UPI</button>
-        <button type="button">Spent 450 on tea and auto at site, cash</button>
-        <button type="button">रमेश को किचन के लिए पच्चीस हज़ार यूपीआई से दिए</button>
-        <button type="button">सिंघल जी से ढाई लाख ऑनलाइन आए</button>
-      </div></li>`;
-    $("#tList").querySelectorAll(".try button").forEach((b) => b.addEventListener("click", () => openEntry(parseEntry(b.textContent), b.textContent)));
-    return;
+// Learning: remember each vendor/client's usual project, item, mode and category
+async function loadMemory() {
+  const { data } = await sb.from("et_entries").select("party,project_id,contract_item_id,mode,category,kind").not("party", "is", null).order("created_at", { ascending: false }).limit(600);
+  const m = new Map();
+  for (const r of data || []) {
+    const key = skel(r.party); if (!key || m.has(key)) continue;
+    m.set(key, { ...r, tokens: itemTokens(r.party) });
   }
-  $("#tList").innerHTML = state.today.map((e) => `
-    <li>
-      <span class="what">${esc(e.party || KIND[e.kind])} <span class="muted" style="font-weight:500">· ${esc(projName(e.project_id))}</span></span>
-      <span class="meta">${KIND[e.kind]} · ${MODE[e.mode]}${e.contract_item_id ? " · " + esc(itemName(e.contract_item_id)) : e.category ? " · " + esc(e.category) : ""}${e.note ? " · " + esc(e.note) : ""}</span>
-      <span class="amt num ${e.kind === "received" ? "in" : "out"}">${e.kind === "received" ? "+" : "−"}${inr(e.amount)}</span>
-    </li>`).join("");
+  state.memory = m; saveCache();
+  $("#parties").innerHTML = [...m.values()].map((r) => `<option value="${esc(r.party)}">`).join("");
+}
+function applyMemory(e) {
+  if (!e.party) return e;
+  const m = state.memory.get(skel(e.party)); if (!m) return e;
+  const active = state.projects.find((p) => p.id === m.project_id && p.status !== "completed");
+  let filled = false;
+  if (!e._exp?.project && active && e.project_id !== m.project_id) { e.project_id = m.project_id; e.contract_item_id = null; filled = true; }
+  if (!e._exp?.project && active && !e.contract_item_id && m.contract_item_id && state.items.some((i) => i.id === m.contract_item_id)) { e.contract_item_id = m.contract_item_id; filled = true; }
+  if (!e._exp?.mode && m.mode && e.mode !== m.mode) { e.mode = m.mode; filled = true; }
+  if (!e.category && m.category) { e.category = m.category; filled = true; }
+  if (!e._exp?.kind && m.kind && e.kind !== m.kind) { e.kind = m.kind; filled = true; }
+  if (filled || !e._exp?.project) e._learned = true;
+  return e;
 }
 
-/* ---------- Render: Projects ---------- */
+const projName = (id) => (id ? state.projects.find((p) => p.id === id)?.name ?? "Project" : "Studio overhead");
+const itemName = (id) => state.items.find((i) => i.id === id)?.item;
 function projectMath(p) {
   const c = +p.contract_value, r = +p.received, vb = +p.vendor_budget, vp = +p.vendor_paid, ex = +p.expenses;
   return { c, r, vb, vp, ex, due: c - r, vendorDue: vb - vp, margin: c - vb, marginNow: c - vb - ex, cash: r - vp - ex,
     pct: c > 0 ? Math.min(100, (r / c) * 100) : 0, marginPct: c > 0 ? ((c - vb - ex) / c) * 100 : 0 };
 }
+
+/* ---------- Render ---------- */
+function renderAll() { renderSync(); renderToday(); renderProjects(); fillProjectSelects(); renderLedger(); }
+
+function entryLi(e, pending = false) {
+  const sign = e.kind === "received" ? "+" : "−";
+  return `<li><button type="button" class="entry" data-id="${e.id}" ${pending ? 'data-pending="1"' : ""}>
+    <span class="what">${esc(e.party || KIND[e.kind])} <span class="muted" style="font-weight:500">· ${esc(projName(e.project_id))}</span></span>
+    <span class="meta">${KIND[e.kind]} · ${MODE[e.mode]}${e.contract_item_id ? " · " + esc(itemName(e.contract_item_id) || "") : e.category ? " · " + esc(e.category) : ""}${e.note ? " · " + esc(e.note) : ""}${pending ? ' <span class="sync">· waiting to sync</span>' : ""}</span>
+    <span class="amt num ${e.kind === "received" ? "in" : "out"}">${sign}${inr(e.amount)}</span>
+  </button></li>`;
+}
+function bindEntryClicks(root) {
+  $$(".entry", root).forEach((b) => b.addEventListener("click", () => {
+    const id = b.dataset.id;
+    const e = [...state.today, ...state.ledger, ...queue.get()].find((x) => x.id === id);
+    if (e) openEntry({ ...e }, { editId: id, pending: !!b.dataset.pending });
+  }));
+}
+
+function renderToday() {
+  const t = istToday();
+  $("#todayTitle").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" });
+  const pend = queue.get().filter((e) => e.entry_date === t);
+  const all = [...pend, ...state.today.filter((e) => !pend.some((p) => p.id === e.id))];
+  const sum = { received: 0, vendor_payment: 0, expense: 0 }, modes = {};
+  all.forEach((e) => { sum[e.kind] += Number(e.amount); modes[e.mode] = (modes[e.mode] || 0) + Number(e.amount) * (e.kind === "received" ? 1 : -1); });
+  $("#tIn").textContent = inr(sum.received); $("#tPaid").textContent = inr(sum.vendor_payment); $("#tExp").textContent = inr(sum.expense);
+
+  // smart insights
+  const chips = Object.entries(modes).map(([m, v]) => `<span class="chip num">${MODE[m]} ${v < 0 ? "−" : "+"}${inr(Math.abs(v))}</span>`);
+  const active = state.projects.filter((p) => p.status === "active");
+  const due = active.reduce((s, p) => s + Math.max(0, projectMath(p).due), 0);
+  const over = active.filter((p) => { const m = projectMath(p); return m.vb > 0 && m.vp > m.vb; });
+  if (due > 0) chips.push(`<button type="button" class="chip warn num" data-go="projects">Due from clients ${inr(due)}</button>`);
+  if (over.length) chips.push(`<button type="button" class="chip bad" data-go="projects">${over.length} vendor overrun${over.length > 1 ? "s" : ""}</button>`);
+  $("#tChips").innerHTML = chips.join("");
+  $$("[data-go]", $("#tChips")).forEach((b) => b.addEventListener("click", () => showTab(b.dataset.go)));
+
+  if (!all.length) {
+    $("#tList").innerHTML = `<li class="empty">Nothing recorded today. Tap the mic and speak naturally, in Hindi or English:
+      <div class="try">
+        <button type="button">रमेश को किचन के लिए पच्चीस हज़ार यूपीआई से दिए</button>
+        <button type="button">Received 2 lakh from Nitin Jain by NEFT</button>
+        <button type="button">चाय और ऑटो में 450 कैश खर्च</button>
+        <button type="button">Ramesh ko ab tak kitna diya?</button>
+      </div></li>`;
+    $$(".try button", $("#tList")).forEach((b) => b.addEventListener("click", () => handleUtterance(b.textContent)));
+    return;
+  }
+  $("#tList").innerHTML = pend.map((e) => entryLi(e, true)).join("") + state.today.filter((e) => !pend.some((p) => p.id === e.id)).map((e) => entryLi(e)).join("");
+  bindEntryClicks($("#tList"));
+}
+
 function renderProjects() {
+  const act = state.projects.filter((p) => p.status !== "completed");
+  const tot = act.reduce((a, p) => { const m = projectMath(p); a.due += Math.max(0, m.due); a.vdue += Math.max(0, m.vendorDue); a.margin += m.marginNow; return a; }, { due: 0, vdue: 0, margin: 0 });
+  $("#pChips").innerHTML = state.projects.length ? `<span class="chip num">Clients owe ${inr(tot.due)}</span><span class="chip num">You owe vendors ${inr(tot.vdue)}</span><span class="chip num">Margin ${inr(tot.margin)}</span>` : "";
   if (!state.projects.length) {
-    $("#projList").innerHTML = `<div class="empty">No projects yet. Add one with its agreed client value and vendor value so every payment is checked against the contract.</div>`;
+    $("#projList").innerHTML = `<div class="empty">No projects yet. Add one with its agreed client value and vendor value, and every payment is checked against the contract.</div>`;
     return;
   }
   $("#projList").innerHTML = state.projects.map((p) => {
-    const m = projectMath(p);
-    const items = state.items.filter((i) => i.project_id === p.id);
-    const warn = [];
+    const m = projectMath(p), items = state.items.filter((i) => i.project_id === p.id), warn = [];
     if (m.vb > 0 && m.vp > m.vb) warn.push(`Vendor payments are ${inr(m.vp - m.vb)} above the agreed vendor value.`);
     if (m.c > 0 && m.r > m.c) warn.push(`Received is ${inr(m.r - m.c)} above the contract value.`);
-    return `<article class="proj">
-      <div class="proj-head">
-        <div><h3>${esc(p.name)}</h3>
+    if (m.c === 0) warn.push("No client value entered yet — tap Edit contract.");
+    return `<details class="proj">
+      <summary>
+        <div class="row" style="align-items:flex-start"><div><h3>${esc(p.name)}</h3>
           <div class="sub">${[p.client_name, p.site, p.contract_ref && "Ref " + p.contract_ref].filter(Boolean).map(esc).join(" · ") || "No contract details yet"}</div></div>
-        <div style="text-align:right"><button class="btn small" data-edit="${p.id}">Edit contract</button>
-          <div class="status">${{ active: "Active", on_hold: "On hold", completed: "Completed" }[p.status]}</div></div>
+          <span class="chip" style="font-size:11px">${{ active: "Active", on_hold: "On hold", completed: "Completed" }[p.status]}</span></div>
+        <div class="bar" aria-hidden="true"><i style="width:${m.pct.toFixed(1)}%"></i></div>
+        <div class="kpis num">
+          <span><span class="muted">Received</span><b class="in">${inr(m.r)}</b></span>
+          <span><span class="muted">Client owes</span><b>${inr(m.due)}</b></span>
+          <span><span class="muted">Margin</span><b>${inr(m.marginNow)}</b></span>
+        </div>
+        ${warn.map((w) => `<div class="warnline">${w}</div>`).join("")}
+      </summary>
+      <div class="proj-body">
+        <div class="ledgerbox num">
+          <div><h4>Client</h4><dl><dt>Client value</dt><dd>${inr(m.c)}</dd><dt>Received</dt><dd class="in">${inr(m.r)}</dd><dt>Still due</dt><dd>${inr(m.due)}</dd></dl></div>
+          <div><h4>Vendors</h4><dl><dt>Vendor value</dt><dd>${inr(m.vb)}</dd><dt>Paid</dt><dd class="out">${inr(m.vp)}</dd><dt>Still to pay</dt><dd>${inr(m.vendorDue)}</dd></dl></div>
+          <div><h4>Your margin</h4><dl><dt>Agreed</dt><dd>${inr(m.margin)}</dd><dt>After expenses</dt><dd>${inr(m.marginNow)} <span class="muted" style="font-size:12px">${m.marginPct.toFixed(1)}%</span></dd>
+            <dt>Cash in hand</dt><dd class="${m.cash < 0 ? "out" : "in"}">${m.cash < 0 ? "−" : ""}${inr(Math.abs(m.cash))}</dd></dl></div>
+        </div>
+        ${items.length ? `<div class="scrollx"><table class="items num"><thead><tr><th>Item</th><th>Vendor</th><th class="r">Agreed</th><th class="r">Paid</th><th class="r">Balance</th></tr></thead><tbody>
+          ${items.map((i) => { const pd = state.itemPaid[i.id] || 0, bal = i.vendor_amount - pd; return `<tr><td>${esc(i.item)}</td><td>${esc(i.vendor_name || "")}</td><td class="r">${inr(i.vendor_amount)}</td><td class="r">${inr(pd)}</td><td class="r ${bal < 0 ? "out" : ""}">${inr(bal)}</td></tr>`; }).join("")}
+        </tbody></table></div>` : ""}
+        ${p.contract_notes ? `<p class="muted" style="font-size:13px;margin:12px 0 0">${esc(p.contract_notes)}</p>` : ""}
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn small" data-edit="${p.id}">Edit contract</button>
+          <button class="btn small" data-ledger="${p.id}">See entries</button>
+        </div>
       </div>
-      <div class="bar" aria-hidden="true"><i style="width:${m.pct.toFixed(1)}%"></i></div>
-      <div class="sub num">${m.pct.toFixed(0)}% of client value received</div>
-      <div class="ledgerbox num">
-        <div><h4>Client</h4><dl>
-          <dt>Client value</dt><dd>${inr(m.c)}</dd><dt>Received</dt><dd class="in">${inr(m.r)}</dd>
-          <dt>Still due</dt><dd>${inr(m.due)}</dd></dl></div>
-        <div><h4>Vendors</h4><dl>
-          <dt>Vendor value</dt><dd>${inr(m.vb)}</dd><dt>Paid</dt><dd class="out">${inr(m.vp)}</dd>
-          <dt>Still to pay</dt><dd>${inr(m.vendorDue)}</dd></dl></div>
-        <div class="key"><h4>Your margin</h4><dl>
-          <dt>Agreed margin</dt><dd>${inr(m.margin)}</dd>
-          <dt>After expenses (${inr(m.ex)})</dt><dd>${inr(m.marginNow)} <span class="muted" style="font-size:12px">${m.marginPct.toFixed(1)}%</span></dd>
-          <dt>Cash in hand</dt><dd class="${m.cash < 0 ? "out" : "in"}">${m.cash < 0 ? "−" : ""}${inr(Math.abs(m.cash))}</dd></dl></div>
-      </div>
-      ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}
-      ${items.length ? `<div style="overflow-x:auto"><table class="items num"><thead><tr><th>Item</th><th class="r">Client</th><th>Vendor</th><th class="r">Vendor value</th><th class="r">Paid</th></tr></thead><tbody>
-        ${items.map((i) => { const pd = state.itemPaid[i.id] || 0; return `<tr><td>${esc(i.item)}</td><td class="r">${inr(i.client_amount)}</td><td>${esc(i.vendor_name || "")}</td><td class="r">${inr(i.vendor_amount)}</td><td class="r ${pd > i.vendor_amount && i.vendor_amount > 0 ? "out" : ""}">${inr(pd)}</td></tr>`; }).join("")}
-      </tbody></table></div>` : ""}
-    </article>`;
+    </details>`;
   }).join("");
-  $("#projList").querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => openProject(b.dataset.edit)));
+  $$("[data-edit]", $("#projList")).forEach((b) => b.addEventListener("click", () => openProject(b.dataset.edit)));
+  $$("[data-ledger]", $("#projList")).forEach((b) => b.addEventListener("click", () => { $("#fProject").value = b.dataset.ledger; $("#fPeriod").value = "all"; showTab("ledger"); loadLedger(); }));
 }
 
 function fillProjectSelects() {
   const usable = state.projects.filter((p) => p.status !== "completed");
-  const opts = usable.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("");
-  $("#eProject").innerHTML = opts + `<option value="">Studio overhead (no project)</option>`;
+  $("#eProject").innerHTML = usable.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("") + `<option value="">Studio overhead (no project)</option>`;
   const keep = $("#fProject").value;
   $("#fProject").innerHTML = `<option value="">All projects</option>` + state.projects.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("") + `<option value="none">Studio overhead</option>`;
   $("#fProject").value = keep;
 }
 
-/* ---------- Render: Ledger ---------- */
+function ledgerRows() {
+  const q = $("#fSearch").value.trim().toLowerCase();
+  if (!q) return state.ledger;
+  return state.ledger.filter((e) => [e.party, e.note, e.category, projName(e.project_id), itemName(e.contract_item_id), e.voice_text, String(e.amount)].join(" ").toLowerCase().includes(q));
+}
 function renderLedger() {
-  const s = { received: 0, vendor_payment: 0, expense: 0 };
-  state.ledger.forEach((e) => (s[e.kind] += Number(e.amount)));
-  $("#lgTotals").innerHTML = `<span class="in">In ${inr(s.received)}</span><span class="out">Vendors ${inr(s.vendor_payment)}</span><span class="out">Expenses ${inr(s.expense)}</span><span>Net ${inr(s.received - s.vendor_payment - s.expense)}</span><span class="muted">${state.ledger.length} entries</span>`;
-  $("#lgBody").innerHTML = state.ledger.length ? state.ledger.map((e) => `<tr>
-      <td class="num">${e.entry_date.split("-").reverse().join("/")}</td><td>${esc(projName(e.project_id))}</td><td>${KIND[e.kind]}</td>
-      <td>${esc(e.party || "")}</td><td>${esc(itemName(e.contract_item_id) || e.category || "")}</td><td>${MODE[e.mode]}</td>
-      <td class="r num ${e.kind === "received" ? "in" : "out"}">${e.kind === "received" ? "+" : "−"}${inr(e.amount)}</td>
-      <td>${esc(e.note || "")}</td><td><button class="btn small ghost danger" data-del="${e.id}" aria-label="Delete entry">Delete</button></td></tr>`).join("")
-    : `<tr><td colspan="9" class="muted" style="padding:18px">No entries for these filters.</td></tr>`;
-  $("#lgBody").querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
-    if (!confirm("Delete this entry? This cannot be undone.")) return;
-    const { error } = await sb.from("et_entries").delete().eq("id", b.dataset.del);
-    if (error) return toast(error.message);
-    toast("Entry deleted"); await refreshAll();
-  }));
+  const rows = ledgerRows(), s = { received: 0, vendor_payment: 0, expense: 0 };
+  rows.forEach((e) => (s[e.kind] += Number(e.amount)));
+  $("#lgTotals").innerHTML = `<span class="in">In ${inr(s.received)}</span><span class="out">Vendors ${inr(s.vendor_payment)}</span><span class="out">Expenses ${inr(s.expense)}</span><span>Net ${inr(s.received - s.vendor_payment - s.expense)}</span><span class="muted">${rows.length} entries</span>`;
+  if (!rows.length) { $("#lgList").innerHTML = `<div class="empty">No entries for these filters.</div>`; return; }
+  const byDay = new Map();
+  rows.forEach((e) => { if (!byDay.has(e.entry_date)) byDay.set(e.entry_date, []); byDay.get(e.entry_date).push(e); });
+  $("#lgList").innerHTML = [...byDay.entries()].map(([d, es]) => {
+    const net = es.reduce((a, e) => a + (e.kind === "received" ? 1 : -1) * e.amount, 0);
+    return `<div class="dayhead num"><span>${fmtDay(d)}</span><span class="${net < 0 ? "out" : "in"}">${net < 0 ? "−" : "+"}${inr(Math.abs(net))}</span></div><ul class="list" style="border-top:0">${es.map((e) => entryLi(e)).join("")}</ul>`;
+  }).join("");
+  bindEntryClicks($("#lgList"));
 }
 $("#exportCsv").addEventListener("click", () => {
   const rows = [["Date", "Project", "Type", "Party", "Item/Category", "Mode", "Amount", "Note", "Heard"]].concat(
-    state.ledger.map((e) => [e.entry_date, projName(e.project_id), KIND[e.kind], e.party || "", itemName(e.contract_item_id) || e.category || "", MODE[e.mode], (e.kind === "received" ? 1 : -1) * e.amount, e.note || "", e.voice_text || ""]));
+    ledgerRows().map((e) => [e.entry_date, projName(e.project_id), KIND[e.kind], e.party || "", itemName(e.contract_item_id) || e.category || "", MODE[e.mode], (e.kind === "received" ? 1 : -1) * e.amount, e.note || "", e.voice_text || ""]));
   const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv" }));
-  a.download = `indeva-ledger-${$("#fFrom").value}-to-${$("#fTo").value}.csv`; a.click();
+  a.download = `indeva-ledger-${istToday()}.csv`; a.click();
 });
 
 /* ---------- Tabs ---------- */
-document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => {
-  document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", x === b));
-  ["today", "projects", "ledger"].forEach((t) => ($("#tab-" + t).hidden = t !== b.dataset.tab));
-}));
+function showTab(name) {
+  $$("nav.bnav .tab[data-tab]").forEach((x) => x.setAttribute("aria-selected", x.dataset.tab === name));
+  ["today", "projects", "ledger"].forEach((t) => ($("#tab-" + t).hidden = t !== name));
+  window.scrollTo({ top: 0 });
+}
+$$("nav.bnav .tab[data-tab]").forEach((b) => b.addEventListener("click", () => { buzz(8); showTab(b.dataset.tab); }));
 
 /* ---------- Voice parsing: English, Hindi (Devanagari) and Hinglish ---------- */
 // 1. Devanagari → readable Roman (Hinglish) so one parser handles every language
@@ -667,9 +897,14 @@ function parseEntry(raw) {
   const RECEIVED = /\b(advance from|payment from|client paid|got payment)\b/;
   const EXPENSE = /\b(expense|expenses|spent|spend|bought|buy|purchased?|tea|petrol|diesel|fuel|auto|cab|uber|ola|rapido|porter|transport|tempo|food|lunch|snacks|parking|toll|courier|stationery|xerox|printout|printing)\b/;
   const PAID = /\b(transfer to|payment to|payment of|advance to)\b/;
-  if ((RECEIVED.test(t) || any(KW.received)) && !/\bpaid to\b/.test(t)) out.kind = "received";
+  // direction decides: "X ko / to X" = money going out, "X se / from X" + received word = money in
+  const count = (set) => words.filter((w) => set.has(w)).length;
+  const toWho = words.includes("ko") || /\b(paid to|payment to|advance to|gave to|given to|sent to|transfer(?:red)? to)\b/.test(t);
+  const recvScore = (RECEIVED.test(t) ? 2 : 0) + count(KW.received) * 2 + (/\bfrom\b/.test(t) ? 1 : 0);
+  const paidScore = (PAID.test(t) ? 2 : 0) + count(KW.paid) * 2 + (toWho ? 3 : 0);
+  if (recvScore > 0 && recvScore >= paidScore) out.kind = "received";
   else if (EXPENSE.test(t) || any(KW.expense)) out.kind = "expense";
-  else if (PAID.test(t) || any(KW.paid)) out.kind = "vendor_payment";
+  else if (paidScore > 0) out.kind = "vendor_payment";
 
   // mode of payment
   if (any(KW.cash)) out.mode = "cash";
@@ -717,6 +952,9 @@ function parseEntry(raw) {
     else if (out.kind !== "received" && best && nameTokens(best.name + " " + best.client_name).some((tok) => sounds(tok, pw))) party = "";
     out.party = party ? title(party) : "";
   }
+  // a vendor you've paid before, said without "to/ko" (e.g. "Ramesh 5000 UPI")
+  if (!out.party && state.memory) for (const m of state.memory.values()) if (m.tokens.some((tok) => sounds(tok, words))) { out.party = m.party; break; }
+  const partyExplicit = !!out.party;
   if (!out.party && iBest?.vendor_name && out.kind !== "received") out.party = iBest.vendor_name;
   if (!out.party && out.kind === "received" && best?.client_name) out.party = best.client_name;
 
@@ -727,50 +965,65 @@ function parseEntry(raw) {
     [/\b(courier|stationery|xerox|printout|printing|office)\b/, KW.office, "Office"], [/\badvance\b/, KW.advance, "Advance"]];
   for (const [re, set, c] of CATS) if (re.test(t) || any(set)) { out.category = c; break; }
 
+  out._exp = { project: !!best, kind: !!out.kind, mode: !!out.mode, party: partyExplicit };
   if (!out.kind) out.kind = out.party ? "vendor_payment" : "expense";
   if (!out.mode) out.mode = store.get("lastMode", "cash");
   return out;
 }
 
-/* ---------- Entry dialog ---------- */
+
+/* ---------- Entry sheet ---------- */
+const kindVal = () => $('input[name="kind"]:checked')?.value;
+const modeVal = () => $('input[name="mode"]:checked')?.value;
 function setKindLabel() {
-  const k = document.querySelector('input[name="kind"]:checked')?.value;
-  $("#ePartyLbl").firstChild.textContent = k === "received" ? "Received from " : k === "expense" ? "Paid to (shop / person) " : "Paid to ";
+  const k = kindVal();
+  $("#ePartyTxt").textContent = k === "received" ? "Received from" : k === "expense" ? "Paid to (shop / person)" : "Paid to";
 }
 function fillItems(selected) {
   const its = state.items.filter((i) => i.project_id === $("#eProject").value);
+  $("#eItemLbl").hidden = !its.length;
   $("#eItem").innerHTML = `<option value="">None</option>` + its.map((i) => `<option value="${i.id}">${esc(i.item)}${i.vendor_name ? " (" + esc(i.vendor_name) + ")" : ""}</option>`).join("");
   $("#eItem").value = selected || ""; showRef();
 }
 function showRef() {
-  const p = state.projects.find((x) => x.id === $("#eProject").value);
-  if (!p) { $("#eRef").hidden = true; return; }
-  const m = projectMath(p), k = document.querySelector('input[name="kind"]:checked')?.value, it = state.items.find((i) => i.id === $("#eItem").value);
-  let txt = "";
-  if (k === "received") txt = `Contract ${inr(m.c)} · received so far ${inr(m.r)} · still due ${inr(m.due)}`;
-  else if (it) txt = `${it.item}: agreed vendor value ${inr(it.vendor_amount)} · paid so far ${inr(state.itemPaid[it.id] || 0)} · balance ${inr(it.vendor_amount - (state.itemPaid[it.id] || 0))}`;
-  else if (k === "vendor_payment") txt = `Agreed vendor value ${inr(m.vb)} · paid so far ${inr(m.vp)} · balance ${inr(m.vendorDue)}`;
-  else txt = `Expenses on this project so far ${inr(m.ex)} · margin after expenses ${inr(m.marginNow)}`;
-  const amt = Number($("#eAmount").value || 0);
-  if (k === "received" && amt > m.due && m.c > 0) txt += " — this is more than the amount due.";
-  if (k === "vendor_payment" && !it && m.vb > 0 && amt > m.vendorDue) txt += " — this takes vendor payments over the agreed value.";
-  if (it && amt > it.vendor_amount - (state.itemPaid[it.id] || 0) && it.vendor_amount > 0) txt += " — this is more than the agreed balance for this item.";
-  $("#eRef").textContent = txt; $("#eRef").hidden = false;
+  const p = state.projects.find((x) => x.id === $("#eProject").value), ref = $("#eRef");
+  if (!p) { ref.hidden = true; return; }
+  const m = projectMath(p), k = kindVal(), it = state.items.find((i) => i.id === $("#eItem").value);
+  const amt = Number($("#eAmount").value || 0), editAmt = state.editing && !state.editing.pending ? Number(state.editing.amount) || 0 : 0;
+  let txt = "", bad = false;
+  if (k === "received") { txt = `Contract ${inr(m.c)} · received ${inr(m.r)} · due ${inr(m.due)}`; bad = m.c > 0 && amt - editAmt > m.due; }
+  else if (it) { const pd = (state.itemPaid[it.id] || 0) - editAmt, bal = it.vendor_amount - pd; txt = `${it.item}: agreed ${inr(it.vendor_amount)} · paid ${inr(pd)} · balance ${inr(bal)}`; bad = it.vendor_amount > 0 && amt > bal; }
+  else if (k === "vendor_payment") { txt = `Vendor value ${inr(m.vb)} · paid ${inr(m.vp - editAmt)} · balance ${inr(m.vendorDue + editAmt)}`; bad = m.vb > 0 && amt > m.vendorDue + editAmt; }
+  else txt = `Expenses on this project ${inr(m.ex)} · margin after expenses ${inr(m.marginNow)}`;
+  if (bad) txt += k === "received" ? " — more than what's due." : " — this goes over what was agreed.";
+  ref.textContent = txt; ref.classList.toggle("bad", bad); ref.hidden = false;
 }
-function openEntry(parsed, heard) {
-  if (!state.projects.length) toast("Add a project first so entries can be checked against its contract.");
-  $("#heard").textContent = "Heard: “" + heard + "”"; $("#heard").dataset.raw = heard;
-  document.querySelectorAll('input[name="kind"]').forEach((r) => (r.checked = r.value === parsed.kind));
-  $("#eAmount").value = parsed.amount || "";
-  $("#eProject").value = parsed.project_id || "";
-  fillItems(parsed.contract_item_id);
-  $("#eParty").value = parsed.party; $("#eMode").value = parsed.mode; $("#eCategory").value = parsed.category;
-  $("#eDate").value = parsed.entry_date; $("#eNote").value = parsed.note;
+function setRadio(name, v) { $$(`input[name="${name}"]`).forEach((r) => (r.checked = r.value === v)); }
+
+function openEntry(e, opts = {}) {
+  state.editing = opts.editId ? { id: opts.editId, pending: !!opts.pending, amount: e.amount } : null;
+  $("#entryTitle").textContent = opts.editId ? "Edit entry" : "Check and save";
+  $("#entryCounter").textContent = opts.total > 1 ? `${opts.index + 1} of ${opts.total}` : "";
+  const heard = opts.heard ?? (opts.editId ? e.voice_text : "");
+  $("#heard").hidden = !heard; $("#heard").textContent = heard ? "Heard: “" + heard + "”" + (e._learned ? "  ·  filled from past entries" : "") : "";
+  $("#heard").dataset.raw = heard || "";
+  setRadio("kind", e.kind); setRadio("mode", e.mode || "cash");
+  $("#eAmount").value = e.amount || "";
+  if (e.project_id && !state.projects.some((p) => p.id === e.project_id && p.status !== "completed")) {
+    const p = state.projects.find((x) => x.id === e.project_id);
+    if (p) $("#eProject").insertAdjacentHTML("afterbegin", `<option value="${p.id}">${esc(p.name)}</option>`);
+  }
+  $("#eProject").value = e.project_id || "";
+  fillItems(e.contract_item_id);
+  $("#eParty").value = e.party || ""; $("#eCategory").value = e.category || "";
+  $("#eDate").value = e.entry_date || istToday(); $("#eNote").value = e.note || "";
+  $("#eDelete").hidden = !opts.editId; $("#eCancel").textContent = opts.total > 1 ? "Skip" : "Cancel";
+  $("#eSave").textContent = opts.editId ? "Update" : "Save entry";
   setKindLabel(); showRef();
-  $("#entryDlg").showModal();
-  if (!parsed.amount) $("#eAmount").focus();
+  if (!$("#entryDlg").open) $("#entryDlg").showModal();
+  if (!e.amount) setTimeout(() => $("#eAmount").focus(), 60);
 }
-document.querySelectorAll('input[name="kind"]').forEach((r) => r.addEventListener("change", () => { setKindLabel(); showRef(); }));
+$$('input[name="kind"]').forEach((r) => r.addEventListener("change", () => { setKindLabel(); showRef(); }));
 $("#eProject").addEventListener("change", () => fillItems(""));
 $("#eItem").addEventListener("change", () => {
   const it = state.items.find((i) => i.id === $("#eItem").value);
@@ -778,64 +1031,254 @@ $("#eItem").addEventListener("change", () => {
   showRef();
 });
 $("#eAmount").addEventListener("input", showRef);
+$("#entryDlg").addEventListener("close", () => {
+  if ($("#entryDlg").returnValue === "cancel") { $("#entryDlg").returnValue = ""; nextPending(); }
+});
 
-$("#entryForm").addEventListener("submit", async (e) => {
-  if (e.submitter?.value !== "save") return;
-  e.preventDefault();
-  const kind = document.querySelector('input[name="kind"]:checked')?.value;
-  if (!kind) return toast("Choose Received, Vendor payment or Expense.");
-  const row = {
-    kind, amount: Number($("#eAmount").value), project_id: $("#eProject").value || null,
-    contract_item_id: $("#eItem").value || null, party: $("#eParty").value.trim() || null, mode: $("#eMode").value,
+function rowFromSheet() {
+  return {
+    kind: kindVal(), amount: Number($("#eAmount").value), project_id: $("#eProject").value || null,
+    contract_item_id: $("#eItem").value || null, party: $("#eParty").value.trim() || null, mode: modeVal() || "cash",
     category: $("#eCategory").value.trim() || null, entry_date: $("#eDate").value, note: $("#eNote").value.trim() || null,
     voice_text: $("#heard").dataset.raw || null,
   };
-  if (!(row.amount > 0)) return toast("Enter an amount above zero.");
-  $("#eSave").disabled = true;
-  const { error } = await sb.from("et_entries").insert(row);
-  $("#eSave").disabled = false;
-  if (error) return toast("Not saved: " + error.message, 4000);
+}
+function looksDuplicate(row) {
+  const recent = [...state.today, ...queue.get()].filter((e) => e.id !== row.id && e.entry_date === row.entry_date);
+  return recent.find((e) => Number(e.amount) === row.amount && e.kind === row.kind && (e.party || "").toLowerCase() === (row.party || "").toLowerCase()
+    && Date.now() - new Date(e.created_at || Date.now()).getTime() < 30 * 60000);
+}
+
+async function saveRow(row) {
+  row.id ||= uuid();
+  if (!navigator.onLine) { queue.set([...queue.get(), row]); return "queued"; }
+  const { error } = await sb.from("et_entries").upsert(row, { onConflict: "id", ignoreDuplicates: true });
+  if (!error) return "saved";
+  if (isNetErr(error)) { queue.set([...queue.get(), row]); return "queued"; }
+  throw error;
+}
+async function undoRow(id) {
+  const q = queue.get();
+  if (q.some((r) => r.id === id)) queue.set(q.filter((r) => r.id !== id));
+  else { const { error } = await sb.from("et_entries").delete().eq("id", id); if (error) return toast("Could not undo: " + error.message); }
+  toast("Entry removed"); await refreshAll(); renderToday();
+}
+async function commit(row) {
+  const res = await saveRow(row);
+  buzz([20, 40, 20]);
   store.set("lastMode", row.mode); if (row.project_id) store.set("lastProject", row.project_id);
-  $("#entryDlg").close(); $("#sayInput").value = "";
-  toast(`Saved ${KIND[row.kind].toLowerCase()} of ${inr(row.amount)}`);
-  await refreshAll();
+  const msg = `${res === "queued" ? "Saved offline" : "Saved"}: ${KIND[row.kind].toLowerCase()} ${inr(row.amount)}${row.party ? " · " + row.party : ""}`;
+  toast(msg, { action: "Undo", onAction: () => undoRow(row.id) });
+  if (state.speakBack) say(`${KIND[row.kind]}, ${inr(row.amount)}${row.party ? ", " + row.party : ""}. Saved.`);
+  if (res === "saved") { refreshAll(); } else renderToday();
+}
+
+$("#entryForm").addEventListener("submit", async (ev) => {
+  if (ev.submitter?.value !== "save") return;
+  ev.preventDefault();
+  const row = rowFromSheet();
+  if (!row.kind) return toast("Choose Received, Vendor paid or Expense.");
+  if (!(row.amount > 0)) { $("#eAmount").focus(); return toast("Enter an amount above zero."); }
+  $("#eSave").disabled = true;
+  try {
+    if (state.editing) {
+      const id = state.editing.id;
+      if (state.editing.pending) queue.set(queue.get().map((r) => (r.id === id ? { ...r, ...row, id } : r)));
+      else {
+        const { error } = await sb.from("et_entries").update(row).eq("id", id);
+        if (error) throw error;
+      }
+      $("#entryDlg").close(); toast("Entry updated"); buzz(); refreshAll(); renderToday();
+    } else {
+      const dup = looksDuplicate(row);
+      if (dup && !confirm(`A ${KIND[row.kind].toLowerCase()} of ${inr(row.amount)}${row.party ? " to " + row.party : ""} is already saved today. Save it again?`)) { $("#eSave").disabled = false; return; }
+      $("#entryDlg").close(); await commit(row); nextPending();
+    }
+  } catch (e) { toast("Not saved: " + (e.message || e), { ms: 5000 }); }
+  $("#eSave").disabled = false;
 });
+$("#eDelete").addEventListener("click", async () => {
+  if (!state.editing || !confirm("Delete this entry? This cannot be undone.")) return;
+  const { id, pending } = state.editing;
+  if (pending) queue.set(queue.get().filter((r) => r.id !== id));
+  else { const { error } = await sb.from("et_entries").delete().eq("id", id); if (error) return toast(error.message); }
+  $("#entryDlg").close(); toast("Entry deleted"); refreshAll(); renderToday();
+});
+
+/* ---------- Understanding what was said ---------- */
+const QUESTION = /\b(kitna|kitne|kitni|kitana|kitane|how much|how many|hisab|hisaab|baki|baaki|bacha|bachi|balance|status|kya hal)\b/;
+const isQuestion = (raw) => /\?\s*$/.test(raw.trim()) || QUESTION.test(" " + translit(raw).toLowerCase() + " ");
+
+function confident(e) {
+  if (!(e.amount > 0) || !e.kind) return false;
+  if (e._conf != null) return e._conf >= 0.8 && (!!e.project_id || e.kind === "expense");
+  return e._exp?.kind && (e._exp?.project || e._learned) && (e._exp?.mode || e._learned);
+}
+async function aiParse(text) {
+  const call = sb.functions.invoke(CONFIG.AI_FUNCTION, { body: { mode: "parse", text, today: istToday() } });
+  const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 9000));
+  const { data, error } = await Promise.race([call, timeout]);
+  if (error || !data || data.error) return null;
+  return data;
+}
+function fromAI(a, local) {
+  const p = state.projects.find((x) => x.id === a.project_id);
+  const it = p && state.items.find((x) => x.id === a.contract_item_id && x.project_id === p.id);
+  return {
+    amount: Number(a.amount) > 0 ? Number(a.amount) : local.amount,
+    kind: KIND[a.kind] ? a.kind : local.kind,
+    mode: MODE[a.mode] ? a.mode : local.mode,
+    project_id: p ? p.id : a.overhead ? null : local.project_id,
+    contract_item_id: it ? it.id : null,
+    party: a.party || local.party, category: a.category || local.category,
+    entry_date: /^\d{4}-\d{2}-\d{2}$/.test(a.entry_date || "") ? a.entry_date : local.entry_date,
+    note: local.note, _conf: Number(a.confidence ?? 0.7),
+    _exp: { project: !!p || !!a.overhead, kind: !!KIND[a.kind], mode: !!MODE[a.mode], party: !!a.party },
+  };
+}
+
+async function handleUtterance(text) {
+  text = String(text || "").trim(); if (!text) return;
+  $("#sayInput").value = "";
+  if (!state.projects.length && !isQuestion(text)) toast("Tip: add your projects first so entries are checked against the contract.");
+  let ai = null;
+  if (state.ai && navigator.onLine) {
+    setBusy(true);
+    try { ai = await aiParse(text); } catch { ai = null; }
+    setBusy(false);
+  }
+  if (ai?.intent === "question" || (!ai && isQuestion(text))) return answerQuestion(text, ai?.question || {});
+  const local = applyMemory(parseEntry(text));
+  let entries = ai?.entries?.length ? ai.entries.map((a) => applyMemory(fromAI(a, local))) : [local];
+  entries = entries.filter((e) => e.amount > 0 || entries.length === 1);
+  state.pending = entries.map((e) => ({ ...e, _heard: text }));
+  state.pendingIndex = 0; state.pendingTotal = state.pending.length;
+  nextPending();
+}
+async function nextPending() {
+  while (state.pendingIndex < state.pending.length) {
+    const i = state.pendingIndex++, e = state.pending[i];
+    if (state.instant && confident(e) && !looksDuplicate({ ...e, id: "x" })) {
+      const row = { kind: e.kind, amount: e.amount, project_id: e.project_id || null, contract_item_id: e.contract_item_id || null, party: e.party || null,
+        mode: e.mode || "cash", category: e.category || null, entry_date: e.entry_date || istToday(), note: e.note || null, voice_text: e._heard };
+      try { await commit(row); continue; } catch (err) { toast("Not saved: " + err.message); }
+    }
+    return openEntry(e, { heard: e._heard, index: i, total: state.pendingTotal });
+  }
+  state.pending = [];
+}
+
+/* ---------- Questions ("Ramesh ko kitna diya?") ---------- */
+async function answerQuestion(raw, aq = {}) {
+  const t = " " + translit(raw).toLowerCase() + " ";
+  const local = applyMemory(parseEntry(raw));
+  let from = aq.from || null, to = aq.to || istToday(), label = "till now";
+  if (aq.from) label = from === to ? fmtDay(from) : `${fmtDay(from)} to ${fmtDay(to)}`;
+  else if (/\b(today|aaj|aj)\b/.test(t)) { from = istToday(); label = "today"; }
+  else if (/\b(yesterday|kal)\b/.test(t)) { from = to = shiftDay(istToday(), -1); label = "yesterday"; }
+  else if (/\b(week|hafte|hafta|hapte|hapta)\b/.test(t)) { from = shiftDay(istToday(), -6); label = "in the last 7 days"; }
+  else if (/\b(month|mahine|mahina|mahine)\b/.test(t)) { from = istToday().slice(0, 8) + "01"; label = "this month"; }
+  const projectId = aq.project_id !== undefined && aq.project_id !== null ? aq.project_id : local._exp?.project ? local.project_id : null;
+  const party = aq.party || (local._exp?.party ? local.party : "");
+  const kindAsked = aq.kind || null;
+  let html = "", speech = "";
+  setBusy(true);
+  try {
+    if (party) {
+      const tok = itemTokens(party).sort((a, b) => b.length - a.length)[0] || party;
+      let q = sb.from("et_entries").select("kind,amount,entry_date,project_id,contract_item_id").ilike("party", `%${tok}%`).lte("entry_date", to).order("entry_date", { ascending: false });
+      if (from) q = q.gte("entry_date", from);
+      if (projectId) q = q.eq("project_id", projectId);
+      const { data, error } = await q; if (error) throw error;
+      const s = { received: 0, vendor_payment: 0, expense: 0 }, n = { received: 0, vendor_payment: 0, expense: 0 };
+      (data || []).forEach((e) => { s[e.kind] += Number(e.amount); n[e.kind]++; });
+      const parts = [];
+      if (s.vendor_payment || s.expense || (!s.received && kindAsked !== "received")) parts.push(`paid <b class="out">${inr(s.vendor_payment + s.expense)}</b> in ${n.vendor_payment + n.expense} payment${n.vendor_payment + n.expense === 1 ? "" : "s"}`);
+      if (s.received) parts.push(`received <b class="in">${inr(s.received)}</b> in ${n.received} payment${n.received === 1 ? "" : "s"}`);
+      html = `${esc(title(party))}: ${parts.join(", and ")} ${label}${projectId ? " on " + esc(projName(projectId)) : ""}.`;
+      const its = state.items.filter((i) => i.vendor_name && itemTokens(i.vendor_name).some((x) => sounds(x, [tok.toLowerCase()])));
+      its.forEach((i) => { const pd = state.itemPaid[i.id] || 0; html += `<div class="muted" style="margin-top:8px">${esc(i.item)} (${esc(projName(i.project_id))}): agreed ${inr(i.vendor_amount)}, paid ${inr(pd)}, balance ${inr(i.vendor_amount - pd)}.</div>`; });
+      const last = (data || [])[0]; if (last) html += `<div class="muted" style="margin-top:8px">Last entry: ${inr(last.amount)} on ${fmtDay(last.entry_date)}.</div>`;
+    } else if (projectId) {
+      const p = state.projects.find((x) => x.id === projectId), m = projectMath(p);
+      html = `${esc(p.name)}: received <b class="in">${inr(m.r)}</b> of ${inr(m.c)}, client still owes <b>${inr(m.due)}</b>. Vendors paid <b class="out">${inr(m.vp)}</b> of ${inr(m.vb)} (balance ${inr(m.vendorDue)}). Margin after expenses <b>${inr(m.marginNow)}</b>.`;
+    } else {
+      let q = sb.from("et_entries").select("kind,amount").lte("entry_date", to);
+      if (!from) { from = istToday(); label = "today"; }
+      q = q.gte("entry_date", from);
+      const { data, error } = await q; if (error) throw error;
+      const s = { received: 0, vendor_payment: 0, expense: 0 }; (data || []).forEach((e) => (s[e.kind] += Number(e.amount)));
+      html = `${label[0].toUpperCase() + label.slice(1)}: received <b class="in">${inr(s.received)}</b>, paid vendors <b class="out">${inr(s.vendor_payment)}</b>, expenses <b class="out">${inr(s.expense)}</b>. Net ${inr(s.received - s.vendor_payment - s.expense)}.`;
+    }
+  } catch (e) {
+    html = isNetErr(e) ? "I need an internet connection to answer that." : "Couldn't work that out: " + esc(e.message || e);
+  }
+  setBusy(false);
+  speech = html.replace(/<[^>]+>/g, "");
+  $("#aHeard").textContent = "You asked: “" + raw + "”"; $("#aText").innerHTML = html; $("#aSpeak").onclick = () => say(speech);
+  $("#answerDlg").showModal(); say(speech);
+}
+function title(s) { return String(s).replace(/\b[a-z]/g, (c) => c.toUpperCase()); }
+$("#aClose").addEventListener("click", () => { try { speechSynthesis.cancel(); } catch {} $("#answerDlg").close(); });
 
 /* ---------- Voice input ---------- */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-let rec = null;
-let voiceLang = store.get("voiceLang", "hi-IN");
-function idleHint() { return voiceLang === "hi-IN" ? "हिंदी या Hinglish में बोलें, या टाइप करें। Tap हिं/EN to switch language." : "Speak in English, or type and press Enter. Tap EN/हिं to switch language."; }
-function showLang() { $("#lang").textContent = voiceLang === "hi-IN" ? "हिं" : "EN"; $("#lang").title = voiceLang === "hi-IN" ? "Voice: Hindi (tap for English)" : "Voice: English (tap for Hindi)"; $("#hint").textContent = idleHint(); }
+let rec = null, voiceLang = store.get("voiceLang", "hi-IN");
+function idleHint() { return voiceLang === "hi-IN" ? "Tap mic · हिंदी, Hinglish या English · ask “Ramesh ko kitna diya?”" : "Tap mic · speak an entry or ask “how much did Ramesh get?”"; }
+function setHint(t, busy = false) { $("#hint").textContent = t; $("#hint").classList.toggle("busy", busy); }
+function setBusy(on) { $("#mic").classList.toggle("busy", on); setHint(on ? (voiceLang === "hi-IN" ? "समझ रहे हैं…" : "Understanding…") : idleHint(), on); }
+function showLang() { $("#lang").textContent = voiceLang === "hi-IN" ? "हिं" : "EN"; $("#lang").title = voiceLang === "hi-IN" ? "Voice: Hindi (tap for English)" : "Voice: English (tap for Hindi)"; setHint(idleHint()); }
 $("#lang").addEventListener("click", () => {
-  voiceLang = voiceLang === "hi-IN" ? "en-IN" : "hi-IN"; store.set("voiceLang", voiceLang); showLang();
+  voiceLang = voiceLang === "hi-IN" ? "en-IN" : "hi-IN"; store.set("voiceLang", voiceLang); showLang(); buzz(8);
   toast(voiceLang === "hi-IN" ? "Voice: Hindi — Hinglish works too" : "Voice: English");
 });
 showLang();
-function setListening(on) { $("#mic").setAttribute("aria-pressed", on); $("#hint").textContent = on ? (voiceLang === "hi-IN" ? "सुन रहे हैं… रकम, किसको/किससे, कौन सा प्रोजेक्ट और कैसे भुगतान हुआ बताइए।" : "Listening… say the amount, who, which project and how it was paid.") : idleHint(); }
+function setListening(on) {
+  $("#mic").setAttribute("aria-pressed", on);
+  setHint(on ? (voiceLang === "hi-IN" ? "सुन रहे हैं… रकम, किसको, कौन सा प्रोजेक्ट, कैसे दिया" : "Listening… amount, who, which project, how paid") : idleHint());
+}
 $("#mic").addEventListener("click", () => {
+  buzz(12);
   if (rec) { rec.stop(); return; }
-  if (!SR) { toast("Voice needs Chrome, Edge or Safari. Type the entry instead."); $("#sayInput").focus(); return; }
+  if (!SR) { toast("Voice isn't available in this browser. Use the keyboard's mic button to dictate instead."); $("#sayInput").focus(); return; }
   rec = new SR(); rec.lang = voiceLang; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
-  let finalText = "";
-  rec.onresult = (ev) => { let txt = ""; for (const r of ev.results) txt += r[0].transcript; $("#sayInput").value = txt; if (ev.results[ev.results.length - 1].isFinal) finalText = txt; };
-  rec.onerror = (ev) => {
-    const msg = { "not-allowed": "Microphone is blocked. Allow mic access for indevastudio.com in browser settings.", "no-speech": "Didn't catch anything. Tap the mic and try again.", network: "Voice needs an internet connection." }[ev.error];
-    if (msg) toast(msg, 4000);
+  let finalText = "", lastText = "";
+  rec.onresult = (ev) => {
+    let txt = ""; for (const r of ev.results) txt += r[0].transcript;
+    lastText = txt; setHint("“" + txt + "”");
+    if (ev.results[ev.results.length - 1].isFinal) finalText = txt;
   };
-  rec.onend = () => { rec = null; setListening(false); const said = (finalText || $("#sayInput").value).trim(); if (said) openEntry(parseEntry(said), said); };
-  rec.start(); setListening(true);
+  rec.onerror = (ev) => {
+    const msg = {
+      "not-allowed": "Microphone is blocked. Allow mic access for indevastudio.com in your browser settings.",
+      "service-not-allowed": "Voice isn't allowed here. Open the page in Chrome or Safari, or use the keyboard's mic button.",
+      "no-speech": "Didn't hear anything. Tap the mic and speak.",
+      "audio-capture": "No microphone found.",
+      network: "Voice needs an internet connection. Type the entry instead — it will save offline.",
+    }[ev.error];
+    if (msg) toast(msg, { ms: 5000 });
+  };
+  rec.onend = () => { rec = null; setListening(false); const said = (finalText || lastText).trim(); if (said) handleUtterance(said); };
+  try { rec.start(); setListening(true); } catch { rec = null; }
 });
-$("#sayForm").addEventListener("submit", (e) => { e.preventDefault(); const s = $("#sayInput").value.trim(); if (s) openEntry(parseEntry(s), s); });
+$("#sayForm").addEventListener("submit", (e) => { e.preventDefault(); handleUtterance($("#sayInput").value); });
+
+/* ---------- AI availability ---------- */
+async function checkAI() {
+  if (!navigator.onLine) return;
+  try { const { data } = await sb.functions.invoke(CONFIG.AI_FUNCTION, { body: { mode: "status" } }); state.ai = !!data?.ai; } catch { state.ai = false; }
+  $("#aiPill").hidden = !state.ai;
+  $("#mStatus").textContent = state.ai ? "AI understanding is on." : "Using built-in understanding. Add an OPENAI_API_KEY or ANTHROPIC_API_KEY secret in Supabase to switch on AI.";
+}
 
 /* ---------- Project editor ---------- */
 function itemRow(i = {}) {
   const d = document.createElement("div"); d.className = "item-row"; d.dataset.id = i.id || "";
-  d.innerHTML = `<input placeholder="Item (e.g. Modular kitchen)" value="${esc(i.item || "")}" data-f="item">
-    <input type="number" inputmode="decimal" placeholder="Client ₹" value="${i.client_amount ?? ""}" data-f="client_amount">
-    <input placeholder="Vendor" value="${esc(i.vendor_name || "")}" data-f="vendor_name">
+  d.innerHTML = `<input class="full" placeholder="Item (e.g. Modular kitchen)" value="${esc(i.item || "")}" data-f="item">
+    <input placeholder="Vendor" value="${esc(i.vendor_name || "")}" data-f="vendor_name" autocapitalize="words">
     <input type="number" inputmode="decimal" placeholder="Vendor ₹" value="${i.vendor_amount ?? ""}" data-f="vendor_amount">
-    <button type="button" class="btn small ghost danger" aria-label="Remove item">✕</button>`;
+    <input type="number" inputmode="decimal" placeholder="Client ₹" value="${i.client_amount ?? ""}" data-f="client_amount">
+    <button type="button" class="btn small ghost danger">Remove</button>`;
   d.querySelector("button").addEventListener("click", () => d.remove());
   $("#itemRows").appendChild(d);
 }
@@ -846,8 +1289,8 @@ function updateMarginHint() {
 ["#pValue", "#pVendor"].forEach((s) => $(s).addEventListener("input", updateMarginHint));
 $("#addItem").addEventListener("click", () => itemRow());
 $("#sumItems").addEventListener("click", () => {
-  let c = 0, v = 0; $("#itemRows").querySelectorAll(".item-row").forEach((r) => { c += Number(r.querySelector('[data-f="client_amount"]').value || 0); v += Number(r.querySelector('[data-f="vendor_amount"]').value || 0); });
-  $("#pValue").value = c; $("#pVendor").value = v; updateMarginHint();
+  let c = 0, v = 0; $$(".item-row", $("#itemRows")).forEach((r) => { c += Number($('[data-f="client_amount"]', r).value || 0); v += Number($('[data-f="vendor_amount"]', r).value || 0); });
+  if (c) $("#pValue").value = c; $("#pVendor").value = v; updateMarginHint();
 });
 $("#addProject").addEventListener("click", () => openProject(null));
 function openProject(id) {
@@ -863,36 +1306,73 @@ function openProject(id) {
 $("#projForm").addEventListener("submit", async (e) => {
   if (e.submitter?.value !== "save") return;
   e.preventDefault();
+  if (!navigator.onLine) return toast("You're offline. Projects can be edited once you're back online.");
   const row = { name: $("#pName").value.trim(), client_name: $("#pClient").value.trim() || null, site: $("#pSite").value.trim() || null,
     contract_ref: $("#pRef").value.trim() || null, contract_date: $("#pDate").value || null, contract_value: Number($("#pValue").value || 0),
     vendor_budget: Number($("#pVendor").value || 0), status: $("#pStatus").value, contract_notes: $("#pNotes").value.trim() || null };
   let id = state.editingProject, error;
   if (id) ({ error } = await sb.from("et_projects").update(row).eq("id", id));
   else { const r = await sb.from("et_projects").insert(row).select("id").single(); error = r.error; id = r.data?.id; }
-  if (error) return toast("Not saved: " + error.message, 4000);
-
-  const rows = [...$("#itemRows").querySelectorAll(".item-row")].map((r) => ({
-    id: r.dataset.id || null, item: r.querySelector('[data-f="item"]').value.trim(),
-    client_amount: Number(r.querySelector('[data-f="client_amount"]').value || 0), vendor_name: r.querySelector('[data-f="vendor_name"]').value.trim() || null,
-    vendor_amount: Number(r.querySelector('[data-f="vendor_amount"]').value || 0) })).filter((r) => r.item);
+  if (error) return toast("Not saved: " + error.message, { ms: 5000 });
+  const rows = $$(".item-row", $("#itemRows")).map((r) => ({
+    id: r.dataset.id || null, item: $('[data-f="item"]', r).value.trim(),
+    client_amount: Number($('[data-f="client_amount"]', r).value || 0), vendor_name: $('[data-f="vendor_name"]', r).value.trim() || null,
+    vendor_amount: Number($('[data-f="vendor_amount"]', r).value || 0) })).filter((r) => r.item);
   const keep = new Set(rows.filter((r) => r.id).map((r) => r.id));
   const removed = state.items.filter((i) => i.project_id === id && !keep.has(i.id)).map((i) => i.id);
   const ops = [];
   if (removed.length) ops.push(sb.from("et_contract_items").delete().in("id", removed));
   rows.forEach((r) => { const { id: rid, ...data } = r; ops.push(rid ? sb.from("et_contract_items").update(data).eq("id", rid) : sb.from("et_contract_items").insert({ ...data, project_id: id })); });
-  const res = await Promise.all(ops); const err = res.find((x) => x.error);
-  if (err) toast("Project saved, but an item failed: " + err.error.message, 4000); else toast("Project saved");
-  $("#projDlg").close(); await refreshAll();
+  const res = await Promise.all(ops), err = res.find((x) => x.error);
+  toast(err ? "Project saved, but an item failed: " + err.error.message : "Project saved");
+  $("#projDlg").close(); buzz(); refreshAll();
 });
 
-/* ---------- Send report now ---------- */
-$("#sendNow").addEventListener("click", async () => {
-  const b = $("#sendNow"); b.disabled = true; b.textContent = "Sending…";
-  const { data, error } = await sb.functions.invoke(CONFIG.REPORT_FUNCTION, { body: { date: istToday() } });
-  b.disabled = false; b.textContent = "Send today's report";
-  if (error || data?.error) return toast("Report not sent: " + (data?.error || error.message), 4500);
-  toast("Report emailed to " + data.sent_to);
+/* ---------- More menu ---------- */
+let installEvt = null;
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installEvt = e; });
+const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+$("#moreBtn").addEventListener("click", () => {
+  buzz(8);
+  $("#mInstant").checked = state.instant; $("#mSpeak").checked = state.speakBack;
+  $("#mInstall").hidden = standalone();
+  $("#mInstallSub").textContent = /iphone|ipad/i.test(navigator.userAgent) ? "In Safari: Share → Add to Home Screen" : "Adds Ledger to your home screen";
+  $("#moreDlg").showModal();
 });
+$("#mClose").addEventListener("click", () => $("#moreDlg").close());
+$("#mInstant").addEventListener("change", (e) => { state.instant = e.target.checked; store.set("et_instant", state.instant ? "1" : "0"); });
+$("#mSpeak").addEventListener("change", (e) => { state.speakBack = e.target.checked; store.set("et_speak", state.speakBack ? "1" : "0"); });
+$("#mInstall").addEventListener("click", async () => {
+  if (installEvt) { installEvt.prompt(); await installEvt.userChoice; installEvt = null; $("#moreDlg").close(); return; }
+  toast(/iphone|ipad/i.test(navigator.userAgent) ? "In Safari, tap Share (□↑) → Add to Home Screen." : "In Chrome, tap ⋮ → Add to Home screen / Install app.", { ms: 6000 });
+});
+$("#mHelp").addEventListener("click", () => {
+  $("#moreDlg").close();
+  $("#aHeard").textContent = "Things you can say";
+  $("#aText").innerHTML = `<div style="font-size:16px;font-weight:500;display:grid;gap:10px">
+    <div><b>Payments out</b><br>रमेश को किचन के लिए 25 हज़ार UPI से दिए · Paid 1.5 lakh to Sharma Marble for Resham by cheque</div>
+    <div><b>Money in</b><br>सिंघल जी से ढाई लाख ऑनलाइन आए · Received 2 lakh from Nitin Jain by NEFT</div>
+    <div><b>Expenses</b><br>चाय और ऑटो में 450 कैश · Petrol 800 yesterday</div>
+    <div><b>Several at once</b><br>Ramesh ko 5000 aur Suresh ko 3000 cash diye (needs AI on)</div>
+    <div><b>Questions</b><br>Ramesh ko ab tak kitna diya? · Nitin Jain ka kitna baaki hai? · Aaj kitna kharcha hua? · Is mahine kitna aaya?</div>
+    <div class="muted">You don't need to name the project every time: once you've paid someone, it remembers their usual project, item and payment mode.</div></div>`;
+  $("#aSpeak").onclick = () => {};
+  $("#answerDlg").showModal();
+});
+$("#mSend").addEventListener("click", async () => {
+  const b = $("#mSend"); b.disabled = true;
+  const { data, error } = await sb.functions.invoke(CONFIG.REPORT_FUNCTION, { body: { date: istToday() } });
+  b.disabled = false;
+  if (error || data?.error) return toast("Report not sent: " + (data?.error || error.message), { ms: 5000 });
+  $("#moreDlg").close(); toast("Report emailed to " + data.sent_to);
+});
+$("#mSignOut").addEventListener("click", async () => { $("#moreDlg").close(); await sb.auth.signOut(); });
+
+/* ---------- Installable app (offline shell) ---------- */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("/ledger-sw.js", { scope: "/ledger" }).catch(() => {}));
+}
+
 </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "Indeva Project Ledger",
+  "short_name": "Ledger",
+  "description": "Voice project ledger for Indeva Studio",
+  "id": "/ledger.html",
+  "start_url": "/ledger.html",
+  "scope": "/ledger",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F5F0",
+  "theme_color": "#F5F5F0",
+  "icons": [
+    { "src": "/ledger-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/ledger-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
