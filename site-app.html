@@ -46,16 +46,14 @@
 <script type="application/ld+json" id="jsonld-org">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "additionalType": "https://schema.org/InteriorDesigner",
+  "@type": "HomeAndConstructionBusiness",
   "name": "indéva studio",
   "url": "https://www.indevastudio.com/",
-  "logo": "https://www.indevastudio.com/favicon-32x32.png",
-  "image": "https://www.indevastudio.com/og-default.jpg",
+  "logo": "https://www.indevastudio.com/android-chrome-512x512.png",
+  "image": "https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-1536.webp",
   "email": "hello@indevastudio.com",
   "telephone": "+919717881083",
-  "priceRange": "₹₹₹₹",
-  "description": "Luxury interior design and architecture studio based in Delhi, India. We design homes, offices, and hospitality spaces with precision, craft, and conviction.",
+  "description": "Architecture-led interior design, construction and custom furniture studio in Delhi. Residential, hospitality and commercial projects across Delhi NCR, from planning and drawings to site execution and handover.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "34/11, Lampur Rd, Industrial Area, Narela",
@@ -64,18 +62,19 @@
     "postalCode": "110040",
     "addressCountry": "IN"
   },
-  "areaServed": ["Delhi", "South Delhi", "Gurgaon", "Noida", "Sonipat", "Narela"],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "13",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
+  "areaServed": [
+    "Delhi",
+    "South Delhi",
+    "Gurgaon",
+    "Noida",
+    "Sonipat",
+    "Narela"
+  ],
   "sameAs": [
     "https://www.instagram.com/indeva.studio",
     "https://www.linkedin.com/company/indevastudio"
-  ]
+  ],
+  "@id": "https://www.indevastudio.com/#business"
 }
 </script>
 
@@ -84,18 +83,17 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": "https://www.indevastudio.com/#website",
   "name": "indéva studio",
   "url": "https://www.indevastudio.com/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://www.indevastudio.com/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "publisher": {
+    "@id": "https://www.indevastudio.com/#business"
+  },
+  "inLanguage": "en-IN"
 }
 </script>
 
 <!-- JSON-LD: Article (injected dynamically when a blog post is open) -->
-<script type="application/ld+json" id="jsonld-article"></script>
 <!-- Favicon set: legacy .ico fallback + modern PNG sizes + Apple/Android touch icons -->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -3988,28 +3986,28 @@ img {
       <a class="btn btn-text reveal d2" href="/insights" data-page="blog" onclick="showPage('blog');window.scrollTo(0,0); return false;">view all insights ↗</a>
     </div>
     <div class="insights-grid">
-      <div class="blog-card reveal" onclick="openArticle('floorplans')">
+      <a class="blog-card reveal" href="/insights/why-most-floor-plans-fail" style="display:block;color:inherit;text-decoration:none;">
         <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=75" alt="why most floor plans fail — indéva studio interior design insights" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
         <div class="blog-card-cat">spatial logic</div>
         <h2 class="blog-card-title">why most floor plans fail</h2>
         <p class="blog-card-excerpt">the plan is not the starting point of design — it is the design. most projects go wrong before a single material is selected.</p>
         <div class="blog-card-read">read article ↗</div>
-      </div>
-      <div class="blog-card reveal d1" onclick="openArticle('execution')">
+      </a>
+      <a class="blog-card reveal d1" href="/insights/execution-is-design" style="display:block;color:inherit;text-decoration:none;">
         <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75" alt="execution is design — on-site interior design supervision by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
         <div class="blog-card-cat">execution</div>
         <h2 class="blog-card-title">execution is design</h2>
         <p class="blog-card-excerpt">design intent dies on site when no one is watching. this is why execution is not a separate phase — it is the final design act.</p>
         <div class="blog-card-read">read article ↗</div>
-      </div>
-      <div class="blog-card reveal d2" onclick="openArticle('perfection')">
+      </a>
+      <a class="blog-card reveal d2" href="/insights/perfection-is-the-enemy-of-comfort" style="display:block;color:inherit;text-decoration:none;">
         <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
         <div class="blog-card-cat">philosophy</div>
         <h2 class="blog-card-title">perfection is the enemy of comfort</h2>
         <p class="blog-card-excerpt">the most uncomfortable spaces we've encountered are the most perfectly finished. here's why we deliberately leave ten percent undone.</p>
         <div class="blog-card-read">read article ↗</div>
+      </a>
       </div>
-    </div>
   </section>
 
   <!-- FOOTER -->
@@ -4031,6 +4029,7 @@ img {
         <a class="footer-nav-link" href="/vendors" onclick="showPage('vendors');return false;">vendors</a>
         <a class="footer-nav-link" href="/furniture" onclick="showPage('furniture');return false;">furniture</a>
         <a class="footer-nav-link" href="/contact" onclick="showPage('contact');return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a>
       </div>
       <div class="footer-nav-links" style="margin-top:20px;">
         <div class="footer-nav-title" style="margin-bottom:8px;font-size:0.6rem;opacity:0.5;letter-spacing:0.2em;text-transform:uppercase;">cities</div>
@@ -4228,6 +4227,7 @@ img {
         <a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a>
         <a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a>
         <a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a>
       </div>
     </div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div>
@@ -4317,8 +4317,8 @@ img {
     </div>
     <div class="service-detail-body">
       <div class="service-detail-image reveal">
-        <img src="https://www.indevastudio.com/project-images-for-website/living%20area.webp" alt="dlf crest penthouse, gurgaon — site execution and delivery by indéva studio" loading="lazy" decoding="async">
-        <div class="service-detail-image-cap">dlf crest penthouse — gurgaon</div>
+        <img src="https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp" alt="hotel lobby with a handcrafted glass ceiling installation — hotel silk by resham, murthal, built and executed by indéva studio" width="800" height="1067" loading="lazy" decoding="async">
+        <div class="service-detail-image-cap">hotel silk by resham — murthal</div>
       </div>
       <p class="service-detail-desc reveal">on-site coordination, design supervision, and delivery control to ensure the design is built exactly as intended. we don't disappear after drawings. we protect design intent through every phase until flawless handover.</p>
       <div class="service-items-grid">
@@ -4332,9 +4332,22 @@ img {
     </div>
   </div>
 
+  <section class="service-detail" id="services-in-detail" style="border-bottom:none;">
+    <div class="service-detail-header">
+      <div class="service-detail-num">→</div>
+      <h2 class="service-detail-title">services<br>in detail</h2>
+      <p class="service-detail-stmt">one team, from plan<br>to handover.</p>
+    </div>
+    <div class="service-detail-body">
+      <div style="border-top:1px solid var(--line);"><a href="/services/residential-interior-design" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">residential interior design</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">apartments, DDA flats, builder floors and family homes</span></a><a href="/services/commercial-interior-design" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">commercial interior design</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">offices, studios and retail stores</span></a><a href="/services/hospitality-interior-design" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">hospitality interior design</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">hotels and hospitality fit-outs</span></a><a href="/services/farmhouse-interior-design" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">farmhouse interior design</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">large-volume family residences</span></a><a href="/services/modular-kitchen-design" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">modular kitchen design</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">layout, materials, hardware and lighting</span></a><a href="/services/interior-design-execution" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">execution & turnkey delivery</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">drawings, vendors, site supervision, handover</span></a><a href="/furniture" style="display:block;padding:26px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);"><span style="display:block;font-size:1.15rem;font-weight:400;">custom furniture & joinery</span><span style="display:block;margin-top:6px;font-size:.85rem;color:var(--white-muted);">pieces built in our own facility</span></a></div>
+      <p style="margin-top:28px;font-size:.9rem;line-height:1.8;color:var(--white-muted);">where we work: <a href="/delhi" style="color:var(--gold);text-decoration:none;">delhi</a> · <a href="/south-delhi-interior-designer" style="color:var(--gold);text-decoration:none;">south delhi</a> · <a href="/locations/vasant-kunj" style="color:var(--gold);text-decoration:none;">vasant kunj</a> · <a href="/locations/narela" style="color:var(--gold);text-decoration:none;">narela</a> · <a href="/gurgaon" style="color:var(--gold);text-decoration:none;">gurgaon</a> · <a href="/noida" style="color:var(--gold);text-decoration:none;">noida</a> · <a href="/sonipat" style="color:var(--gold);text-decoration:none;">sonipat</a> · <a href="/locations" style="color:var(--gold);text-decoration:none;">all locations →</a></p>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">designed to last. not to impress.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -4453,7 +4466,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">designed to last. not to impress.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -4667,7 +4681,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">designed to last. not to impress.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -4795,7 +4810,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">designed to last. not to impress.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">get in touch</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><a href="tel:+919717881083" class="footer-contact-item">+91 9717881083</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -5084,7 +5100,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">designed to last. not to impress.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -5256,7 +5273,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">beyond the visuals.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
@@ -5793,7 +5811,8 @@ img {
 
   <footer class="site-footer">
     <div class="footer-logo-wrap"><a class="footer-logo" href="/" data-page="home" onclick="showPage('home'); return false;">indéva studio</a><p class="footer-tagline">beyond the visuals.</p></div>
-    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a></div></div>
+    <div class="footer-nav"><div class="footer-nav-title">navigate</div><div class="footer-nav-links"><a class="footer-nav-link" href="/" data-page="home" onclick="showPage('home'); return false;">home</a><a class="footer-nav-link" href="/about" data-page="about" onclick="showPage('about'); return false;">about</a><a class="footer-nav-link" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">projects</a><a class="footer-nav-link" href="/services" data-page="services" onclick="showPage('services'); return false;">services</a><a class="footer-nav-link" href="/philosophy" data-page="philosophy" onclick="showPage('philosophy'); return false;">philosophy</a><a class="footer-nav-link" href="/process" data-page="process" onclick="showPage('process'); return false;">process</a><a class="footer-nav-link" href="/insights">insights</a><a class="footer-nav-link" href="/vendors" data-page="vendors" onclick="showPage('vendors'); return false;">vendors</a><a class="footer-nav-link" href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture</a><a class="footer-nav-link" href="/contact" data-page="contact" onclick="showPage('contact'); return false;">contact</a>
+        <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>

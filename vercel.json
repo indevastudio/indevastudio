@@ -771,6 +771,41 @@
       "statusCode": 301
     },
     {
+      "source": "/locations/delhi",
+      "destination": "/delhi",
+      "statusCode": 301
+    },
+    {
+      "source": "/locations/gurgaon",
+      "destination": "/gurgaon",
+      "statusCode": 301
+    },
+    {
+      "source": "/locations/noida",
+      "destination": "/noida",
+      "statusCode": 301
+    },
+    {
+      "source": "/locations/sonipat",
+      "destination": "/sonipat",
+      "statusCode": 301
+    },
+    {
+      "source": "/locations/south-delhi",
+      "destination": "/south-delhi-interior-designer",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/custom-furniture",
+      "destination": "/furniture",
+      "statusCode": 301
+    },
+    {
+      "source": "/site-app",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
       "source": "/interior-designer-delhi",
       "destination": "/delhi",
       "statusCode": 301

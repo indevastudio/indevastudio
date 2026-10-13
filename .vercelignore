@@ -27,3 +27,18 @@ vercel.json.reference
 *.csv
 patel-nagar-project-entry.txt
 
+
+# Source / superseded files (added 2026-10-13, SEO implementation)
+# site-app.html is the source for the generated core pages (build-pages.cjs); it is not a page.
+site-app.html
+# Older Sept-2026 /services page; /services is now services.html (generated). Kept for history.
+services/index.html
+# Old case-study viewer templates, not linked anywhere
+pshow.html
+pshow-schema.html
+pshow.js
+pshow.css
+# Build scripts and workflow copies at the repo root — not pages
+*.cjs
+*.yml
+*.py
