@@ -450,6 +450,56 @@ function projectMath(p) {
   return { c, r, vb, vp, ex, due: c - r, vendorDue: vb - vp, margin: c - vb, marginNow: c - vb - ex, cash: r - vp - ex,
     pct: c > 0 ? Math.min(100, (r / c) * 100) : 0, marginPct: c > 0 ? ((c - vb - ex) / c) * 100 : 0 };
 }
+
+/* ---------- Billing breakdown (work lines, provisions, pending-rate items, payables) ---------- */
+const PROVISION_PCT = 5;
+function billingOf(items, received) {
+  const priced = items.filter((i) => (i.pricing_status || "priced") === "priced");
+  const work = priced.filter((i) => (i.line_type || "work") === "work");
+  const prov = priced.filter((i) => i.line_type === "provision");
+  const subtotal = work.reduce((s, i) => s + Number(i.client_amount || 0), 0);
+  const provAlloc = prov.reduce((s, i) => s + Number(i.client_amount || 0), 0);
+  const total = subtotal + provAlloc;
+  return { work, prov, subtotal, provAlloc, provCalc: subtotal * PROVISION_PCT / 100, total, balance: total - received,
+    pending: items.filter((i) => i.pricing_status === "pending"),
+    payables: items.filter((i) => i.vendor_status === "payable" && (state.itemPaid[i.id] || 0) < Number(i.vendor_amount || 0)),
+    advances: items.filter((i) => i.vendor_status === "advance"),
+    groups: [...new Set(prov.map((i) => i.group_name).filter(Boolean))] };
+}
+const billTag = (t) => ` <span class="muted" style="font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:0 6px;white-space:nowrap">${t}</span>`;
+function itemTags(i) {
+  const pd = state.itemPaid[i.id] || 0, t = [];
+  if (i.vendor_status === "payable") t.push(pd >= Number(i.vendor_amount || 0) && pd > 0 ? "Paid" : "Payable");
+  if (i.vendor_status === "advance") t.push(pd > 0 ? "Advance paid " + inr(pd) : "Advance · not yet recorded as paid");
+  if (/pending fee/i.test(i.note || "")) t.push("Pending fee");
+  return t.map(billTag).join("");
+}
+const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</span>` : "");
+function billingBlock(p, items) {
+  if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending")) return "";
+  const b = billingOf(items, +p.received || 0);
+  const row = (i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
+  const diff = Math.round(b.provAlloc) - Math.round(b.provCalc);
+  const warn = [];
+  if (Math.round(+p.contract_value) !== Math.round(b.total)) warn.push(`Client value on the contract (${inr(Math.round(+p.contract_value))}) differs from the itemised billing total (${inr(Math.round(b.total))}).`);
+  if (b.prov.length && diff !== 0) warn.push(`Provision items total ${inr(b.provAlloc)}, but ${PROVISION_PCT}% of the subtotal is ${inr(Math.round(b.provCalc))}.`);
+  return `<div style="overflow-x:auto;margin-top:14px"><table class="items num">
+    <thead><tr><th>Billing</th><th class="r">Client ₹</th></tr></thead><tbody>
+    ${b.work.filter((i) => Number(i.client_amount) > 0).map(row).join("")}
+    <tr><td><b>Subtotal before provision</b></td><td class="r"><b>${inr(Math.round(b.subtotal))}</b></td></tr>
+    ${b.prov.length ? `<tr><td colspan="2" style="padding-top:12px"><b>${esc(b.groups[0] || "Site overheads and wastage provision")}</b>
+      <div class="muted" style="font-size:12px">Budget provision — proposed allocation, not verified expenditure. ${PROVISION_PCT}% of ${inr(Math.round(b.subtotal))} = ${inr(b.provCalc)}</div></td></tr>
+      ${b.prov.map(row).join("")}
+      <tr><td><b>Total provision</b></td><td class="r"><b>${inr(Math.round(b.provAlloc))}</b></td></tr>` : ""}
+    <tr><td><b>Total including provision</b></td><td class="r"><b>${inr(Math.round(b.total))}</b></td></tr>
+    <tr><td>Client payments received</td><td class="r in">${inr(+p.received || 0)}</td></tr>
+    <tr><td><b>${b.balance >= 0 ? "Balance exceeding receipts" : "Receipts exceed billing by"}</b></td><td class="r"><b>${inr(Math.abs(Math.round(b.balance)))}</b></td></tr>
+    </tbody></table></div>
+    ${b.pending.length ? `<div class="muted" style="font-size:13px;margin-top:10px"><b>Pending pricing — not in total:</b> ${b.pending.map((i) => `${esc(i.item)}${i.qty ? ` (${Number(i.qty)} ${esc(i.unit || "")})` : ""} · rate pending confirmation`).join("; ")}</div>` : ""}
+    ${b.payables.length ? `<div class="muted" style="font-size:13px;margin-top:6px"><b>Vendor payables (unpaid):</b> ${b.payables.map((i) => `${esc(i.item)} ${inr(Number(i.vendor_amount) - (state.itemPaid[i.id] || 0))}`).join("; ")}</div>` : ""}
+    <div class="muted" style="font-size:12px;margin-top:6px">The balance is billing less receipts — not by itself the final amount payable; check pending fees, vendor advances and provisions.</div>
+    ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}`;
+}
 function renderProjects() {
   if (!state.projects.length) {
     $("#projList").innerHTML = `<div class="empty">No projects yet. Add one with its agreed client value and vendor value so every payment is checked against the contract.</div>`;
@@ -457,7 +507,7 @@ function renderProjects() {
   }
   $("#projList").innerHTML = state.projects.map((p) => {
     const m = projectMath(p);
-    const items = state.items.filter((i) => i.project_id === p.id);
+    const items = state.items.filter((i) => i.project_id === p.id), vItems = items.filter((i) => i.line_type !== "provision" && i.pricing_status !== "pending");
     const warn = [];
     if (m.vb > 0 && m.vp > m.vb) warn.push(`Vendor payments are ${inr(m.vp - m.vb)} above the agreed vendor value.`);
     if (m.c > 0 && m.r > m.c) warn.push(`Received is ${inr(m.r - m.c)} above the contract value.`);
@@ -483,9 +533,10 @@ function renderProjects() {
           <dt>Cash in hand</dt><dd class="${m.cash < 0 ? "out" : "in"}">${m.cash < 0 ? "−" : ""}${inr(Math.abs(m.cash))}</dd></dl></div>
       </div>
       ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}
-      ${items.length ? `<div style="overflow-x:auto"><table class="items num"><thead><tr><th>Item</th><th class="r">Client</th><th>Vendor</th><th class="r">Vendor value</th><th class="r">Paid</th></tr></thead><tbody>
-        ${items.map((i) => { const pd = state.itemPaid[i.id] || 0; return `<tr><td>${esc(i.item)}</td><td class="r">${inr(i.client_amount)}</td><td>${esc(i.vendor_name || "")}</td><td class="r">${inr(i.vendor_amount)}</td><td class="r ${pd > i.vendor_amount && i.vendor_amount > 0 ? "out" : ""}">${inr(pd)}</td></tr>`; }).join("")}
+      ${vItems.length ? `<div style="overflow-x:auto"><table class="items num"><thead><tr><th>Item</th><th class="r">Client</th><th>Vendor</th><th class="r">Vendor value</th><th class="r">Paid</th></tr></thead><tbody>
+        ${vItems.map((i) => { const pd = state.itemPaid[i.id] || 0; return `<tr><td>${esc(i.item)}</td><td class="r">${inr(i.client_amount)}</td><td>${esc(i.vendor_name || "")}</td><td class="r">${inr(i.vendor_amount)}</td><td class="r ${pd > i.vendor_amount && i.vendor_amount > 0 ? "out" : ""}">${inr(pd)}</td></tr>`; }).join("")}
       </tbody></table></div>` : ""}
+${billingBlock(p, items)}
     </article>`;
   }).join("");
   $("#projList").querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => openProject(b.dataset.edit)));
