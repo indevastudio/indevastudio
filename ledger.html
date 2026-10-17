@@ -154,6 +154,16 @@ dialog::backdrop{background:rgba(30,36,34,.45)}
 
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom,0px));z-index:50;
   background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;max-width:90vw}
+details.bd{margin-top:4px}
+details.bd summary{cursor:pointer;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600;list-style:none}
+details.bd summary::-webkit-details-marker{display:none}
+details.bd summary::before{content:"▸ "} details.bd[open] summary::before{content:"▾ "}
+details.bd h4{margin:10px 0 2px;font-size:12px;font-weight:700}
+details.bd table{width:100%;border-collapse:collapse;font-size:12px;margin:0}
+details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;font-weight:500}
+details.bd th{color:var(--muted);font-weight:600}
+details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
+details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -339,6 +349,13 @@ const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const bdHtml = (b, internal) => {
+  if (!b || !Array.isArray(b.sections) || !b.sections.length) return "";
+  const n = b.sections.reduce((t, s) => t + (s.rows || []).length, 0);
+  const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const list = (h, a) => (a && a.length ? `<h4>${h}</h4><ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
+  return `<details class="bd"><summary>View ${esc(b.title || "breakdown")} (${n} items)</summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
+};
 const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
 const istToday = () => new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
 const shiftDay = (d, k) => { const x = new Date(d + "T00:00:00Z"); x.setUTCDate(x.getUTCDate() + k); return x.toISOString().slice(0, 10); };
@@ -461,10 +478,11 @@ function billingOf(items, received) {
   const priced = items.filter((i) => (i.pricing_status || "priced") === "priced");
   const work = priced.filter((i) => (i.line_type || "work") === "work");
   const prov = priced.filter((i) => i.line_type === "provision");
+  const incl = priced.filter((i) => i.line_type === "included");
   const subtotal = work.reduce((s, i) => s + Number(i.client_amount || 0), 0);
   const provAlloc = prov.reduce((s, i) => s + Number(i.client_amount || 0), 0);
   const total = subtotal + provAlloc;
-  return { work, prov, subtotal, provAlloc, provCalc: subtotal * PROVISION_PCT / 100, total, balance: total - received,
+  return { work, prov, incl, subtotal, provAlloc, provCalc: subtotal * PROVISION_PCT / 100, total, balance: total - received,
     pending: items.filter((i) => i.pricing_status === "pending"),
     payables: items.filter((i) => i.vendor_status === "payable" && (state.itemPaid[i.id] || 0) < Number(i.vendor_amount || 0)),
     advances: items.filter((i) => i.vendor_status === "advance"),
@@ -482,7 +500,7 @@ const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(
 function billingBlock(p, items) {
   if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending")) return "";
   const b = billingOf(items, +p.received || 0);
-  const row = (i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
+  const row = (i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}${bdHtml(i.breakdown, true)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
   const diff = Math.round(b.provAlloc) - Math.round(b.provCalc);
   const warn = [];
   if (Math.round(+p.contract_value) !== Math.round(b.total)) warn.push(`Client value on the contract (${inr(Math.round(+p.contract_value))}) differs from the itemised billing total (${inr(Math.round(b.total))}).`);
@@ -496,6 +514,8 @@ function billingBlock(p, items) {
       ${b.prov.map(row).join("")}
       <tr><td><b>Total provision</b></td><td class="r"><b>${inr(Math.round(b.provAlloc))}</b></td></tr>` : ""}
     <tr><td><b>Total including provision</b></td><td class="r"><b>${inr(Math.round(b.total))}</b></td></tr>
+    ${b.incl.length ? `<tr><td colspan="2" style="padding-top:12px"><b>Included — not added to total</b></td></tr>
+      ${b.incl.map((i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}</td><td class="r muted">${inr(i.client_amount)}</td></tr>`).join("")}` : ""}
     <tr><td>Client payments received</td><td class="r in">${inr(+p.received || 0)}</td></tr>
     <tr><td><b>${b.balance >= 0 ? "Balance exceeding receipts" : "Receipts exceed billing by"}</b></td><td class="r"><b>${inr(Math.abs(Math.round(b.balance)))}</b></td></tr>
     </tbody></table></div>

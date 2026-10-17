@@ -55,6 +55,16 @@ tr.sum td{font-weight:700}
 tr.group td{padding-top:14px;border-bottom:0}
 .note{font-size:13px;color:var(--muted);margin:10px 0 0}
 .empty{color:var(--muted);padding:24px 0;text-align:center}
+details.bd{margin-top:4px}
+details.bd summary{cursor:pointer;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600;list-style:none}
+details.bd summary::-webkit-details-marker{display:none}
+details.bd summary::before{content:"▸ "} details.bd[open] summary::before{content:"▾ "}
+details.bd h4{margin:10px 0 2px;font-size:12px;font-weight:700}
+details.bd table{width:100%;border-collapse:collapse;font-size:12px;margin:0}
+details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;font-weight:500}
+details.bd th{color:var(--muted);font-weight:600}
+details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
+details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -84,6 +94,13 @@ const sb = supabase.createClient("https://rolarfaotykmprzvcmgh.supabase.co",
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const bdHtml = (b, internal) => {
+  if (!b || !Array.isArray(b.sections) || !b.sections.length) return "";
+  const n = b.sections.reduce((t, s) => t + (s.rows || []).length, 0);
+  const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const list = (h, a) => (a && a.length ? `<h4>${h}</h4><ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
+  return `<details class="bd"><summary>View ${esc(b.title || "breakdown")} (${n} items)</summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
+};
 const inr = (n) => "₹" + Math.round(Number(n || 0)).toLocaleString("en-IN");
 const MODE = { cash: "Cash", upi: "UPI", bank_transfer: "Bank transfer", cheque: "Cheque", card: "Card", other: "Other" };
 const fmtDate = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
@@ -112,12 +129,13 @@ function render(s) {
   const items = s.items || [], receipts = s.receipts || [];
   const priced = items.filter((i) => i.pricing_status === "priced");
   const work = priced.filter((i) => i.line_type === "work"), prov = priced.filter((i) => i.line_type === "provision");
+  const incl = priced.filter((i) => i.line_type === "included");
   const pending = items.filter((i) => i.pricing_status === "pending");
   const sum = (a) => a.reduce((t, i) => t + Number(i.amount || 0), 0);
   const subtotal = sum(work), provTotal = sum(prov), total = subtotal + provTotal;
   const received = receipts.reduce((t, r) => t + Number(r.amount || 0), 0), balance = total - received;
   const qty = (i) => (i.qty ? `<div class="muted" style="font-size:12px">${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</div>` : "");
-  const row = (i) => `<tr><td>${esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}</td></tr>`;
+  const row = (i) => `<tr><td>${esc(i.item)}${qty(i)}${bdHtml(i.breakdown, false)}</td><td class="r">${inr(i.amount)}</td></tr>`;
   const p = s.project;
   return `<section class="card">
       <h2>${esc(p.name)}</h2>
@@ -138,6 +156,9 @@ function render(s) {
           ${prov.map(row).join("")}
           <tr class="sum"><td>Total provision</td><td class="r">${inr(provTotal)}</td></tr>` : ""}
         <tr class="sum"><td>Total</td><td class="r">${inr(total)}</td></tr>
+        ${incl.length ? `<tr class="group"><td colspan="2"><b>Included — not added to the total</b>
+          <div class="muted" style="font-size:12px">Shown for reference; these are not charged separately</div></td></tr>
+          ${incl.map((i) => `<tr><td>${esc(i.item)}${qty(i)}</td><td class="r muted">${inr(i.amount)}</td></tr>`).join("")}` : ""}
       </tbody></table></div>
       ${pending.length ? `<p class="note"><b>To be priced (not included above):</b> ${pending.map((i) => `${esc(i.item)}${i.qty ? ` — ${Number(i.qty)} ${esc(i.unit || "")}` : ""}`).join("; ")}</p>` : ""}
     </section>
