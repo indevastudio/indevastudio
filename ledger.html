@@ -155,15 +155,19 @@ dialog::backdrop{background:rgba(30,36,34,.45)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom,0px));z-index:50;
   background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;max-width:90vw}
 details.bd{margin-top:4px}
-details.bd summary{cursor:pointer;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600;list-style:none}
+details.bd summary{cursor:pointer;list-style:none}
+details.bd .bd-link{display:block;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600}
+details.bd .bd-label{color:var(--ink)}
 details.bd summary::-webkit-details-marker{display:none}
-details.bd summary::before{content:"▸ "} details.bd[open] summary::before{content:"▾ "}
+details.bd .bd-link::before{content:"▸ "} details.bd[open] .bd-link::before{content:"▾ "}
+details.bd{margin-top:0}
 details.bd h4{margin:10px 0 2px;font-size:12px;font-weight:700}
 details.bd table{width:100%;border-collapse:collapse;font-size:12px;margin:0}
 details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;font-weight:500}
 details.bd th{color:var(--muted);font-weight:600}
 details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
 details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
+#sWarn{color:var(--out);background:#F6E7E2}
 </style>
 </head>
 <body>
@@ -187,7 +191,7 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
   <header class="top">
     <div class="top-row">
       <div class="brand">Project ledger<small>Indeva Studio</small></div>
-      <button class="btn small" id="sendNow" title="Email today's PDF now">Send today's report</button>
+      <button class="btn small" id="sendNow" title="Email a report">Send report</button>
       <button class="btn small ghost" id="signOut">Sign out</button>
     </div>
     <nav class="tabs" role="tablist">
@@ -298,6 +302,28 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
   </form>
 </dialog>
 
+<!-- Send report -->
+<dialog id="sendDlg">
+  <form class="dlg" id="sendForm" method="dialog">
+    <h3>Send report</h3>
+    <label>Report
+      <select id="sKind">
+        <option value="daily">Internal daily report (margins, vendors, all projects)</option>
+        <option value="client">Client statement (billing and payments only)</option>
+      </select>
+    </label>
+    <label id="sDateWrap">Date <input id="sDate" type="date"></label>
+    <label id="sProjWrap" hidden>Project <select id="sProj"></select></label>
+    <label>Send to <input id="sTo" type="text" inputmode="email" autocomplete="off" placeholder="name@example.com, another@example.com"></label>
+    <div class="ref" id="sHint">Always copied to ceo@indevastudio.com. Leave blank to send only to ceo@indevastudio.com.</div>
+    <div class="ref out" id="sWarn" hidden></div>
+    <div class="actions">
+      <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" value="send" id="sSend">Send</button>
+    </div>
+  </form>
+</dialog>
+
 <!-- Project editor -->
 <dialog id="projDlg">
   <form class="dlg" id="projForm" method="dialog">
@@ -349,12 +375,13 @@ const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const bdHtml = (b, internal) => {
+const bdHtml = (b, internal, label) => {
   if (!b || !Array.isArray(b.sections) || !b.sections.length) return "";
   const n = b.sections.reduce((t, s) => t + (s.rows || []).length, 0);
   const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   const list = (h, a) => (a && a.length ? `<h4>${h}</h4><ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
-  return `<details class="bd"><summary>View ${esc(b.title || "breakdown")} (${n} items)</summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
+  if (!label) return "";
+  return `<details class="bd"><summary><span class="bd-label">${label}</span> <span class="bd-link">View ${esc(b.title || "breakdown")} · ${n} items</span></summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
 };
 const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
 const istToday = () => new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
@@ -500,7 +527,7 @@ const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(
 function billingBlock(p, items) {
   if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending")) return "";
   const b = billingOf(items, +p.received || 0);
-  const row = (i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}${bdHtml(i.breakdown, true)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
+  const row = (i) => `<tr><td>${i.breakdown ? bdHtml(i.breakdown, true, esc(i.item) + qtyText(i) + itemTags(i)) : esc(i.item) + qtyText(i) + itemTags(i)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
   const diff = Math.round(b.provAlloc) - Math.round(b.provCalc);
   const warn = [];
   if (Math.round(+p.contract_value) !== Math.round(b.total)) warn.push(`Client value on the contract (${inr(Math.round(+p.contract_value))}) differs from the itemised billing total (${inr(Math.round(b.total))}).`);
@@ -960,13 +987,58 @@ $("#projForm").addEventListener("submit", async (e) => {
   $("#projDlg").close(); await refreshAll();
 });
 
-/* ---------- Send report now ---------- */
-$("#sendNow").addEventListener("click", async () => {
-  const b = $("#sendNow"); b.disabled = true; b.textContent = "Sending…";
-  const { data, error } = await sb.functions.invoke(CONFIG.REPORT_FUNCTION, { body: { date: istToday() } });
-  b.disabled = false; b.textContent = "Send today's report";
+/* ---------- Send report ---------- */
+const REPORT_CEO = "ceo@indevastudio.com";
+const parseEmails = (v) => [...new Set(String(v || "").split(/[\s,;]+/).map((e) => e.trim().toLowerCase()).filter(Boolean))];
+const isEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+async function sendSetup() {
+  const client = $("#sKind").value === "client";
+  $("#sProjWrap").hidden = !client; $("#sDateWrap").hidden = client;
+  $("#sHint").textContent = client
+    ? "The client gets billing and payments only. No vendor amounts or margins. Always copied to " + REPORT_CEO + "."
+    : "Includes margins and vendor amounts. For your team only. Always copied to " + REPORT_CEO + ".";
+  checkSendWarn();
+}
+async function fillClientEmails() {
+  const pid = $("#sProj").value; if (!pid) return;
+  const { data } = await sb.from("et_client_access").select("email").eq("project_id", pid);
+  $("#sTo").value = (data || []).map((r) => r.email).join(", ");
+  checkSendWarn();
+}
+async function checkSendWarn() {
+  const w = $("#sWarn"); w.hidden = true;
+  if ($("#sKind").value !== "daily") return;
+  const to = parseEmails($("#sTo").value).filter((e) => e !== REPORT_CEO);
+  if (!to.length) return;
+  const { data } = await sb.from("et_client_access").select("email").in("email", to);
+  if (data && data.length) {
+    w.textContent = [...new Set(data.map((r) => r.email))].join(", ") + " is a client login. The internal report shows your margins and vendor amounts. Send them a client statement instead.";
+    w.hidden = false;
+  }
+}
+$("#sendNow").addEventListener("click", () => {
+  $("#sKind").value = "daily"; $("#sDate").value = istToday(); $("#sTo").value = "";
+  $("#sProj").innerHTML = state.projects.map((p) => `<option value="${p.id}">${esc(p.name)}${p.client_name ? " · " + esc(p.client_name) : ""}</option>`).join("");
+  sendSetup(); $("#sendDlg").showModal();
+});
+$("#sKind").addEventListener("change", () => { sendSetup(); if ($("#sKind").value === "client") fillClientEmails(); });
+$("#sProj").addEventListener("change", fillClientEmails);
+$("#sTo").addEventListener("change", checkSendWarn);
+$("#sendForm").addEventListener("submit", async (e) => {
+  if (e.submitter?.value !== "send") return;
+  e.preventDefault();
+  const kind = $("#sKind").value, to = parseEmails($("#sTo").value);
+  const bad = to.filter((x) => !isEmail(x));
+  if (bad.length) return toast("Check the email address: " + bad.join(", "), 4000);
+  if (kind === "daily" && !$("#sWarn").hidden) return toast("That address is a client. Choose Client statement instead.", 4500);
+  if (kind === "client" && !$("#sProj").value) return toast("Choose a project", 3000);
+  const b = $("#sSend"); b.disabled = true; b.textContent = "Sending…";
+  const body = kind === "client" ? { kind, project_id: $("#sProj").value, to } : { kind, date: $("#sDate").value || istToday(), to };
+  const { data, error } = await sb.functions.invoke(CONFIG.REPORT_FUNCTION, { body });
+  b.disabled = false; b.textContent = "Send";
   if (error || data?.error) return toast("Report not sent: " + (data?.error || error.message), 4500);
-  toast("Report emailed to " + data.sent_to);
+  $("#sendDlg").close();
+  toast("Report emailed to " + [].concat(data.sent_to || []).join(", "), 3500);
 });
 </script>
 </body>

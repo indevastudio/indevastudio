@@ -56,9 +56,12 @@ tr.group td{padding-top:14px;border-bottom:0}
 .note{font-size:13px;color:var(--muted);margin:10px 0 0}
 .empty{color:var(--muted);padding:24px 0;text-align:center}
 details.bd{margin-top:4px}
-details.bd summary{cursor:pointer;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600;list-style:none}
+details.bd summary{cursor:pointer;list-style:none}
+details.bd .bd-link{display:block;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600}
+details.bd .bd-label{color:var(--ink)}
 details.bd summary::-webkit-details-marker{display:none}
-details.bd summary::before{content:"▸ "} details.bd[open] summary::before{content:"▾ "}
+details.bd .bd-link::before{content:"▸ "} details.bd[open] .bd-link::before{content:"▾ "}
+details.bd{margin-top:0}
 details.bd h4{margin:10px 0 2px;font-size:12px;font-weight:700}
 details.bd table{width:100%;border-collapse:collapse;font-size:12px;margin:0}
 details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;font-weight:500}
@@ -94,12 +97,13 @@ const sb = supabase.createClient("https://rolarfaotykmprzvcmgh.supabase.co",
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const bdHtml = (b, internal) => {
+const bdHtml = (b, internal, label) => {
   if (!b || !Array.isArray(b.sections) || !b.sections.length) return "";
   const n = b.sections.reduce((t, s) => t + (s.rows || []).length, 0);
   const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   const list = (h, a) => (a && a.length ? `<h4>${h}</h4><ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
-  return `<details class="bd"><summary>View ${esc(b.title || "breakdown")} (${n} items)</summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
+  if (!label) return "";
+  return `<details class="bd"><summary><span class="bd-label">${label}</span> <span class="bd-link">View ${esc(b.title || "breakdown")} · ${n} items</span></summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
 };
 const inr = (n) => "₹" + Math.round(Number(n || 0)).toLocaleString("en-IN");
 const MODE = { cash: "Cash", upi: "UPI", bank_transfer: "Bank transfer", cheque: "Cheque", card: "Card", other: "Other" };
@@ -135,7 +139,7 @@ function render(s) {
   const subtotal = sum(work), provTotal = sum(prov), total = subtotal + provTotal;
   const received = receipts.reduce((t, r) => t + Number(r.amount || 0), 0), balance = total - received;
   const qty = (i) => (i.qty ? `<div class="muted" style="font-size:12px">${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</div>` : "");
-  const row = (i) => `<tr><td>${esc(i.item)}${qty(i)}${bdHtml(i.breakdown, false)}</td><td class="r">${inr(i.amount)}</td></tr>`;
+  const row = (i) => `<tr><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}</td></tr>`;
   const p = s.project;
   return `<section class="card">
       <h2>${esc(p.name)}</h2>
