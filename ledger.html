@@ -371,6 +371,8 @@ async function enter(session) {
   const email = session.user.email.toLowerCase();
   const { data } = await sb.from("et_admins").select("email").eq("email", email).maybeSingle();
   if (!data) {
+    const { data: client } = await sb.from("et_client_access").select("project_id").eq("email", email).limit(1);
+    if (client && client.length) { location.replace("/statement"); return; }
     $("#login").hidden = false; $("#app").hidden = true;
     $("#loginMsg").textContent = email + " is not on the ledger access list. Add it to the et_admins table in Supabase.";
     await sb.auth.signOut(); return;
