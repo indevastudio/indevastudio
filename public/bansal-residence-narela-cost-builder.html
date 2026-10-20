@@ -308,7 +308,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Bansal Residence, Narela — Ground Floor Interiors</h1>
-  <p>Revision 1 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Revision 6 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -375,55 +375,55 @@ const LOOSE = {
 
 const SECTIONS = [
 {
-  id:"house", tab:"Entire House", letter:"A", title:"Entire House — Ceiling, Flooring, Electrical, Lighting, Paint, Doors",
-  intro:"Work that runs through the whole ground floor. The walls are already in place, so no masonry is priced (except closing one internal window, see Kitchen). Interior carpet area is taken as approx. 755 sq.ft. from the plan (drawing room, lobby / dining, kitchen, bedroom, back passage, store, toilet, foyer & stair hall). The front porch is priced separately under Porch & Exterior.",
+  id:"house", tab:"Entire House", letter:"A", title:"Entire House — Ceiling, Walls, Flooring, Electrical, Lighting, Paint",
+  intro:"Work that runs through the whole ground floor. The walls are already in place, so masonry is limited to the wall alterations below (70 sq.ft. removed, 70 sq.ft. new), the new bathroom in the lobby and closing one internal window (see Kitchen). Interior carpet area is taken as approx. 755 sq.ft. from the plan (drawing room, lobby / dining, kitchen, bedroom, back passage, guest bedroom (store + old toilet), foyer & stair hall). Front porch work is not part of this BOQ.",
   hero:[],
   groups:[
-    {note:"False ceiling (approx. 486 sq.ft.) with cove / pelmet detail for concealed LED", items:[
+    {note:"False ceiling (approx. 486 sq.ft.) in POP at ₹160/sq.ft., with cove patta at ₹100/rft", items:[
       ["Drawing Room",179],["Lobby / Dining",122],["Bedroom",135],["Foyer passage",50]
-     ].map(([room,q],i)=>({id:"ceil"+i, room:room, name:"False Ceiling", unit:"sq.ft.", qty:q, on:true, selected:"Gypsum",
+     ].map(([room,q],i)=>({id:"ceil"+i, room:room, name:"False Ceiling", unit:"sq.ft.", qty:q, on:true, selected:"POP",
        options:{
-        Gypsum:{rate:160, spec:"Gypsum board suspended ceiling: Saint-Gobain Gyproc 12.5mm board on Gyproc GI framing, cove / pelmet detail for concealed LED, jointing tape, POP punning and primer. Agreed rate ₹160/sq.ft."},
-        POP:{rate:160, spec:"Plaster of Paris suspended ceiling on GI framing with chicken mesh, cove / pelmet detail for concealed LED, primer. Rate as per Indéva master BOQ."}
+        POP:{rate:160, spec:"Plaster of Paris suspended ceiling on GI framing with chicken mesh, finished and primed. Agreed rate ₹160/sq.ft. Cove patta is charged separately below at ₹100/rft."},
+        Gypsum:{rate:160, spec:"Gypsum board suspended ceiling: Saint-Gobain Gyproc 12.5mm board on Gyproc GI framing, jointing tape, POP punning and primer. ₹160/sq.ft. Cove patta is charged separately below at ₹100/rft."}
        }})).concat([
-      {id:"ceilwet", room:"Kitchen + Toilet", name:"False Ceiling — moisture-resistant", unit:"sq.ft.", qty:140, rate:160, on:true,
-       spec:"Saint-Gobain Gyproc moisture-resistant board on GI framing (new kitchen 113 sq.ft. + toilet 27 sq.ft.; the store room is left without a false ceiling), with access panel for plumbing / exhaust. Agreed rate ₹160/sq.ft."}
+      {id:"ceilwet", room:"Kitchen", name:"False Ceiling — moisture-resistant", unit:"sq.ft.", qty:113, rate:160, on:true,
+       spec:"Saint-Gobain Gyproc moisture-resistant board on GI framing for the new kitchen (113 sq.ft.), with access panel. The new bathroom and guest bedroom ceilings are priced in their own tabs. Agreed rate ₹160/sq.ft."},
+      {id:"covepatta", room:"Drawing, Lobby, Bedroom", name:"Cove patta — false-ceiling cove / pelmet band", unit:"rft", qty:140, rate:100, on:true, src:"Agreed rate",
+       spec:"POP cove patta (pelmet band with return) around the false-ceiling edge to hold the concealed LED strip: drawing room approx. 50 rft, lobby / dining 44, bedroom 46. 140 rft × agreed rate ₹100/rft; length to be confirmed on site."}
     ])},
-    {note:"Flooring — all rooms except the toilet (approx. 728 sq.ft., kitchen and foyer included)", items:[
-      {id:"floor", room:"Whole Ground Floor", name:"Flooring — laying + material", unit:"sq.ft.", qty:728, on:true, selected:"Vitrified",
-       options:{
-        Vitrified:{rate:165, spec:"Laying ₹90/sq.ft. (Indéva master BOQ, tiles up to 2' × 4', incl. adhesive & grout) + tile ₹75/sq.ft.: Kajaria / Somany glazed vitrified, 600 × 1200mm, matt or satin, 2mm spacers."},
-        Granite:{rate:270, spec:"Installation ₹150/sq.ft. (Indéva master BOQ, granite flooring) + granite ₹120/sq.ft. allowance: 18mm Rajasthan / South Indian granite, machine-cut, polished."},
-        "Italian Marble":{rate:650, spec:"Installation and diamond-finish polishing ₹250/sq.ft. (Indéva master BOQ, Italian marble flooring) + marble ₹400/sq.ft. allowance (Botticino / Perlato, 18mm, final per your selection at the stone yard)."}
-       }},
+    {note:"Civil — wall alterations (approx. 70 sq.ft. removed + 70 sq.ft. new)", items:[
+      {id:"wallremove", room:"As per layout", name:"Dismantling of existing 4.5\" wall", unit:"sq.ft.", qty:70, rate:40, on:true, src:"Qty to confirm",
+       spec:"Dismantling of 4.5 inch thick brick wall with plaster, cutting back and making good the junctions. Approx. 70 sq.ft. (wall length × height). Rate as per Indéva master BOQ."},
+      {id:"wallbuild", room:"As per layout", name:"Construction of new 4.5\" brick wall with plaster", unit:"sq.ft.", qty:70, rate:150, on:true, src:"Qty to confirm",
+       spec:"4.5 inch brick masonry in cement mortar 1:4 with hoop iron at every 4th course, plastered both sides and ready for punning / tiling. Approx. 70 sq.ft., including the walls enclosing the new bathroom. Rate as per Indéva master BOQ (labour + material)."},
+      {id:"walldebris", room:"Whole Ground Floor", name:"Removal of construction debris", unit:"trolley", qty:1, rate:2000, on:true,
+       spec:"Removal of the masonry debris from the wall dismantling by trolley. Rate as per Indéva master BOQ."},
+    ]},
+    {note:"Flooring — tile laying in all rooms (approx. 755 sq.ft.); tiles as per client selection, not included", items:[
+      {id:"floor", room:"Whole Ground Floor", name:"Floor tile laying (tiles as per client selection)", unit:"sq.ft.", qty:755, rate:60, on:true,
+       spec:"Laying of floor tiles with adhesive, grout and spacers in all rooms including the new guest bedroom (the new bathroom is priced separately), approx. 755 sq.ft. at ₹60/sq.ft. (labour). Tiles are supplied as per the client's selection and are not included in this cost."},
       {id:"floorremove", room:"Whole Ground Floor", name:"Removal of existing floor tiles / stone with mortar", unit:"sq.ft.", qty:755, rate:40, on:false, src:"Switch on if needed",
        spec:"Removal of existing floor tiles / stone with the underlying mortar, if the present flooring is to be replaced. Rate as per Indéva master BOQ. Off by default because the plan does not show the existing floor; confirm on site."},
       {id:"debris", room:"Whole Ground Floor", name:"Removal of construction debris", unit:"trolley", qty:3, rate:2000, on:false, src:"Switch on if needed",
        spec:"Debris removal by trolley, needed only if the existing flooring is removed. Rate as per Indéva master BOQ."},
     ]},
     {note:"Electrical — wiring and points through the house", items:[
-      {id:"elec", room:"Whole Ground Floor", name:"Electrical work", unit:"sq.ft.", qty:755, rate:160, on:true, src:"Agreed rate",
-       spec:"New points and relocation of existing points through the house, including the new kitchen's appliance and 16A power points: internal chiselling, AKG PVC conduits, boxing, Finolex / Polycab / KEI wires, and labour for fitting architectural lights, exhaust fans, switches and MCBs. 755 sq.ft. × agreed rate ₹160/sq.ft. Switch plates, MCBs, DB and fixtures excluded."},
+      {id:"elec", room:"Whole Ground Floor", name:"Electrical work — new wiring throughout", unit:"sq.ft.", qty:755, rate:180, on:true, src:"Agreed rate",
+       spec:"Complete new electrical wiring through the house with all new points, including the new kitchen's appliance and 16A power points: internal chiselling, new AKG PVC conduits, boxing, new Finolex / Polycab / KEI wires, and labour for fitting architectural lights, exhaust fans, switches and MCBs. 755 sq.ft. × agreed rate ₹180/sq.ft. Switch plates, MCBs, DB and fixtures excluded."},
     ]},
     {note:"Lighting — Philips", items:[
       {id:"cove", room:"Drawing, Lobby, Bedroom", name:"Philips Cove Lighting (LED strip)", unit:"rft", qty:140, rate:180, on:true, src:"Qty estimate",
        spec:"Philips LED strip with driver and aluminium profile in the false-ceiling coves: drawing room approx. 50 rft, lobby / dining 44, bedroom 46. No cove in the kitchen (under-cabinet LED is in the Kitchen tab). Quantity from room perimeters on the plan; confirm on site."},
       {id:"spots", room:"Whole Ground Floor", name:"Philips Spotlights (COB)", unit:"No.", qty:32, rate:650, on:true, src:"Qty estimate",
-       spec:"Philips COB spotlights: drawing room 8, lobby / dining 6, kitchen 5, bedroom 6, foyer 3, back passage 2, toilet 1, store 1. Confirm on the lighting layout."},
+       spec:"Philips COB spotlights: drawing room 8, lobby / dining 6, kitchen 5, bedroom 6, foyer 3, back passage 2, guest bedroom 2. Confirm on the lighting layout."},
     ]},
     {note:"Wall preparation & paint (approx. 3,120 sq.ft. of walls + ceilings, measured room by room at the plan ceiling heights of 111\"–131\")", items:[
-      {id:"punning", room:"All walls", name:"POP punning on walls", unit:"sq.ft.", qty:2360, rate:30, on:true, src:"Skip if walls are already punned",
-       spec:"POP punning on wall surfaces to get a true, smooth base for emulsion paint (walls only; the false-ceiling areas don't need it). Rate as per Indéva master BOQ."},
+      {id:"punning", room:"All walls", name:"POP punning on walls", unit:"sq.ft.", qty:2360, rate:45, on:true, src:"Agreed rate",
+       spec:"POP punning on wall surfaces to get a true, smooth base for emulsion paint (walls only; the false-ceiling areas don't need it). 2,360 sq.ft. × agreed rate ₹45/sq.ft."},
       {id:"paint", room:"Whole Ground Floor", name:"Paint — walls and ceilings", unit:"sq.ft.", qty:3120, rate:45, on:true, src:"Agreed rate",
        spec:"Asian Paints Royale / Dulux Velvet Touch / Berger Silk plastic emulsion, roller finish, 2 coats, over primer and putty. 3,120 sq.ft. × agreed rate ₹45/sq.ft."},
     ]},
-    {note:"Doors, mosquito mesh & curtains", items:[
-      {id:"doors", room:"All 10 doors", name:"Door polishing — both sides", unit:"doors", qty:10, on:true, selected:"Standard",
-       spec:"",
-       options:{
-        Premium:{rate:9240, spec:"PU finish on both faces: sanding, sealer, 2K PU top coat (matt / satin). Approx. 42 sq.ft. per door (3 ft × 7 ft × 2 faces) at ₹220/sq.ft. (Indéva master BOQ). Doors: drawing (2), foyer (2), kitchen (2), bedroom (2), store, toilet. Add ½ rft for carvings or mouldings."},
-        Standard:{rate:4200, spec:"Melamine finish on both faces, approx. 42 sq.ft. per door at ₹100/sq.ft. (Indéva master BOQ). Same 10 doors."}
-       }},
+    {note:"Mosquito mesh & curtains", items:[
       {id:"mesh", room:"Drawing + foyer windows", name:"Mosquito mesh — external windows", unit:"sq.ft.", qty:40, on:true, selected:"Standard", src:"Market rate · size to confirm",
        options:{
         Premium:{rate:450, spec:"Pleated polyester mesh in powder-coated aluminium frame (folding, retractable). Drawing room window 6' × 4'5\" + foyer window 3' × 4'5\" (sill 3', lintel 8'5\")."},
@@ -470,31 +470,71 @@ const SECTIONS = [
         Premium:{rate:16230, spec:"Marble / sintered-stone top on powder-coated MS frame."},
         Standard:{rate:10140, spec:"Laminate top on 18mm HDHMR, powder-coated MS frame."}
        }},
-      {id:"dwall", room:"Drawing Room", name:"Feature wall behind sofa (10 ft × 8 ft)", unit:"sq.ft.", qty:80, on:true, selected:"Standard", options:PANEL},
       {id:"dart", room:"Drawing Room", name:"Art work", unit:"lumpsum", qty:1, rate:15000, on:false, src:"Allowance",
        spec:"Framed canvas art / art panel above the sofa, approx. 5 ft wide. Allowance; final as per your selection."},
     ]},
   ]
 },
 {
-  id:"lobby", tab:"Lobby, Foyer & Stair", letter:"C", title:"Lobby / Dining, Foyer & Staircase",
-  intro:"The central lobby (approx. 13'6\" × 9'6\", ceiling 131\") is used as the dining space. The foyer / stair hall on the right (approx. 8'2\" × 14') leads in from the porch through a 3'7\" door and holds the staircase to the first floor.",
+  id:"lobby", tab:"Lobby, Foyer & Stair", letter:"C", title:"Lobby / Dining with Mandir & New Bathroom, Foyer & Staircase",
+  intro:"The central lobby (approx. 13'6\" × 9'6\", ceiling 131\") is used as the dining space; part of it is taken for a new bathroom (approx. 5' × 7') with full plumbing, and a mandir area is set along one wall. The dining table and dining feature wall are not part of this BOQ. The foyer / stair hall on the right (approx. 8'2\" × 14') leads in from the porch through a 3'7\" door and holds the staircase to the first floor.",
   hero:[],
   groups:[
     {note:"Lobby / Dining", items:[
-      {id:"dtable", room:"Lobby / Dining", name:"Dining table (6 seater)", unit:"set", qty:1, on:true, selected:"Standard", src:"Allowance",
-       options:{
-        Premium:{rate:95000, spec:"6-seater, sintered-stone / marble top on solid-wood or powder-coated metal base, 6 upholstered chairs."},
-        Standard:{rate:60000, spec:"6-seater, veneer top on solid-wood base, 6 upholstered chairs."}
-       }},
-      {id:"lwall", room:"Lobby / Dining", name:"Dining feature wall (8 ft × 8 ft)", unit:"sq.ft.", qty:64, on:true, selected:"Standard", options:PANEL},
       {id:"wash", room:"Lobby / Dining", name:"Wash-basin counter with mirror", unit:"No.", qty:1, rate:20000, on:false, src:"Optional",
-       spec:"2 ft vanity in 18mm BWP ply with 1mm laminate and basin (₹18,000, Indéva item master) + new water and drain point (₹2,000, Indéva master BOQ). Useful because the toilet is compact; switch on if wanted."},
-      {id:"puja", room:"Lobby / Dining", name:"Puja unit", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional",
+       spec:"2 ft vanity in 18mm BWP ply with 1mm laminate and basin (₹18,000, Indéva item master) + new water and drain point (₹2,000, Indéva master BOQ). A second wash point beside the dining; switch on if wanted."},
+    ]},
+    {note:"Mandir area — in the lobby / dining", items:[
+      {id:"mandir", room:"Mandir area", name:"Mandir unit (approx. 3 ft wide × 7 ft high)", unit:"No.", qty:1, on:true, selected:"Standard",
        options:{
-        Premium:{rate:40580, spec:STD.carcass+" Top: white Makrana marble slab. Shutters: 1mm laminate with brass-finish handles. "+STD.hinges+". Concealed Philips LED strip."},
-        Standard:{rate:27050, spec:STD.carcassStd+" Top and shutters in 1mm laminate (Merino / Greenlam), standard SS handles, "+STD.hinges+"."}
+        Premium:{rate:40580, spec:STD.carcass+" White Makrana marble top and base platform, back-lit CNC jaali shutters in matt PU, brass-finish handles, bell hook, diya shelf and drawer for puja items. "+STD.hinges+". Concealed Philips LED strip."},
+        Standard:{rate:27050, spec:STD.carcassStd+" Laminate top with a drawer and lower storage for puja items, CNC-routed shutters in 1mm laminate (Merino / Greenlam), standard SS handles, "+STD.hinges+". Concealed Philips LED strip."}
        }},
+      {id:"mandirback", room:"Mandir area", name:"Mandir back wall — CNC jaali backdrop (4 ft × 6 ft)", unit:"sq.ft.", qty:24, rate:1500, on:false, src:"Optional",
+       spec:"MDF CNC jaali panel with frame, PU paint, with LED back-lighting behind the mandir. Rate as per Indéva master BOQ (MDF jaali partition)."},
+      {id:"mandirfloor", room:"Mandir area", name:"White marble platform / floor inlay", unit:"sq.ft.", qty:9, rate:650, on:false, src:"Optional",
+       spec:"White marble on the mandir floor area (approx. 3 ft × 3 ft) to set it apart from the main flooring: installation ₹250/sq.ft. (Indéva master BOQ) + marble ₹400/sq.ft. allowance."},
+    ]},
+    {note:"New bathroom in the lobby / dining (approx. 5' × 7' = 35 sq.ft. floor, walls tiled to 7 ft) — size and position to be fixed on the layout", items:[
+      {id:"nbpcc", room:"New Bathroom", name:"Floor preparation — PCC with slope to drain", unit:"sq.ft.", qty:35, rate:50, on:true,
+       spec:"Plain cement concrete over the existing floor, laid to slope towards the floor trap. Rate as per Indéva master BOQ (PCC)."},
+      {id:"nbwp", room:"New Bathroom", name:"Waterproofing — floor + walls up to 1 ft (shower wall to 6 ft)", unit:"sq.ft.", qty:80, on:true, selected:"Dr. Fixit",
+       options:{
+        "Dr. Fixit":{rate:60, spec:"Dr. Fixit waterproofing: floor 35 sq.ft. + 1 ft up the walls (24 sq.ft.) + the shower wall to 6 ft (approx. 21 sq.ft.). Rate as per Indéva master BOQ."},
+        "Kerakoll":{rate:80, spec:"Kerakoll waterproofing application, same area. Rate as per Indéva master BOQ."}
+       }},
+      {id:"nbbase", room:"New Bathroom", name:"Rough cement plaster base for wall tiles", unit:"sq.ft.", qty:168, rate:40, on:true,
+       spec:"Base coat of rough cement plaster beneath the wall tiles, 24 ft perimeter × 7 ft. Rate as per Indéva master BOQ."},
+      {id:"nbtile", room:"New Bathroom", name:"Floor & wall tile laying", unit:"sq.ft.", qty:203, rate:60, on:true,
+       spec:"Laying of floor (35 sq.ft.) and wall tiles to 7 ft (168 sq.ft.) with adhesive and grout at ₹60/sq.ft. (labour). Tiles as per the client's selection, not included."},
+      {id:"nbplumb", room:"New Bathroom", name:"Bathroom plumbing — new internal lines (CPVC)", unit:"No.", qty:1, rate:20000, on:true,
+       spec:"Internal bathroom plumbing with new CPVC hot and cold lines and bends for the WC, basin, shower mixer, health faucet and geyser, floor trap and PVC waste pipes. Additional fittings charged separately. Rate as per Indéva master BOQ (internal bathroom plumbing with pipe modification)."},
+      {id:"nbdrain", room:"New Bathroom", name:"New water supply + soil / waste connection to the existing line", unit:"lumpsum", qty:1, rate:15000, on:true, src:"Market rate · route to confirm",
+       spec:"Tapping the supply from the existing line and running a new 4\" soil pipe and 2\" waste pipe from the new bathroom to the nearest existing soil line / chamber, with chasing, cutting and making good of the floor. Depends on the drain route; confirm on site."},
+      {id:"nbsan", room:"New Bathroom", name:"Complete Sanitaryware Set", unit:"set", qty:1, on:true, selected:"Jaquar",
+       options:{
+        "Jaquar":{rate:52000, spec:"Jaquar: WC with soft-close seat, basin, basin mixer, shower + wall mixer, health faucet, angle valves and accessories (towel rail, robe hook, soap dish)."},
+        "Colston":{rate:51400, spec:"Colston: same set contents as the Jaquar option."},
+        "Kohler Prime":{rate:74390, spec:"Kohler (Prime range): same set contents as the Jaquar option."}
+       }},
+      {id:"nbvan", room:"New Bathroom", name:"Vanity unit (2 ft)", unit:"No.", qty:1, on:true, selected:"Laminate",
+       options:{
+        Laminate:{rate:18000, spec:STD.wetCarcass+" Shutters: 18mm BWP ply with 1mm laminate (Merino / Greenlam), "+STD.hinges+". Rate as per Indéva item master."},
+        Acrylic:{rate:22000, spec:STD.wetCarcass+" Shutters: 1.2mm acrylic (Rehau / Merino Luxe) on 18mm BWP ply, "+STD.hinges+". Rate as per Indéva item master."}
+       }},
+      {id:"nbmirror", room:"New Bathroom", name:"Mirror", unit:"No.", qty:1, rate:12000, on:true,
+       spec:"5mm Saint-Gobain mirror with bevelled edge, framed, approx. 2 ft × 3 ft. Rate as per Indéva item master (plain bathroom mirror)."},
+      {id:"nbdoor", room:"New Bathroom", name:"Bathroom door with frame", unit:"No.", qty:1, on:true, selected:"WPC", src:"Market rate · to confirm",
+       options:{
+        WPC:{rate:14000, spec:"WPC door shutter (waterproof, termite-proof) with WPC frame, laminate finish, SS hinges, tower bolt and handle. Approx. 2'6\" × 7'."},
+        "Flush + teak frame":{rate:35000, spec:"Teakwood door frame up to 8\" (₹20,000, Indéva item master) + flush door shutter with laminate both faces and hardware (approx. ₹15,000, market rate)."}
+       }},
+      {id:"nbceil", room:"New Bathroom", name:"False ceiling — moisture-resistant", unit:"sq.ft.", qty:35, rate:160, on:true,
+       spec:"Saint-Gobain Gyproc moisture-resistant board on GI framing with access panel for the plumbing. Same agreed rate as the other ceilings, ₹160/sq.ft."},
+      {id:"nbexh", room:"New Bathroom", name:"Exhaust ducting + fan installation (fan by client)", unit:"No.", qty:1, rate:1500, on:true, src:"Market rate · to confirm",
+       spec:"Exhaust opening and PVC duct through the false ceiling to the outside, and fixing of the client's 6\" exhaust fan. Fan supply excluded (appliance). The bathroom's light, geyser and exhaust points are covered by the house electrical (₹180/sq.ft.)."},
+      {id:"nbshower", room:"New Bathroom", name:"Glass shower partition", unit:"No.", qty:1, rate:16500, on:false, src:"Optional · market rate",
+       spec:"10mm toughened clear glass partition with SS 304 hinges / clamps and seals, approx. 15 sq.ft."},
     ]},
     {note:"Foyer & staircase", items:[
       {id:"shoe", room:"Foyer", name:"Shoe cabinet (4 ft × 4 ft)", unit:"sq.ft.", qty:16, on:true, selected:"Standard",
@@ -558,11 +598,8 @@ const SECTIONS = [
        }},
       {id:"sink", room:"Kitchen", name:"Sink + sink mixer", unit:"set", qty:1, rate:9000, on:true, src:"Allowance",
        spec:"Single-bowl SS sink with drainboard (Carysil / Nirali) and a Jaquar sink mixer. Allowance; final per selection."},
-      {id:"kdado", room:"Kitchen", name:"Dado tiles above counter (2 ft high)", unit:"sq.ft.", qty:32, on:true, selected:"Standard",
-       options:{
-        Premium:{rate:190, spec:"Laying ₹90/sq.ft. (Indéva master BOQ) + tile ₹100/sq.ft.: Kajaria / Somany glazed vitrified / subway, epoxy grout."},
-        Standard:{rate:150, spec:"Laying ₹90/sq.ft. (Indéva master BOQ) + tile ₹60/sq.ft.: Kajaria / Somany ceramic."}
-       }},
+      {id:"kdado", room:"Kitchen", name:"Dado tile laying above counter (2 ft high)", unit:"sq.ft.", qty:32, rate:60, on:true,
+       spec:"Laying of dado tiles above the counter with adhesive and grout at ₹60/sq.ft. (labour). Tiles as per the client's selection, not included."},
       {id:"kled", room:"Kitchen", name:"Under-cabinet LED profile (Philips)", unit:"rft", qty:16, rate:180, on:true,
        spec:"Philips LED strip with driver in aluminium profile under the wall units, lighting the counter. Same rate as the cove lighting."},
       {id:"kwp", room:"Kitchen", name:"Waterproofing — Dr. Fixit (full floor)", unit:"sq.ft.", qty:113, rate:60, on:true,
@@ -577,9 +614,6 @@ const SECTIONS = [
       {id:"kwin", room:"Kitchen ↔ Bedroom", name:"Close the 2'2\" window to the bedroom", unit:"sq.ft.", qty:9, rate:150, on:true, src:"Recommended",
        spec:"The internal 2'2\" window between the kitchen and the bedroom would carry cooking smoke and smell into the bedroom. Fill with 4.5\" brick masonry finished with plaster (Indéva master BOQ), approx. 2'2\" × 4'. Switch off to keep it (e.g. as fixed glass)."},
     ]},
-    {note:"Store room (the earlier small kitchen, 7'4\" × 5'3\") — optional", items:[
-      {id:"store", room:"Store Room", name:"Storage shelving / cabinet (7 ft × 7 ft)", unit:"sq.ft.", qty:49, on:false, selected:"Standard", src:"Optional", options:LOOSE},
-    ]},
   ]
 },
 {
@@ -592,7 +626,6 @@ const SECTIONS = [
       {id:"b2bed", room:"Bedroom", name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b2side", room:"Bedroom", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
       {id:"b2tv", room:"Bedroom", name:"TV unit with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BTV},
-      {id:"b2wall", room:"Bedroom", name:"Bed-back wall design (9 ft × 8 ft)", unit:"sq.ft.", qty:72, on:true, selected:"Standard", options:PANEL},
     ]},
     {note:"Back passage — optional", items:[
       {id:"psto", room:"Back Passage", name:"Shallow storage along back wall (10 ft × 8 ft, 15\" deep)", unit:"sq.ft.", qty:80, on:false, selected:"Standard", src:"Optional", options:LOOSE},
@@ -600,68 +633,34 @@ const SECTIONS = [
   ]
 },
 {
-  id:"toilet", tab:"Toilet", letter:"F", title:"Toilet — 7'4\" × 3'8\"",
-  intro:"Compact toilet off the lobby (approx. 27 sq.ft. floor). Floor and walls tiled to 7 ft (approx. 164 sq.ft.), with waterproofing, plumbing, sanitaryware, a small vanity, mirror and exhaust.",
+  id:"toilet", tab:"Guest Bedroom", letter:"F", title:"Guest Bedroom — store (7'4\" × 5'3\") + old toilet (7'4\" × 3'8\") combined",
+  intro:"The store room (the earlier small kitchen) and the old toilet are joined into one guest bedroom of approx. 7'4\" × 9' (about 66 sq.ft.). The wall between them is taken down within the 70 sq.ft. of wall removal on the Entire House tab. The toilet's tiles and fittings are removed and its water and drain points sealed; the new bathroom in the lobby takes over.",
   hero:[],
   groups:[
-    {note:"Civil & services", items:[
-      {id:"twp", room:"Toilet", name:"Waterproofing — floor + 1 ft up walls", unit:"sq.ft.", qty:49, on:true, selected:"Dr. Fixit",
-       options:{
-        "Dr. Fixit":{rate:60, spec:"Dr. Fixit waterproofing treatment, floor 27 sq.ft. + 1 ft up the walls (22 sq.ft.). Rate as per Indéva master BOQ."},
-        "Kerakoll":{rate:80, spec:"Kerakoll waterproofing application, same area. Rate as per Indéva master BOQ."}
-       }},
-      {id:"ttile", room:"Toilet", name:"Floor & wall tiling — laying + tile", unit:"sq.ft.", qty:164, on:true, selected:"Standard",
-       options:{
-        Premium:{rate:190, spec:"Laying ₹90/sq.ft. (Indéva master BOQ) + tile ₹100/sq.ft.: Kajaria / Somany glazed vitrified, anti-skid on floor, epoxy grout."},
-        Standard:{rate:150, spec:"Laying ₹90/sq.ft. (Indéva master BOQ) + tile ₹60/sq.ft.: Kajaria / Somany ceramic, anti-skid on floor."}
-       }},
-      {id:"tplumb", room:"Toilet", name:"Bathroom plumbing", unit:"No.", qty:1, on:true, selected:"Existing pipes",
-       options:{
-        "Existing pipes":{rate:12000, spec:"Internal bathroom plumbing without alteration of the existing internal pipes. Additional fittings charged separately. Rate as per Indéva master BOQ."},
-        "Pipe replacement":{rate:20000, spec:"Internal bathroom plumbing replacement with internal pipe modification, CPVC pipes and bends; additional fittings extra. Rate as per Indéva master BOQ."}
-       }},
-      {id:"texh", room:"Toilet", name:"Exhaust fan with ducting", unit:"No.", qty:1, rate:4500, on:true, src:"Market rate · to confirm",
-       spec:"Havells / Crompton 6\" exhaust fan, ducted through the false ceiling to the outside, with electrical point."},
+    {note:"Conversion works", items:[
+      {id:"gbstrip", room:"Old toilet", name:"Removal of toilet wall + floor tiles with mortar", unit:"sq.ft.", qty:164, rate:40, on:true,
+       spec:"Removal of the existing wall and floor tiles with the underlying mortar (approx. 164 sq.ft.), ready for plaster and the new floor. Rate as per Indéva master BOQ."},
+      {id:"gbsan", room:"Old toilet", name:"Removal of sanitary fixtures", unit:"No.", qty:1, rate:500, on:true,
+       spec:"Removal of WC, basin and fittings. Rate as per Indéva master BOQ."},
+      {id:"gbplug", room:"Old toilet", name:"Sealing of water and drain points + floor making good", unit:"lumpsum", qty:1, rate:5000, on:true, src:"Market rate · to confirm",
+       spec:"Capping the supply lines and the WC / floor-trap drains, filling the sunken floor with PCC to the room level. Depends on the toilet's floor sinking; confirm on site."},
+      {id:"gbplaster", room:"Old toilet walls", name:"Plastering of walls after tile removal", unit:"sq.ft.", qty:137, rate:40, on:true,
+       spec:"Cement plaster on the walls where the tiles are removed, ready for punning and paint. Rate as per Indéva master BOQ."},
+      {id:"gbceil", room:"Guest Bedroom", name:"False ceiling — POP", unit:"sq.ft.", qty:66, rate:160, on:true, src:"Agreed rate",
+       spec:"POP suspended ceiling on GI framing over the new guest bedroom, at the agreed ₹160/sq.ft."},
     ]},
-    {note:"Sanitaryware & fittings", items:[
-      {id:"sanset", room:"Toilet", name:"Complete Sanitaryware Set", unit:"set", qty:1, on:true, selected:"Jaquar",
-       options:{
-        "Jaquar":{rate:52000, spec:"Jaquar: WC with soft-close seat, basin, basin mixer, shower + wall mixer, health faucet, angle valves and accessories (towel rail, robe hook, soap dish)."},
-        "Colston":{rate:51400, spec:"Colston: same set contents as the Jaquar option."},
-        "Kohler Prime":{rate:74390, spec:"Kohler (Prime range): same set contents as the Jaquar option."}
-       }},
-      {id:"tvan", room:"Toilet", name:"Vanity unit (2 ft)", unit:"No.", qty:1, on:true, selected:"Laminate",
-       options:{
-        Laminate:{rate:18000, spec:STD.wetCarcass+" Shutters: 18mm BWP ply with 1mm laminate (Merino / Greenlam), "+STD.hinges+". Rate as per Indéva item master."},
-        Acrylic:{rate:22000, spec:STD.wetCarcass+" Shutters: 1.2mm acrylic (Rehau / Merino Luxe) on 18mm BWP ply, "+STD.hinges+". Rate as per Indéva item master."},
-        PU:{rate:24000, spec:STD.wetCarcass+" Shutters: 18mm BWP ply in 2K PU paint (ICA / Sirca), "+STD.hinges+". Rate as per Indéva item master."}
-       }},
-      {id:"tmirror", room:"Toilet", name:"Mirror", unit:"No.", qty:1, rate:12000, on:true,
-       spec:"5mm Saint-Gobain mirror with bevelled edge, framed, approx. 1'6\" × 2'6\". Rate as per Indéva item master (plain bathroom mirror)."},
+    {note:"Furniture & storage", items:[
+      {id:"gbward", room:"Guest Bedroom", name:"Wardrobe (4 ft wide × 9 ft high)", unit:"sq.ft.", qty:36, on:true, selected:"Standard", options:WARD},
+      {id:"gbbed", room:"Guest Bedroom", name:"Single bed with storage (3 ft × 6'6\")", unit:"No.", qty:1, rate:20000, on:true, src:"Allowance",
+       spec:"Single bed in 18mm HDHMR with box storage and a plain upholstered headboard, fabric from the standard range. Mattress excluded. Allowance."},
     ]},
   ]
 },
 {
-  id:"porch", tab:"Porch & Exterior", letter:"G", title:"Front Porch & Exterior",
-  intro:"Front porch approx. 21'8\" × 6'7\" (about 140 sq.ft.), with the 5'11\" gate opening. Flooring, front-elevation paint and porch lights.",
-  hero:[],
-  groups:[
-    {note:null, items:[
-      {id:"pfloor", room:"Front Porch", name:"Porch flooring — laying + material", unit:"sq.ft.", qty:140, on:true, selected:"Standard",
-       options:{
-        Premium:{rate:270, spec:"Installation ₹150/sq.ft. (Indéva master BOQ, granite flooring) + flamed / leather-finish granite ₹120/sq.ft., anti-skid."},
-        Standard:{rate:150, spec:"Laying ₹90/sq.ft. (Indéva master BOQ) + tile ₹60/sq.ft.: Kajaria / Somany anti-skid outdoor vitrified, 600 × 600mm."}
-       }},
-      {id:"extpaint", room:"Front elevation + porch walls", name:"Exterior paint — Asian Paints Apex", unit:"sq.ft.", qty:370, rate:30, on:true, src:"Area to confirm",
-       spec:"Asian Paints Apex exterior emulsion over primer, 2 coats. Front elevation approx. 22 ft × 11 ft + porch side walls. Rate as per Indéva master BOQ."},
-      {id:"plights", room:"Front Porch", name:"Porch lights", unit:"No.", qty:3, rate:2500, on:true, src:"Allowance",
-       spec:"Outdoor wall / ceiling lights, IP65 (Philips / Wipro). Allowance; final as per selection."},
-    ]},
-  ]
-},
-{
-  id:"design", tab:null, letter:"H", title:"Design & Execution", intro:"", hero:[],
+  id:"design", tab:null, letter:"G", title:"Site Expenses, Design & Execution", intro:"", hero:[],
   groups:[{note:null, items:[
+    {id:"siteexp", room:"Whole Ground Floor", name:"Site expenses — 2% of works", unit:"lumpsum", qty:1, pct:2, on:true,
+     spec:"Site protection, casual labour, regular site cleaning, material handling and local transport for factory-made items, at 2% of the value of all works switched on (design fee excluded). Updates automatically as items are switched on or off."},
     {id:"designexec", room:"Whole Ground Floor", name:"Design Consultancy & Site Execution Management", unit:"sq.ft.", qty:755, rate:100, on:true, src:"To confirm",
      spec:"Design development, 3D views, working drawings, BOQ and on-site supervision through to handover, at ₹100/sq.ft. of carpet area (Indéva design rate)."},
   ]}]
@@ -679,13 +678,14 @@ SECTIONS.forEach(s=>s.groups.forEach(g=>g.items.forEach(it=>{ it._sec=s; ALL_ITE
 const BY_ID = Object.fromEntries(ALL_ITEMS.map(i=>[i.id,i]));
 const DEFAULTS = Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on, selected:i.selected}]));
 
-function rateOf(it){ return it.options ? it.options[it.selected].rate : it.rate; }
+function worksBase(){ let t=0; ALL_ITEMS.forEach(i=>{ if(i.on && !i.pct && i.id!=="designexec") t+=i.qty*rateOf(i); }); return t; }
+function rateOf(it){ if(it.pct) return Math.round(worksBase()*it.pct/100); return it.options ? it.options[it.selected].rate : it.rate; }
 function amtOf(it){ return it.qty * rateOf(it); }
 function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec; }
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
 function grandTotal(){ return SECTIONS.reduce((t,s)=>t+secTotal(s),0); }
 
-const STORAGE_KEY = 'bansalNarelaCostBuilder_v1';
+const STORAGE_KEY = 'bansalNarelaCostBuilder_v6';
 function saveState(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on,selected:i.selected}])))); }catch(e){}
 }
@@ -754,19 +754,18 @@ function renderSection(s){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Bansal Residence, Narela · ground floor interior fit-out. The walls are already built, so the scope starts at ceilings, flooring, services and finishes. The kitchen is planned in the back-left room, with the earlier small kitchen used as a store. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen and vanity are priced by finish (Laminate / Acrylic / PU) and the flooring by material. Switch any item off to see the effect on the total.</p></div>
+      <p>Bansal Residence, Narela · ground floor interior fit-out. The walls are already built, so the scope starts at ceilings, flooring, services and finishes. The kitchen is planned in the back-left room, with the earlier small kitchen (store) and the old toilet joined into a guest bedroom. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen and vanity are priced by finish (Laminate / Acrylic / PU) and the flooring by material. Switch any item off to see the effect on the total.</p></div>
     <div class="floorplan-wrap"><img src="${REF_IMAGES.floorplan.src}" onclick="openLightbox('floorplan')" alt="Floor plan"><div class="cap">${REF_IMAGES.floorplan.cap}</div></div>
     <div class="item"><div class="item-title">Room schedule (from the plan)</div><div class="item-spec" style="margin-bottom:0">
       <b>Drawing Room</b> 13'0" × 13'9" (179 sq.ft., ceiling 111") · <b>Lobby / Dining</b> approx. 13'6" × 9'6" (122 sq.ft., ceiling 131") · <b>Kitchen</b> 11'5" × 9'11" (113 sq.ft., ceiling 128") · <b>Bedroom</b> 9'6" × 14'2" (135 sq.ft., ceiling 128") · <b>Back Passage</b> 3'4" × 11'5" (40 sq.ft.) · <b>Store</b> 7'4" × 5'3" (38 sq.ft.) · <b>Toilet</b> 7'4" × 3'8" (27 sq.ft.) · <b>Foyer & Stair</b> approx. 8'2" × 14' (100 sq.ft. excl. stair) · <b>Front Porch</b> approx. 21'8" × 6'7" (140 sq.ft.).</div></div>
     <div class="item"><div class="item-title">Scope covered</div><div class="item-spec" style="margin-bottom:0">
-      <b>Entire house:</b> gypsum false ceiling (₹160/sq.ft.), flooring (vitrified / granite / Italian marble), electrical (₹160/sq.ft.), Philips cove and spot lighting, POP punning, Royale-grade paint (₹45/sq.ft.), door polishing, mosquito mesh, curtains.<br>
-      <b>Drawing room:</b> TV + storage unit, crockery / display unit in the existing recess, sofa for 5, coffee table, feature wall.<br>
-      <b>Lobby, foyer & stair:</b> dining table, dining feature wall, shoe cabinet, staircase cladding; optional wash-basin counter, puja unit and stair railing.<br>
-      <b>Kitchen:</b> L-shaped modular kitchen with tall pantry, Hettich / Ebco hardware, granite top, sink, dado tiles, under-cabinet LED, waterproofing, new plumbing line, chimney duct opening, closing the internal window to the bedroom; optional store-room shelving.<br>
-      <b>Bedroom:</b> wardrobe, queen bed with storage, bedside tables, TV unit, bed-back wall; optional storage in the back passage.<br>
-      <b>Toilet:</b> waterproofing, tiling, plumbing, sanitaryware set, vanity, mirror, exhaust.<br>
-      <b>Porch & exterior:</b> porch flooring, front elevation paint, porch lights.<br>
-      <b>Not included:</b> civil / masonry work beyond closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, switch plates, MCBs and decorative fixtures other than those listed.</div></div>
+      <b>Entire house:</b> POP false ceiling (₹160/sq.ft.) with cove patta (₹100/rft), wall alterations (70 sq.ft. dismantled, 70 sq.ft. new 4.5" brick wall), floor tile laying at ₹60/sq.ft. (tiles as per client selection), new electrical wiring (₹180/sq.ft.), Philips cove and spot lighting, POP punning (₹45/sq.ft.), Royale-grade paint (₹45/sq.ft.), mosquito mesh, curtains.<br>
+      <b>Drawing room:</b> TV + storage unit, crockery / display unit in the existing recess, sofa for 5, coffee table.<br>
+      <b>Lobby, foyer & stair:</b> mandir area with mandir unit (optional jaali backdrop and marble platform), new bathroom in the lobby / dining (PCC, waterproofing, tiling, new plumbing and drain connection, sanitaryware, vanity, mirror, door, ceiling, exhaust ducting), shoe cabinet, staircase cladding; optional wash-basin counter and stair railing.<br>
+      <b>Kitchen:</b> L-shaped modular kitchen with tall pantry, Hettich / Ebco hardware, granite top, sink, dado tile laying, under-cabinet LED, waterproofing, new plumbing line, chimney duct opening, closing the internal window to the bedroom.<br>
+      <b>Bedroom:</b> wardrobe, queen bed with storage, bedside tables, TV unit; optional storage in the back passage.<br>
+      <b>Guest bedroom</b> (store + old toilet): removal of toilet tiles and fittings, sealing of plumbing points, plastering, POP ceiling, wardrobe, single bed with storage.<br>
+      <b>Not included:</b> tiles (laying only; tiles as per client selection), feature walls (drawing room, dining) and bed-back wall, door polishing, appliances (exhaust fans, geysers, chimney, hob, RO and others), dining table, front porch work (flooring, exterior paint, porch lights), civil / masonry work beyond the listed wall alterations, new bathroom and closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, switch plates, MCBs and decorative fixtures other than those listed.</div></div>
     <div class="item"><div class="item-title">Material standards used throughout</div><div class="item-spec" style="margin-bottom:0">
       <b>Boards:</b> HDHMR (Action TESA / Greenpanel) for dry-area carcasses; 18mm BWP ply (Century / Greenply) for wet areas.<br>
       <b>Surfaces:</b> 1mm laminate (Merino / Greenlam), 1.2mm acrylic (Rehau / Merino Luxe), 2K PU paint (ICA / Sirca); 2mm PVC edge banding (Rehau).<br>
@@ -784,9 +783,9 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
-    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bansal Residence, Narela · Ground Floor · Revision 1</div></div><div class="value">${fmt(grandTotal())}</div></div>
+    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bansal Residence, Narela · Ground Floor · Revision 6</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
-    <p class="foot-note">Excludes GST, transportation, civil and masonry work beyond closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, switch plates, MCBs, DB and light fixtures other than the Philips lighting and porch lights listed. False ceiling (₹160/sq.ft.), electrical (₹160/sq.ft.) and paint (₹45/sq.ft.) are at agreed rates; other ceiling-to-floor civil, tiling, waterproofing, plumbing and woodwork rates follow the Indéva master BOQ (labour + material). Quantities are measured from the plan and will be confirmed on site measurement. Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
+    <p class="foot-note">Excludes GST, transportation, civil and masonry work beyond the listed wall alterations, new bathroom and closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, switch plates, MCBs, DB and light fixtures other than the Philips lighting listed, tiles (laying only; tiles as per client selection), feature walls and bed-back wall, door polishing, appliances (including exhaust fans), the dining table, and front porch work. POP false ceiling (₹160/sq.ft.), cove patta (₹100/rft), new electrical wiring (₹180/sq.ft.), POP punning (₹45/sq.ft.) and paint (₹45/sq.ft.) are at agreed rates; other ceiling-to-floor civil, tiling, waterproofing, plumbing and woodwork rates follow the Indéva master BOQ (labour + material). Quantities are measured from the plan and will be confirmed on site measurement. Site expenses are charged at 2% of the works total (design fee excluded). Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
   </section>`;
 }
 let currentTab='overview', showAllMode=false;
