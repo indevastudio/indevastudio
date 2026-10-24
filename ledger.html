@@ -521,11 +521,12 @@ function itemTags(i) {
   if (i.vendor_status === "payable") t.push(pd >= Number(i.vendor_amount || 0) && pd > 0 ? "Paid" : "Payable");
   if (i.vendor_status === "advance") t.push(pd > 0 ? "Advance paid " + inr(pd) : "Advance · not yet recorded as paid");
   if (/pending fee/i.test(i.note || "")) t.push("Pending fee");
+  if (Number(i.client_due) > 0) t.push(Number(i.client_due) < Number(i.client_amount) ? "Client due " + inr(i.client_due) : "Client due");
   return t.map(billTag).join("");
 }
 const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</span>` : "");
 function billingBlock(p, items) {
-  if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending")) return "";
+  if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending" || i.pricing_status === "draft")) return "";
   const b = billingOf(items, +p.received || 0);
   const row = (i) => `<tr><td>${i.breakdown ? bdHtml(i.breakdown, true, esc(i.item) + qtyText(i) + itemTags(i)) : esc(i.item) + qtyText(i) + itemTags(i)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
   const diff = Math.round(b.provAlloc) - Math.round(b.provCalc);
@@ -549,7 +550,65 @@ function billingBlock(p, items) {
     ${b.pending.length ? `<div class="muted" style="font-size:13px;margin-top:10px"><b>Pending pricing — not in total:</b> ${b.pending.map((i) => `${esc(i.item)}${i.qty ? ` (${Number(i.qty)} ${esc(i.unit || "")})` : ""} · rate pending confirmation`).join("; ")}</div>` : ""}
     ${b.payables.length ? `<div class="muted" style="font-size:13px;margin-top:6px"><b>Vendor payables (unpaid):</b> ${b.payables.map((i) => `${esc(i.item)} ${inr(Number(i.vendor_amount) - (state.itemPaid[i.id] || 0))}`).join("; ")}</div>` : ""}
     <div class="muted" style="font-size:12px;margin-top:6px">The balance is billing less receipts — not by itself the final amount payable; check pending fees, vendor advances and provisions.</div>
+    ${draftBlock(items)}
     ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}`;
+}
+/* ---------- Draft lines: pending measurement verification (not in totals, hidden from the client) ---------- */
+const fmtDay = (t) => (t ? new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }) : "");
+function draftBlock(items) {
+  const d = items.filter((i) => i.pricing_status === "draft");
+  if (!d.length) return "";
+  const groups = [...new Set(d.map((i) => i.group_name || "Draft items"))];
+  let all = 0;
+  const body = groups.map((g) => {
+    const rows = d.filter((i) => (i.group_name || "Draft items") === g);
+    const sub = rows.reduce((t, i) => t + Number(i.client_amount || 0), 0); all += sub;
+    const ids = rows.map((i) => i.id).join(",");
+    return `<tr><td colspan="4" style="padding-top:12px"><b>${esc(g)}</b></td></tr>` +
+      rows.map((i) => `<tr><td>${esc(String(i.item).replace(/^[^:]+:\s*/, ""))}</td>
+        <td class="r"><input type="number" step="0.01" min="0" inputmode="decimal" value="${Number(i.qty)}" data-dq="${i.id}" style="width:84px;text-align:right;padding:4px 6px"> ${esc(i.unit || "")}</td>
+        <td class="r">${inr(i.rate)}</td><td class="r">${inr(i.client_amount)}</td></tr>`).join("") +
+      `<tr><td colspan="3"><b>Subtotal</b></td><td class="r"><b>${inr(sub)}</b></td></tr>
+       <tr><td colspan="4"><button class="btn small" data-dsave="${ids}">Save quantities</button>
+         <button class="btn small primary" data-dapprove="${ids}">Approve and add to bill</button></td></tr>`;
+  }).join("");
+  const created = d.map((i) => i.created_at).sort()[0], updated = d.map((i) => i.updated_at || i.created_at).sort().pop();
+  return `<div style="margin-top:14px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px">
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>Draft: pending measurement verification</b>
+      <span class="muted" style="font-size:12px">Not in totals · hidden from the client · created ${fmtDay(created)} · updated ${fmtDay(updated)}</span></div>
+    <div style="overflow-x:auto"><table class="items num"><thead><tr><th>Room / area</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead>
+      <tbody>${body}<tr><td colspan="3"><b>Combined proposed</b></td><td class="r"><b>${inr(all)}</b></td></tr></tbody></table></div>
+    <div class="muted" style="font-size:12px;margin-top:6px">Amount = quantity × rate, rounded to the nearest rupee. Approving moves the lines into the bill and the client statement.</div></div>`;
+}
+function bindDrafts() {
+  const root = $("#projList");
+  root.querySelectorAll("[data-dsave]").forEach((b) => b.addEventListener("click", async () => {
+    b.disabled = true; let err = null, n = 0;
+    for (const id of b.dataset.dsave.split(",")) {
+      const it = state.items.find((x) => x.id === id), inp = root.querySelector(`[data-dq="${id}"]`);
+      const q = Number(inp && inp.value);
+      if (!it || !(q >= 0) || inp.value === "") { err = "Check the quantity for " + (it ? it.item : "a line"); break; }
+      if (q === Number(it.qty)) continue;
+      const amt = Math.round((Math.round(q * 100) * Number(it.rate)) / 100);
+      const { error } = await sb.from("et_contract_items").update({ qty: q, client_amount: amt }).eq("id", id).eq("pricing_status", "draft");
+      if (error) { err = error.message; break; } n++;
+    }
+    b.disabled = false;
+    if (err) return toast("Not saved: " + err, 4500);
+    toast(n ? n + " quantit" + (n > 1 ? "ies" : "y") + " saved" : "No changes");
+    await refreshAll();
+  }));
+  root.querySelectorAll("[data-dapprove]").forEach((b) => b.addEventListener("click", async () => {
+    if (b.dataset.armed !== "1") {
+      b.dataset.armed = "1"; b.textContent = "Tap again to confirm";
+      setTimeout(() => { b.dataset.armed = ""; b.textContent = "Approve and add to bill"; }, 4000);
+      return;
+    }
+    const { error } = await sb.from("et_contract_items").update({ pricing_status: "priced" }).in("id", b.dataset.dapprove.split(",")).eq("pricing_status", "draft");
+    if (error) return toast("Not approved: " + error.message, 4500);
+    toast("Approved and added to the bill");
+    await refreshAll();
+  }));
 }
 function renderProjects() {
   if (!state.projects.length) {
@@ -558,7 +617,7 @@ function renderProjects() {
   }
   $("#projList").innerHTML = state.projects.map((p) => {
     const m = projectMath(p);
-    const items = state.items.filter((i) => i.project_id === p.id), vItems = items.filter((i) => i.line_type !== "provision" && i.pricing_status !== "pending");
+    const items = state.items.filter((i) => i.project_id === p.id), vItems = items.filter((i) => i.line_type !== "provision" && i.pricing_status !== "pending" && i.pricing_status !== "draft");
     const warn = [];
     if (m.vb > 0 && m.vp > m.vb) warn.push(`Vendor payments are ${inr(m.vp - m.vb)} above the agreed vendor value.`);
     if (m.c > 0 && m.r > m.c) warn.push(`Received is ${inr(m.r - m.c)} above the contract value.`);
@@ -591,6 +650,7 @@ ${billingBlock(p, items)}
     </article>`;
   }).join("");
   $("#projList").querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => openProject(b.dataset.edit)));
+  bindDrafts();
 }
 
 function fillProjectSelects() {
