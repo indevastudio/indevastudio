@@ -5,58 +5,155 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#F5F5F0">
-<title>Project Statement | Indeva Studio</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Project Ledger | Indeva Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="/auth-kit.js"></script>
 <style>
 :root{
   --paper:#F5F5F0; --card:#FFFFFF; --ink:#1E2422; --muted:#6B706C; --line:#DCDDD5;
-  --brass:#8C6A2E; --in:#2E6A4C; --out:#A5432F; --focus:#2B5FA8;
-  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --brass:#8C6A2E; --brass-deep:#6F531F; --brass-soft:#EFE8D8;
+  --in:#2E6A4C; --in-soft:#E3EFE8; --out:#A5432F; --out-soft:#F5E4DF;
+  --focus:#2B5FA8;
+  font-family:"Schibsted Grotesk","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color:var(--ink); background:var(--paper);
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{background:var(--paper);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.45}
-button,input{font:inherit;color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .num{font-variant-numeric:tabular-nums}
-.muted{color:var(--muted)} .in{color:var(--in)}
+.muted{color:var(--muted)}
+.in{color:var(--in)} .out{color:var(--out)}
 [hidden]{display:none !important}
-.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+
+/* Login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px}
 .login form{width:100%;max-width:360px;display:grid;gap:14px}
-h1{font-size:30px;line-height:1.1;margin:0 0 4px;font-weight:800;letter-spacing:-.02em}
-label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
-input{width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px 12px;font-size:16px;font-weight:500}
+.login h1{font-size:30px;line-height:1.1;margin:0 0 4px;font-weight:800;letter-spacing:-.02em}
+
+/* Shell */
+header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 0}
+.top-row{display:flex;align-items:center;gap:10px;max-width:960px;margin:0 auto}
+.brand{font-weight:800;font-size:18px;letter-spacing:-.01em;margin-right:auto}
+.brand small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
+.tabs{display:flex;gap:4px;max-width:960px;margin:10px auto 0}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brass)}
+main{max-width:960px;margin:0 auto;padding:18px 16px calc(150px + env(safe-area-inset-bottom,0px))}
+
 .btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:9px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
 .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
 .btn.small{padding:6px 10px;font-size:13px}
-header{border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 12px}
-.top{display:flex;align-items:center;gap:10px;max-width:820px;margin:0 auto}
-.brand{font-weight:800;font-size:18px;margin-right:auto}
-.brand small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
-main{max-width:820px;margin:0 auto;padding:18px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:16px}
-.card h2{margin:0;font-size:20px;font-weight:800}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-@media (max-width:560px){.kpis{grid-template-columns:1fr}}
-.kpis div{border-top:2px solid var(--line);padding-top:8px}
-.kpis span{display:block;font-size:12px;font-weight:600;color:var(--muted)}
-.kpis b{font-size:20px}
-.scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
-th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:7px 4px;font-size:13px}
-td{border-bottom:1px solid var(--line);padding:7px 4px;vertical-align:top}
-.r{text-align:right;white-space:nowrap}
-tr.sum td{font-weight:700}
-tr.group td{padding-top:14px;border-bottom:0}
-.note{font-size:13px;color:var(--muted);margin:10px 0 0}
-.due{display:inline-block;margin-top:3px;font-size:11.5px;font-weight:700;color:var(--out);border:1px solid var(--out);border-radius:999px;padding:0 7px;white-space:nowrap}
-tr.duerow td{background:#FBF1EE}
-.empty{color:var(--muted);padding:24px 0;text-align:center}
+.btn.ghost{background:none;border-color:transparent}
+.btn.danger{color:var(--out)}
+.btn:disabled{opacity:.5;cursor:default}
+
+label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
+input,select,textarea{width:100%;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px 12px;font-size:16px;font-weight:500}
+textarea{resize:vertical;min-height:64px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}}
+
+/* Today */
+.day-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.day-head h2{margin:0;font-size:24px;font-weight:800;letter-spacing:-.015em}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:16px 0 8px;border-top:2px solid var(--ink)}
+.flow div{padding:12px 12px 12px 0}
+.flow div+div{padding-left:12px;border-left:1px solid var(--line)}
+.flow span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.flow b{font-size:22px;font-weight:700;letter-spacing:-.01em}
+@media (max-width:480px){.flow b{font-size:17px}}
+.modes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.chip{font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+
+.entries{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.entries li{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.entries .what{font-weight:600}
+.entries .meta{font-size:13px;color:var(--muted);grid-column:1}
+.entries .amt{grid-row:1 / span 2;grid-column:2;align-self:center;font-weight:700;font-size:16px;text-align:right}
+.empty{padding:28px 0;color:var(--muted)}
+.try{display:flex;flex-direction:column;gap:8px;margin-top:12px;align-items:flex-start}
+.try button{border:1px dashed var(--brass);background:var(--brass-soft);color:var(--brass-deep);border-radius:8px;padding:8px 12px;cursor:pointer;text-align:left;font-weight:500}
+
+/* Projects */
+.proj{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+.proj-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.proj h3{margin:0;font-size:18px;font-weight:700}
+.proj .sub{font-size:13px;color:var(--muted)}
+.status{font-size:12px;font-weight:600;color:var(--muted)}
+.bar{height:6px;background:var(--paper);border-radius:3px;margin:12px 0 4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--in)}
+.ledgerbox{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+@media (max-width:640px){.ledgerbox{grid-template-columns:1fr}}
+.ledgerbox h4{margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:700}
+.ledgerbox dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:14px}
+.ledgerbox dt{color:var(--muted)} .ledgerbox dd{margin:0;text-align:right;font-weight:600}
+.ledgerbox .key dd{font-size:16px}
+.warn{margin-top:10px;font-size:13px;color:var(--out);font-weight:600}
+.items{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.items th{text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line);padding:6px 4px}
+.items td{border-bottom:1px solid var(--line);padding:6px 4px}
+.items td.r,.items th.r{text-align:right}
+
+/* Ledger */
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px}
+@media (max-width:760px){.filters{grid-template-columns:1fr 1fr}}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table.lg{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+table.lg th{text-align:left;font-size:12px;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);background:var(--paper)}
+table.lg td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.lg td.r,table.lg th.r{text-align:right}
+.totals{display:flex;flex-wrap:wrap;gap:18px;margin:12px 0;font-weight:600}
+
+/* Voice dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:linear-gradient(to top,var(--paper) 70%,rgba(245,245,240,0));
+  padding:18px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+.dock-in{max-width:960px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.dock .say{flex:1;display:flex;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px 4px 4px 14px;min-height:56px}
+.dock .say input{border:0;padding:8px 6px 8px 0;background:none;font-size:16px}
+.dock .say input:focus-visible{outline:none}
+.dock .say:focus-within{border-color:var(--ink)}
+.mic{width:68px;height:68px;border-radius:50%;border:0;cursor:pointer;flex:none;position:relative;
+  background:radial-gradient(circle at 35% 30%,#B8955A,var(--brass) 55%,var(--brass-deep));color:#fff;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 6px 16px rgba(111,83,31,.35);display:grid;place-items:center}
+.mic svg{width:28px;height:28px}
+.mic[aria-pressed="true"]{background:radial-gradient(circle at 35% 30%,#C9644F,var(--out) 60%,#7D2F20)}
+.mic[aria-pressed="true"]::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--out);animation:ring 1.2s ease-out infinite}
+@keyframes ring{from{transform:scale(.92);opacity:1}to{transform:scale(1.25);opacity:0}}
+@media (prefers-reduced-motion:reduce){.mic[aria-pressed="true"]::after{animation:none}}
+.lang{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:15px;cursor:pointer;flex:none}
+.lang:hover{border-color:var(--ink)}
+.hint{max-width:960px;margin:6px auto 0;font-size:12px;color:var(--muted);padding-left:4px;min-height:16px}
+
+/* Dialogs */
+dialog{border:0;border-radius:16px;padding:0;width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 40px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(30,36,34,.45)}
+.dlg{padding:20px;display:grid;gap:14px;overflow:auto;max-height:calc(100vh - 40px)}
+.dlg h3{margin:0;font-size:20px;font-weight:800}
+.heard{font-size:13px;background:var(--paper);border-radius:8px;padding:8px 10px;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{display:block;text-align:center;padding:10px 4px;font-size:14px;color:var(--ink);cursor:pointer;font-weight:600}
+.seg label+label{border-left:1px solid var(--line)}
+.seg input:checked+span{display:block}
+.seg label:has(input:checked){background:var(--ink);color:#fff}
+.seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:-2px}
+.amount-in{font-size:26px !important;font-weight:700 !important}
+.ref{font-size:13px;color:var(--muted);background:var(--brass-soft);border-radius:8px;padding:8px 10px}
+.actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.item-row{display:grid;grid-template-columns:2fr 1fr 1.4fr 1fr auto;gap:6px;margin-bottom:6px}
+.item-row input{padding:8px;font-size:14px}
+@media (max-width:560px){.item-row{grid-template-columns:1fr 1fr}.item-row input:first-child{grid-column:1 / -1}}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(120px + env(safe-area-inset-bottom,0px));z-index:50;
+  background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;max-width:90vw}
 details.bd{margin-top:4px}
 details.bd summary{cursor:pointer;list-style:none}
 details.bd .bd-link{display:block;color:var(--brass,#8C6A2E);font-size:12px;font-weight:600}
@@ -70,57 +167,211 @@ details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;
 details.bd th{color:var(--muted);font-weight:600}
 details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
 details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
-.print-head{display:none}
-@media print{
-  @page{size:A4;margin:14mm 12mm}
-  html,body{background:#fff}
-  body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  header{display:none}
-  main{max-width:none;padding:0}
-  .print-head{display:block;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px}
-  .print-head .ph-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-  .print-head b{font-size:20px;font-weight:800}
-  .print-head .ph-meta{font-size:11px;color:var(--muted);text-align:right}
-  .print-head .ph-addr{font-size:11px;color:var(--muted);margin-top:2px}
-  .card{border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:12px;break-inside:auto}
-  .card h2{font-size:16px;break-after:avoid}
-  .card:last-child{break-inside:avoid}
-  .kpis{grid-template-columns:repeat(3,1fr)}
-  .kpis b{font-size:16px}
-  .scroll{overflow:visible}
-  table{font-size:12px}
-  tr,details.bd table tr{break-inside:avoid}
-  thead{display:table-header-group}
-  details.bd summary .bd-link{display:none}
-  details.bd > :not(summary){display:block}
-}
+#sWarn{color:var(--out);background:#F6E7E2}
 </style>
 </head>
 <body>
 
-<section class="login" id="login">
+<!-- Sign in -->
+<section class="login" id="login" hidden>
   <form id="loginForm">
-    <div><h1>Your project statement</h1><div class="muted">Indeva Studio · sign in with the email and password shared with you</div></div>
-    <label>Email<input type="email" id="lgEmail" autocomplete="username" required></label>
-    <label>Password<input type="password" id="lgPass" autocomplete="current-password" required></label>
+    <div>
+      <h1>Project ledger</h1>
+      <div class="muted">Indeva Studio. Sign in to record and review payments.</div>
+    </div>
+    <label>Email <input type="email" id="lgEmail" autocomplete="username" required></label>
+    <label>Password <input type="password" id="lgPass" autocomplete="current-password" required></label>
     <button class="btn primary" type="submit">Sign in</button>
-    <div id="loginMsg" style="color:var(--out)" role="alert"></div>
+    <div id="loginMsg" class="out" role="alert"></div>
   </form>
 </section>
 
+<!-- App -->
 <div id="app" hidden>
-  <header><div class="top">
-    <div class="brand">Indeva Studio<small id="who"></small></div>
-    <button class="btn small primary" id="printPdf" title="Download as PDF or print">PDF / Print</button>
-    <button class="btn small" id="refresh">Refresh</button>
-    <button class="btn small" id="signOut">Sign out</button>
-  </div></header>
-  <main id="out"></main>
+  <header class="top">
+    <div class="top-row">
+      <div class="brand">Project ledger<small>Indeva Studio</small></div>
+      <button class="btn small" id="sendNow" title="Email a report">Send report</button>
+      <button class="btn small ghost" id="signOut">Sign out</button>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="today">Today</button>
+      <button role="tab" aria-selected="false" data-tab="projects">Projects</button>
+      <button role="tab" aria-selected="false" data-tab="ledger">Ledger</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="tab-today">
+      <div class="day-head">
+        <h2 id="todayTitle">Today</h2>
+        <span class="muted" style="font-size:13px">PDF goes to ceo@indevastudio.com at 9:00 pm</span>
+      </div>
+      <div class="flow num">
+        <div><span>Received</span><b class="in" id="tIn">₹0</b></div>
+        <div><span>Paid to vendors</span><b class="out" id="tPaid">₹0</b></div>
+        <div><span>Expenses</span><b class="out" id="tExp">₹0</b></div>
+      </div>
+      <div class="modes" id="tModes"></div>
+      <ul class="entries" id="tList"></ul>
+    </section>
+
+    <section id="tab-projects" hidden>
+      <div class="day-head" style="margin-bottom:14px">
+        <h2>Projects</h2>
+        <button class="btn primary" id="addProject">Add project</button>
+      </div>
+      <div id="projList"></div>
+    </section>
+
+    <section id="tab-ledger" hidden>
+      <div class="day-head" style="margin-bottom:14px"><h2>Ledger</h2></div>
+      <div class="filters">
+        <label>Project <select id="fProject"></select></label>
+        <label>From <input type="date" id="fFrom"></label>
+        <label>To <input type="date" id="fTo"></label>
+        <label>Type
+          <select id="fKind">
+            <option value="">All</option><option value="received">Received</option>
+            <option value="vendor_payment">Vendor payment</option><option value="expense">Expense</option>
+          </select>
+        </label>
+        <button class="btn" id="exportCsv">Export CSV</button>
+      </div>
+      <div class="totals num" id="lgTotals"></div>
+      <div class="tablewrap">
+        <table class="lg">
+          <thead><tr><th>Date</th><th>Project</th><th>Type</th><th>Party</th><th>Item / category</th><th>Mode</th><th class="r">Amount</th><th>Note</th><th></th></tr></thead>
+          <tbody id="lgBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Voice dock -->
+  <div class="dock">
+    <form class="dock-in" id="sayForm">
+      <div class="say">
+        <input id="sayInput" type="text" autocomplete="off" enterkeyhint="done"
+          placeholder="रमेश को 25 हज़ार UPI से दिए / Paid 25,000 to Ramesh by UPI" aria-label="Say or type an entry">
+      </div>
+      <button type="button" class="lang" id="lang" aria-label="Voice language"></button>
+      <button type="button" class="mic" id="mic" aria-pressed="false" aria-label="Speak an entry">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>
+      </button>
+    </form>
+    <div class="hint" id="hint"></div>
+  </div>
 </div>
 
+<!-- Confirm entry -->
+<dialog id="entryDlg">
+  <form class="dlg" id="entryForm" method="dialog">
+    <h3 id="entryTitle">Check and save</h3>
+    <div class="heard" id="heard"></div>
+    <div class="seg" role="radiogroup" aria-label="Type">
+      <label><input type="radio" name="kind" value="received">Received</label>
+      <label><input type="radio" name="kind" value="vendor_payment">Vendor payment</label>
+      <label><input type="radio" name="kind" value="expense">Expense</label>
+    </div>
+    <label>Amount (₹) <input id="eAmount" class="amount-in num" type="number" inputmode="decimal" min="1" step="0.01" required></label>
+    <div class="grid2">
+      <label>Project <select id="eProject"></select></label>
+      <label>Contract item <select id="eItem"></select></label>
+    </div>
+    <div class="ref" id="eRef" hidden></div>
+    <div class="grid2">
+      <label id="ePartyLbl">Paid to <input id="eParty" type="text"></label>
+      <label>Mode of payment
+        <select id="eMode">
+          <option value="cash">Cash</option><option value="upi">UPI</option><option value="bank_transfer">Bank transfer</option>
+          <option value="cheque">Cheque</option><option value="card">Card</option><option value="other">Other</option>
+        </select>
+      </label>
+    </div>
+    <div class="grid2">
+      <label>Category <input id="eCategory" type="text" list="cats"></label>
+      <label>Date <input id="eDate" type="date" required></label>
+    </div>
+    <datalist id="cats"><option>Material</option><option>Labour</option><option>Transport</option><option>Food &amp; tea</option><option>Site misc</option><option>Office</option><option>Advance</option></datalist>
+    <label>Note <input id="eNote" type="text"></label>
+    <div class="actions">
+      <button class="btn ghost" value="cancel" formnovalidate>Discard</button>
+      <button class="btn primary" id="eSave" value="save">Save entry</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Send report -->
+<dialog id="sendDlg">
+  <form class="dlg" id="sendForm" method="dialog">
+    <h3>Send report</h3>
+    <label>Report
+      <select id="sKind">
+        <option value="daily">Internal daily report (margins, vendors, all projects)</option>
+        <option value="client">Client statement (billing and payments only)</option>
+      </select>
+    </label>
+    <label id="sDateWrap">Date <input id="sDate" type="date"></label>
+    <label id="sProjWrap" hidden>Project <select id="sProj"></select></label>
+    <label>Send to <input id="sTo" type="text" inputmode="email" autocomplete="off" placeholder="name@example.com, another@example.com"></label>
+    <div class="ref" id="sHint">Always copied to ceo@indevastudio.com. Leave blank to send only to ceo@indevastudio.com.</div>
+    <div class="ref out" id="sWarn" hidden></div>
+    <div class="actions">
+      <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" value="send" id="sSend">Send</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Project editor -->
+<dialog id="projDlg">
+  <form class="dlg" id="projForm" method="dialog">
+    <h3 id="projTitle">Add project</h3>
+    <label>Project name <input id="pName" required placeholder="Nitin Jain 4 BHK"></label>
+    <div class="grid2">
+      <label>Client <input id="pClient"></label>
+      <label>Site <input id="pSite"></label>
+    </div>
+    <div class="grid2">
+      <label>Contract / LOI ref <input id="pRef"></label>
+      <label>Contract date <input id="pDate" type="date"></label>
+    </div>
+    <div class="grid2">
+      <label>Client value (agreed, ₹) <input id="pValue" type="number" inputmode="decimal" min="0" step="0.01"></label>
+      <label>Vendor value (agreed, ₹) <input id="pVendor" type="number" inputmode="decimal" min="0" step="0.01"></label>
+    </div>
+    <div class="ref" id="pMargin"></div>
+    <label>Status
+      <select id="pStatus"><option value="active">Active</option><option value="on_hold">On hold</option><option value="completed">Completed</option></select>
+    </label>
+    <label>Contract notes / payment terms <textarea id="pNotes" placeholder="40% advance, 40% on carcass, 20% on handover"></textarea></label>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px">Contract items (optional)</div>
+      <div class="muted" style="font-size:12px;margin-bottom:8px">Item, client amount, vendor, vendor amount. Payments can then be tracked per item.</div>
+      <div id="itemRows"></div>
+      <button type="button" class="btn small" id="addItem">Add item</button>
+      <button type="button" class="btn small ghost" id="sumItems">Fill totals from items</button>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" value="save">Save project</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
 <script>
-const sb = supabase.createClient("https://rolarfaotykmprzvcmgh.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI");
+/* ========= CONFIG: fill these two values ========= */
+const CONFIG = {
+  SUPABASE_URL: "https://rolarfaotykmprzvcmgh.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI",
+  REPORT_FUNCTION: "daily-expense-report",
+};
+/* ================================================= */
+
+const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -132,108 +383,726 @@ const bdHtml = (b, internal, label) => {
   if (!label) return "";
   return `<details class="bd"><summary><span class="bd-label">${label}</span> <span class="bd-link">View ${esc(b.title || "breakdown")} · ${n} items</span></summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
 };
-const inr = (n) => "₹" + Math.round(Number(n || 0)).toLocaleString("en-IN");
+const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+const istToday = () => new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+const shiftDay = (d, k) => { const x = new Date(d + "T00:00:00Z"); x.setUTCDate(x.getUTCDate() + k); return x.toISOString().slice(0, 10); };
+const KIND = { received: "Received", vendor_payment: "Vendor payment", expense: "Expense" };
 const MODE = { cash: "Cash", upi: "UPI", bank_transfer: "Bank transfer", cheque: "Cheque", card: "Card", other: "Other" };
-const fmtDate = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const store = { get: (k, d) => { try { return localStorage.getItem(k) ?? d; } catch { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
 
+const state = { projects: [], items: [], today: [], ledger: [], entered: false, editingProject: null };
+
+function toast(msg, ms = 2600) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms);
+}
+
+/* ---------- Auth ---------- */
 $("#loginForm").addEventListener("submit", async (e) => {
   e.preventDefault(); $("#loginMsg").textContent = "";
   const { error } = await sb.auth.signInWithPassword({ email: $("#lgEmail").value.trim(), password: $("#lgPass").value });
   if (error) $("#loginMsg").textContent = "Sign-in failed: " + error.message;
 });
 $("#signOut").addEventListener("click", () => sb.auth.signOut());
-$("#refresh").addEventListener("click", load);
-// PDF / Print: open every breakdown so the printed copy shows the full detail, then restore.
-let openedForPrint = [];
-window.addEventListener("beforeprint", () => {
-  openedForPrint = [...document.querySelectorAll("details.bd:not([open])")];
-  openedForPrint.forEach((d) => (d.open = true));
-  const ph = document.querySelector(".print-head .ph-date");
-  if (ph) ph.textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-});
-window.addEventListener("afterprint", () => { openedForPrint.forEach((d) => (d.open = false)); openedForPrint = []; });
-$("#printPdf").addEventListener("click", () => {
-  const p = window.__stmtProject;
-  const prev = document.title;
-  if (p) document.title = `Indeva Studio - ${p.name} - Statement`;
-  window.print();
-  setTimeout(() => (document.title = prev), 1000);
-});
-sb.auth.onAuthStateChange((_e, session) => {
-  $("#login").hidden = !!session; $("#app").hidden = !session;
-  if (session) { $("#who").textContent = session.user.email; load(); }
+
+sb.auth.onAuthStateChange((_evt, session) => {
+  if (session && !state.entered) enter(session);
+  if (!session) { state.entered = false; $("#app").hidden = true; $("#login").hidden = false; }
 });
 
-async function load() {
-  $("#out").innerHTML = `<div class="empty">Loading…</div>`;
-  const { data, error } = await sb.rpc("et_client_statement");
-  if (error) { $("#out").innerHTML = `<div class="empty">Could not load your statement. Please try again.</div>`; return; }
-  if (!data || !data.length) { $("#out").innerHTML = `<div class="empty">No project is linked to this account yet. Please contact Indeva Studio at hello@indevastudio.com.</div>`; return; }
-  window.__stmtProject = data[0] && data[0].project;
-  const today = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
-  const printHead = `<div class="print-head"><div class="ph-top"><div><b>Indeva Studio</b><div class="ph-addr">34/11, Lampur, Narela, Delhi – 110040 · GSTIN 07KJDPS5276J1ZG · hello@indevastudio.com</div></div>
-    <div class="ph-meta">Project statement<br>As on <span class="ph-date">${today}</span></div></div></div>`;
-  $("#out").innerHTML = printHead + data.map(render).join("");
+async function enter(session) {
+  state.entered = true;
+  const email = session.user.email.toLowerCase();
+  const { data } = await sb.from("et_admins").select("email").eq("email", email).maybeSingle();
+  if (!data) {
+    const { data: client } = await sb.from("et_client_access").select("project_id").eq("email", email).limit(1);
+    if (client && client.length) { location.replace("/statement"); return; }
+    $("#login").hidden = false; $("#app").hidden = true;
+    $("#loginMsg").textContent = email + " is not on the ledger access list. Add it to the et_admins table in Supabase.";
+    await sb.auth.signOut(); return;
+  }
+  $("#login").hidden = true; $("#app").hidden = false;
+  $("#fFrom").value = shiftDay(istToday(), -30); $("#fTo").value = istToday();
+  await refreshAll();
 }
 
-function render(s) {
-  const items = s.items || [], receipts = s.receipts || [];
-  const priced = items.filter((i) => i.pricing_status === "priced");
-  const work = priced.filter((i) => i.line_type === "work"), prov = priced.filter((i) => i.line_type === "provision");
+async function refreshAll() {
+  await loadProjects();
+  await Promise.all([loadToday(), loadLedger()]);
+}
+
+/* ---------- Data ---------- */
+async function loadProjects() {
+  const [{ data: p, error }, { data: it }] = await Promise.all([
+    sb.from("et_project_summary").select("*").order("status").order("name"),
+    sb.from("et_contract_items").select("*").order("created_at"),
+  ]);
+  if (error) return toast("Could not load projects: " + error.message);
+  state.projects = p || []; state.items = it || [];
+  // item-wise vendor payments
+  const { data: paid } = await sb.from("et_entries").select("contract_item_id,amount").not("contract_item_id", "is", null);
+  state.itemPaid = {};
+  (paid || []).forEach((r) => (state.itemPaid[r.contract_item_id] = (state.itemPaid[r.contract_item_id] || 0) + Number(r.amount)));
+  renderProjects(); fillProjectSelects();
+}
+async function loadToday() {
+  const { data, error } = await sb.from("et_entries").select("*").eq("entry_date", istToday()).order("created_at", { ascending: false });
+  if (error) return toast(error.message);
+  state.today = data || []; renderToday();
+}
+async function loadLedger() {
+  let q = sb.from("et_entries").select("*").gte("entry_date", $("#fFrom").value).lte("entry_date", $("#fTo").value)
+    .order("entry_date", { ascending: false }).order("created_at", { ascending: false }).limit(1000);
+  const pid = $("#fProject").value, kind = $("#fKind").value;
+  if (pid === "none") q = q.is("project_id", null); else if (pid) q = q.eq("project_id", pid);
+  if (kind) q = q.eq("kind", kind);
+  const { data, error } = await q;
+  if (error) return toast(error.message);
+  state.ledger = data || []; renderLedger();
+}
+["#fProject", "#fFrom", "#fTo", "#fKind"].forEach((s) => $(s).addEventListener("change", loadLedger));
+
+const projName = (id) => (id ? state.projects.find((p) => p.id === id)?.name ?? "Unknown project" : "Studio overhead");
+const itemName = (id) => state.items.find((i) => i.id === id)?.item;
+
+/* ---------- Render: Today ---------- */
+function renderToday() {
+  $("#todayTitle").textContent = new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Kolkata" });
+  const sum = { received: 0, vendor_payment: 0, expense: 0 }, modes = {};
+  state.today.forEach((e) => { sum[e.kind] += Number(e.amount); modes[e.mode] = (modes[e.mode] || 0) + Number(e.amount) * (e.kind === "received" ? 1 : -1); });
+  $("#tIn").textContent = inr(sum.received); $("#tPaid").textContent = inr(sum.vendor_payment); $("#tExp").textContent = inr(sum.expense);
+  $("#tModes").innerHTML = Object.entries(modes).map(([m, v]) => `<span class="chip num">${MODE[m]} ${v < 0 ? "−" : "+"}${inr(Math.abs(v))}</span>`).join("");
+  if (!state.today.length) {
+    $("#tList").innerHTML = `<li class="empty" style="display:block">Nothing recorded today. Tap the mic and say what happened, for example:
+      <div class="try">
+        <button type="button">Received 2 lakh from Mr. Nitin Jain by NEFT</button>
+        <button type="button">Paid 25000 to Ramesh carpenter for Deepanshi by UPI</button>
+        <button type="button">Spent 450 on tea and auto at site, cash</button>
+        <button type="button">रमेश को किचन के लिए पच्चीस हज़ार यूपीआई से दिए</button>
+        <button type="button">सिंघल जी से ढाई लाख ऑनलाइन आए</button>
+      </div></li>`;
+    $("#tList").querySelectorAll(".try button").forEach((b) => b.addEventListener("click", () => openEntry(parseEntry(b.textContent), b.textContent)));
+    return;
+  }
+  $("#tList").innerHTML = state.today.map((e) => `
+    <li>
+      <span class="what">${esc(e.party || KIND[e.kind])} <span class="muted" style="font-weight:500">· ${esc(projName(e.project_id))}</span></span>
+      <span class="meta">${KIND[e.kind]} · ${MODE[e.mode]}${e.contract_item_id ? " · " + esc(itemName(e.contract_item_id)) : e.category ? " · " + esc(e.category) : ""}${e.note ? " · " + esc(e.note) : ""}</span>
+      <span class="amt num ${e.kind === "received" ? "in" : "out"}">${e.kind === "received" ? "+" : "−"}${inr(e.amount)}</span>
+    </li>`).join("");
+}
+
+/* ---------- Render: Projects ---------- */
+function projectMath(p) {
+  const c = +p.contract_value, r = +p.received, vb = +p.vendor_budget, vp = +p.vendor_paid, ex = +p.expenses;
+  return { c, r, vb, vp, ex, due: c - r, vendorDue: vb - vp, margin: c - vb, marginNow: c - vb - ex, cash: r - vp - ex,
+    pct: c > 0 ? Math.min(100, (r / c) * 100) : 0, marginPct: c > 0 ? ((c - vb - ex) / c) * 100 : 0 };
+}
+
+/* ---------- Billing breakdown (work lines, provisions, pending-rate items, payables) ---------- */
+const PROVISION_PCT = 5;
+function billingOf(items, received) {
+  const priced = items.filter((i) => (i.pricing_status || "priced") === "priced");
+  const work = priced.filter((i) => (i.line_type || "work") === "work");
+  const prov = priced.filter((i) => i.line_type === "provision");
   const incl = priced.filter((i) => i.line_type === "included");
-  const pending = items.filter((i) => i.pricing_status === "pending");
-  const sum = (a) => a.reduce((t, i) => t + Number(i.amount || 0), 0);
-  const subtotal = sum(work), provTotal = sum(prov), total = subtotal + provTotal;
-  const received = receipts.reduce((t, r) => t + Number(r.amount || 0), 0), balance = total - received;
-  const qty = (i) => (i.qty ? `<div class="muted" style="font-size:12px">${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</div>` : "");
-  const dueTag = (i) => (Number(i.due) > 0 ? `<br><span class="due">${Number(i.due) < Number(i.amount) ? "Due " + inr(i.due) : "Due"}</span>` : "");
-  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}</td></tr>`;
-  const dueItems = priced.filter((i) => Number(i.due) > 0), dueMarked = dueItems.reduce((t, i) => t + Number(i.due), 0);
-  const dueOther = Math.round(balance - dueMarked);
-  const p = s.project;
-  return `<section class="card">
-      <h2>${esc(p.name)}</h2>
-      <div class="muted">${[p.client_name, p.site].filter(Boolean).map(esc).join(" · ")}</div>
-      <div class="kpis num">
-        <div><span>Total billed</span><b>${inr(total)}</b></div>
-        <div><span>Paid so far</span><b class="in">${inr(received)}</b></div>
-        <div><span>${balance >= 0 ? "Balance" : "Paid in advance"}</span><b>${inr(Math.abs(balance))}</b></div>
-      </div>
-    </section>
-    ${balance > 0 && dueItems.length ? `<section class="card">
-      <h2>What is due</h2>
-      <div class="scroll"><table class="num"><thead><tr><th>Bill</th><th class="r">Billed</th><th class="r">Due</th></tr></thead><tbody>
-        ${dueItems.map((i) => `<tr><td>${esc(i.item)}</td><td class="r">${inr(i.amount)}</td><td class="r" style="color:var(--out);font-weight:700">${inr(i.due)}</td></tr>`).join("")}
-        ${dueOther > 0 ? `<tr><td>Balance on earlier bills</td><td class="r"></td><td class="r" style="color:var(--out);font-weight:700">${inr(dueOther)}</td></tr>` : ""}
-        <tr class="sum"><td>Total due</td><td></td><td class="r">${inr(balance)}</td></tr>
-      </tbody></table></div>
-      <p class="note">Lines marked "Due" in the billing below are not yet paid. Please write to hello@indevastudio.com for payment details.</p>
-    </section>` : ""}
-    <section class="card">
-      <h2>Billing</h2>
-      <div class="scroll"><table class="num"><thead><tr><th>Work</th><th class="r">Amount</th></tr></thead><tbody>
-        ${work.map(row).join("")}
-        <tr class="sum"><td>Subtotal</td><td class="r">${inr(subtotal)}</td></tr>
-        ${prov.length ? `<tr class="group"><td colspan="2"><b>${esc(prov[0].group_name || "Site overheads and wastage provision")}</b>
-          <div class="muted" style="font-size:12px">Provision for site overheads, consumables and wastage</div></td></tr>
-          ${prov.map(row).join("")}
-          <tr class="sum"><td>Total provision</td><td class="r">${inr(provTotal)}</td></tr>` : ""}
-        <tr class="sum"><td>Total</td><td class="r">${inr(total)}</td></tr>
-        ${incl.length ? `<tr class="group"><td colspan="2"><b>Included — not added to the total</b>
-          <div class="muted" style="font-size:12px">Shown for reference; these are not charged separately</div></td></tr>
-          ${incl.map((i) => `<tr><td>${esc(i.item)}${qty(i)}</td><td class="r muted">${inr(i.amount)}</td></tr>`).join("")}` : ""}
-      </tbody></table></div>
-      ${pending.length ? `<p class="note"><b>To be priced (not included above):</b> ${pending.map((i) => `${esc(i.item)}${i.qty ? ` — ${Number(i.qty)} ${esc(i.unit || "")}` : ""}`).join("; ")}</p>` : ""}
-    </section>
-    <section class="card">
-      <h2>Payments received</h2>
-      ${receipts.length ? `<div class="scroll"><table class="num"><thead><tr><th>Date</th><th>Mode</th><th class="r">Amount</th></tr></thead><tbody>
-        ${receipts.map((r) => `<tr><td>${fmtDate(r.date)}</td><td>${MODE[r.mode] || ""}</td><td class="r">${inr(r.amount)}</td></tr>`).join("")}
-        <tr class="sum"><td colspan="2">Total received</td><td class="r">${inr(received)}</td></tr>
-      </tbody></table></div>` : `<p class="note">No payments recorded yet.</p>`}
-      <p class="note">Questions about this statement? Write to hello@indevastudio.com.</p>
-    </section>`;
+  const subtotal = work.reduce((s, i) => s + Number(i.client_amount || 0), 0);
+  const provAlloc = prov.reduce((s, i) => s + Number(i.client_amount || 0), 0);
+  const total = subtotal + provAlloc;
+  return { work, prov, incl, subtotal, provAlloc, provCalc: subtotal * PROVISION_PCT / 100, total, balance: total - received,
+    pending: items.filter((i) => i.pricing_status === "pending"),
+    payables: items.filter((i) => i.vendor_status === "payable" && (state.itemPaid[i.id] || 0) < Number(i.vendor_amount || 0)),
+    advances: items.filter((i) => i.vendor_status === "advance"),
+    groups: [...new Set(prov.map((i) => i.group_name).filter(Boolean))] };
 }
+const billTag = (t) => ` <span class="muted" style="font-size:11px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:0 6px;white-space:nowrap">${t}</span>`;
+function itemTags(i) {
+  const pd = state.itemPaid[i.id] || 0, t = [];
+  if (i.vendor_status === "payable") t.push(pd >= Number(i.vendor_amount || 0) && pd > 0 ? "Paid" : "Payable");
+  if (i.vendor_status === "advance") t.push(pd > 0 ? "Advance paid " + inr(pd) : "Advance · not yet recorded as paid");
+  if (/pending fee/i.test(i.note || "")) t.push("Pending fee");
+  if (Number(i.client_due) > 0) t.push(Number(i.client_due) < Number(i.client_amount) ? "Client due " + inr(i.client_due) : "Client due");
+  if (i.client_approved_at && Number(i.client_approved_amount) === Number(i.client_amount)) {
+    t.push(`<span style="color:#2E6A4C">✓ Client approved ${new Date(i.client_approved_at).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</span>`);
+  } else if (i.client_approved_at) t.push(`<span style="color:#A5432F">Amount changed after client approval</span>`);
+  return t.map(billTag).join("");
+}
+const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</span>` : "");
+function billingBlock(p, items) {
+  if (!items.some((i) => Number(i.client_amount) > 0 || i.line_type === "provision" || i.pricing_status === "pending" || i.pricing_status === "draft")) return "";
+  const b = billingOf(items, +p.received || 0);
+  const row = (i) => `<tr><td>${i.breakdown ? bdHtml(i.breakdown, true, esc(i.item) + qtyText(i) + itemTags(i)) : esc(i.item) + qtyText(i) + itemTags(i)}</td><td class="r">${inr(i.client_amount)}</td></tr>`;
+  const diff = Math.round(b.provAlloc) - Math.round(b.provCalc);
+  const warn = [];
+  if (Math.round(+p.contract_value) !== Math.round(b.total)) warn.push(`Client value on the contract (${inr(Math.round(+p.contract_value))}) differs from the itemised billing total (${inr(Math.round(b.total))}).`);
+  if (b.prov.length && diff !== 0) warn.push(`Provision items total ${inr(b.provAlloc)}, but ${PROVISION_PCT}% of the subtotal is ${inr(Math.round(b.provCalc))}.`);
+  return `<div style="overflow-x:auto;margin-top:14px"><table class="items num">
+    <thead><tr><th>Billing</th><th class="r">Client ₹</th></tr></thead><tbody>
+    ${b.work.filter((i) => Number(i.client_amount) > 0).map(row).join("")}
+    <tr><td><b>Subtotal before provision</b></td><td class="r"><b>${inr(Math.round(b.subtotal))}</b></td></tr>
+    ${b.prov.length ? `<tr><td colspan="2" style="padding-top:12px"><b>${esc(b.groups[0] || "Site overheads and wastage provision")}</b>
+      <div class="muted" style="font-size:12px">Budget provision — proposed allocation, not verified expenditure. ${PROVISION_PCT}% of ${inr(Math.round(b.subtotal))} = ${inr(b.provCalc)}</div></td></tr>
+      ${b.prov.map(row).join("")}
+      <tr><td><b>Total provision</b></td><td class="r"><b>${inr(Math.round(b.provAlloc))}</b></td></tr>` : ""}
+    <tr><td><b>Total including provision</b></td><td class="r"><b>${inr(Math.round(b.total))}</b></td></tr>
+    ${b.incl.length ? `<tr><td colspan="2" style="padding-top:12px"><b>Included — not added to total</b></td></tr>
+      ${b.incl.map((i) => `<tr><td>${esc(i.item)}${qtyText(i)}${itemTags(i)}</td><td class="r muted">${inr(i.client_amount)}</td></tr>`).join("")}` : ""}
+    <tr><td>Client payments received</td><td class="r in">${inr(+p.received || 0)}</td></tr>
+    <tr><td><b>${b.balance >= 0 ? "Balance exceeding receipts" : "Receipts exceed billing by"}</b></td><td class="r"><b>${inr(Math.abs(Math.round(b.balance)))}</b></td></tr>
+    </tbody></table></div>
+    ${b.pending.length ? `<div class="muted" style="font-size:13px;margin-top:10px"><b>Pending pricing — not in total:</b> ${b.pending.map((i) => `${esc(i.item)}${i.qty ? ` (${Number(i.qty)} ${esc(i.unit || "")})` : ""} · rate pending confirmation`).join("; ")}</div>` : ""}
+    ${b.payables.length ? `<div class="muted" style="font-size:13px;margin-top:6px"><b>Vendor payables (unpaid):</b> ${b.payables.map((i) => `${esc(i.item)} ${inr(Number(i.vendor_amount) - (state.itemPaid[i.id] || 0))}`).join("; ")}</div>` : ""}
+    <div class="muted" style="font-size:12px;margin-top:6px">The balance is billing less receipts — not by itself the final amount payable; check pending fees, vendor advances and provisions.</div>
+    ${draftBlock(items)}
+    ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}`;
+}
+/* ---------- Draft lines: pending measurement verification (not in totals, hidden from the client) ---------- */
+const fmtDay = (t) => (t ? new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" }) : "");
+function draftBlock(items) {
+  const d = items.filter((i) => i.pricing_status === "draft");
+  if (!d.length) return "";
+  const groups = [...new Set(d.map((i) => i.group_name || "Draft items"))];
+  let all = 0;
+  const body = groups.map((g) => {
+    const rows = d.filter((i) => (i.group_name || "Draft items") === g);
+    const sub = rows.reduce((t, i) => t + Number(i.client_amount || 0), 0); all += sub;
+    const ids = rows.map((i) => i.id).join(",");
+    return `<tr><td colspan="4" style="padding-top:12px"><b>${esc(g)}</b></td></tr>` +
+      rows.map((i) => `<tr><td>${esc(String(i.item).replace(/^[^:]+:\s*/, ""))}</td>
+        <td class="r"><input type="number" step="0.01" min="0" inputmode="decimal" value="${Number(i.qty)}" data-dq="${i.id}" style="width:84px;text-align:right;padding:4px 6px"> ${esc(i.unit || "")}</td>
+        <td class="r">${inr(i.rate)}</td><td class="r">${inr(i.client_amount)}</td></tr>`).join("") +
+      `<tr><td colspan="3"><b>Subtotal</b></td><td class="r"><b>${inr(sub)}</b></td></tr>
+       <tr><td colspan="4"><button class="btn small" data-dsave="${ids}">Save quantities</button>
+         <button class="btn small primary" data-dapprove="${ids}">Approve and add to bill</button></td></tr>`;
+  }).join("");
+  const created = d.map((i) => i.created_at).sort()[0], updated = d.map((i) => i.updated_at || i.created_at).sort().pop();
+  return `<div style="margin-top:14px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px">
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><b>Draft: pending measurement verification</b>
+      <span class="muted" style="font-size:12px">Not in totals · hidden from the client · created ${fmtDay(created)} · updated ${fmtDay(updated)}</span></div>
+    <div style="overflow-x:auto"><table class="items num"><thead><tr><th>Room / area</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead>
+      <tbody>${body}<tr><td colspan="3"><b>Combined proposed</b></td><td class="r"><b>${inr(all)}</b></td></tr></tbody></table></div>
+    <div class="muted" style="font-size:12px;margin-top:6px">Amount = quantity × rate, rounded to the nearest rupee. Approving moves the lines into the bill and the client statement.</div></div>`;
+}
+function bindDrafts() {
+  const root = $("#projList");
+  root.querySelectorAll("[data-dsave]").forEach((b) => b.addEventListener("click", async () => {
+    b.disabled = true; let err = null, n = 0;
+    for (const id of b.dataset.dsave.split(",")) {
+      const it = state.items.find((x) => x.id === id), inp = root.querySelector(`[data-dq="${id}"]`);
+      const q = Number(inp && inp.value);
+      if (!it || !(q >= 0) || inp.value === "") { err = "Check the quantity for " + (it ? it.item : "a line"); break; }
+      if (q === Number(it.qty)) continue;
+      const amt = Math.round((Math.round(q * 100) * Number(it.rate)) / 100);
+      const { error } = await sb.from("et_contract_items").update({ qty: q, client_amount: amt }).eq("id", id).eq("pricing_status", "draft");
+      if (error) { err = error.message; break; } n++;
+    }
+    b.disabled = false;
+    if (err) return toast("Not saved: " + err, 4500);
+    toast(n ? n + " quantit" + (n > 1 ? "ies" : "y") + " saved" : "No changes");
+    await refreshAll();
+  }));
+  root.querySelectorAll("[data-dapprove]").forEach((b) => b.addEventListener("click", async () => {
+    if (b.dataset.armed !== "1") {
+      b.dataset.armed = "1"; b.textContent = "Tap again to confirm";
+      setTimeout(() => { b.dataset.armed = ""; b.textContent = "Approve and add to bill"; }, 4000);
+      return;
+    }
+    const { error } = await sb.from("et_contract_items").update({ pricing_status: "priced" }).in("id", b.dataset.dapprove.split(",")).eq("pricing_status", "draft");
+    if (error) return toast("Not approved: " + error.message, 4500);
+    toast("Approved and added to the bill");
+    await refreshAll();
+  }));
+}
+function renderProjects() {
+  if (!state.projects.length) {
+    $("#projList").innerHTML = `<div class="empty">No projects yet. Add one with its agreed client value and vendor value so every payment is checked against the contract.</div>`;
+    return;
+  }
+  $("#projList").innerHTML = state.projects.map((p) => {
+    const m = projectMath(p);
+    const items = state.items.filter((i) => i.project_id === p.id), vItems = items.filter((i) => i.line_type !== "provision" && i.pricing_status !== "pending" && i.pricing_status !== "draft");
+    const warn = [];
+    if (m.vb > 0 && m.vp > m.vb) warn.push(`Vendor payments are ${inr(m.vp - m.vb)} above the agreed vendor value.`);
+    if (m.c > 0 && m.r > m.c) warn.push(`Received is ${inr(m.r - m.c)} above the contract value.`);
+    return `<article class="proj">
+      <div class="proj-head">
+        <div><h3>${esc(p.name)}</h3>
+          <div class="sub">${[p.client_name, p.site, p.contract_ref && "Ref " + p.contract_ref].filter(Boolean).map(esc).join(" · ") || "No contract details yet"}</div></div>
+        <div style="text-align:right"><button class="btn small" data-edit="${p.id}">Edit contract</button>
+          <div class="status">${{ active: "Active", on_hold: "On hold", completed: "Completed" }[p.status]}</div></div>
+      </div>
+      <div class="bar" aria-hidden="true"><i style="width:${m.pct.toFixed(1)}%"></i></div>
+      <div class="sub num">${m.pct.toFixed(0)}% of client value received</div>
+      <div class="ledgerbox num">
+        <div><h4>Client</h4><dl>
+          <dt>Client value</dt><dd>${inr(m.c)}</dd><dt>Received</dt><dd class="in">${inr(m.r)}</dd>
+          <dt>Still due</dt><dd>${inr(m.due)}</dd></dl></div>
+        <div><h4>Vendors</h4><dl>
+          <dt>Vendor value</dt><dd>${inr(m.vb)}</dd><dt>Paid</dt><dd class="out">${inr(m.vp)}</dd>
+          <dt>Still to pay</dt><dd>${inr(m.vendorDue)}</dd></dl></div>
+        <div class="key"><h4>Your margin</h4><dl>
+          <dt>Agreed margin</dt><dd>${inr(m.margin)}</dd>
+          <dt>After expenses (${inr(m.ex)})</dt><dd>${inr(m.marginNow)} <span class="muted" style="font-size:12px">${m.marginPct.toFixed(1)}%</span></dd>
+          <dt>Cash in hand</dt><dd class="${m.cash < 0 ? "out" : "in"}">${m.cash < 0 ? "−" : ""}${inr(Math.abs(m.cash))}</dd></dl></div>
+      </div>
+      ${warn.map((w) => `<div class="warn">${w}</div>`).join("")}
+      ${vItems.length ? `<div style="overflow-x:auto"><table class="items num"><thead><tr><th>Item</th><th class="r">Client</th><th>Vendor</th><th class="r">Vendor value</th><th class="r">Paid</th></tr></thead><tbody>
+        ${vItems.map((i) => { const pd = state.itemPaid[i.id] || 0; return `<tr><td>${esc(i.item)}</td><td class="r">${inr(i.client_amount)}</td><td>${esc(i.vendor_name || "")}</td><td class="r">${inr(i.vendor_amount)}</td><td class="r ${pd > i.vendor_amount && i.vendor_amount > 0 ? "out" : ""}">${inr(pd)}</td></tr>`; }).join("")}
+      </tbody></table></div>` : ""}
+${billingBlock(p, items)}
+    </article>`;
+  }).join("");
+  $("#projList").querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => openProject(b.dataset.edit)));
+  bindDrafts();
+}
+
+function fillProjectSelects() {
+  const usable = state.projects.filter((p) => p.status !== "completed");
+  const opts = usable.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("");
+  $("#eProject").innerHTML = opts + `<option value="">Studio overhead (no project)</option>`;
+  const keep = $("#fProject").value;
+  $("#fProject").innerHTML = `<option value="">All projects</option>` + state.projects.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("") + `<option value="none">Studio overhead</option>`;
+  $("#fProject").value = keep;
+}
+
+/* ---------- Render: Ledger ---------- */
+function renderLedger() {
+  const s = { received: 0, vendor_payment: 0, expense: 0 };
+  state.ledger.forEach((e) => (s[e.kind] += Number(e.amount)));
+  $("#lgTotals").innerHTML = `<span class="in">In ${inr(s.received)}</span><span class="out">Vendors ${inr(s.vendor_payment)}</span><span class="out">Expenses ${inr(s.expense)}</span><span>Net ${inr(s.received - s.vendor_payment - s.expense)}</span><span class="muted">${state.ledger.length} entries</span>`;
+  $("#lgBody").innerHTML = state.ledger.length ? state.ledger.map((e) => `<tr>
+      <td class="num">${e.entry_date.split("-").reverse().join("/")}</td><td>${esc(projName(e.project_id))}</td><td>${KIND[e.kind]}</td>
+      <td>${esc(e.party || "")}</td><td>${esc(itemName(e.contract_item_id) || e.category || "")}</td><td>${MODE[e.mode]}</td>
+      <td class="r num ${e.kind === "received" ? "in" : "out"}">${e.kind === "received" ? "+" : "−"}${inr(e.amount)}</td>
+      <td>${esc(e.note || "")}</td><td><button class="btn small ghost danger" data-del="${e.id}" aria-label="Delete entry">Delete</button></td></tr>`).join("")
+    : `<tr><td colspan="9" class="muted" style="padding:18px">No entries for these filters.</td></tr>`;
+  $("#lgBody").querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm("Delete this entry? This cannot be undone.")) return;
+    const { error } = await sb.from("et_entries").delete().eq("id", b.dataset.del);
+    if (error) return toast(error.message);
+    toast("Entry deleted"); await refreshAll();
+  }));
+}
+$("#exportCsv").addEventListener("click", () => {
+  const rows = [["Date", "Project", "Type", "Party", "Item/Category", "Mode", "Amount", "Note", "Heard"]].concat(
+    state.ledger.map((e) => [e.entry_date, projName(e.project_id), KIND[e.kind], e.party || "", itemName(e.contract_item_id) || e.category || "", MODE[e.mode], (e.kind === "received" ? 1 : -1) * e.amount, e.note || "", e.voice_text || ""]));
+  const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob(["\ufeff" + csv], { type: "text/csv" }));
+  a.download = `indeva-ledger-${$("#fFrom").value}-to-${$("#fTo").value}.csv`; a.click();
+});
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", x === b));
+  ["today", "projects", "ledger"].forEach((t) => ($("#tab-" + t).hidden = t !== b.dataset.tab));
+}));
+
+/* ---------- Voice parsing: English, Hindi (Devanagari) and Hinglish ---------- */
+// 1. Devanagari → readable Roman (Hinglish) so one parser handles every language
+const DV_CONS = { "क": "k", "ख": "kh", "ग": "g", "घ": "gh", "ङ": "n", "च": "ch", "छ": "chh", "ज": "j", "झ": "jh", "ञ": "n",
+  "ट": "t", "ठ": "th", "ड": "d", "ढ": "dh", "ण": "n", "त": "t", "थ": "th", "द": "d", "ध": "dh", "न": "n", "प": "p", "फ": "ph",
+  "ब": "b", "भ": "bh", "म": "m", "य": "y", "र": "r", "ल": "l", "व": "v", "श": "sh", "ष": "sh", "स": "s", "ह": "h", "ळ": "l" };
+const DV_VOW = { "अ": "a", "आ": "a", "इ": "i", "ई": "i", "उ": "u", "ऊ": "u", "ऋ": "ri", "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au", "ऑ": "o", "ऍ": "e" };
+const DV_MAT = { "ा": "a", "ि": "i", "ी": "i", "ु": "u", "ू": "u", "ृ": "ri", "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ॉ": "o", "ॅ": "e" };
+const normDeva = (s) => String(s || "").normalize("NFD").replace(/\u093C/g, "").replace(/\u0901/g, "\u0902")
+  .replace(/[\u0966-\u096F]/g, (d) => String(d.charCodeAt(0) - 0x966)).replace(/[\u0964\u0965]/g, ".");
+function translitWord(w) {
+  const u = [];
+  for (const ch of w) {
+    const last = u[u.length - 1];
+    if (DV_CONS[ch]) u.push({ k: "c", s: DV_CONS[ch], v: null, n: "" });
+    else if (DV_MAT[ch] && last && last.k === "c") last.v = DV_MAT[ch];
+    else if (ch === "\u094D" && last && last.k === "c") last.v = "";
+    else if (ch === "\u0902" && last) last.n = "n";
+    else if (ch === "\u0903" && last) last.n = "h";
+    else if (DV_VOW[ch]) u.push({ k: "v", s: DV_VOW[ch], n: "" });
+    else u.push({ k: "x", s: ch, n: "" });
+  }
+  const voiced = (x) => x && (x.k === "v" || (x.k === "c" && x.v !== ""));
+  for (let i = u.length - 1; i > 0; i--) {           // Hindi schwa deletion: ramesh, not ramesha
+    const x = u[i]; if (x.k !== "c" || x.v !== null || x.n) continue;
+    const isLast = !u.slice(i + 1).some((y) => y.k !== "x");
+    if (isLast || (voiced(u[i - 1]) && u[i + 1]?.k === "c" && voiced(u[i + 1]))) x.v = "";
+  }
+  return u.map((x) => (x.k === "c" ? x.s + (x.v === null ? "a" : x.v) + x.n : x.s + x.n)).join("");
+}
+const translit = (s) => normDeva(s).replace(/[\u0900-\u097F]+/g, translitWord);
+
+// 2. Sound-skeleton so "दीपांशी" matches "Deepanshi" and "मुरथल" matches "Murthal"
+const skel = (w) => String(w).toLowerCase().replace(/[^a-z]/g, "").replace(/tch/g, "ch").replace(/ck/g, "k").replace(/ph/g, "f")
+  .replace(/w/g, "v").replace(/z/g, "j").replace(/q/g, "k").replace(/x/g, "ks").replace(/c(?!h)/g, "k")
+  .replace(/[aeiouyh]/g, "").replace(/(.)\1+/g, "$1");
+
+// 3. Vocabulary (Hindi words are converted with the same transliteration, so spellings always line up)
+const wset = (roman, hindi = "") => new Set([...roman.split(" ").filter(Boolean), ...hindi.split(" ").filter(Boolean).map((w) => translit(w).toLowerCase())]);
+const KW = {
+  received: wset("received receive recieved got mila mile mili aaya aaye aya aye ae aai credited collected wasool vasool", "मिले मिला मिली प्राप्त रिसीव वसूल वसूली क्रेडिट आए आये आया आई जमा"),
+  paid: wset("paid pay gave given diya diye die di de dey transferred sent advance bheje bheja bheji chukaya chukaye", "दिए दिये दिया दी भुगतान पेमेंट भेजे भेजा भेजी ट्रांसफर एडवांस चुकाए चुकाया"),
+  expense: wset("kharcha kharch kharche lage laga kharida kharide kharidi", "खर्च खर्चा खर्चे लगे लगा खरीदा खरीदे खरीदी चाय पेट्रोल डीजल ऑटो टैक्सी भाड़ा किराया खाना नाश्ता कूरियर पार्किंग टोल टेम्पो पोर्टर"),
+  yesterday: wset("yesterday kal", "कल"),
+  dayBefore: wset("parso parson parsoon", "परसों"),
+  cash: wset("cash nakad naqad nagad nakd", "नकद नगद कैश"),
+  upi: wset("upi gpay paytm phonepe bhim", "यूपीआई जीपे फोनपे पेटीएम भीम"),
+  bank: wset("neft rtgs imps bank online account netbanking", "बैंक एनईएफटी आरटीजीएस आईएमपीएस ऑनलाइन ट्रांसफर खाते खाता"),
+  cheque: wset("cheque check chq", "चेक"),
+  card: wset("card", "कार्ड"),
+  transport: wset("bhada kiraya", "पेट्रोल डीजल ऑटो टैक्सी भाड़ा किराया टेम्पो पोर्टर टोल पार्किंग गाड़ी"),
+  food: wset("chai khana nashta paani pani", "चाय खाना नाश्ता पानी"),
+  labour: wset("mazdoor majdoor mazdoori dihadi", "मजदूर मजदूरी लेबर दिहाड़ी कारीगर"),
+  material: wset("saman samaan maal", "सीमेंट रेत बजरी टाइल टाइल्स प्लाई पेंट हार्डवेयर सामान माल मटेरियल पाइप तार"),
+  office: wset("", "कूरियर प्रिंट ज़ेरॉक्स"),
+  advance: wset("", "एडवांस"),
+};
+const HI_NUMS = "एक दो तीन चार पांच छह सात आठ नौ दस ग्यारह बारह तेरह चौदह पंद्रह सोलह सत्रह अठारह उन्नीस बीस इक्कीस बाईस तेईस चौबीस पच्चीस छब्बीस सत्ताईस अट्ठाईस उनतीस तीस इकतीस बत्तीस तैंतीस चौंतीस पैंतीस छत्तीस सैंतीस अड़तीस उनतालीस चालीस इकतालीस बयालीस तैंतालीस चवालीस पैंतालीस छियालीस सैंतालीस अड़तालीस उनचास पचास इक्यावन बावन तिरपन चौवन पचपन छप्पन सत्तावन अट्ठावन उनसठ साठ इकसठ बासठ तिरसठ चौंसठ पैंसठ छियासठ सड़सठ अड़सठ उनहत्तर सत्तर इकहत्तर बहत्तर तिहत्तर चौहत्तर पचहत्तर छिहत्तर सतहत्तर अठहत्तर उन्यासी अस्सी इक्यासी बयासी तिरासी चौरासी पचासी छियासी सत्तासी अट्ठासी नवासी नब्बे इक्यानवे बानवे तिरानवे चौरानवे पचानवे छियानवे सत्तानवे अट्ठानवे निन्यानवे".split(" ");
+const NUMW = {};
+HI_NUMS.forEach((w, i) => (NUMW[translit(w).toLowerCase()] = i + 1));
+Object.assign(NUMW, { [translit("छः")]: 6, [translit("पन्द्रह")]: 15, [translit("डेढ़")]: 1.5, [translit("ढाई")]: 2.5, [translit("अढ़ाई")]: 2.5,
+  ek: 1, teen: 3, char: 4, chaar: 4, paanch: 5, panch: 5, chhe: 6, saat: 7, aath: 8, nau: 9, das: 10, gyarah: 11, barah: 12,
+  pandrah: 15, bees: 20, pachees: 25, pachis: 25, pachchis: 25, tees: 30, chalees: 40, chalis: 40, pachas: 50, pachaas: 50,
+  sattar: 70, pachattar: 75, assi: 80, nabbe: 90, dedh: 1.5, dhai: 2.5, dhaai: 2.5, adhai: 2.5,
+  one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twenty: 20, fifty: 50 });
+const UNITS = { sau: 100, hundred: 100, hajar: 1e3, hazar: 1e3, hazaar: 1e3, hajaar: 1e3, thousand: 1e3,
+  lakh: 1e5, lakhs: 1e5, lac: 1e5, lacs: 1e5, laakh: 1e5, karod: 1e7, karor: 1e7, crore: 1e7, crores: 1e7, cr: 1e7 };
+UNITS[translit("सौ")] = 100; UNITS[translit("हज़ार")] = 1e3; UNITS[translit("लाख")] = 1e5; UNITS[translit("करोड़")] = 1e7;
+const MODS = { sadhe: 0.5, saadhe: 0.5, sade: 0.5, sava: 0.25, savaa: 0.25, paune: -0.25, pone: -0.25 };
+MODS[translit("साढ़े")] = 0.5; MODS[translit("सवा")] = 0.25; MODS[translit("पौने")] = -0.25;
+const RUPEE = wset("rs inr rupees rupee rupaye rupae rupaya rupiya rupaiye rupay ru /-", "रुपये रुपए रुपया रूपये रु");
+const STOP_NAME = wset("ke ki ka liye lie ne maine mene hamne humne aaj aj site project par pe me mein main se ko aur and the for of by via to from on at in with sath bhi ye yeh wo is us total payment mr mrs shri ji sir madam ko",
+  "के की का लिए ने मैंने हमने आज साइट प्रोजेक्ट पर में से को और साथ भी ये वो इस उस श्री जी");
+const NOT_NAME = new Set([...STOP_NAME, ...Object.values(KW).flatMap((s) => [...s]), ...Object.keys(NUMW), ...Object.keys(UNITS), ...Object.keys(MODS), ...RUPEE,
+  "petrol", "diesel", "fuel", "auto", "cab", "uber", "ola", "tea", "food", "lunch", "material", "labour", "today", "yesterday", "hotel"]);
+
+const STOP = new Set(["mr", "mrs", "ms", "dr", "the", "and", "for", "project", "residence", "flat", "house", "site", "apartment", "apartments",
+  "sector", "tower", "floor", "ground", "first", "second", "delhi", "gurgaon", "gurugram", "noida", "new", "renovation", "bhk", "kitchen", "room", "work", "puja", "city", "hotel"]);
+const nameTokens = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((t) => t.length >= 3 && !STOP.has(t));
+const itemTokens = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter((t) => t.length >= 3 && !["the", "and", "for", "work"].includes(t));
+// a known English word "matches" a spoken word if spelled the same, or (for longer names) sounds the same
+const sounds = (tok, words) => { const k = skel(tok); return words.some((w) => w === tok || (k.length >= 3 && skel(w) === k)); };
+
+function parseAmount(words) {
+  const segs = []; let cur = null, tagNext = false;
+  const close = () => { if (cur && cur.parts.some((p) => p.t !== "conn")) segs.push(cur); cur = null; };
+  for (const w of words) {
+    const m = w.match(/^(₹)?(\d+(?:\.\d+)?)(k|l|cr|\/-)?$/);
+    let parts = null, tag = false;
+    if (m) {
+      parts = [{ t: "num", v: parseFloat(m[2]) }]; tag = !!m[1] || m[3] === "/-";
+      if (m[3] === "k") parts.push({ t: "unit", v: 1e3 }); else if (m[3] === "l") parts.push({ t: "unit", v: 1e5 }); else if (m[3] === "cr") parts.push({ t: "unit", v: 1e7 });
+    } else if (NUMW[w] != null) parts = [{ t: "num", v: NUMW[w] }];
+    else if (UNITS[w]) parts = [{ t: "unit", v: UNITS[w] }];
+    else if (MODS[w] != null) parts = [{ t: "mod", v: MODS[w] }];
+    else if (cur && w === "aur") parts = [{ t: "conn" }];
+    if (!parts) { if (cur && RUPEE.has(w)) cur.tag = true; close(); tagNext = RUPEE.has(w) || w === "₹"; continue; }
+    if (!cur) { cur = { parts: [], tag: tagNext }; tagNext = false; }
+    cur.parts.push(...parts); if (tag) cur.tag = true;
+  }
+  close();
+  let best = 0, bestTagged = 0;
+  for (const s of segs) {
+    let total = 0, c = 0, mod = 0, unit = false;
+    for (const p of s.parts) {
+      if (p.t === "num") { c += p.v + mod; mod = 0; }
+      else if (p.t === "mod") mod = p.v;
+      else if (p.t === "unit") { unit = true; if (!c) c = 1 + mod; mod = 0; if (p.v === 100) c *= 100; else { total += c * p.v; c = 0; } }
+    }
+    const v = total + c;
+    if ((s.tag || unit) && v > bestTagged) bestTagged = v;
+    if (v > best) best = v;
+  }
+  return Math.round((bestTagged || best) * 100) / 100;
+}
+
+function parseEntry(raw) {
+  const hindi = /[\u0900-\u097F]/.test(raw);
+  const latin = translit(raw).toLowerCase().replace(/[“”]/g, '"');
+  const t = " " + latin + " ";
+  const words = latin.replace(/(\d),(?=\d)/g, "$1").split(/[\s,;:!?()"'|]+/).map((w) => w.replace(/^[.\-]+|\.+$/g, "")).filter(Boolean);
+  const any = (set) => words.some((w) => set.has(w));
+  const compact = words.join("");
+  const title = (s) => s.replace(/\b[a-z]/g, (c) => c.toUpperCase());
+  const out = { amount: parseAmount(words), kind: null, mode: null, project_id: null, contract_item_id: null, party: "", category: "",
+    entry_date: istToday(), note: hindi ? latin.trim().replace(/^./, (c) => c.toUpperCase()) : raw.trim() };
+
+  // date
+  if (any(KW.yesterday)) out.entry_date = shiftDay(istToday(), -1);
+  else if (any(KW.dayBefore)) out.entry_date = shiftDay(istToday(), -2);
+
+  // type
+  const RECEIVED = /\b(advance from|payment from|client paid|got payment)\b/;
+  const EXPENSE = /\b(expense|expenses|spent|spend|bought|buy|purchased?|tea|petrol|diesel|fuel|auto|cab|uber|ola|rapido|porter|transport|tempo|food|lunch|snacks|parking|toll|courier|stationery|xerox|printout|printing)\b/;
+  const PAID = /\b(transfer to|payment to|payment of|advance to)\b/;
+  if ((RECEIVED.test(t) || any(KW.received)) && !/\bpaid to\b/.test(t)) out.kind = "received";
+  else if (EXPENSE.test(t) || any(KW.expense)) out.kind = "expense";
+  else if (PAID.test(t) || any(KW.paid)) out.kind = "vendor_payment";
+
+  // mode of payment
+  if (any(KW.cash)) out.mode = "cash";
+  else if (any(KW.upi) || /(googlepay|gugalpe|phonepe|phonpe|gpay|jipe|yupiai)/.test(compact)) out.mode = "upi";
+  else if (any(KW.bank) || /\btransfer\w*\b/.test(t) || /(netbanking|netbainking)/.test(compact)) out.mode = "bank_transfer";
+  else if (any(KW.cheque)) out.mode = "cheque";
+  else if (any(KW.card)) out.mode = "card";
+
+  // project (works for English and Hindi spellings)
+  let best = null, score = 0;
+  for (const p of state.projects.filter((p) => p.status !== "completed")) {
+    let s = 0; new Set([...nameTokens(p.name), ...nameTokens(p.client_name), ...nameTokens(p.site)]).forEach((tok) => { if (sounds(tok, words)) s += tok.length; });
+    if (s > score) { score = s; best = p; }
+  }
+  out.project_id = best ? best.id : store.get("lastProject", state.projects[0]?.id || "");
+
+  // contract item / vendor
+  let iBest = null, iScore = 0;
+  for (const it of state.items.filter((i) => i.project_id === out.project_id)) {
+    let s = 0; new Set([...itemTokens(it.item), ...itemTokens(it.vendor_name)]).forEach((tok) => { if (sounds(tok, words)) s += tok.length; });
+    if (s > iScore) { iScore = s; iBest = it; }
+  }
+  if (iBest) { out.contract_item_id = iBest.id; if (!out.kind) out.kind = "vendor_payment"; }
+
+  // who — English "to/from X", Hindi "X को / X से"
+  let party = "";
+  const pm = t.match(/\b(?:to|from)\s+(?:mr\.?\s+|mrs\.?\s+|shri\s+)?([a-z][a-z.'& -]{1,40}?)(?=\s+(?:for|by|via|through|in|on|at|of|towards|against|as|cash|upi|neft|rtgs|imps|cheque|bank|online|gpay|paytm|phonepe|today|yesterday|rs|rupees|\d)\b|[,.]|\s*$)/);
+  if (pm) party = pm[1].trim();
+  if (!party) {
+    const posts = out.kind === "received" ? ["se", "ko"] : ["ko", "se"];
+    const isName = (w) => /^[a-z][a-z.']+$/.test(w) && !NOT_NAME.has(w);
+    outer: for (const p of posts) for (let j = 1; j < words.length; j++) {
+      if (words[j] !== p) continue;
+      const name = [];
+      for (let i = j - 1; i >= 0 && name.length < 3 && isName(words[i]); i--) name.unshift(words[i]);
+      if (name.length) { party = name.join(" "); break outer; }
+    }
+  }
+  if (party) {
+    const pw = party.split(/\s+/);
+    // prefer the spelling already on file for this vendor / client
+    const known = [iBest?.vendor_name, ...state.items.filter((i) => i.project_id === out.project_id).map((i) => i.vendor_name), best?.client_name].filter(Boolean);
+    const hit = known.find((k) => itemTokens(k).some((tok) => sounds(tok, pw)));
+    if (hit) party = hit;
+    else if (out.kind !== "received" && best && nameTokens(best.name + " " + best.client_name).some((tok) => sounds(tok, pw))) party = "";
+    out.party = party ? title(party) : "";
+  }
+  if (!out.party && iBest?.vendor_name && out.kind !== "received") out.party = iBest.vendor_name;
+  if (!out.party && out.kind === "received" && best?.client_name) out.party = best.client_name;
+
+  // category
+  const CATS = [[/\b(petrol|diesel|fuel|auto|cab|uber|ola|rapido|porter|transport|tempo|toll|parking)\b/, KW.transport, "Transport"],
+    [/\b(tea|food|lunch|snacks|water)\b/, KW.food, "Food & tea"], [/\b(labour|labor|helper|wages)\b/, KW.labour, "Labour"],
+    [/\b(cement|sand|tiles?|ply|plywood|laminate|hardware|paint|putty|pipe|wire|material|screws?|adhesive|fevicol|glass)\b/, KW.material, "Material"],
+    [/\b(courier|stationery|xerox|printout|printing|office)\b/, KW.office, "Office"], [/\badvance\b/, KW.advance, "Advance"]];
+  for (const [re, set, c] of CATS) if (re.test(t) || any(set)) { out.category = c; break; }
+
+  if (!out.kind) out.kind = out.party ? "vendor_payment" : "expense";
+  if (!out.mode) out.mode = store.get("lastMode", "cash");
+  return out;
+}
+
+/* ---------- Entry dialog ---------- */
+function setKindLabel() {
+  const k = document.querySelector('input[name="kind"]:checked')?.value;
+  $("#ePartyLbl").firstChild.textContent = k === "received" ? "Received from " : k === "expense" ? "Paid to (shop / person) " : "Paid to ";
+}
+function fillItems(selected) {
+  const its = state.items.filter((i) => i.project_id === $("#eProject").value);
+  $("#eItem").innerHTML = `<option value="">None</option>` + its.map((i) => `<option value="${i.id}">${esc(i.item)}${i.vendor_name ? " (" + esc(i.vendor_name) + ")" : ""}</option>`).join("");
+  $("#eItem").value = selected || ""; showRef();
+}
+function showRef() {
+  const p = state.projects.find((x) => x.id === $("#eProject").value);
+  if (!p) { $("#eRef").hidden = true; return; }
+  const m = projectMath(p), k = document.querySelector('input[name="kind"]:checked')?.value, it = state.items.find((i) => i.id === $("#eItem").value);
+  let txt = "";
+  if (k === "received") txt = `Contract ${inr(m.c)} · received so far ${inr(m.r)} · still due ${inr(m.due)}`;
+  else if (it) txt = `${it.item}: agreed vendor value ${inr(it.vendor_amount)} · paid so far ${inr(state.itemPaid[it.id] || 0)} · balance ${inr(it.vendor_amount - (state.itemPaid[it.id] || 0))}`;
+  else if (k === "vendor_payment") txt = `Agreed vendor value ${inr(m.vb)} · paid so far ${inr(m.vp)} · balance ${inr(m.vendorDue)}`;
+  else txt = `Expenses on this project so far ${inr(m.ex)} · margin after expenses ${inr(m.marginNow)}`;
+  const amt = Number($("#eAmount").value || 0);
+  if (k === "received" && amt > m.due && m.c > 0) txt += " — this is more than the amount due.";
+  if (k === "vendor_payment" && !it && m.vb > 0 && amt > m.vendorDue) txt += " — this takes vendor payments over the agreed value.";
+  if (it && amt > it.vendor_amount - (state.itemPaid[it.id] || 0) && it.vendor_amount > 0) txt += " — this is more than the agreed balance for this item.";
+  $("#eRef").textContent = txt; $("#eRef").hidden = false;
+}
+function openEntry(parsed, heard) {
+  if (!state.projects.length) toast("Add a project first so entries can be checked against its contract.");
+  $("#heard").textContent = "Heard: “" + heard + "”"; $("#heard").dataset.raw = heard;
+  document.querySelectorAll('input[name="kind"]').forEach((r) => (r.checked = r.value === parsed.kind));
+  $("#eAmount").value = parsed.amount || "";
+  $("#eProject").value = parsed.project_id || "";
+  fillItems(parsed.contract_item_id);
+  $("#eParty").value = parsed.party; $("#eMode").value = parsed.mode; $("#eCategory").value = parsed.category;
+  $("#eDate").value = parsed.entry_date; $("#eNote").value = parsed.note;
+  setKindLabel(); showRef();
+  $("#entryDlg").showModal();
+  if (!parsed.amount) $("#eAmount").focus();
+}
+document.querySelectorAll('input[name="kind"]').forEach((r) => r.addEventListener("change", () => { setKindLabel(); showRef(); }));
+$("#eProject").addEventListener("change", () => fillItems(""));
+$("#eItem").addEventListener("change", () => {
+  const it = state.items.find((i) => i.id === $("#eItem").value);
+  if (it?.vendor_name && !$("#eParty").value) $("#eParty").value = it.vendor_name;
+  showRef();
+});
+$("#eAmount").addEventListener("input", showRef);
+
+$("#entryForm").addEventListener("submit", async (e) => {
+  if (e.submitter?.value !== "save") return;
+  e.preventDefault();
+  const kind = document.querySelector('input[name="kind"]:checked')?.value;
+  if (!kind) return toast("Choose Received, Vendor payment or Expense.");
+  const row = {
+    kind, amount: Number($("#eAmount").value), project_id: $("#eProject").value || null,
+    contract_item_id: $("#eItem").value || null, party: $("#eParty").value.trim() || null, mode: $("#eMode").value,
+    category: $("#eCategory").value.trim() || null, entry_date: $("#eDate").value, note: $("#eNote").value.trim() || null,
+    voice_text: $("#heard").dataset.raw || null,
+  };
+  if (!(row.amount > 0)) return toast("Enter an amount above zero.");
+  $("#eSave").disabled = true;
+  const { error } = await sb.from("et_entries").insert(row);
+  $("#eSave").disabled = false;
+  if (error) return toast("Not saved: " + error.message, 4000);
+  store.set("lastMode", row.mode); if (row.project_id) store.set("lastProject", row.project_id);
+  $("#entryDlg").close(); $("#sayInput").value = "";
+  toast(`Saved ${KIND[row.kind].toLowerCase()} of ${inr(row.amount)}`);
+  await refreshAll();
+});
+
+/* ---------- Voice input ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let rec = null;
+let voiceLang = store.get("voiceLang", "hi-IN");
+function idleHint() { return voiceLang === "hi-IN" ? "हिंदी या Hinglish में बोलें, या टाइप करें। Tap हिं/EN to switch language." : "Speak in English, or type and press Enter. Tap EN/हिं to switch language."; }
+function showLang() { $("#lang").textContent = voiceLang === "hi-IN" ? "हिं" : "EN"; $("#lang").title = voiceLang === "hi-IN" ? "Voice: Hindi (tap for English)" : "Voice: English (tap for Hindi)"; $("#hint").textContent = idleHint(); }
+$("#lang").addEventListener("click", () => {
+  voiceLang = voiceLang === "hi-IN" ? "en-IN" : "hi-IN"; store.set("voiceLang", voiceLang); showLang();
+  toast(voiceLang === "hi-IN" ? "Voice: Hindi — Hinglish works too" : "Voice: English");
+});
+showLang();
+function setListening(on) { $("#mic").setAttribute("aria-pressed", on); $("#hint").textContent = on ? (voiceLang === "hi-IN" ? "सुन रहे हैं… रकम, किसको/किससे, कौन सा प्रोजेक्ट और कैसे भुगतान हुआ बताइए।" : "Listening… say the amount, who, which project and how it was paid.") : idleHint(); }
+$("#mic").addEventListener("click", () => {
+  if (rec) { rec.stop(); return; }
+  if (!SR) { toast("Voice needs Chrome, Edge or Safari. Type the entry instead."); $("#sayInput").focus(); return; }
+  rec = new SR(); rec.lang = voiceLang; rec.interimResults = true; rec.continuous = false; rec.maxAlternatives = 1;
+  let finalText = "";
+  rec.onresult = (ev) => { let txt = ""; for (const r of ev.results) txt += r[0].transcript; $("#sayInput").value = txt; if (ev.results[ev.results.length - 1].isFinal) finalText = txt; };
+  rec.onerror = (ev) => {
+    const msg = { "not-allowed": "Microphone is blocked. Allow mic access for indevastudio.com in browser settings.", "no-speech": "Didn't catch anything. Tap the mic and try again.", network: "Voice needs an internet connection." }[ev.error];
+    if (msg) toast(msg, 4000);
+  };
+  rec.onend = () => { rec = null; setListening(false); const said = (finalText || $("#sayInput").value).trim(); if (said) openEntry(parseEntry(said), said); };
+  rec.start(); setListening(true);
+});
+$("#sayForm").addEventListener("submit", (e) => { e.preventDefault(); const s = $("#sayInput").value.trim(); if (s) openEntry(parseEntry(s), s); });
+
+/* ---------- Project editor ---------- */
+function itemRow(i = {}) {
+  const d = document.createElement("div"); d.className = "item-row"; d.dataset.id = i.id || "";
+  d.innerHTML = `<input placeholder="Item (e.g. Modular kitchen)" value="${esc(i.item || "")}" data-f="item">
+    <input type="number" inputmode="decimal" placeholder="Client ₹" value="${i.client_amount ?? ""}" data-f="client_amount">
+    <input placeholder="Vendor" value="${esc(i.vendor_name || "")}" data-f="vendor_name">
+    <input type="number" inputmode="decimal" placeholder="Vendor ₹" value="${i.vendor_amount ?? ""}" data-f="vendor_amount">
+    <button type="button" class="btn small ghost danger" aria-label="Remove item">✕</button>`;
+  d.querySelector("button").addEventListener("click", () => d.remove());
+  $("#itemRows").appendChild(d);
+}
+function updateMarginHint() {
+  const c = Number($("#pValue").value || 0), v = Number($("#pVendor").value || 0);
+  $("#pMargin").textContent = c ? `Agreed margin ${inr(c - v)} (${(((c - v) / c) * 100).toFixed(1)}%)` : "Enter the client value to see your margin.";
+}
+["#pValue", "#pVendor"].forEach((s) => $(s).addEventListener("input", updateMarginHint));
+$("#addItem").addEventListener("click", () => itemRow());
+$("#sumItems").addEventListener("click", () => {
+  let c = 0, v = 0; $("#itemRows").querySelectorAll(".item-row").forEach((r) => { c += Number(r.querySelector('[data-f="client_amount"]').value || 0); v += Number(r.querySelector('[data-f="vendor_amount"]').value || 0); });
+  $("#pValue").value = c; $("#pVendor").value = v; updateMarginHint();
+});
+$("#addProject").addEventListener("click", () => openProject(null));
+function openProject(id) {
+  const p = state.projects.find((x) => x.id === id) || {};
+  state.editingProject = id;
+  $("#projTitle").textContent = id ? "Edit contract" : "Add project";
+  $("#pName").value = p.name || ""; $("#pClient").value = p.client_name || ""; $("#pSite").value = p.site || "";
+  $("#pRef").value = p.contract_ref || ""; $("#pDate").value = p.contract_date || ""; $("#pValue").value = p.contract_value ?? "";
+  $("#pVendor").value = p.vendor_budget ?? ""; $("#pStatus").value = p.status || "active"; $("#pNotes").value = p.contract_notes || "";
+  $("#itemRows").innerHTML = ""; state.items.filter((i) => i.project_id === id).forEach(itemRow);
+  updateMarginHint(); $("#projDlg").showModal();
+}
+$("#projForm").addEventListener("submit", async (e) => {
+  if (e.submitter?.value !== "save") return;
+  e.preventDefault();
+  const row = { name: $("#pName").value.trim(), client_name: $("#pClient").value.trim() || null, site: $("#pSite").value.trim() || null,
+    contract_ref: $("#pRef").value.trim() || null, contract_date: $("#pDate").value || null, contract_value: Number($("#pValue").value || 0),
+    vendor_budget: Number($("#pVendor").value || 0), status: $("#pStatus").value, contract_notes: $("#pNotes").value.trim() || null };
+  let id = state.editingProject, error;
+  if (id) ({ error } = await sb.from("et_projects").update(row).eq("id", id));
+  else { const r = await sb.from("et_projects").insert(row).select("id").single(); error = r.error; id = r.data?.id; }
+  if (error) return toast("Not saved: " + error.message, 4000);
+
+  const rows = [...$("#itemRows").querySelectorAll(".item-row")].map((r) => ({
+    id: r.dataset.id || null, item: r.querySelector('[data-f="item"]').value.trim(),
+    client_amount: Number(r.querySelector('[data-f="client_amount"]').value || 0), vendor_name: r.querySelector('[data-f="vendor_name"]').value.trim() || null,
+    vendor_amount: Number(r.querySelector('[data-f="vendor_amount"]').value || 0) })).filter((r) => r.item);
+  const keep = new Set(rows.filter((r) => r.id).map((r) => r.id));
+  const removed = state.items.filter((i) => i.project_id === id && !keep.has(i.id)).map((i) => i.id);
+  const ops = [];
+  if (removed.length) ops.push(sb.from("et_contract_items").delete().in("id", removed));
+  rows.forEach((r) => { const { id: rid, ...data } = r; ops.push(rid ? sb.from("et_contract_items").update(data).eq("id", rid) : sb.from("et_contract_items").insert({ ...data, project_id: id })); });
+  const res = await Promise.all(ops); const err = res.find((x) => x.error);
+  if (err) toast("Project saved, but an item failed: " + err.error.message, 4000); else toast("Project saved");
+  $("#projDlg").close(); await refreshAll();
+});
+
+/* ---------- Send report ---------- */
+const REPORT_CEO = "ceo@indevastudio.com";
+const parseEmails = (v) => [...new Set(String(v || "").split(/[\s,;]+/).map((e) => e.trim().toLowerCase()).filter(Boolean))];
+const isEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+async function sendSetup() {
+  const client = $("#sKind").value === "client";
+  $("#sProjWrap").hidden = !client; $("#sDateWrap").hidden = client;
+  $("#sHint").textContent = client
+    ? "The client gets billing and payments only. No vendor amounts or margins. Always copied to " + REPORT_CEO + "."
+    : "Includes margins and vendor amounts. For your team only. Always copied to " + REPORT_CEO + ".";
+  checkSendWarn();
+}
+async function fillClientEmails() {
+  const pid = $("#sProj").value; if (!pid) return;
+  const { data } = await sb.from("et_client_access").select("email").eq("project_id", pid);
+  $("#sTo").value = (data || []).map((r) => r.email).join(", ");
+  checkSendWarn();
+}
+async function checkSendWarn() {
+  const w = $("#sWarn"); w.hidden = true;
+  if ($("#sKind").value !== "daily") return;
+  const to = parseEmails($("#sTo").value).filter((e) => e !== REPORT_CEO);
+  if (!to.length) return;
+  const { data } = await sb.from("et_client_access").select("email").in("email", to);
+  if (data && data.length) {
+    w.textContent = [...new Set(data.map((r) => r.email))].join(", ") + " is a client login. The internal report shows your margins and vendor amounts. Send them a client statement instead.";
+    w.hidden = false;
+  }
+}
+$("#sendNow").addEventListener("click", () => {
+  $("#sKind").value = "daily"; $("#sDate").value = istToday(); $("#sTo").value = "";
+  $("#sProj").innerHTML = state.projects.map((p) => `<option value="${p.id}">${esc(p.name)}${p.client_name ? " · " + esc(p.client_name) : ""}</option>`).join("");
+  sendSetup(); $("#sendDlg").showModal();
+});
+$("#sKind").addEventListener("change", () => { sendSetup(); if ($("#sKind").value === "client") fillClientEmails(); });
+$("#sProj").addEventListener("change", fillClientEmails);
+$("#sTo").addEventListener("change", checkSendWarn);
+$("#sendForm").addEventListener("submit", async (e) => {
+  if (e.submitter?.value !== "send") return;
+  e.preventDefault();
+  const kind = $("#sKind").value, to = parseEmails($("#sTo").value);
+  const bad = to.filter((x) => !isEmail(x));
+  if (bad.length) return toast("Check the email address: " + bad.join(", "), 4000);
+  if (kind === "daily" && !$("#sWarn").hidden) return toast("That address is a client. Choose Client statement instead.", 4500);
+  if (kind === "client" && !$("#sProj").value) return toast("Choose a project", 3000);
+  const b = $("#sSend"); b.disabled = true; b.textContent = "Sending…";
+  const body = kind === "client" ? { kind, project_id: $("#sProj").value, to } : { kind, date: $("#sDate").value || istToday(), to };
+  const { data, error } = await sb.functions.invoke(CONFIG.REPORT_FUNCTION, { body });
+  b.disabled = false; b.textContent = "Send";
+  if (error || data?.error) return toast("Report not sent: " + (data?.error || error.message), 4500);
+  $("#sendDlg").close();
+  toast("Report emailed to " + [].concat(data.sent_to || []).join(", "), 3500);
+});
 </script>
 </body>
 </html>
