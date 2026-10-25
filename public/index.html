@@ -1193,6 +1193,30 @@ nav.solid {
   color: var(--white);
 }
 
+/* ---------- our team ---------- */
+.team-section { padding: 100px 60px; border-bottom: 1px solid var(--line); }
+.team-header { margin-bottom: 56px; max-width: 640px; }
+.team-intro { font-family: var(--sans); font-size: 0.85rem; font-weight: 300; line-height: 1.95; color: var(--white-dim); margin-top: 20px; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 32px; }
+.team-card { position: relative; outline: none; cursor: default; }
+.team-photo { position: relative; aspect-ratio: 4/5; overflow: hidden; background: var(--black-2); border: 1px solid var(--line); }
+.team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.team-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.team-initials { font-family: var(--serif); font-weight: 300; font-size: 3rem; color: var(--gold-dim); letter-spacing: 0.04em; }
+.team-ph-note { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white-muted); opacity: 0.6; }
+.team-hover { position: absolute; inset: 0; background: rgba(36,36,36,0.95); color: #F5F1E8; padding: 28px 24px; display: flex; flex-direction: column; justify-content: flex-end; opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease; }
+.team-hover p { font-family: var(--sans); font-size: 0.82rem; font-weight: 300; line-height: 1.8; margin: 0; }
+.team-card:hover .team-hover, .team-card:focus-within .team-hover, .team-card.is-open .team-hover { opacity: 1; transform: none; }
+.team-name { font-family: var(--serif); font-weight: 300; font-size: 1.35rem; color: var(--white); margin-top: 18px; }
+.team-role { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); margin-top: 6px; }
+@media (max-width: 768px) {
+  .team-section { padding: 64px 20px; }
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .team-hover { padding: 16px 14px; }
+  .team-hover p { font-size: 0.74rem; line-height: 1.6; }
+  .team-initials { font-size: 2.2rem; }
+}
+
 .philosophy-section {
   padding: 100px 60px;
   border-bottom: 1px solid var(--line);
@@ -4197,6 +4221,34 @@ img {
     </div>
     <div style="background:var(--black-2);aspect-ratio:4/5;overflow:hidden;" class="reveal d1">
       <img src="https://www.indevastudio.com/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
+    </div>
+  </section>
+
+  <section class="team-section" id="our-team">
+    <div class="team-header">
+      <div class="label-line label reveal">our team</div>
+      <h2 class="display display-lg reveal d1" style="margin-top:24px;">the people behind indéva</h2>
+      <p class="team-intro reveal d2">a small team that stays with your project from the first conversation to the final handover.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal d1" tabindex="0">
+        <div class="team-photo">
+          <!-- Replace this placeholder with: <img src="/project-images-for-website/team-gunjeet.webp" alt="gunjeet singh, chief marketing officer, indéva studio" loading="lazy"> -->
+          <div class="team-placeholder" aria-hidden="true"><span class="team-initials">GS</span><span class="team-ph-note">photo coming soon</span></div>
+          <div class="team-hover"><p>gunjeet leads marketing at indéva: the brand, our content and the campaigns that bring the right clients to the studio. he makes sure every project's story is told the way it was built, with care and honesty.</p></div>
+        </div>
+        <div class="team-name">gunjeet singh</div>
+        <div class="team-role">chief marketing officer</div>
+      </div>
+      <div class="team-card reveal d2" tabindex="0">
+        <div class="team-photo">
+          <!-- Replace this placeholder with: <img src="/project-images-for-website/team-tanvi.webp" alt="tanvi, crm, indéva studio" loading="lazy"> -->
+          <div class="team-placeholder" aria-hidden="true"><span class="team-initials">T</span><span class="team-ph-note">photo coming soon</span></div>
+          <div class="team-hover"><p>tanvi looks after our client relationships. she is your first point of contact, keeping every enquiry, meeting, approval and follow-up on track so nothing slips between the first call and handover.</p></div>
+        </div>
+        <div class="team-name">tanvi</div>
+        <div class="team-role">crm · client relationships</div>
+      </div>
     </div>
   </section>
 
@@ -9777,5 +9829,12 @@ function downloadProcessPDF() {
   </div>
 </div>
 
+<script>
+document.addEventListener('click', function(e){
+  var card = e.target.closest && e.target.closest('.team-card');
+  document.querySelectorAll('.team-card.is-open').forEach(function(c){ if(c!==card) c.classList.remove('is-open'); });
+  if(card) card.classList.toggle('is-open');
+});
+</script>
 </body>
 </html>
