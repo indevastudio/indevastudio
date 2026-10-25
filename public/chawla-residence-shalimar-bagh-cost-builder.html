@@ -628,7 +628,7 @@ const SECTIONS = [
   id:"fees", tab:null, letter:"F", title:"Project Handling", intro:"", hero:[],
   groups:[{note:null, items:[
     {id:"handling", room:"Whole Apartment", name:"Project handling fees — 10% of works (includes design fees)", unit:"lumpsum", qty:1, pct:10, on:true,
-     spec:"Includes design fees (design development, 3D views, working drawings and BOQ), project management and site supervision through to handover, procurement, material handling, loading / unloading and local transport, vendor coordination and quality checks, at 10% of the value of all works switched on. Updates automatically as items are switched on or off. Design fees are included in this; there are no other charges."},
+     spec:"Includes design fees (design development, 3D views, working drawings and BOQ), project management and site supervision through to handover, procurement, material handling, loading / unloading and local transport, vendor coordination and quality checks, at 10% of the value of all works switched on. Updates automatically as items are switched on or off. Design fees are included in this; there are no other charges. Design only: if you would like only the design from us and get it executed by someone else, the design fee is ₹100/sq.ft. of carpet area (approx. ₹1,69,000 for 1,690 sq.ft.)."},
   ]}]
 },
 ];
@@ -779,6 +779,7 @@ function panelOverview(){
       <b>Bedrooms:</b> wardrobe in bedroom 1, walk-in wardrobe units in bedrooms 2, 3 and 4, beds with storage, bedside tables, TV units in bedrooms 3 and 4, dresser and lounge chairs in bedroom 3; servant room bed and wardrobe.<br>
       <b>Bathrooms:</b> three bedroom toilets and the servant toilet fully redone: tile removal, waterproofing, new CPVC plumbing, tile laying, sanitaryware, vanity, mirror, glass partition, moisture-resistant ceiling, exhaust ducting and WPC door.<br>
       <b>Project handling:</b> 10% of the works, including design fees (design development, 3D views, working drawings and BOQ), project management, site supervision, procurement, material handling and transport. No other charges.<br>
+      <b>Design only:</b> if you would like only the design from us and get it executed by someone else, the design fee is ₹100/sq.ft. of carpet area (approx. ₹1,69,000 for 1,690 sq.ft.).<br>
       <b>Not included:</b> GST, tiles (laying only; tiles as per client selection), appliances (ACs, geysers, exhaust fans, chimney, hob, RO and others), mattresses, gas pipeline, decorative light fixtures other than those listed, and civil or structural changes to the layout.</div></div>
     <div class="item"><div class="item-title">Material standards used throughout</div><div class="item-spec" style="margin-bottom:0">
       <b>Boards:</b> HDHMR (Action TESA / Greenpanel) for dry-area carcasses; 18mm BWP ply (Century / Greenply) for wet areas.<br>
@@ -799,7 +800,7 @@ function panelCostSheet(){
     ${rows}
     <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bhawna Chawla · Shalimar Bagh · Revision 1</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
-    <p class="foot-note">Excludes GST, tiles (laying only; tiles as per client selection), appliances (ACs, geysers, exhaust fans, chimney, hob, RO and others), mattresses, gas pipeline, decorative light fixtures other than those listed, and civil or structural changes to the layout. Rates follow the Indéva master BOQ (labour + material); quantities are measured from the plan and will be confirmed on site measurement. Project handling fees are charged at 10% of the works total and include the design fees; there are no other charges. Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
+    <p class="foot-note">Excludes GST, tiles (laying only; tiles as per client selection), appliances (ACs, geysers, exhaust fans, chimney, hob, RO and others), mattresses, gas pipeline, decorative light fixtures other than those listed, and civil or structural changes to the layout. Rates follow the Indéva master BOQ (labour + material); quantities are measured from the plan and will be confirmed on site measurement. Project handling fees are charged at 10% of the works total and include the design fees; there are no other charges. Design only: if you would like only the design from us and get it executed by someone else, the design fee is ₹100/sq.ft. of carpet area (approx. ₹1,69,000 for 1,690 sq.ft.). Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
   </section>`;
 }
 let currentTab='overview', showAllMode=false;
