@@ -74,7 +74,8 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
 .appr .btn{padding:3px 10px;font-size:12px;border-color:var(--in);color:var(--in);background:#fff}
 .appr .btn.confirm{background:var(--in);color:#fff}
 .appr .btn:disabled{opacity:.6;cursor:default}
-.appr .ok{font-size:11.5px;font-weight:700;color:var(--in);white-space:nowrap}
+.appr .ok{font-size:12px;font-weight:700;color:#fff;background:var(--in);border:1px solid var(--in);border-radius:8px;padding:3px 10px;white-space:nowrap;cursor:default}
+.appr .when{font-size:11px;color:var(--muted);white-space:nowrap}
 .appr .chg{font-size:11px;color:var(--out);white-space:nowrap}
 .appr .err{font-size:11px;color:var(--out)}
 .print-head{display:none}
@@ -179,7 +180,7 @@ $("#out").addEventListener("click", async (e) => {
     if (!box.querySelector(".err")) box.insertAdjacentHTML("beforeend", `<span class="err">Could not approve. Please try again.</span>`);
     return;
   }
-  box.innerHTML = `<span class="ok">✓ Approved ${fmtTs(data.approved_at)}</span>${data.mail && data.mail.sent ? `<span class="muted" style="font-size:11px">Confirmation emailed</span>` : ""}`;
+  box.innerHTML = `<button class="ok" type="button" disabled aria-label="Approved">✓ Approved</button><span class="when">${fmtTs(data.approved_at)}${data.mail && data.mail.sent ? " · Confirmation emailed" : ""}</span>`;
 });
 $("#printPdf").addEventListener("click", () => {
   const p = window.__stmtProject;
@@ -218,7 +219,7 @@ function render(s) {
   const dueTag = (i) => (Number(i.due) > 0 ? `<br><span class="due">${Number(i.due) < Number(i.amount) ? "Due " + inr(i.due) : "Due"}</span>` : "");
   const appr = (i) => {
     if (!i.id) return "";
-    if (i.approved_at) return `<div class="appr"><span class="ok">✓ Approved ${fmtTs(i.approved_at)}</span></div>`;
+    if (i.approved_at) return `<div class="appr"><button class="ok" type="button" disabled aria-label="Approved">✓ Approved</button><span class="when">${fmtTs(i.approved_at)}</span></div>`;
     return `<div class="appr">${i.approval_changed ? `<span class="chg">Amount changed, please approve again</span>` : ""}<button class="btn" type="button" data-approve="${esc(i.id)}">Approve</button></div>`;
   };
   const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
