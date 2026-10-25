@@ -70,6 +70,13 @@ details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;
 details.bd th{color:var(--muted);font-weight:600}
 details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
 details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
+.appr{margin-top:5px;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.appr .btn{padding:3px 10px;font-size:12px;border-color:var(--in);color:var(--in);background:#fff}
+.appr .btn.confirm{background:var(--in);color:#fff}
+.appr .btn:disabled{opacity:.6;cursor:default}
+.appr .ok{font-size:11.5px;font-weight:700;color:var(--in);white-space:nowrap}
+.appr .chg{font-size:11px;color:var(--out);white-space:nowrap}
+.appr .err{font-size:11px;color:var(--out)}
 .print-head{display:none}
 @media print{
   @page{size:A4;margin:14mm 12mm}
@@ -93,6 +100,7 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
   thead{display:table-header-group}
   details.bd summary .bd-link{display:none}
   details.bd > :not(summary){display:block}
+  .appr .btn,.appr .chg,.appr .err{display:none}
 }
 </style>
 </head>
@@ -135,6 +143,7 @@ const bdHtml = (b, internal, label) => {
 const inr = (n) => "₹" + Math.round(Number(n || 0)).toLocaleString("en-IN");
 const MODE = { cash: "Cash", upi: "UPI", bank_transfer: "Bank transfer", cheque: "Cheque", card: "Card", other: "Other" };
 const fmtDate = (d) => new Date(d + "T00:00:00Z").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const fmtTs = (t) => new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 
 $("#loginForm").addEventListener("submit", async (e) => {
   e.preventDefault(); $("#loginMsg").textContent = "";
@@ -152,6 +161,25 @@ window.addEventListener("beforeprint", () => {
   if (ph) ph.textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 });
 window.addEventListener("afterprint", () => { openedForPrint.forEach((d) => (d.open = false)); openedForPrint = []; });
+// Approve a billing line: first tap asks to confirm, second tap approves.
+$("#out").addEventListener("click", async (e) => {
+  const b = e.target.closest("button[data-approve]");
+  if (!b || b.disabled) return;
+  if (!b.classList.contains("confirm")) {
+    b.classList.add("confirm"); b.textContent = "Tap to confirm";
+    setTimeout(() => { if (!b.disabled) { b.classList.remove("confirm"); b.textContent = "Approve"; } }, 4000);
+    return;
+  }
+  b.disabled = true; b.textContent = "Approving…";
+  const { data, error } = await sb.rpc("et_client_approve_item", { p_item: b.dataset.approve });
+  const box = b.parentElement;
+  if (error) {
+    b.disabled = false; b.classList.remove("confirm"); b.textContent = "Approve";
+    if (!box.querySelector(".err")) box.insertAdjacentHTML("beforeend", `<span class="err">Could not approve. Please try again.</span>`);
+    return;
+  }
+  box.innerHTML = `<span class="ok">✓ Approved ${fmtTs(data.approved_at)}</span>`;
+});
 $("#printPdf").addEventListener("click", () => {
   const p = window.__stmtProject;
   const prev = document.title;
@@ -187,7 +215,12 @@ function render(s) {
   const received = receipts.reduce((t, r) => t + Number(r.amount || 0), 0), balance = total - received;
   const qty = (i) => (i.qty ? `<div class="muted" style="font-size:12px">${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</div>` : "");
   const dueTag = (i) => (Number(i.due) > 0 ? `<br><span class="due">${Number(i.due) < Number(i.amount) ? "Due " + inr(i.due) : "Due"}</span>` : "");
-  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}</td></tr>`;
+  const appr = (i) => {
+    if (!i.id) return "";
+    if (i.approved_at) return `<div class="appr"><span class="ok">✓ Approved ${fmtTs(i.approved_at)}</span></div>`;
+    return `<div class="appr">${i.approval_changed ? `<span class="chg">Amount changed, please approve again</span>` : ""}<button class="btn" type="button" data-approve="${esc(i.id)}">Approve</button></div>`;
+  };
+  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
   const dueItems = priced.filter((i) => Number(i.due) > 0), dueMarked = dueItems.reduce((t, i) => t + Number(i.due), 0);
   const dueOther = Math.round(balance - dueMarked);
   const p = s.project;

@@ -522,6 +522,9 @@ function itemTags(i) {
   if (i.vendor_status === "advance") t.push(pd > 0 ? "Advance paid " + inr(pd) : "Advance · not yet recorded as paid");
   if (/pending fee/i.test(i.note || "")) t.push("Pending fee");
   if (Number(i.client_due) > 0) t.push(Number(i.client_due) < Number(i.client_amount) ? "Client due " + inr(i.client_due) : "Client due");
+  if (i.client_approved_at && Number(i.client_approved_amount) === Number(i.client_amount)) {
+    t.push(`<span style="color:#2E6A4C">✓ Client approved ${new Date(i.client_approved_at).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}</span>`);
+  } else if (i.client_approved_at) t.push(`<span style="color:#A5432F">Amount changed after client approval</span>`);
   return t.map(billTag).join("");
 }
 const qtyText = (i) => (i.qty ? ` <span class="muted">· ${Number(i.qty)} ${esc(i.unit || "")}${i.rate ? " @ " + inr(i.rate) : ""}</span>` : "");
