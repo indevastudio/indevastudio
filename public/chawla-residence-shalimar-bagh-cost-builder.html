@@ -84,7 +84,7 @@
 
   .showall-bar{
     background:var(--cream); border-bottom:1px solid var(--line);
-    display:flex; justify-content:center; padding:8px 12px;
+    display:flex; justify-content:center; gap:8px; flex-wrap:wrap; padding:8px 12px;
   }
   .showall-btn{
     font-family:'Inter',sans-serif; font-size:12px; font-weight:700;
@@ -318,6 +318,7 @@
 <nav class="tabs" id="tabs"></nav>
 <div class="showall-bar">
   <button class="showall-btn" id="showAllBtn" onclick="toggleShowAll()">☰ Show All Categories</button>
+  <button class="showall-btn" id="designOnlyBtn" onclick="toggleDesignOnly()">✎ Design fees only</button>
 </div>
 
 
@@ -330,10 +331,10 @@
 
 <div class="sticky-total" id="stickyTotal">
   <div>
-    <div class="l">Running total</div>
+    <div class="l" id="stickyLabel">Running total</div>
     <div class="v" id="stickyValue">₹0</div>
   </div>
-  <button onclick="goTo('costsheet')">View cost sheet</button>
+  <button id="stickyBtn" onclick="goTo('costsheet')">View cost sheet</button>
 </div>
 
 <script>
@@ -804,13 +805,43 @@ function panelCostSheet(){
   </section>`;
 }
 let currentTab='overview', showAllMode=false;
+/* Design fees only (no execution): ₹100/sq.ft. of carpet area */
+const DESIGN_AREA=1690, DESIGN_RATE=100, DESIGN_FEE=DESIGN_AREA*DESIGN_RATE;
+let designOnly=false; try{ designOnly = localStorage.getItem(STORAGE_KEY+'_designOnly')==='1'; }catch(e){}
+function toggleDesignOnly(){ designOnly=!designOnly; try{ localStorage.setItem(STORAGE_KEY+'_designOnly', designOnly?'1':'0'); }catch(e){} renderMain(); window.scrollTo({top:0}); }
+function panelDesignOnly(){
+  return `<section class="panel active" id="panel-designonly">
+    <div class="panel-head"><h2>Design Fees Only — No Execution</h2>
+      <p>Only design fees and no execution. Choose this if you would like the design from Indéva Studio and will get the work executed by someone else.</p></div>
+    <div class="cs-group"><table class="cs"><thead><tr><th>Item</th><th>Specification</th><th class="num">Amount</th></tr></thead><tbody>
+      <tr><td><b>Whole Apartment</b> — Design fees<br><span class="csd">${num(DESIGN_AREA)} sq.ft. × ${fmt(DESIGN_RATE)}</span></td>
+        <td class="csd">Design development and space planning, 3D views, working drawings (false ceiling, electrical, plumbing and joinery details) and the BOQ with material specifications, at ₹100/sq.ft. of carpet area.</td>
+        <td class="num">${fmt(DESIGN_FEE)}</td></tr></tbody></table></div>
+    <div class="item"><div class="item-title">Not included</div><div class="item-spec" style="margin-bottom:0">Execution of any kind: materials, labour, woodwork, furniture, site supervision, procurement and project handling. None of the work in the full project estimate is part of this fee.</div></div>
+    <div class="item"><div class="item-title">If Indéva executes the project</div><div class="item-spec" style="margin-bottom:0">No design fee is charged. The 10% project handling in the full estimate already covers the design.</div></div>
+    <div class="grand"><div><div class="label">Design Fees (excl. GST)</div><div class="cap-note">Bhawna Chawla · Shalimar Bagh · Design only, no execution</div></div><div class="value">${fmt(DESIGN_FEE)}</div></div>
+    <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="toggleDesignOnly()">Back to full project estimate</button></div>
+  </section>`;
+}
 function renderMain(){
   const y=window.scrollY;
+  const dbtn=document.getElementById('designOnlyBtn');
+  dbtn.classList.toggle('active', designOnly); dbtn.textContent = designOnly ? '✕ Back to full project estimate' : '✎ Design fees only';
+  document.getElementById('tabs').style.display = designOnly ? 'none' : '';
+  document.getElementById('showAllBtn').style.display = designOnly ? 'none' : '';
+  document.getElementById('stickyLabel').textContent = designOnly ? 'Design fees only (no execution)' : 'Running total';
+  document.getElementById('stickyBtn').style.display = designOnly ? 'none' : '';
+  if(designOnly){
+    document.getElementById('main').innerHTML = panelDesignOnly();
+    document.getElementById('stickyValue').textContent = fmt(DESIGN_FEE);
+    return;
+  }
   document.getElementById('main').innerHTML = panelOverview() + SECTIONS.filter(s=>s.tab).map(renderSection).join('') + renderSection(SECTIONS.find(s=>s.id==='fees')).replace('class="panel"','class="panel" data-hidden="1"') + panelCostSheet();
   document.getElementById('stickyValue').textContent = fmt(grandTotal());
   applyView(false); window.scrollTo(0,y);
 }
 function applyView(scrollTop){
+  if(designOnly) return;
   document.querySelectorAll('section.panel').forEach(p=>{
     const id=p.id.replace('panel-','');
     const show = p.dataset.hidden ? false : (showAllMode ? true : id===currentTab);
