@@ -379,9 +379,16 @@ const STD = {
   channels: "Hettich Quadro full-extension soft-close channels",
 };
 
+const TC=" Market rate — to confirm.";
+const WARD_HW=" Hardware is billed separately (see Wardrobe hardware and Wardrobe fittings below).";
+const WARD_INT=" Inside: 0.8mm inner laminate (white / light oak), 25mm thick shelves on load-bearing spans, adjustable shelf pins, hanging zone with wardrobe tube, loft above with separate shutters.";
 const WARD = {
-  Premium:{rate:1620, spec:STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam), both faces. "+STD.hinges+", Hettich 3-point lock, SS oval wardrobe tube, internal drawers on "+STD.channels+", handles up to ₹500 each."},
-  Standard:{rate:1400, spec:"Carcass: 16.75mm pre-laminated HDHMR (Action TESA / Greenpanel). Shutters: HDF with 1mm high-gloss / matt laminate (Merino / Greenlam). Ozone soft-close hinges and channels, SS wardrobe tube, standard handles. Rate as per Indéva master BOQ (modular woodwork ₹1,400/sq.ft.)."}
+  Laminate:{rate:1400, spec:STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam / Royal Touche) on both faces so the shutter stays flat; matt, suede, textured or high-gloss from the standard range."+WARD_INT+" Rate per sq.ft. of front area."+WARD_HW},
+  Acrylic:{rate:1800, spec:STD.carcass+" Shutters: 18mm HDHMR with 1.2mm acrylic (Rehau / Merino Luxe / Durian) on the front, balancing laminate on the back, laser / ABS edge banding in matching colour; high-gloss or super-matt."+WARD_INT+" Rate per sq.ft. of front area."+WARD_HW},
+  PU:{rate:2200, spec:STD.carcass+" Shutters: 18mm HDHMR in 2K PU paint (ICA / Sirca), sanded and sprayed in 5–6 coats, matt, satin or gloss in any shade; inside face in PU or matching laminate."+WARD_INT+" Rate per sq.ft. of front area."+WARD_HW},
+  "Veneer":{rate:2400, spec:STD.carcass+" Shutters: 18mm HDHMR with natural wood veneer (Greenlam / Century: oak, walnut, teak), PU melamine polish in matt / satin, matching veneer edge."+WARD_INT+" Rate per sq.ft. of front area."+TC+WARD_HW},
+  "Glass + Aluminium Profile":{rate:2500, spec:"Carcass as laminate option with finished inside laminate. Shutters: 45mm anodised aluminium profile (black / champagne / bronze) with 5mm tinted, fluted or frosted glass, with internal LED strip. Best on walk-ins and display sections. Rate per sq.ft. of front area."+TC+WARD_HW},
+  "Fluted / Profile PU":{rate:2600, spec:STD.carcass+" Shutters: 18mm HDHMR with CNC-routed flutes or classic moulded profile, finished in 2K PU paint (ICA / Sirca)."+WARD_INT+" Rate per sq.ft. of front area."+TC+WARD_HW}
 };
 const BED = {
   Premium:{rate:120000, spec:"Frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. Mattress excluded."},
@@ -399,6 +406,8 @@ const PANEL = {
   Premium:{rate:1400, spec:"Veneer / matt PU panelling with 15–25mm metal inlay profiles, on 12mm HDHMR ground. Rate as per Indéva item master."},
   Standard:{rate:700, spec:"Laminate panelling (Merino / Greenlam, 1mm) with V-grooves, on 12mm HDHMR ground. Rate as per Indéva item master."}
 };
+const WALKIN = Object.fromEntries(Object.entries(WARD).map(([k,v])=>[k,{rate:v.rate, spec:"Walk-in units: mix of open shelving, hanging and shuttered sections, finished inside. "+v.spec}]));
+
 const LOOSE = {
   Premium:{rate:1620, spec:"18mm HDHMR carcass, 0.8mm inner laminate, 2mm Rehau edge banding, 1mm laminate / acrylic shutters, Hettich Sensys hinges and Quadro drawers."},
   Standard:{rate:1400, spec:"16.75mm pre-laminated HDHMR carcass, HDF shutters with 1mm laminate, Ozone hardware. Rate as per Indéva master BOQ."}
@@ -584,19 +593,19 @@ const SECTIONS = [
   hero:[],
   groups:[
     {note:"Bedroom 1 — 12'5\" × 9'5\"", items:[
-      {id:"b1ward", room:"Bedroom 1", name:"Wardrobe (6 ft wide × 9 ft high)", unit:"sq.ft.", qty:54, on:true, selected:"Standard", options:WARD},
+      {id:"b1ward", room:"Bedroom 1", name:"Wardrobe (6 ft wide × 9 ft high)", unit:"sq.ft.", qty:54, on:true, selected:"Laminate", options:WARD},
       {id:"b1bed", room:"Bedroom 1", name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b1side", room:"Bedroom 1", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
       {id:"b1tv", room:"Bedroom 1", name:"TV unit with storage", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional", options:BTV},
     ]},
     {note:"Bedroom 2 — 12'5\" × 10'0\", with walk-in (5'1\" × 5'0\")", items:[
-      {id:"b2walk", room:"Bedroom 2 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:80, on:true, selected:"Standard", options:LOOSE},
+      {id:"b2walk", room:"Bedroom 2 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:80, on:true, selected:"Laminate", options:WALKIN},
       {id:"b2bed", room:"Bedroom 2", name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b2side", room:"Bedroom 2", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
       {id:"b2tv", room:"Bedroom 2", name:"TV unit with storage", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional", options:BTV},
     ]},
     {note:"Bedroom 3 — 12'10\" × 11'3\", with walk-in and dresser (5'0\" × 10'7\")", items:[
-      {id:"b3walk", room:"Bedroom 3 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:95, on:true, selected:"Standard", options:LOOSE},
+      {id:"b3walk", room:"Bedroom 3 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:95, on:true, selected:"Laminate", options:WALKIN},
       {id:"b3dress", room:"Bedroom 3 walk-in", name:"Dresser unit with mirror", unit:"No.", qty:1, rate:15000, on:true, src:"Allowance",
        spec:"Dresser with drawers in 18mm HDHMR and 1mm laminate, framed mirror with LED back-light. Allowance."},
       {id:"b3bed", room:"Bedroom 3", name:"Bed — King, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
@@ -606,7 +615,7 @@ const SECTIONS = [
        spec:"Two upholstered lounge chairs and a small side table for the seating corner. Allowance; final as per selection."},
     ]},
     {note:"Bedroom 4 — 12'3\" × 11'6\", with walk-in (5'3\" × 6'0\")", items:[
-      {id:"b4walk", room:"Bedroom 4 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:90, on:true, selected:"Standard", options:LOOSE},
+      {id:"b4walk", room:"Bedroom 4 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:90, on:true, selected:"Laminate", options:WALKIN},
       {id:"b4bed", room:"Bedroom 4", name:"Bed — King, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b4side", room:"Bedroom 4", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
       {id:"b4tv", room:"Bedroom 4", name:"TV unit with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BTV},
@@ -614,8 +623,57 @@ const SECTIONS = [
     {note:"Servant room — 8'6\" × 6'0\"", items:[
       {id:"sbed", room:"Servant room", name:"Single bed with storage", unit:"No.", qty:1, rate:20000, on:true, src:"Allowance",
        spec:"Single bed in 18mm HDHMR with box storage. Mattress excluded. Allowance."},
-      {id:"sward", room:"Servant room", name:"Wardrobe (3 ft wide × 7 ft high)", unit:"sq.ft.", qty:21, rate:1400, on:true,
-       spec:"16.75mm pre-laminated HDHMR carcass, HDF laminate shutters, Ozone hardware. Rate as per Indéva master BOQ."},
+      {id:"sward", room:"Servant room", name:"Wardrobe (3 ft wide × 7 ft high)", unit:"sq.ft.", qty:21, on:true, selected:"Laminate", options:WARD},
+    ]},
+    {note:"Wardrobe hardware — billed separately, choose the brand", items:[
+      {id:"whinge", room:"All wardrobes (approx. 30 shutters)", name:"Soft-close hinges", unit:"pair", qty:42, on:true, selected:"Hettich", options:{
+        Ozone:{rate:250, spec:"Ozone soft-close concealed hinges with plates. Budget option."+TC},
+        Ebco:{rate:320, spec:"Ebco soft-close concealed hinges (Auto-close) with plates."+TC},
+        Hettich:{rate:460, spec:"Hettich Sensys soft-close concealed hinges with mounting plates, Indéva vendor rate. Full-height shutters take 2 pairs, loft shutters 1 pair."},
+        Blum:{rate:750, spec:"Blum Clip-top Blumotion soft-close hinges, tool-free fixing, 3-way adjustment."+TC}}},
+      {id:"wchannel", room:"Wardrobe drawers (bedroom 1: 2, each walk-in: 3)", name:"Drawer channels", unit:"pair", qty:11, on:true, selected:"Hettich telescopic", options:{
+        "Ebco telescopic":{rate:750, spec:"Ebco full-extension soft-close telescopic channels, 450mm."+TC},
+        "Hettich telescopic":{rate:1200, spec:"Hettich full-extension soft-close telescopic channels, 450mm."+TC},
+        "Hettich Quadro (concealed)":{rate:2800, spec:"Hettich Quadro concealed under-mount runners with Silent System, full extension."+TC},
+        "Blum Tandembox":{rate:4500, spec:"Blum Tandembox / Legrabox drawer system with Blumotion, metal sides."+TC}}},
+      {id:"wtube", room:"Bedroom 1: 2, each walk-in: 2, servant: 1", name:"Wardrobe hanging rod", unit:"No.", qty:9, on:true, selected:"SS oval", options:{
+        "SS oval":{rate:450, spec:"Stainless steel oval wardrobe tube with end supports."+TC},
+        "Aluminium anodised":{rate:750, spec:"Anodised aluminium oval rod (black / champagne) with matching supports."+TC},
+        "Rod with LED":{rate:2200, spec:"Aluminium rod with built-in LED and door / motion sensor, lights the hanging zone when opened."+TC}}},
+      {id:"wlock", room:"Main shutters and locker drawers", name:"Locks", unit:"No.", qty:9, on:true, selected:"Hettich", options:{
+        Ebco:{rate:350, spec:"Ebco cam lock with two keys."+TC},
+        Hettich:{rate:650, spec:"Hettich wardrobe / drawer lock, master-key option."+TC},
+        "Digital (locker drawer only)":{rate:4500, spec:"Digital PIN / RFID cabinet lock (Ebco / Hafele), battery operated, priced per lock; usually one per locker drawer."+TC}}},
+      {id:"whandle", room:"Approx. 30 shutters + 11 drawers", name:"Handles", unit:"No.", qty:41, on:true, selected:"Standard", options:{
+        Standard:{rate:350, spec:"Standard SS / aluminium handles, 160–224mm, allowance ₹350 each."},
+        Designer:{rate:750, spec:"Designer handles in brushed brass, matt black or leather-wrapped, up to ₹750 each."+TC},
+        "Long / full-height":{rate:1800, spec:"Full-height or 600–1200mm bar handles for tall shutters (allowance per shutter)."+TC},
+        "Aluminium G / J profile":{rate:550, spec:"Handle-less look with anodised aluminium G- or J-profile along the shutter edge, per shutter equivalent."+TC},
+        "Push-to-open":{rate:900, spec:"Hettich / Blum push-to-open mechanism, no visible handle (per shutter / drawer)."+TC}}},
+    ]},
+    {note:"Wardrobe fittings — optional add-ons, switch on what you want", items:[
+      {id:"wf_trouser", room:"Walk-ins", name:"Trouser pull-out rack", unit:"No.", qty:2, rate:6500, on:false, src:"Optional",
+       spec:"Side-mounted trouser pull-out with soft-close slides and non-slip bars (Hettich / Ebco / Hafele)."+TC},
+      {id:"wf_tie", room:"Walk-ins", name:"Tie & belt organiser pull-out", unit:"No.", qty:2, rate:4500, on:false, src:"Optional",
+       spec:"Side pull-out with hooks for ties, belts and scarves."+TC},
+      {id:"wf_saree", room:"Bedroom 3 walk-in", name:"Saree / dupatta pull-out", unit:"No.", qty:1, rate:6000, on:false, src:"Optional",
+       spec:"Pull-out rack with multiple bars for sarees, on full-extension slides."+TC},
+      {id:"wf_jewel", room:"Bedroom 1 / walk-ins", name:"Jewellery & accessory tray (velvet insert)", unit:"No.", qty:2, rate:3500, on:false, src:"Optional",
+       spec:"Velvet-lined compartment tray for jewellery, watches and glasses, fits a standard drawer."+TC},
+      {id:"wf_mirror", room:"Walk-ins", name:"Pull-out full-length mirror", unit:"No.", qty:2, rate:7500, on:false, src:"Optional",
+       spec:"Swivel pull-out full-length mirror fitted inside a tall section."+TC},
+      {id:"wf_shoe", room:"Walk-ins", name:"Shoe pull-out rack", unit:"No.", qty:2, rate:5500, on:false, src:"Optional",
+       spec:"Tilted / flat shoe pull-out with soft-close slides."+TC},
+      {id:"wf_laundry", room:"Walk-ins", name:"Laundry basket pull-out", unit:"No.", qty:2, rate:4500, on:false, src:"Optional",
+       spec:"Removable laundry bag / wire basket on soft-close slides."+TC},
+      {id:"wf_lift", room:"Bedroom 1 wardrobe", name:"Pull-down wardrobe lift", unit:"No.", qty:1, rate:9500, on:false, src:"Optional",
+       spec:"Pull-down hanging rail for high sections (Hafele / Ebco), gas-assisted."+TC},
+      {id:"wf_led", room:"All wardrobes", name:"LED profile lighting with door sensor", unit:"wardrobe", qty:5, rate:6000, on:false, src:"Optional",
+       spec:"Aluminium LED profile with diffuser on the shelves / hanging zone, driver and door / PIR sensor, per wardrobe."+TC},
+      {id:"wf_sliding", room:"Bedroom 1 wardrobe", name:"Sliding shutter system (instead of hinged)", unit:"set", qty:1, rate:14000, on:false, src:"Optional",
+       spec:"Top-hung soft-close sliding fittings (Hettich TopLine / Ebco) for two sliding shutters; saves door swing in a 9'5\" wide room."+TC},
+      {id:"wf_safe", room:"Bedroom 3 walk-in", name:"Electronic safe built into wardrobe", unit:"No.", qty:1, rate:18000, on:false, src:"Optional",
+       spec:"Godrej / Yale electronic safe, approx. 30 litres, bolted inside a wardrobe section."+TC},
     ]},
   ]
 },
@@ -785,7 +843,7 @@ function panelOverview(){
     <div class="item"><div class="item-title">Material standards used throughout</div><div class="item-spec" style="margin-bottom:0">
       <b>Boards:</b> HDHMR (Action TESA / Greenpanel) for dry-area carcasses; 18mm BWP ply (Century / Greenply) for wet areas.<br>
       <b>Surfaces:</b> 1mm laminate (Merino / Greenlam), 1.2mm acrylic (Rehau / Merino Luxe), 2K PU paint (ICA / Sirca); 2mm PVC edge banding (Rehau).<br>
-      <b>Hardware:</b> Hettich / Ebco (Ozone on Standard woodwork).<br>
+      <b>Hardware:</b> Hettich / Ebco. Wardrobes are priced by shutter finish (laminate ₹1,400, acrylic ₹1,800, PU ₹2,200 per sq.ft.) with hardware billed separately.<br>
       <b>Civil:</b> Saint-Gobain Gyproc ceilings, Dr. Fixit waterproofing, Asian Paints Royale / Dulux / Berger Silk. <b>Sanitaryware:</b> Jaquar. <b>Lighting:</b> Philips.</div></div>
   </section>`;
 }
