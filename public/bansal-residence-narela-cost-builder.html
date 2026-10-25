@@ -308,7 +308,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Bansal Residence, Narela — Ground Floor Interiors</h1>
-  <p>Revision 7 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Revision 8 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -669,8 +669,8 @@ const SECTIONS = [
 {
   id:"design", tab:null, letter:"G", title:"Site Expenses, Handling & Design Fees", intro:"", hero:[],
   groups:[{note:null, items:[
-    {id:"siteexp", room:"Whole Ground Floor", name:"Site expenses — 2% of works", unit:"lumpsum", qty:1, pct:2, on:true,
-     spec:"Site protection, casual labour and regular site cleaning, at 2% of the value of all works switched on (design fee excluded). Updates automatically as items are switched on or off."},
+    {id:"siteexp", room:"Whole Ground Floor", name:"Site expenses — 5% of works", unit:"lumpsum", qty:1, pct:5, on:true,
+     spec:"Site protection, casual labour and regular site cleaning, at 5% of the value of all works switched on (design fee excluded). Updates automatically as items are switched on or off."},
     {id:"handling", room:"Whole Ground Floor", name:"Handling fees — 5% of works", unit:"lumpsum", qty:1, pct:5, on:true,
      spec:"Procurement, material handling, loading / unloading and local transport of all materials and factory-made items, vendor coordination and quality checks, at 5% of the value of all works switched on (design fee excluded). Updates automatically as items are switched on or off."},
     {id:"designexec", room:"Whole Ground Floor", name:"Design Fees", unit:"lumpsum", qty:1, rate:75000, on:true, src:"Agreed",
@@ -795,7 +795,7 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
-    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bansal Residence, Narela · Ground Floor · Revision 7</div></div><div class="value">${fmt(grandTotal())}</div></div>
+    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bansal Residence, Narela · Ground Floor · Revision 8</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
     <p class="foot-note">Excludes GST, civil and masonry work beyond the listed wall alterations, new bathroom and closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, light fixtures other than the Philips lighting listed, tiles (laying only; tiles as per client selection), feature walls and bed-back wall, door polishing, appliances (including exhaust fans), the dining table, and front porch work. POP false ceiling (₹160/sq.ft.), cove patta (₹100/rft), new electrical wiring (₹180/sq.ft.), POP punning (₹45/sq.ft.) and paint (₹45/sq.ft.) are at agreed rates; other ceiling-to-floor civil, tiling, waterproofing, plumbing and woodwork rates follow the Indéva master BOQ (labour + material). Quantities are measured from the plan and will be confirmed on site measurement. Site expenses are charged at 2% and handling fees at 5% of the works total (design fee excluded). Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
   </section>`;
