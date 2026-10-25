@@ -78,6 +78,7 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
 .appr .when{font-size:11px;color:var(--muted);white-space:nowrap}
 .appr .chg{font-size:11px;color:var(--out);white-space:nowrap}
 .appr .err{font-size:11px;color:var(--out)}
+details.bd td.blurred{filter:blur(4px);user-select:none;-webkit-user-select:none;pointer-events:none}
 .print-head{display:none}
 @media print{
   @page{size:A4;margin:14mm 12mm}
@@ -133,10 +134,10 @@ const sb = supabase.createClient("https://rolarfaotykmprzvcmgh.supabase.co",
 AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const bdHtml = (b, internal, label) => {
+const bdHtml = (b, internal, label, locked) => {
   if (!b || !Array.isArray(b.sections) || !b.sections.length) return "";
   const n = b.sections.reduce((t, s) => t + (s.rows || []).length, 0);
-  const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  const sec = (s) => `<h4>${esc(s.name)}</h4><table><thead><tr>${(s.cols || []).map((c) => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${(s.rows || []).map((r) => `<tr>${r.map((c, k) => `<td${locked && k > 0 ? ' class="blurred" aria-label="hidden until approval"' : ""}>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
   const list = (h, a) => (a && a.length ? `<h4>${h}</h4><ul>${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
   if (!label) return "";
   return `<details class="bd"><summary><span class="bd-label">${label}</span> <span class="bd-link">View ${esc(b.title || "breakdown")} · ${n} items</span></summary>${b.sections.map(sec).join("")}${internal ? list("Pending points (internal)", b.pending) + list("Verify before procurement (internal)", b.notes) : ""}</details>`;
@@ -225,7 +226,7 @@ function render(s) {
     return `<div class="appr">${i.approval_changed ? `<span class="chg">Amount changed, please approve again</span>` : ""}<button class="btn" type="button" data-approve="${esc(i.id)}">Approve</button></div>`;
   };
   const lockNote = (i) => (i.breakdown_locked ? `<div class="muted" style="font-size:12px;margin-top:3px">🔒 Detailed areas will be shown once you approve this bill.</div>` : "");
-  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}${lockNote(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
+  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item), i.breakdown_locked) : esc(i.item)}${qty(i)}${lockNote(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
   const dueItems = priced.filter((i) => Number(i.due) > 0), dueMarked = dueItems.reduce((t, i) => t + Number(i.due), 0);
   const dueOther = Math.round(balance - dueMarked);
   const p = s.project;
