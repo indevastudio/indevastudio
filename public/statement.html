@@ -171,14 +171,15 @@ $("#out").addEventListener("click", async (e) => {
     return;
   }
   b.disabled = true; b.textContent = "Approving…";
-  const { data, error } = await sb.rpc("et_client_approve_item", { p_item: b.dataset.approve });
+  // Records the approval and emails the client a confirmation.
+  const { data, error } = await sb.functions.invoke("client-approve", { body: { item_id: b.dataset.approve } });
   const box = b.parentElement;
-  if (error) {
+  if (error || !data || !data.ok) {
     b.disabled = false; b.classList.remove("confirm"); b.textContent = "Approve";
     if (!box.querySelector(".err")) box.insertAdjacentHTML("beforeend", `<span class="err">Could not approve. Please try again.</span>`);
     return;
   }
-  box.innerHTML = `<span class="ok">✓ Approved ${fmtTs(data.approved_at)}</span>`;
+  box.innerHTML = `<span class="ok">✓ Approved ${fmtTs(data.approved_at)}</span>${data.mail && data.mail.sent ? `<span class="muted" style="font-size:11px">Confirmation emailed</span>` : ""}`;
 });
 $("#printPdf").addEventListener("click", () => {
   const p = window.__stmtProject;
