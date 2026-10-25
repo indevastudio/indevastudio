@@ -181,6 +181,8 @@ $("#out").addEventListener("click", async (e) => {
     return;
   }
   box.innerHTML = `<button class="ok" type="button" disabled aria-label="Approved">✓ Approved</button><span class="when">${fmtTs(data.approved_at)}${data.mail && data.mail.sent ? " · Confirmation emailed" : ""}</span>`;
+  // A bill whose areas were held back until approval: reload so the areas appear now.
+  if (data.unlocked) setTimeout(load, 1200);
 });
 $("#printPdf").addEventListener("click", () => {
   const p = window.__stmtProject;
@@ -222,7 +224,8 @@ function render(s) {
     if (i.approved_at) return `<div class="appr"><button class="ok" type="button" disabled aria-label="Approved">✓ Approved</button><span class="when">${fmtTs(i.approved_at)}</span></div>`;
     return `<div class="appr">${i.approval_changed ? `<span class="chg">Amount changed, please approve again</span>` : ""}<button class="btn" type="button" data-approve="${esc(i.id)}">Approve</button></div>`;
   };
-  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
+  const lockNote = (i) => (i.breakdown_locked ? `<div class="muted" style="font-size:12px;margin-top:3px">🔒 Detailed areas will be shown once you approve this bill.</div>` : "");
+  const row = (i) => `<tr class="${Number(i.due) > 0 ? "duerow" : ""}"><td>${i.breakdown ? bdHtml(i.breakdown, false, esc(i.item)) : esc(i.item)}${qty(i)}${lockNote(i)}</td><td class="r">${inr(i.amount)}${dueTag(i)}${appr(i)}</td></tr>`;
   const dueItems = priced.filter((i) => Number(i.due) > 0), dueMarked = dueItems.reduce((t, i) => t + Number(i.due), 0);
   const dueOther = Math.round(balance - dueMarked);
   const p = s.project;
