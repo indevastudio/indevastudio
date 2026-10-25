@@ -70,6 +70,30 @@ details.bd th,details.bd td{border-bottom:1px solid var(--line);padding:4px 4px;
 details.bd th{color:var(--muted);font-weight:600}
 details.bd td:last-child,details.bd th:last-child{text-align:right;white-space:nowrap}
 details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)}
+.print-head{display:none}
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  html,body{background:#fff}
+  body{font-size:12px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  header{display:none}
+  main{max-width:none;padding:0}
+  .print-head{display:block;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px}
+  .print-head .ph-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+  .print-head b{font-size:20px;font-weight:800}
+  .print-head .ph-meta{font-size:11px;color:var(--muted);text-align:right}
+  .print-head .ph-addr{font-size:11px;color:var(--muted);margin-top:2px}
+  .card{border:1px solid var(--line);border-radius:6px;padding:12px;margin-bottom:12px;break-inside:auto}
+  .card h2{font-size:16px;break-after:avoid}
+  .card:last-child{break-inside:avoid}
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .kpis b{font-size:16px}
+  .scroll{overflow:visible}
+  table{font-size:12px}
+  tr,details.bd table tr{break-inside:avoid}
+  thead{display:table-header-group}
+  details.bd summary .bd-link{display:none}
+  details.bd > :not(summary){display:block}
+}
 </style>
 </head>
 <body>
@@ -87,6 +111,7 @@ details.bd ul{margin:4px 0 0;padding-left:18px;font-size:12px;color:var(--muted)
 <div id="app" hidden>
   <header><div class="top">
     <div class="brand">Indeva Studio<small id="who"></small></div>
+    <button class="btn small primary" id="printPdf" title="Download as PDF or print">PDF / Print</button>
     <button class="btn small" id="refresh">Refresh</button>
     <button class="btn small" id="signOut">Sign out</button>
   </div></header>
@@ -118,6 +143,22 @@ $("#loginForm").addEventListener("submit", async (e) => {
 });
 $("#signOut").addEventListener("click", () => sb.auth.signOut());
 $("#refresh").addEventListener("click", load);
+// PDF / Print: open every breakdown so the printed copy shows the full detail, then restore.
+let openedForPrint = [];
+window.addEventListener("beforeprint", () => {
+  openedForPrint = [...document.querySelectorAll("details.bd:not([open])")];
+  openedForPrint.forEach((d) => (d.open = true));
+  const ph = document.querySelector(".print-head .ph-date");
+  if (ph) ph.textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+});
+window.addEventListener("afterprint", () => { openedForPrint.forEach((d) => (d.open = false)); openedForPrint = []; });
+$("#printPdf").addEventListener("click", () => {
+  const p = window.__stmtProject;
+  const prev = document.title;
+  if (p) document.title = `Indeva Studio - ${p.name} - Statement`;
+  window.print();
+  setTimeout(() => (document.title = prev), 1000);
+});
 sb.auth.onAuthStateChange((_e, session) => {
   $("#login").hidden = !!session; $("#app").hidden = !session;
   if (session) { $("#who").textContent = session.user.email; load(); }
@@ -128,7 +169,11 @@ async function load() {
   const { data, error } = await sb.rpc("et_client_statement");
   if (error) { $("#out").innerHTML = `<div class="empty">Could not load your statement. Please try again.</div>`; return; }
   if (!data || !data.length) { $("#out").innerHTML = `<div class="empty">No project is linked to this account yet. Please contact Indeva Studio at hello@indevastudio.com.</div>`; return; }
-  $("#out").innerHTML = data.map(render).join("");
+  window.__stmtProject = data[0] && data[0].project;
+  const today = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  const printHead = `<div class="print-head"><div class="ph-top"><div><b>Indeva Studio</b><div class="ph-addr">34/11, Lampur, Narela, Delhi – 110040 · GSTIN 07KJDPS5276J1ZG · hello@indevastudio.com</div></div>
+    <div class="ph-meta">Project statement<br>As on <span class="ph-date">${today}</span></div></div></div>`;
+  $("#out").innerHTML = printHead + data.map(render).join("");
 }
 
 function render(s) {
