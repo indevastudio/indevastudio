@@ -130,5 +130,66 @@ function build() {
   }
 }
 
+// ── Our Team: render the cards on /about from content/team.json into site-app.html ──
+// Edit content/team.json (names, roles, descriptions, photo file, crop focus), then run this script.
+const TEAM_JSON = path.join(ROOT, 'content', 'team.json');
+const TEAM_IMG_DIR = '/project-images-for-website/team/';
+function renderTeam() {
+  if (!fs.existsSync(TEAM_JSON)) return;
+  const { members } = JSON.parse(fs.readFileSync(TEAM_JSON, 'utf8'));
+  const h = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const initials = n => n.replace(/^(Ar|Er|Dr)\.\s+/, '').split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+  let sizeOf = () => null;
+  try { // webp/png/jpeg dimensions without dependencies, so the browser can reserve space
+    sizeOf = file => {
+      const b = fs.readFileSync(file);
+      if (b.toString('ascii', 0, 4) === 'RIFF') {
+        const c = b.toString('ascii', 12, 16);
+        if (c === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+        if (c === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+        if (c === 'VP8L') { const n = b.readUInt32LE(21); return [1 + (n & 0x3fff), 1 + ((n >> 14) & 0x3fff)]; }
+      }
+      if (b.readUInt32BE(0) === 0x89504e47) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+      return null;
+    };
+  } catch (e) {}
+  const cards = members.map((m, i) => {
+    const id = 'team-' + m.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    let media;
+    if (m.photo) {
+      const file = path.join(ROOT, TEAM_IMG_DIR.slice(1), m.photo);
+      if (!fs.existsSync(file)) throw new Error(`team.json: photo not found for ${m.name}: ${file}`);
+      const dim = sizeOf(file);
+      media = `<img src="${TEAM_IMG_DIR}${h(m.photo)}" alt="${h(m.name)}, ${h(m.role)} at indéva studio"${dim ? ` width="${dim[0]}" height="${dim[1]}"` : ''} loading="lazy" decoding="async" style="object-position:${h(m.focus || 'center 20%')};">`;
+    } else {
+      media = `<div class="team-initials" aria-hidden="true">${h(initials(m.name))}</div>`;
+    }
+    return `      <li class="team-card reveal d${(i % 3) + 1}">
+        <article class="team-card-inner" tabindex="0" aria-labelledby="${id}" aria-describedby="${id}-desc">
+          <div class="team-media">
+            ${media}
+            <div class="team-overlay" aria-hidden="true">
+              <div class="team-ov-name">${h(m.name)}</div>
+              <div class="team-ov-role">${h(m.role)}</div>
+              <p class="team-ov-desc">${h(m.desc)}</p>
+            </div>
+          </div>
+          <div class="team-meta">
+            <h3 class="team-name" id="${id}">${h(m.name)}</h3>
+            <div class="team-role">${h(m.role)}</div>
+            <p class="team-desc" id="${id}-desc">${h(m.desc)}</p>
+          </div>
+        </article>
+      </li>`;
+  }).join('\n');
+  const src = fs.readFileSync(SRC, 'utf8');
+  const re = /(<!-- TEAM:START -->)[\s\S]*?(\n\s*<!-- TEAM:END -->)/;
+  if (!re.test(src)) throw new Error('site-app.html: TEAM:START / TEAM:END markers not found');
+  const out = src.replace(re, (_, a, b) => `${a}\n    <ul class="team-grid">\n${cards}\n    </ul>${b}`);
+  if (out !== src) fs.writeFileSync(SRC, out);
+  console.log(`  team section     ${members.length} members (${members.filter(m => m.photo).length} with photos)`);
+}
+
+renderTeam();
 build();
 console.log('pages built from site-app.html');
