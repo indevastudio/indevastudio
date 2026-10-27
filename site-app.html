@@ -1265,6 +1265,25 @@ nav.solid {
   color: var(--white-muted);
 }
 
+/* ── ABOUT · WHY INDÉVA ── */
+.about-why { padding-left: 60px; padding-right: 60px; padding-bottom: 70px; border-bottom: 1px solid var(--line); }
+.about-why-top { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: end; padding-top: 60px; margin-bottom: 48px; }
+.about-why-text { font-family: var(--serif); font-size: clamp(0.98rem, 1.25vw, 1.12rem); font-weight: 300; line-height: 1.75; color: var(--white-dim); max-width: 620px; }
+.about-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+.about-why-item { background: var(--black-2); padding: 26px 24px 28px; }
+.about-why-num { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.15em; color: var(--gold-dim); margin-bottom: 14px; }
+.about-why-title { font-family: var(--serif); font-size: 1rem; font-weight: 400; line-height: 1.3; color: var(--white); margin-bottom: 8px; }
+.about-why-desc { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; line-height: 1.7; color: var(--white-muted); }
+@media (max-width: 1024px) {
+  .about-why { padding-left: 32px; padding-right: 32px; padding-bottom: 56px; }
+  .about-why-top { grid-template-columns: 1fr; gap: 20px; padding-top: 48px; margin-bottom: 36px; }
+  .about-why-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .about-why { padding-left: 20px; padding-right: 20px; }
+  .about-why-grid { grid-template-columns: 1fr; }
+}
+
 /* ── ABOUT · FIVE PILLARS, compact ── */
 .philosophy-section { padding: 80px 60px; }
 .pillar-card { padding: 30px 24px 32px; }
@@ -4125,9 +4144,37 @@ img {
 ══════════════════════════════════ -->
 <div class="page" id="about">
 
-  <!-- page heading for search engines and screen readers (visual intro removed) -->
-  <section class="pt-nav">
-    <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">about indéva studio — architecture-led interior design and execution, delhi</h2>
+  <!-- ── WHY INDÉVA (top of about) ── -->
+  <section class="about-why pt-nav">
+    <div class="about-why-top">
+      <div>
+        <div class="label-line label reveal">about indéva</div>
+        <h2 class="display display-md reveal d1" style="margin-top:20px;">why indéva <em class="italic gold">started.</em></h2>
+      </div>
+      <p class="about-why-text reveal d2">too many homes are designed in one place and built in another. the drawings promise one thing, the site delivers something else, and the client is left in between. arpit saini grew up around construction, in a family that has been building since 1939, and started indéva studio to close that gap: one studio that designs the space and stays accountable for how it is built.</p>
+    </div>
+    <div class="about-why-grid">
+      <div class="about-why-item reveal">
+        <div class="about-why-num">01</div>
+        <div class="about-why-title">design and execution, one team</div>
+        <p class="about-why-desc">the same studio plans, draws, sources and builds. no handoffs, and no blame between designer and contractor.</p>
+      </div>
+      <div class="about-why-item reveal d1">
+        <div class="about-why-num">02</div>
+        <div class="about-why-title">architecture leads</div>
+        <p class="about-why-desc">every interior starts from the plan: light, movement and structure come before finishes.</p>
+      </div>
+      <div class="about-why-item reveal d2">
+        <div class="about-why-num">03</div>
+        <div class="about-why-title">furniture made for the room</div>
+        <p class="about-why-desc">custom furniture and joinery designed in-house and sized to the space, not picked from a catalogue.</p>
+      </div>
+      <div class="about-why-item reveal d3">
+        <div class="about-why-num">04</div>
+        <div class="about-why-title">honest numbers, early</div>
+        <p class="about-why-desc">budgets, risks and timelines are discussed upfront, with itemised estimates you can see and approve.</p>
+      </div>
+    </div>
   </section>
 
   <section class="founder-section">
