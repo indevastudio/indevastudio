@@ -312,7 +312,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Chawla Residence, Shalimar Bagh — Complete Interiors</h1>
-  <p>Revision 1 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Revision 2 — detailed scope of work with Indéva rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -466,12 +466,12 @@ const SECTIONS = [
        spec:"Fibreglass mesh in aluminium sliding / fixed frame, fixed to the existing window frames. Approx. 150 sq.ft. across the bedroom, kitchen and bathroom windows; count to be confirmed on site."},
       {id:"meshdoor", room:"Living → veranda", name:"Mesh door", unit:"No.", qty:1, rate:7500, on:true,
        spec:"Fibreglass mesh on hinged aluminium shutters for the living-room door to the veranda."},
-      {id:"ctrack", room:"6 openings", name:"Curtain tracks — double (blackout + sheer)", unit:"openings", qty:6, on:true, selected:"Standard", src:"Market rate · to confirm",
+      {id:"ctrack", room:"Dining area + mandir room", name:"Curtain tracks — double (blackout + sheer)", unit:"openings", qty:2, on:true, selected:"Standard", src:"Market rate · to confirm",
        options:{
         Premium:{rate:38000, spec:"Smart motorised double track (Dooya / Somfy), 2 motors per opening, app and remote control, Alexa / Google compatible."},
-        Standard:{rate:6500, spec:"Manual aluminium double track with gliders and end brackets. Openings: living-room veranda door and window, one window in each bedroom."}
+        Standard:{rate:6500, spec:"Manual aluminium double track with gliders and end brackets. Two openings only: the dining area and the mandir room (the other rooms have no windows)."}
        }},
-      {id:"cfabric", room:"6 openings", name:"Curtain fabric — blackout + sheer, stitched", unit:"openings", qty:6, rate:14000, on:true, src:"Allowance",
+      {id:"cfabric", room:"Dining area + mandir room", name:"Curtain fabric — blackout + sheer, stitched", unit:"openings", qty:2, rate:14000, on:true, src:"Allowance",
        spec:"Blackout curtain with lining + sheer, ripple-fold stitched, average opening 6 ft wide × 9 ft drop. Fabric from the standard range (D'Decor / Sarom); final per selection."},
       {id:"kblind", room:"Kitchen window", name:"Roller blind", unit:"No.", qty:1, rate:4500, on:true, src:"Allowance",
        spec:"Sunscreen / blackout roller blind for the kitchen window, easy to wipe clean. Size to confirm on site."},
@@ -488,11 +488,6 @@ const SECTIONS = [
   hero:[],
   groups:[
     {note:"Living & dining", items:[
-      {id:"ltv", room:"Living", name:"TV + Storage Unit", unit:"lumpsum", qty:1, on:true, selected:"Standard",
-       options:{
-        Premium:{rate:150000, spec:"Ceiling-height storage both sides of the TV. "+STD.carcass+" Shutters: 1.2mm acrylic (Rehau / Merino Luxe). Fluted TV back panel, wall-hung console with 2 drawers (Hettich Quadro), Hettich Sensys hinges, Philips LED profile."},
-        Standard:{rate:75000, spec:"Wall-mounted TV console with back panel. 18mm HDHMR carcass, 1mm laminate (Merino / Greenlam), 2 drawers on Hettich Quadro, Hettich Sensys hinges. Rate as per Indéva master BOQ reference (drawing room TV unit)."}
-       }},
       {id:"sofa", room:"Living", name:"Sofa set for 7 (3 + 2 + 2)", unit:"set", qty:1, on:true, selected:"Standard",
        options:{
         Premium:{rate:151480, spec:"Kiln-dried hardwood frame, 40-density HR foam with fibre wrap, no-sag springs, fabric from the standard range (D'Decor / Sarom). 7 seats at ₹21,640 per seat."},
@@ -503,10 +498,10 @@ const SECTIONS = [
         Premium:{rate:40000, spec:"Marble / sintered-stone top on powder-coated MS frame."},
         Standard:{rate:25000, spec:"Laminate top on 18mm HDHMR, powder-coated MS frame."}
        }},
-      {id:"dining", room:"Dining", name:"Dining table with 6 chairs", unit:"set", qty:1, on:true, selected:"Standard", src:"Allowance",
+      {id:"dining", room:"Dining", name:"Dining chairs (to go with your existing table)", unit:"No.", qty:6, on:true, selected:"Standard", src:"Allowance",
        options:{
-        Premium:{rate:110000, spec:"Marble / sintered-stone top on a solid-wood or metal base, 6 upholstered chairs in solid wood. Allowance; final as per selection."},
-        Standard:{rate:60000, spec:"Engineered-wood table with veneer / laminate top, 6 upholstered chairs. Allowance; final as per selection."}
+        Premium:{rate:14000, spec:"Solid-wood upholstered dining chair, fabric or leatherette from the standard range, matched to your existing table. Price per chair; allowance, final as per selection."},
+        Standard:{rate:8000, spec:"Engineered-wood upholstered dining chair, fabric from the standard range, matched to your existing table. Price per chair; allowance, final as per selection."}
        }},
       {id:"crock", room:"Dining", name:"Crockery / display unit (6 ft × 7 ft)", unit:"sq.ft.", qty:42, on:false, selected:"Standard", src:"Optional",
        options:{
@@ -596,13 +591,11 @@ const SECTIONS = [
       {id:"b1ward", room:"Bedroom 1", name:"Wardrobe (6 ft wide × 9 ft high)", unit:"sq.ft.", qty:54, on:true, selected:"Laminate", options:WARD},
       {id:"b1bed", room:"Bedroom 1", name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b1side", room:"Bedroom 1", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
-      {id:"b1tv", room:"Bedroom 1", name:"TV unit with storage", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional", options:BTV},
     ]},
     {note:"Bedroom 2 — 12'5\" × 10'0\", with walk-in (5'1\" × 5'0\")", items:[
       {id:"b2walk", room:"Bedroom 2 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:80, on:true, selected:"Laminate", options:WALKIN},
       {id:"b2bed", room:"Bedroom 2", name:"Bed — Queen, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b2side", room:"Bedroom 2", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
-      {id:"b2tv", room:"Bedroom 2", name:"TV unit with storage", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional", options:BTV},
     ]},
     {note:"Bedroom 3 — 12'10\" × 11'3\", with walk-in and dresser (5'0\" × 10'7\")", items:[
       {id:"b3walk", room:"Bedroom 3 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:95, on:true, selected:"Laminate", options:WALKIN},
@@ -610,7 +603,6 @@ const SECTIONS = [
        spec:"Dresser with drawers in 18mm HDHMR and 1mm laminate, framed mirror with LED back-light. Allowance."},
       {id:"b3bed", room:"Bedroom 3", name:"Bed — King, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b3side", room:"Bedroom 3", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
-      {id:"b3tv", room:"Bedroom 3", name:"TV unit with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BTV},
       {id:"b3chairs", room:"Bedroom 3", name:"Lounge chairs (pair) with side table", unit:"set", qty:1, rate:28000, on:true, src:"Allowance",
        spec:"Two upholstered lounge chairs and a small side table for the seating corner. Allowance; final as per selection."},
     ]},
@@ -618,7 +610,6 @@ const SECTIONS = [
       {id:"b4walk", room:"Bedroom 4 walk-in", name:"Walk-in wardrobe units (open + shuttered)", unit:"sq.ft.", qty:90, on:true, selected:"Laminate", options:WALKIN},
       {id:"b4bed", room:"Bedroom 4", name:"Bed — King, upholstered with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BED},
       {id:"b4side", room:"Bedroom 4", name:"Bedside tables (pair)", unit:"set", qty:1, on:true, selected:"Standard", options:SIDE},
-      {id:"b4tv", room:"Bedroom 4", name:"TV unit with storage", unit:"No.", qty:1, on:true, selected:"Standard", options:BTV},
     ]},
     {note:"Servant room — 8'6\" × 6'0\"", items:[
       {id:"sbed", room:"Servant room", name:"Single bed with storage", unit:"No.", qty:1, rate:20000, on:true, src:"Allowance",
@@ -736,8 +727,67 @@ SECTIONS.find(s=>s.id==="baths").groups = [
   bathGroup("ts", "Servant toilet", 30, 148, 54, {note:"Servant toilet — 8'6\" × 3'6\"", basic:true}),
 ];
 
-const HERO_MAP = {"house": ["ceiling", "lobby", "panelling"], "living": ["tvunit", "living", "living2", "dining", "foyer"], "kitchen": ["kitchen1", "kitchen2", "kitchen3", "utility"], "bedrooms": ["mbed", "wardin", "mtv", "mbed2", "vkbed", "vkwall", "kidsbed"], "baths": ["bath1", "bath2"]};
-const ITEM_IMG = {"ceil0": "ceiling", "covepatta": "lobby", "cove": "lobby", "spots": "lobby", "ltv": "tvunit", "sofa": "living", "coffee": "coffee", "dining": "dining", "crock": "sideboard", "lpanel": "panelling", "shoe": "foyer", "washcab": "utility", "kcab": "kitchen2", "granite": "kitchen1", "kled": "kitchen3", "b1ward": "wardentry", "b1bed": "vkbed", "b1tv": "vktv", "b2walk": "wardin", "b2bed": "kidsbed", "b2tv": "mtv", "b3walk": "wardin", "b3bed": "mbed", "b3tv": "mtv", "b3chairs": "lounge", "b4walk": "wardin", "b4bed": "mbed2", "b4tv": "mtv", "t2van": "bath1", "t3van": "bath1", "t4van": "bath1", "t2glass": "bath2", "t3glass": "bath2", "t4glass": "bath2"};
+// ── Re-organise every item by TRADE (civil, woodwork, …) so each trade has its own tab and subtotal.
+// Items are defined above by room; this regroups them without changing any rate.
+const TRADES = [
+  {id:"civil", tab:"Civil Work", letter:"A", title:"Civil Work — Flooring, Tiling, Waterproofing, Plumbing & Stone",
+   intro:"All civil and wet work: tile and stone laying, removal of old tiles, bathroom waterproofing and plaster base, plumbing lines, the kitchen counter and duct opening, and debris removal. Tiles are laid by us; the tiles themselves are as per your selection and not included."},
+  {id:"wood", tab:"Woodwork", letter:"B", title:"Woodwork — Kitchen, Wardrobes, Mandir, Doors & Built-ins",
+   intro:"Everything made in board and wood: the modular kitchen and its hardware, wardrobes and walk-ins with their hardware and fittings, the mandir unit and jaali, shoe and utility cabinets, the driver's bench, vanities and all doors. No TV units: the TVs are wall-mounted as shown in the layout."},
+  {id:"ceil", tab:"Ceiling & Paint", letter:"C", title:"False Ceiling, Cove & Paint",
+   intro:"POP false ceiling with cove patta in the living, dining and bedrooms, moisture-resistant ceilings in the kitchen and bathrooms, POP punning on the walls and paint on walls and ceilings."},
+  {id:"elec", tab:"Electrical & Lighting", letter:"D", title:"Electrical & Lighting",
+   intro:"New wiring throughout, modular switches, DB and MCBs, Philips cove and spot lighting, fans, outdoor lights, kitchen under-cabinet lighting and bathroom exhaust ducting."},
+  {id:"furn", tab:"Furniture & Furnishings", letter:"E", title:"Furniture, Curtains & Furnishings",
+   intro:"Loose furniture and furnishings: sofa, coffee table, dining chairs (your existing dining table stays), beds, bedside tables, lounge chairs, curtains for the dining area and mandir room only, the kitchen blind and mosquito mesh."},
+  {id:"fit", tab:"Sanitaryware & Fittings", letter:"F", title:"Sanitaryware & Fittings",
+   intro:"Jaquar sanitaryware for the three bedroom toilets, a basic set for the servant toilet, mirrors, glass shower partitions and the kitchen sink with mixer."},
+];
+function tradeOf(it, sec, g){
+  const id = it.id, n = g.note || "";
+  const bath = /^t[234s]/.test(id) && sec.id==="baths";
+  if(id==="handling") return ["fees", null];
+  if(bath){
+    const t = id.replace(/^t[234s]/,"");
+    if(["strip","base","wp","tile","plumb","debris"].includes(t)) return ["civil", n];
+    if(t==="ceil") return ["ceil", "Bathroom ceilings — moisture-resistant"];
+    if(t==="exh") return ["elec", "Bathroom exhaust"];
+    if(t==="van"||t==="door") return ["wood", "Bathroom vanities & doors"];
+    return ["fit", n];
+  }
+  const CIVIL = ["floor","skirting","floorremove","floordebris","mandirfloor","dado","granite","chimney","washplumb","kplumb"];
+  const CEIL  = ["ceilwet","covepatta","punning","paint"];
+  const ELEC  = ["elec","switches","cove","spots","fans","verlights","kled"];
+  const FURN  = ["sofa","coffee","dining","lart","b1bed","b2bed","b3bed","b4bed","b1side","b2side","b3side","b4side","b3chairs","sbed"];
+  const DRESS = ["ctrack","cfabric","kblind","mesh","meshdoor"];
+  if(CIVIL.includes(id)) return ["civil", sec.id==="house" ? n : (sec.id==="kitchen" ? "Kitchen — counter, dado, plumbing & duct" : (id==="mandirfloor" ? "Mandir room" : "Washing area"))];
+  if(id.startsWith("ceil") || CEIL.includes(id)) return ["ceil", /paint/i.test(n) ? n : "False ceiling & cove patta"];
+  if(ELEC.includes(id)) return ["elec", "Wiring, switches, lighting & fans"];
+  if(FURN.includes(id)) return ["furn", sec.id==="living" ? "Living & dining" : "Bedrooms & servant room"];
+  if(DRESS.includes(id)) return ["furn", "Curtains, blinds & mesh"];
+  if(id==="sink") return ["fit", "Kitchen"];
+  if(id==="rdoors"||id==="maindoor") return ["wood", "Doors"];
+  if(sec.id==="kitchen") return ["wood", /Hardware/.test(n) ? "Kitchen — hardware (Hettich / Ebco)" : "Kitchen — cabinetry (rate per sq.ft. of front area, hardware extra)"];
+  return ["wood", n];
+}
+(function regroup(){
+  const buckets = {}; TRADES.forEach(t=>buckets[t.id]=[]);
+  let fees = null;
+  SECTIONS.forEach(sec=>sec.groups.forEach(g=>g.items.forEach(it=>{
+    const [tr, label] = tradeOf(it, sec, g);
+    if(tr==="fees"){ fees = sec; return; }
+    const list = buckets[tr];
+    let grp = list.find(x=>x.note===label);
+    if(!grp){ grp = {note:label, items:[]}; list.push(grp); }
+    grp.items.push(it);
+  })));
+  const out = TRADES.map(t=>Object.assign({}, t, {hero:[], groups:buckets[t.id]})).filter(t=>t.groups.length);
+  if(fees){ fees.letter = String.fromCharCode(65+out.length); out.push(fees); }
+  SECTIONS.splice(0, SECTIONS.length, ...out);
+})();
+
+const HERO_MAP = {"civil": ["kitchen1", "bath2"], "wood": ["kitchen2", "wardin", "wardentry", "utility", "foyer"], "ceil": ["ceiling", "lobby", "panelling"], "elec": ["lobby", "kitchen3"], "furn": ["living", "living2", "dining", "mbed", "vkbed", "lounge"], "fit": ["bath1", "bath2"]};
+const ITEM_IMG = {"ceil0": "ceiling", "covepatta": "lobby", "cove": "lobby", "spots": "lobby", "sofa": "living", "coffee": "coffee", "dining": "dining", "crock": "sideboard", "lpanel": "panelling", "shoe": "foyer", "washcab": "utility", "kcab": "kitchen2", "granite": "kitchen1", "kled": "kitchen3", "b1ward": "wardentry", "b1bed": "vkbed", "b2walk": "wardin", "b2bed": "kidsbed", "b3walk": "wardin", "b3bed": "mbed", "b3chairs": "lounge", "b4walk": "wardin", "b4bed": "mbed2", "t2van": "bath1", "t3van": "bath1", "t4van": "bath1", "t2glass": "bath2", "t3glass": "bath2", "t4glass": "bath2"};
 SECTIONS.forEach(s=>{ if(HERO_MAP[s.id]) s.hero=HERO_MAP[s.id]; s.groups.forEach(g=>g.items.forEach(it=>{ if(ITEM_IMG[it.id]) it.img=ITEM_IMG[it.id]; })); });
 
 const KITCHEN_CONFIG = [];
@@ -758,7 +808,7 @@ function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec;
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
 function grandTotal(){ return SECTIONS.reduce((t,s)=>t+secTotal(s),0); }
 
-const STORAGE_KEY = 'chawlaShalimarBaghCostBuilder_v1';
+const STORAGE_KEY = 'chawlaShalimarBaghCostBuilder_v2';
 function saveState(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on,selected:i.selected}])))); }catch(e){}
 }
@@ -827,15 +877,15 @@ function renderSection(s){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Chawla Residence, Shalimar Bagh · client Ms. Bhawna Chawla · complete interior fit-out of the apartment: ceilings, flooring, electrical, lighting, paint, woodwork, furniture, kitchen, mandir and all bathrooms. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen is priced by finish (Laminate / Acrylic / PU). Switch any item off to see the effect on the total. A project handling fee of 10% is applied on the works. It includes the design fees, and there are no other charges.</p></div>
+      <p>Chawla Residence, Shalimar Bagh · client Ms. Bhawna Chawla · complete interior fit-out of the apartment: ceilings, flooring, electrical, lighting, paint, woodwork, furniture, kitchen, mandir and all bathrooms. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen is priced by finish (Laminate / Acrylic / PU). Switch any item off to see the effect on the total. The estimate is split by trade, so <b>Civil Work</b> and <b>Woodwork</b> each have their own tab and subtotal, along with Ceiling &amp; Paint, Electrical &amp; Lighting, Furniture &amp; Furnishings and Sanitaryware &amp; Fittings. A project handling fee of 10% is applied on the works. It includes the design fees, and there are no other charges.</p></div>
     <div class="floorplan-wrap"><img src="${REF_IMAGES.floorplan.src}" onclick="openLightbox('floorplan')" alt="Floor plan"><div class="cap">${REF_IMAGES.floorplan.cap}</div></div>
     <div class="item"><div class="item-title">Room schedule (from the plan)</div><div class="item-spec" style="margin-bottom:0">
       <b>Living &amp; Dining</b> 26'2" × 21'9" (569 sq.ft.) · <b>Mandir</b> 5'0" × 10'0" (50 sq.ft.) · <b>Kitchen</b> 8'10" × 12'3" (108 sq.ft.) · <b>Bedroom 1</b> 12'5" × 9'5" (117 sq.ft.) · <b>Bedroom 2</b> 12'5" × 10'0" (124 sq.ft.) with walk-in 5'1" × 5'0" · <b>Bedroom 3</b> 12'10" × 11'3" (144 sq.ft.) with walk-in 5'0" × 10'7" · <b>Bedroom 4</b> 12'3" × 11'6" (141 sq.ft.) with walk-in 5'3" × 6'0" · <b>Toilet 2</b> 8'9" × 5'9" · <b>Toilet 3</b> 5'7" × 10'7" · <b>Bedroom 4 toilet</b> 6'9" × 6'0" · <b>Servant room</b> 8'6" × 6'0" with toilet 8'6" × 3'6" · <b>Driver's area</b> 8'11" × 4'3" · <b>Washing area</b> 6'2" × 10'7" · <b>Veranda</b> 16'6" × 6'0". Approx. 1,690 sq.ft. interior carpet area.</div></div>
     <div class="item"><div class="item-title">Scope covered</div><div class="item-spec" style="margin-bottom:0">
-      <b>Entire house:</b> POP false ceiling (₹160/sq.ft.) with cove patta (₹100/rft), floor tile laying and skirting (tiles as per client selection), new electrical wiring (₹180/sq.ft.) with modular switches, DB and MCBs, Philips cove and spot lighting, ceiling fans, POP punning and Royale-grade paint (₹45/sq.ft. each), mosquito mesh, curtains, kitchen blind, room doors.<br>
-      <b>Living, dining &amp; mandir:</b> TV + storage unit, sofa set for 7, coffee table, dining table with 6 chairs, mandir unit with jaali backdrop, marble floor and jaali doors, shoe cabinet, driver's bench, washing machine point and utility cabinet.<br>
+      <b>Entire house:</b> POP false ceiling (₹160/sq.ft.) with cove patta (₹100/rft), floor tile laying and skirting (tiles as per client selection), new electrical wiring (₹180/sq.ft.) with modular switches, DB and MCBs, Philips cove and spot lighting, ceiling fans, POP punning and Royale-grade paint (₹45/sq.ft. each), mosquito mesh, curtains for the dining area and mandir room only (the other rooms have no windows), kitchen blind, room doors.<br>
+      <b>Living, dining &amp; mandir:</b> sofa set for 7, coffee table, 6 dining chairs (your existing dining table stays), no TV unit (the TV is wall-mounted as shown in the layout), mandir unit with jaali backdrop, marble floor and jaali doors, shoe cabinet, driver's bench, washing machine point and utility cabinet.<br>
       <b>Kitchen:</b> parallel modular kitchen with Hettich / Ebco hardware, granite top, sink, dado tile laying, under-cabinet LED, plumbing and chimney duct opening.<br>
-      <b>Bedrooms:</b> wardrobe in bedroom 1, walk-in wardrobe units in bedrooms 2, 3 and 4, beds with storage, bedside tables, TV units in bedrooms 3 and 4, dresser and lounge chairs in bedroom 3; servant room bed and wardrobe.<br>
+      <b>Bedrooms:</b> wardrobe in bedroom 1, walk-in wardrobe units in bedrooms 2, 3 and 4, beds with storage, bedside tables, wall-mounted TVs (no TV units), dresser and lounge chairs in bedroom 3; servant room bed and wardrobe.<br>
       <b>Bathrooms:</b> three bedroom toilets and the servant toilet fully redone: tile removal, waterproofing, new CPVC plumbing, tile laying, sanitaryware, vanity, mirror, glass partition, moisture-resistant ceiling, exhaust ducting and WPC door.<br>
       <b>Project handling:</b> 10% of the works, including design fees (design development, 3D views, working drawings and BOQ), project management, site supervision, procurement, material handling and transport. No other charges.<br>
       <b>Design fee:</b> not charged when Indéva handles the project. It applies only if you take the design alone and get it executed by someone else: ₹100/sq.ft. of carpet area (approx. ₹1,69,000 for 1,690 sq.ft.).<br>
