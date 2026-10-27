@@ -1,0 +1,75 @@
+{
+  "_readme": "Edit this file to change the Our Team section on /about, then run: node build-pages.cjs. 'photo' is a file in project-images-for-website/team/ (null shows initials). 'focus' is the CSS object-position for the photo crop.",
+  "members": [
+    {
+      "name": "Veenu Saini",
+      "role": "Director, Compliance, Risk & Safety",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Oversees compliance, risk management and site safety, making sure every project runs responsibly and safely from the first day to handover."
+    },
+    {
+      "name": "Gunjeet Singh",
+      "role": "Chief Marketing Officer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Leads the studio's brand, communication and marketing, shaping how our work, process and values reach the people we design for."
+    },
+    {
+      "name": "Tanvi Maru",
+      "role": "Client Relations Manager",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Keeps clients informed and supported at every stage, coordinating updates, approvals and communication between homeowners and the studio team."
+    },
+    {
+      "name": "Yakshita Katyal",
+      "role": "Senior Interior Designer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings."
+    },
+    {
+      "name": "Vidisha Chaudhary",
+      "role": "Furniture Designer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Designs custom furniture and joinery, balancing proportion, comfort, materials and buildability so each piece belongs to the space it is made for."
+    },
+    {
+      "name": "Shravan Chauhan",
+      "role": "Interior Designer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Develops thoughtful interior concepts, spatial layouts and material palettes that balance functionality with the character of each space."
+    },
+    {
+      "name": "Salman",
+      "role": "Site Supervisor",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Coordinates on-site activities, monitors workmanship and supports the smooth execution of design and construction details."
+    },
+    {
+      "name": "Ar. Kunal Sangtani",
+      "role": "Architect",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Shapes spatial planning and architectural detailing, making sure layouts, proportions and building elements work together as one coherent design."
+    },
+    {
+      "name": "Er. Ashish Solanki",
+      "role": "Structural Engineer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Supports structural planning and engineering coordination to help ensure safe, practical and technically sound building solutions."
+    },
+    {
+      "name": "Lavdeep Singh Chahal",
+      "role": "Cinematographer",
+      "photo": null,
+      "focus": "center 20%",
+      "desc": "Captures spaces, materials and architectural details through considered visual storytelling and cinematic composition, documenting each project as it comes to life."
+    }
+  ]
+}
