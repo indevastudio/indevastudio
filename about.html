@@ -1194,8 +1194,8 @@ nav.solid {
   padding: 100px 60px;
   border-bottom: 1px solid var(--line);
 }
-.philosophy-header { margin-bottom: 80px; }
-.philosophy-pillars { display:grid; grid-template-columns:1fr 1fr; gap: 2px; }
+.philosophy-header { margin-bottom: 40px; }
+.philosophy-pillars { display:grid; grid-template-columns:repeat(5, 1fr); gap: 2px; }
 .pillar-card {
   background: var(--black-2);
   padding: 52px 48px;
@@ -1265,6 +1265,17 @@ nav.solid {
   line-height: 1.85;
   color: var(--white-muted);
 }
+
+/* ── ABOUT · FIVE PILLARS, compact ── */
+.philosophy-section { padding: 80px 60px; }
+.pillar-card { padding: 30px 24px 32px; }
+.pillar-icon { width: 26px; height: 26px; margin-bottom: 18px; }
+.pillar-num { margin-bottom: 10px; }
+.pillar-name { font-size: 1.05rem; line-height: 1.3; margin-bottom: 10px; }
+.pillar-desc { font-size: 0.72rem; line-height: 1.75; }
+@media (max-width: 1200px) and (min-width: 1025px) { .philosophy-pillars { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1024px) { .philosophy-section { padding: 64px 32px; } }
+@media (max-width: 600px) { .philosophy-pillars { grid-template-columns: 1fr; } .philosophy-section { padding: 56px 20px; } }
 
 /* ── ABOUT · OUR TEAM (cards rendered from content/team.json by build-pages.cjs) ── */
 .team-section { padding: 100px 60px; border-top: 1px solid var(--line); }
@@ -2474,7 +2485,7 @@ select.form-field option { background: var(--black-3); }
   .about-hero, .founder-section, .phil-hero, .contact-body,
   .services-hero, .service-detail, .defines-grid { grid-template-columns:1fr; }
   .projects-carousel-track { animation-duration: 22s; } .project-card { width: 280px; height: 380px; }
-  .philosophy-pillars { grid-template-columns:1fr; }
+  .philosophy-pillars { grid-template-columns:1fr 1fr; }
   .process-stage { grid-template-columns: 60px 1fr; gap:32px; }
   .process-stage > *:last-child { grid-column: 2; }
   .phil-pillar { grid-template-columns:1fr; gap:24px; }
@@ -3632,7 +3643,7 @@ img {
   <section class="philosophy-section">
     <div class="philosophy-header">
       <div class="label-line label reveal">our philosophy</div>
-      <h2 class="display display-lg reveal d1" style="margin-top:24px;">five pillars</h2>
+      <h2 class="display display-md reveal d1" style="margin-top:20px;">five pillars</h2>
     </div>
     <div class="philosophy-pillars">
       <div class="pillar-card reveal">
@@ -3659,7 +3670,7 @@ img {
         <div class="pillar-name">imperfection as <em>character</em></div>
         <p class="pillar-desc">a room that is too perfect is a room without character. we leave space for the happy accident — books slightly off-centre, a weathered patina, a rug with a softened edge. this quiet imperfection invites people to relax, not retreat.</p>
       </div>
-      <div class="pillar-card reveal d4" style="grid-column: span 2;">
+      <div class="pillar-card reveal d4">
         <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="20" cy="20" r="11"/><path d="M20 20 L26 12" stroke-linecap="round"/><path d="M20 20 L15 26" stroke-linecap="round" opacity="0.5"/></svg></div>
         <div class="pillar-num">pillar 05</div>
         <div class="pillar-name">confidence <em>over rules</em></div>
