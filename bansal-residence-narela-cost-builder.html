@@ -721,8 +721,28 @@ function toggleItem(id, val){ BY_ID[id].on=val; saveState(); renderMain(); }
 /* =====================================================================
    RENDER
    ===================================================================== */
+// Trade views: the same items as the room tabs, regrouped so civil work and woodwork can be costed separately.
+// They are views only; every item is still counted once in the total.
+const TRADE_VIEWS = [
+  {id:"t_civil", label:"Civil Work", title:"Civil Work — separate costing",
+   intro:"Every civil and wet-work item from all rooms in one place: wall alterations, floor and dado tile laying, tile removal, debris, the new bathroom's PCC, waterproofing, plaster and plumbing, the guest-bedroom conversion, kitchen granite, waterproofing, plumbing and duct, and the staircase cladding.",
+   ids:["wallremove","wallbuild","walldebris","floor","skirting","floorremove","debris","mandirfloor","nbpcc","nbwp","nbbase","nbtile","nbplumb","nbdrain","granite","kdado","kwp","kplumb","kduct","kwin","gbstrip","gbsan","gbplug","gbplaster","stair"]},
+  {id:"t_wood", label:"Woodwork", title:"Woodwork — separate costing",
+   intro:"Every woodwork item from all rooms in one place: the modular kitchen and its hardware, wardrobes, TV units, the mandir unit and jaali, the shoe cabinet, the wash-basin counter, the vanity, back-passage storage and doors.",
+   ids:["kcab","hw_hinge","hw_cutlery","hw_cutins","hw_potpan","hw_bottle","hw_gtpt","hw_wicker","hw_corner","hw_larder","hw_handles","dtv","b2tv","b2ward","gbward","mandir","mandirback","shoe","wash","nbvan","psto","nbdoor","gbdoor"]},
+];
+function tradeTotal(v){ return v.ids.reduce((t,id)=>{ const it=BY_ID[id]; return t+(it&&it.on?amtOf(it):0); },0); }
+function panelTrade(v){
+  const bySec=[]; v.ids.forEach(id=>{ const it=BY_ID[id]; if(!it) return; let g=bySec.find(x=>x.sec===it._sec); if(!g){ g={sec:it._sec, items:[]}; bySec.push(g);} g.items.push(it); });
+  return `<section class="panel" id="panel-${v.id}" data-trade="1">
+    <div class="panel-head"><h2>${v.title}</h2><p>${v.intro} Switching an item on or off here also changes it in its room tab; nothing is counted twice.</p></div>
+    ${bySec.map(g=>`<div class="divider-note">${g.sec.tab||g.sec.title}</div>`+g.items.map(renderItem).join('')).join('')}
+    <div class="subtotal-strip"><span>${v.label} subtotal</span><span class="val">${fmt(tradeTotal(v))}</span></div>
+  </section>`;
+}
 const TABS = [{id:"overview", label:"Overview"}]
   .concat(SECTIONS.filter(s=>s.tab).map(s=>({id:s.id, label:s.tab})))
+  .concat(TRADE_VIEWS.map(v=>({id:v.id, label:v.label})))
   .concat([{id:"costsheet", label:"Cost Sheet"}]);
 
 function renderTabs(){
@@ -795,6 +815,10 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
+    <div class="cs-group"><h3>Trade split</h3><table class="cs"><tbody>
+      ${TRADE_VIEWS.map(v=>`<tr><td><b>${v.label}</b></td><td class="num">${fmt(tradeTotal(v))}</td></tr>`).join('')}
+      <tr><td><b>All other items</b> (ceiling, paint, electrical, lighting, furniture, furnishings, sanitaryware, fees)</td><td class="num">${fmt(grandTotal()-TRADE_VIEWS.reduce((t,v)=>t+tradeTotal(v),0))}</td></tr>
+    </tbody></table></div>
     <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Bansal Residence, Narela · Ground Floor · Revision 8</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
     <p class="foot-note">Excludes GST, civil and masonry work beyond the listed wall alterations, new bathroom and closing one internal window, appliances, chimney and hob, gas pipeline, mattresses, ACs, light fixtures other than the Philips lighting listed, tiles (laying only; tiles as per client selection), feature walls and bed-back wall, door polishing, appliances (including exhaust fans), the dining table, and front porch work. POP false ceiling (₹160/sq.ft.), cove patta (₹100/rft), new electrical wiring (₹180/sq.ft.), POP punning (₹45/sq.ft.) and paint (₹45/sq.ft.) are at agreed rates; other ceiling-to-floor civil, tiling, waterproofing, plumbing and woodwork rates follow the Indéva master BOQ (labour + material). Quantities are measured from the plan and will be confirmed on site measurement. Site expenses are charged at 2% and handling fees at 5% of the works total (design fee excluded). Items marked "Allowance" are budget figures that change with your selection; items marked "to confirm" are dealer or market rates, or quantities to be fixed on site; items marked "Optional" or "Switch on if needed" are off by default and not in the total.</p>
@@ -803,14 +827,14 @@ function panelCostSheet(){
 let currentTab='overview', showAllMode=false;
 function renderMain(){
   const y=window.scrollY;
-  document.getElementById('main').innerHTML = panelOverview() + SECTIONS.filter(s=>s.tab).map(renderSection).join('') + renderSection(SECTIONS.find(s=>s.id==='design')).replace('class="panel"','class="panel" data-hidden="1"') + panelCostSheet();
+  document.getElementById('main').innerHTML = panelOverview() + SECTIONS.filter(s=>s.tab).map(renderSection).join('') + TRADE_VIEWS.map(panelTrade).join('') + renderSection(SECTIONS.find(s=>s.id==='design')).replace('class="panel"','class="panel" data-hidden="1"') + panelCostSheet();
   document.getElementById('stickyValue').textContent = fmt(grandTotal());
   applyView(false); window.scrollTo(0,y);
 }
 function applyView(scrollTop){
   document.querySelectorAll('section.panel').forEach(p=>{
     const id=p.id.replace('panel-','');
-    const show = p.dataset.hidden ? false : (showAllMode ? true : id===currentTab);
+    const show = p.dataset.hidden ? false : (showAllMode ? !p.dataset.trade : id===currentTab);
     p.classList.toggle('active', show);
   });
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', !showAllMode && b.dataset.tab===currentTab));
