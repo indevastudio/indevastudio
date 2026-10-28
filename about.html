@@ -1288,6 +1288,38 @@ nav.solid {
 }
 @media (prefers-reduced-motion: reduce) { .founder-linkedin, .founder-photo::after { transition: none; } }
 
+/* ── ABOUT · HEADER BANNER ── */
+.about-banner { padding-left: 60px; padding-right: 60px; }
+.about-banner-frame { position: relative; height: clamp(320px, 52vh, 520px); margin-top: 28px; overflow: hidden; border-radius: 0 56px 0 0; background: var(--black-3); }
+.about-banner-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.4s ease; }
+.about-banner-slide.is-on { opacity: 1; }
+.about-banner-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.0); }
+.about-banner-slide.is-on img { animation: aboutKen 7s ease-out forwards; }
+@keyframes aboutKen { from { transform: scale(1.0); } to { transform: scale(1.08); } }
+.about-banner-slide figcaption { position: absolute; right: 22px; bottom: 18px; z-index: 3; font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,249,246,0.8); }
+.about-banner-shade { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to top, rgba(18,16,14,0.72) 0%, rgba(18,16,14,0.15) 55%, rgba(18,16,14,0.05) 100%); pointer-events: none; }
+.about-banner-text { position: absolute; left: 40px; bottom: 40px; z-index: 3; max-width: 640px; color: #FAF9F6; }
+.about-banner-kicker { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 14px; }
+.about-banner-line { font-family: var(--serif); font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 300; line-height: 1.12; letter-spacing: -0.01em; animation: aboutRise 1s ease-out both 0.2s; }
+.about-banner-line em { font-style: italic; color: var(--gold-bright); }
+@keyframes aboutRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.about-banner-dots { position: absolute; left: 40px; top: 28px; z-index: 3; display: flex; gap: 6px; }
+.about-banner-dots span { width: 18px; height: 2px; background: rgba(250,249,246,0.4); transition: background 0.4s, width 0.4s; }
+.about-banner-dots span.on { width: 34px; background: #FAF9F6; }
+.about-why .about-why-top { padding-top: 70px; }
+@media (max-width: 1024px) { .about-banner { padding-left: 32px; padding-right: 32px; } }
+@media (max-width: 520px) {
+  .about-banner { padding-left: 20px; padding-right: 20px; }
+  .about-banner-frame { height: 340px; border-radius: 0 36px 0 0; margin-top: 16px; }
+  .about-banner-text { left: 22px; right: 22px; bottom: 28px; }
+  .about-banner-dots { left: 22px; top: 20px; }
+  .about-banner-slide figcaption { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-banner-slide, .about-banner-dots span { transition: none; }
+  .about-banner-slide.is-on img, .about-banner-line { animation: none; }
+}
+
 /* ── ABOUT · WHY INDÉVA ── */
 .about-why { padding-left: 60px; padding-right: 60px; padding-bottom: 70px; border-bottom: 1px solid var(--line); }
 .about-why-top { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: end; padding-top: 60px; margin-bottom: 48px; }
@@ -3652,8 +3684,49 @@ img {
 ══════════════════════════════════ -->
 <div class="page active" id="about">
 
+  <!-- ── ABOUT HEADER BANNER: slow cross-fading project photos ── -->
+  <div class="about-banner pt-nav" aria-label="indéva projects">
+    <div class="about-banner-frame">
+      <figure class="about-banner-slide is-on" aria-hidden="false">
+        <img src="/mini-farmhouse-delhi-grand-exterior-1536.webp" alt="indéva project — mini farmhouse, delhi" width="1536" height="1024" fetchpriority="high" decoding="async">
+        <figcaption>mini farmhouse, delhi</figcaption>
+      </figure>
+      <figure class="about-banner-slide" aria-hidden="true">
+        <img src="/mini-farmhouse-delhi-living-area-1536.webp" alt="indéva project — mini farmhouse, delhi — living area" width="1536" height="1024" loading="lazy" decoding="async">
+        <figcaption>mini farmhouse, delhi — living area</figcaption>
+      </figure>
+      <figure class="about-banner-slide" aria-hidden="true">
+        <img src="/hotel-silk-murthal-lobby-seating-area-1448.webp" alt="indéva project — hotel silk by resham, murthal — lobby" width="1536" height="1024" loading="lazy" decoding="async">
+        <figcaption>hotel silk by resham, murthal — lobby</figcaption>
+      </figure>
+      <figure class="about-banner-slide" aria-hidden="true">
+        <img src="/south-delhi-neoclassical-residence-master-bedroom-1362.webp" alt="indéva project — south delhi neo-classical residence — master bedroom" width="1536" height="1024" loading="lazy" decoding="async">
+        <figcaption>south delhi neo-classical residence — master bedroom</figcaption>
+      </figure>
+      <figure class="about-banner-slide" aria-hidden="true">
+        <img src="/studio-workspace-gurgaon-studio-main-floor-1536.webp" alt="indéva project — studio workspace, gurgaon" width="1536" height="1024" loading="lazy" decoding="async">
+        <figcaption>studio workspace, gurgaon</figcaption>
+      </figure>
+      <div class="about-banner-shade"></div>
+      <div class="about-banner-text">
+        <div class="about-banner-kicker">about indéva studio</div>
+        <div class="about-banner-line">designed with intent. <em>built without excuses.</em></div>
+      </div>
+      <div class="about-banner-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var root=document.querySelector('.about-banner'); if(!root) return; var slides=root.querySelectorAll('.about-banner-slide'), dots=root.querySelectorAll('.about-banner-dots span'), i=0;
+    function show(n){ slides.forEach(function(s,k){ s.classList.toggle('is-on',k===n); s.setAttribute('aria-hidden',k===n?'false':'true'); }); dots.forEach(function(d,k){ d.classList.toggle('on',k===n); }); }
+    show(0);
+    var still=false; try{ still=window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+    if(!still && slides.length>1) setInterval(function(){ if(document.hidden) return; i=(i+1)%slides.length; show(i); }, 5000);
+  })();
+  </script>
+
   <!-- ── WHY INDÉVA (top of about) ── -->
-  <section class="about-why pt-nav">
+  <section class="about-why">
     <div class="about-why-top">
       <div>
         <div class="label-line label reveal">about indéva</div>
