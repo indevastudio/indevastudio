@@ -150,7 +150,12 @@ $("#loginForm").addEventListener("submit", async (e) => {
   e.preventDefault(); $("#loginMsg").textContent = "";
   const { error } = await sb.auth.signInWithPassword({ email: $("#lgEmail").value.trim(), password: $("#lgPass").value });
   if (error) $("#loginMsg").textContent = "Sign-in failed: " + error.message;
+  else notifyActivity("login");
 });
+// Activity alert: tells Indeva Studio (ceo@) when a client signs in or downloads / prints the PDF.
+function notifyActivity(event) {
+  sb.functions.invoke("client-activity", { body: { event } }).catch(() => {});
+}
 $("#signOut").addEventListener("click", () => sb.auth.signOut());
 $("#refresh").addEventListener("click", load);
 // PDF / Print: open every breakdown so the printed copy shows the full detail, then restore.
@@ -158,6 +163,7 @@ let openedForPrint = [];
 window.addEventListener("beforeprint", () => {
   openedForPrint = [...document.querySelectorAll("details.bd:not([open])")];
   openedForPrint.forEach((d) => (d.open = true));
+  if (!$("#app").hidden) notifyActivity("pdf");
   const ph = document.querySelector(".print-head .ph-date");
   if (ph) ph.textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 });
