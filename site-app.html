@@ -4040,85 +4040,132 @@ img {
     </div>
   </section>
 
-  <!-- TESTIMONIALS (replace the old testi-strip section, including the testi-proof-grid) -->
+  <!-- TESTIMONIALS — card carousel (real client reviews; photos are from Indéva projects) -->
 <style>
-.tr-section{padding:110px 60px;border-top:1px solid var(--line,rgba(36,36,36,.08));background:var(--black,#FAF9F6);font-family:var(--sans,'Plus Jakarta Sans',sans-serif);color:var(--white,#242424)}
-.tr-inner{max-width:1200px;margin:0 auto}
-.tr-header{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:48px}
-.tr-rating{font-size:.9rem;color:rgba(36,36,36,.7);text-align:right;line-height:1.6}
-.tr-rating strong{font-weight:600;color:var(--white,#242424)}
-.tr-rating .tr-stars{color:var(--gold,#8A5E31);letter-spacing:2px;margin-right:6px}
-.tr-rating a{color:var(--gold,#8A5E31);text-decoration:underline;text-underline-offset:3px}
-.tr-rating a:focus-visible{outline:2px solid var(--gold,#8A5E31);outline-offset:3px}
-.tr-photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:12px;margin:0;height:min(560px,52vw)}
-.tr-photos img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;border-radius:3px;background:var(--black-3,#ECEAE4)}
-.tr-photos img:first-child{grid-row:1/3}
-.tr-photo-note{font-size:.85rem;color:rgba(36,36,36,.65);margin:14px 0 0}
-.tr-grid{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px}
-.tr-item{padding:32px 0;border-top:1px solid var(--line,rgba(36,36,36,.1));display:flex;flex-direction:column}
-.tr-quote{margin:0 0 24px;font-size:.97rem;line-height:1.75;color:rgba(36,36,36,.85);flex:1}
-.tr-person{display:flex;align-items:center;gap:12px}
-.tr-avatar{flex:0 0 38px;height:38px;border-radius:50%;background:var(--black-3,#ECEAE4);color:var(--gold,#8A5E31);display:grid;place-items:center;font-size:.78rem;font-weight:600}
-.tr-name{display:block;font-size:.93rem;font-weight:500}
-.tr-where{display:block;font-size:.8rem;color:rgba(36,36,36,.6);margin-top:1px}
-@media (max-width:980px){.tr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:700px){
-  .tr-section{padding:64px 20px}
-  .tr-header{flex-direction:column;align-items:flex-start;margin-bottom:32px}
-  .tr-rating{text-align:left}
-  .tr-photos{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;height:auto}
-  .tr-photos img{height:160px}
-  .tr-photos img:first-child{grid-column:1/-1;grid-row:auto;height:260px}
-  .tr-grid{grid-template-columns:1fr;margin-top:40px}
-}
+.tc-section{padding:110px 0 90px;border-top:1px solid var(--line);background:var(--black);overflow:hidden}
+.tc-head{max-width:1320px;margin:0 auto 56px;padding:0 60px;display:grid;grid-template-columns:1.3fr 1fr auto;gap:40px;align-items:end}
+.tc-kicker{display:flex;justify-content:space-between;max-width:1320px;margin:0 auto 26px;padding:0 60px}
+.tc-kicker .tc-r{font-family:var(--mono);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--white)}
+.tc-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,4.6vw,4.2rem);line-height:1.05;letter-spacing:-.02em;color:var(--white)}
+.tc-title em{font-style:italic;color:var(--gold)}
+.tc-intro{font-size:.86rem;line-height:1.75;color:var(--white-muted);max-width:360px}
+.tc-intro .tr-rating{text-align:left;margin-top:12px;font-size:.8rem;color:var(--white-muted)}
+.tc-intro .tr-stars{color:var(--gold);letter-spacing:2px;margin-right:6px}
+.tc-intro .tr-rating a{color:var(--gold)}
+.tc-arrows{display:flex;gap:14px}
+.tc-arrow{width:52px;height:52px;border-radius:50%;border:1px solid var(--line-gold);background:transparent;color:var(--white);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.tc-arrow.tc-next{background:var(--gold-bright);border-color:var(--gold-bright);color:#fff}
+.tc-arrow:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.tc-arrow:focus-visible,.tc-dot:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.tc-viewport{position:relative}
+.tc-track{list-style:none;margin:0;padding:24px 0;display:flex;gap:28px;align-items:center;transition:transform .7s cubic-bezier(.22,1,.36,1);will-change:transform}
+.tc-card{flex:0 0 min(600px,42vw);background:#FBFAF7;border-radius:6px;overflow:hidden;box-shadow:0 1px 2px rgba(36,36,36,.04);transform:scale(.92);opacity:.62;transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .7s,box-shadow .7s;cursor:pointer}
+.tc-card.is-on{transform:scale(1);opacity:1;box-shadow:0 22px 50px rgba(36,36,36,.10);cursor:default}
+.tc-img{aspect-ratio:16/8.5;overflow:hidden;background:var(--black-3)}
+.tc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.tc-body{padding:30px 46px 34px}
+.tc-mark{display:block;font-family:Georgia,'Times New Roman',serif;font-size:4.2rem;line-height:.6;height:30px;color:var(--gold-bright);margin-bottom:14px}
+.tc-quote{margin:0;font-family:var(--serif);font-size:clamp(.98rem,1.25vw,1.15rem);font-weight:300;line-height:1.6;color:var(--white);padding-bottom:22px;border-bottom:1px solid var(--line);max-width:460px}
+.tc-person{display:flex;align-items:center;gap:16px;margin-top:20px}
+.tc-avatar{flex:0 0 52px;height:52px;border-radius:50%;background:var(--black-3);color:var(--gold);display:grid;place-items:center;font-size:.8rem;font-weight:600;letter-spacing:.04em}
+.tc-name{display:block;font-size:.95rem;font-weight:500;color:var(--white)}
+.tc-role{display:block;font-family:var(--mono);font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--white-muted);margin-top:5px;line-height:1.7}
+.tc-dots{display:flex;justify-content:center;gap:12px;margin-top:22px}
+.tc-dot{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:var(--black-4);cursor:pointer;transition:background .3s,transform .3s}
+.tc-dot.on{background:var(--gold-bright);transform:scale(1.35)}
+.tc-note{text-align:center;font-size:.72rem;color:var(--white-muted);margin-top:14px}
+@media (max-width:1024px){.tc-head,.tc-kicker{padding:0 32px}.tc-head{grid-template-columns:1fr auto;}.tc-head .tc-intro{grid-column:1/-1;grid-row:2}.tc-card{flex-basis:70vw}}
+@media (max-width:600px){.tc-section{padding:70px 0 60px}.tc-head,.tc-kicker{padding:0 20px}.tc-kicker .tc-r{display:none}.tc-head{gap:20px}.tc-card{flex-basis:84vw}.tc-body{padding:24px 24px 26px}.tc-arrow{width:44px;height:44px}}
+@media (prefers-reduced-motion:reduce){.tc-track,.tc-card{transition:none}}
 </style>
 
-<section class="tr-section" aria-labelledby="tr-title">
-  <div class="tr-inner">
-    <div class="tr-header">
-      <div>
-        <div class="label-line label" style="margin-bottom:16px;">client reviews</div>
-        <h2 id="tr-title" class="display" style="font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;">what our clients <em class="italic gold">say.</em></h2>
-      </div>
-      <!-- Replace the href with your direct Google review link (Google Business Profile → Read reviews → Share) -->
+<section class="tc-section" aria-labelledby="tc-title" aria-roledescription="carousel">
+  <div class="tc-kicker"><div class="label-line label" style="flex-direction:row-reverse;gap:14px;">testimonials</div><div class="tc-r">client stories, real spaces</div></div>
+  <div class="tc-head">
+    <h2 id="tc-title" class="tc-title">homes, spaces<br><em>and people we’re grateful for.</em></h2>
+    <div class="tc-intro">from first conversations to final handovers, here’s what our clients have to say about working with indéva studio.
       <p class="tr-rating"><span class="tr-stars" aria-hidden="true">★★★★★</span><strong>4.9</strong> from 13 Google reviews<br><a href="https://www.google.com/maps/search/?api=1&query=Indeva+Studio+Narela+Delhi" target="_blank" rel="noopener">Read them on Google</a></p>
     </div>
-
-    <figure class="tr-photos">
-      <img src="https://www.indevastudio.com/resham%20suite%20bedroom.webp" alt="Suite bedroom at Resham Hotel, Murthal, after completion" width="1448" height="1086" loading="lazy" decoding="async">
-      <img src="https://www.indevastudio.com/resham%20lobby%20seating%20area.webp" alt="Lobby seating at Resham Hotel, Murthal" width="1448" height="1086" loading="lazy" decoding="async">
-      <img src="https://www.indevastudio.com/resham%20room%20dining%20nook.webp" alt="Guest room dining nook at Resham Hotel, Murthal" width="1448" height="1086" loading="lazy" decoding="async">
-    </figure>
-    <p class="tr-photo-note">Resham Hotel, Murthal. Real photos of the finished project, not renders.</p>
-
-    <ul class="tr-grid">
-      <li class="tr-item">
-        <p class="tr-quote">“When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">PG</span><span><span class="tr-name">Pranav Gaur</span><span class="tr-where">Homeowner, New Delhi</span></span></div>
-      </li>
-      <li class="tr-item">
-        <p class="tr-quote">“The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">MS</span><span><span class="tr-name">Manogya Singh</span><span class="tr-where">Homeowner</span></span></div>
-      </li>
-      <li class="tr-item">
-        <p class="tr-quote">“I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">RG</span><span><span class="tr-name">Rahat Gera</span><span class="tr-where">Homeowner</span></span></div>
-      </li>
-      <li class="tr-item">
-        <p class="tr-quote">“What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">SK</span><span><span class="tr-name">Sumit Kumar</span><span class="tr-where">Homeowner</span></span></div>
-      </li>
-      <li class="tr-item">
-        <p class="tr-quote">“I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">SJ</span><span><span class="tr-name">Sonali Jain</span><span class="tr-where">Homeowner</span></span></div>
-      </li>
-      <li class="tr-item">
-        <p class="tr-quote">“From the first discussion to the final walkthrough, the process felt organized and reassuring. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.”</p>
-        <div class="tr-person"><span class="tr-avatar" aria-hidden="true">AS</span><span><span class="tr-name">Areeb Sami</span><span class="tr-where">Homeowner</span></span></div>
-      </li>
+    <div class="tc-arrows"><button type="button" class="tc-arrow tc-prev" aria-label="previous review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button type="button" class="tc-arrow tc-next" aria-label="next review"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+  </div>
+  <div class="tc-viewport">
+    <ul class="tc-track">
+        <li class="tc-card is-on" role="group" aria-roledescription="slide" aria-label="1 of 6">
+          <div class="tc-img"><img src="/south-delhi-neoclassical-residence-living-room-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">When I first met Arpit Saini, I felt a sense of confidence that this would not be just another design exercise. Seeing the space come together was genuinely exciting for my family and me. The finishing, the alignment, the detailing, everything felt intentional.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">PG</span><span><span class="tc-name">Pranav Gaur</span><span class="tc-role">Homeowner<br>New Delhi</span></span></div>
+          </div>
+        </li>
+        <li class="tc-card" role="group" aria-roledescription="slide" aria-label="2 of 6">
+          <div class="tc-img"><img src="/mini-farmhouse-delhi-living-area-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">The journey with Indéva studio was surprisingly enjoyable. There was clarity at every step, which made the entire experience stress free. When we finally stepped into the finished space, it felt like it was truly ours.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">MS</span><span><span class="tc-name">Manogya Singh</span><span class="tc-role">Homeowner</span></span></div>
+          </div>
+        </li>
+        <li class="tc-card" role="group" aria-roledescription="slide" aria-label="3 of 6">
+          <div class="tc-img"><img src="/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">I appreciated how involved the team was on site. There was care in every small detail. Watching the transformation unfold was exciting, and the final reveal felt incredibly rewarding.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">RG</span><span><span class="tc-name">Rahat Gera</span><span class="tc-role">Homeowner</span></span></div>
+          </div>
+        </li>
+        <li class="tc-card" role="group" aria-roledescription="slide" aria-label="4 of 6">
+          <div class="tc-img"><img src="/hotel-silk-murthal-suite-bedroom-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">What made us happiest was the transparency and discipline throughout the project. There were no unpleasant surprises, only steady progress and clear communication.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">SK</span><span><span class="tc-name">Sumit Kumar</span><span class="tc-role">Homeowner</span></span></div>
+          </div>
+        </li>
+        <li class="tc-card" role="group" aria-roledescription="slide" aria-label="5 of 6">
+          <div class="tc-img"><img src="/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">I met Arpit Saini during our consultation, and his calm and practical approach immediately reassured us. Today, the home feels elegant yet deeply personal, and it brings us happiness every single day.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">SJ</span><span><span class="tc-name">Sonali Jain</span><span class="tc-role">Homeowner</span></span></div>
+          </div>
+        </li>
+        <li class="tc-card" role="group" aria-roledescription="slide" aria-label="6 of 6">
+          <div class="tc-img"><img src="/hotel-silk-murthal-lobby-seating-area-800.webp" alt="" width="800" height="560" loading="lazy" decoding="async"></div>
+          <div class="tc-body">
+            <span class="tc-mark" aria-hidden="true">“</span>
+            <blockquote class="tc-quote">From the first discussion to the final walkthrough, the process felt organized and reassuring. It looks effortless, but you can sense the effort behind it. We are extremely happy with how the space turned out.</blockquote>
+            <div class="tc-person"><span class="tc-avatar" aria-hidden="true">AS</span><span><span class="tc-name">Areeb Sami</span><span class="tc-role">Homeowner</span></span></div>
+          </div>
+        </li>
     </ul>
   </div>
+  <div class="tc-dots" role="tablist" aria-label="choose a review"><button type="button" class="tc-dot on" data-i="0" aria-label="review 1"></button><button type="button" class="tc-dot" data-i="1" aria-label="review 2"></button><button type="button" class="tc-dot" data-i="2" aria-label="review 3"></button><button type="button" class="tc-dot" data-i="3" aria-label="review 4"></button><button type="button" class="tc-dot" data-i="4" aria-label="review 5"></button><button type="button" class="tc-dot" data-i="5" aria-label="review 6"></button></div>
+  <p class="tc-note">reviews from our clients on google. photos are from indéva projects.</p>
 </section>
+<script>
+(function(){
+  var sec=document.querySelector('.tc-section'); if(!sec) return;
+  var track=sec.querySelector('.tc-track'), cards=[].slice.call(track.children), dots=sec.querySelectorAll('.tc-dot'), vp=sec.querySelector('.tc-viewport');
+  var i=0, n=cards.length, timer=null, hold=false, still=false;
+  try{ still=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  function place(){ var c=cards[i], gap=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||28;
+    var x=vp.clientWidth/2 - (c.offsetLeft + c.offsetWidth/2); track.style.transform='translateX('+x+'px)'; }
+  function show(k){ i=(k+n)%n; cards.forEach(function(c,j){ c.classList.toggle('is-on',j===i); c.setAttribute('aria-hidden', j===i?'false':'true'); });
+    dots.forEach(function(d,j){ d.classList.toggle('on',j===i); }); place(); arm(); }
+  function arm(){ clearTimeout(timer); if(still||hold) return; timer=setTimeout(function(){ if(!document.hidden) show(i+1); else arm(); }, 7000); }
+  sec.querySelector('.tc-prev').addEventListener('click',function(){ show(i-1); });
+  sec.querySelector('.tc-next').addEventListener('click',function(){ show(i+1); });
+  dots.forEach(function(d){ d.addEventListener('click',function(){ show(+d.dataset.i); }); });
+  cards.forEach(function(c,j){ c.addEventListener('click',function(){ if(j!==i) show(j); }); });
+  vp.addEventListener('mouseenter',function(){ hold=true; arm(); }); vp.addEventListener('mouseleave',function(){ hold=false; arm(); });
+  sec.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') show(i-1); if(e.key==='ArrowRight') show(i+1); });
+  var x0=null; vp.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; hold=true; },{passive:true});
+  vp.addEventListener('touchend',function(e){ hold=false; if(x0!==null){ var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) show(i+(dx<0?1:-1)); else arm(); } x0=null; });
+  window.addEventListener('resize',place); window.addEventListener('load',place);
+  show(1);
+})();
+</script>
 
   <!-- QUICK ENQUIRY FORM (home page, above footer) -->
   <section style="background:var(--black-2);padding:80px 60px;border-top:1px solid var(--line);">

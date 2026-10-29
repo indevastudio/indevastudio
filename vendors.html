@@ -4242,6 +4242,29 @@ img {
     })();
     </script>
 <script>
+(function(){
+  var sec=document.querySelector('.tc-section'); if(!sec) return;
+  var track=sec.querySelector('.tc-track'), cards=[].slice.call(track.children), dots=sec.querySelectorAll('.tc-dot'), vp=sec.querySelector('.tc-viewport');
+  var i=0, n=cards.length, timer=null, hold=false, still=false;
+  try{ still=matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  function place(){ var c=cards[i], gap=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap)||28;
+    var x=vp.clientWidth/2 - (c.offsetLeft + c.offsetWidth/2); track.style.transform='translateX('+x+'px)'; }
+  function show(k){ i=(k+n)%n; cards.forEach(function(c,j){ c.classList.toggle('is-on',j===i); c.setAttribute('aria-hidden', j===i?'false':'true'); });
+    dots.forEach(function(d,j){ d.classList.toggle('on',j===i); }); place(); arm(); }
+  function arm(){ clearTimeout(timer); if(still||hold) return; timer=setTimeout(function(){ if(!document.hidden) show(i+1); else arm(); }, 7000); }
+  sec.querySelector('.tc-prev').addEventListener('click',function(){ show(i-1); });
+  sec.querySelector('.tc-next').addEventListener('click',function(){ show(i+1); });
+  dots.forEach(function(d){ d.addEventListener('click',function(){ show(+d.dataset.i); }); });
+  cards.forEach(function(c,j){ c.addEventListener('click',function(){ if(j!==i) show(j); }); });
+  vp.addEventListener('mouseenter',function(){ hold=true; arm(); }); vp.addEventListener('mouseleave',function(){ hold=false; arm(); });
+  sec.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') show(i-1); if(e.key==='ArrowRight') show(i+1); });
+  var x0=null; vp.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; hold=true; },{passive:true});
+  vp.addEventListener('touchend',function(e){ hold=false; if(x0!==null){ var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) show(i+(dx<0?1:-1)); else arm(); } x0=null; });
+  window.addEventListener('resize',place); window.addEventListener('load',place);
+  show(1);
+})();
+</script>
+<script>
     (function(){
       var root=document.querySelector('.pillar-carousel'); if(!root) return;
       var slides=root.querySelectorAll('.pc-slide'), tabs=root.querySelectorAll('.pc-tab'), count=root.querySelector('.pc-count b'), bar=root.querySelector('.pc-bar span');
