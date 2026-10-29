@@ -1057,6 +1057,10 @@
       "destination": "/project-studio-workspace-gurgaon"
     },
     {
+      "source": "/projects/indeva-studio-office-narela",
+      "destination": "/project-indeva-studio-office-narela"
+    },
+    {
       "source": "/projects/vasant-kunj-dda-residence",
       "destination": "/project-vasant-kunj-dda-residence"
     }
