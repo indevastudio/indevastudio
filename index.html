@@ -692,7 +692,7 @@ nav.solid {
 .projects-carousel-track {
   display: flex;
   gap: 20px;
-  animation: projectsScroll 32s linear infinite;
+  animation: projectsScroll 45s linear infinite;
   width: max-content;
   cursor: grab;
 }
@@ -2557,7 +2557,7 @@ select.form-field option { background: var(--black-3); }
   .who-inner, .grid-2, .approach-inner, .testi-inner, .cta-inner,
   .about-hero, .founder-section, .phil-hero, .contact-body,
   .services-hero, .service-detail, .defines-grid { grid-template-columns:1fr; }
-  .projects-carousel-track { animation-duration: 22s; } .project-card { width: 280px; height: 380px; }
+  .projects-carousel-track { animation-duration: 31s; } .project-card { width: 280px; height: 380px; }
   .philosophy-pillars { grid-template-columns:1fr 1fr; }
   .process-stage { grid-template-columns: 60px 1fr; gap:32px; }
   .process-stage > *:last-child { grid-column: 2; }
@@ -3809,6 +3809,27 @@ img {
 
     <div class="projects-carousel-wrap">
       <div class="projects-carousel-track" id="projectsTrack">
+        <!-- New: villa + office -->
+        <div class="project-card" onclick="location.href='/projects/villa-narela'">
+          <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" width="800" height="451" decoding="async" loading="lazy">
+          <div class="project-hover-line">renewed, not rebuilt.</div>
+          <div class="project-card-info">
+            <div class="project-card-type">residential</div>
+            <div class="project-card-name">villa project</div>
+            <div class="project-card-loc">narela &middot; dholpur stone facade</div>
+            <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
+          </div>
+        </div>
+        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
+          <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" width="800" height="450" decoding="async" loading="lazy">
+          <div class="project-hover-line">one room, every wall planned.</div>
+          <div class="project-card-info">
+            <div class="project-card-type">commercial</div>
+            <div class="project-card-name">indéva studio office</div>
+            <div class="project-card-loc">narela &middot; office interior</div>
+            <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
+          </div>
+        </div>
         <!-- Card 1 -->
         <div class="project-card" onclick="showPage('projects')">
           <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
@@ -3865,6 +3886,26 @@ img {
           </div>
         </div>
         <!-- Duplicate set for seamless loop -->
+        <div class="project-card" onclick="location.href='/projects/villa-narela'">
+          <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="451" decoding="async" loading="lazy">
+          <div class="project-hover-line">renewed, not rebuilt.</div>
+          <div class="project-card-info">
+            <div class="project-card-type">residential</div>
+            <div class="project-card-name">villa project</div>
+            <div class="project-card-loc">narela &middot; dholpur stone facade</div>
+            <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
+          </div>
+        </div>
+        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
+          <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="450" decoding="async" loading="lazy">
+          <div class="project-hover-line">one room, every wall planned.</div>
+          <div class="project-card-info">
+            <div class="project-card-type">commercial</div>
+            <div class="project-card-name">indéva studio office</div>
+            <div class="project-card-loc">narela &middot; office interior</div>
+            <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
+          </div>
+        </div>
         <div class="project-card" onclick="showPage('projects')">
           <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">designed for living.</div>
