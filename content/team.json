@@ -2,13 +2,6 @@
   "_readme": "Edit this file to change the Our Team section on /about, then run: node build-pages.cjs. 'photo' is a file in project-images-for-website/team/ (null shows initials). 'focus' is the CSS object-position for the photo crop.",
   "members": [
     {
-      "name": "Veenu Saini",
-      "role": "Director, Compliance, Risk & Safety",
-      "photo": "veenu-saini-2.webp",
-      "focus": "center center",
-      "desc": "Oversees compliance, risk management and site safety, making sure every project runs responsibly and safely from the first day to handover."
-    },
-    {
       "name": "Gunjeet Singh",
       "role": "Chief Marketing Officer",
       "photo": "gunjeet-singh.webp",
