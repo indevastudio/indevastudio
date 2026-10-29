@@ -1288,6 +1288,40 @@ nav.solid {
 }
 @media (prefers-reduced-motion: reduce) { .founder-linkedin, .founder-photo::after { transition: none; } }
 
+/* ── ABOUT · FIVE PILLARS carousel ── */
+.pillar-carousel { position: relative; }
+.pc-stage { position: relative; display: grid; }
+.pc-slide { grid-area: 1 / 1; display: grid; grid-template-columns: 1.25fr 1fr; gap: 0; background: var(--black-2); opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0s linear 0.6s; }
+.pc-slide.is-on { opacity: 1; visibility: visible; transition: opacity 0.6s ease; }
+.pc-media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 0 0 0 0; }
+.pc-media img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.04); transition: transform 6s ease-out; }
+.pc-slide.is-on .pc-media img { transform: scale(1); }
+.pc-text { padding: 44px 44px 40px; display: flex; flex-direction: column; justify-content: center; }
+.pc-text .pillar-icon { width: 30px; height: 30px; margin-bottom: 20px; }
+.pc-text .pillar-name { font-size: clamp(1.3rem, 2vw, 1.7rem); margin-bottom: 14px; }
+.pc-text .pillar-desc { font-size: 0.82rem; line-height: 1.85; max-width: 440px; }
+.pc-slide.is-on .pc-text > * { animation: pcIn 0.6s ease both; }
+.pc-slide.is-on .pc-text > *:nth-child(2) { animation-delay: 0.05s; } .pc-slide.is-on .pc-text > *:nth-child(3) { animation-delay: 0.1s; } .pc-slide.is-on .pc-text > *:nth-child(4) { animation-delay: 0.15s; }
+@keyframes pcIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.pc-controls { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.pc-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-gold); background: transparent; color: var(--gold); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.pc-arrow:hover { background: var(--gold); color: #fff; }
+.pc-arrow:focus-visible, .pc-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.pc-count { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; color: var(--white-muted); min-width: 64px; text-align: center; }
+.pc-count b { color: var(--white); font-weight: 600; }
+.pc-bar { flex: 1; height: 1px; background: var(--line); position: relative; }
+.pc-bar span { position: absolute; left: 0; top: -0.5px; height: 2px; width: 0; background: var(--gold); }
+.pc-tabs { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 16px; }
+.pc-tab { background: none; border: none; padding: 4px 0; cursor: pointer; font-family: var(--sans); font-size: 0.72rem; color: var(--white-muted); border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.pc-tab span { font-family: var(--mono); font-size: 0.55rem; letter-spacing: 0.12em; color: var(--gold-dim); margin-right: 4px; }
+.pc-tab:hover, .pc-tab.on { color: var(--white); border-color: var(--gold); }
+@media (max-width: 900px) {
+  .pc-slide { grid-template-columns: 1fr; }
+  .pc-text { padding: 26px 22px 28px; }
+  .pc-tabs { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .pc-slide, .pc-media img { transition: none; } .pc-slide.is-on .pc-text > * { animation: none; } }
+
 /* ── ABOUT · WHY INDÉVA ── */
 .about-why { padding-left: 60px; padding-right: 60px; padding-bottom: 70px; border-bottom: 1px solid var(--line); }
 .about-why-top { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: end; padding-top: 60px; margin-bottom: 48px; }
@@ -4205,6 +4239,32 @@ img {
         var walk = (x - startX) * 1.5;
         track.style.transform = 'translateX(' + (-walk) + 'px)';
       });
+    })();
+    </script>
+<script>
+    (function(){
+      var root=document.querySelector('.pillar-carousel'); if(!root) return;
+      var slides=root.querySelectorAll('.pc-slide'), tabs=root.querySelectorAll('.pc-tab'), count=root.querySelector('.pc-count b'), bar=root.querySelector('.pc-bar span');
+      var i=0, n=slides.length, DUR=6000, timer=null, paused=false;
+      var still=false; try{ still=window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+      function show(k){ i=(k+n)%n;
+        slides.forEach(function(s,j){ s.classList.toggle('is-on',j===i); if(j===i) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden','true'); });
+        tabs.forEach(function(t,j){ t.classList.toggle('on',j===i); });
+        count.textContent='0'+(i+1); restart(); }
+      function restart(){ clearTimeout(timer); bar.style.transition='none'; bar.style.width='0';
+        if(still||paused) return; void bar.offsetWidth; bar.style.transition='width '+DUR+'ms linear'; bar.style.width='100%';
+        timer=setTimeout(function(){ if(!document.hidden) show(i+1); else restart(); }, DUR); }
+      root.querySelector('.pc-prev').addEventListener('click',function(){ show(i-1); });
+      root.querySelector('.pc-next').addEventListener('click',function(){ show(i+1); });
+      tabs.forEach(function(t){ t.addEventListener('click',function(){ show(+t.dataset.i); }); });
+      root.addEventListener('mouseenter',function(){ paused=true; restart(); });
+      root.addEventListener('mouseleave',function(){ paused=false; restart(); });
+      root.addEventListener('focusin',function(){ paused=true; restart(); });
+      root.addEventListener('focusout',function(){ paused=false; restart(); });
+      root.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft') show(i-1); if(e.key==='ArrowRight') show(i+1); });
+      var x0=null; root.addEventListener('touchstart',function(e){ x0=e.touches[0].clientX; },{passive:true});
+      root.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>40) show(i+(dx<0?1:-1)); x0=null; });
+      show(0);
     })();
     </script>
 <!-- /vendors -->
