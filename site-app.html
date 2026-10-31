@@ -4398,7 +4398,7 @@ img {
       root.querySelector('.lc-next').addEventListener('click',function(){ go(i+1); restart(); });
       dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); restart(); }); });
       track.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ go(i+1); restart(); } else if(e.key==='ArrowLeft'){ go(i-1); restart(); } });
-      function start(){ if(!reduce && !timer) timer=setInterval(function(){ go(i+1); },6000); }
+      function start(){ if(!reduce && !timer) timer=setInterval(function(){ go(i+1); },4000); }
       function stop(){ clearInterval(timer); timer=null; }
       function restart(){ stop(); start(); }
       root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
