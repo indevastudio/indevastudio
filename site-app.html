@@ -3290,6 +3290,19 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 :where(a[data-page]){color:inherit;text-decoration:none;cursor:pointer}
 :where(.nav-link,.nav-cta-primary,.mob-btn,.drawer-cta)[href]{display:inline-block}
 :where(.nav-logo,.footer-logo)[href]{display:block}
+
+/* ── ABOUT · LEADERSHIP (founder + director side by side) ── */
+.leadership-section { padding: 100px 60px; border-bottom: 1px solid var(--line); }
+.leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 8px; }
+.leader-card { display: flex; flex-direction: column; }
+.leadership-section .founder-photo { position: relative; top: auto; max-width: none; width: 100%; justify-self: stretch; aspect-ratio: 1/1; margin-bottom: 36px; }
+.leadership-section .founder-label { margin-bottom: 18px; }
+.leadership-section .founder-position { margin-bottom: 22px; }
+.leadership-section .founder-note { margin-top: 28px; }
+@media (max-width: 900px) {
+  .leadership-section { padding: 64px 20px; }
+  .leadership-grid { grid-template-columns: 1fr; gap: 64px; }
+}
 </style>
 
 <style id="mobile-optimisation">
@@ -4304,8 +4317,17 @@ img {
     </div>
   </section>
 
-  <section class="founder-section">
-    <div>
+  <section class="leadership-section" aria-label="leadership">
+    <div class="leadership-grid">
+      <article class="leader-card">
+      <div class="founder-photo reveal d1">
+      <img src="https://www.indevastudio.com/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
+      <a class="founder-linkedin" href="https://www.linkedin.com/in/arpit-saini-3310981a8/" target="_blank" rel="noopener me" aria-label="arpit saini on linkedin (opens in a new tab)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        <span>connect on linkedin</span>
+      </a>
+    </div>
+
       <div class="label-line label founder-label reveal">founder</div>
       <div class="founder-name-display reveal d1">arpit saini</div>
       <div class="founder-title-tag reveal d2">founder & ceo, indéva studio</div>
@@ -4319,32 +4341,27 @@ img {
           "impact over hard work. nobody lives in the hours we put in. they live in what we built."
         </p>
       </div>
-    </div>
-    <div class="founder-photo reveal d1">
-      <img src="https://www.indevastudio.com/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
-      <a class="founder-linkedin" href="https://www.linkedin.com/in/arpit-saini-3310981a8/" target="_blank" rel="noopener me" aria-label="arpit saini on linkedin (opens in a new tab)">
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-        <span>connect on linkedin</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="founder-section director-section" aria-labelledby="director-veenu-saini">
-    <div>
-      <div class="label-line label founder-label reveal">director</div>
-      <div class="founder-name-display reveal d1" id="director-veenu-saini">veenu saini</div>
-      <div class="founder-title-tag reveal d2">director of projects &amp; compliance, indéva studio</div>
-      <p class="founder-body reveal d3">
-        veenu saini brings 25+ years of experience in manufacturing, sales, operations, financial compliance and site audits with quality control checks.
-      </p>
-      <div class="founder-note reveal d4">
-        <p class="founder-note-text">
-          "design inspires. discipline delivers."
-        </p>
+    
+      </article>
+      <article class="leader-card" aria-labelledby="director-veenu-saini">
+      <div class="founder-photo reveal d1">
+        <img src="/project-images-for-website/team/veenu-saini.webp" alt="veenu saini, director of projects and compliance at indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
       </div>
-    </div>
-    <div class="founder-photo reveal d1">
-      <img src="/project-images-for-website/team/veenu-saini.webp" alt="veenu saini, director of projects and compliance at indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
+        <div class="label-line label founder-label reveal">director</div>
+        <div class="founder-name-display reveal d1" id="director-veenu-saini">veenu saini</div>
+        <div class="founder-title-tag reveal d2">director of projects &amp; compliance, indéva studio</div>
+        <div class="founder-position reveal d2">Where design meets accountability.</div>
+        <p class="founder-body reveal d3">
+          veenu saini brings 25+ years of experience in manufacturing, sales, operations, financial compliance and site audits with quality control checks.<br><br>
+          at indéva studio he oversees project delivery and compliance, keeping timelines, vendor commitments, documentation and site quality on track so that what is designed on paper is delivered on site exactly as promised.<br><br>
+          his years on factory floors and in audits shape a simple discipline: every material checked, every stage inspected and every rupee accounted for before a home is handed over.
+        </p>
+        <div class="founder-note reveal d4">
+          <p class="founder-note-text">
+            "design inspires. discipline delivers."
+          </p>
+        </div>
+      </article>
     </div>
   </section>
 
