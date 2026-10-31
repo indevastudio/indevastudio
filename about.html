@@ -3292,27 +3292,32 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 :where(.nav-link,.nav-cta-primary,.mob-btn,.drawer-cta)[href]{display:inline-block}
 :where(.nav-logo,.footer-logo)[href]{display:block}
 
-/* ── ABOUT · LEADERSHIP (founder + director side by side) ── */
+/* ── ABOUT · LEADERSHIP CAROUSEL (founder + director) ── */
 .leadership-section { padding: 72px 60px; border-bottom: 1px solid var(--line); }
-.leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; max-width: 1160px; margin: 0 auto; }
-.leader-card { display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: start; }
-.leadership-section .founder-photo { position: relative; top: auto; width: 180px; max-width: 180px; justify-self: start; aspect-ratio: 4/5; margin: 0; }
-.leadership-section .founder-linkedin { padding: 9px 12px; font-size: 0.55rem; bottom: 14px; white-space: nowrap; }
+.leadership-carousel { max-width: 980px; margin: 0 auto; }
+.leadership-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+.leadership-grid::-webkit-scrollbar { display: none; }
+.leader-card { flex: 0 0 100%; scroll-snap-align: start; display: grid; grid-template-columns: 260px 1fr; gap: 44px; align-items: center; padding: 4px 2px; box-sizing: border-box; }
+.leadership-section .founder-photo { position: relative; top: auto; width: 260px; max-width: 260px; justify-self: start; aspect-ratio: 4/5; margin: 0; }
+.leadership-section .founder-linkedin { padding: 10px 14px; font-size: 0.58rem; bottom: 18px; white-space: nowrap; }
 .leadership-section .founder-label { margin-bottom: 12px; }
-.leadership-section .founder-name-display { font-size: clamp(1.4rem, 2vw, 1.9rem); margin-bottom: 4px; }
-.leadership-section .founder-title-tag { font-size: 0.55rem; margin-bottom: 16px; }
-.leadership-section .founder-position { font-size: 1rem; margin-bottom: 14px; }
+.leadership-section .founder-name-display { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 4px; }
+.leadership-section .founder-title-tag { font-size: 0.56rem; margin-bottom: 16px; }
+.leadership-section .founder-position { font-size: 1.02rem; margin-bottom: 14px; }
 .leadership-section .founder-body { font-size: 0.8rem; line-height: 1.75; }
 .leadership-section .founder-note { margin-top: 18px; padding-left: 18px; }
 .leadership-section .founder-note-text { font-size: 0.92rem; }
-@media (max-width: 1100px) {
-  .leadership-grid { grid-template-columns: 1fr; gap: 48px; max-width: 720px; }
-}
-@media (max-width: 600px) {
+.lc-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 28px; }
+.lc-dots { display: flex; gap: 8px; }
+.lc-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid var(--gold); background: transparent; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.lc-dot[aria-current="true"] { background: var(--gold); transform: scale(1.15); }
+.lc-dot:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 760px) {
   .leadership-section { padding: 56px 20px; }
-  .leader-card { grid-template-columns: 1fr; gap: 20px; }
-  .leadership-section .founder-photo { width: 160px; max-width: 160px; }
+  .leader-card { grid-template-columns: 1fr; gap: 22px; align-items: start; }
+  .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
+@media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
 </style>
 
 <style id="mobile-optimisation">
@@ -3740,8 +3745,9 @@ img {
   </section>
 
   <section class="leadership-section" aria-label="leadership">
-    <div class="leadership-grid">
-      <article class="leader-card">
+    <div class="leadership-carousel" aria-roledescription="carousel" aria-label="leadership">
+    <div class="leadership-grid" tabindex="0">
+      <article class="leader-card" aria-roledescription="slide" aria-label="1 of 2">
       <div class="founder-photo reveal d1">
       <img src="https://www.indevastudio.com/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
       <a class="founder-linkedin" href="https://www.linkedin.com/in/arpit-saini-3310981a8/" target="_blank" rel="noopener me" aria-label="arpit saini on linkedin (opens in a new tab)">
@@ -3765,7 +3771,7 @@ img {
       </div>
       </div>
       </article>
-      <article class="leader-card" aria-labelledby="director-veenu-saini">
+      <article class="leader-card" aria-roledescription="slide" aria-label="2 of 2">
       <div class="founder-photo reveal d1">
         <img src="/project-images-for-website/team/veenu-saini.webp" alt="veenu saini, director of projects and compliance at indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
       </div>
@@ -3787,6 +3793,33 @@ img {
       </div>
       </article>
     </div>
+    <div class="lc-controls">
+      <button type="button" class="pc-arrow lc-prev" aria-label="previous"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="lc-dots"><button type="button" class="lc-dot" aria-label="arpit saini" aria-current="true"></button><button type="button" class="lc-dot" aria-label="veenu saini" aria-current="false"></button></div>
+      <button type="button" class="pc-arrow lc-next" aria-label="next"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    </div>
+    <script>
+    (function(){
+      var root=document.querySelector('.leadership-carousel'); if(!root) return;
+      var track=root.querySelector('.leadership-grid'), cards=track.querySelectorAll('.leader-card'), dots=root.querySelectorAll('.lc-dot');
+      var n=cards.length, i=0, timer=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function go(k){ i=(k+n)%n; track.scrollTo({left:cards[i].offsetLeft-track.offsetLeft, behavior: reduce?'auto':'smooth'}); mark(); }
+      function mark(){ dots.forEach(function(d,j){ d.setAttribute('aria-current', j===i?'true':'false'); }); }
+      track.addEventListener('scroll',function(){ var k=Math.round(track.scrollLeft/track.clientWidth); if(k!==i){ i=k; mark(); } },{passive:true});
+      root.querySelector('.lc-prev').addEventListener('click',function(){ go(i-1); restart(); });
+      root.querySelector('.lc-next').addEventListener('click',function(){ go(i+1); restart(); });
+      dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); restart(); }); });
+      track.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ go(i+1); restart(); } else if(e.key==='ArrowLeft'){ go(i-1); restart(); } });
+      function start(){ if(!reduce && !timer) timer=setInterval(function(){ go(i+1); },6000); }
+      function stop(){ clearInterval(timer); timer=null; }
+      function restart(){ stop(); start(); }
+      root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
+      root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
+      track.addEventListener('touchstart',stop,{passive:true});
+      start();
+    })();
+    </script>
   </section>
 
   <section class="philosophy-section">
