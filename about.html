@@ -3293,16 +3293,25 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 :where(.nav-logo,.footer-logo)[href]{display:block}
 
 /* ── ABOUT · LEADERSHIP (founder + director side by side) ── */
-.leadership-section { padding: 100px 60px; border-bottom: 1px solid var(--line); }
-.leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 8px; }
-.leader-card { display: flex; flex-direction: column; }
-.leadership-section .founder-photo { position: relative; top: auto; max-width: none; width: 100%; justify-self: stretch; aspect-ratio: 1/1; margin-bottom: 36px; }
-.leadership-section .founder-label { margin-bottom: 18px; }
-.leadership-section .founder-position { margin-bottom: 22px; }
-.leadership-section .founder-note { margin-top: 28px; }
-@media (max-width: 900px) {
-  .leadership-section { padding: 64px 20px; }
-  .leadership-grid { grid-template-columns: 1fr; gap: 64px; }
+.leadership-section { padding: 72px 60px; border-bottom: 1px solid var(--line); }
+.leadership-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; max-width: 1160px; margin: 0 auto; }
+.leader-card { display: grid; grid-template-columns: 180px 1fr; gap: 28px; align-items: start; }
+.leadership-section .founder-photo { position: relative; top: auto; width: 180px; max-width: 180px; justify-self: start; aspect-ratio: 4/5; margin: 0; }
+.leadership-section .founder-linkedin { padding: 9px 12px; font-size: 0.55rem; bottom: 14px; white-space: nowrap; }
+.leadership-section .founder-label { margin-bottom: 12px; }
+.leadership-section .founder-name-display { font-size: clamp(1.4rem, 2vw, 1.9rem); margin-bottom: 4px; }
+.leadership-section .founder-title-tag { font-size: 0.55rem; margin-bottom: 16px; }
+.leadership-section .founder-position { font-size: 1rem; margin-bottom: 14px; }
+.leadership-section .founder-body { font-size: 0.8rem; line-height: 1.75; }
+.leadership-section .founder-note { margin-top: 18px; padding-left: 18px; }
+.leadership-section .founder-note-text { font-size: 0.92rem; }
+@media (max-width: 1100px) {
+  .leadership-grid { grid-template-columns: 1fr; gap: 48px; max-width: 720px; }
+}
+@media (max-width: 600px) {
+  .leadership-section { padding: 56px 20px; }
+  .leader-card { grid-template-columns: 1fr; gap: 20px; }
+  .leadership-section .founder-photo { width: 160px; max-width: 160px; }
 }
 </style>
 
@@ -3740,7 +3749,7 @@ img {
         <span>connect on linkedin</span>
       </a>
     </div>
-
+      <div class="leader-text">
       <div class="label-line label founder-label reveal">founder</div>
       <div class="founder-name-display reveal d1">arpit saini</div>
       <div class="founder-title-tag reveal d2">founder & ceo, indéva studio</div>
@@ -3754,12 +3763,13 @@ img {
           "impact over hard work. nobody lives in the hours we put in. they live in what we built."
         </p>
       </div>
-    
+      </div>
       </article>
       <article class="leader-card" aria-labelledby="director-veenu-saini">
       <div class="founder-photo reveal d1">
         <img src="/project-images-for-website/team/veenu-saini.webp" alt="veenu saini, director of projects and compliance at indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
       </div>
+      <div class="leader-text">
         <div class="label-line label founder-label reveal">director</div>
         <div class="founder-name-display reveal d1" id="director-veenu-saini">veenu saini</div>
         <div class="founder-title-tag reveal d2">director of projects &amp; compliance, indéva studio</div>
@@ -3774,6 +3784,7 @@ img {
             "design inspires. discipline delivers."
           </p>
         </div>
+      </div>
       </article>
     </div>
   </section>
