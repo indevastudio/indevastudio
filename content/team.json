@@ -9,6 +9,13 @@
       "desc": "Leads the studio's brand, communication and marketing, shaping how our work, process and values reach the people we design for."
     },
     {
+      "name": "Yakshita Katyal",
+      "role": "Design Manager",
+      "photo": "yakshita-katyal.webp",
+      "focus": "center center",
+      "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings."
+    },
+    {
       "name": "Tanvi Maru",
       "role": "Client Relations Manager",
       "photo": "tanvi-maru.webp",
@@ -21,13 +28,6 @@
       "photo": "rishabh-jain.webp",
       "focus": "center 15%",
       "desc": "Manages accounts, billing and vendor payments, keeping every estimate, invoice and project ledger clear, accurate and on record."
-    },
-    {
-      "name": "Yakshita Katyal",
-      "role": "Design Manager",
-      "photo": "yakshita-katyal.webp",
-      "focus": "center center",
-      "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings."
     },
     {
       "name": "Vidisha Chaudhary",
