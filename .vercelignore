@@ -4,8 +4,16 @@
 # Old hosting folder. The site is now served from the repo root (vercel.json outputDirectory ".").
 public
 
-# Duplicate route files. The live versions are projects.html + project-*.html and insights/index.html.
-projects
+# Duplicate route files. Live: projects.html (/projects) and projects/<slug>.html (/projects/<slug>).
+# The old per-folder case studies below are superseded and 301-redirected in vercel.json.
+projects/index.html
+projects/dda-apartment
+projects/mini-farmhouse
+projects/patel-nagar
+projects/resham-hotel
+projects/south-delhi-neoclassical
+projects/studio-workspace
+projects/vasant-kunj
 insights.html
 new-update-03 Sept
 images-only
@@ -42,3 +50,9 @@ pshow.css
 *.cjs
 *.yml
 *.py
+
+# Stray single-file copies that shadowed their folder versions (insights/<slug>/index.html)
+# and carried a trailing-slash canonical. The folder versions are the live pages. (2 Nov 2026)
+insights/modern-cafe-interior-design-delhi-ncr.html
+insights/premium-living-room-design-gurgaon.html
+.gitignore

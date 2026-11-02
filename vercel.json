@@ -947,12 +947,12 @@
     },
     {
       "source": "/insights/flat-interior-design-cost-delhi",
-      "destination": "/insights/flat-interior-design-delhi-cost",
+      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
       "statusCode": 301
     },
     {
       "source": "/insights/flat-interior-design-delhi-cost-per-sqft-design",
-      "destination": "/insights/flat-interior-design-delhi-cost",
+      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
       "statusCode": 301
     },
     {
@@ -1029,44 +1029,11 @@
       "source": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost-cost-guide",
       "destination": "/insights/villa-interior-designers-delhi-ncr-price-guide-cost",
       "statusCode": 301
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/projects/dda-apartment-delhi",
-      "destination": "/project-dda-apartment-delhi"
     },
     {
-      "source": "/projects/mini-farmhouse-delhi",
-      "destination": "/project-mini-farmhouse-delhi"
-    },
-    {
-      "source": "/projects/patel-nagar-retail-store",
-      "destination": "/project-patel-nagar-retail-store"
-    },
-    {
-      "source": "/projects/hotel-silk-murthal",
-      "destination": "/project-hotel-silk-murthal"
-    },
-    {
-      "source": "/projects/south-delhi-neoclassical-residence",
-      "destination": "/project-south-delhi-neoclassical-residence"
-    },
-    {
-      "source": "/projects/studio-workspace-gurgaon",
-      "destination": "/project-studio-workspace-gurgaon"
-    },
-    {
-      "source": "/projects/indeva-studio-office-narela",
-      "destination": "/project-indeva-studio-office-narela"
-    },
-    {
-      "source": "/projects/villa-narela",
-      "destination": "/project-villa-narela"
-    },
-    {
-      "source": "/projects/vasant-kunj-dda-residence",
-      "destination": "/project-vasant-kunj-dda-residence"
+      "source": "/insights/flat-interior-design-delhi-cost",
+      "destination": "/insights/flat-interior-design-delhi-cost-per-sqft",
+      "statusCode": 301
     }
   ],
   "headers": [

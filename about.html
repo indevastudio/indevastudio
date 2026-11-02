@@ -702,6 +702,7 @@ nav.solid {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+a.project-card { display: block; color: inherit; text-decoration: none; }
 .project-card {
   position: relative;
   overflow: hidden;
@@ -3318,6 +3319,16 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* homepage enquiry form: one column on phones (2 Nov 2026 — the 2-column grid pushed the page 78px wider than a 390px screen) */
+#home-enquiry-form > * { min-width: 0; }
+@media (max-width: 600px) { #home-enquiry-form { grid-template-columns: 1fr !important; } }
+/* /services detail image: never wider than its column (2 Nov 2026 — pushed /services 300px past a 390px screen) */
+.service-detail > *, .service-detail-body > * { min-width: 0; }
+.service-detail-image img { max-width: 100%; height: auto; }
+/* /furniture catalogue buttons: one column on phones (2 Nov 2026 — 3 columns pushed the page 106px wide) */
+.catalog-grid > * { min-width: 0; }
+@media (max-width: 700px) { .catalog-grid { grid-template-columns: 1fr !important; } }
 </style>
 
 <style id="mobile-optimisation">

@@ -701,6 +701,7 @@ nav.solid {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+a.project-card { display: block; color: inherit; text-decoration: none; }
 .project-card {
   position: relative;
   overflow: hidden;
@@ -3317,6 +3318,16 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* homepage enquiry form: one column on phones (2 Nov 2026 — the 2-column grid pushed the page 78px wider than a 390px screen) */
+#home-enquiry-form > * { min-width: 0; }
+@media (max-width: 600px) { #home-enquiry-form { grid-template-columns: 1fr !important; } }
+/* /services detail image: never wider than its column (2 Nov 2026 — pushed /services 300px past a 390px screen) */
+.service-detail > *, .service-detail-body > * { min-width: 0; }
+.service-detail-image img { max-width: 100%; height: auto; }
+/* /furniture catalogue buttons: one column on phones (2 Nov 2026 — 3 columns pushed the page 106px wide) */
+.catalog-grid > * { min-width: 0; }
+@media (max-width: 700px) { .catalog-grid { grid-template-columns: 1fr !important; } }
 </style>
 
 <style id="mobile-optimisation">
@@ -3809,16 +3820,16 @@ img {
         <div class="offering-card"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
         <div class="offering-card"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
         <!-- duplicate for seamless loop -->
-        <div class="offering-card"><span class="offering-icon">📐</span><div class="offering-name">spatial planning</div><div class="offering-sub">zoning · circulation · proportion</div></div>
-        <div class="offering-card"><span class="offering-icon">💡</span><div class="offering-name">lighting strategy</div><div class="offering-sub">layered · purposeful · atmospheric</div></div>
-        <div class="offering-card"><span class="offering-icon">🪵</span><div class="offering-name">material language</div><div class="offering-sub">texture · contrast · dialogue</div></div>
-        <div class="offering-card"><span class="offering-icon">🛋</span><div class="offering-name">custom furniture</div><div class="offering-sub">form · function · forever</div></div>
-        <div class="offering-card"><span class="offering-icon">🏛</span><div class="offering-name">architecture</div><div class="offering-sub">structure · movement · logic</div></div>
-        <div class="offering-card"><span class="offering-icon">🔩</span><div class="offering-name">joinery & built-ins</div><div class="offering-sub">precision · longevity · detail</div></div>
-        <div class="offering-card"><span class="offering-icon">🧱</span><div class="offering-name">site execution</div><div class="offering-sub">supervision · protection · delivery</div></div>
-        <div class="offering-card"><span class="offering-icon">📦</span><div class="offering-name">vendor management</div><div class="offering-sub">alignment · accountability · control</div></div>
-        <div class="offering-card"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
-        <div class="offering-card"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">📐</span><div class="offering-name">spatial planning</div><div class="offering-sub">zoning · circulation · proportion</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">💡</span><div class="offering-name">lighting strategy</div><div class="offering-sub">layered · purposeful · atmospheric</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🪵</span><div class="offering-name">material language</div><div class="offering-sub">texture · contrast · dialogue</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🛋</span><div class="offering-name">custom furniture</div><div class="offering-sub">form · function · forever</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🏛</span><div class="offering-name">architecture</div><div class="offering-sub">structure · movement · logic</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🔩</span><div class="offering-name">joinery & built-ins</div><div class="offering-sub">precision · longevity · detail</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🧱</span><div class="offering-name">site execution</div><div class="offering-sub">supervision · protection · delivery</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">📦</span><div class="offering-name">vendor management</div><div class="offering-sub">alignment · accountability · control</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
+        <div class="offering-card" aria-hidden="true"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
       </div>
     </div>
   </section>
@@ -3836,7 +3847,7 @@ img {
     <div class="projects-carousel-wrap">
       <div class="projects-carousel-track" id="projectsTrack">
         <!-- New: villa + office -->
-        <div class="project-card" onclick="location.href='/projects/villa-narela'">
+        <a class="project-card" href="/projects/villa-narela" draggable="false">
           <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" width="800" height="451" decoding="async" loading="lazy">
           <div class="project-hover-line">renewed, not rebuilt.</div>
           <div class="project-card-info">
@@ -3845,8 +3856,8 @@ img {
             <div class="project-card-loc">narela &middot; dholpur stone facade</div>
             <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
           </div>
-        </div>
-        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
+        </a>
+        <a class="project-card" href="/projects/indeva-studio-office-narela" draggable="false">
           <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" width="800" height="450" decoding="async" loading="lazy">
           <div class="project-hover-line">one room, every wall planned.</div>
           <div class="project-card-info">
@@ -3855,9 +3866,9 @@ img {
             <div class="project-card-loc">narela &middot; office interior</div>
             <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
           </div>
-        </div>
+        </a>
         <!-- Card 1 -->
-        <div class="project-card" onclick="showPage('projects')">
+        <a class="project-card" href="/projects/mini-farmhouse-delhi" draggable="false">
           <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
@@ -3866,9 +3877,9 @@ img {
             <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
             <div class="project-card-scope">Interior Design + Furniture + Execution</div>
           </div>
-        </div>
+        </a>
         <!-- Card 2 -->
-        <div class="project-card" onclick="showPage('projects')">
+        <a class="project-card" href="/projects/hotel-silk-murthal" draggable="false">
           <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
@@ -3877,9 +3888,9 @@ img {
             <div class="project-card-loc">murthal &middot; 23 rooms</div>
             <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
           </div>
-        </div>
+        </a>
         <!-- Card 3 -->
-        <div class="project-card" onclick="showPage('projects')">
+        <a class="project-card" href="/projects/dda-apartment-delhi" draggable="false">
           <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
@@ -3888,9 +3899,9 @@ img {
             <div class="project-card-loc">delhi &middot; 1,800 sqft</div>
             <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
           </div>
-        </div>
+        </a>
         <!-- Card 4 -->
-        <div class="project-card" onclick="showPage('projects')">
+        <a class="project-card" href="/projects/studio-workspace-gurgaon" draggable="false">
           <img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="commercial design studio office interior, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">space as identity.</div>
           <div class="project-card-info">
@@ -3899,9 +3910,9 @@ img {
             <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
             <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
           </div>
-        </div>
+        </a>
         <!-- Card 6 -->
-        <div class="project-card" onclick="showPage('projects')">
+        <a class="project-card" href="/projects/vasant-kunj-dda-residence" draggable="false">
           <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
@@ -3910,9 +3921,9 @@ img {
             <div class="project-card-loc">new delhi &middot; dda residence</div>
             <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
           </div>
-        </div>
+        </a>
         <!-- Duplicate set for seamless loop -->
-        <div class="project-card" onclick="location.href='/projects/villa-narela'">
+        <a class="project-card" href="/projects/villa-narela" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="451" decoding="async" loading="lazy">
           <div class="project-hover-line">renewed, not rebuilt.</div>
           <div class="project-card-info">
@@ -3921,8 +3932,8 @@ img {
             <div class="project-card-loc">narela &middot; dholpur stone facade</div>
             <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
           </div>
-        </div>
-        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
+        </a>
+        <a class="project-card" href="/projects/indeva-studio-office-narela" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="450" decoding="async" loading="lazy">
           <div class="project-hover-line">one room, every wall planned.</div>
           <div class="project-card-info">
@@ -3931,8 +3942,8 @@ img {
             <div class="project-card-loc">narela &middot; office interior</div>
             <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
           </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
+        </a>
+        <a class="project-card" href="/projects/mini-farmhouse-delhi" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
@@ -3941,8 +3952,8 @@ img {
             <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
             <div class="project-card-scope">Interior Design + Furniture + Execution</div>
           </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
+        </a>
+        <a class="project-card" href="/projects/hotel-silk-murthal" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
@@ -3951,8 +3962,8 @@ img {
             <div class="project-card-loc">murthal &middot; 23 rooms</div>
             <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
           </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
+        </a>
+        <a class="project-card" href="/projects/dda-apartment-delhi" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
@@ -3961,8 +3972,8 @@ img {
             <div class="project-card-loc">delhi &middot; 1,800 sqft</div>
             <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
           </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
+        </a>
+        <a class="project-card" href="/projects/studio-workspace-gurgaon" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="commercial design studio office interior, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
           <div class="project-hover-line">space as identity.</div>
           <div class="project-card-info">
@@ -3971,8 +3982,8 @@ img {
             <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
             <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
           </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
+        </a>
+        <a class="project-card" href="/projects/vasant-kunj-dda-residence" draggable="false" aria-hidden="true" tabindex="-1">
           <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
@@ -3981,7 +3992,7 @@ img {
             <div class="project-card-loc">new delhi &middot; dda residence</div>
             <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 
@@ -5750,7 +5761,7 @@ img {
     <div class="label-line label reveal">download</div>
     <h3 class="display display-md reveal d1" style="margin-top:20px;margin-bottom:12px;">our furniture<br>catalogues.</h3>
     <p class="reveal d2" style="font-family:var(--sans);font-size:0.9rem;color:var(--white-muted);max-width:600px;margin-bottom:48px;">browse our full range by category — download any catalogue below as a PDF.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+    <div class="catalog-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
       <button class="btn reveal" onclick="downloadCatalog('furniture-catalogue', 'Indeva-Furniture-Catalogue.pdf', 'Furniture Catalogue')" style="justify-content:space-between;border:1px solid var(--line-gold);color:var(--white);padding:20px 24px;width:100%;">
         <span>furniture catalogue</span><span style="opacity:0.6;">↓</span>
       </button>
