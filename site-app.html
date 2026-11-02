@@ -4332,9 +4332,9 @@ img {
   </section>
 
   <section class="leadership-section" aria-label="leadership">
-    <div class="leadership-carousel" aria-roledescription="carousel" aria-label="leadership">
+    <div class="leadership-carousel">
     <div class="leadership-grid" tabindex="0">
-      <article class="leader-card" aria-roledescription="slide" aria-label="1 of 2">
+      <article class="leader-card">
       <div class="founder-photo reveal d1">
       <img src="https://www.indevastudio.com/project-images-for-website/founder-arpit.webp" alt="arpit saini, founder of indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
       <a class="founder-linkedin" href="https://www.linkedin.com/in/arpit-saini-3310981a8/" target="_blank" rel="noopener me" aria-label="arpit saini on linkedin (opens in a new tab)">
@@ -4358,55 +4358,8 @@ img {
       </div>
       </div>
       </article>
-      <article class="leader-card" aria-roledescription="slide" aria-label="2 of 2">
-      <div class="founder-photo reveal d1">
-        <img src="/project-images-for-website/team/veenu-saini.webp" alt="veenu saini, director of projects and compliance at indéva studio" width="1080" height="1080" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.78) grayscale(8%);">
-      </div>
-      <div class="leader-text">
-        <div class="label-line label founder-label reveal">director</div>
-        <div class="founder-name-display reveal d1" id="director-veenu-saini">veenu saini</div>
-        <div class="founder-title-tag reveal d2">director of projects &amp; compliance, indéva studio</div>
-        <div class="founder-position reveal d2">Where design meets accountability.</div>
-        <p class="founder-body reveal d3">
-          veenu saini brings 25+ years of experience in manufacturing, sales, operations, financial compliance and site audits with quality control checks.<br><br>
-          at indéva studio he oversees project delivery and compliance, keeping timelines, vendor commitments, documentation and site quality on track so that what is designed on paper is delivered on site exactly as promised.<br><br>
-          his years on factory floors and in audits shape a simple discipline: every material checked, every stage inspected and every rupee accounted for before a home is handed over.
-        </p>
-        <div class="founder-note reveal d4">
-          <p class="founder-note-text">
-            "design inspires. discipline delivers."
-          </p>
-        </div>
-      </div>
-      </article>
-    </div>
-    <div class="lc-controls">
-      <button type="button" class="pc-arrow lc-prev" aria-label="previous"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <div class="lc-dots"><button type="button" class="lc-dot" aria-label="arpit saini" aria-current="true"></button><button type="button" class="lc-dot" aria-label="veenu saini" aria-current="false"></button></div>
-      <button type="button" class="pc-arrow lc-next" aria-label="next"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
     </div>
-    <script>
-    (function(){
-      var root=document.querySelector('.leadership-carousel'); if(!root) return;
-      var track=root.querySelector('.leadership-grid'), cards=track.querySelectorAll('.leader-card'), dots=root.querySelectorAll('.lc-dot');
-      var n=cards.length, i=0, timer=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function go(k){ i=(k+n)%n; track.scrollTo({left:cards[i].offsetLeft-track.offsetLeft, behavior: reduce?'auto':'smooth'}); mark(); }
-      function mark(){ dots.forEach(function(d,j){ d.setAttribute('aria-current', j===i?'true':'false'); }); }
-      track.addEventListener('scroll',function(){ var k=Math.round(track.scrollLeft/track.clientWidth); if(k!==i){ i=k; mark(); } },{passive:true});
-      root.querySelector('.lc-prev').addEventListener('click',function(){ go(i-1); restart(); });
-      root.querySelector('.lc-next').addEventListener('click',function(){ go(i+1); restart(); });
-      dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); restart(); }); });
-      track.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ go(i+1); restart(); } else if(e.key==='ArrowLeft'){ go(i-1); restart(); } });
-      function start(){ if(!reduce && !timer) timer=setInterval(function(){ go(i+1); },4000); }
-      function stop(){ clearInterval(timer); timer=null; }
-      function restart(){ stop(); start(); }
-      root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
-      root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
-      track.addEventListener('touchstart',stop,{passive:true});
-      start();
-    })();
-    </script>
   </section>
 
   <section class="philosophy-section">
