@@ -1,187 +1,205 @@
-# Indeva Studio — Technical SEO, Service & Location Pages: Implementation Report
+# Indéva Studio — SEO repair: implementation report
 
-Date: 13 October 2026
-Repository: `github.com/indevastudio/indevastudio` (commit `fdbe088` as baseline)
-Scope of this report: what was **actually** changed and tested in the repository. Nothing here has been deployed by me — this session has read access to the repo, no push access, and the Vercel API returned 403 for the project's team scope.
+Date: 2 November 2026 · Branch: `seo-repair-2026-11` (from `main` at `9fa92e9`) · Audit: `SEO_PRE_REPAIR_AUDIT.md`
+Previous report (13 Oct 2026): `SEO_IMPLEMENTATION_REPORT_2026-10-13.md`
 
----
+**Nothing has been deployed.** Pushing to `main` deploys straight to production, so all work is on the branch above, waiting for your approval to merge.
 
-## A. Baseline findings (before any change)
+**Statuses used:**
 
-**Architecture**
-- Plain static HTML on Vercel (`framework: null`, `outputDirectory: "."`, `cleanUrls: true`, `trailingSlash: false`). No framework, no SSR. Cloudflare sits in front of Vercel (DNS/proxy).
-- The core pages (`/`, `/about`, `/services`, `/process`, `/philosophy`, `/contact`, `/furniture`, `/vendors`) are a single-page app: every one was a **556 KB copy of the same document** containing all ten sections, with JavaScript switching the visible section after load.
-- Project case studies are separate static files (`project-*.html`, rewritten to `/projects/<slug>`); city pages are separate static files (`delhi.html`, `gurgaon.html`, …); ~300 insight articles live under `insights/<slug>/index.html`, published by a GitHub Actions bot.
-
-**Issues found**
-
-| # | Issue | Evidence |
-|---|---|---|
-| 1 | Every core page shared one H1 ("Architecture led interiors…") and near-identical HTML | `about.html`, `services.html` etc. byte-identical bodies; live `/about` confirmed the homepage H1 |
-| 2 | A builder that fixes #1 (`build-pages.cjs`) existed but had **never run**: its workflow (`seo-build.yml`) and helper (`seo-apply.cjs`) were uploaded to the repo root instead of `.github/workflows/` and `scripts/`, so neither ever executed | file locations; `seo-apply.cjs` resolves paths relative to `scripts/` |
-| 3 | Main navigation on the live homepage was `<button onclick>` — not crawlable links | live `index.html` vs `site-app.html` |
-| 4 | **Mislabelled project photos**: Gurgaon page and the Services section showed the Mini Farmhouse (Delhi) living room as "DLF Crest Penthouse, Gurgaon"; the Noida page presented Mini Farmhouse and Gurgaon studio photos as Noida projects | perceptual-hash match of `project-images-for-website/living area.webp`, `Master bedroom design.webp`, `Studio Workspace.webp` against the case-study images |
-| 5 | Noida page carried unverifiable claims: "6 Projects Delivered", "5★ Average Client Rating", "No subcontractors", "Sector 150 is one of our most active Noida markets", Noida testimonials | `noida.html` |
-| 6 | Structured data: self-serving `AggregateRating` on the business entity (not eligible for review rich results), a `SearchAction` for a site search that does not exist, invalid `additionalType: schema.org/InteriorDesigner`, an empty `<script type="application/ld+json">` block on every SPA page, and a separate `LocalBusiness` with a different `url` on each city page | `site-app.html`, city pages |
-| 7 | Latent sitemap bug: `build-sitemap.cjs` wrote a sitemap **index** + 4 child files, but the blog workflow only commits `sitemap.xml` — the next bot run would have published an index pointing to missing files | `.github/workflows/auto-generate.yml` |
-| 8 | Repo `sitemap.xml` listed 25 URLs that 301-redirect and 4 that are `noindex` | sitemap vs `vercel.json` |
-| 9 | Two stray `insights/<slug>.html` files shadow their folder versions; one served an indexable page whose canonical pointed at a trailing-slash (redirecting) URL | `insights/modern-cafe-interior-design-delhi-ncr.html` |
-| 10 | `/services` was ambiguous: both `services.html` and an older `services/index.html` existed | file system |
-| 11 | ~300 internal links across insights/city pages pointed at `/#section` anchors or at URLs that 301-redirect | `seo-apply.cjs` dry run |
-| 12 | Homepage "insights" cards were `<div onclick>` opening an in-page overlay instead of links to the real `/insights/<slug>` pages; every core page shipped 210 KB of inline article text for that overlay | `site-app.html` |
-| 13 | City-page heroes started at `opacity:0` (`.reveal`) until JavaScript ran, delaying the visible H1/hero (LCP); hero images lacked width/height; section titles were `<h3>` directly under the `<h1>` | `delhi.html`, `gurgaon.html`, etc. |
-| 14 | No dedicated service pages (only `/services` hub) and no Narela or Vasant Kunj location pages | routes |
-| 15 | Lead-tracking: homepage form fires `lead_form_submit`; no tracking on phone/WhatsApp clicks on city/project pages | page scripts |
-| 16 | Live site ≠ repo: the live sitemap has 331 URLs vs 193 in the repo, i.e. the deploy is out of step with `main` (the known deploy-lag/Cloudflare issue) | WebFetch of live `/sitemap.xml` |
-
-Not verified at baseline (no access): Google Search Console, GA4 reports, Vercel deployment history, real-user Core Web Vitals.
-
----
-
-## B. Files changed
-
-**Build pipeline / config**
-- `vercel.json` — 7 new 301s: `/locations/{delhi,gurgaon,noida,sonipat,south-delhi}` → existing city URLs, `/services/custom-furniture` → `/furniture`, `/site-app` → `/`. Existing rules untouched.
-- `.vercelignore` — excludes `site-app.html` (source file, was a duplicate homepage), `services/index.html` (superseded), unused `pshow*` files, root `*.cjs/*.yml/*.py`.
-- `seo-apply.cjs` → **moved** to `scripts/seo-apply.cjs`; `seo-build.yml` → **moved** to `.github/workflows/seo-build.yml` (+ landing-page build step, new path triggers, commits `services/` and `locations/`).
-- `build-pages.cjs` — also strips the unused 210 KB article-overlay payload from built pages.
-- `build-sitemap.cjs` — writes one `<urlset>` (no index/children), includes service and location pages, deletes stale `sitemap-*.xml`.
-- `llms.txt` — services and new locations added.
-
-**Source + generated core pages**
-- `site-app.html` (source) — business JSON-LD rebuilt (single `HomeAndConstructionBusiness` with `@id`, no AggregateRating/SearchAction/invalid type), empty JSON-LD placeholder removed, mislabelled "DLF Crest" image replaced with a correctly captioned Hotel Silk photo, new "services in detail" block linking all service + location pages, `locations` added to every footer, homepage insight cards converted to real links.
-- Regenerated from it by `build-pages.cjs`: `index.html`, `about.html`, `services.html`, `process.html`, `philosophy.html`, `contact.html`, `furniture.html`, `vendors.html` (each now has only its own section, own H1, title, description, canonical).
-
-**City / project pages**
-- `delhi.html`, `gurgaon.html`, `sonipat.html`, `south-delhi-interior-designer.html` — via `scripts/seo/fix-location-pages.py`: Gurgaon featured project replaced with the real Gurgaon project (Studio Workspace), Delhi's Vasant Kunj blurb corrected ("parents' bedroom", not "full residential"), schema normalised, hero visible without JS + image dimensions, `<h3>`→`<h2>` section titles, links to service pages and new locations, drawer-shadow fix.
-- `noida.html` — **rebuilt** on the new template with honest copy (see C).
-- `project-*.html` (7) — related service + location links, new locations in footer (`scripts/seo/fix-project-pages.py`). `projects.html` footer updated.
-- `insights/**` (≈290 files), `insights/index.html`, `insights.html`, `404.html`, `interior-designer-*.html` — produced by running the existing `scripts/seo-apply.cjs`: `/#section` links → real URLs, links to redirected URLs → final URL, extra `<h1>`s in 59 articles demoted, listing cards removed for 6 redirected/noindex articles and added for 31 orphan articles, Instagram handle normalised.
-- `insights/modern-cafe-interior-design-delhi-ncr.html`, `insights/premium-living-room-design-gurgaon.html` — canonical/og:url trailing slash removed.
-
-**New**
-- `scripts/landing/data.cjs` (all page content, with editing rules), `scripts/landing/build.cjs` (generator), `scripts/landing/landing.src.css`, `scripts/landing/purge-css.cjs`
-- `assets/landing.css` (18.5 KB, shared/cached), `assets/landing.js` (reveal, nav, enquiry form, click tracking)
-- `services/*.html` (6), `locations.html`, `locations/narela.html`, `locations/vasant-kunj.html`
-- `scripts/seo/vercel-local.py` (local Vercel routing emulator), `scripts/seo/crawl-check.py` (SEO crawler), the two fix scripts above
-- `sitemap.xml` (regenerated)
-
----
-
-## C. New pages
-
-| Page type | URL | Search intent | Status |
-|---|---|---|---|
-| Service | `/services/residential-interior-design` | home / apartment / DDA flat interior design, Delhi NCR | Built & tested locally |
-| Service | `/services/commercial-interior-design` | office & retail interior design (covers the proposed "office" page) | Built & tested locally |
-| Service | `/services/hospitality-interior-design` | hotel / hospitality interior design & fit-out | Built & tested locally |
-| Service | `/services/interior-design-execution` | turnkey interior execution / fit-out contractor | Built & tested locally |
-| Service | `/services/farmhouse-interior-design` | farmhouse interior design, Delhi NCR | Built & tested locally |
-| Service | `/services/modular-kitchen-design` | modular kitchen design | Built & tested locally |
-| Service | `/services/custom-furniture` | custom furniture | **Not created** — `/furniture` already serves this intent; 301 to `/furniture` |
-| Service | `/services/villa-interior-design` | villa interiors | **Not created** — no published villa project to support it |
-| Service | `/services/office-interior-design` | office interiors | **Not created separately** — one office project; folded into commercial to avoid a thin page |
-| Location hub | `/locations` | "interior designer Delhi NCR" / area index | Built & tested locally |
-| Location | `/locations/narela` | interior design Narela (studio's own location) | Built & tested locally |
-| Location | `/locations/vasant-kunj` | interior design Vasant Kunj | Built & tested locally |
-| Location | `/noida` (existing URL) | interior design Noida | Rebuilt & tested locally |
-| Location | `/locations/delhi`, `/gurgaon`, `/noida`, `/sonipat`, `/south-delhi` | — | 301 to the established `/delhi`, `/gurgaon`, `/noida`, `/sonipat`, `/south-delhi-interior-designer` (history preserved, no duplicates) |
-
-Every new page has: unique title/description, one H1, self-canonical, OG/Twitter tags, visible breadcrumbs, `BreadcrumbList` + `Service` + `FAQPage` + `WebPage` JSON-LD referencing the single business entity, real project cards linking to case studies, FAQs, related guides/services/locations, and a mobile-friendly enquiry form (name, phone/email, location, property type, area, start, optional budget).
-
-**Content rules followed:** every fact is taken from the published case studies, the studio's own About/Process/Services copy, or the studio's stated service areas. Where a location has no published project (Narela, Noida), the page says so and labels the photos as from elsewhere. No prices, ratings, reviews, timelines or offices were invented; durations are quoted only as what specific projects took.
-
----
-
-## D. Technical SEO status
-
-| Area | Status |
+| Status | Meaning |
 |---|---|
-| Metadata | Done. All 173 indexable pages crawled have a title, description and one H1; **0 duplicate titles** (was 9 core pages sharing one H1). |
-| Canonicals | Done. All indexable pages self-canonical, absolute `https://www`, no trailing slash. |
-| robots.txt | Unchanged — already correct (`Allow: /`, sitemap referenced; private pages handled with `X-Robots-Tag`). |
-| XML sitemap | Done. Single file, 173 URLs, all 200 + canonical + indexable; 25 redirecting and 4 noindex URLs removed; 9 new pages added; `lastmod` only where a page states a real date. |
-| Redirects | 7 added (above). No chains: crawler found 0 internal links to redirects and 0 chains. All 193 URLs from the old sitemap still resolve to a 200 (directly or via one redirect). |
-| Structured data | Done. One business entity (`HomeAndConstructionBusiness`, `@id …/#business`) used site-wide; AggregateRating, SearchAction, invalid type and empty block removed; all JSON-LD on crawled pages parses. Not run through Google's Rich Results Test (needs a live URL). |
-| Internal linking | Done. Services hub → 6 service pages; every service ↔ projects ↔ locations; project pages → services + location; city pages → services + new locations; footers list services and locations. Crawler: 0 broken links, 0 orphans in sitemap. |
-| Indexability | No new page is noindex; private cost builders/ledger stay noindex. |
-| Images | New pages: responsive `srcset`, width/height on every image, hero preloaded with `fetchpriority=high`, everything else lazy. City heroes now have dimensions. Insights listing (117 images) still lacks width/height — not changed. |
-| Core Web Vitals | Lab only (below). No field data accessed. |
+| **FIXED AND VERIFIED** | Tested here, through a local emulation of Vercel's routing (`scripts/seo/vercel-route.py`), the crawler (`scripts/seo/crawl-check.py`) and headless Chrome at 390 px and 1440 px. |
+| **IMPLEMENTED BUT NOT VERIFIED** | The change is made, but proving it needs the live site, which this session could not fetch. |
+| **BLOCKED** | Could not be done here; the blocker is stated. |
 
-**Lighthouse lab results** (Lighthouse 12, mobile simulation, local server; Google Fonts/GA blocked in the sandbox, so absolute numbers are indicative — compare before/after only):
+None of this shows any change in Google indexing, rankings or traffic. That needs Search Console and analytics evidence after deploy.
+
+---
+
+## 1. Initial problems found
+
+Twelve groups of problems, listed in `SEO_PRE_REPAIR_AUDIT.md`:
+- Two location URLs returned 404.
+- `/locations` and `/noida` rendered unstyled because of missing assets.
+- Project pages depended on rewrites that have repeatedly failed on the live site.
+- Cost-article arithmetic was wrong, and the articles contained invented quotations, statistics and company policies.
+- 972 dead `/#section` links.
+- Double H1s, orphans, a stray duplicate page and a duplicate title.
+- Homepage carousel duplicates were exposed to screen readers, and the project cards were not links.
+- Mobile horizontal scroll on `/`, `/services` and `/furniture`.
+- Blog-generator defects that would recreate several of these.
+
+## 2–4. Pages restored, created and repaired
+
+| # | URL | File(s) | What changed | Tested | Status |
+|---|---|---|---|---|---|
+| 1–9 | `/projects/hotel-silk-murthal`, `/projects/south-delhi-neoclassical-residence`, `/projects/vasant-kunj-dda-residence`, `/projects/mini-farmhouse-delhi`, `/projects/dda-apartment-delhi`, `/projects/studio-workspace-gurgaon`, `/projects/patel-nagar-retail-store`, plus `/projects/villa-narela` and `/projects/indeva-studio-office-narela` | `project-<slug>.html` → `projects/<slug>.html` (git move, content unchanged); `vercel.json` (9 rewrites removed); `.vercelignore` (now ignores only the old `projects/<old-folder>/` copies and `projects/index.html`, not the whole folder) | Each case study is now a real file at its URL, so it no longer depends on rewrites, which have repeatedly failed on this site while real files have worked. The old `/project-<slug>` and `/projects/<old-slug>` 301s still lead to these pages, with no chains. | Emulator: all 9 return 200 directly; `.html` and trailing-slash variants 308 to the clean URL. Headless Chrome: loads and refreshes, 1 H1, no horizontal scroll at 390 px. | **FIXED AND VERIFIED** (repo). Live 200: **IMPLEMENTED BUT NOT VERIFIED** — check after deploy. |
+| 10 | `/locations/narela` (new) | `locations/narela.html`, built by `scripts/build-location-pages.py` | Content: the studio's real address, the two published Narela projects (Villa Project and the studio office), services and FAQs. It states plainly that there is one studio and no branch offices. It carries Breadcrumb, WebPage, FAQ and business JSON-LD, uses only real photos, and includes call, WhatsApp and email links with GA4 events. | 200; 1 H1; self-canonical; valid JSON-LD; no overflow at 390/1440 px; Lighthouse lab: perf 99 / a11y 100 / SEO 100. | **FIXED AND VERIFIED** (repo) |
+| 11 | `/locations/vasant-kunj` (new) | `locations/vasant-kunj.html` (same builder) | Built from the published Vasant Kunj parents'-bedroom case study (5 real photos). Covers DDA-flat planning, storage, joinery, lighting, kitchens and bedrooms, related services and FAQs. It says the kitchen example comes from the Delhi DDA apartment, not Vasant Kunj, so no Vasant Kunj kitchen work is implied. | As above; Lighthouse lab 99 / 100 / 100. | **FIXED AND VERIFIED** (repo) |
+| 12 | `/locations` (repaired) | `locations.html` (same builder) | It loaded `/assets/landing.css` and `/assets/landing.js`, which were never committed, so it rendered unstyled (1,194 px wider than a phone). It now uses the self-contained service-page template. The broken inline form is replaced with links to `/contact`, phone, WhatsApp and email. Narela now lists its real projects. | 0 px overflow at 390 px (was 1,194); Lighthouse a11y 96 → 100. | **FIXED AND VERIFIED** (repo) |
+| 13 | `/noida` (repaired) | `noida.html` (same builder) | Same missing-asset problem. The existing honest copy is kept, including "no published Noida case study yet", on the new template. | 200; 0 overflow; Lighthouse lab 100 / 100 / 100. | **FIXED AND VERIFIED** (repo) |
+
+**Duplicate-intent check:** no other page targets Narela or Vasant Kunj. `/locations/delhi`, `/gurgaon`, `/noida`, `/sonipat` and `/south-delhi` keep their existing 301s to the established city pages.
+
+## 5. Redirects implemented
+
+| From | To | Why | Status |
+|---|---|---|---|
+| `/insights/flat-interior-design-delhi-cost` | `/insights/flat-interior-design-delhi-cost-per-sqft` (301) | Both had the same H1 and intent. The newer one (May 2026) is folded into the older one (April), which the service pages already link to. | **FIXED AND VERIFIED** (emulator) |
+| two existing 301s that pointed at the page above | now point straight at the final URL | Prevents a redirect chain | **FIXED AND VERIFIED**: crawler finds 0 chains |
+| 9 rewrites `/projects/<slug>` → `/project-<slug>` | removed | Replaced by real files | **FIXED AND VERIFIED** |
+
+Two stray files, `insights/modern-cafe-interior-design-delhi-ncr.html` and `insights/premium-living-room-design-gurgaon.html`, shadowed their folder versions. One of them had a trailing-slash canonical. They are now excluded in `.vercelignore` rather than deleted, so the folder versions are served. **FIXED AND VERIFIED** (emulator).
+
+## 6. Broken links fixed
+
+| What | Count | Files | Status |
+|---|---|---|---|
+| Footer and nav links to `/locations/narela` and `/locations/vasant-kunj` | Now resolve (pages exist) | — | **FIXED AND VERIFIED** |
+| `href="/#contact"`, `/#about`, `/#services`, `/#projects`, `/#process`, `/#philosophy` | **972 links in 409 files** | `insights/**` via `scripts/seo/clean-insights.py` | **FIXED AND VERIFIED** (0 remain) |
+| Internal links to redirected URLs → final URL | 14 | listing, service and location pages, via `scripts/seo/fix-insight-structure.py` | **FIXED AND VERIFIED** (0 remain) |
+| Homepage project cards: `<div onclick>`, 5 of 7 opening the generic projects view | 7 real links to each case study (+7 decorative loop copies) | `site-app.html` via `scripts/seo/fix-homepage-carousels.py`, rebuilt by `build-pages.cjs` | **FIXED AND VERIFIED** |
+| Generator would keep creating these | `/#…` targets → real pages; new listing cards no longer link to trailing-slash URLs | `scripts/generate-blogs.js` | **IMPLEMENTED BUT NOT VERIFIED** (syntax checked; needs the next scheduled run) |
+
+**Crawler after the changes:** 180 pages, 251 URLs, **0 broken internal links, 0 links to redirects, 0 redirect chains, 0 sitemap orphans.**
+**Before:** 2 broken, 12 to redirects, 31 orphans.
+
+## 7. Content calculations corrected
+
+**`/insights/interior-design-cost-south-delhi-guide`** — `scripts/seo/fix-south-delhi-cost-guide.py`. **FIXED AND VERIFIED**: the script asserts every figure.
+- Table recomputed: low % of ₹1 crore to high % of ₹3 crore.
+
+  | Category | Range |
+  |---|---|
+  | Living & dining | ₹25–90 lakh |
+  | Master suite | ₹15–54 lakh |
+  | Guest bedrooms | ₹10–36 lakh |
+  | Kitchen | ₹12–45 lakh |
+  | Bathrooms | ₹8–30 lakh |
+  | Service areas | ₹5–21 lakh |
+  | Contingency | ₹5–30 lakh |
+
+- The page now explains that the percentage ranges sum to 80–102%, so readers choose values that total 100%.
+- Example rescaled to add up: ₹30 + 80 + 40 + 60 + 30 lakh = **₹2.4 crore** (was ₹3.6 crore labelled ₹2.4 crore). Built-up area aligned to 4,000 sq ft, which is about ₹6,000 per sq ft. It is labelled as a made-up example, not an Indéva project.
+- Added what the figures include and exclude, and a disclaimer.
+- Removed the invented "senior cost consultant" quote and the unsourced "10–30% markup".
+- Title: "2024" removed. `datePublished` 2026-08-22 is kept; `dateModified` 2026-11-02 and a visible correction note are added. Link text updated on the 4 pages that cite it.
+
+**Three other local articles** — `scripts/seo/fix-local-cost-articles.py`. **FIXED AND VERIFIED** (asserted arithmetic). Each gets `dateModified` and a visible update note.
+- **Defence Colony:**
+  - Project management corrected to 10% × ₹1.64 crore = ₹16.4 lakh (was ₹20 lakh).
+  - Total stated correctly as **₹1.95 crore** (was a range "₹1.6–2.4 crore" that matched nothing).
+  - "Averages from recent market data" claim removed.
+  - Unsourced 30–50% and 8–12% figures removed.
+  - Invented quote removed; unsupported 6–10 month timeline removed.
+- **Greater Kailash:**
+  - Room items rewritten so each room adds up to its table row: ₹22 lakh low, ₹39 lakh high, totals shown worked out.
+  - Room shares restated from the actual numbers.
+  - "62% survey" removed.
+  - Unverified **"10% discount on a fixed-price contract"** policy removed.
+  - "Vetted supplier list" and "free consultation" claims removed.
+  - Invented quote removed.
+- **Hauz Khas:**
+  - Budget labelled as an example.
+  - Unsupported 10–14 week timelines replaced with "agree a written schedule".
+  - Unattributed quote removed.
+  - "Licensed architect must be engaged" corrected to a structural engineer's check.
+
+**Site-wide quotation clean-up:** `scripts/seo/clean-insights.py`. **FIXED AND VERIFIED**
+- 144 pull-quotes had their invented attribution and quotation marks removed. Examples: "– senior designer, indéva studio" (82 Indéva-attributed), "– industry analyst", and false citations of Architectural Digest India and NID.
+- The sentence stays as the article's own pull-quote; nothing else in those articles changed.
+- One quote written in markdown outside a `<blockquote>` was fixed by hand.
+- Two non-attributions were correctly left alone.
+
+## 8. Metadata changes
+
+- **31 indexable articles** had two H1s; the second is now an H2 (90 extra H1s across all article files). **FIXED AND VERIFIED.**
+- **New and rebuilt pages:** each has a unique title and description, one H1, a self-canonical, and Open Graph and Twitter tags with real project images.
+- **Crawler:** 0 missing titles, descriptions or canonicals; 0 duplicate titles (was 1); 0 non-self canonicals (was 1).
+- **Generator fix:** every new article was written with a trailing-slash canonical, `og:url`, schema `@id`, sitemap `<loc>` and IndexNow URL. The trailing-slash URL redirects, so new posts were also being left out of the sitemap. All of these now use the clean URL. **IMPLEMENTED BUT NOT VERIFIED** (next scheduled run).
+
+## 9. Schema changes
+
+- **New location pages:** BreadcrumbList, WebPage and FAQPage, referencing the existing business entity `@id …/#business`.
+- **`/locations/narela`:** also carries the business node. Its address, phone and email are the ones already on every page of the site.
+- **Not added:** ratings, reviews, hours, awards or offices.
+- **Checks:** all JSON-LD on crawled pages parses. **FIXED AND VERIFIED** (syntax). Google's Rich Results Test needs the live URL: **BLOCKED** until deploy.
+
+## 10. Sitemap and robots
+
+- **`sitemap.xml`:** valid XML, 174 URLs, all canonical, indexable and 200. The two 404s are now real pages, and the one redirected article is dropped.
+- **`build-sitemap.cjs`:** now reads `projects/*.html` directly. **FIXED AND VERIFIED.**
+- **`robots.txt`:** unchanged, already correct. **NOT APPLICABLE.**
+
+## 11. Performance and mobile changes
+
+Changes, all made in `site-app.html` and rebuilt with `node build-pages.cjs` unless noted:
+- Homepage enquiry form: one column under 600 px.
+- `/services` detail images: never wider than their column.
+- `/furniture` catalogue buttons: one column under 700 px.
+- `/insights` listing (edited directly in `insights/index.html`): 117 listing images given width/height and lazy loading after the first row, plus a grid `min-width` fix.
+
+Horizontal overflow at 390 px:
 
 | Page | Before | After |
 |---|---|---|
-| `/about` | score 71, LCP 5.0 s, 567 KiB | score 88, LCP 2.8 s, 254 KiB |
-| `/` | score 74, LCP 4.2 s, 567 KiB | score 86, LCP 3.5 s, 279 KiB |
-| `/noida` | 97, LCP 1.7 s | 99, LCP 1.6 s |
-| `/gurgaon` | 97, LCP 2.0 s | 96, LCP 2.0 s |
-| `/services/residential-interior-design` | — | 99, LCP 1.6 s, CLS 0 |
-| `/locations/narela` | — | 99, LCP 1.7 s, CLS 0 |
+| `/` | 78 px | 0 |
+| `/services` | 300 px | 0 |
+| `/furniture` | 106 px | 0 |
+| `/locations` | 1,194 px | 0 |
 
-CLS was 0 on every measured page. These are lab numbers; they do not show that real users meet LCP ≤ 2.5 s / INP ≤ 200 ms / CLS ≤ 0.1.
+**FIXED AND VERIFIED** in headless Chrome.
 
----
+**Lighthouse 12 lab results** (mobile simulation, local server; Google Fonts, GA, CDNs and Unsplash blocked in this sandbox, so the numbers are indicative only):
 
-## E. Testing
-
-**Passed (local)**
-- All build scripts run cleanly: `scripts/seo-apply.cjs`, `build-pages.cjs`, `scripts/landing/build.cjs`, `build-sitemap.cjs`. (The repo has no lint or test suite; `package.json` scripts belong to the blog generator.)
-- `vercel.json` valid JSON; `sitemap.xml` well-formed.
-- Crawl of the site through a local emulation of Vercel's routing (`.vercelignore`, trailingSlash, cleanUrls, redirects, rewrites, headers): **178 pages, 0 errors, 0 warnings** — status codes, canonicals, robots, titles, H1s, JSON-LD, img alt, sitemap membership, broken links, redirect links.
-- Redirect spot checks (`/locations/*`, `/services/custom-furniture`, `/site-app`, `/services/`, `/about.html`, legacy project/city URLs) all return the intended 301/308.
-- Headless Chromium: new pages have no JavaScript errors and no horizontal scroll at 390 px, 1024 px and 1440 px; screenshots checked for layout.
-- Mobile drawer opens/closes (incl. Escape); form validation messages work; location pre-selected per page; `lead_form_start`, `lead_form_error`, `phone_click` events fire.
-- Core pages render the right section, title, H1 and canonical after JavaScript runs.
-
-**Failed / not verifiable here**
-- Form **success** path: EmailJS's CDN is blocked in this sandbox, so only the error path (which shows WhatsApp/call fallbacks) was exercised. It uses the same EmailJS account, service and template as the homepage form.
-- Core pages log `createClient`/`emailjs is not defined` errors here because Supabase/EmailJS CDNs are blocked; the same scripts load on the live site. Not introduced by these changes.
-- Production behaviour: Vercel's exact precedence when both `services.html` and a `services/` folder exist is assumed (standard `cleanUrls`); verify after deploy.
-- Rich Results Test, PageSpeed Insights (field data), Search Console: need the live URLs/access.
-
----
-
-## F. Search Console & analytics
-
-Search Console was **not accessed** (no connection in this session); no GSC data in this report. GA4 (`G-HR4CCENYLM`) is already on the site — not duplicated; new pages use the same tag.
-
-New GA4 events on service/location pages: `lead_form_start`, `lead_form_submit` (same name as the homepage form), `lead_form_error`, `phone_click`, `whatsapp_click`, `email_click`. No personal data is sent to GA.
-
-Manual checks after deploy:
-1. Sitemaps → resubmit `https://www.indevastudio.com/sitemap.xml`; expect 173 discovered URLs.
-2. URL Inspection → test live + request indexing: `/services`, the 6 `/services/*` pages, `/locations`, `/locations/narela`, `/locations/vasant-kunj`, `/noida`, `/about`.
-3. Pages report → watch "Duplicate, Google chose different canonical" for `/about`, `/process`, etc. (should clear as pages recrawl).
-4. Rich Results Test on one service page (Breadcrumb, FAQ markup valid).
-5. GA4 → Admin → Events: mark `lead_form_submit` (and optionally `whatsapp_click`, `phone_click`) as **key events**; build an exploration of organic sessions by landing page.
-6. Core Web Vitals report / PageSpeed Insights field data for `/` and `/about` after 28 days.
-
----
-
-## G. Remaining work (and what's needed)
-
-| Item | Why open | Needed |
+| Page | main (before) | branch (after) |
 |---|---|---|
-| Deploy | No push or Vercel access from this session | Upload the bundle; confirm the Vercel deploy finished; purge Cloudflare cache |
-| GitHub Actions secret | `seo-build.yml` calls `VERCEL_DEPLOY_HOOK`; it will warn and skip deploy if the secret is missing | Check the secret exists |
-| Hashtag Restaurant / Jaypee Penthouse / DLF Crest Penthouse | Removed from the Noida and Gurgaon pages because the photos shown belonged to other projects. They may be real projects | Confirm and supply real photos → publish as case studies, then link from Noida/Gurgaon |
-| Narela case study | Studio is in Narela but no Narela project is published | Publish one completed Narela project (with client consent) |
-| Villa / office service pages | No supporting project evidence yet | A completed villa project; a second office project |
-| Restaurants & cafés claim | Hospitality page says the studio takes on restaurants/cafés; only Hotel Silk is published | Confirm, or remove that FAQ line |
-| Response time | Homepage says "within 24 hours", contact page "within 48 hours" | Pick one; update `site-app.html` |
-| Insight duplication | ~170 near-duplicate articles remain (ISSUE-12 in `ISSUES.md`) — editorial merge, not mechanical | Editorial review |
-| Core pages still ~250 KB with ~125 KB inline CSS | Splitting the SPA stylesheet is a larger refactor | Move shared CSS to a cached file |
-| Insights listing images | 117 images without width/height | Add dimensions in the listing generator |
-| Non-www → www | Done by client-side JavaScript in `site-app.html`, not a server redirect | Add a domain-level redirect in Vercel (Domains → redirect `indevastudio.com` to `www`) |
-| Root clutter | Old copies (`seo-apply.cjs`, `seo-build.yml`) remain at the repo root if the upload can't delete them | Delete them in GitHub (now excluded from deploy anyway) |
+| `/` | perf 86, a11y 80, SEO 100, LCP 3.4 s, CLS 0.005 | perf 88, a11y 80, SEO 100, LCP 3.0 s, CLS 0 |
+| `/locations` | 99 / 96 / 100, LCP 1.8 s | 99 / 100 / 100, LCP 1.6 s |
+| `/insights` | 98 / 91 / 100 | 97 / 91 / 100 (within run-to-run noise) |
+| `/locations/narela` | 404 | 99 / 100 / 100, LCP 1.9 s, CLS 0 |
+| `/locations/vasant-kunj` | 404 | 99 / 100 / 100, LCP 1.9 s, CLS 0 |
+| `/noida` | unstyled | 100 / 100 / 100 |
+| `/projects/hotel-silk-murthal` | — | 100 / 100 / 100 |
 
----
+These are lab numbers from one run each; they say nothing about real-user Core Web Vitals.
 
-## H. Next 30 days (highest impact first)
+## 12. Build and testing results
 
-1. **Deploy and verify** — upload, confirm the Vercel deploy, purge Cloudflare, then spot-check `/about` (should show "we don't have a legacy…" as H1), `/services/residential-interior-design`, `/locations/narela`, `/sitemap.xml`.
-2. **Search Console** — resubmit the sitemap and request indexing for the 10 new/rebuilt pages; record a baseline of impressions per page today.
-3. **Google Business Profile** — make sure categories, service areas (Delhi, Gurgaon, Noida, Sonipat, Narela) and the website link match the site; link GBP to `/locations/narela` or the homepage.
-4. **Publish one Narela and one Noida project** — the biggest gap in local proof; the page templates are ready to show them.
-5. **Mark lead events as key events in GA4** and review which service/location pages produce enquiries after 2–3 weeks.
-6. **Fix the remaining performance debt on core pages** (external stylesheet, insights image dimensions) and re-measure with PageSpeed Insights.
+| Check | Result |
+|---|---|
+| `node build-pages.cjs`, `node build-sitemap.cjs`, `python3 scripts/build-location-pages.py`, all fix scripts | Run cleanly |
+| `node --check scripts/generate-blogs.js` | Passes |
+| `vercel.json` | Valid JSON |
+| `sitemap.xml` | Well-formed |
+| Crawl through Vercel routing emulation | 180 pages · 0 broken links · 0 redirect links · 0 chains · 0 orphans · 0 duplicate titles · 0 bad canonicals · all pages 1 H1 · all JSON-LD parses |
+| Direct navigation and refresh (local server with production routing) | Every project and location URL returns 200; old URLs return one 301; unknown URLs return 404 |
+| Headless Chrome, 12 key pages × 2 viewports | All 200, 1 H1, 0 horizontal scroll, no broken local images, no focusable elements inside `aria-hidden` |
+| Console | The only errors are `createClient` / `emailjs` undefined on core pages, because the Supabase and EmailJS CDNs are blocked in this sandbox. Pre-existing and identical on `main`. |
+| Homepage carousels | Look and animation unchanged. The loop copies are now `aria-hidden` and out of the tab order; the real cards are links. |
+
+The site has no lint or test suite, and `package.json` belongs to the blog generator.
+
+## 13. Unresolved issues
+
+| Item | Status | Needed |
+|---|---|---|
+| Live HTTP status of every URL | **BLOCKED**: the live domain and Vercel URLs can't be fetched from this session | After merging: open each `/projects/<slug>` and `/locations/*` URL in a private window, then purge the Cloudflare cache |
+| Deploy | Waiting for your approval | Merge `seo-repair-2026-11` into `main`; Vercel deploys automatically |
+| Service pages (Phase 7) | Audited: 6 unique pages with unique titles and H1s, related projects, locations and CTA. **FAQs not added** | FAQs should come from questions clients actually ask; send a list and they can be added in the same style as the location pages |
+| Blog bot silent since 5 Oct | Not investigated (out of scope) | Check the GitHub Actions log for "Auto Blog Publisher" |
+| ~170 near-duplicate insight articles | Not changed: an editorial merge, not a mechanical one | Editorial review (`ISSUES.md` ISSUE-12) |
+| "Complimentary discovery session" in every article's footer CTA; company-voice pull-quotes ("we offer a free consultation", "a dedicated project manager") | Left: not invented people, but company claims | Confirm they're true, or ask for removal |
+| Article hero images are Unsplash stock | Left: articles don't claim them as projects | Optional: swap in studio photography |
+| Root-level `generate-blogs.js` (an older copy; the workflow uses `scripts/generate-blogs.js`) | Left | Delete when convenient |
+| Search Console, GA4, Rich Results Test | **BLOCKED**: no access | See below |
+
+## 14. Recommended next actions
+
+1. **Merge and verify:** after merging, confirm the deploy is READY, purge Cloudflare, then open the 9 project URLs, `/locations/narela`, `/locations/vasant-kunj`, `/locations`, `/noida` and `/sitemap.xml`.
+2. **Search Console:** resubmit `sitemap.xml` (expect 174). Use URL Inspection → Request indexing for `/locations/narela`, `/locations/vasant-kunj`, `/locations`, `/noida` and two project pages. Note today's impressions per page as a baseline.
+3. **Rich Results Test:** run it on `/locations/narela` (Breadcrumb, FAQ).
+4. **Blog bot:** find out why it stopped on 5 Oct. The generator fixes in this branch take effect on its next run.
+5. **Service-page FAQs** from real client questions.
+6. **Google Business Profile:** make its categories, Narela address and service areas match `/locations/narela`.

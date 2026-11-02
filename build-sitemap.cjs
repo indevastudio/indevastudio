@@ -69,6 +69,16 @@ for (const [dir, group] of [['locations', 'locations'], ['services', 'services']
 }
 
 push('projects', entry('/projects', rewrites.get('/projects') || 'projects.html', '0.9'));
+// Case studies are real files at projects/<slug>.html (served at /projects/<slug>).
+// They used to be root-level project-*.html files reached through rewrites, which
+// did not resolve on the live site; real files need no rewrite.
+{
+  const d = path.join(ROOT, 'projects');
+  for (const f of fs.existsSync(d) ? fs.readdirSync(d).sort() : []) {
+    if (!f.endsWith('.html') || f === 'index.html') continue;
+    push('projects', entry(`/projects/${f.slice(0, -5)}`, `projects/${f}`, '0.8'));
+  }
+}
 for (const [src, dest] of rewrites) {
   if (src.startsWith('/projects/')) push('projects', entry(src, dest, '0.8'));
 }

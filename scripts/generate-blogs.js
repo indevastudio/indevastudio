@@ -311,8 +311,9 @@ const BUDGETS = [
 //                  project data exists to write a real case study from).
 //
 // `targetUrl` = a route that ALREADY EXISTS on indevastudio.com today
-// (confirmed from the repo: /delhi, /gurgaon, /#services, /#contact, /#about,
-// /#projects). Generated articles link to these.
+// (confirmed from the repo: /delhi, /gurgaon, /services, /contact, /process,
+// /projects). Generated articles link to these. (Until Nov 2026 these were
+// /#section anchors on the homepage; the sections now have their own pages.)
 // `proposedLandingUrl` = the SEO-recommended future URL for that canonical
 // group (e.g. /interior-designer-south-delhi). These do NOT exist yet — do
 // not link to them and do not treat them as live. Build the real page first,
@@ -705,7 +706,7 @@ const KEYWORD_DATABASE = [
     cluster: "furniture-custom",
     canonicalGroup: "custom-furniture-delhi-ncr",
     location: "Delhi NCR", intent: "commercial", priority: "B", niche: "furniture",
-    contentType: "BLOG", targetUrl: "/#services", category: "furniture",
+    contentType: "BLOG", targetUrl: "/services", category: "furniture",
     keywords: [
       "custom furniture Delhi", "custom furniture Gurgaon", "bespoke furniture Delhi",
       "luxury furniture Delhi", "custom furniture manufacturer Delhi",
@@ -716,7 +717,7 @@ const KEYWORD_DATABASE = [
     cluster: "turnkey-execution",
     canonicalGroup: "turnkey-interior-execution-delhi-ncr",
     location: "Delhi NCR", intent: "commercial", priority: "B", niche: "renovation",
-    contentType: "BLOG", targetUrl: "/#about", category: "renovation",
+    contentType: "BLOG", targetUrl: "/process", category: "renovation",
     keywords: [
       "turnkey interior design Delhi", "turnkey interior design Gurgaon",
       "interior design and execution Delhi", "interior execution company Delhi",
@@ -738,42 +739,42 @@ const KEYWORD_DATABASE = [
     cluster: "material-plywood",
     canonicalGroup: "plywood-material-guide",
     location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "plywood",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["best plywood for kitchen", "BWP plywood for kitchen", "best plywood for wardrobe", "best plywood brands India"],
   }),
   ...cluster({
     cluster: "material-hdhmr",
     canonicalGroup: "hdhmr-vs-plywood-comparison",
     location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "hdhmr",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["HDHMR vs plywood kitchen", "HDHMR vs marine plywood", "HDHMR vs plywood wardrobe", "MDF vs HDHMR", "plywood vs HDHMR"],
   }),
   ...cluster({
     cluster: "material-laminates",
     canonicalGroup: "laminate-veneer-comparison-guide",
     location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "laminates",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["best laminate brands India", "veneer vs laminate interiors", "PU polish vs laminate", "acrylic vs laminate kitchen"],
   }),
   ...cluster({
     cluster: "material-kitchen",
     canonicalGroup: "kitchen-material-cost-guide",
     location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "kitchen",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["best material for kitchen cabinets", "kitchen cabinet material comparison", "modular kitchen cost Delhi", "modular kitchen cost Gurgaon", "kitchen interior cost Delhi", "kitchen interior cost Gurgaon"],
   }),
   ...cluster({
     cluster: "material-wardrobe",
     canonicalGroup: "wardrobe-material-cost-guide",
     location: "Delhi NCR", intent: "technical", priority: "B", techTopic: "wardrobe",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["wardrobe material comparison", "wardrobe cost Delhi", "wardrobe cost Gurgaon", "custom wardrobe cost Gurgaon", "custom wardrobe cost Delhi"],
   }),
   ...cluster({
     cluster: "material-hardware",
     canonicalGroup: "interior-hardware-fittings-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "hardware",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["best hardware brands for interiors", "soft close hinges comparison", "drawer channel brands India"],
   }),
   ...cluster({
@@ -781,35 +782,35 @@ const KEYWORD_DATABASE = [
     cluster: "material-lighting",
     canonicalGroup: "interior-lighting-design-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "lighting",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["layered lighting design for Indian homes", "false ceiling lighting design ideas"],
   }),
   ...cluster({
     cluster: "material-flooring",
     canonicalGroup: "interior-flooring-material-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "flooring",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["best flooring material for Indian homes", "marble vs tile flooring cost"],
   }),
   ...cluster({
     cluster: "material-furniture-construction",
     canonicalGroup: "custom-furniture-construction-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "furniture-construction",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["how custom furniture is made", "carcass construction explained"],
   }),
   ...cluster({
     cluster: "material-boq",
     canonicalGroup: "interior-boq-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "boq",
-    contentType: "BLOG", targetUrl: "/#services", category: "technical",
+    contentType: "BLOG", targetUrl: "/services", category: "technical",
     keywords: ["how to read an interior design BOQ", "interior BOQ vs quotation"],
   }),
   ...cluster({
     cluster: "material-execution",
     canonicalGroup: "interior-execution-process-guide",
     location: "Delhi NCR", intent: "technical", priority: "C", techTopic: "execution",
-    contentType: "BLOG", targetUrl: "/#about", category: "technical",
+    contentType: "BLOG", targetUrl: "/process", category: "technical",
     keywords: ["interior execution timeline India", "site supervision during interior execution"],
   }),
 ];
@@ -826,11 +827,11 @@ const CATEGORY_MAP = {
 };
 
 const INTERNAL_LINKS = [
-  { text: "our portfolio", url: "/#projects" },
-  { text: "our services", url: "/#services" },
-  { text: "contact us for a free consultation", url: "/#contact" },
-  { text: "our design process", url: "/#about" },
-  { text: "get in touch with our designers", url: "/#contact" },
+  { text: "our portfolio", url: "/projects" },
+  { text: "our services", url: "/services" },
+  { text: "contact us", url: "/contact" },
+  { text: "our design process", url: "/process" },
+  { text: "get in touch with our designers", url: "/contact" },
   { text: "interior design in south delhi", url: "/delhi" },
   { text: "interior design in gurgaon", url: "/gurgaon" },
 ];
@@ -1198,14 +1199,14 @@ function isTitleUnique(newTitle, existingTitles) {
 // the targetUrl values on KEYWORD_DATABASE). We never link to a
 // proposedLandingUrl — those aren't live.
 function buildInternalLinksForEntry(entry) {
-  const primaryUrl = entry.targetUrl || "/#services";
+  const primaryUrl = entry.targetUrl || "/services";
   const primaryText = primaryUrl === "/delhi" ? "interior design in south delhi"
     : primaryUrl === "/gurgaon" ? "interior design in gurgaon"
-    : primaryUrl === "/#about" ? "our design process"
+    : primaryUrl === "/process" ? "our design process"
     : "our services";
   const primary = { text: primaryText, url: primaryUrl };
   // Second link: always portfolio or contact, picked deterministically off the keyword
-  const secondaryOptions = INTERNAL_LINKS.filter(l => l.url === "/#projects" || l.url === "/#contact");
+  const secondaryOptions = INTERNAL_LINKS.filter(l => l.url === "/projects" || l.url === "/contact");
   const secondary = secondaryOptions[entry.keyword.length % secondaryOptions.length];
   return [primary, secondary];
 }
@@ -1257,6 +1258,7 @@ CRITICAL — DO NOT FABRICATE (PART 6):
 - Never invent exact measurements, lab statistics, or certification numbers.
 - If an example genuinely helps the reader, label it explicitly in the text as "HYPOTHETICAL EXAMPLE" or "ILLUSTRATIVE BUDGET" — do not present it as something that actually happened.
 - Use ₹ pricing only where pricing is genuinely relevant to the topic.
+- QUOTATIONS: never attribute a quote to anyone. The <blockquote> is a pull-quote of the article's own point, written without quotation marks and with no "– name/role" attribution — never "senior designer, indéva studio", "industry analyst", "a seasoned professional" or a publication name. Never invent statistics, surveys or percentages presented as research findings, and never state an Indéva discount, offer, policy or service (e.g. a free consultation, a supplier list) that is not in this brief.
 - BANNED PHRASES — do not write any of these or close variants of them: "as a senior designer", "as a senior writer",
   "with 15 years of experience", "in my X years of experience", "I've worked with numerous clients", "the day a client called us".
 
@@ -1439,6 +1441,12 @@ function validateBlog(parsed, entry, allKnownTitles, allKnownSlugs) {
     /\b\d+\s*years? of experience/i,
     /i(?:'ve| have) worked with (numerous|many|hundreds of) clients/i,
     /the day a client called us/i,
+    // Attributed quotes (audit 2026-11-02: 80+ published articles had invented
+    // "– senior <role>, indéva studio" / "– industry analyst" attributions).
+    /[”"]\s*[–—-]\s*(?:an?\s+)?(?:senior|lead|principal|seasoned|industry|insight)/i,
+    /[–—-]\s*(?:a\s+)?[a-z ]{0,40},?\s*(?:at\s+)?ind[ée]va studio(?: designer)?\s*\.?\s*$/im,
+    /says an? (?:senior|lead|principal)[^.]{0,60}ind[ée]va/i,
+    /\b(?:a )?(?:recent )?survey (?:shows|found|finds)\b/i,
   ];
   const fabricationHits = fabricationSignatures.filter((re) => re.test(plainText));
   if (fabricationHits.length > 0) problems.push(`fabricated-credential/anecdote signature detected (${fabricationHits.length} pattern match(es))`);
@@ -1494,7 +1502,7 @@ function buildInsightPage(blogData, image) {
     datePublished: date,
     author: { "@type": "Organization", name: "indéva studio", url: "https://www.indevastudio.com" },
     publisher: { "@type": "Organization", name: "indéva studio" },
-    mainEntityOfPage: { "@type": "WebPage", "@id": `https://www.indevastudio.com/insights/${blogData.slug}/` },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://www.indevastudio.com/insights/${blogData.slug}` },
   });
 
   return `<!DOCTYPE html>
@@ -1505,11 +1513,11 @@ function buildInsightPage(blogData, image) {
 <title>${blogData.title.toLowerCase()} — indéva studio</title>
 <meta name="description" content="${blogData.meta}">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.indevastudio.com/insights/${blogData.slug}/">
+<link rel="canonical" href="https://www.indevastudio.com/insights/${blogData.slug}">
 <meta property="og:title" content="${blogData.title} — indéva studio">
 <meta property="og:description" content="${blogData.meta}">
 <meta property="og:image" content="${imageUrl}">
-<meta property="og:url" content="https://www.indevastudio.com/insights/${blogData.slug}/">
+<meta property="og:url" content="https://www.indevastudio.com/insights/${blogData.slug}">
 <meta property="og:type" content="article">
 <script type="application/ld+json">${schema}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -1638,7 +1646,8 @@ function injectCardsIntoInsightsPage(newBlogs) {
   let html = fs.readFileSync(insightsIndexPath, "utf8");
 
   const newCards = newBlogs.map(blog => {
-    if (html.includes(`/insights/${blog.slug}/`)) {
+    // match the canonical form (no trailing slash; the site 308-redirects /slug/ to /slug)
+    if (html.includes(`href="/insights/${blog.slug}"`) || html.includes(`href="/insights/${blog.slug}/"`)) {
       console.log(`  ⏭️  Already in insights: ${blog.slug}`);
       return null;
     }
@@ -1646,8 +1655,8 @@ function injectCardsIntoInsightsPage(newBlogs) {
     const imageUrl = blog.image?.url || `https://picsum.photos/id/1048/1200/675`;
     const imageAlt = blog.image?.alt || blog.title.toLowerCase();
     return `
-    <a class="blog-card" href="/insights/${blog.slug}/">
-      <img src="${imageUrl}" alt="${imageAlt}" class="blog-card-image">
+    <a class="blog-card" href="/insights/${blog.slug}">
+      <img src="${imageUrl}" alt="${imageAlt}" class="blog-card-image" width="1200" height="675" loading="lazy" decoding="async">
       <div class="blog-card-cat">${blog.cat}</div>
       <h2 class="blog-card-title">${blog.title.toLowerCase()}</h2>
       <p class="blog-card-excerpt">${blog.excerpt}</p>
@@ -1674,10 +1683,10 @@ function updateSitemap(newBlogs) {
   let sitemap = fs.readFileSync(sitemapPath, "utf8");
   const today = new Date().toISOString().split("T")[0];
   const newEntries = newBlogs
-    .filter(b => !sitemap.includes(`/insights/${b.slug}/`))
+    .filter(b => !sitemap.includes(`/insights/${b.slug}<`) && !sitemap.includes(`/insights/${b.slug}/<`))
     .map(b => `
   <url>
-    <loc>https://www.indevastudio.com/insights/${b.slug}/</loc>
+    <loc>https://www.indevastudio.com/insights/${b.slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -1703,7 +1712,7 @@ async function pingSearchEngines(newBlogs) {
   }
   if (newBlogs.length === 0) return;
 
-  const urlList = newBlogs.map(b => `https://www.indevastudio.com/insights/${b.slug}/`);
+  const urlList = newBlogs.map(b => `https://www.indevastudio.com/insights/${b.slug}`);
 
   try {
     const res = await fetch("https://api.indexnow.org/indexnow", {

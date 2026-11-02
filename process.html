@@ -702,6 +702,7 @@ nav.solid {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+a.project-card { display: block; color: inherit; text-decoration: none; }
 .project-card {
   position: relative;
   overflow: hidden;
@@ -3291,6 +3292,43 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 :where(a[data-page]){color:inherit;text-decoration:none;cursor:pointer}
 :where(.nav-link,.nav-cta-primary,.mob-btn,.drawer-cta)[href]{display:inline-block}
 :where(.nav-logo,.footer-logo)[href]{display:block}
+
+/* ── ABOUT · LEADERSHIP CAROUSEL (founder + director) ── */
+.leadership-section { padding: 72px 60px; border-bottom: 1px solid var(--line); }
+.leadership-carousel { max-width: 980px; margin: 0 auto; }
+.leadership-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; }
+.leadership-grid::-webkit-scrollbar { display: none; }
+.leader-card { flex: 0 0 100%; scroll-snap-align: start; display: grid; grid-template-columns: 260px 1fr; gap: 44px; align-items: center; padding: 4px 2px; box-sizing: border-box; }
+.leadership-section .founder-photo { position: relative; top: auto; width: 260px; max-width: 260px; justify-self: start; aspect-ratio: 4/5; margin: 0; }
+.leadership-section .founder-linkedin { padding: 10px 14px; font-size: 0.58rem; bottom: 18px; white-space: nowrap; }
+.leadership-section .founder-label { margin-bottom: 12px; }
+.leadership-section .founder-name-display { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 4px; }
+.leadership-section .founder-title-tag { font-size: 0.56rem; margin-bottom: 16px; }
+.leadership-section .founder-position { font-size: 1.02rem; margin-bottom: 14px; }
+.leadership-section .founder-body { font-size: 0.8rem; line-height: 1.75; }
+.leadership-section .founder-note { margin-top: 18px; padding-left: 18px; }
+.leadership-section .founder-note-text { font-size: 0.92rem; }
+.lc-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 28px; }
+.lc-dots { display: flex; gap: 8px; }
+.lc-dot { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid var(--gold); background: transparent; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+.lc-dot[aria-current="true"] { background: var(--gold); transform: scale(1.15); }
+.lc-dot:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .leadership-section { padding: 56px 20px; }
+  .leader-card { grid-template-columns: 1fr; gap: 22px; align-items: start; }
+  .leadership-section .founder-photo { width: 200px; max-width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* homepage enquiry form: one column on phones (2 Nov 2026 — the 2-column grid pushed the page 78px wider than a 390px screen) */
+#home-enquiry-form > * { min-width: 0; }
+@media (max-width: 600px) { #home-enquiry-form { grid-template-columns: 1fr !important; } }
+/* /services detail image: never wider than its column (2 Nov 2026 — pushed /services 300px past a 390px screen) */
+.service-detail > *, .service-detail-body > * { min-width: 0; }
+.service-detail-image img { max-width: 100%; height: auto; }
+/* /furniture catalogue buttons: one column on phones (2 Nov 2026 — 3 columns pushed the page 106px wide) */
+.catalog-grid > * { min-width: 0; }
+@media (max-width: 700px) { .catalog-grid { grid-template-columns: 1fr !important; } }
 </style>
 
 <style id="mobile-optimisation">
@@ -3847,6 +3885,27 @@ img {
   show(1);
 })();
 </script>
+<script>
+    (function(){
+      var root=document.querySelector('.leadership-carousel'); if(!root) return;
+      var track=root.querySelector('.leadership-grid'), cards=track.querySelectorAll('.leader-card'), dots=root.querySelectorAll('.lc-dot');
+      var n=cards.length, i=0, timer=null, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function go(k){ i=(k+n)%n; track.scrollTo({left:cards[i].offsetLeft-track.offsetLeft, behavior: reduce?'auto':'smooth'}); mark(); }
+      function mark(){ dots.forEach(function(d,j){ d.setAttribute('aria-current', j===i?'true':'false'); }); }
+      track.addEventListener('scroll',function(){ var k=Math.round(track.scrollLeft/track.clientWidth); if(k!==i){ i=k; mark(); } },{passive:true});
+      root.querySelector('.lc-prev').addEventListener('click',function(){ go(i-1); restart(); });
+      root.querySelector('.lc-next').addEventListener('click',function(){ go(i+1); restart(); });
+      dots.forEach(function(d,j){ d.addEventListener('click',function(){ go(j); restart(); }); });
+      track.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'){ go(i+1); restart(); } else if(e.key==='ArrowLeft'){ go(i-1); restart(); } });
+      function start(){ if(!reduce && !timer) timer=setInterval(function(){ go(i+1); },4000); }
+      function stop(){ clearInterval(timer); timer=null; }
+      function restart(){ stop(); start(); }
+      root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
+      root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
+      track.addEventListener('touchstart',stop,{passive:true});
+      start();
+    })();
+    </script>
 <script>
     (function(){
       var root=document.querySelector('.pillar-carousel'); if(!root) return;
