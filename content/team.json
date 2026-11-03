@@ -2,6 +2,13 @@
   "_readme": "Edit this file to change the Our Team section on /about, then run: node build-pages.cjs. 'photo' is a file in project-images-for-website/team/ (null shows initials). 'focus' is the CSS object-position for the photo crop.",
   "members": [
     {
+      "name": "Veenu Saini",
+      "role": "Director, Projects & Compliance",
+      "photo": "veenu-saini-2.webp",
+      "focus": "center center",
+      "desc": "Oversees project delivery and compliance, keeping every site on schedule, to specification and fully compliant from the first day to handover."
+    },
+    {
       "name": "Gunjeet Singh",
       "role": "Chief Marketing Officer",
       "photo": "gunjeet-singh.webp",
@@ -10,7 +17,7 @@
     },
     {
       "name": "Yakshita Katyal",
-      "role": "Design Manager",
+      "role": "Senior Interior Designer",
       "photo": "yakshita-katyal.webp",
       "focus": "center center",
       "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings."
