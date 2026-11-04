@@ -154,7 +154,9 @@ $("#loginForm").addEventListener("submit", async (e) => {
 });
 // Activity alert: tells Indeva Studio (ceo@) when a client signs in or downloads / prints the PDF.
 function notifyActivity(event) {
-  sb.functions.invoke("client-activity", { body: { event } }).catch(() => {});
+  fetch("/api/geo", { cache: "no-store" }).then((r) => (r.ok ? r.json() : null)).catch(() => null)
+    .then((geo) => sb.functions.invoke("client-activity", { body: { event, geo } }))
+    .catch(() => {});
 }
 $("#signOut").addEventListener("click", () => sb.auth.signOut());
 $("#refresh").addEventListener("click", load);
