@@ -160,7 +160,9 @@ function renderTeam() {
       const file = path.join(ROOT, TEAM_IMG_DIR.slice(1), m.photo);
       if (!fs.existsSync(file)) throw new Error(`team.json: photo not found for ${m.name}: ${file}`);
       const dim = sizeOf(file);
-      media = `<img src="${TEAM_IMG_DIR}${h(m.photo)}" alt="${h(m.name)}, ${h(m.role)} at indéva studio"${dim ? ` width="${dim[0]}" height="${dim[1]}"` : ''} loading="lazy" decoding="async" style="object-position:${h(m.focus || 'center 20%')};">`;
+      media = `<img src="${TEAM_IMG_DIR}${h(m.photo)}" alt="${h(m.name)}, ${h(m.role)} at indéva studio"${dim ? ` width="${dim[0]}" height="${dim[1]}"` : ''} loading="lazy" decoding="async" style="object-position:${h(m.focus || 'center 20%')};">`
+        // cartoon version shown on hover (same photo through the #ivs-toon SVG filter)
+        + `<img class="team-toon" src="${TEAM_IMG_DIR}${h(m.photo)}" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:${h(m.focus || 'center 20%')};">`;
     } else {
       media = `<div class="team-initials" aria-hidden="true">${h(initials(m.name))}</div>`;
     }

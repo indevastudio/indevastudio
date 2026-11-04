@@ -1376,6 +1376,15 @@ nav.solid {
 .team-card-inner:focus-visible .team-overlay { opacity: 1; }
 .team-card-inner:focus-visible .team-overlay > * { transform: none; }
 .team-card-inner:focus-visible .team-media { outline: 2px solid var(--gold); outline-offset: 3px; }
+/* team photos: cartoon / caricature-style version fades in on hover */
+.team-media .team-toon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: url(#ivs-toon) saturate(1.1); transition: opacity 0.45s ease, transform 0.6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .team-card-inner:hover .team-toon { opacity: 1; transform: scale(1.04); }
+  .team-card-inner:hover .team-overlay { background: linear-gradient(to top, rgba(20,20,20,0.86) 0%, rgba(20,20,20,0.55) 30%, rgba(20,20,20,0) 58%); }
+}
+.team-card-inner:focus-visible .team-toon { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .team-media .team-toon { transition: none; } }
+
 /* touch screens: no hover, so the description sits under the role */
 @media (hover: none), (pointer: coarse) {
   .team-overlay { display: none; }
@@ -3319,6 +3328,9 @@ a, button, [onclick], .service-row, .project-card, .project-row,
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
 
+/* home enquiry form: one column on phones (was pushing the page sideways) */
+@media (max-width:640px){#home-enquiry-form{grid-template-columns:1fr!important}#home-enquiry-form>*{min-width:0;width:100%;box-sizing:border-box;grid-column:auto!important}}
+
 /* catalogue download buttons: stack on phones (were pushing the page sideways) */
 @media (max-width:640px){[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}}
 </style>
@@ -3665,6 +3677,23 @@ img {
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <filter id="ivs-toon" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="soft"/>
+    <feComponentTransfer in="soft" result="poster">
+      <feFuncR type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+      <feFuncG type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+      <feFuncB type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+    </feComponentTransfer>
+    <feGaussianBlur in="poster" stdDeviation="0.6" result="posterSoft"/>
+    <feColorMatrix in="SourceGraphic" type="saturate" values="0" result="gray"/>
+    <feGaussianBlur in="gray" stdDeviation="1.7" result="graysoft"/>
+    <feConvolveMatrix in="graysoft" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" result="edges"/>
+    <feColorMatrix in="edges" type="matrix" values="0 0 0 0 0.12  0 0 0 0 0.1  0 0 0 0 0.08  7 7 7 0 -0.62" result="lines"/>
+    <feComposite in="lines" in2="posterSoft" operator="over"/>
+  </filter>
+</defs></svg>
+
 <!-- ══ INTRO ANIMATION ══ -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>

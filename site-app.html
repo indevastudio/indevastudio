@@ -1375,6 +1375,15 @@ nav.solid {
 .team-card-inner:focus-visible .team-overlay { opacity: 1; }
 .team-card-inner:focus-visible .team-overlay > * { transform: none; }
 .team-card-inner:focus-visible .team-media { outline: 2px solid var(--gold); outline-offset: 3px; }
+/* team photos: cartoon / caricature-style version fades in on hover */
+.team-media .team-toon { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; filter: url(#ivs-toon) saturate(1.1); transition: opacity 0.45s ease, transform 0.6s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .team-card-inner:hover .team-toon { opacity: 1; transform: scale(1.04); }
+  .team-card-inner:hover .team-overlay { background: linear-gradient(to top, rgba(20,20,20,0.86) 0%, rgba(20,20,20,0.55) 30%, rgba(20,20,20,0) 58%); }
+}
+.team-card-inner:focus-visible .team-toon { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .team-media .team-toon { transition: none; } }
+
 /* touch screens: no hover, so the description sits under the role */
 @media (hover: none), (pointer: coarse) {
   .team-overlay { display: none; }
@@ -3317,6 +3326,12 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* home enquiry form: one column on phones (was pushing the page sideways) */
+@media (max-width:640px){#home-enquiry-form{grid-template-columns:1fr!important}#home-enquiry-form>*{min-width:0;width:100%;box-sizing:border-box;grid-column:auto!important}}
+
+/* catalogue download buttons: stack on phones (were pushing the page sideways) */
+@media (max-width:640px){[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}}
 </style>
 
 <style id="mobile-optimisation">
@@ -3661,6 +3676,23 @@ img {
 
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <filter id="ivs-toon" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="soft"/>
+    <feComponentTransfer in="soft" result="poster">
+      <feFuncR type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+      <feFuncG type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+      <feFuncB type="discrete" tableValues="0.06 0.2 0.36 0.52 0.68 0.83 0.96"/>
+    </feComponentTransfer>
+    <feGaussianBlur in="poster" stdDeviation="0.6" result="posterSoft"/>
+    <feColorMatrix in="SourceGraphic" type="saturate" values="0" result="gray"/>
+    <feGaussianBlur in="gray" stdDeviation="1.7" result="graysoft"/>
+    <feConvolveMatrix in="graysoft" order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" preserveAlpha="true" result="edges"/>
+    <feColorMatrix in="edges" type="matrix" values="0 0 0 0 0.12  0 0 0 0 0.1  0 0 0 0 0.08  7 7 7 0 -0.62" result="lines"/>
+    <feComposite in="lines" in2="posterSoft" operator="over"/>
+  </filter>
+</defs></svg>
+
 <!-- ══ INTRO ANIMATION ══ -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -3740,17 +3772,17 @@ img {
     </div>
     <div class="hero-visual">
       <!-- 1. Mini Farmhouse, Delhi -->
-      <div class="hero-slide active" data-label="mini farmhouse"><img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="mini farmhouse, delhi — indéva studio" loading="eager" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide active" data-label="mini farmhouse"><img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="mini farmhouse, delhi — indéva studio" loading="eager" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 2. Resham Hotel, Murthal -->
-      <div class="hero-slide" data-label="resham hotel"><img src="https://www.indevastudio.com/resham%20suite%20bedroom.webp" alt="resham hotel suite bedroom, murthal — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="resham hotel"><img src="https://www.indevastudio.com/resham%20suite%20bedroom.webp" alt="resham hotel suite bedroom, murthal — indéva studio" loading="lazy" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/resham%20suite%20bedroom-800w.webp 800w, https://www.indevastudio.com/resham%20suite%20bedroom.webp 1448w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 3. DDA Apartment, Delhi -->
-      <div class="hero-slide" data-label="dda apartment"><img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — indéva studio" loading="lazy" width="734" height="744" decoding="async"></div>
+      <div class="hero-slide" data-label="dda apartment"><img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — indéva studio" loading="lazy" width="734" height="744" decoding="async" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 4. Studio Workspace, Gurgaon -->
       <div class="hero-slide" data-label="studio workspace"><img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="studio workspace office, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 5. Vasant Kunj, New Delhi -->
-      <div class="hero-slide" data-label="vasant kunj"><img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async"></div>
+      <div class="hero-slide" data-label="vasant kunj"><img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 6. Patel Nagar Retail Store, Delhi -->
-      <div class="hero-slide" data-label="patel nagar"><img src="https://www.indevastudio.com/patel-nagar-retail-1.jpg" alt="patel nagar retail store, delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="patel nagar"><img src="https://www.indevastudio.com/patel-nagar-retail-1.jpg" alt="patel nagar retail store, delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/patel-nagar-retail-1-800w.webp 800w, https://www.indevastudio.com/patel-nagar-retail-1.jpg 1331w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 7. South Delhi Neo-Classical Residence -->
       <div class="hero-slide" data-label="south delhi neo-classical"><img src="https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-seating.webp?v=20260930" alt="south delhi neo-classical residence, south delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <div class="hero-space-label" id="hero-space-label">private villa</div>
@@ -3858,7 +3890,7 @@ img {
         </div>
         <!-- Card 1 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3869,7 +3901,7 @@ img {
         </div>
         <!-- Card 2 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
@@ -3880,7 +3912,7 @@ img {
         </div>
         <!-- Card 3 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3902,7 +3934,7 @@ img {
         </div>
         <!-- Card 6 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3933,7 +3965,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3943,7 +3975,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
@@ -3953,7 +3985,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3973,7 +4005,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -4027,7 +4059,7 @@ img {
         </div>
       </div>
       <div class="reveal d2" style="aspect-ratio:4/3; overflow:hidden; background:var(--black-3);">
-        <img src="https://www.indevastudio.com/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        <img src="https://www.indevastudio.com/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;" srcset="https://www.indevastudio.com/philosophy-moodboard-800w.webp 800w, https://www.indevastudio.com/philosophy-moodboard.jpg 1200w" sizes="(max-width:900px) 100vw, 60vw">
       </div>
     </div>
   </section>
@@ -4220,21 +4252,21 @@ img {
     </div>
     <div class="insights-grid">
       <a class="blog-card reveal" href="/insights/why-most-floor-plans-fail" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=75" alt="why most floor plans fail — indéva studio interior design insights" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="/villa-narela-facade-sketch-800.webp" alt="hand sketch of a villa facade, villa project narela — why most floor plans fail, indéva studio insights" class="blog-card-image" width="800" height="307" decoding="async" loading="lazy">
         <div class="blog-card-cat">spatial logic</div>
         <h2 class="blog-card-title">why most floor plans fail</h2>
         <p class="blog-card-excerpt">the plan is not the starting point of design — it is the design. most projects go wrong before a single material is selected.</p>
         <div class="blog-card-read">read article ↗</div>
       </a>
       <a class="blog-card reveal d1" href="/insights/execution-is-design" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75" alt="execution is design — on-site interior design supervision by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="/indeva-studio-office-narela-detail-studies-800.webp" alt="detail studies pinned up in the indéva studio office, narela — execution is design" class="blog-card-image" width="800" height="450" decoding="async" loading="lazy">
         <div class="blog-card-cat">execution</div>
         <h2 class="blog-card-title">execution is design</h2>
         <p class="blog-card-excerpt">design intent dies on site when no one is watching. this is why execution is not a separate phase — it is the final design act.</p>
         <div class="blog-card-read">read article ↗</div>
       </a>
       <a class="blog-card reveal d2" href="/insights/perfection-is-the-enemy-of-comfort" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/front%20elevation-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/front%20elevation.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
         <div class="blog-card-cat">philosophy</div>
         <h2 class="blog-card-title">perfection is the enemy of comfort</h2>
         <p class="blog-card-excerpt">the most uncomfortable spaces we've encountered are the most perfectly finished. here's why we deliberately leave ten percent undone.</p>
@@ -4285,7 +4317,7 @@ img {
     </div>
   </footer>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 indéva studio. all rights reserved.</span>
+    <span class="footer-copy">© 2026 indéva studio. all rights reserved. · <a href="/privacy" style="color:inherit">privacy policy</a></span>
     <span class="footer-copy">designed to last. not to impress.</span>
   </div>
 
@@ -4370,7 +4402,7 @@ img {
     <div class="pillar-carousel reveal" aria-roledescription="carousel" aria-label="five pillars">
       <div class="pc-stage">
       <div class="pc-slide is-on" role="group" aria-roledescription="slide" aria-label="1 of 5" >
-        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-2-invisible-detail.webp" alt="a hidden bookshelf door opening off a marble-floored passage" width="1400" height="933" loading="eager" decoding="async"></div>
+        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-2-invisible-detail.webp" alt="a hidden bookshelf door opening off a marble-floored passage" width="1400" height="933" loading="eager" decoding="async" srcset="/project-images-for-website/pillars/pillar-2-invisible-detail-800w.webp 800w, /project-images-for-website/pillars/pillar-2-invisible-detail.webp 1400w" sizes="(max-width:900px) 100vw, 60vw"></div>
         <div class="pc-text">
           <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="7" y="9" width="26" height="22" rx="1"/><path d="M7 18h26"/><circle cx="20" cy="24.5" r="1.4" fill="currentColor" stroke="none"/></svg></div>
           <div class="pillar-num">pillar 01</div>
@@ -4379,7 +4411,7 @@ img {
         </div>
       </div>
       <div class="pc-slide" role="group" aria-roledescription="slide" aria-label="2 of 5" aria-hidden="true">
-        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-3-art-of-the-mix.webp" alt="a double-height living room mixing marble, antiques and a modern curved sofa" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-3-art-of-the-mix.webp" alt="a double-height living room mixing marble, antiques and a modern curved sofa" width="1400" height="933" loading="lazy" decoding="async" srcset="/project-images-for-website/pillars/pillar-3-art-of-the-mix-800w.webp 800w, /project-images-for-website/pillars/pillar-3-art-of-the-mix.webp 1400w" sizes="(max-width:900px) 100vw, 60vw"></div>
         <div class="pc-text">
           <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="16" cy="20" r="10"/><circle cx="26" cy="20" r="10"/></svg></div>
           <div class="pillar-num">pillar 02</div>
@@ -4388,7 +4420,7 @@ img {
         </div>
       </div>
       <div class="pc-slide" role="group" aria-roledescription="slide" aria-label="3 of 5" aria-hidden="true">
-        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-4-imperfection.webp" alt="a warm living and dining room with textured stone, glass blocks and a draped throw" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-4-imperfection.webp" alt="a warm living and dining room with textured stone, glass blocks and a draped throw" width="1400" height="933" loading="lazy" decoding="async" srcset="/project-images-for-website/pillars/pillar-4-imperfection-800w.webp 800w, /project-images-for-website/pillars/pillar-4-imperfection.webp 1400w" sizes="(max-width:900px) 100vw, 60vw"></div>
         <div class="pc-text">
           <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M29.5 12A11.5 11.5 0 1 1 20 8.5"/></svg></div>
           <div class="pillar-num">pillar 03</div>
@@ -4397,7 +4429,7 @@ img {
         </div>
       </div>
       <div class="pc-slide" role="group" aria-roledescription="slide" aria-label="4 of 5" aria-hidden="true">
-        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-5-confidence.webp" alt="a bedroom in bold powder blue with patterned rugs, brass and classic mouldings" width="1400" height="933" loading="lazy" decoding="async"></div>
+        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-5-confidence.webp" alt="a bedroom in bold powder blue with patterned rugs, brass and classic mouldings" width="1400" height="933" loading="lazy" decoding="async" srcset="/project-images-for-website/pillars/pillar-5-confidence-800w.webp 800w, /project-images-for-website/pillars/pillar-5-confidence.webp 1400w" sizes="(max-width:900px) 100vw, 60vw"></div>
         <div class="pc-text">
           <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="20" cy="20" r="11"/><path d="M20 20 L26 12" stroke-linecap="round"/><path d="M20 20 L15 26" stroke-linecap="round" opacity="0.5"/></svg></div>
           <div class="pillar-num">pillar 04</div>
@@ -4406,7 +4438,7 @@ img {
         </div>
       </div>
       <div class="pc-slide" role="group" aria-roledescription="slide" aria-label="5 of 5" aria-hidden="true">
-        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-1-human-centricity.webp" alt="a deep upholstered armchair in walnut and textured boucle" width="1374" height="1145" loading="lazy" decoding="async"></div>
+        <div class="pc-media"><img src="/project-images-for-website/pillars/pillar-1-human-centricity.webp" alt="a deep upholstered armchair in walnut and textured boucle" width="1374" height="1145" loading="lazy" decoding="async" srcset="/project-images-for-website/pillars/pillar-1-human-centricity-800w.webp 800w, /project-images-for-website/pillars/pillar-1-human-centricity.webp 1374w" sizes="(max-width:900px) 100vw, 60vw"></div>
         <div class="pc-text">
           <div class="pillar-icon"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M10 8v14M30 8v14M10 22h20M13 22v10M27 22v10M10 15h20"/></svg></div>
           <div class="pillar-num">pillar 05</div>
@@ -4462,7 +4494,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-gunjeet-singh" aria-describedby="team-gunjeet-singh-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/gunjeet-singh.webp" alt="Gunjeet Singh, Chief Marketing Officer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/gunjeet-singh.webp" alt="Gunjeet Singh, Chief Marketing Officer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-toon" src="/project-images-for-website/team/gunjeet-singh.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Gunjeet Singh</div>
               <div class="team-ov-role">Chief Marketing Officer</div>
@@ -4479,7 +4511,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-yakshita-katyal" aria-describedby="team-yakshita-katyal-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/yakshita-katyal.webp" alt="Yakshita Katyal, Design Manager at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/yakshita-katyal.webp" alt="Yakshita Katyal, Design Manager at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-toon" src="/project-images-for-website/team/yakshita-katyal.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Yakshita Katyal</div>
               <div class="team-ov-role">Design Manager</div>
@@ -4496,7 +4528,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-tanvi-maru" aria-describedby="team-tanvi-maru-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/tanvi-maru.webp" alt="Tanvi Maru, Client Relations Manager at indéva studio" width="812" height="632" loading="lazy" decoding="async" style="object-position:50% top;">
+            <img src="/project-images-for-website/team/tanvi-maru.webp" alt="Tanvi Maru, Client Relations Manager at indéva studio" width="812" height="632" loading="lazy" decoding="async" style="object-position:50% top;"><img class="team-toon" src="/project-images-for-website/team/tanvi-maru.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:50% top;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Tanvi Maru</div>
               <div class="team-ov-role">Client Relations Manager</div>
@@ -4513,7 +4545,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-rishabh-jain" aria-describedby="team-rishabh-jain-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/rishabh-jain.webp" alt="Rishabh Jain, Accountant at indéva studio" width="833" height="1000" loading="lazy" decoding="async" style="object-position:center 15%;">
+            <img src="/project-images-for-website/team/rishabh-jain.webp" alt="Rishabh Jain, Accountant at indéva studio" width="833" height="1000" loading="lazy" decoding="async" style="object-position:center 15%;"><img class="team-toon" src="/project-images-for-website/team/rishabh-jain.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 15%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Rishabh Jain</div>
               <div class="team-ov-role">Accountant</div>
@@ -4530,7 +4562,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-vidisha-chaudhary" aria-describedby="team-vidisha-chaudhary-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/vidisha-chaudhary.webp" alt="Vidisha Chaudhary, Furniture Designer at indéva studio" width="602" height="554" loading="lazy" decoding="async" style="object-position:55% top;">
+            <img src="/project-images-for-website/team/vidisha-chaudhary.webp" alt="Vidisha Chaudhary, Furniture Designer at indéva studio" width="602" height="554" loading="lazy" decoding="async" style="object-position:55% top;"><img class="team-toon" src="/project-images-for-website/team/vidisha-chaudhary.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:55% top;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Vidisha Chaudhary</div>
               <div class="team-ov-role">Furniture Designer</div>
@@ -4547,7 +4579,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-shravan-kumar" aria-describedby="team-shravan-kumar-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/shravan-kumar.webp" alt="Shravan Kumar, Interior Designer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/shravan-kumar.webp" alt="Shravan Kumar, Interior Designer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-toon" src="/project-images-for-website/team/shravan-kumar.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Shravan Kumar</div>
               <div class="team-ov-role">Interior Designer</div>
@@ -4564,7 +4596,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-shrishty" aria-describedby="team-shrishty-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/shrishty.webp" alt="Shrishty, 3D Visualizer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center 30%;">
+            <img src="/project-images-for-website/team/shrishty.webp" alt="Shrishty, 3D Visualizer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center 30%;"><img class="team-toon" src="/project-images-for-website/team/shrishty.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 30%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Shrishty</div>
               <div class="team-ov-role">3D Visualizer</div>
@@ -4581,7 +4613,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-salman" aria-describedby="team-salman-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/salman.webp" alt="Salman, Site Supervisor at indéva studio" width="750" height="1000" loading="lazy" decoding="async" style="object-position:center 25%;">
+            <img src="/project-images-for-website/team/salman.webp" alt="Salman, Site Supervisor at indéva studio" width="750" height="1000" loading="lazy" decoding="async" style="object-position:center 25%;"><img class="team-toon" src="/project-images-for-website/team/salman.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Salman</div>
               <div class="team-ov-role">Site Supervisor</div>
@@ -4598,7 +4630,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-ar-kunal-sangtani" aria-describedby="team-ar-kunal-sangtani-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/kunal-sangtani.webp" alt="Ar. Kunal Sangtani, Architect at indéva studio" width="667" height="1000" loading="lazy" decoding="async" style="object-position:center 12%;">
+            <img src="/project-images-for-website/team/kunal-sangtani.webp" alt="Ar. Kunal Sangtani, Architect at indéva studio" width="667" height="1000" loading="lazy" decoding="async" style="object-position:center 12%;"><img class="team-toon" src="/project-images-for-website/team/kunal-sangtani.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 12%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Ar. Kunal Sangtani</div>
               <div class="team-ov-role">Architect</div>
@@ -4615,7 +4647,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-er-aashish-bhardwaj" aria-describedby="team-er-aashish-bhardwaj-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/aashish-bhardwaj.webp" alt="Er. Aashish Bhardwaj, Structural Engineer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/aashish-bhardwaj.webp" alt="Er. Aashish Bhardwaj, Structural Engineer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-toon" src="/project-images-for-website/team/aashish-bhardwaj.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Er. Aashish Bhardwaj</div>
               <div class="team-ov-role">Structural Engineer</div>
@@ -4632,7 +4664,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-lavdeep-singh-chahal" aria-describedby="team-lavdeep-singh-chahal-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/lavdeep-singh-chahal.webp" alt="Lavdeep Singh Chahal, Cinematographer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:62% center;">
+            <img src="/project-images-for-website/team/lavdeep-singh-chahal.webp" alt="Lavdeep Singh Chahal, Cinematographer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:62% center;"><img class="team-toon" src="/project-images-for-website/team/lavdeep-singh-chahal.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:62% center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Lavdeep Singh Chahal</div>
               <div class="team-ov-role">Cinematographer</div>
@@ -4649,7 +4681,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-veenu-saini" aria-describedby="team-veenu-saini-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/veenu-saini-2.webp" alt="Veenu Saini, Director, Projects &amp; Compliance at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/veenu-saini-2.webp" alt="Veenu Saini, Director, Projects &amp; Compliance at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-toon" src="/project-images-for-website/team/veenu-saini-2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center center;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Veenu Saini</div>
               <div class="team-ov-role">Director, Projects &amp; Compliance</div>
@@ -4733,7 +4765,7 @@ img {
     </div>
   </footer>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 indéva studio.</span>
+    <span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span>
     <span class="footer-copy">new delhi, india</span>
   </div>
 </div><!-- /about -->
@@ -4764,7 +4796,7 @@ img {
     </div>
     <div class="service-detail-body">
       <div class="service-detail-image reveal">
-        <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — architecture and interior design by indéva studio" loading="lazy" decoding="async">
+        <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — architecture and interior design by indéva studio" loading="lazy" decoding="async" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
         <div class="service-detail-image-cap">vasant kunj dda residence — new delhi</div>
       </div>
       <p class="service-detail-desc reveal">spatial planning, structural coordination, material and lighting strategy — defining how a space works, moves, and lives. architecture-led interiors, designed to be built. we design from structure, proportion, and movement, not from aesthetics.</p>
@@ -4787,7 +4819,7 @@ img {
     </div>
     <div class="service-detail-body">
       <div class="service-detail-image reveal">
-        <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — custom joinery and cabinetry by indéva studio" loading="lazy" decoding="async">
+        <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — custom joinery and cabinetry by indéva studio" loading="lazy" decoding="async" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
         <div class="service-detail-image-cap">dda apartment kitchen — delhi</div>
       </div>
       <p class="service-detail-desc reveal">custom furniture, built-ins, and detailing developed with manufacturing realities and long-term use in mind. every piece is conceived as form, function, and durability — designed to survive life, not just a photoshoot.</p>
@@ -4845,7 +4877,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /services -->
 
 
@@ -4965,7 +4997,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /process -->
 
 
@@ -5180,7 +5212,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">indéva studio · indéva studio · designed for living, not applause.</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">indéva studio · indéva studio · designed for living, not applause.</span></div>
 </div><!-- /philosophy -->
 
 
@@ -5309,7 +5341,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">get in touch</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><a href="tel:+919717881083" class="footer-contact-item">+91 9717881083</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /contact -->
 
 
@@ -5328,21 +5360,21 @@ img {
 
   <div class="blog-grid">
     <div class="blog-card reveal" onclick="openArticle('floorplans')">
-      <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=75" alt="why most floor plans fail — indéva studio interior design insights" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+      <img src="/villa-narela-facade-sketch-800.webp" alt="hand sketch of a villa facade, villa project narela — why most floor plans fail, indéva studio insights" class="blog-card-image" width="800" height="307" decoding="async" loading="lazy">
       <div class="blog-card-cat">spatial logic</div>
       <h2 class="blog-card-title">why most floor plans fail</h2>
       <p class="blog-card-excerpt">the plan is not the starting point of design — it is the design. most projects go wrong before a single material is selected, because the spatial logic was never interrogated.</p>
       <div class="blog-card-read">read article ↗</div>
     </div>
     <div class="blog-card reveal d1" onclick="openArticle('execution')">
-      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75" alt="execution is design — on-site interior design supervision by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+      <img src="/indeva-studio-office-narela-detail-studies-800.webp" alt="detail studies pinned up in the indéva studio office, narela — execution is design" class="blog-card-image" width="800" height="450" decoding="async" loading="lazy">
       <div class="blog-card-cat">execution</div>
       <h2 class="blog-card-title">execution is design</h2>
       <p class="blog-card-excerpt">there is a persistent myth that design ends when drawings are submitted. it doesn't. design intent dies on site when no one is watching. this is why execution is not a separate phase — it is the final design act.</p>
       <div class="blog-card-read">read article ↗</div>
     </div>
     <div class="blog-card reveal d2" onclick="openArticle('perfection')">
-      <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+      <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/front%20elevation-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/front%20elevation.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
       <div class="blog-card-cat">philosophy</div>
       <h2 class="blog-card-title">perfection is the enemy of comfort</h2>
       <p class="blog-card-excerpt">the most uncomfortable spaces we've encountered are the most perfectly finished. when everything is controlled, nothing is human. here's why we deliberately leave ten percent undone.</p>
@@ -5599,7 +5631,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /blog -->
 
 
@@ -5772,7 +5804,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 
 </div><!-- /furniture -->
 
@@ -6310,7 +6342,7 @@ img {
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
   </footer>
-  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio.</span><span class="footer-copy">new delhi, india</span></div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 </div><!-- /vendors -->
 
 
@@ -8197,7 +8229,7 @@ function submitEnquiry() {
   var leadRow = {
     name: name, email: email, phone: phone,
     project_type: type || null, budget: budget || null, area: area || null,
-    timeline: timeline || null, source: 'contact-page'
+    timeline: timeline || null, source: 'form:' + (window.location.pathname || '/')
   };
 
   function sendEmailJsNotification() {
@@ -10015,7 +10047,7 @@ function lpSubmit() {
     return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
   }
 
-  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, location: location, project_type: type, budget: budget, source: 'lead_popup' }])
+  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, city: location, project_type: type, budget: budget, source: 'lead_popup' }])
   .then(function(res) {
     if (res.error) throw res.error;
     sendLpEmailNotification();
