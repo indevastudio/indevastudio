@@ -3318,6 +3318,9 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* home enquiry form: one column on phones (was pushing the page sideways) */
+@media (max-width:640px){#home-enquiry-form{grid-template-columns:1fr!important}#home-enquiry-form>*{min-width:0;width:100%;box-sizing:border-box;grid-column:auto!important}}
 </style>
 
 <style id="mobile-optimisation">
@@ -3741,17 +3744,17 @@ img {
     </div>
     <div class="hero-visual">
       <!-- 1. Mini Farmhouse, Delhi -->
-      <div class="hero-slide active" data-label="mini farmhouse"><img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="mini farmhouse, delhi — indéva studio" loading="eager" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide active" data-label="mini farmhouse"><img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="mini farmhouse, delhi — indéva studio" loading="eager" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 2. Resham Hotel, Murthal -->
-      <div class="hero-slide" data-label="resham hotel"><img src="https://www.indevastudio.com/resham%20suite%20bedroom.webp" alt="resham hotel suite bedroom, murthal — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="resham hotel"><img src="https://www.indevastudio.com/resham%20suite%20bedroom.webp" alt="resham hotel suite bedroom, murthal — indéva studio" loading="lazy" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/resham%20suite%20bedroom-800w.webp 800w, https://www.indevastudio.com/resham%20suite%20bedroom.webp 1448w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 3. DDA Apartment, Delhi -->
-      <div class="hero-slide" data-label="dda apartment"><img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — indéva studio" loading="lazy" width="734" height="744" decoding="async"></div>
+      <div class="hero-slide" data-label="dda apartment"><img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen, delhi — indéva studio" loading="lazy" width="734" height="744" decoding="async" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 4. Studio Workspace, Gurgaon -->
       <div class="hero-slide" data-label="studio workspace"><img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="studio workspace office, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 5. Vasant Kunj, New Delhi -->
-      <div class="hero-slide" data-label="vasant kunj"><img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async"></div>
+      <div class="hero-slide" data-label="vasant kunj"><img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 6. Patel Nagar Retail Store, Delhi -->
-      <div class="hero-slide" data-label="patel nagar"><img src="https://www.indevastudio.com/patel-nagar-retail-1.jpg" alt="patel nagar retail store, delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
+      <div class="hero-slide" data-label="patel nagar"><img src="https://www.indevastudio.com/patel-nagar-retail-1.jpg" alt="patel nagar retail store, delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/patel-nagar-retail-1-800w.webp 800w, https://www.indevastudio.com/patel-nagar-retail-1.jpg 1331w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 7. South Delhi Neo-Classical Residence -->
       <div class="hero-slide" data-label="south delhi neo-classical"><img src="https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-seating.webp?v=20260930" alt="south delhi neo-classical residence, south delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <div class="hero-space-label" id="hero-space-label">private villa</div>
@@ -3859,7 +3862,7 @@ img {
         </div>
         <!-- Card 1 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3870,7 +3873,7 @@ img {
         </div>
         <!-- Card 2 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
@@ -3881,7 +3884,7 @@ img {
         </div>
         <!-- Card 3 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3903,7 +3906,7 @@ img {
         </div>
         <!-- Card 6 -->
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3934,7 +3937,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">designed for living.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3944,7 +3947,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">built to last.</div>
           <div class="project-card-info">
             <div class="project-card-type">hospitality</div>
@@ -3954,7 +3957,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">every detail considered.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -3974,7 +3977,7 @@ img {
           </div>
         </div>
         <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy">
+          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
           <div class="project-hover-line">quiet sophistication.</div>
           <div class="project-card-info">
             <div class="project-card-type">residential</div>
@@ -4028,7 +4031,7 @@ img {
         </div>
       </div>
       <div class="reveal d2" style="aspect-ratio:4/3; overflow:hidden; background:var(--black-3);">
-        <img src="https://www.indevastudio.com/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+        <img src="https://www.indevastudio.com/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;" srcset="https://www.indevastudio.com/philosophy-moodboard-800w.webp 800w, https://www.indevastudio.com/philosophy-moodboard.jpg 1200w" sizes="(max-width:900px) 100vw, 60vw">
       </div>
     </div>
   </section>
@@ -4221,21 +4224,21 @@ img {
     </div>
     <div class="insights-grid">
       <a class="blog-card reveal" href="/insights/why-most-floor-plans-fail" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=75" alt="why most floor plans fail — indéva studio interior design insights" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="/villa-narela-facade-sketch-800.webp" alt="hand sketch of a villa facade, villa project narela — why most floor plans fail, indéva studio insights" class="blog-card-image" width="800" height="307" decoding="async" loading="lazy">
         <div class="blog-card-cat">spatial logic</div>
         <h2 class="blog-card-title">why most floor plans fail</h2>
         <p class="blog-card-excerpt">the plan is not the starting point of design — it is the design. most projects go wrong before a single material is selected.</p>
         <div class="blog-card-read">read article ↗</div>
       </a>
       <a class="blog-card reveal d1" href="/insights/execution-is-design" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=75" alt="execution is design — on-site interior design supervision by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="/indeva-studio-office-narela-detail-studies-800.webp" alt="detail studies pinned up in the indéva studio office, narela — execution is design" class="blog-card-image" width="800" height="450" decoding="async" loading="lazy">
         <div class="blog-card-cat">execution</div>
         <h2 class="blog-card-title">execution is design</h2>
         <p class="blog-card-excerpt">design intent dies on site when no one is watching. this is why execution is not a separate phase — it is the final design act.</p>
         <div class="blog-card-read">read article ↗</div>
       </a>
       <a class="blog-card reveal d2" href="/insights/perfection-is-the-enemy-of-comfort" style="display:block;color:inherit;text-decoration:none;">
-        <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy">
+        <img src="https://www.indevastudio.com/project-images-for-website/front%20elevation.webp" alt="perfection is the enemy of comfort — luxury interior design philosophy by indéva studio" class="blog-card-image" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/front%20elevation-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/front%20elevation.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
         <div class="blog-card-cat">philosophy</div>
         <h2 class="blog-card-title">perfection is the enemy of comfort</h2>
         <p class="blog-card-excerpt">the most uncomfortable spaces we've encountered are the most perfectly finished. here's why we deliberately leave ten percent undone.</p>

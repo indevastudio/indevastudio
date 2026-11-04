@@ -3318,6 +3318,9 @@ a, button, [onclick], .service-row, .project-card, .project-row,
   .leadership-section .founder-photo { width: 200px; max-width: 200px; }
 }
 @media (prefers-reduced-motion: reduce) { .leadership-grid { scroll-behavior: auto; } }
+
+/* catalogue download buttons: stack on phones (were pushing the page sideways) */
+@media (max-width:640px){[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}}
 </style>
 
 <style id="mobile-optimisation">
