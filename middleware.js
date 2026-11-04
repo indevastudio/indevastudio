@@ -2,7 +2,7 @@
 //
 // Each client's code is their registered mobile number; the studio code opens every page.
 // Codes live in the Vercel environment variable COST_BUILDER_CODES (JSON), e.g.
-//   {"bansal":"98xxxxxxxx","chawla":"...","studio":"INDEVA"}
+//   {"bansal":"98xxxxxxxx","deepanshi":["88xxxxxxxx","81xxxxxxxx"],"studio":"INDEVA"}
 // Share a page as:  https://www.indevastudio.com/bansal-residence-narela-cost-builder?code=98xxxxxxxx
 // After the first visit the code is remembered in a cookie for 90 days.
 
@@ -77,9 +77,11 @@ function norm(x) {
   return s.replace(/\s+/g, '');
 }
 
+// A client entry may be one code or a list (e.g. both spouses' numbers).
 function isValid(code, client, codes) {
   const c = norm(code);
-  return safeEqual(c, norm(codes[client])) || safeEqual(c, norm(codes.studio));
+  const allowed = [].concat(codes[client] || [], codes.studio || []);
+  return allowed.some((k) => safeEqual(c, norm(k)));
 }
 
 function escapeHtml(s) {
