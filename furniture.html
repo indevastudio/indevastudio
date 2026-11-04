@@ -5059,7 +5059,7 @@ function submitEnquiry() {
   var leadRow = {
     name: name, email: email, phone: phone,
     project_type: type || null, budget: budget || null, area: area || null,
-    timeline: timeline || null, source: 'contact-page'
+    timeline: timeline || null, source: 'form:' + (window.location.pathname || '/')
   };
 
   function sendEmailJsNotification() {
@@ -6877,7 +6877,7 @@ function lpSubmit() {
     return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
   }
 
-  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, location: location, project_type: type, budget: budget, source: 'lead_popup' }])
+  supabaseClient.from('lead submissions').insert([{ name: name, phone: phone, email: email, city: location, project_type: type, budget: budget, source: 'lead_popup' }])
   .then(function(res) {
     if (res.error) throw res.error;
     sendLpEmailNotification();
