@@ -1375,6 +1375,15 @@ nav.solid {
 .team-card-inner:focus-visible .team-overlay { opacity: 1; }
 .team-card-inner:focus-visible .team-overlay > * { transform: none; }
 .team-card-inner:focus-visible .team-media { outline: 2px solid var(--gold); outline-offset: 3px; }
+/* team photos: illustrated portrait fades in on hover (team.json "illustration") */
+.team-media .team-illustration { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.45s ease, transform 0.7s cubic-bezier(.2,.7,.2,1); pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .team-card-inner:hover .team-illustration { opacity: 1; transform: scale(1.03); }
+  .team-card-inner:hover .team-media:has(.team-illustration) .team-overlay { background: linear-gradient(to top, rgba(20,20,20,0.86) 0%, rgba(20,20,20,0.55) 30%, rgba(20,20,20,0) 58%); }
+}
+.team-card-inner:focus-visible .team-illustration { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .team-media .team-illustration { transition: none; } }
+
 /* touch screens: no hover, so the description sits under the role */
 @media (hover: none), (pointer: coarse) {
   .team-overlay { display: none; }
@@ -4469,7 +4478,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-gunjeet-singh" aria-describedby="team-gunjeet-singh-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/gunjeet-singh.webp" alt="Gunjeet Singh, Chief Marketing Officer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/gunjeet-singh.webp" alt="Gunjeet Singh, Chief Marketing Officer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/gunjeet-singh.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Gunjeet Singh</div>
               <div class="team-ov-role">Chief Marketing Officer</div>
@@ -4486,7 +4495,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-yakshita-katyal" aria-describedby="team-yakshita-katyal-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/yakshita-katyal.webp" alt="Yakshita Katyal, Design Manager at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/yakshita-katyal.webp" alt="Yakshita Katyal, Design Manager at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/yakshita-katyal.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Yakshita Katyal</div>
               <div class="team-ov-role">Design Manager</div>
@@ -4503,7 +4512,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-tanvi-maru" aria-describedby="team-tanvi-maru-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/tanvi-maru.webp" alt="Tanvi Maru, Client Relations Manager at indéva studio" width="812" height="632" loading="lazy" decoding="async" style="object-position:50% top;">
+            <img src="/project-images-for-website/team/tanvi-maru.webp" alt="Tanvi Maru, Client Relations Manager at indéva studio" width="812" height="632" loading="lazy" decoding="async" style="object-position:50% top;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/tanvi-maru.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Tanvi Maru</div>
               <div class="team-ov-role">Client Relations Manager</div>
@@ -4537,7 +4546,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-vidisha-chaudhary" aria-describedby="team-vidisha-chaudhary-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/vidisha-chaudhary.webp" alt="Vidisha Chaudhary, Furniture Designer at indéva studio" width="602" height="554" loading="lazy" decoding="async" style="object-position:55% top;">
+            <img src="/project-images-for-website/team/vidisha-chaudhary.webp" alt="Vidisha Chaudhary, Furniture Designer at indéva studio" width="602" height="554" loading="lazy" decoding="async" style="object-position:55% top;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/vidisha-chaudhary.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Vidisha Chaudhary</div>
               <div class="team-ov-role">Furniture Designer</div>
@@ -4554,7 +4563,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-shravan-kumar" aria-describedby="team-shravan-kumar-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/shravan-kumar.webp" alt="Shravan Kumar, Interior Designer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/shravan-kumar.webp" alt="Shravan Kumar, Interior Designer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/shravan-kumar.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Shravan Kumar</div>
               <div class="team-ov-role">Interior Designer</div>
@@ -4588,7 +4597,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-salman" aria-describedby="team-salman-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/salman.webp" alt="Salman, Site Supervisor at indéva studio" width="750" height="1000" loading="lazy" decoding="async" style="object-position:center 25%;">
+            <img src="/project-images-for-website/team/salman.webp" alt="Salman, Site Supervisor at indéva studio" width="750" height="1000" loading="lazy" decoding="async" style="object-position:center 25%;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/salman.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Salman</div>
               <div class="team-ov-role">Site Supervisor</div>
@@ -4605,7 +4614,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-ar-kunal-sangtani" aria-describedby="team-ar-kunal-sangtani-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/kunal-sangtani.webp" alt="Ar. Kunal Sangtani, Architect at indéva studio" width="667" height="1000" loading="lazy" decoding="async" style="object-position:center 12%;">
+            <img src="/project-images-for-website/team/kunal-sangtani.webp" alt="Ar. Kunal Sangtani, Architect at indéva studio" width="667" height="1000" loading="lazy" decoding="async" style="object-position:center 12%;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/kunal-sangtani.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Ar. Kunal Sangtani</div>
               <div class="team-ov-role">Architect</div>
@@ -4622,7 +4631,7 @@ img {
       <li class="team-card reveal d1">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-er-aashish-bhardwaj" aria-describedby="team-er-aashish-bhardwaj-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/aashish-bhardwaj.webp" alt="Er. Aashish Bhardwaj, Structural Engineer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/aashish-bhardwaj.webp" alt="Er. Aashish Bhardwaj, Structural Engineer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/aashish-bhardwaj.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Er. Aashish Bhardwaj</div>
               <div class="team-ov-role">Structural Engineer</div>
@@ -4639,7 +4648,7 @@ img {
       <li class="team-card reveal d2">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-lavdeep-singh-chahal" aria-describedby="team-lavdeep-singh-chahal-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/lavdeep-singh-chahal.webp" alt="Lavdeep Singh Chahal, Cinematographer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:62% center;">
+            <img src="/project-images-for-website/team/lavdeep-singh-chahal.webp" alt="Lavdeep Singh Chahal, Cinematographer at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:62% center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/lavdeep-singh-chahal.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Lavdeep Singh Chahal</div>
               <div class="team-ov-role">Cinematographer</div>
@@ -4656,7 +4665,7 @@ img {
       <li class="team-card reveal d3">
         <article class="team-card-inner" tabindex="0" aria-labelledby="team-veenu-saini" aria-describedby="team-veenu-saini-desc">
           <div class="team-media">
-            <img src="/project-images-for-website/team/veenu-saini-2.webp" alt="Veenu Saini, Director, Projects &amp; Compliance at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;">
+            <img src="/project-images-for-website/team/veenu-saini-2.webp" alt="Veenu Saini, Director, Projects &amp; Compliance at indéva studio" width="1000" height="1000" loading="lazy" decoding="async" style="object-position:center center;"><img class="team-illustration" src="/project-images-for-website/team/illustrations/veenu-saini-2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:center 25%;">
             <div class="team-overlay" aria-hidden="true">
               <div class="team-ov-name">Veenu Saini</div>
               <div class="team-ov-role">Director, Projects &amp; Compliance</div>

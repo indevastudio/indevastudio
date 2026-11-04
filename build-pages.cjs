@@ -161,6 +161,12 @@ function renderTeam() {
       if (!fs.existsSync(file)) throw new Error(`team.json: photo not found for ${m.name}: ${file}`);
       const dim = sizeOf(file);
       media = `<img src="${TEAM_IMG_DIR}${h(m.photo)}" alt="${h(m.name)}, ${h(m.role)} at indéva studio"${dim ? ` width="${dim[0]}" height="${dim[1]}"` : ''} loading="lazy" decoding="async" style="object-position:${h(m.focus || 'center 20%')};">`;
+      // illustrated version shown on hover (team.json "illustration", under the team image folder)
+      if (m.illustration) {
+        const ill = path.join(ROOT, TEAM_IMG_DIR.slice(1), m.illustration);
+        if (!fs.existsSync(ill)) throw new Error(`team.json: illustration not found for ${m.name}: ${ill}`);
+        media += `<img class="team-illustration" src="${TEAM_IMG_DIR}${h(m.illustration)}" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-position:${h(m.illustrationFocus || 'center 25%')};">`;
+      }
     } else {
       media = `<div class="team-initials" aria-hidden="true">${h(initials(m.name))}</div>`;
     }

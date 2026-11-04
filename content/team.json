@@ -6,21 +6,24 @@
       "role": "Chief Marketing Officer",
       "photo": "gunjeet-singh.webp",
       "focus": "center center",
-      "desc": "Leads the studio's brand, communication and marketing, shaping how our work, process and values reach the people we design for."
+      "desc": "Leads the studio's brand, communication and marketing, shaping how our work, process and values reach the people we design for.",
+      "illustration": "illustrations/gunjeet-singh.webp"
     },
     {
       "name": "Yakshita Katyal",
       "role": "Design Manager",
       "photo": "yakshita-katyal.webp",
       "focus": "center center",
-      "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings."
+      "desc": "Leads interior concepts, space planning and material palettes, guiding design development from first layouts to detailed working drawings.",
+      "illustration": "illustrations/yakshita-katyal.webp"
     },
     {
       "name": "Tanvi Maru",
       "role": "Client Relations Manager",
       "photo": "tanvi-maru.webp",
       "focus": "50% top",
-      "desc": "Keeps clients informed and supported at every stage, coordinating updates, approvals and communication between homeowners and the studio team."
+      "desc": "Keeps clients informed and supported at every stage, coordinating updates, approvals and communication between homeowners and the studio team.",
+      "illustration": "illustrations/tanvi-maru.webp"
     },
     {
       "name": "Rishabh Jain",
@@ -34,14 +37,16 @@
       "role": "Furniture Designer",
       "photo": "vidisha-chaudhary.webp",
       "focus": "55% top",
-      "desc": "Designs custom furniture and joinery, balancing proportion, comfort, materials and buildability so each piece belongs to the space it is made for."
+      "desc": "Designs custom furniture and joinery, balancing proportion, comfort, materials and buildability so each piece belongs to the space it is made for.",
+      "illustration": "illustrations/vidisha-chaudhary.webp"
     },
     {
       "name": "Shravan Kumar",
       "role": "Interior Designer",
       "photo": "shravan-kumar.webp",
       "focus": "center center",
-      "desc": "Develops thoughtful interior concepts, spatial layouts and material palettes that balance functionality with the character of each space."
+      "desc": "Develops thoughtful interior concepts, spatial layouts and material palettes that balance functionality with the character of each space.",
+      "illustration": "illustrations/shravan-kumar.webp"
     },
     {
       "name": "Shrishty",
@@ -55,35 +60,40 @@
       "role": "Site Supervisor",
       "photo": "salman.webp",
       "focus": "center 25%",
-      "desc": "Coordinates on-site activities, monitors workmanship and supports the smooth execution of design and construction details."
+      "desc": "Coordinates on-site activities, monitors workmanship and supports the smooth execution of design and construction details.",
+      "illustration": "illustrations/salman.webp"
     },
     {
       "name": "Ar. Kunal Sangtani",
       "role": "Architect",
       "photo": "kunal-sangtani.webp",
       "focus": "center 12%",
-      "desc": "Shapes spatial planning and architectural detailing, making sure layouts, proportions and building elements work together as one coherent design."
+      "desc": "Shapes spatial planning and architectural detailing, making sure layouts, proportions and building elements work together as one coherent design.",
+      "illustration": "illustrations/kunal-sangtani.webp"
     },
     {
       "name": "Er. Aashish Bhardwaj",
       "role": "Structural Engineer",
       "photo": "aashish-bhardwaj.webp",
       "focus": "center center",
-      "desc": "Supports structural planning and engineering coordination to help ensure safe, practical and technically sound building solutions."
+      "desc": "Supports structural planning and engineering coordination to help ensure safe, practical and technically sound building solutions.",
+      "illustration": "illustrations/aashish-bhardwaj.webp"
     },
     {
       "name": "Lavdeep Singh Chahal",
       "role": "Cinematographer",
       "photo": "lavdeep-singh-chahal.webp",
       "focus": "62% center",
-      "desc": "Captures spaces, materials and architectural details through considered visual storytelling and cinematic composition, documenting each project as it comes to life."
+      "desc": "Captures spaces, materials and architectural details through considered visual storytelling and cinematic composition, documenting each project as it comes to life.",
+      "illustration": "illustrations/lavdeep-singh-chahal.webp"
     },
     {
       "name": "Veenu Saini",
       "role": "Director, Projects & Compliance",
       "photo": "veenu-saini-2.webp",
       "focus": "center center",
-      "desc": "Oversees project delivery and compliance, keeping every site on schedule, to specification and fully compliant from the first day to handover."
+      "desc": "Oversees project delivery and compliance, keeping every site on schedule, to specification and fully compliant from the first day to handover.",
+      "illustration": "illustrations/veenu-saini-2.webp"
     }
   ]
 }
