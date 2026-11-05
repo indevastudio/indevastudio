@@ -1384,6 +1384,10 @@ nav.solid {
 }
 .team-card-inner:focus-visible .team-illustration { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .team-media .team-illustration { transition: none; } }
+/* touch screens: tap a photo to switch to the illustration, tap again to switch back */
+.team-card-inner.show-illustration .team-illustration { opacity: 1; }
+@media (hover: none), (pointer: coarse) { .team-media:has(.team-illustration) { cursor: pointer; -webkit-tap-highlight-color: transparent; } }
+
 
 /* touch screens: no hover, so the description sits under the role */
 @media (hover: none), (pointer: coarse) {
@@ -7050,5 +7054,21 @@ function downloadProcessPDF() {
   </div>
 </div>
 
+
+<script>
+/* Team photos: tap (touch screens) to toggle the illustrated portrait. */
+(function () {
+  var touch = window.matchMedia && matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!touch) return;
+  document.addEventListener('click', function (e) {
+    var media = e.target.closest && e.target.closest('.team-media');
+    if (!media || !media.querySelector('.team-illustration')) return;
+    var card = media.closest('.team-card-inner');
+    var on = !card.classList.contains('show-illustration');
+    document.querySelectorAll('.team-card-inner.show-illustration').forEach(function (c) { c.classList.remove('show-illustration'); });
+    if (on) card.classList.add('show-illustration');
+  });
+})();
+</script>
 </body>
 </html>
