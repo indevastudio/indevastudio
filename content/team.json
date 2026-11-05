@@ -30,7 +30,8 @@
       "role": "Accountant",
       "photo": "rishabh-jain.webp",
       "focus": "center 15%",
-      "desc": "Manages accounts, billing and vendor payments, keeping every estimate, invoice and project ledger clear, accurate and on record."
+      "desc": "Manages accounts, billing and vendor payments, keeping every estimate, invoice and project ledger clear, accurate and on record.",
+      "illustration": "illustrations/rishabh-jain.webp"
     },
     {
       "name": "Vidisha Chaudhary",
@@ -53,7 +54,8 @@
       "role": "3D Visualizer",
       "photo": "shrishty.webp",
       "focus": "center 30%",
-      "desc": "Turns design drawings into photorealistic 3D views, so clients can see materials, light and mood in their space before work begins on site."
+      "desc": "Turns design drawings into photorealistic 3D views, so clients can see materials, light and mood in their space before work begins on site.",
+      "illustration": "illustrations/shrishty.webp"
     },
     {
       "name": "Salman",
