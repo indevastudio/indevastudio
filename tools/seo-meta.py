@@ -71,13 +71,12 @@ for l in locs:
         for a, k in (('name','description'),('property','og:description'),('name','twitter:description')):
             s = re.sub(r'(<meta\s+%s="%s"\s+content=")[^"]*' % (a, re.escape(k)), lambda m: m.group(1) + e, s)
         changed.append((l, len(nd), nd))
-    if 'twitter:card' not in s:
-        img = meta(s, 'property', 'og:image') or O + '/og-image.jpg'
-        tags = ('<meta name="twitter:card" content="summary_large_image">\n'
-                f'<meta name="twitter:title" content="{html.escape(meta(s,"property","og:title") and html.unescape(meta(s,"property","og:title")) or title, quote=True)}">\n'
-                f'<meta name="twitter:description" content="{html.escape(nd, quote=True)}">\n'
-                f'<meta name="twitter:image" content="{img}">\n')
-        s = s.replace('</head>', tags + '</head>', 1)
+    ogt = meta(s, 'property', 'og:title'); ogt = html.unescape(ogt) if ogt else title
+    want = {'twitter:card': 'summary_large_image', 'twitter:title': html.escape(ogt, quote=True),
+            'twitter:description': html.escape(nd, quote=True),
+            'twitter:image': meta(s, 'property', 'og:image') or O + '/og-default.jpg'}
+    tags = ''.join(f'<meta name="{k}" content="{v}">\n' for k, v in want.items() if meta(s, 'name', k) is None)
+    if tags: s = s.replace('</head>', tags + '</head>', 1)
     if 'BreadcrumbList' not in s:
         parts = [p for p in l.split('/') if p]
         items = [{'@type':'ListItem','position':1,'name':'Home','item':O+'/'}]

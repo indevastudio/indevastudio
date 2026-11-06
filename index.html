@@ -1473,7 +1473,11 @@ nav.solid {
   padding-left: 20px;
 }
 
-.service-detail-body { }
+.service-detail-body { min-width: 0; }
+@media (max-width: 900px) {
+  .service-detail { grid-template-columns: 1fr; gap: 28px; padding: 36px 20px; }
+  .service-detail-header { position: static; }
+}
 .service-detail-image {
   width: 100%;
   aspect-ratio: 16/9;
