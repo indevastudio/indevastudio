@@ -2136,6 +2136,59 @@ select.form-field option { background: var(--black-3); }
 /* ════════════════════════════════════
    FOOTER
 ════════════════════════════════════ */
+
+/* ── homepage sections 02–07 (redesign 2026) ── */
+.hx-sec{padding:110px 60px;border-top:1px solid var(--line)}
+.hx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:56px;flex-wrap:wrap}
+.hx-n{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hx-st{position:absolute;top:16px;left:16px;padding:6px 11px;font-family:var(--mono);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;line-height:1}
+.hx-st.done{background:#161412;color:#FAF9F6}.hx-st.wip{background:#FAF9F6;color:#7A5530;border:1px solid var(--gold)}
+.hx-kind{position:absolute;right:12px;bottom:12px;padding:4px 9px;background:rgba(22,20,18,.72);color:#FAF9F6;font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase}
+.hx-work-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:56px 40px}
+.hx-w{display:flex;flex-direction:column;gap:10px;color:var(--white);text-decoration:none}
+.hx-w figure{position:relative;margin:0;overflow:hidden;background:var(--black-3)}
+.hx-w img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.hx-w:hover img{transform:scale(1.025)}
+.hx-w-a{grid-column:1/8;grid-row:1/3}.hx-w-a figure{aspect-ratio:4/5}
+.hx-w-b{grid-column:8/13}.hx-w-b figure{aspect-ratio:4/3}
+.hx-w-c{grid-column:8/13}.hx-w-c figure{aspect-ratio:16/10}
+.hx-w-d{grid-column:1/-1}.hx-w-d figure{aspect-ratio:21/8}
+.hx-w-meta{display:flex;justify-content:space-between;gap:12px;margin-top:6px;font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}.hx-w-meta span+span{color:var(--white-muted)}
+.hx-w h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,2.4vw,2.2rem);line-height:1.1;letter-spacing:-.01em;transition:color .2s}
+.hx-w:hover h3{color:var(--gold)}
+.hx-w p{font-size:.86rem;line-height:1.75;color:var(--white-dim);max-width:560px}
+.hx-do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px}
+.hx-do-col{border-top:1px solid var(--white);padding-top:24px}
+.hx-do-col h3,.hx-ap-list h3,.hx-ft-steps h3,.hx-pr-list h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.25rem,1.8vw,1.6rem);line-height:1.2;margin-bottom:12px;color:var(--white)}
+.hx-do-col p,.hx-ap-list p,.hx-ft-steps p,.hx-pr-list p{font-size:.84rem;line-height:1.75;color:var(--white-dim)}
+.hx-do-col ul{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.hx-do-col li{border-bottom:1px solid var(--line);padding:11px 0;font-size:.8rem}
+.hx-do-col a,.hx-ap-list a,.hx-d2s a{color:var(--white);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px}
+.hx-do-col a:hover,.hx-ap-list a:hover,.hx-d2s a:hover{color:var(--gold)}
+.hx-approach{background:#161412}
+.hx-approach,.hx-approach h2,.hx-approach h3{color:#FAF9F6}.hx-approach p{color:#BDB5A8}.hx-approach .hx-n{color:#C5A46D}
+.hx-approach a{color:#FAF9F6;border-color:#C5A46D}
+.hx-ap-inner{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
+.hx-ap-lead{position:sticky;top:120px}.hx-ap-lead p{margin-top:20px;font-size:.9rem;line-height:1.8;max-width:420px}
+.hx-ap-list{list-style:none;margin:0;padding:0}
+.hx-ap-list li{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:28px 0;border-top:1px solid #3A352F}
+.hx-ft-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.hx-ft-steps figure{margin:0 0 20px;aspect-ratio:3/4;overflow:hidden;background:var(--black-3)}
+.hx-ft-steps img{width:100%;height:100%;object-fit:cover;display:block}
+.hx-ft-site{aspect-ratio:3/4;margin-bottom:20px;background:#161412;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:24px}
+.hx-ft-site span{font-family:var(--serif);font-weight:300;font-size:clamp(1.3rem,2vw,1.9rem);color:#FAF9F6;line-height:1.1}
+.hx-d2s{background:var(--black-2)}
+.hx-d2s-lede{max-width:620px;margin:-28px 0 40px;font-size:.9rem;line-height:1.8;color:var(--white-dim)}
+.hx-d2s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:d2s}
+.hx-d2s-grid figure{margin:0}
+.hx-d2s-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#fff;border:1px solid var(--line)}
+.hx-d2s-grid figure:first-child img,.hx-d2s-grid figure:nth-child(2) img{object-fit:contain;padding:8px}
+.hx-d2s-grid figcaption{margin-top:16px;font-size:.82rem;line-height:1.7;color:var(--white-dim)}
+.hx-pr-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:28px}
+.hx-pr-list li{border-top:1px solid var(--white);padding-top:20px}
+@media (max-width:1100px){.hx-ft-steps{grid-template-columns:1fr 1fr}.hx-pr-list{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){.hx-sec{padding:72px 24px}.hx-work-grid{grid-template-columns:1fr;gap:48px}.hx-w-a,.hx-w-b,.hx-w-c,.hx-w-d{grid-column:1/-1;grid-row:auto}.hx-w-a figure{aspect-ratio:4/5}.hx-w-d figure{aspect-ratio:4/3}.hx-do-grid,.hx-d2s-grid{grid-template-columns:1fr;gap:36px}.hx-ap-inner{grid-template-columns:1fr;gap:32px}.hx-ap-lead{position:static}.hx-ap-list li{grid-template-columns:48px 1fr}.hx-pr-list{grid-template-columns:1fr 1fr}.hx-head{margin-bottom:36px}.hx-d2s-lede{margin-top:-12px}}
+@media (max-width:560px){.hx-ft-steps,.hx-pr-list{grid-template-columns:1fr}.hx-ft-steps figure,.hx-ft-site{aspect-ratio:4/3}}
 .site-footer {
   background: var(--black-2);
   border-top: 1px solid var(--line);
@@ -3768,9 +3821,9 @@ img {
   <section class="hero">
     <div class="hero-left">
       <h1 class="hero-headline reveal d1">
-        Architecture led interiors.<br>Designed to be built.
+        architecture led interiors.<br>designed to be built.
       </h1>
-      <p class="hero-sub reveal d2">We design and deliver residential, commercial and hospitality spaces from planning and interiors to furniture, drawings and execution.</p>
+      <p class="hero-sub reveal d2">from the first drawing to the final detail. we design, coordinate and execute spaces with construction at the centre of every decision.</p>
       <div class="hero-credibility reveal d2">
         <div class="hero-cred-item">
           <div class="hero-cred-num">Delhi NCR</div>
@@ -3788,8 +3841,8 @@ img {
         </div>
       </div>
       <div class="hero-actions reveal d3">
-        <a class="hero-cta hero-cta-secondary" href="/projects" data-page="projects" onclick="showPage('projects');window.scrollTo(0,0); return false;"><span>view projects</span></a>
-        <a class="hero-cta hero-cta-primary" href="/contact" data-page="contact" onclick="showPage('contact');window.scrollTo(0,0); return false;"><span>discuss your project</span><span class="hero-cta-arrow">→</span></a>
+        <a class="hero-cta hero-cta-primary" href="/projects" data-page="projects" onclick="showPage('projects');window.scrollTo(0,0); return false;"><span>explore projects</span><span class="hero-cta-arrow">→</span></a>
+        <a class="hero-cta hero-cta-secondary" href="/contact" data-page="contact" onclick="showPage('contact');window.scrollTo(0,0); return false;"><span>start a project</span></a>
       </div>
     </div>
     <div class="hero-visual">
@@ -3803,8 +3856,6 @@ img {
       <div class="hero-slide" data-label="studio workspace"><img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="studio workspace office, gurgaon — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <!-- 5. Vasant Kunj, New Delhi -->
       <div class="hero-slide" data-label="vasant kunj"><img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" loading="lazy" width="692" height="497" decoding="async" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw"></div>
-      <!-- 6. Patel Nagar Retail Store, Delhi -->
-      <div class="hero-slide" data-label="patel nagar"><img src="https://www.indevastudio.com/patel-nagar-retail-1.jpg" alt="patel nagar retail store, delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async" srcset="https://www.indevastudio.com/patel-nagar-retail-1-800w.webp 800w, https://www.indevastudio.com/patel-nagar-retail-1.jpg 1331w" sizes="(max-width:900px) 100vw, 60vw"></div>
       <!-- 7. South Delhi Neo-Classical Residence -->
       <div class="hero-slide" data-label="south delhi neo-classical"><img src="https://www.indevastudio.com/south-delhi-neoclassical-images/south-delhi-neoclassical-living-room-seating.webp?v=20260930" alt="south delhi neo-classical residence, south delhi — indéva studio" loading="lazy" width="1200" height="900" decoding="async"></div>
       <div class="hero-space-label" id="hero-space-label">private villa</div>
@@ -3841,251 +3892,110 @@ img {
     </div>
   </div>
 
-  <!-- ANIMATED OFFERINGS -->
-  <section class="offerings-section">
-    <div class="offerings-header">
-      <div>
-        <div class="label-line label reveal">what we offer</div>
-        <h2 class="display display-md reveal d1" style="margin-top:16px;">our <em class="italic gold">offerings</em></h2>
-      </div>
-      <a class="btn btn-text reveal d2" href="/services" data-page="services" onclick="showPage('services'); return false;">explore all services</a>
+  <!-- 02 SELECTED WORK -->
+  <section class="hx-sec hx-work" aria-labelledby="hx-work-t">
+    <div class="hx-head">
+      <div><div class="label-line label reveal">selected work</div>
+      <h2 id="hx-work-t" class="display display-md reveal d1" style="margin-top:16px;">four projects, <em class="italic gold">four kinds of problem.</em></h2></div>
+      <a class="btn btn-text reveal d2" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">see all work</a>
     </div>
-    <div class="offerings-mask">
-      <div class="offerings-track">
-        <div class="offering-card"><span class="offering-icon">📐</span><div class="offering-name">spatial planning</div><div class="offering-sub">zoning · circulation · proportion</div></div>
-        <div class="offering-card"><span class="offering-icon">💡</span><div class="offering-name">lighting strategy</div><div class="offering-sub">layered · purposeful · atmospheric</div></div>
-        <div class="offering-card"><span class="offering-icon">🪵</span><div class="offering-name">material language</div><div class="offering-sub">texture · contrast · dialogue</div></div>
-        <div class="offering-card"><span class="offering-icon">🛋</span><div class="offering-name">custom furniture</div><div class="offering-sub">form · function · forever</div></div>
-        <div class="offering-card"><span class="offering-icon">🏛</span><div class="offering-name">architecture</div><div class="offering-sub">structure · movement · logic</div></div>
-        <div class="offering-card"><span class="offering-icon">🔩</span><div class="offering-name">joinery & built-ins</div><div class="offering-sub">precision · longevity · detail</div></div>
-        <div class="offering-card"><span class="offering-icon">🧱</span><div class="offering-name">site execution</div><div class="offering-sub">supervision · protection · delivery</div></div>
-        <div class="offering-card"><span class="offering-icon">📦</span><div class="offering-name">vendor management</div><div class="offering-sub">alignment · accountability · control</div></div>
-        <div class="offering-card"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
-        <div class="offering-card"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
-        <!-- duplicate for seamless loop -->
-        <div class="offering-card"><span class="offering-icon">📐</span><div class="offering-name">spatial planning</div><div class="offering-sub">zoning · circulation · proportion</div></div>
-        <div class="offering-card"><span class="offering-icon">💡</span><div class="offering-name">lighting strategy</div><div class="offering-sub">layered · purposeful · atmospheric</div></div>
-        <div class="offering-card"><span class="offering-icon">🪵</span><div class="offering-name">material language</div><div class="offering-sub">texture · contrast · dialogue</div></div>
-        <div class="offering-card"><span class="offering-icon">🛋</span><div class="offering-name">custom furniture</div><div class="offering-sub">form · function · forever</div></div>
-        <div class="offering-card"><span class="offering-icon">🏛</span><div class="offering-name">architecture</div><div class="offering-sub">structure · movement · logic</div></div>
-        <div class="offering-card"><span class="offering-icon">🔩</span><div class="offering-name">joinery & built-ins</div><div class="offering-sub">precision · longevity · detail</div></div>
-        <div class="offering-card"><span class="offering-icon">🧱</span><div class="offering-name">site execution</div><div class="offering-sub">supervision · protection · delivery</div></div>
-        <div class="offering-card"><span class="offering-icon">📦</span><div class="offering-name">vendor management</div><div class="offering-sub">alignment · accountability · control</div></div>
-        <div class="offering-card"><span class="offering-icon">🪟</span><div class="offering-name">ceiling & wall design</div><div class="offering-sub">overhead · elevation · finish specs</div></div>
-        <div class="offering-card"><span class="offering-icon">✏️</span><div class="offering-name">working drawings</div><div class="offering-sub">built for contractors · not applause</div></div>
-      </div>
+    <div class="hx-work-grid">
+      <a class="hx-w hx-w-a reveal" href="/projects/casa-bianca-farmhouse-gurgaon">
+        <figure><picture><img src="/casa-bianca-farmhouse-gurgaon-living-hall-chandelier-800.webp" srcset="/casa-bianca-farmhouse-gurgaon-living-hall-chandelier-800.webp 800w, /casa-bianca-farmhouse-gurgaon-living-hall-chandelier-844.webp 844w" sizes="(max-width:900px) 100vw, 50vw" width="844" height="1500" alt="double-height living hall under a crystal chandelier at casa bianca, sohna" loading="lazy" decoding="async"></picture><span class="hx-st done">completed</span></figure>
+        <div class="hx-w-meta"><span>farmhouse · sohna</span><span>10,000 sq ft</span></div>
+        <h3>casa bianca</h3><p>a neoclassical farmhouse with around ten bedrooms and an eight-shaped pool, built through 45°c summers and high groundwater.</p>
+      </a>
+      <a class="hx-w hx-w-b reveal d1" href="/projects/hotel-silk-murthal">
+        <figure><picture><img src="/hotel-silk-murthal-lobby-ceiling-installation-800.webp" srcset="/hotel-silk-murthal-lobby-ceiling-installation-800.webp 800w, /hotel-silk-murthal-lobby-ceiling-installation-1086.webp 1086w" sizes="(max-width:900px) 100vw, 50vw" width="1086" height="1448" alt="lobby ceiling installation at hotel silk by resham, murthal" loading="lazy" decoding="async"></picture><span class="hx-st done">completed</span></figure>
+        <div class="hx-w-meta"><span>hospitality · murthal</span><span>23 rooms</span></div>
+        <h3>hotel silk by resham</h3><p>23 guest rooms on a busy highway, designed and built in 12 months for hard daily use.</p>
+      </a>
+      <a class="hx-w hx-w-c reveal d2" href="/projects/villa-narela">
+        <figure><picture><img src="/villa-narela-dholpur-facade-day-800.webp" srcset="/villa-narela-dholpur-facade-day-800.webp 800w, /villa-narela-dholpur-facade-day-1536.webp 1536w" sizes="(max-width:900px) 100vw, 50vw" width="1536" height="865" alt="design render of the dholpur stone villa facade, narela" loading="lazy" decoding="async"></picture><span class="hx-st wip">in progress</span><span class="hx-kind">design render</span></figure>
+        <div class="hx-w-meta"><span>renovation · narela</span><span>35-year-old house</span></div>
+        <h3>the dholpur stone villa</h3><p>a load-bearing stone house with no columns or beams, replanned for modern family life without losing its facade.</p>
+      </a>
+      <a class="hx-w hx-w-d reveal" href="/projects/south-delhi-neoclassical-residence">
+        <figure><picture><img src="/south-delhi-neoclassical-residence-wall-panelling-800.webp" srcset="/south-delhi-neoclassical-residence-wall-panelling-800.webp 800w, /south-delhi-neoclassical-residence-wall-panelling-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" width="1600" height="932" alt="panelled walls and mouldings in the south delhi neo-classical residence" loading="lazy" decoding="async"></picture><span class="hx-st done">completed</span></figure>
+        <div class="hx-w-meta"><span>apartment · south delhi</span><span>1,500 sq ft</span></div>
+        <h3>south delhi neo-classical residence</h3><p>classic mouldings in a compact 2 bhk, with wardrobes built into the panelling so the flat stays calm.</p>
+      </a>
     </div>
   </section>
 
-  <!-- SELECTED PROJECTS -->
-  <section class="projects-strip">
-    <div class="projects-header">
-      <div>
-        <div class="label-line label reveal">selected work</div>
-        <h2 class="display display-md reveal d1" style="margin-top:20px;">projects</h2>
-      </div>
-      <a class="btn btn-text reveal d2" href="/projects" data-page="projects" onclick="showPage('projects'); return false;">view all projects</a>
-    </div>
-
-    <div class="projects-carousel-wrap">
-      <div class="projects-carousel-track" id="projectsTrack">
-        <!-- New: villa + office -->
-        <div class="project-card" onclick="location.href='/projects/villa-narela'">
-          <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" width="800" height="451" decoding="async" loading="lazy">
-          <div class="project-hover-line">renewed, not rebuilt.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">villa project</div>
-            <div class="project-card-loc">narela &middot; dholpur stone facade</div>
-            <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
-          <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" width="800" height="450" decoding="async" loading="lazy">
-          <div class="project-hover-line">one room, every wall planned.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">commercial</div>
-            <div class="project-card-name">indéva studio office</div>
-            <div class="project-card-loc">narela &middot; office interior</div>
-            <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
-          </div>
-        </div>
-        <!-- Card 1 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">designed for living.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">mini farmhouse</div>
-            <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
-            <div class="project-card-scope">Interior Design + Furniture + Execution</div>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">built to last.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">hospitality</div>
-            <div class="project-card-name">resham hotel</div>
-            <div class="project-card-loc">murthal &middot; 23 rooms</div>
-            <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">every detail considered.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">dda apartment</div>
-            <div class="project-card-loc">delhi &middot; 1,800 sqft</div>
-            <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
-          </div>
-        </div>
-        <!-- Card 4 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="commercial design studio office interior, new delhi — indéva studio" class="project-card-img" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">space as identity.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">commercial</div>
-            <div class="project-card-name">studio workspace</div>
-            <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
-            <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
-          </div>
-        </div>
-        <!-- Card 6 -->
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">quiet sophistication.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">vasant kunj</div>
-            <div class="project-card-loc">new delhi &middot; dda residence</div>
-            <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
-          </div>
-        </div>
-        <!-- Duplicate set for seamless loop -->
-        <div class="project-card" onclick="location.href='/projects/villa-narela'">
-          <img src="https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp" alt="35-year-old villa with a dholpur stone facade, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="451" decoding="async" loading="lazy">
-          <div class="project-hover-line">renewed, not rebuilt.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">villa project</div>
-            <div class="project-card-loc">narela &middot; dholpur stone facade</div>
-            <div class="project-card-scope">Facade + Structure + Interiors + Execution</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="location.href='/projects/indeva-studio-office-narela'">
-          <img src="https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp" alt="indéva studio office interior, narela, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="800" height="450" decoding="async" loading="lazy">
-          <div class="project-hover-line">one room, every wall planned.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">commercial</div>
-            <div class="project-card-name">indéva studio office</div>
-            <div class="project-card-loc">narela &middot; office interior</div>
-            <div class="project-card-scope">Layout + Interior Design + Working Drawings</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp" alt="luxury farmhouse residence interior design, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner-800w.webp 800w, https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp 1536w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">designed for living.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">mini farmhouse</div>
-            <div class="project-card-loc">delhi &middot; 4,800 sqft</div>
-            <div class="project-card-scope">Interior Design + Furniture + Execution</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp" alt="resham hotel lobby design, murthal — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/resham%20lobby%20ceiling%20art-800w.webp 800w, https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp 1086w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">built to last.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">hospitality</div>
-            <div class="project-card-name">resham hotel</div>
-            <div class="project-card-loc">murthal &middot; 23 rooms</div>
-            <div class="project-card-scope">Concept + Interior Design + Site Execution</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/urban-apartment-kitchen-1.jpg" alt="dda apartment kitchen interior design, delhi — indéva studio" class="project-card-img" aria-hidden="true" width="734" height="744" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/urban-apartment-kitchen-1-800w.webp 800w, https://www.indevastudio.com/urban-apartment-kitchen-1.jpg 1375w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">every detail considered.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">dda apartment</div>
-            <div class="project-card-loc">delhi &middot; 1,800 sqft</div>
-            <div class="project-card-scope">Space Planning + Interior Design + Execution</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp" alt="commercial design studio office interior, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="1200" height="900" decoding="async" loading="lazy">
-          <div class="project-hover-line">space as identity.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">commercial</div>
-            <div class="project-card-name">studio workspace</div>
-            <div class="project-card-loc">gurgaon &middot; 3,200 sqft</div>
-            <div class="project-card-scope">Space Planning + Interiors + Custom Furniture</div>
-          </div>
-        </div>
-        <div class="project-card" onclick="showPage('projects')">
-          <img src="https://www.indevastudio.com/vasant-kunj-cover.jpg" alt="vasant kunj dda residence, new delhi — indéva studio" class="project-card-img" aria-hidden="true" width="692" height="497" decoding="async" loading="lazy" srcset="https://www.indevastudio.com/vasant-kunj-cover-800w.webp 800w, https://www.indevastudio.com/vasant-kunj-cover.jpg 1384w" sizes="(max-width:900px) 100vw, 60vw">
-          <div class="project-hover-line">quiet sophistication.</div>
-          <div class="project-card-info">
-            <div class="project-card-type">residential</div>
-            <div class="project-card-name">vasant kunj</div>
-            <div class="project-card-loc">new delhi &middot; dda residence</div>
-            <div class="project-card-scope">Interior Design + Custom Joinery + Execution</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-    /* Drag-to-scroll for project carousel */
-    (function() {
-      var track = document.getElementById('projectsTrack');
-      if (!track) return;
-      var isDragging = false, startX = 0, scrollLeft = 0;
-      track.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        startX = e.pageX - track.offsetLeft;
-        scrollLeft = track.scrollLeft;
-        track.style.animationPlayState = 'paused';
-      });
-      document.addEventListener('mouseup', function() {
-        if (isDragging) {
-          isDragging = false;
-          setTimeout(function(){ track.style.animationPlayState = ''; }, 2000);
-        }
-      });
-      track.addEventListener('mousemove', function(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        var x = e.pageX - track.offsetLeft;
-        var walk = (x - startX) * 1.5;
-        track.style.transform = 'translateX(' + (-walk) + 'px)';
-      });
-    })();
-    </script>
-  </section>
-
-  <!-- PHILOSOPHY -->
-  <section class="home-phil-strip">
-    <div class="home-phil-inner">
-      <div>
-        <div class="label-line label reveal">philosophy</div>
-        <h2 class="home-phil-headline reveal d1">We design from structure,<br>proportion and movement.</h2>
-        <p class="label-line label reveal d2" style="margin:18px 0 0;color:var(--gold-dim);font-style:italic;">Architecture-led interiors. Designed to be built.</p>
-        <p class="home-phil-body reveal d2" style="margin-top:14px;">No surface styling. Every decision — spatial, material, structural — is made with execution in mind, and judged by how it performs once the space is actually lived in.</p>
-        <div style="margin-top:36px;" class="reveal d3">
-          <button class="btn btn-primary" onclick="window.open('/vasant-kunj-design-intent.pdf', '_blank')" style="font-size:0.62rem;padding:16px 36px;letter-spacing:0.2em;">See How We Develop a Project →</button>
-        </div>
-      </div>
-      <div class="reveal d2" style="aspect-ratio:4/3; overflow:hidden; background:var(--black-3);">
-        <img src="https://www.indevastudio.com/philosophy-moodboard.jpg" alt="indéva studio material and design moodboard" width="1200" height="675" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center;" srcset="https://www.indevastudio.com/philosophy-moodboard-800w.webp 800w, https://www.indevastudio.com/philosophy-moodboard.jpg 1200w" sizes="(max-width:900px) 100vw, 60vw">
-      </div>
+  <!-- 03 WHAT WE DO -->
+  <section class="hx-sec hx-do" aria-labelledby="hx-do-t">
+    <div class="hx-head"><div><div class="label-line label reveal">what we do</div>
+      <h2 id="hx-do-t" class="display display-md reveal d1" style="margin-top:16px;">one studio, <em class="italic gold">from plan to handover.</em></h2></div></div>
+    <div class="hx-do-grid">
+      <div class="hx-do-col reveal"><span class="hx-n">01</span><h3>architecture &amp; design</h3>
+        <p>site study, space planning, 3d views, working drawings and an itemised boq, so every decision is settled on paper before site work begins.</p>
+        <ul><li><a href="/services/architecture-spatial-planning">architecture &amp; spatial planning</a></li><li><a href="/services/residential-interior-design">residential interiors</a></li><li><a href="/services/farmhouse-interior-design">farmhouses &amp; villas</a></li><li><a href="/services/commercial-interior-design">commercial</a> · <a href="/services/hospitality-interior-design">hospitality</a></li></ul></div>
+      <div class="hx-do-col reveal d1"><span class="hx-n">02</span><h3>construction &amp; execution</h3>
+        <p>civil work, services coordination and site supervision by our own team, building to the drawings and checking each stage before the next one starts.</p>
+        <ul><li><a href="/services/interior-design-execution">construction &amp; execution</a></li><li><a href="/process">how a project runs</a></li></ul></div>
+      <div class="hx-do-col reveal d2"><span class="hx-n">03</span><h3>furniture &amp; manufacturing</h3>
+        <p>kitchens, wardrobes, panelling and loose furniture, drawn to the exact wall they sit against and built by our makers.</p>
+        <ul><li><a href="/services/furniture-joinery">furniture &amp; joinery</a></li><li><a href="/services/modular-kitchen-design">kitchens &amp; wardrobes</a></li><li><a href="/furniture" data-page="furniture" onclick="showPage('furniture'); return false;">furniture catalogue</a></li></ul></div>
     </div>
   </section>
 
+  <!-- 04 THE INDÉVA APPROACH -->
+  <section class="hx-sec hx-approach" aria-labelledby="hx-ap-t">
+    <div class="hx-ap-inner">
+      <div class="hx-ap-lead"><div class="label-line label reveal">the indéva approach</div>
+        <h2 id="hx-ap-t" class="display display-md reveal d1" style="margin-top:16px;">five ideas we <em class="italic gold">design by.</em></h2>
+        <p class="reveal d2">architecture-led interiors, designed to be built. these are the principles behind every plan we draw.</p></div>
+      <ol class="hx-ap-list">
+        <li class="reveal"><span class="hx-n">01</span><div><h3>human-centricity first</h3><p>we start with how people move, cook, pray and rest in a space. the plan follows their day, not a mood board.</p></div></li>
+        <li class="reveal"><span class="hx-n">02</span><div><h3>the invisible detail</h3><p>the parts no one photographs: a switch where the hand goes, a drain that slopes the right way, a hinge that still closes in ten years. we draw them anyway.</p></div></li>
+        <li class="reveal"><span class="hx-n">03</span><div><h3>the art of the mix</h3><p>old and new, stone and laminate, carved and plain. good rooms balance materials instead of matching them.</p></div></li>
+        <li class="reveal"><span class="hx-n">04</span><div><h3>je ne sais quoi</h3><p>the quality you feel before you can name it. it comes from proportion and light more than from expensive finishes.</p></div></li>
+        <li class="reveal"><span class="hx-n">05</span><div><h3>perfection isn't the point</h3><p>a home should be lived in, not guarded. we design for comfort and everyday use. <a href="/insights/perfection-is-the-enemy-of-comfort">read why</a></p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 05 FEATURED CASE STUDY -->
+  <section class="hx-sec hx-feature" aria-labelledby="hx-ft-t">
+    <div class="hx-head"><div><div class="label-line label reveal">featured case study · completed</div>
+      <h2 id="hx-ft-t" class="display display-md reveal d1" style="margin-top:16px;">casa bianca, <em class="italic gold">from brief to handover.</em></h2></div>
+      <a class="btn btn-text reveal d2" href="/projects/casa-bianca-farmhouse-gurgaon">read the case study</a></div>
+    <ol class="hx-ft-steps">
+      <li class="reveal"><figure><picture><img src="/casa-bianca-farmhouse-gurgaon-facade-800.webp" srcset="/casa-bianca-farmhouse-gurgaon-facade-800.webp 800w, /casa-bianca-farmhouse-gurgaon-facade-1536.webp 1536w" sizes="(max-width:900px) 100vw, 50vw" width="1536" height="864" alt="white neoclassical facade of casa bianca, sohna" loading="lazy" decoding="async"></picture></figure><span class="hx-n">01 · concept</span><h3>the white house</h3><p>a vastu-compliant neoclassical plan for around ten bedroom suites, a basement and an eight-shaped pool.</p></li>
+      <li class="reveal d1"><div class="hx-ft-site"><span>45°c</span><span>power cuts</span><span>saline groundwater</span></div><span class="hx-n">02 · construction</span><h3>building on a hard site</h3><p>waterproofing across the basement, bathrooms, balconies and terrace, designed against groundwater pressure.</p></li>
+      <li class="reveal d2"><figure><picture><img src="/casa-bianca-farmhouse-gurgaon-living-hall-from-gallery-800.webp" srcset="/casa-bianca-farmhouse-gurgaon-living-hall-from-gallery-800.webp 800w, /casa-bianca-farmhouse-gurgaon-living-hall-from-gallery-864.webp 864w" sizes="(max-width:900px) 100vw, 50vw" width="864" height="1536" alt="living hall at casa bianca seen from the gallery" loading="lazy" decoding="async"></picture></figure><span class="hx-n">03 · interiors</span><h3>one double-height hall</h3><p>cove-lit ceilings, a tiered chandelier, carved furniture and a hdhmr kitchen with its own pantry.</p></li>
+      <li class="reveal d3"><figure><picture><img src="/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp" srcset="/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp 800w, /casa-bianca-farmhouse-gurgaon-across-the-lawns-1536.webp 1536w" sizes="(max-width:900px) 100vw, 50vw" width="1536" height="864" alt="casa bianca seen across the lawns after handover" loading="lazy" decoding="async"></picture></figure><span class="hx-n">04 · handover</span><h3>10,000 sq ft, delivered</h3><p>granite coping cut to every curve of the pool, and a dry basement beneath the house.</p></li>
+    </ol>
+  </section>
+
+  <!-- 06 FROM DRAWING TO SITE -->
+  <section class="hx-sec hx-d2s" aria-labelledby="hx-ds-t">
+    <div class="hx-head"><div><div class="label-line label reveal">from drawing to site</div>
+      <h2 id="hx-ds-t" class="display display-md reveal d1" style="margin-top:16px;">what gets built is <em class="italic gold">what gets drawn.</em></h2></div>
+      <a class="btn btn-text reveal d2" href="/vasant-kunj-design-intent.pdf" target="_blank" rel="noopener">open the full drawing set (pdf)</a></div>
+    <p class="hx-d2s-lede reveal">one room, three stages. the parents' bedroom at our vasant kunj project, from zoning plan to working drawing to the finished wall.</p>
+    <div class="hx-d2s-grid">
+      <figure class="reveal"><picture><source type="image/avif" srcset="/vasant-kunj-dda-residence-zoning-plan-800.avif 800w, /vasant-kunj-dda-residence-zoning-plan-1196.avif 1196w" sizes="(max-width:900px) 100vw, 50vw"><img src="/vasant-kunj-dda-residence-zoning-plan-800.webp" srcset="/vasant-kunj-dda-residence-zoning-plan-800.webp 800w, /vasant-kunj-dda-residence-zoning-plan-1196.webp 1196w" sizes="(max-width:900px) 100vw, 50vw" width="1196" height="900" alt="spatial zoning plan for the parents bedroom, vasant kunj dda residence" loading="lazy" decoding="async"></picture><figcaption><span class="hx-n">01 · plan</span>spatial zoning: where the bed, tv wall, dressing unit and window seat go.</figcaption></figure>
+      <figure class="reveal d1"><picture><source type="image/avif" srcset="/vasant-kunj-dda-residence-tv-unit-working-drawing-800.avif 800w, /vasant-kunj-dda-residence-tv-unit-working-drawing-1600.avif 1600w" sizes="(max-width:900px) 100vw, 50vw"><img src="/vasant-kunj-dda-residence-tv-unit-working-drawing-800.webp" srcset="/vasant-kunj-dda-residence-tv-unit-working-drawing-800.webp 800w, /vasant-kunj-dda-residence-tv-unit-working-drawing-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" width="1600" height="900" alt="working drawing of the tv unit and entertainment panel, vasant kunj dda residence" loading="lazy" decoding="async"></picture><figcaption><span class="hx-n">02 · working drawing</span>the tv unit drawn and dimensioned for the carpenter, with materials named.</figcaption></figure>
+      <figure class="reveal d2"><picture><img src="/vasant-kunj-dda-residence-tv-unit-detail-800.webp" srcset="/vasant-kunj-dda-residence-tv-unit-detail-800.webp 800w, /vasant-kunj-dda-residence-tv-unit-detail-1600.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" width="1600" height="920" alt="the finished tv unit wall in the parents bedroom, vasant kunj dda residence" loading="lazy" decoding="async"></picture><figcaption><span class="hx-n">03 · built</span>the same wall, built and handed over. <a href="/projects/vasant-kunj-dda-residence">see the project</a></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 07 OUR PROCESS -->
+  <section class="hx-sec hx-process" aria-labelledby="hx-pr-t">
+    <div class="hx-head"><div><div class="label-line label reveal">our process</div>
+      <h2 id="hx-pr-t" class="display display-md reveal d1" style="margin-top:16px;">six steps, <em class="italic gold">one team.</em></h2></div>
+      <a class="btn btn-text reveal d2" href="/process" data-page="process" onclick="showPage('process'); return false;">the full process</a></div>
+    <ol class="hx-pr-list">
+      <li class="reveal"><span class="hx-n">01</span><h3>understand</h3><p>site visit, measurements and a brief written in your words: who uses the space and how.</p></li>
+      <li class="reveal d1"><span class="hx-n">02</span><h3>plan</h3><p>layouts and zoning fixed first, checked against structure, services and vastu where needed.</p></li>
+      <li class="reveal d2"><span class="hx-n">03</span><h3>design</h3><p>materials, lighting and furniture developed room by room, with 3d views you sign off.</p></li>
+      <li class="reveal"><span class="hx-n">04</span><h3>document</h3><p>working drawings and an itemised boq, every item with its material, brand and rate.</p></li>
+      <li class="reveal d1"><span class="hx-n">05</span><h3>build</h3><p>our team executes on site and checks each stage against the drawings before the next.</p></li>
+      <li class="reveal d2"><span class="hx-n">06</span><h3>deliver</h3><p>snag list, corrections, deep clean and a walkthrough before the keys change hands.</p></li>
+    </ol>
+  </section>
 
   <!-- TESTIMONIALS — card carousel (real client reviews; photos are from Indéva projects) -->
 <style>
@@ -4199,36 +4109,6 @@ img {
 })();
 </script>
 
-  <!-- QUICK ENQUIRY FORM (home page, above footer) -->
-  <section style="background:var(--black-2);padding:80px 60px;border-top:1px solid var(--line);">
-    <div style="max-width:860px;margin:0 auto;">
-      <div class="label-line label" style="margin-bottom:28px;">quick enquiry</div>
-      <h2 class="display display-sm" style="margin-bottom:12px;">tell us about your project</h2>
-      <p class="body-text" style="margin-bottom:48px;max-width:480px;">fill in the form below and we will get back to you within 24 hours. no obligations, no sales calls — just a conversation.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" id="home-enquiry-form">
-        <input type="text" id="hef-name" placeholder="your name *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
-        <input type="tel" id="hef-phone" placeholder="phone number *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
-        <input type="email" id="hef-email" placeholder="email address *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
-        <select id="hef-type" style="background:var(--black-3);border:1px solid var(--line);color:var(--white-dim);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;appearance:none;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
-          <option value="">project type</option>
-          <option value="Luxury Residence">luxury residence</option>
-          <option value="Villa">villa</option>
-          <option value="Farmhouse">farmhouse</option>
-          <option value="Restaurant">restaurant</option>
-          <option value="Commercial Office">commercial / office</option>
-          <option value="Custom Furniture">custom furniture</option>
-          <option value="Other">other</option>
-        </select>
-        <textarea id="hef-message" placeholder="brief description of your project" rows="3" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;resize:vertical;grid-column:1/-1;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'"></textarea>
-      </div>
-      <div style="margin-top:20px;display:flex;align-items:center;gap:20px;">
-        <button class="btn btn-primary" id="hefBtn" style="font-size:0.62rem;padding:16px 36px;" onclick="(function(){var n=(document.getElementById('hef-name').value||'').trim();var p=(document.getElementById('hef-phone').value||'').trim();var e=(document.getElementById('hef-email').value||'').trim();var t=(document.getElementById('hef-type').value||'');var m=(document.getElementById('hef-message').value||'').trim();var s=document.getElementById('hefStatus');var b=document.getElementById('hefBtn');if(!n){s.textContent='please enter your name.';s.style.color='#e55544';return;}if(!p){s.textContent='please enter your phone number.';s.style.color='#e55544';return;}if(!e||!e.includes('@')){s.textContent='please enter a valid email.';s.style.color='#e55544';return;}b.textContent='sending…';b.disabled=true;b.style.opacity='0.6';s.textContent='';var modal=document.getElementById('thankYouModal');setTimeout(function(){  b.textContent='send enquiry →';b.disabled=false;b.style.opacity='1';  if(modal)modal.classList.remove('open');  document.getElementById('hef-name').value='';  document.getElementById('hef-phone').value='';  document.getElementById('hef-email').value='';  document.getElementById('hef-message').value='';  document.getElementById('hef-type').selectedIndex=0;},4000);if(modal)modal.classList.add('open');try{history.pushState({},'',window.location.pathname+'?submitted=1');}catch(e){}try{gtag('event','lead_form_submit',{event_category:'lead',event_label:'homepage_quick_enquiry',project_type:t||'not specified'});}catch(e){}try{/* GOOGLE ADS CONVERSION: replace AW-CONVERSION_ID/CONVERSION_LABEL below with your real values from Google Ads > Tools & Settings > Conversions, then uncomment. Also add the base Google Ads gtag snippet to <head> first (see setup notes). */ /* gtag('event','conversion',{'send_to':'AW-CONVERSION_ID/CONVERSION_LABEL'}); */}catch(e){}try{  emailjs.send('service_3dpadmb','template_jg3vvys',{    to_email:'hello@indevastudio.com',from_name:n,from_email:e,reply_to:e,    user_name:n,user_email:e,phone:p,project_type:t||'Not specified',    message:'Name:'+n+' | Phone:'+p+' | Email:'+e+' | Type:'+t+' | Msg:'+m,    subject:'Homepage enquiry from '+n  });}catch(err){}})()">send enquiry →</button>
-        <span id="hefStatus" style="font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--white-muted);"></span>
-      </div>
-      <p style="font-family:var(--mono);font-size:0.5rem;letter-spacing:0.15em;color:var(--white-muted);margin-top:16px;text-transform:uppercase;">or reach us directly · <a href="https://wa.me/919717881083" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">whatsapp ↗</a> · <a href="tel:+919717881083" style="color:var(--gold);text-decoration:none;">+91 9717881083</a></p>
-    </div>
-  </section>
-
   <!-- INSIGHTS -->
   <section class="insights-strip">
     <div class="insights-header">
@@ -4261,6 +4141,36 @@ img {
         <div class="blog-card-read">read article ↗</div>
       </a>
       </div>
+  </section>
+
+  <!-- QUICK ENQUIRY FORM (home page, above footer) -->
+  <section style="background:var(--black-2);padding:80px 60px;border-top:1px solid var(--line);">
+    <div style="max-width:860px;margin:0 auto;">
+      <div class="label-line label" style="margin-bottom:28px;">quick enquiry</div>
+      <h2 class="display display-sm" style="margin-bottom:12px;">tell us about your project</h2>
+      <p class="body-text" style="margin-bottom:48px;max-width:480px;">fill in the form below and we will get back to you within 24 hours. no obligations, no sales calls — just a conversation.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" id="home-enquiry-form">
+        <input type="text" id="hef-name" placeholder="your name *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
+        <input type="tel" id="hef-phone" placeholder="phone number *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
+        <input type="email" id="hef-email" placeholder="email address *" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
+        <select id="hef-type" style="background:var(--black-3);border:1px solid var(--line);color:var(--white-dim);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;appearance:none;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'">
+          <option value="">project type</option>
+          <option value="Luxury Residence">luxury residence</option>
+          <option value="Villa">villa</option>
+          <option value="Farmhouse">farmhouse</option>
+          <option value="Restaurant">restaurant</option>
+          <option value="Commercial Office">commercial / office</option>
+          <option value="Custom Furniture">custom furniture</option>
+          <option value="Other">other</option>
+        </select>
+        <textarea id="hef-message" placeholder="brief description of your project" rows="3" style="background:var(--black-3);border:1px solid var(--line);color:var(--white);font-family:var(--mono);font-size:0.7rem;letter-spacing:0.1em;padding:18px 20px;outline:none;transition:border-color 0.2s;resize:vertical;grid-column:1/-1;" onfocus="this.style.borderColor='var(--gold-dim)'" onblur="this.style.borderColor='var(--line)'"></textarea>
+      </div>
+      <div style="margin-top:20px;display:flex;align-items:center;gap:20px;">
+        <button class="btn btn-primary" id="hefBtn" style="font-size:0.62rem;padding:16px 36px;" onclick="(function(){var n=(document.getElementById('hef-name').value||'').trim();var p=(document.getElementById('hef-phone').value||'').trim();var e=(document.getElementById('hef-email').value||'').trim();var t=(document.getElementById('hef-type').value||'');var m=(document.getElementById('hef-message').value||'').trim();var s=document.getElementById('hefStatus');var b=document.getElementById('hefBtn');if(!n){s.textContent='please enter your name.';s.style.color='#e55544';return;}if(!p){s.textContent='please enter your phone number.';s.style.color='#e55544';return;}if(!e||!e.includes('@')){s.textContent='please enter a valid email.';s.style.color='#e55544';return;}b.textContent='sending…';b.disabled=true;b.style.opacity='0.6';s.textContent='';var modal=document.getElementById('thankYouModal');setTimeout(function(){  b.textContent='send enquiry →';b.disabled=false;b.style.opacity='1';  if(modal)modal.classList.remove('open');  document.getElementById('hef-name').value='';  document.getElementById('hef-phone').value='';  document.getElementById('hef-email').value='';  document.getElementById('hef-message').value='';  document.getElementById('hef-type').selectedIndex=0;},4000);if(modal)modal.classList.add('open');try{history.pushState({},'',window.location.pathname+'?submitted=1');}catch(e){}try{gtag('event','lead_form_submit',{event_category:'lead',event_label:'homepage_quick_enquiry',project_type:t||'not specified'});}catch(e){}try{/* GOOGLE ADS CONVERSION: replace AW-CONVERSION_ID/CONVERSION_LABEL below with your real values from Google Ads > Tools & Settings > Conversions, then uncomment. Also add the base Google Ads gtag snippet to <head> first (see setup notes). */ /* gtag('event','conversion',{'send_to':'AW-CONVERSION_ID/CONVERSION_LABEL'}); */}catch(e){}try{  emailjs.send('service_3dpadmb','template_jg3vvys',{    to_email:'hello@indevastudio.com',from_name:n,from_email:e,reply_to:e,    user_name:n,user_email:e,phone:p,project_type:t||'Not specified',    message:'Name:'+n+' | Phone:'+p+' | Email:'+e+' | Type:'+t+' | Msg:'+m,    subject:'Homepage enquiry from '+n  });}catch(err){}})()">send enquiry →</button>
+        <span id="hefStatus" style="font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;color:var(--white-muted);"></span>
+      </div>
+      <p style="font-family:var(--mono);font-size:0.5rem;letter-spacing:0.15em;color:var(--white-muted);margin-top:16px;text-transform:uppercase;">or reach us directly · <a href="https://wa.me/919717881083" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">whatsapp ↗</a> · <a href="tel:+919717881083" style="color:var(--gold);text-decoration:none;">+91 9717881083</a></p>
+    </div>
   </section>
 
   <!-- FOOTER -->
