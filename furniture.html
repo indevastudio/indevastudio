@@ -2142,7 +2142,7 @@ select.form-field option { background: var(--black-3); }
   border-top: 1px solid var(--line);
   padding: 60px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1.15fr;
   gap: 40px;
   align-items: start;
 }
@@ -2202,6 +2202,17 @@ select.form-field option { background: var(--black-3); }
   transition: color 0.2s;
 }
 .footer-contact-item:hover { color: var(--white); }
+.footer-news-text { font-family: var(--sans); font-size: 0.78rem; line-height: 1.7; color: var(--white-muted); margin: 0 0 16px; max-width: 320px; }
+.footer-news-form { display: flex; max-width: 340px; border: 1px solid var(--line-gold, var(--line)); }
+.footer-news-form input[type=email] { flex: 1; min-width: 0; background: transparent; border: 0; padding: 13px 14px; font-family: var(--sans); font-size: 0.78rem; color: var(--white); outline: none; }
+.footer-news-form input[type=email]::placeholder { color: var(--white-muted); opacity: 0.7; }
+.footer-news-form button { background: var(--gold); color: #fff; border: 0; padding: 0 18px; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.footer-news-form button:hover { background: var(--gold-dim); }
+.footer-news-form button:disabled { opacity: 0.6; cursor: default; }
+.footer-news-form:focus-within { border-color: var(--gold); }
+.footer-news-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.footer-news-msg { font-family: var(--sans); font-size: 0.72rem; color: var(--gold); margin: 10px 0 0; min-height: 1em; }
+@media (max-width: 1100px) and (min-width: 769px) { .site-footer { grid-template-columns: 1fr 1fr !important; } }
 
 .footer-bottom {
   background: var(--black-2);
@@ -3904,6 +3915,16 @@ img {
         <a class="footer-nav-link" href="/locations">locations</a></div></div>
     <div><div class="footer-nav-title" style="margin-bottom:20px;">contact</div><div class="footer-contact-info"><a href="mailto:hello@indevastudio.com" class="footer-contact-item">hello@indevastudio.com</a><address class="footer-contact-item" style="font-style:normal;">sonipat · delhi · noida · gurgaon</address>
         <address class="footer-contact-item" style="font-style:normal;">34/11, Lampur Rd, Industrial Area, Narela, Delhi, 110040</address></div></div>
+    <div class="footer-news">
+      <div class="footer-nav-title" style="margin-bottom:20px;">newsletter</div>
+      <p class="footer-news-text">project stories, site lessons and material notes from the studio. no spam, unsubscribe anytime.</p>
+      <form class="footer-news-form" onsubmit="return indevaSubscribe(this)" novalidate>
+        <input type="email" name="email" required placeholder="your email address" aria-label="email address" autocomplete="email">
+        <input type="text" name="company" class="footer-news-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit">subscribe</button>
+      </form>
+      <p class="footer-news-msg" role="status" aria-live="polite"></p>
+    </div>
   </footer>
   <div class="footer-bottom"><span class="footer-copy">© 2026 indéva studio. · <a href="/privacy" style="color:inherit">privacy policy</a></span><span class="footer-copy">new delhi, india</span></div>
 
@@ -5047,6 +5068,26 @@ document.addEventListener('click',function(e){
 
 
 
+<script>
+function indevaSubscribe(form){
+  var msg=form.parentNode.querySelector('.footer-news-msg');
+  var email=(form.email.value||'').trim();
+  if(form.company.value){msg.textContent='thanks — you\'re on the list.';return false;}
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.textContent='please enter a valid email address.';return false;}
+  var btn=form.querySelector('button');btn.disabled=true;msg.textContent='subscribing…';
+  fetch('https://rolarfaotykmprzvcmgh.supabase.co/rest/v1/newsletter_subscribers',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI','Authorization':'Bearer '+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI','Prefer':'return=minimal'},
+    body:JSON.stringify({email:email.toLowerCase(),source:(location.pathname||'/').slice(0,100)})
+  }).then(function(r){
+    if(r.ok){msg.textContent='thanks — you\'re on the list.';form.reset();}
+    else if(r.status===409){msg.textContent='you\'re already subscribed.';form.reset();}
+    else{msg.textContent='something went wrong. please try again.';}
+  }).catch(function(){msg.textContent='something went wrong. please try again.';})
+  .finally(function(){btn.disabled=false;});
+  return false;
+}
+</script>
 <!-- Supabase client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
