@@ -33,33 +33,35 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.indevastudio.com/services/architecture-spatial-planning</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.indevastudio.com/services/commercial-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/farmhouse-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/services/furniture-joinery</loc>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/hospitality-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/interior-design-execution</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/modular-kitchen-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/residential-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -90,12 +92,12 @@
   </url>
   <url>
     <loc>https://www.indevastudio.com/locations/narela</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.indevastudio.com/locations/vasant-kunj</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -132,6 +134,14 @@
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/villa-narela</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/casa-bianca-farmhouse-gurgaon</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/bansal-residence-narela</loc>
     <priority>0.8</priority>
   </url>
   <url>
@@ -840,5 +850,4 @@
     <loc>https://www.indevastudio.com/insights/why-we-refuse-to-start-with-moodboards</loc>
     <priority>0.6</priority>
   </url>
-  <url><loc>https://www.indevastudio.com/privacy</loc><lastmod>2026-11-05</lastmod></url>
 </urlset>

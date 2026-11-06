@@ -95,5 +95,15 @@ let page = fs.readFileSync(FILE, 'utf8');
 const a = page.indexOf('<!--portfolio:start-->'), b = page.indexOf('<!--portfolio:end-->');
 if (a < 0 || b < 0) throw new Error('portfolio markers not found in projects.html');
 page = page.slice(0, a) + html + page.slice(b + '<!--portfolio:end-->'.length);
+// keep the CollectionPage schema in step with the cards
+page = page.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g, (m, body) => {
+  let j; try { j = JSON.parse(body); } catch { return m; }
+  const nodes = j['@graph'] || [j];
+  const cp = nodes.find(n => n['@type'] === 'CollectionPage');
+  if (!cp) return m;
+  cp.hasPart = projects.map(p => ({ '@type': 'CreativeWork', name: p.name, url: `https://www.indevastudio.com/projects/${p.slug}`,
+    creativeWorkStatus: p.status, locationCreated: { '@type': 'Place', name: p.location } }));
+  return `<script type="application/ld+json">${JSON.stringify(j)}</script>`;
+});
 fs.writeFileSync(FILE, page);
 console.log(`portfolio: ${projects.length} projects written to projects.html`);

@@ -70,7 +70,7 @@ for (const [dir, group] of [['locations', 'locations'], ['services', 'services']
 
 push('projects', entry('/projects', rewrites.get('/projects') || 'projects.html', '0.9'));
 for (const [src, dest] of rewrites) {
-  if (src.startsWith('/projects/')) push('projects', entry(src, dest, '0.8'));
+  if (src.startsWith('/projects/')) push('projects', entry(src, /\.html$/.test(dest) ? dest : dest + '.html', '0.8'));
 }
 
 push('insights', entry('/insights', 'insights/index.html', '0.8'));
