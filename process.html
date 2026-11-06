@@ -2190,6 +2190,15 @@ select.form-field option { background: var(--black-3); }
 @media (max-width:1100px){.hx-ft-steps{grid-template-columns:1fr 1fr}.hx-pr-list{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:900px){.hx-sec{padding:72px 24px}.hx-work-grid{grid-template-columns:1fr;gap:48px}.hx-w-a,.hx-w-b,.hx-w-c,.hx-w-d{grid-column:1/-1;grid-row:auto}.hx-w-a figure{aspect-ratio:4/5}.hx-w-d figure{aspect-ratio:4/3}.hx-do-grid,.hx-d2s-grid{grid-template-columns:1fr;gap:36px}.hx-ap-inner{grid-template-columns:1fr;gap:32px}.hx-ap-lead{position:static}.hx-ap-list li{grid-template-columns:48px 1fr}.hx-pr-list{grid-template-columns:1fr 1fr}.hx-head{margin-bottom:36px}.hx-d2s-lede{margin-top:-12px}}
 @media (max-width:560px){.hx-ft-steps,.hx-pr-list{grid-template-columns:1fr}.hx-ft-steps figure,.hx-ft-site{aspect-ratio:4/3}}
+.cf-services{border:0;padding:0;margin:6px 0 22px;display:flex;flex-wrap:wrap;gap:10px}
+.cf-services legend{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--white-muted);margin-bottom:12px;padding:0}
+.cf-services label{cursor:pointer}.cf-services input{position:absolute;opacity:0;pointer-events:none}
+.cf-services span{display:inline-block;border:1px solid var(--line);padding:9px 14px;font-size:.8rem;color:var(--white-muted);transition:all .2s}
+.cf-services input:checked+span{border-color:var(--gold);color:var(--white);background:rgba(160,120,70,.12)}
+.cf-services input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+#cf-message{resize:vertical;min-height:110px;font-family:inherit}
+.cf-alt{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;color:var(--white-muted)}
+.cf-alt a{color:var(--gold);text-decoration:none}
 .site-footer {
   background: var(--black-2);
   border-top: 1px solid var(--line);
@@ -5099,6 +5108,9 @@ function submitEnquiry() {
   var area     = (document.getElementById('cf-area').value     || '').trim();
   var budget   = (document.getElementById('cf-budget').value   || '');
   var timeline = (document.getElementById('cf-timeline').value || '');
+  var location = (document.getElementById('cf-location') ? document.getElementById('cf-location').value : '').trim();
+  var message  = (document.getElementById('cf-message') ? document.getElementById('cf-message').value : '').trim();
+  var services = Array.prototype.map.call(document.querySelectorAll('#cf-services input:checked'), function(c){ return c.value; }).join(', ');
   var hp       = (document.getElementById('cf-hp')            ? document.getElementById('cf-hp').value : '');
 
   // Honeypot — bots fill this, humans don't
@@ -5128,7 +5140,8 @@ function submitEnquiry() {
   var leadRow = {
     name: name, email: email, phone: phone,
     project_type: type || null, budget: budget || null, area: area || null,
-    timeline: timeline || null, source: 'form:' + (window.location.pathname || '/')
+    timeline: timeline || null, city: location || null, services: services || null,
+    message: message || null, source: 'form:' + (window.location.pathname || '/')
   };
 
   function sendEmailJsNotification() {
@@ -5139,7 +5152,7 @@ function submitEnquiry() {
       phone: phone, project_type: type||'—',
       area: area||'—', budget: budget||'—', timeline: timeline||'—',
       subject: 'new enquiry from ' + name,
-      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nType: '+(type||'—')+'\nArea: '+(area||'—')+'\nBudget: '+(budget||'—')+'\nTimeline: '+(timeline||'—')
+      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nLocation: '+(location||'—')+'\nType: '+(type||'—')+'\nArea: '+(area||'—')+'\nServices: '+(services||'—')+'\nBudget: '+(budget||'—')+'\nStart: '+(timeline||'—')+'\n\n'+(message||'')
     };
     return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
   }
@@ -5167,9 +5180,10 @@ function submitEnquiry() {
   }
 
   function resetForm() {
-    ['cf-name','cf-email','cf-phone','cf-area'].forEach(function(id){
+    ['cf-name','cf-email','cf-phone','cf-area','cf-location','cf-message'].forEach(function(id){
       var el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('error'); }
     });
+    document.querySelectorAll('#cf-services input').forEach(function(c){ c.checked = false; });
     ['cf-type','cf-budget','cf-timeline'].forEach(function(id){
       var el = document.getElementById(id); if (el) el.selectedIndex = 0;
     });

@@ -2189,6 +2189,15 @@ select.form-field option { background: var(--black-3); }
 @media (max-width:1100px){.hx-ft-steps{grid-template-columns:1fr 1fr}.hx-pr-list{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:900px){.hx-sec{padding:72px 24px}.hx-work-grid{grid-template-columns:1fr;gap:48px}.hx-w-a,.hx-w-b,.hx-w-c,.hx-w-d{grid-column:1/-1;grid-row:auto}.hx-w-a figure{aspect-ratio:4/5}.hx-w-d figure{aspect-ratio:4/3}.hx-do-grid,.hx-d2s-grid{grid-template-columns:1fr;gap:36px}.hx-ap-inner{grid-template-columns:1fr;gap:32px}.hx-ap-lead{position:static}.hx-ap-list li{grid-template-columns:48px 1fr}.hx-pr-list{grid-template-columns:1fr 1fr}.hx-head{margin-bottom:36px}.hx-d2s-lede{margin-top:-12px}}
 @media (max-width:560px){.hx-ft-steps,.hx-pr-list{grid-template-columns:1fr}.hx-ft-steps figure,.hx-ft-site{aspect-ratio:4/3}}
+.cf-services{border:0;padding:0;margin:6px 0 22px;display:flex;flex-wrap:wrap;gap:10px}
+.cf-services legend{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--white-muted);margin-bottom:12px;padding:0}
+.cf-services label{cursor:pointer}.cf-services input{position:absolute;opacity:0;pointer-events:none}
+.cf-services span{display:inline-block;border:1px solid var(--line);padding:9px 14px;font-size:.8rem;color:var(--white-muted);transition:all .2s}
+.cf-services input:checked+span{border-color:var(--gold);color:var(--white);background:rgba(160,120,70,.12)}
+.cf-services input:focus-visible+span{outline:2px solid var(--gold);outline-offset:2px}
+#cf-message{resize:vertical;min-height:110px;font-family:inherit}
+.cf-alt{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;color:var(--white-muted)}
+.cf-alt a{color:var(--gold);text-decoration:none}
 .site-footer {
   background: var(--black-2);
   border-top: 1px solid var(--line);
@@ -4271,7 +4280,8 @@ img {
       <div class="founder-position reveal d2">Built on generations of understanding how things are made.</div>
       <p class="founder-body reveal d3">
         arpit saini grew up around construction. his grandfather was involved in building and the family brick business, a legacy dating back to 1939, and his father carried it forward through construction.<br><br>
-        those years on sites taught him that an idea has little value if it cannot be built properly. he founded indéva studio to bring design and execution closer together, so every decision accounts for budgets, materials, craftsmanship, timelines and real site conditions.
+        those years on sites taught him that an idea has little value if it cannot be built properly. he founded indéva studio to bring design and execution closer together, so every decision accounts for budgets, materials, craftsmanship, timelines and real site conditions.<br><br>
+        that is why the studio works the way it does: plans are settled before finishes, every room is drawn before it reaches site, and every quote is an itemised list you can check line by line. you can see it in the work, from a <a href="/projects/casa-bianca-farmhouse-gurgaon" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--line-gold);">farmhouse built through 45°C summers near sohna</a> to a <a href="/projects/villa-narela" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--line-gold);">35-year-old stone house in narela</a> being replanned around its load-bearing walls.
       </p>
       <div class="founder-note reveal d4">
         <p class="founder-note-text">
@@ -5176,42 +5186,61 @@ img {
         <input type="email" id="cf-email" class="form-field reveal" placeholder="email address *" autocomplete="email">
         <input type="tel" id="cf-phone" class="form-field reveal d1" placeholder="phone number *" autocomplete="tel">
       </div>
-      <div class="form-row">
-        <select id="cf-type" class="form-field reveal">
+      <div class="form-row-2">
+        <input type="text" id="cf-location" class="form-field reveal" placeholder="project location (city / area)" autocomplete="address-level2">
+        <select id="cf-type" class="form-field reveal d1">
           <option value="" disabled selected>project type</option>
-          <option>residential</option>
+          <option>apartment / builder floor</option>
+          <option>independent house / villa</option>
+          <option>farmhouse</option>
+          <option>office / commercial</option>
+          <option>retail</option>
           <option>hospitality</option>
-          <option>commercial</option>
-          <option>architecture</option>
           <option>other</option>
         </select>
       </div>
       <div class="form-row">
-        <input type="text" id="cf-area" class="form-field reveal" placeholder="approximate area (sqft)">
+        <input type="text" id="cf-area" class="form-field reveal" placeholder="approximate area (sq ft)">
       </div>
-      <div class="form-row">
+      <fieldset class="cf-services reveal" id="cf-services">
+        <legend>services required</legend>
+        <label><input type="checkbox" value="architecture & planning"><span>architecture & planning</span></label>
+        <label><input type="checkbox" value="interior design"><span>interior design</span></label>
+        <label><input type="checkbox" value="construction & execution"><span>construction & execution</span></label>
+        <label><input type="checkbox" value="furniture & joinery"><span>furniture & joinery</span></label>
+        <label><input type="checkbox" value="kitchens & wardrobes"><span>kitchens & wardrobes</span></label>
+        <label><input type="checkbox" value="renovation"><span>renovation</span></label>
+      </fieldset>
+      <div class="form-row-2">
         <select id="cf-budget" class="form-field reveal">
-          <option value="" disabled selected>budget range</option>
+          <option value="" selected>budget range (optional)</option>
           <option>below ₹25 lakhs</option>
           <option>₹25 – 50 lakhs</option>
           <option>₹50 lakhs – 1 crore</option>
           <option>above ₹1 crore</option>
           <option>to be discussed</option>
         </select>
+        <select id="cf-timeline" class="form-field reveal d1">
+          <option value="" selected>expected start (optional)</option>
+          <option>within 1 month</option>
+          <option>1 – 3 months</option>
+          <option>3 – 6 months</option>
+          <option>6+ months</option>
+          <option>just exploring</option>
+        </select>
       </div>
       <div class="form-row">
-        <select id="cf-timeline" class="form-field reveal">
-          <option value="" disabled selected>timeline</option>
-          <option>within 3 months</option>
-          <option>3 – 6 months</option>
-          <option>6 – 12 months</option>
-          <option>12+ months</option>
-          <option>flexible</option>
-        </select>
+        <textarea id="cf-message" class="form-field reveal" rows="4" placeholder="tell us about the project: the site, who will use it, what isn't working today"></textarea>
       </div>
       <div class="form-submit reveal d1">
         <button class="btn btn-primary" id="submitEnquiryBtn" onclick="submitEnquiry()" style="font-size:0.65rem;padding:16px 36px;">submit enquiry</button>
-        <span id="formStatusMsg" style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;color:var(--white-muted);">we respond within 48 hours</span>
+        <span id="formStatusMsg" style="font-family:var(--mono);font-size:0.58rem;letter-spacing:0.1em;color:var(--white-muted);">we respond within 24 hours</span>
+      </div>
+      <div class="cf-alt reveal">
+        <span>prefer to talk first?</span>
+        <a href="https://wa.me/919717881083?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Ind%C3%A9va%20Studio" target="_blank" rel="noopener">whatsapp us →</a>
+        <a href="https://wa.me/919717881083?text=Hi%2C%20I%27d%20like%20to%20book%20a%20consultation%20with%20Ind%C3%A9va%20Studio.%20My%20preferred%20day%20and%20time%3A%20" target="_blank" rel="noopener">book a consultation →</a>
+        <a href="tel:+919717881083">call +91 97178 81083</a>
       </div>
     </div>
 
@@ -8190,6 +8219,9 @@ function submitEnquiry() {
   var area     = (document.getElementById('cf-area').value     || '').trim();
   var budget   = (document.getElementById('cf-budget').value   || '');
   var timeline = (document.getElementById('cf-timeline').value || '');
+  var location = (document.getElementById('cf-location') ? document.getElementById('cf-location').value : '').trim();
+  var message  = (document.getElementById('cf-message') ? document.getElementById('cf-message').value : '').trim();
+  var services = Array.prototype.map.call(document.querySelectorAll('#cf-services input:checked'), function(c){ return c.value; }).join(', ');
   var hp       = (document.getElementById('cf-hp')            ? document.getElementById('cf-hp').value : '');
 
   // Honeypot — bots fill this, humans don't
@@ -8219,7 +8251,8 @@ function submitEnquiry() {
   var leadRow = {
     name: name, email: email, phone: phone,
     project_type: type || null, budget: budget || null, area: area || null,
-    timeline: timeline || null, source: 'form:' + (window.location.pathname || '/')
+    timeline: timeline || null, city: location || null, services: services || null,
+    message: message || null, source: 'form:' + (window.location.pathname || '/')
   };
 
   function sendEmailJsNotification() {
@@ -8230,7 +8263,7 @@ function submitEnquiry() {
       phone: phone, project_type: type||'—',
       area: area||'—', budget: budget||'—', timeline: timeline||'—',
       subject: 'new enquiry from ' + name,
-      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nType: '+(type||'—')+'\nArea: '+(area||'—')+'\nBudget: '+(budget||'—')+'\nTimeline: '+(timeline||'—')
+      message: 'Name: '+name+'\nPhone: '+phone+'\nEmail: '+email+'\nLocation: '+(location||'—')+'\nType: '+(type||'—')+'\nArea: '+(area||'—')+'\nServices: '+(services||'—')+'\nBudget: '+(budget||'—')+'\nStart: '+(timeline||'—')+'\n\n'+(message||'')
     };
     return emailjs.send('service_3dpadmb', 'template_jg3vvys', params).catch(function(){});
   }
@@ -8258,9 +8291,10 @@ function submitEnquiry() {
   }
 
   function resetForm() {
-    ['cf-name','cf-email','cf-phone','cf-area'].forEach(function(id){
+    ['cf-name','cf-email','cf-phone','cf-area','cf-location','cf-message'].forEach(function(id){
       var el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('error'); }
     });
+    document.querySelectorAll('#cf-services input').forEach(function(c){ c.checked = false; });
     ['cf-type','cf-budget','cf-timeline'].forEach(function(id){
       var el = document.getElementById(id); if (el) el.selectedIndex = 0;
     });
