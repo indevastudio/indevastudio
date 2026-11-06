@@ -1,0 +1,317 @@
+{
+  "_readme": "Single source for the portfolio (/projects). Edit here, then run: node build-portfolio.cjs. status must be one of: Completed, In Progress, Design Development. Never mark renders as Completed. area: only verified figures, else null. imageKind: photo | render.",
+  "projects": [
+    {
+      "slug": "casa-bianca-farmhouse-gurgaon",
+      "name": "Casa Bianca",
+      "location": "Sohna, Gurugram",
+      "category": "Farmhouse",
+      "filters": [
+        "Residential",
+        "Farmhouses"
+      ],
+      "status": "Completed",
+      "area": "10,000 sq ft",
+      "facts": [
+        "~10 bedrooms",
+        "Eight-shaped pool"
+      ],
+      "summary": "The family called it the White House: a neoclassical farmhouse with around ten bedrooms and an eight-shaped pool, built through 45°C summers on a remote site.",
+      "image": "casa-bianca-farmhouse-gurgaon-front-lawn",
+      "sizes": [
+        800,
+        1536
+      ],
+      "w": 1536,
+      "h": 864,
+      "imageKind": "photo",
+      "alt": "Casa Bianca, a white neoclassical farmhouse in Sohna, seen across the front lawn",
+      "layout": "wide"
+    },
+    {
+      "slug": "hotel-silk-murthal",
+      "name": "Hotel Silk by Resham",
+      "location": "Murthal, Haryana",
+      "category": "Hospitality",
+      "filters": [
+        "Hospitality"
+      ],
+      "status": "Completed",
+      "area": null,
+      "facts": [
+        "23 guest rooms",
+        "12 months",
+        "Handed over Aug 2026"
+      ],
+      "summary": "A food-led highway destination given 23 guest rooms, designed and built for hard daily use and low running costs.",
+      "image": "hotel-silk-murthal-lobby-seating-area",
+      "sizes": [
+        800,
+        1448
+      ],
+      "w": 1448,
+      "h": 1086,
+      "imageKind": "photo",
+      "alt": "Lobby seating area at Hotel Silk by Resham, Murthal",
+      "layout": "large"
+    },
+    {
+      "slug": "villa-narela",
+      "name": "The Dholpur Stone Villa",
+      "location": "Narela, Delhi",
+      "category": "Residential renovation",
+      "filters": [
+        "Residential",
+        "In Progress"
+      ],
+      "status": "In Progress",
+      "area": null,
+      "facts": [
+        "35-year-old house",
+        "Load-bearing walls",
+        "15–20 layout iterations"
+      ],
+      "summary": "A hand-built stone house with no columns or beams, replanned for modern family life and Vastu without losing its Dholpur facade.",
+      "image": "villa-narela-dholpur-facade-day",
+      "sizes": [
+        800,
+        1536
+      ],
+      "w": 1536,
+      "h": 865,
+      "imageKind": "render",
+      "alt": "Design render of the Dholpur stone facade of the 35-year-old villa in Narela",
+      "layout": "small"
+    },
+    {
+      "slug": "mini-farmhouse-delhi",
+      "name": "Mini Farmhouse",
+      "location": "Delhi",
+      "category": "Farmhouse",
+      "filters": [
+        "Residential",
+        "Farmhouses"
+      ],
+      "status": "Completed",
+      "area": "4,800 sq ft",
+      "facts": [
+        "5 months",
+        "2024"
+      ],
+      "summary": "A compact farmhouse built on restraint, where layout, light and proportion do the work instead of ornament.",
+      "image": "mini-farmhouse-delhi-grand-exterior",
+      "sizes": [
+        800,
+        1536
+      ],
+      "w": 1536,
+      "h": 1024,
+      "imageKind": "photo",
+      "alt": "Exterior of the Mini Farmhouse in Delhi",
+      "layout": "small"
+    },
+    {
+      "slug": "south-delhi-neoclassical-residence",
+      "name": "South Delhi Neo-Classical Residence",
+      "location": "South Delhi",
+      "category": "Apartment",
+      "filters": [
+        "Residential",
+        "Furniture"
+      ],
+      "status": "Completed",
+      "area": "1,500 sq ft",
+      "facts": [
+        "3 months",
+        "Turnkey"
+      ],
+      "summary": "Classic mouldings and panelled walls in a compact 2 BHK, with wardrobes built into the panelling so the flat stays calm.",
+      "image": "south-delhi-neoclassical-residence-living-room",
+      "sizes": [
+        800
+      ],
+      "w": 800,
+      "h": 687,
+      "imageKind": "photo",
+      "alt": "Living room of the South Delhi Neo-Classical Residence with panelled walls",
+      "layout": "large"
+    },
+    {
+      "slug": "dda-apartment-delhi",
+      "name": "DDA Apartment",
+      "location": "Delhi",
+      "category": "Apartment",
+      "filters": [
+        "Residential",
+        "Furniture"
+      ],
+      "status": "Completed",
+      "area": "1,800 sq ft",
+      "facts": [
+        "3 months",
+        "2024"
+      ],
+      "summary": "A DDA flat where storage was solved on the plan first, then light, then material, with a fluted-wood breakfast bar off the kitchen.",
+      "image": "dda-apartment-delhi-kitchen-and-breakfast-bar",
+      "sizes": [
+        800,
+        1375
+      ],
+      "w": 1375,
+      "h": 1144,
+      "imageKind": "photo",
+      "alt": "Sage kitchen with a fluted-wood breakfast bar in a DDA apartment, Delhi",
+      "layout": "large"
+    },
+    {
+      "slug": "vasant-kunj-dda-residence",
+      "name": "Vasant Kunj DDA Residence",
+      "location": "Vasant Kunj, New Delhi",
+      "category": "Bedroom & joinery",
+      "filters": [
+        "Residential",
+        "Furniture"
+      ],
+      "status": "Completed",
+      "area": null,
+      "facts": [
+        "Parents' bedroom",
+        "2 months",
+        "2025"
+      ],
+      "summary": "One parents' bedroom resolved through joinery and layered light: an arched headboard wall, cane TV console and window seat.",
+      "image": "vasant-kunj-dda-residence-parents-bedroom-full-view",
+      "sizes": [
+        800,
+        1384
+      ],
+      "w": 1384,
+      "h": 994,
+      "imageKind": "photo",
+      "alt": "Parents' bedroom with an arched upholstered headboard, Vasant Kunj DDA Residence",
+      "layout": "small"
+    },
+    {
+      "slug": "studio-workspace-gurgaon",
+      "name": "Studio Workspace",
+      "location": "Gurgaon",
+      "category": "Office",
+      "filters": [
+        "Commercial"
+      ],
+      "status": "Completed",
+      "area": "3,200 sq ft",
+      "facts": [
+        "3 months",
+        "2023"
+      ],
+      "summary": "A workplace planned around daylight and sustained focus, with a conference room, cafeteria and open studio floor.",
+      "image": "studio-workspace-gurgaon-studio-main-floor",
+      "sizes": [
+        800,
+        1536
+      ],
+      "w": 1536,
+      "h": 1024,
+      "imageKind": "photo",
+      "alt": "Main studio floor of a 3,200 sq ft office in Gurgaon",
+      "layout": "small"
+    },
+    {
+      "slug": "patel-nagar-retail-store",
+      "name": "Patel Nagar Menswear Store",
+      "location": "Patel Nagar, Delhi",
+      "category": "Retail",
+      "filters": [
+        "Commercial",
+        "In Progress"
+      ],
+      "status": "In Progress",
+      "area": null,
+      "facts": [
+        "2 floors",
+        "Retail"
+      ],
+      "summary": "A two-floor menswear store being rebuilt around a younger customer. Images are design renders; site photographs follow on completion.",
+      "image": "patel-nagar-retail-store-ground-floor",
+      "sizes": [
+        800,
+        1331
+      ],
+      "w": 1331,
+      "h": 1182,
+      "imageKind": "render",
+      "alt": "Design render of the ground floor of the Patel Nagar menswear store",
+      "layout": "large"
+    },
+    {
+      "slug": "indeva-studio-office-narela",
+      "name": "Indéva Studio Office",
+      "location": "Narela, Delhi",
+      "category": "Office",
+      "filters": [
+        "Commercial",
+        "Design Development"
+      ],
+      "status": "Design Development",
+      "area": null,
+      "facts": [
+        "Our own studio",
+        "Design intent"
+      ],
+      "summary": "Our own studio and client meeting room: one compact room planned wall by wall for work, meetings and a material display.",
+      "image": "indeva-studio-office-narela-meeting-table",
+      "sizes": [
+        800,
+        1536
+      ],
+      "w": 1536,
+      "h": 864,
+      "imageKind": "render",
+      "alt": "Design render of the meeting table in the Indéva Studio office, Narela",
+      "layout": "large"
+    },
+    {
+      "slug": "bansal-residence-narela",
+      "name": "Bansal Residence",
+      "location": "Narela, Delhi",
+      "category": "Residential",
+      "filters": [
+        "Residential",
+        "Design Development"
+      ],
+      "status": "Design Development",
+      "area": null,
+      "facts": [
+        "Ground floor",
+        "Vastu-led plan",
+        "Minimal structural change"
+      ],
+      "summary": "A ground-floor home being replanned around Vastu: mandir in the north-east, kitchen in the south-east and a ground-floor bedroom, with minimal structural change.",
+      "image": null,
+      "imageKind": null,
+      "alt": "",
+      "layout": "small"
+    }
+  ],
+  "documentation": [
+    {
+      "title": "Vasant Kunj — design intent set",
+      "kind": "Design intent · PDF",
+      "href": "/vasant-kunj-design-intent.pdf",
+      "note": "Plans, elevations and material notes issued before site work."
+    },
+    {
+      "title": "Dholpur Stone Villa — daughter's bedroom",
+      "kind": "Design intent · PDF",
+      "href": "/villa-narela-daughters-bedroom-design-intent.pdf",
+      "note": "Room layout, elevations and finishes for one bedroom."
+    },
+    {
+      "title": "How we develop a project",
+      "kind": "Process · PDF",
+      "href": "/indeva-studio-process.pdf",
+      "note": "Our stages from site visit to handover, with sample drawings."
+    }
+  ]
+}

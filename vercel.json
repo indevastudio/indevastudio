@@ -1069,6 +1069,10 @@
       "destination": "/project-casa-bianca-farmhouse-gurgaon"
     },
     {
+      "source": "/projects/bansal-residence-narela",
+      "destination": "/project-bansal-residence-narela"
+    },
+    {
       "source": "/projects/vasant-kunj-dda-residence",
       "destination": "/project-vasant-kunj-dda-residence"
     }
