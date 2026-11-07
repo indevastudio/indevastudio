@@ -166,19 +166,19 @@
       "slug": "vasant-kunj-dda-residence",
       "name": "Vasant Kunj DDA Residence",
       "location": "Vasant Kunj, New Delhi",
-      "category": "Bedroom & joinery",
+      "category": "Residential · room by room",
       "filters": [
         "Residential",
-        "Furniture"
+        "Furniture",
+        "Design Development"
       ],
       "status": "Completed",
       "area": null,
       "facts": [
-        "Parents' bedroom",
-        "2 months",
-        "2025"
+        "Parents' bedroom completed",
+        "4 rooms in design development"
       ],
-      "summary": "One parents' bedroom resolved through joinery and layered light: an arched headboard wall, cane TV console and window seat.",
+      "summary": "A DDA home designed room by room: a completed parents' bedroom in Indian heritage joinery, with the living and dining room, kitchen, powder washroom and a modern bedroom now in design development.",
       "image": "vasant-kunj-dda-residence-parents-bedroom-full-view",
       "sizes": [
         800,
@@ -186,8 +186,8 @@
       ],
       "w": 1384,
       "h": 994,
-      "imageKind": "photo",
-      "alt": "Parents' bedroom with an arched upholstered headboard, Vasant Kunj DDA Residence",
+      "imageKind": "render",
+      "alt": "Design render of the parents' bedroom with a Rajasthani-inspired mural and cane headboard, Vasant Kunj DDA Residence",
       "layout": "small"
     },
     {

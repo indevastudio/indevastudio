@@ -55,7 +55,7 @@ DESC = {
  '/projects/casa-bianca-farmhouse-gurgaon': 'Casa Bianca: a 10,000 sq ft neoclassical farmhouse near Sohna with around ten bedrooms and an eight-shaped pool, designed and built by Indéva Studio.',
  '/projects/bansal-residence-narela': 'Bansal Residence, Narela: a ground-floor home being replanned around Vastu, a ground-floor bedroom and minimal structural change. In design development.',
  '/insights/the-honest-material-stone-over-stone-effect': 'Imitation materials age poorly, feel hollow underfoot and eventually betray themselves. Why we choose real stone over stone-effect finishes.',
- '/projects/vasant-kunj-dda-residence': "A parents' bedroom in a Vasant Kunj DDA flat, resolved through drawn joinery and layered light: arched headboard wall, cane TV console and window seat.",
+ '/projects/vasant-kunj-dda-residence': "A Vasant Kunj DDA home designed room by room: parents' bedroom, modern bedroom, living and dining, kitchen and powder washroom, with renders and drawings.",
 }
 changed = []
 locs = re.findall(r'<loc>%s([^<]*)</loc>' % re.escape(O), open(os.path.join(ROOT,'sitemap.xml')).read())
