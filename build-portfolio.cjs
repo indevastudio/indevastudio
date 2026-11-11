@@ -36,7 +36,7 @@ function card(p, i) {
   return `<article class="pf-item ${p.layout}" data-filters="${esc(p.filters.join('|'))}">
 <a class="pf-link" href="/projects/${p.slug}">
 <figure class="pf-fig">${picture(p, i === 0)}
-<span class="pf-status ${STATUS[p.status]}">${esc(p.status)}</span>${p.imageKind === 'render' ? '<span class="pf-kind">design render</span>' : ''}</figure>
+<span class="pf-status ${STATUS[p.status]}">${esc(p.status)}</span></figure>
 <div class="pf-meta"><span>${esc(p.category)}</span><span>${esc(p.location)}</span></div>
 <h3>${esc(p.name)}</h3>
 <p>${esc(p.summary)}</p>
