@@ -3,22 +3,28 @@
 This file is the whole procedure for the scheduled weekly article run. Follow it exactly.
 The goal is **one** genuinely useful article a week, written from the studio's real projects, that
 Google treats as original expert content. Quality beats quantity: if anything below can't be met,
-open no pull request and say why.
+publish nothing and say why.
+
+**Mode: auto-publish** (set by the studio, Nov 2026). An article that passes every check is committed
+straight to `main`; Vercel deploys it and `.github/workflows/article-published.yml` emails the full
+article to ceo@indevastudio.com. The studio reviews it from that email and asks for edits afterwards.
+Because nobody reviews before it goes live, the fact and voice rules below are absolute.
 
 ## 0. set up
 
 - Work in the repo `indevastudio/indevastudio` (attach and clone it if it isn't in the session).
-  `git fetch origin main && git checkout -B article/<brief-id> origin/main`.
+  `git fetch origin main && git checkout -B main origin/main`.
 - Tools needed: python3 with Pillow + PyYAML (`pip install --break-system-packages pillow pyyaml` if missing), node.
 
 ## 1. pick the brief
 
 - `python3 content-engine/queue.py` to see the queue, `python3 content-engine/queue.py --next` for the next id.
 - If nothing is `ready`, stop: report "no brief ready — add one in content-engine/briefs/" and open nothing.
-- If an open pull request from a previous run (branch `article/*`) is still unmerged, stop and report it:
-  never stack a second article on an unreviewed one. Check with the REST API (GraphQL `gh pr` commands
-  are blocked in Claude sessions):
-  `gh api 'repos/indevastudio/indevastudio/pulls?state=open' --jq '.[] | select(.head.ref|startswith("article/")) | .html_url'`
+- Cadence: if any post in `content-engine/posts/` is dated within the last 6 days, stop and report it —
+  one article a week, never more.
+- If an `article/*` pull request from the old review mode is still open, merge it first with
+  `gh api -X PUT repos/indevastudio/indevastudio/pulls/<n>/merge -f merge_method=squash` (it was already
+  checked), set its brief to `published`, and count it as this week's article — stop there.
 - If the brief says CHECK FIRST and you can't confirm it, set it to `hold` in a tiny PR or report it, and stop.
 
 ## 2. gather the source material — nothing else is a source
@@ -60,20 +66,18 @@ open no pull request and say why.
 - In `content-engine/KEYWORDS.md` replace the brief's "(open — brief: <id>)" with `/insights/<slug>`.
 - `python3 content-engine/queue.py --set <brief-id> written`.
 
-## 6. open the pull request — never push to main
+## 6. publish
 
-- Commit everything on `article/<brief-id>` and push the branch.
-- Open the PR with the REST API (write the body to a file first):
-  `gh api repos/indevastudio/indevastudio/pulls -f title='article: <title>' -f head='article/<brief-id>' -f base=main -F body=@/tmp/pr-body.md --jq .html_url`
-  The PR has:
-  - title: `article: <title>`
-  - body: the target phrase and its volume, word count, the check.py summary line, the list of
-    photos used (site photo / render), every number used and where it came from, and
-    "Merge this PR to publish. Close it to discard." End with the PR attribution line.
-- Report back: the PR link and a two-line summary. Done.
+- Set the brief to `published` (`python3 content-engine/queue.py --set <brief-id> published`).
+- Commit everything to `main` in ONE commit: message `article: <title>`, with a body listing the target
+  phrase, word count, the check.py summary line, photos used (site photo / render) and every number used
+  with its source; end with the commit attribution lines. Then `git push origin main`.
+  (If the push is rejected because main moved, `git pull --rebase origin main`, rerun build.py, push again.)
+- Wait ~2 minutes, then confirm https://www.indevastudio.com/insights/<slug> returns 200.
+- Report back: the live URL, the title, the target phrase, and one line on anything the studio should
+  double-check (for example a fact only the studio can confirm). The article email goes out automatically.
 
-## after the studio merges
+## after publishing (studio)
 
-Vercel deploys automatically. Then (by hand, or ask Claude in chat): request indexing for the new URL
-in Google Search Console, and share it once on LinkedIn/Instagram. On the next run, set the merged
-brief's status to `published` if it still says `written`.
+Request indexing for the new URL in Google Search Console and share it once on LinkedIn/Instagram.
+To change or remove an article, ask Claude in chat or edit `content-engine/posts/<slug>.md`.

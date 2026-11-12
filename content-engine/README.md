@@ -1,7 +1,7 @@
 # indéva studio content engine
 
-One honest article a week, written by Claude from the studio's real projects, reviewed by you
-before it goes live.
+One honest article a week, written by Claude from the studio's real projects, published automatically
+and emailed in full to ceo@indevastudio.com.
 
 ## how it works
 
@@ -10,11 +10,9 @@ before it goes live.
    project pages.
 2. **every week** a scheduled Claude run takes the next ready brief, looks at the photos, writes the
    article in the studio's voice (`VOICE.md`), runs the quality checks (`check.py`), builds the page
-   (`build.py`) and opens a **pull request** on GitHub.
-3. **you review** the pull request. Read the article in the PR's file view. Merge it to publish
-   (Vercel deploys within a minute). Close it to discard. Ask Claude in chat for changes.
-
-Nothing reaches the live site without your merge.
+   (`build.py`) and publishes it to the live site — only if every check passes.
+3. **you get an email** with the full article and a link to the live page. Want a change or want it
+   removed? Ask Claude in chat.
 
 ## the fastest way to make articles better: add studio notes
 
@@ -55,7 +53,7 @@ Needs python3 with Pillow and PyYAML, and node.
 
 ## rules that keep it out of "AI spam" territory
 
-- one article a week at most; never more than one open at a time
+- one article a week at most
 - only the studio's own photos, looked at before use; renders labelled as renders
 - every number traceable to a project page or the studio's notes
 - no stock phrases, no keyword stuffing, one search phrase per page

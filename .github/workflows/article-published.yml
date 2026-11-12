@@ -1,0 +1,55 @@
+name: Article published — email the studio
+
+# When a new content-engine article lands on main, wait for Vercel to deploy it,
+# then email the full article to ceo@indevastudio.com (via Resend).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content-engine/posts/*.md"
+  workflow_dispatch:
+    inputs:
+      slugs:
+        description: "Article slug(s) to email, space-separated"
+        required: true
+
+jobs:
+  email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find new articles
+        id: find
+        run: |
+          if [ -n "${{ github.event.inputs.slugs }}" ]; then
+            SLUGS="${{ github.event.inputs.slugs }}"
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then BEFORE="HEAD~1"; fi
+            SLUGS=$(git diff --diff-filter=A --name-only "$BEFORE" "${{ github.sha }}" -- 'content-engine/posts/*.md' \
+                    | sed 's|content-engine/posts/\(.*\)\.md|\1|' | tr '\n' ' ')
+          fi
+          echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
+          echo "New articles: ${SLUGS:-none}"
+
+      - name: Wait for the live page
+        if: steps.find.outputs.slugs != ''
+        run: |
+          for SLUG in ${{ steps.find.outputs.slugs }}; do
+            for i in $(seq 1 30); do
+              CODE=$(curl -s -o /dev/null -w '%{http_code}' "https://www.indevastudio.com/insights/$SLUG")
+              [ "$CODE" = "200" ] && echo "$SLUG is live" && break
+              sleep 20
+            done
+          done
+
+      - name: Email the article
+        if: steps.find.outputs.slugs != ''
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_FROM: ${{ secrets.NOTIFY_FROM }}
+          ARTICLE_EMAIL_TO: ceo@indevastudio.com
+        run: python3 content-engine/email_article.py ${{ steps.find.outputs.slugs }}
