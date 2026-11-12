@@ -3791,7 +3791,7 @@ img {
         alt="indéva studio philosophy — the art of the lived-in aura"
         style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.72) saturate(0.85);"
         loading="lazy"
- width="1200" height="900" decoding="async">
+ width="1536" height="1024" decoding="async">
       <div style="
         position:absolute;inset:0;
         background:linear-gradient(to bottom, transparent 40%, rgba(247,243,236,0.75) 100%);
@@ -4235,7 +4235,7 @@ function renderIndex() {
          style="transition-delay:${(i%3)*.1}s"
          onclick="window.pOpenProject('${p.id}')">
       <div class="pcard-iw">
-        <img class="pcard-img" src="${img(p.cover)}" alt="${p.name}" loading="lazy" width="1200" height="900" decoding="async">
+        <img class="pcard-img" src="${img(p.cover)}" alt="${(p.name + ', ' + p.location + ' — ' + p.typology + ' interior design by indéva studio').toLowerCase()}" loading="lazy" width="1200" height="900" decoding="async">
         <div class="pcard-dim"></div>
         <div class="pcard-vw">view project</div>
       </div>
@@ -4284,6 +4284,7 @@ window.pOpenProject = function(id) {
   document.querySelectorAll('#pv-detail .ds-i').forEach(el => el.classList.remove('vis'));
 
   lbImgs = p.images.map(fn => ({src:img(fn), ...cap(fn)}));
+  const pWhere = `${p.name}, ${p.location}`.toLowerCase();
 
   /* hero */
   const hi = document.getElementById('pdet-hero-img');
@@ -4318,7 +4319,7 @@ window.pOpenProject = function(id) {
   document.getElementById('pdet-gallery').innerHTML = p.images.map((fn,i) => {
     const c = cap(fn);
     return `<div class="gimg" onclick="window.pLbOpen(${i})">
-      <img class="gimg-img" src="${img(fn)}" alt="${c.t}" loading="lazy" width="1200" height="900" decoding="async">
+      <img class="gimg-img" src="${img(fn)}" alt="${(c.t + ' — ' + pWhere + ' — indéva studio').replace(/"/g,'&quot;')}" loading="lazy" width="1200" height="900" decoding="async">
       <div class="gimg-xp">&#x26F6;</div>
       <div class="gimg-cap"><div class="gimg-ct">${c.t}</div><div class="gimg-cs">${c.c}</div></div>
     </div>`;
@@ -4326,10 +4327,12 @@ window.pOpenProject = function(id) {
 
   /* parallax */
   document.getElementById('pdet-par-img').src = img(p.parallax);
+  document.getElementById('pdet-par-img').alt = `${p.parallaxLbl} — ${pWhere} — ind\u00e9va studio`;
   document.getElementById('pdet-par-lbl').textContent = p.parallaxLbl;
 
   /* closing */
   document.getElementById('pdet-closing').src = img(p.images[p.images.length-1]);
+  document.getElementById('pdet-closing').alt = `${cap(p.images[p.images.length-1]).t} — ${pWhere} — ind\u00e9va studio`;
 
   /* next project */
   const ni = window.PROJECTS.indexOf(p);
@@ -4365,7 +4368,7 @@ function pLbRender() {
   const el = document.getElementById('plb-img');
   el.style.opacity = '0';
   setTimeout(() => {
-    el.src = it.src; el.style.opacity = '1'; el.style.transition = 'opacity .3s';
+    el.src = it.src; el.alt = it.t + ' — indéva studio'; el.style.opacity = '1'; el.style.transition = 'opacity .3s';
     document.getElementById('plb-title').textContent = it.t;
     document.getElementById('plb-sub').textContent   = it.c;
     document.getElementById('plb-ctr').textContent   =
@@ -4376,7 +4379,7 @@ window.pLbNav = function(d) { lbIdx = (lbIdx+d+lbImgs.length)%lbImgs.length; pLb
 window.pLbClose = function() {
   const lb = document.getElementById('p-lightbox');
   lb.classList.remove('vis');
-  setTimeout(() => { lb.style.display='none'; document.getElementById('plb-img').src=''; document.body.style.overflow=''; }, 400);
+  setTimeout(() => { lb.style.display='none'; document.getElementById('plb-img').removeAttribute('src'); document.body.style.overflow=''; }, 400);
 };
 
 /* ── PARALLAX ─────────────────────────────────────────────── */
@@ -6807,7 +6810,7 @@ function feqSubmit() {
 <!-- PROJECTS LIGHTBOX (global, fixed positioning) -->
 <div id="p-lightbox" style="position:fixed;inset:0;background:rgba(8,8,8,.97);z-index:9999;display:none;align-items:center;justify-content:center;opacity:0;transition:opacity .38s cubic-bezier(.4,0,.2,1)">
   <button onclick="window.pLbClose()" style="position:fixed;top:26px;right:36px;background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,235,227,.28);transition:color .2s" onmouseover="this.style.color='#f0ebe3'" onmouseout="this.style.color='rgba(240,235,227,.28)'">close &middot; esc</button>
-  <img id="plb-img" style="max-width:90vw;max-height:84vh;object-fit:contain;display:block;transition:opacity .3s" src="" alt="" width="1200" height="900" decoding="async" loading="lazy">
+  <img id="plb-img" style="max-width:90vw;max-height:84vh;object-fit:contain;display:block;transition:opacity .3s" alt="indéva studio project image" width="1200" height="900" decoding="async" loading="lazy">
   <div style="position:fixed;bottom:0;left:0;right:0;padding:36px 56px;background:linear-gradient(to top,rgba(8,8,8,.88),transparent);display:flex;justify-content:space-between;align-items:flex-end">
     <div>
       <div id="plb-title" style="font-family:var(--serif);font-size:clamp(.95rem,1.8vw,1.4rem);font-weight:300;font-style:italic;color:#f0ebe3;margin-bottom:5px"></div>

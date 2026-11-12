@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.indevastudio.com/</loc>
     <priority>1.0</priority>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-facade-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-tv-and-mandir-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-front-lawn-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-primary-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-lounge-and-meeting-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-garden-side-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-living-lobby-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-sofa-and-cane-screen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-display-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/resham%20lobby%20ceiling%20art.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/urban-apartment-kitchen-1.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/Studio%20Workspace.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-cover.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/philosophy-moodboard.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-mandir-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-tall-units-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-facade-sketch-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-detail-studies-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/front%20elevation.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/about</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/founder-arpit.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/pillars/pillar-2-invisible-detail.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/pillars/pillar-3-art-of-the-mix.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/pillars/pillar-4-imperfection.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/pillars/pillar-5-confidence.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/pillars/pillar-1-human-centricity.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/gunjeet-singh.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/yakshita-katyal.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/tanvi-maru.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/rishabh-jain.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/vidisha-chaudhary.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/shravan-kumar.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/shrishty.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/salman.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/kunal-sangtani.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/aashish-bhardwaj.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/lavdeep-singh-chahal.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/team/veenu-saini-2.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services</loc>
     <priority>0.9</priority>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-cover.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/urban-apartment-kitchen-1.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/process</loc>
@@ -19,10 +64,20 @@
   <url>
     <loc>https://www.indevastudio.com/philosophy</loc>
     <priority>0.5</priority>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/Master%20bedroom%20design.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/furniture</loc>
     <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/lounge-chair-teak-mountain.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/armchair-brass-velvet.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/accent-chair-rattan.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/lounge-chair-boucle.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/dining-table-marble-oval.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/coffee-table-round-cane.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/bar-cabinet-arched-cane.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/sideboard-cane-console.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/daybed-cane.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/vendors</loc>
@@ -34,109 +89,280 @@
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/commercial-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-ground-floor-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/farmhouse-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/hospitality-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/interior-design-execution</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/modular-kitchen-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/services/residential-interior-design</loc>
-    <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/delhi</loc>
     <priority>0.9</priority>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-cover.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/south-delhi-interior-designer</loc>
     <priority>0.9</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-living-room-seating.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-cover.jpg</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/gurgaon</loc>
     <priority>0.9</priority>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-conference-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/noida</loc>
     <lastmod>2026-10-13</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-kitchen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/sonipat</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/locations</loc>
     <lastmod>2026-10-13</lastmod>
     <priority>0.7</priority>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-living-lobby-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/locations/narela</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/locations/vasant-kunj</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-mural-headboard-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects</loc>
     <priority>0.9</priority>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-lounge-and-meeting-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-guest-room-corridor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-front-lawn-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-living-hall-chandelier-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-kitchen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-facade-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-tv-and-mandir-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-sofa-and-cane-screen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-grey-kitchen-671.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-ground-floor-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/dda-apartment-delhi</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-and-breakfast-bar-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-kitchen-cabinetry-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/mini-farmhouse-delhi</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-primary-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-side-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-living-lobby-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-kitchen-and-utility-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-exterior-alternate-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/patel-nagar-retail-store</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-ground-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-first-floor-lounge-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-first-floor-display-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/hotel-silk-murthal</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-guest-room-corridor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-corridor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-suite-bedroom-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-room-dining-nook-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-room-entry-and-wardrobe-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-bathroom-with-jacuzzi-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-bedroom-and-ensuite-bath-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-meeting-room-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/south-delhi-neoclassical-residence</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-entrance-view-664.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-wall-panelling-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-tv-unit-and-pooja-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-kitchen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-master-bedroom-balcony-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-master-bedroom-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-master-bedroom-tv-unit-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-master-bedroom-hallway-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-bedroom-headboard-655.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-bedroom-window-seating-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-bedroom-tv-unit-698.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-bedroom-wardrobe-entry-580.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-wardrobe-interior-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/studio-workspace-gurgaon</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-workstation-zone-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-conference-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-cafeteria-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-office-entrance-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/indeva-studio-office-narela</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-display-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-art-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-seating-corner-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-pin-up-wall-and-tv-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-linear-light-over-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-stone-top-detail-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-coffee-table-styling-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-detail-studies-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/villa-narela</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-night-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-front-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-mandir-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-seating-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-tv-and-mandir-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-sofa-and-cane-screen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-tall-units-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-l-shape-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-master-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-master-bedroom-tv-and-dressing-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-sons-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-sons-bedroom-tv-and-study-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-bedroom-tv-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-bedroom-corner-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-bedroom-wardrobe-and-bed-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-staircase-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-staircase-lighting-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-sons-washroom-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-washroom-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-parents-washroom-800.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/casa-bianca-farmhouse-gurgaon</loc>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-front-lawn-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-living-hall-chandelier-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-living-hall-from-gallery-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-kitchen-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-dining-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-champagne-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-carved-bed-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-carved-bed-wide-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-navy-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-wide-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-leather-bed-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-sage-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bathroom-herringbone-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bathroom-geometric-tiles-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-facade-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-corner-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-front-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-balcony-corner-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-cantilevered-balcony-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-side-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-garden-side-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/projects/vasant-kunj-dda-residence</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-mural-headboard-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-window-seat-and-tv-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-bed-wall-straight-on-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-tv-unit-detail-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-living-towards-dining-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-living-sofa-wall-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-dining-towards-living-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-living-material-palette-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-living-dining-working-drawing-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-kitchen-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-kitchen-moodboard-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-kitchen-elevation-drawing-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-powder-washroom-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-powder-washroom-basin-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-powder-washroom-render-views-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-bed-wall-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-tv-wall-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-window-seat-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-dressing-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-zoning-plan-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-bed-wall-drawing-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
@@ -840,5 +1066,4 @@
     <loc>https://www.indevastudio.com/insights/why-we-refuse-to-start-with-moodboards</loc>
     <priority>0.6</priority>
   </url>
-  <url><loc>https://www.indevastudio.com/privacy</loc><lastmod>2026-11-05</lastmod></url>
 </urlset>

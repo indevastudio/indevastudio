@@ -29,11 +29,37 @@ const noindexHeader = new Set((vercel.headers || [])
   .map(h => strip(h.source)));
 const rewrites = new Map((vercel.rewrites || []).map(r => [strip(r.source), r.destination.replace(/^\//, '')]));
 
-const read = f => { try { return fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch { return null; } };
+const read = f => {
+  // rewrite destinations are written without ".html" (cleanUrls), so try the .html file too
+  for (const c of [f, f + '.html']) { try { return fs.readFileSync(path.join(ROOT, c), 'utf8'); } catch {} }
+  return null;
+};
 const isNoindexMeta = html => /<meta\s+name=["']robots["'][^>]*noindex/i.test(html);
 const canonicalOf = html => ((html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)/i) || [])[1] || '');
 const lastmodOf = html => ((html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/) ||
                             html.match(/"datePublished"\s*:\s*"(\d{4}-\d{2}-\d{2})/) || [])[1] || null);
+
+// Image sitemap entries (Google Images): every real <img> on the page, absolute, de-duplicated.
+// Skips placeholders, data URIs, SVG icons, JS template strings and decorative aria-hidden images.
+const xmlEsc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+function imagesOf(html) {
+  const out = new Set();
+  const body = html.replace(/<script\b[\s\S]*?<\/script>/gi, '').replace(/<noscript\b[\s\S]*?<\/noscript>/gi, '');
+  for (const m of body.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = m[0];
+    if (/aria-hidden=["']true["']/i.test(tag)) continue;
+    const src = (tag.match(/\ssrc=["']([^"']+)["']/i) || [])[1];
+    if (!src || /^data:|\$\{|\.svg(\?|$)/i.test(src)) continue;
+    let abs;
+    try { abs = new URL(src.replace(/ /g, '%20'), ORIGIN + '/').href; } catch { continue; }
+    if (!abs.startsWith(ORIGIN)) continue;
+    const file = decodeURIComponent(new URL(abs).pathname).replace(/^\//, '');
+    if (!fs.existsSync(path.join(ROOT, file))) continue;   // never advertise a missing image
+    out.add(abs);
+    if (out.size >= 1000) break;
+  }
+  return [...out];
+}
 
 const skipped = [];
 function entry(loc, file, priority) {
@@ -44,7 +70,7 @@ function entry(loc, file, priority) {
   if (isNoindexMeta(html)) return null;
   const want = ORIGIN + (loc === '/' ? '/' : loc);
   if (canonicalOf(html) !== want) { skipped.push(`${loc} (canonical is ${canonicalOf(html) || 'missing'})`); return null; }
-  return { loc: want, lastmod: lastmodOf(html), priority };
+  return { loc: want, lastmod: lastmodOf(html), priority, images: imagesOf(html) };
 }
 
 const groups = { pages: [], services: [], locations: [], projects: [], insights: [] };
@@ -81,9 +107,11 @@ for (const slug of fs.existsSync(insDir) ? fs.readdirSync(insDir).sort() : []) {
 }
 
 const xmlUrlset = list => ['<?xml version="1.0" encoding="UTF-8"?>',
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
   ...list.map(e => ['  <url>', `    <loc>${e.loc}</loc>`, e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
-    `    <priority>${e.priority}</priority>`, '  </url>'].filter(Boolean).join('\n')),
+    `    <priority>${e.priority}</priority>`,
+    ...(e.images || []).map(u => `    <image:image><image:loc>${xmlEsc(u)}</image:loc></image:image>`),
+    '  </url>'].filter(Boolean).join('\n')),
   '</urlset>', ''].join('\n');
 
 const all = Object.values(groups).flat();
@@ -91,5 +119,5 @@ for (const [name, list] of Object.entries(groups)) console.log(`  ${name.padEnd(
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xmlUrlset(all));
 // remove child sitemaps left over from the old index layout so nothing stale is served
 for (const f of fs.readdirSync(ROOT)) if (/^sitemap-.*\.xml$/.test(f)) fs.unlinkSync(path.join(ROOT, f));
-console.log(`sitemap.xml written — ${all.length} URLs`);
+console.log(`sitemap.xml written — ${all.length} URLs, ${all.reduce((n, e) => n + (e.images || []).length, 0)} images`);
 if (skipped.length) console.log('  skipped (fix these if they should be indexed):\n   - ' + skipped.join('\n   - '));
