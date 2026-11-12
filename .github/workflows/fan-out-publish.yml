@@ -1,9 +1,10 @@
 name: Fan-out publish
 
+# Switched off (Nov 2026): copying full articles to Medium/Blogger/Tumblr creates duplicate
+# content that Google can treat as spam. Share new articles by hand on LinkedIn/Instagram/Pinterest.
+# The workflow can still be run manually from the Actions tab if ever needed.
 on:
-  push:
-    paths:
-      - "feed.xml"
+  workflow_dispatch:
 
 jobs:
   fan-out:

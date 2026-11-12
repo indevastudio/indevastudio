@@ -50,3 +50,6 @@ pshow.css
 /generate-blogs.js
 /sitemap.js
 /download
+
+# content engine sources (briefs with studio notes, drafts, scripts) — never served
+content-engine
