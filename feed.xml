@@ -6,7 +6,7 @@
   <atom:link href="https://www.indevastudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Design intelligence from indéva studio — perspectives on luxury interior design, spatial logic, materials, and process.</description>
   <language>en-in</language>
-  <lastBuildDate>Thu, 12 Nov 2026 07:31:12 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 12 Nov 2026 09:46:43 GMT</lastBuildDate>
   <generator>indeva-blog-generator</generator>
 
   <item>
@@ -30,6 +30,14 @@
     <link>https://www.indevastudio.com/insights/renovate-dont-rebuild-35-year-old-villa-narela</link>
     <guid isPermaLink="true">https://www.indevastudio.com/insights/renovate-dont-rebuild-35-year-old-villa-narela</guid>
     <description>old house renovation, done properly: how we are renewing a 35-year-old villa in narela, delhi — structure first, a dholpur stone facade, then every room.</description>
+    <pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate>
+  </item>
+
+  <item>
+    <title>Small Office Interior Design: One Room, Three Jobs | Indéva</title>
+    <link>https://www.indevastudio.com/insights/small-office-interior-design-one-room-three-jobs</link>
+    <guid isPermaLink="true">https://www.indevastudio.com/insights/small-office-interior-design-one-room-three-jobs</guid>
+    <description>small office interior design from our own narela studio: one room that works as an office, a meeting room and a sample library — wall by wall.</description>
     <pubDate>Thu, 12 Nov 2026 00:00:00 GMT</pubDate>
   </item>
 
@@ -319,14 +327,6 @@
     <guid isPermaLink="true">https://www.indevastudio.com/insights/penthouse-renovation-mistakes-gurgaon</guid>
     <description>Discover the top errors that drain budget on luxury upgrades and how indéva studio helps you stay on track.</description>
     <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
-  </item>
-
-  <item>
-    <title>guide to hiring an independent bungalow designer in south delhi</title>
-    <link>https://www.indevastudio.com/insights/independent-bungalow-designer-south-delhi-guide</link>
-    <guid isPermaLink="true">https://www.indevastudio.com/insights/independent-bungalow-designer-south-delhi-guide</guid>
-    <description>Discover the exact steps to select the right independent bungalow interior designer in South Delhi and avoid common pitfalls.</description>
-    <pubDate>Thu, 10 Sep 2026 00:00:00 GMT</pubDate>
   </item>
 </channel>
 </rss>

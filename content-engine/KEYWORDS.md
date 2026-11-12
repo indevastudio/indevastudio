@@ -24,7 +24,7 @@ it would compete with it. `check.py` reads this table. Volumes: monthly Google s
 | old house renovation | /insights/renovate-dont-rebuild-35-year-old-villa-narela | - |
 | hotel interior design | /insights/hotel-interior-design-23-rooms-three-materials | - |
 | hdhmr vs plywood | /insights/hdhmr-vs-plywood-wardrobe-guide | 320 |
-| small office interior design | (open — brief: indeva-studio-office) | 6600 |
+| small office interior design | /insights/small-office-interior-design-one-room-three-jobs | 6600 |
 | clothing store interior design | (open — brief: patel-nagar-menswear) | 1000 |
 | neoclassical interior design | (open — brief: south-delhi-neoclassical) | 480 |
 | small farmhouse design in india | (open — brief: mini-farmhouse) | 390 |

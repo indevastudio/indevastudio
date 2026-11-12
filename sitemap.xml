@@ -366,6 +366,7 @@
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-pin-up-wall-and-tv-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
@@ -995,6 +996,16 @@
     <loc>https://www.indevastudio.com/insights/restaurant-interior-designers-gurgaon</loc>
     <lastmod>2026-05-01</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/small-office-interior-design-one-room-three-jobs</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-pin-up-wall-and-tv-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-display-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-art-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-seating-corner-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/sofa-set-design-ideas-indian-living-room</loc>
