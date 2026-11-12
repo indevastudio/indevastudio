@@ -1,6 +1,6 @@
 ---
 id: indeva-studio-office
-status: ready          # ready → written (PR open) → published (merged). use "hold" to skip.
+status: written          # ready → written (PR open) → published (merged). use "hold" to skip.
 priority: 1            # lower runs first
 project: /projects/indeva-studio-office-narela
 target_keyword: "small office interior design"
