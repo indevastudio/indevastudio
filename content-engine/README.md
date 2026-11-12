@@ -1,6 +1,6 @@
 # indéva studio content engine
 
-One honest article a week, written by Claude from the studio's real projects, published automatically
+One honest article a day (while there are briefs), written by Claude from the studio's real projects, published automatically
 and emailed in full to ceo@indevastudio.com.
 
 ## how it works
@@ -8,7 +8,7 @@ and emailed in full to ceo@indevastudio.com.
 1. **briefs** (`content-engine/briefs/`) are the queue. Each one names a project, the one idea the
    article is about, and the search phrase it should rank for. Six are already queued from the
    project pages.
-2. **every week** a scheduled Claude run takes the next ready brief, looks at the photos, writes the
+2. **every day** a scheduled Claude run takes the next ready brief, looks at the photos, writes the
    article in the studio's voice (`VOICE.md`), runs the quality checks (`check.py`), builds the page
    (`build.py`) and publishes it to the live site — only if every check passes.
 3. **you get an email** with the full article and a link to the live page. Want a change or want it
@@ -53,7 +53,7 @@ Needs python3 with Pillow and PyYAML, and node.
 
 ## rules that keep it out of "AI spam" territory
 
-- one article a week at most
+- one article a day at most, and only from a real brief — when the queue is empty, nothing is published
 - only the studio's own photos, looked at before use; renders labelled as renders
 - every number traceable to a project page or the studio's notes
 - no stock phrases, no keyword stuffing, one search phrase per page

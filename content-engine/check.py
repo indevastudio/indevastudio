@@ -13,7 +13,7 @@ What it checks, and why Google cares:
   original    does not copy the project page or overlap other articles (duplicate content)
   keyword     targets one phrase, not owned by another page; phrase used naturally, not stuffed
   structure   length, numbered sections, images with captions, internal links that resolve
-  meta        title/description lengths, slug, date, cadence (no more than one article a week)
+  meta        title/description lengths, slug, date, cadence (no more than one article a day)
 """
 import glob, os, re, sys
 from datetime import date
@@ -224,8 +224,8 @@ def main():
             if other == slug:
                 continue
             od = date.fromisoformat(build.load_post(other)['date'])
-            if 0 < abs((d - od).days) < 6:
-                warn(f'cadence: /insights/{other} is dated {od} — keep at least a week between articles')
+            if d == od:
+                warn(f'cadence: /insights/{other} is also dated {od} — one article a day at most')
 
     for w in warns:
         print('WARN ', w)

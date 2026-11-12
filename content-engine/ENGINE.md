@@ -1,7 +1,7 @@
-# weekly run — instructions for Claude
+# daily run — instructions for Claude
 
-This file is the whole procedure for the scheduled weekly article run. Follow it exactly.
-The goal is **one** genuinely useful article a week, written from the studio's real projects, that
+This file is the whole procedure for the scheduled daily article run. Follow it exactly.
+The goal is **one** genuinely useful article a day at most, written from the studio's real projects, that
 Google treats as original expert content. Quality beats quantity: if anything below can't be met,
 publish nothing and say why.
 
@@ -20,11 +20,11 @@ Because nobody reviews before it goes live, the fact and voice rules below are a
 
 - `python3 content-engine/queue.py` to see the queue, `python3 content-engine/queue.py --next` for the next id.
 - If nothing is `ready`, stop: report "no brief ready — add one in content-engine/briefs/" and open nothing.
-- Cadence: if any post in `content-engine/posts/` is dated within the last 6 days, stop and report it —
-  one article a week, never more.
+- Cadence: if any post in `content-engine/posts/` is already dated today, stop and report it —
+  one article a day, never more. (The studio set daily frequency in Nov 2026.)
 - If an `article/*` pull request from the old review mode is still open, merge it first with
   `gh api -X PUT repos/indevastudio/indevastudio/pulls/<n>/merge -f merge_method=squash` (it was already
-  checked), set its brief to `published`, and count it as this week's article — stop there.
+  checked), set its brief to `published`, and count it as today's article — stop there.
 - If the brief says CHECK FIRST and you can't confirm it, set it to `hold` in a tiny PR or report it, and stop.
 
 ## 2. gather the source material — nothing else is a source
