@@ -16,7 +16,9 @@ open no pull request and say why.
 - `python3 content-engine/queue.py` to see the queue, `python3 content-engine/queue.py --next` for the next id.
 - If nothing is `ready`, stop: report "no brief ready — add one in content-engine/briefs/" and open nothing.
 - If an open pull request from a previous run (branch `article/*`) is still unmerged, stop and report it:
-  never stack a second article on an unreviewed one.
+  never stack a second article on an unreviewed one. Check with the REST API (GraphQL `gh pr` commands
+  are blocked in Claude sessions):
+  `gh api 'repos/indevastudio/indevastudio/pulls?state=open' --jq '.[] | select(.head.ref|startswith("article/")) | .html_url'`
 - If the brief says CHECK FIRST and you can't confirm it, set it to `hold` in a tiny PR or report it, and stop.
 
 ## 2. gather the source material — nothing else is a source
@@ -61,7 +63,9 @@ open no pull request and say why.
 ## 6. open the pull request — never push to main
 
 - Commit everything on `article/<brief-id>` and push the branch.
-- `gh pr create --base main --head article/<brief-id>` with:
+- Open the PR with the REST API (write the body to a file first):
+  `gh api repos/indevastudio/indevastudio/pulls -f title='article: <title>' -f head='article/<brief-id>' -f base=main -F body=@/tmp/pr-body.md --jq .html_url`
+  The PR has:
   - title: `article: <title>`
   - body: the target phrase and its volume, word count, the check.py summary line, the list of
     photos used (site photo / render), every number used and where it came from, and
