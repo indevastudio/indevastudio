@@ -301,6 +301,25 @@
   table.cfg td{ padding:7px 10px; border-bottom:1px solid #f0ebe0; vertical-align:top; }
   .csd{ font-size:11.5px; color:var(--grey); line-height:1.4; }
   table.cs td:nth-child(2){ max-width:360px; }
+
+  /* cost breakdown on the overview */
+  .bd{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px 18px 8px; margin:0 0 22px; }
+  .bd h3{ font-family:'Fraunces',serif; font-size:20px; margin:0 0 4px; }
+  .bd .bd-sub{ font-size:12.5px; color:var(--grey); margin:0 0 12px; }
+  .bd-row{ border-bottom:1px solid var(--line); }
+  .bd-row summary{ list-style:none; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:11px 2px; cursor:pointer; font-size:14.5px; }
+  .bd-row summary::-webkit-details-marker{ display:none; }
+  .bd-row summary .bd-name{ font-weight:600; }
+  .bd-row summary .bd-name small{ font-weight:400; color:var(--grey); margin-left:6px; }
+  .bd-row summary .bd-amt{ font-weight:700; white-space:nowrap; }
+  .bd-row summary .bd-ar{ display:inline-block; width:14px; color:var(--brass); transition:transform .15s; }
+  .bd-row[open] summary .bd-ar{ transform:rotate(90deg); }
+  .bd-items{ padding:0 0 10px 16px; }
+  .bd-it{ display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:4px 0; color:#4a443c; border-top:1px dashed #efe9dc; }
+  .bd-it span:last-child{ white-space:nowrap; }
+  .bd-go{ background:none; border:0; color:var(--brass); font-size:12.5px; font-weight:600; cursor:pointer; padding:6px 0 0; }
+  .bd .grand{ margin:14px 0 8px; }
+  .bd-actions{ display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 10px; }
 </style>
 </head>
 <body>
@@ -783,10 +802,26 @@ function renderSection(s){
     <div class="subtotal-strip"><span>Section subtotal</span><span class="val">${fmt(secTotal(s))}</span></div>
   </section>`;
 }
+function overviewBreakdown(){
+  const rows = SECTIONS.map(s=>{
+    const items=[]; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) items.push(it); }));
+    if(!items.length) return '';
+    const name = s.tab || s.title;
+    return `<details class="bd-row"><summary><span class="bd-name"><span class="bd-ar">›</span> ${name}<small>${items.length} item${items.length>1?'s':''}</small></span><span class="bd-amt">${fmt(secTotal(s))}</span></summary>
+      <div class="bd-items">${items.map(it=>`<div class="bd-it"><span>${it.room} — ${it.name}${it.options?' · '+it.selected:''}</span><span>${fmt(amtOf(it))}</span></div>`).join('')}
+      ${s.tab?`<button class="bd-go" onclick="goTo('${s.id}')">Change options in ${s.tab} →</button>`:''}</div></details>`;
+  }).join('');
+  const grands = (panelCostSheet().match(/<div class="grand">[\s\S]*?<div class="value">[\s\S]*?<\/div><\/div>/g)||[]).join('');
+  return `<div class="bd"><h3>Cost breakdown</h3><p class="bd-sub">Your current selection, category by category. Tap a category to see every item and its amount.</p>
+    ${rows}${grands}
+    <div class="bd-actions"><button class="cta" onclick="goTo('costsheet')">Full cost sheet with specifications</button><button class="cta ghost" onclick="window.print()">Print / Save as PDF</button></div></div>`;
+}
+
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
       <p>Bansal Residence, Narela · ground floor interior fit-out. The walls are already built, so the scope starts at ceilings, flooring, services and finishes. The kitchen is planned in the back-left room, with the earlier small kitchen (store) and the old toilet joined into a guest bedroom. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen and vanity are priced by finish (Laminate / Acrylic / PU) and the flooring by material. Switch any item off to see the effect on the total.</p></div>
+    ${overviewBreakdown()}
     <div class="floorplan-wrap"><img src="${REF_IMAGES.floorplan.src}" onclick="openLightbox('floorplan')" alt="Floor plan"><div class="cap">${REF_IMAGES.floorplan.cap}</div></div>
     <div class="item"><div class="item-title">Room schedule (from the plan)</div><div class="item-spec" style="margin-bottom:0">
       <b>Drawing Room</b> 13'0" × 13'9" (179 sq.ft., ceiling 111") · <b>Lobby / Dining</b> approx. 13'6" × 9'6" (122 sq.ft., ceiling 131") · <b>Kitchen</b> 11'5" × 9'11" (113 sq.ft., ceiling 128") · <b>Bedroom</b> 9'6" × 14'2" (135 sq.ft., ceiling 128") · <b>Back Passage</b> 3'4" × 11'5" (40 sq.ft.) · <b>Store</b> 7'4" × 5'3" (38 sq.ft.) · <b>Toilet</b> 7'4" × 3'8" (27 sq.ft.) · <b>Foyer & Stair</b> approx. 8'2" × 14' (100 sq.ft. excl. stair) · <b>Front Porch</b> approx. 21'8" × 6'7" (140 sq.ft.).</div></div>
