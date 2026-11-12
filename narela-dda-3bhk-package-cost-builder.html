@@ -331,7 +331,7 @@
 <header class="top">
   <div class="brandline">INDÉVA STUDIO · INTERACTIVE COST BUILDER</div>
   <h1>Narela DDA 3 BHK — Interior Package</h1>
-  <p>Complete interiors incl. loose furniture, from about ₹20 lakh (excl. GST) — detailed scope of work with Indéva master BOQ rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
+  <p>Complete interiors incl. loose furniture, from about ₹21.1 lakh (excl. GST) — detailed scope of work with Indéva master BOQ rates, materials and brands. Tap a category, pick your options, and your cost sheet builds itself.</p>
 </header>
 
 <nav class="tabs" id="tabs"></nav>
@@ -405,8 +405,8 @@ const WARD = {
   Standard:{rate:1400, spec:"Carcass: 16.75mm pre-laminated HDHMR (Action TESA / Greenpanel). Shutters: HDF with 1mm high-gloss / matt laminate (Merino / Greenlam). Ozone soft-close hinges and channels, SS wardrobe tube, standard handles. Rate as per Indéva master BOQ (modular woodwork ₹1,400/sq.ft.)."}
 };
 const BED = {
-  Premium:{rate:40580, spec:"Frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. Mattress excluded."},
-  Standard:{rate:27050, spec:"Frame in 18mm HDHMR, box storage with top-opening flaps (no hydraulic), plain upholstered headboard, fabric from the standard range. Mattress excluded."}
+  Premium:{rate:70000, spec:"Frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. 10-year warranty on the frame and storage mechanism. Mattress excluded."},
+  Standard:{rate:60000, spec:"Frame in 18mm HDHMR, box storage with top-opening flaps (no hydraulic), plain upholstered headboard, fabric from the standard range. 10-year warranty on the frame and storage mechanism. Mattress excluded."}
 };
 const SIDE = {
   Premium:{rate:10820, spec:"Two units, approx. 18\"W × 16\"D. 18mm HDHMR in matt PU paint finish, 1 drawer each on "+STD.channels+"."},
@@ -437,7 +437,7 @@ const VAN = {
   PU:{rate:24000, spec:STD.wetCarcass+" Shutters: 18mm BWP ply in 2K PU paint (ICA / Sirca), "+STD.hinges+". Rate as per Indéva item master."}
 };
 const QBED = {
-  Premium:{rate:40580, spec:BED.Premium.spec}, Standard:{rate:27050, spec:BED.Standard.spec}
+  Premium:{rate:70000, spec:BED.Premium.spec}, Standard:{rate:60000, spec:BED.Standard.spec}
 };
 function bedroomItems(p, room, w){
   return [
@@ -450,8 +450,8 @@ function bedroomItems(p, room, w){
 }
 
 const KBED = {
-  Premium:{rate:70000, spec:"King size, frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. Mattress excluded."},
-  Standard:{rate:40580, spec:"King size, frame in 18mm HDHMR, box storage with top-opening flaps (no hydraulic), plain upholstered headboard, fabric from the standard range. Mattress excluded."}
+  Premium:{rate:70000, spec:"King size, frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. 10-year warranty on the frame and storage mechanism. Mattress excluded."},
+  Standard:{rate:60000, spec:"King size, frame in 18mm HDHMR, box storage with top-opening flaps (no hydraulic), plain upholstered headboard, fabric from the standard range. 10-year warranty on the frame and storage mechanism. Mattress excluded."}
 };
 
 const SECTIONS = [
@@ -488,9 +488,15 @@ const SECTIONS = [
     {note:"Paint (approx. 2,450 sq.ft. of walls + ceilings: dry areas 830 sq.ft. × 2.8 + kitchen and toilet ceilings)", items:[
       {id:"paint", room:"Whole Apartment", name:"Paint — walls and ceilings", unit:"sq.ft.", qty:2450, on:true, selected:"Premium",
        options:{
-        Premium:{rate:45, spec:"Asian Paints Royale / Dulux Velvet Touch / Berger Silk plastic emulsion, roller finish, 2 coats, over primer and putty. Rate as per Indéva master BOQ."},
-        "Royale Matt":{rate:50, spec:"Asian Paints Royale Matt plastic emulsion, roller finish, over high-quality POP punning, primer and putty. Rate as per Indéva master BOQ."},
-        Standard:{rate:30, spec:"Berger Rangoli acrylic emulsion, roller finish, 2 coats, over primer and putty. Rate as per Indéva master BOQ."}
+        Premium:{rate:55, spec:"Asian Paints Royale / Dulux Velvet Touch / Berger Silk plastic emulsion, roller finish, 2 coats, over primer and putty. Rate as per Indéva master BOQ."},
+        "Royale Matt":{rate:60, spec:"Asian Paints Royale Matt plastic emulsion, roller finish, over high-quality POP punning, primer and putty. Rate as per Indéva master BOQ."},
+        Standard:{rate:45, spec:"Berger Rangoli acrylic emulsion, roller finish, 2 coats, over primer and putty. Rate as per Indéva master BOQ."}
+       }},
+      {id:"accent", room:"Feature walls", name:"Accent wall finish — POP mouldings, texture paint or wallpaper", unit:"sq.ft.", qty:400, on:false, selected:"Texture paint", src:"Optional",
+       options:{
+        "POP mouldings":{rate:70, spec:"POP / PU moulding frames and cornice on feature walls, with joints filled, primed and painted to match. Indéva rate ₹70/sq.ft. of wall."},
+        "Texture paint":{rate:70, spec:"Asian Paints Royale Play / Dulux texture finish on feature walls, over primer and putty. Indéva rate ₹70/sq.ft."},
+        Wallpaper:{rate:100, spec:"Imported vinyl wallpaper (Marshalls / Excel / Life n Colors), supplied and fixed with adhesive over primed walls. Indéva rate ₹100/sq.ft.; final per your selection."}
        }},
     ]},
     {note:"Curtains — blackout + sheer (4 openings: living window to Balcony 1, master bedroom window to Balcony 2, Bedroom 2 window, Bedroom 3 window)", items:[
@@ -543,8 +549,8 @@ const SECTIONS = [
     {note:"Dining", items:[
       {id:"dtable", room:"Dining", name:"Dining table (6 seater)", unit:"set", qty:1, on:true, selected:"Standard", src:"Allowance",
        options:{
-        Premium:{rate:95000, spec:"6-seater, sintered-stone / marble top on solid-wood or powder-coated metal base, 6 upholstered chairs."},
-        Standard:{rate:60000, spec:"6-seater, veneer top on solid-wood base, 6 upholstered chairs."}
+        Premium:{rate:180000, spec:"6-seater with marble top on solid-wood or powder-coated metal base, 6 upholstered chairs. ₹30,000 per seat."},
+        Standard:{rate:90000, spec:"6-seater, veneer top on solid-wood base, 6 upholstered chairs. ₹15,000 per seat."}
        }},
       {id:"crockery", room:"Dining", name:"Crockery + storage unit (5 ft × 7 ft)", unit:"sq.ft.", qty:35, on:true, selected:"Standard", options:LOOSE},
       {id:"chand", room:"Dining", name:"Chandelier over dining", unit:"No.", qty:1, rate:35000, on:true, src:"Allowance",
@@ -675,14 +681,10 @@ const SECTIONS = [
 },
 {
   id:"balconies", tab:"Balconies", letter:"G", title:"Balconies — Balcony 1 (3850 × 1250) & Balcony 2 (2900 × 1250)",
-  intro:"Balcony 1 runs along the living room and Balcony 2 along the master bedroom, both 4 ft deep. Balc 3 is the utility, covered in the kitchen tab. Outdoor furniture and deck tiles are add-ons. No civil work on the façade.",
+  intro:"Balcony 1 runs along the living room and Balcony 2 along the master bedroom, both 4 ft deep. Balc 3 is the utility, covered in the kitchen tab. Deck tiles and planters are add-ons. No civil work on the façade.",
   hero:[],
   groups:[
     {note:null, items:[
-      {id:"balbig", room:"Balcony 1", name:"Outdoor lounge set + planters", unit:"set", qty:1, rate:40000, on:true, src:"Allowance",
-       spec:"Outdoor seating for a 4 ft deep balcony (2-seater + 1 chair + low table), weatherproof, with planters."},
-      {id:"balmaster", room:"Balcony 2", name:"Bistro set", unit:"set", qty:1, rate:25000, on:true, src:"Allowance",
-       spec:"Outdoor bistro set (2 chairs + table), weatherproof."},
       {id:"deck", room:"Balconies 1 + 2", name:"Artificial grass / deck tiles", unit:"sq.ft.", qty:91, rate:220, on:false, src:"Optional · market rate",
        spec:"Interlocking WPC deck tiles or artificial grass laid loose over the builder's flooring: Balcony 1 52 sq.ft. + Balcony 2 39 sq.ft."},
       {id:"planters", room:"Balconies 1 + 2", name:"Planters", unit:"lumpsum", qty:1, rate:12000, on:false, src:"Optional · allowance",
@@ -810,19 +812,19 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Package Overview</h2>
-      <p>Indéva's interior package for the Narela DDA 3 BHK · Unit Type-1, first floor · carpet area 100.12 sq.m (approx. 1,078 sq.ft.) without walls, 104.50 sq.m as per RERA. The recommended package comes to about <b>₹20 lakh (excl. GST)</b> and covers everything to move in, loose furniture included: a complete fit-out of the builder-finished flat, with the builder's flooring, bathroom tiles, sanitaryware, doors and windows kept as they are. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen and vanities are priced by finish (Laminate / Acrylic / PU). Items marked <b>Optional</b> are add-ons, switched off and not in the package price — switch any item on or off to see the effect on the total.</p></div>
+      <p>Indéva's interior package for the Narela DDA 3 BHK · Unit Type-1, first floor · carpet area 100.12 sq.m (approx. 1,078 sq.ft.) without walls, 104.50 sq.m as per RERA. The recommended package comes to about <b>₹21.1 lakh (excl. GST)</b> and covers everything to move in, loose furniture included: a complete fit-out of the builder-finished flat, with the builder's flooring, bathroom tiles, sanitaryware, doors and windows kept as they are. Every line states the actual material, board, finish and hardware brand. <b>Standard</b> is the value specification and <b>Premium</b> the higher one; the kitchen and vanities are priced by finish (Laminate / Acrylic / PU). Items marked <b>Optional</b> are add-ons, switched off and not in the package price — switch any item on or off to see the effect on the total.</p></div>
     ${overviewBreakdown()}
     <div class="floorplan-wrap"><img src="${REF_IMAGES.floorplan.src}" onclick="openLightbox('floorplan')" alt="Floor plan"><div class="cap">${REF_IMAGES.floorplan.cap}</div></div>
     <div class="item"><div class="item-title">Room schedule (from the plan)</div><div class="item-spec" style="margin-bottom:0">
       <b>Living / Dining</b> 4175 × 6835 (13'8" × 22'5") · <b>Entrance lobby</b> 1450 × 2275 · <b>Kitchen</b> 3425 × 2640 (11'3" × 8'8") · <b>Master Bedroom</b> 3250 × 4465 (10'8" × 14'8") + <b>Dress</b> 1500 × 1670 + <b>Toilet 1</b> 2600 × 1570 · <b>Bedroom 2</b> 3225 × 4000 (10'7" × 13'1") · <b>Toilet 2</b> (common) 2275 × 1570 · <b>Bedroom 3</b> 3175 × 2965 (10'5" × 9'9") + <b>Toilet 3</b> 1525 × 2110 · <b>Balconies:</b> Balcony 1 3850 × 1250 (living), Balcony 2 2900 × 1250 (master bedroom), Balc 3 (utility) 2000 × 2465.</div></div>
     <div class="item"><div class="item-title">What the package includes</div><div class="item-spec" style="margin-bottom:0">
-      <b>Entire house:</b> gypsum false ceiling, electrical modifications, Philips cove and spot lighting, Royale-grade paint, blackout + sheer curtains; optional flooring upgrade (vitrified or Italian marble).<br>
+      <b>Entire house:</b> gypsum false ceiling, electrical modifications, Philips cove and spot lighting, Royale-grade paint (accent-wall mouldings, texture or wallpaper as an add-on), blackout + sheer curtains; optional flooring upgrade (vitrified or Italian marble).<br>
       <b>Living, dining & entry:</b> TV + storage unit, sofa for 5, coffee table, feature wall, 6-seater dining, shoe cabinet; optional crockery unit, chandelier, puja unit and entry feature wall.<br>
       <b>Kitchen & utility:</b> L-shaped modular kitchen (Laminate; Acrylic / PU as upgrades), Hettich / Ebco hardware, stone counter, sink, under-cabinet LED, plumbing fit-out; utility unit, washing machine point and ceiling cloth dryer in Balc 3.<br>
       <b>Master bedroom:</b> L-shaped wardrobe in the dress, dresser, king bed, bedside tables, TV unit, bed-back wall; optional lounge chairs.<br>
       <b>Bedrooms 2 & 3:</b> wardrobe, queen bed, bedside tables and bed-back wall in each; optional TV units and a study desk in Bedroom 3.<br>
       <b>Bathrooms:</b> vanity units, mirrors and glass shower partitions in the three toilets.<br>
-      <b>Balconies:</b> optional outdoor lounge and bistro sets, deck tiles and planters.<br>
+      <b>Balconies:</b> optional deck tiles and planters.<br>
       <b>Not included:</b> civil and demolition work (except the optional flooring upgrade), bathroom tiling and sanitaryware (builder-finished), appliances, chimney and hob, mattresses, ACs, switch plates, MCBs and decorative fixtures other than those listed.</div></div>
     <div class="item"><div class="item-title">Material standards used throughout</div><div class="item-spec" style="margin-bottom:0">
       <b>Boards:</b> HDHMR (Action TESA / Greenpanel) for dry-area carcasses; 18mm BWP ply (Century / Greenply) for wet areas.<br>
