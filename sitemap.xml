@@ -367,6 +367,9 @@
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/2-bhk-interior-cost-gurgaon-guide</loc>
@@ -620,6 +623,17 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.indevastudio.com/insights/farmhouse-design-gurgaon-lessons-from-casa-bianca</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-facade-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-corner-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-living-hall-chandelier-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-bedroom-champagne-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-kitchen-800.webp</image:loc></image:image>
+  </url>
+  <url>
     <loc>https://www.indevastudio.com/insights/farmhouse-design-mistakes-gurgaon</loc>
     <lastmod>2026-09-08</lastmod>
     <priority>0.6</priority>
@@ -728,6 +742,17 @@
     <loc>https://www.indevastudio.com/insights/hiring-home-interior-designer-hauz-khas</loc>
     <lastmod>2026-09-07</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/hotel-interior-design-23-rooms-three-materials</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-guest-room-corridor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-room-dining-nook-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-ceiling-installation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-bathroom-with-jacuzzi-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-room-entry-and-wardrobe-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/how-we-protect-design-on-site</loc>
@@ -935,6 +960,17 @@
     <loc>https://www.indevastudio.com/insights/read-interior-design-boq-guide</loc>
     <lastmod>2026-09-04</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/renovate-dont-rebuild-35-year-old-villa-narela</loc>
+    <lastmod>2026-11-12</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-front-elevation-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-night-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-tv-and-mandir-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-daughters-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/villa-narela-staircase-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/renovating-home-in-delhi-ncr</loc>
