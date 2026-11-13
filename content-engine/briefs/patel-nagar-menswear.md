@@ -1,6 +1,6 @@
 ---
 id: patel-nagar-menswear
-status: ready          # ready → written (PR open) → published (merged). use "hold" to skip.
+status: published          # ready → written (PR open) → published (merged). use "hold" to skip.
 priority: 2            # lower runs first
 project: /projects/patel-nagar-retail-store
 target_keyword: "clothing store interior design"

@@ -24,6 +24,7 @@
     <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-tall-units-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
   </url>
@@ -366,6 +367,7 @@
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-pin-up-wall-and-tv-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
@@ -508,6 +510,15 @@
   <url>
     <loc>https://www.indevastudio.com/insights/choosing-a-contractor-in-india</loc>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/clothing-store-interior-design-let-the-shirts-sell</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-ground-floor-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-first-floor-lounge-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-first-floor-display-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/colour-follows-conviction-not-trends</loc>
