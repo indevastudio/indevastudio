@@ -1,6 +1,7 @@
 // Reads an uploaded floor plan with Claude and returns the rooms and their sizes.
 // The BOQ itself is priced in the browser (cost-estimate.html) from the Indéva rate table.
-// Needs the ANTHROPIC_API_KEY environment variable in Vercel. ESTIMATE_MODEL is optional.
+// Auth: AI_GATEWAY_API_KEY (Vercel AI Gateway, preferred), else the Vercel OIDC token, else ANTHROPIC_API_KEY (direct).
+// ESTIMATE_MODEL is optional.
 
 export const config = { maxDuration: 60 };
 
@@ -61,7 +62,8 @@ export async function POST(request) {
   if (origin && !/^https:\/\/(www\.)?indevastudio\.com$|\.vercel\.app$|^http:\/\/localhost(:\d+)?$/.test(origin)) {
     return json({ error: 'Not allowed.' }, 403);
   }
-  const key = process.env.ANTHROPIC_API_KEY;
+  const gwKey = process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN || request.headers.get('x-vercel-oidc-token');
+  const key = gwKey || process.env.ANTHROPIC_API_KEY;
   if (!key) return json({ error: 'The estimator is not switched on yet. Please WhatsApp us your plan.' }, 503);
 
   const ip = (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
@@ -85,11 +87,15 @@ export async function POST(request) {
     : { type: 'image', source: { type: 'base64', media_type: mediaType, data: file } };
 
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
+    const url = gwKey ? 'https://ai-gateway.vercel.sh/v1/messages' : 'https://api.anthropic.com/v1/messages';
+    const headers = gwKey
+      ? { authorization: 'Bearer ' + gwKey, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' }
+      : { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' };
+    const r = await fetch(url, {
       method: 'POST',
-      headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+      headers,
       body: JSON.stringify({
-        model: process.env.ESTIMATE_MODEL || 'claude-sonnet-5-5',
+        model: process.env.ESTIMATE_MODEL || (gwKey ? 'anthropic/claude-sonnet-5' : 'claude-sonnet-5-5'),
         max_tokens: 3000,
         tools: [TOOL],
         tool_choice: { type: 'tool', name: TOOL.name },
