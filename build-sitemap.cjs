@@ -78,7 +78,9 @@ const push = (g, e) => e && groups[g].push(e);
 
 [['/', 'index.html', '1.0'], ['/about', 'about.html', '0.8'], ['/services', 'services.html', '0.9'],
  ['/process', 'process.html', '0.6'], ['/philosophy', 'philosophy.html', '0.5'], ['/furniture', 'furniture.html', '0.6'],
- ['/vendors', 'vendors.html', '0.5'], ['/contact', 'contact.html', '0.7']]
+ ['/vendors', 'vendors.html', '0.5'], ['/contact', 'contact.html', '0.7'],
+ ['/interior-design-cost-delhi', 'interior-design-cost-delhi.html', '0.9'], ['/dda-flat-interior-design', 'dda-flat-interior-design.html', '0.9'],
+ ['/cost-estimate', 'cost-estimate.html', '0.8']]
   .forEach(([loc, f, p]) => push('pages', entry(loc, f, p)));
 
 [['/delhi', '0.9'], ['/south-delhi-interior-designer', '0.9'], ['/gurgaon', '0.9'], ['/noida', '0.8'], ['/sonipat', '0.8']]
