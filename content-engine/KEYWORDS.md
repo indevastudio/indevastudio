@@ -26,7 +26,7 @@ it would compete with it. `check.py` reads this table. Volumes: monthly Google s
 | hdhmr vs plywood | /insights/hdhmr-vs-plywood-wardrobe-guide | 320 |
 | small office interior design | /insights/small-office-interior-design-one-room-three-jobs | 6600 |
 | clothing store interior design | /insights/clothing-store-interior-design-let-the-shirts-sell | 1000 |
-| neoclassical interior design | (open — brief: south-delhi-neoclassical) | 480 |
+| neoclassical interior design | /insights/neoclassical-interior-design-apartment-south-delhi | 480 |
 | small farmhouse design in india | (open — brief: mini-farmhouse) | 390 |
 | dda flat interior design | (open — brief: vasant-kunj-dda) | 10 |
 | design studio office interior | (open — brief: studio-workspace-gurgaon) | - |

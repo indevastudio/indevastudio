@@ -4,13 +4,11 @@
     <loc>https://www.indevastudio.com/</loc>
     <priority>1.0</priority>
     <image:image><image:loc>https://www.indevastudio.com/project-images-for-website/desktop%20version%20banner.webp</image:loc></image:image>
-    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-facade-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-tv-and-mandir-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-front-lawn-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-primary-elevation-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-lounge-and-meeting-800.webp</image:loc></image:image>
-    <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-garden-side-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-living-lobby-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-living-room-sofa-and-cane-screen-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-display-wall-800.webp</image:loc></image:image>
@@ -26,7 +24,6 @@
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-tall-units-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/casa-bianca-farmhouse-gurgaon-across-the-lawns-800.webp</image:loc></image:image>
-    <image:image><image:loc>https://www.indevastudio.com/hotel-silk-murthal-lobby-seating-area-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/about</loc>
@@ -367,6 +364,7 @@
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-pin-up-wall-and-tv-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-dholpur-facade-day-800.webp</image:loc></image:image>
@@ -917,6 +915,17 @@
     <loc>https://www.indevastudio.com/insights/modular-kitchen-cost-south-delhi</loc>
     <lastmod>2026-09-13</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/neoclassical-interior-design-apartment-south-delhi</loc>
+    <lastmod>2026-11-14</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-wall-panelling-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-tv-unit-and-pooja-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-wardrobe-interior-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-master-bedroom-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-kitchen-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/office-interior-design-delhi-guide</loc>

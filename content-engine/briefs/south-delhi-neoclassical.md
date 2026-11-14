@@ -1,6 +1,6 @@
 ---
 id: south-delhi-neoclassical
-status: ready          # ready → written (PR open) → published (merged). use "hold" to skip.
+status: published          # ready → written (PR open) → published (merged). use "hold" to skip.
 priority: 3            # lower runs first
 project: /projects/south-delhi-neoclassical-residence
 target_keyword: "neoclassical interior design"
