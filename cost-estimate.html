@@ -109,6 +109,7 @@
         <div class="picked" id="picked"></div>
         <img id="prev" alt="" hidden>
       </div>
+      <p class="fine" style="margin-top:8px">No plan handy? <a href="#" id="sample" style="color:var(--brass);font-weight:600">Try it with a sample 2 BHK plan</a></p>
       <input type="file" id="file" accept="image/jpeg,image/png,image/webp,application/pdf" hidden>
       <div class="err" id="err"></div>
       <div class="row-actions"><button class="btn" id="go" type="submit">Get my estimate →</button></div>
@@ -345,6 +346,7 @@ drop.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault()
 ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); }); });
 ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
 drop.addEventListener('drop',function(e){ if(e.dataTransfer.files[0]) pick(e.dataTransfer.files[0]); });
+document.getElementById('sample').onclick=function(e){ e.preventDefault(); fetch('/cost-estimate-sample-plan.jpg').then(function(r){return r.blob();}).then(function(b){ pick(new File([b],'sample-2bhk-plan.jpg',{type:'image/jpeg'})); }); };
 fin.onchange=function(){ if(fin.files[0]) pick(fin.files[0]); };
 function showErr(m){ var e=document.getElementById('err'); e.textContent=m; e.style.display=m?'block':'none'; }
 function pick(f){
