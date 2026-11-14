@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interior Cost Estimate from Your Floor Plan | Indéva Studio</title>
+<meta name="description" content="Upload your floor plan and get an instant interior BOQ — scope of work, materials and rates, room by room — from Indéva Studio, Delhi NCR.">
+<link rel="canonical" href="https://www.indevastudio.com/cost-estimate">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --espresso:#262019; --brass:#D97757; --cream:#F5F4EE; --card:#FFFEFB; --line:#E5E1D5; --grey:#83807A; --ok:#4f7a4f; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--cream); color:var(--espresso); font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  header{ background:var(--espresso); color:#fff; padding:38px 22px 34px; text-align:center; }
+  header a.home{ color:var(--brass); text-decoration:none; font-size:11px; letter-spacing:.22em; font-weight:600; text-transform:uppercase; }
+  h1{ font-family:Fraunces,Georgia,serif; font-weight:600; font-size:clamp(28px,5.5vw,42px); line-height:1.12; margin:12px auto 10px; max-width:720px; }
+  header p{ margin:0 auto; max-width:560px; color:#d8d0c3; font-size:15.5px; line-height:1.55; }
+  .steps{ display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-top:18px; font-size:13px; color:#cfc6b8; }
+  .steps b{ color:var(--brass); margin-right:4px; }
+  main{ max-width:980px; margin:0 auto; padding:26px 18px 50px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:0 1px 3px rgba(38,32,25,.06),0 8px 22px rgba(38,32,25,.05); padding:22px; margin-bottom:20px; }
+  .card h2{ font-family:Fraunces,Georgia,serif; font-size:22px; margin:0 0 4px; font-weight:600; }
+  .sub{ color:var(--grey); font-size:13.5px; margin:0 0 16px; line-height:1.5; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:640px){ .grid{ grid-template-columns:1fr; } }
+  label.f{ display:block; font-size:12.5px; font-weight:600; margin-bottom:5px; }
+  input[type=text], input[type=tel], input[type=number], select{ width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:15px; background:#fff; color:inherit; }
+  input:focus, select:focus{ outline:2px solid rgba(217,119,87,.35); border-color:var(--brass); }
+  .drop{ margin-top:14px; border:2px dashed #d6cfbf; border-radius:14px; padding:26px 16px; text-align:center; cursor:pointer; background:#fcfaf5; transition:border-color .15s, background .15s; }
+  .drop.over, .drop:hover{ border-color:var(--brass); background:#fdf4ef; }
+  .drop b{ display:block; font-size:16px; margin-bottom:4px; }
+  .drop span{ color:var(--grey); font-size:13px; }
+  .drop .picked{ margin-top:10px; font-weight:600; color:var(--ok); font-size:14px; }
+  .drop img{ max-height:140px; max-width:100%; margin-top:10px; border-radius:8px; border:1px solid var(--line); }
+  .hp{ position:absolute; left:-9999px; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 22px; border-radius:999px; border:0; background:var(--brass); color:#fff; font:inherit; font-weight:600; font-size:15px; cursor:pointer; text-decoration:none; }
+  .btn:disabled{ opacity:.55; cursor:wait; }
+  .btn.ghost{ background:transparent; color:var(--espresso); border:1.5px solid var(--espresso); }
+  .btn.dark{ background:var(--espresso); }
+  .row-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; align-items:center; }
+  .fine{ font-size:12px; color:var(--grey); line-height:1.5; margin-top:10px; }
+  .err{ background:#fbecea; color:#8a2f22; border:1px solid #f0c9c2; padding:11px 14px; border-radius:10px; font-size:14px; margin-top:12px; display:none; }
+  .loading{ display:none; text-align:center; padding:34px 10px; }
+  .spinner{ width:42px; height:42px; border:4px solid #eadfd2; border-top-color:var(--brass); border-radius:50%; margin:0 auto 14px; animation:sp 1s linear infinite; }
+  @keyframes sp{ to{ transform:rotate(360deg); } }
+  #result{ display:none; }
+  .summary{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:flex-end; }
+  .summary .big{ font-family:Fraunces,Georgia,serif; font-size:clamp(30px,6vw,44px); font-weight:700; line-height:1; }
+  .summary .lbl{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--grey); font-weight:600; margin-bottom:6px; }
+  .tier{ display:inline-flex; background:#efeadf; border-radius:999px; padding:4px; }
+  .tier button{ border:0; background:transparent; padding:8px 16px; border-radius:999px; font:inherit; font-weight:600; font-size:13.5px; cursor:pointer; color:var(--grey); }
+  .tier button.on{ background:var(--espresso); color:#fff; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .chip{ background:#f3eee4; border-radius:999px; padding:6px 12px; font-size:12.5px; }
+  .note{ background:#fdf4ef; border:1px solid #f1d6c9; border-radius:10px; padding:10px 13px; font-size:13px; margin-top:14px; line-height:1.5; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  th{ text-align:left; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--grey); font-weight:600; padding:8px 6px; border-bottom:1px solid var(--line); }
+  td{ padding:9px 6px; border-bottom:1px solid #f0ebe0; vertical-align:top; }
+  td.num, th.num{ text-align:right; white-space:nowrap; }
+  .rooms input, .rooms select{ padding:7px 8px; font-size:13.5px; border-radius:8px; }
+  .rooms td{ vertical-align:middle; }
+  .rooms .del{ border:0; background:none; color:#b04a37; font-size:18px; cursor:pointer; }
+  .sec{ margin-top:6px; }
+  .sec h3{ font-family:Fraunces,Georgia,serif; font-size:18px; margin:18px 0 6px; display:flex; justify-content:space-between; gap:10px; }
+  .sec h3 span{ font-family:Inter,sans-serif; font-size:15px; font-weight:700; }
+  .it-name{ font-weight:600; }
+  .it-spec{ color:#6c675f; font-size:12.5px; line-height:1.45; margin-top:3px; }
+  .it-off td{ opacity:.4; }
+  .it-off .it-name{ text-decoration:line-through; }
+  input.tg{ width:auto; accent-color:var(--brass); transform:scale(1.15); }
+  .grand{ display:flex; justify-content:space-between; align-items:center; gap:14px; background:var(--espresso); color:#fff; border-radius:14px; padding:18px 22px; margin-top:22px; }
+  .grand .v{ font-family:Fraunces,Georgia,serif; font-size:30px; font-weight:700; }
+  .grand small{ color:#cfc6b8; display:block; margin-top:3px; }
+  ul.inc{ margin:8px 0 0; padding-left:18px; font-size:13.5px; line-height:1.6; }
+  .scroll{ overflow-x:auto; }
+  @media print{
+    header .steps, #start, .no-print, .row-actions, .tier, .rooms-card{ display:none !important; }
+    body{ background:#fff; } .card{ box-shadow:none; border:0; padding:0; } header{ padding:14px; }
+    .grand{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <a class="home" href="/">Indéva Studio</a>
+  <h1>Your interior cost estimate, from your floor plan</h1>
+  <p>Upload your plan. We read every room and build a BOQ with the scope of work, materials and our standard rates, in about 30 seconds.</p>
+  <div class="steps"><div><b>1</b>Your details</div><div><b>2</b>Upload the plan</div><div><b>3</b>See the BOQ</div></div>
+</header>
+
+<main>
+  <section class="card" id="start">
+    <h2>Get your estimate</h2>
+    <p class="sub">We'll share the estimate with you on WhatsApp too. Your plan is used only to prepare your estimate.</p>
+    <form id="f" novalidate>
+      <div class="grid">
+        <div><label class="f" for="nm">Your name</label><input type="text" id="nm" autocomplete="name" required></div>
+        <div><label class="f" for="ph">WhatsApp number</label><input type="tel" id="ph" inputmode="numeric" autocomplete="tel" placeholder="98xxx xxxxx" required></div>
+        <div><label class="f" for="ct">City / locality</label><input type="text" id="ct" placeholder="e.g. Narela, Gurgaon Sector 106"></div>
+        <div><label class="f" for="pt">Property</label>
+          <select id="pt"><option>Apartment</option><option>Builder floor</option><option>Independent house / villa</option><option>DDA flat</option><option>Farmhouse</option></select></div>
+      </div>
+      <input class="hp" type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="drop" id="drop" tabindex="0" role="button" aria-label="Upload floor plan">
+        <b>Upload your floor plan</b>
+        <span>JPG, PNG or PDF · a photo of the printed plan works too</span>
+        <div class="picked" id="picked"></div>
+        <img id="prev" alt="" hidden>
+      </div>
+      <input type="file" id="file" accept="image/jpeg,image/png,image/webp,application/pdf" hidden>
+      <div class="err" id="err"></div>
+      <div class="row-actions"><button class="btn" id="go" type="submit">Get my estimate →</button></div>
+      <p class="fine">By continuing you agree that Indéva Studio may contact you on WhatsApp or phone about this estimate. No spam.</p>
+    </form>
+    <div class="loading" id="loading"><div class="spinner"></div><b>Reading your plan…</b><p class="sub" style="margin-top:6px">Measuring rooms and pricing the scope of work. This takes about 30 seconds.</p></div>
+  </section>
+
+  <div id="result">
+    <section class="card">
+      <div class="summary">
+        <div>
+          <div class="lbl" id="flatLbl">Estimate</div>
+          <div class="big" id="total">₹0</div>
+          <div class="sub" style="margin:8px 0 0" id="totalSub">excl. GST · carpet area approx. — sq.ft.</div>
+        </div>
+        <div class="tier no-print" role="tablist" aria-label="Specification">
+          <button type="button" class="on" data-t="s">Standard</button><button type="button" data-t="p">Premium</button>
+        </div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="note" id="aiNote" hidden></div>
+      <div class="row-actions">
+        <a class="btn" id="wa" target="_blank" rel="noopener">Book a free site visit on WhatsApp</a>
+        <button class="btn ghost" type="button" onclick="window.print()">Save as PDF</button>
+        <button class="btn ghost" type="button" id="again">Upload another plan</button>
+      </div>
+    </section>
+
+    <section class="card rooms-card">
+      <h2>Rooms we read from your plan</h2>
+      <p class="sub">Check the rooms and sizes. If anything is off, correct it here and the BOQ updates instantly.</p>
+      <div class="scroll"><table class="rooms"><thead><tr><th>Room</th><th>Type</th><th class="num">Length (ft)</th><th class="num">Width (ft)</th><th class="num">Area</th><th></th></tr></thead><tbody id="roomRows"></tbody></table></div>
+      <div class="row-actions"><button class="btn ghost" type="button" id="addRoom">+ Add a room</button></div>
+    </section>
+
+    <section class="card">
+      <h2>Bill of quantities</h2>
+      <p class="sub">Scope of work, materials and rates for each room. Untick any item to leave it out.</p>
+      <div id="boq"></div>
+      <div class="grand"><div>Estimated total (excl. GST)<small id="grandNote"></small></div><div class="v" id="grand">₹0</div></div>
+      <h3 style="font-family:Fraunces,Georgia,serif;margin:22px 0 4px">Please note</h3>
+      <ul class="inc">
+        <li>This is an indicative estimate at Indéva's standard rates. Quantities come from the room sizes on your plan and are confirmed by a site measurement before the final quotation.</li>
+        <li><b>Standard</b> uses pre-laminated HDHMR, laminate finishes and Ozone / Hettich hardware; <b>Premium</b> uses 18mm HDHMR / BWP ply, acrylic and PU finishes and Hettich hardware throughout.</li>
+        <li>Not included: civil work, flooring and bathroom tiling, sanitaryware, doors and windows, appliances, chimney and hob, mattresses, ACs, switch plates and decorative light fixtures. GST is extra.</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function(){
+var SUPABASE_URL='https://rolarfaotykmprzvcmgh.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI';
+try{ emailjs.init('HGr3wuPNyLvmq1S14'); }catch(e){}
+
+/* ---------- Indéva rate table (master BOQ rates, as used on our cost builders) ---------- */
+var R = {
+  ceiling:{s:150,p:150, spec:"Saint-Gobain Gyproc 12.5mm gypsum board on GI framing, cove / pelmet detail for concealed LED, jointing, POP punning and primer."},
+  elec:{s:100,p:250, specS:"New and relocated points for the furniture and lighting layout, using the existing conduits where possible. AKG conduits, Finolex / Polycab wires, fitting labour. Switch plates and fixtures excluded.", specP:"All new points throughout: chiselling, AKG conduits, boxing, Finolex / Polycab / KEI wires, fitting labour. Switch plates and fixtures excluded."},
+  cove:{s:180,p:180, spec:"Philips LED strip with driver and aluminium profile in the false-ceiling cove."},
+  spot:{s:650,p:650, spec:"Philips COB spotlights in the false ceiling."},
+  paint:{s:45,p:55, specS:"Berger Rangoli / equivalent acrylic emulsion, 2 coats over primer and putty, walls and ceilings.", specP:"Asian Paints Royale / Dulux Velvet Touch plastic emulsion, 2 coats over primer and putty, walls and ceilings."},
+  track:{s:6500,p:6500, spec:"Manual aluminium double track (blackout + sheer) with gliders and brackets."},
+  fabric:{s:14000,p:14000, spec:"Blackout curtain with lining + sheer, ripple-fold stitched, fabric from the standard range (D'Decor / Sarom). Allowance per opening."},
+  tv:{s:1400,p:1620, specS:"Wall-mounted TV back panel + console with drawers. Pre-laminated HDHMR, 1mm laminate, Ozone hardware.", specP:"TV back panel + console with drawers. 18mm HDHMR, acrylic / laminate finish, Hettich hardware, LED accent."},
+  seat:{s:14427,p:21640, specS:"Engineered-wood frame, 32-density foam, fabric from the standard range. Priced per seat.", specP:"Kiln-dried hardwood frame, 40-density HR foam with fibre wrap, no-sag springs, D'Decor / Sarom fabric. Priced per seat."},
+  coffee:{s:10140,p:16230, specS:"Laminate top on 18mm HDHMR, powder-coated MS frame.", specP:"Marble / sintered-stone top on powder-coated MS frame."},
+  dining:{s:15000,p:30000, specS:"Veneer top on solid-wood base with upholstered chairs. Priced per seat.", specP:"Marble top on solid-wood / metal base with upholstered chairs. Priced per seat."},
+  shoe:{s:1400,p:1620, specS:"Pre-laminated HDHMR, laminate shutters, slanted shelves, Ozone hardware.", specP:"18mm HDHMR, tilt-out shoe racks, acrylic / laminate shutters, Hettich hardware."},
+  kit:{s:1400,p:1800, specS:"Modular kitchen — base, wall and loft units. HDHMR carcass with BWP ply sink base, 1mm laminate shutters (Merino / Greenlam). Rate per sq.ft. of front area.", specP:"Modular kitchen — base, wall and loft units. 18mm HDHMR carcass with BWP ply sink base, 1.2mm acrylic shutters (Rehau / Merino Luxe). Rate per sq.ft. of front area."},
+  hinge:{s:460,p:460, spec:"Hettich soft-close concealed hinges."},
+  drawer:{s:4250,p:4250, spec:"Hettich InnoTech cutlery drawer with soft-close runners."},
+  potpan:{s:4650,p:4650, spec:"Hettich pot & pan drawers with soft-close runners."},
+  counter:{s:250,p:250, spec:"Granite / quartz countertop with moulding and sink and hob cut-outs (labour + material)."},
+  sink:{s:9000,p:9000, spec:"Single-bowl SS sink with drainboard (Carysil / Nirali) + Jaquar sink mixer. Allowance."},
+  kled:{s:180,p:180, spec:"Philips LED profile under the wall units."},
+  kplumb:{s:15000,p:15000, spec:"Kitchen plumbing fit-out on the existing points: sink, RO and appliance connections."},
+  ward:{s:1400,p:1620, specS:"Pre-laminated HDHMR carcass, HDF laminate shutters, Ozone soft-close hinges and channels, wardrobe tube. Rate per sq.ft. of front area.", specP:"18mm HDHMR carcass and shutters with 1mm laminate both faces, Hettich hinges and channels, 3-point lock, internal drawers. Rate per sq.ft. of front area."},
+  bed:{s:60000,p:70000, specS:"Upholstered bed with box storage, plain upholstered headboard. 10-year warranty. Mattress excluded.", specP:"Upholstered bed in BWP ply frame with hydraulic lift-up storage and tufted / panelled headboard. 10-year warranty. Mattress excluded."},
+  side:{s:6760,p:10820, specS:"Pair of bedside tables, HDHMR with laminate, 1 drawer each.", specP:"Pair of bedside tables, HDHMR in matt PU, 1 drawer each on Hettich channels."},
+  desk:{s:15000,p:22000, specS:"4 ft study desk with 2 drawers, HDHMR with laminate.", specP:"4 ft study desk with 2 drawers, cable management and overhead shelf, laminate / PU."},
+  puja:{s:27050,p:40580, specS:"Puja unit in HDHMR with laminate shutters and standard handles.", specP:"Puja unit with white marble top, laminate shutters with brass-finish handles, concealed LED."},
+  vanity:{s:18000,p:22000, specS:"2 ft vanity in BWP ply with 1mm laminate shutters, soft-close hinges.", specP:"2 ft vanity in BWP ply with 1.2mm acrylic shutters, soft-close hinges."},
+  mirror:{s:12000,p:12000, spec:"5mm Saint-Gobain mirror with bevelled edge, framed, approx. 2 × 3 ft."},
+  shower:{s:16500,p:16500, spec:"10mm toughened glass shower partition with SS 304 fittings and seals."},
+  wm:{s:2000,p:2000, spec:"Inlet and drain point for the washing machine."},
+  dryer:{s:4500,p:4500, spec:"Ceiling-mounted pulley cloth dryer, 6 SS rods."},
+  design:{s:100,p:100, spec:"Design development, 3D views, working drawings, BOQ and on-site supervision through to handover. Rate per sq.ft. of carpet area."}
+};
+var TYPES = [['living','Living'],['living_dining','Living / dining'],['dining','Dining'],['family_lounge','Family lounge'],['kitchen','Kitchen'],['master_bedroom','Master bedroom'],['bedroom','Bedroom'],['dress','Dress / walk-in'],['toilet','Toilet / bath'],['balcony','Balcony'],['utility','Utility'],['lobby','Lobby / foyer'],['passage','Passage'],['puja','Puja'],['study','Study'],['store','Store'],['servant_room','Servant room'],['other','Other']];
+var TNAME = {}; TYPES.forEach(function(t){ TNAME[t[0]]=t[1]; });
+var CEIL = {living:1,living_dining:1,dining:1,family_lounge:1,master_bedroom:1,bedroom:1,dress:1,lobby:1,passage:1,study:1,puja:1};
+var COVE = {living:1,living_dining:1,family_lounge:1,master_bedroom:1,bedroom:1};
+var DRY = {living:1,living_dining:1,dining:1,family_lounge:1,master_bedroom:1,bedroom:1,dress:1,lobby:1,passage:1,study:1,puja:1,store:1,servant_room:1,other:1};
+
+var S = { rooms:[], tier:'s', off:{}, label:'', carpetStated:null, notes:'', lead:null };
+var MM_FT = 304.8;
+function inr(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+function r1(n){ return Math.round(n*10)/10; }
+function esc(t){ return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function area(r){ return r.L*r.W; }
+function carpet(){ if(S.carpetStated) return Math.round(S.carpetStated); var a=0; S.rooms.forEach(function(r){ if(r.type!=='balcony') a+=area(r); }); return Math.round(a); }
+
+/* ---------- BOQ rules ---------- */
+function buildBOQ(){
+  var t=S.tier, sec=[], rooms=S.rooms;
+  function rate(k){ return R[k][t]; }
+  function spec(k){ return R[k].spec || (t==='p'?R[k].specP:R[k].specS); }
+  function it(key,name,unit,qty,k,extra){ qty=Math.max(0,Math.round(qty*100)/100); return {key:key,name:name,unit:unit,qty:qty,rate:rate(k),spec:(extra?extra+' ':'')+spec(k)}; }
+  var cp = carpet();
+  // Entire house
+  var h=[], ceilA=0, cove=0, spots=0, dryA=0, wetA=0, openings=0;
+  rooms.forEach(function(r){ var a=area(r);
+    if(CEIL[r.type]){ ceilA+=a; spots+=Math.max(1,Math.round(a/25)); }
+    if(COVE[r.type]) cove+=2*(r.L+r.W);
+    if(DRY[r.type]) dryA+=a; else if(r.type==='kitchen'||r.type==='toilet'||r.type==='utility') wetA+=a;
+    if(r.type==='living'||r.type==='living_dining'||r.type==='family_lounge'||r.type==='master_bedroom'||r.type==='bedroom'||r.type==='study') openings+= (r.type==='living_dining'&&a>220)?2:1;
+  });
+  if(ceilA) h.push(it('ceil','False ceiling — living areas, bedrooms and lobbies','sq.ft.',Math.round(ceilA),'ceiling'));
+  h.push(it('elec','Electrical work — new and relocated points','sq.ft.',cp,'elec'));
+  if(cove) h.push(it('cove','Cove lighting (LED strip)','rft',Math.round(cove),'cove'));
+  if(spots) h.push(it('spots','Spotlights (COB)','No.',spots,'spot'));
+  h.push(it('paint','Paint — walls and ceilings','sq.ft.',Math.round(dryA*2.8+wetA),'paint','Approx. '+Math.round(dryA*2.8+wetA)+' sq.ft. of wall and ceiling surface.'));
+  if(openings){ h.push(it('track','Curtain tracks — double','openings',openings,'track')); h.push(it('fabric','Curtains — blackout + sheer, stitched','openings',openings,'fabric')); }
+  sec.push({title:'Entire house', items:h});
+  // Rooms
+  var hasDress = rooms.some(function(r){return r.type==='dress';});
+  var shoeDone=false, wmDone=false;
+  var lobby = rooms.find(function(r){return r.type==='lobby';});
+  var utilRoom = rooms.find(function(r){return r.type==='utility';}) || rooms.find(function(r){return r.type==='balcony';});
+  rooms.forEach(function(r,i){
+    var a=area(r), L=Math.max(r.L,r.W), W=Math.min(r.L,r.W), items=[], p='r'+i+'_';
+    var title = r.name + ' · ' + r1(L) + "' × " + r1(W) + "'";
+    switch(r.type){
+      case 'living': case 'living_dining': case 'family_lounge': {
+        var la = r.type==='living_dining' ? a*0.6 : a;
+        items.push(it(p+'tv','TV panel + console with storage','sq.ft.', la<160?20:36,'tv'));
+        var seats = la<140?3:(la<250?5:7);
+        items.push(it(p+'sofa','Sofa — '+seats+' seats','seats',seats,'seat'));
+        items.push(it(p+'coffee','Coffee table','No.',1,'coffee'));
+        if(r.type==='living_dining'){ var ds = a*0.4<70?4:(a*0.4<140?6:8); items.push(it(p+'dine','Dining table — '+ds+' seater','seats',ds,'dining')); }
+        if(!shoeDone && !lobby && r.type!=='family_lounge'){ items.push(it(p+'shoe','Shoe cabinet (3 ft × 4 ft)','sq.ft.',12,'shoe')); shoeDone=true; }
+        break; }
+      case 'dining': { var ds2 = a<70?4:(a<140?6:8); items.push(it(p+'dine','Dining table — '+ds2+' seater','seats',ds2,'dining')); break; }
+      case 'lobby': if(!shoeDone){ items.push(it(p+'shoe','Shoe cabinet (3 ft × 4 ft)','sq.ft.',12,'shoe')); shoeDone=true; } break;
+      case 'kitchen': {
+        var run = W>=7 ? L+W-2 : L; run=Math.max(7,Math.round(run));
+        var front = Math.round(run*6);
+        items.push(it(p+'kit','Modular kitchen — '+(W>=7?'L-shaped':'straight')+', approx. '+run+' ft running','sq.ft.',front,'kit'));
+        items.push(it(p+'hinge','Soft-close hinges','pair',Math.round(front/6),'hinge'));
+        items.push(it(p+'drawer','Cutlery drawer','set',1,'drawer'));
+        items.push(it(p+'potpan','Pot & pan drawers','set',run>10?2:1,'potpan'));
+        items.push(it(p+'counter','Countertop','sq.ft.',Math.round(run*2+3),'counter'));
+        items.push(it(p+'sink','Sink + sink mixer','set',1,'sink'));
+        items.push(it(p+'kled','Under-cabinet LED','rft',Math.max(4,run-3),'kled'));
+        items.push(it(p+'kplumb','Kitchen plumbing fit-out','No.',1,'kplumb'));
+        break; }
+      case 'master_bedroom': case 'bedroom': {
+        var master = r.type==='master_bedroom';
+        if(!(master && hasDress)){ var ww = master?7:(W<9?5:6); items.push(it(p+'ward','Wardrobe ('+ww+' ft wide × 9 ft high)','sq.ft.',ww*9,'ward')); }
+        items.push(it(p+'bed','Bed — '+(master?'King':'Queen')+' with storage','No.',1,'bed'));
+        items.push(it(p+'side','Bedside tables (pair)','set',1,'side'));
+        break; }
+      case 'dress': { var dw=Math.max(4,Math.round(L)); items.push(it(p+'ward','Wardrobe ('+dw+' ft wide × 9 ft high)','sq.ft.',dw*9,'ward')); break; }
+      case 'study': items.push(it(p+'desk','Study desk','No.',1,'desk')); break;
+      case 'puja': items.push(it(p+'puja','Puja unit','No.',1,'puja')); break;
+      case 'toilet': {
+        items.push(it(p+'van','Vanity unit','No.',1,'vanity'));
+        items.push(it(p+'mir','Mirror','No.',1,'mirror'));
+        if(a>=30) items.push(it(p+'shw','Glass shower partition','No.',1,'shower'));
+        break; }
+    }
+    if(r===utilRoom && !wmDone){ items.push(it(p+'wm','Washing machine point','No.',1,'wm')); items.push(it(p+'dry','Ceiling cloth dryer','No.',1,'dryer')); wmDone=true; }
+    if(items.length) sec.push({title:title, items:items});
+  });
+  sec.push({title:'Design & site execution', items:[it('design','Design consultancy & site execution management','sq.ft.',cp,'design')]});
+  return sec;
+}
+
+/* ---------- render ---------- */
+function render(){
+  var sec=buildBOQ(), g=0, html='';
+  sec.forEach(function(s){
+    var st=0, rows='';
+    s.items.forEach(function(x){ var amt=x.qty*x.rate, off=!!S.off[x.key]; if(!off) st+=amt;
+      rows+='<tr class="'+(off?'it-off':'')+'"><td class="no-print"><input class="tg" type="checkbox" data-k="'+x.key+'" '+(off?'':'checked')+' aria-label="include"></td><td><div class="it-name">'+esc(x.name)+'</div><div class="it-spec">'+esc(x.spec)+'</div></td><td class="num">'+x.qty.toLocaleString('en-IN')+' '+x.unit+'</td><td class="num">'+inr(x.rate)+'</td><td class="num"><b>'+inr(amt)+'</b></td></tr>'; });
+    g+=st;
+    html+='<div class="sec"><h3>'+esc(s.title)+'<span>'+inr(st)+'</span></h3><div class="scroll"><table><thead><tr><th class="no-print"></th><th>Item &amp; scope of work</th><th class="num">Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+  });
+  document.getElementById('boq').innerHTML=html;
+  var cp=carpet(), tierName=S.tier==='p'?'Premium':'Standard';
+  document.getElementById('grand').textContent=inr(g);
+  document.getElementById('total').textContent=inr(g);
+  document.getElementById('grandNote').textContent=tierName+' specification · carpet area approx. '+cp.toLocaleString('en-IN')+' sq.ft.';
+  document.getElementById('totalSub').textContent='excl. GST · '+tierName+' specification · carpet area approx. '+cp.toLocaleString('en-IN')+' sq.ft.';
+  document.getElementById('flatLbl').textContent='Estimate · '+(S.label||'your home');
+  var counts={}; S.rooms.forEach(function(r){ var n=TNAME[r.type]||'Other'; counts[n]=(counts[n]||0)+1; });
+  document.getElementById('chips').innerHTML=Object.keys(counts).map(function(k){return '<span class="chip">'+counts[k]+' × '+esc(k)+'</span>';}).join('');
+  var msg='Hi Indéva, I got an estimate of '+inr(g)+' ('+tierName+', excl. GST) for my '+(S.label||'home')+(S.lead&&S.lead.city?' in '+S.lead.city:'')+' on your website. I would like to book a site visit.';
+  document.getElementById('wa').href='https://wa.me/919717881083?text='+encodeURIComponent(msg);
+  S.total=g;
+}
+function renderRooms(){
+  var opts=function(sel){ return TYPES.map(function(t){return '<option value="'+t[0]+'"'+(t[0]===sel?' selected':'')+'>'+t[1]+'</option>';}).join(''); };
+  document.getElementById('roomRows').innerHTML=S.rooms.map(function(r,i){
+    return '<tr><td><input type="text" data-i="'+i+'" data-f="name" value="'+esc(r.name)+'"></td><td><select data-i="'+i+'" data-f="type">'+opts(r.type)+'</select></td>'+
+      '<td class="num"><input type="number" step="0.1" min="1" data-i="'+i+'" data-f="L" value="'+r1(r.L)+'" style="width:80px"></td>'+
+      '<td class="num"><input type="number" step="0.1" min="1" data-i="'+i+'" data-f="W" value="'+r1(r.W)+'" style="width:80px"></td>'+
+      '<td class="num">'+Math.round(area(r))+' sq.ft.</td><td><button class="del" type="button" data-del="'+i+'" aria-label="Remove room">×</button></td></tr>';
+  }).join('');
+}
+document.addEventListener('change',function(e){
+  var el=e.target;
+  if(el.matches('input.tg')){ if(el.checked) delete S.off[el.dataset.k]; else S.off[el.dataset.k]=1; render(); return; }
+  if(el.dataset && el.dataset.f){ var r=S.rooms[+el.dataset.i]; if(!r) return;
+    if(el.dataset.f==='L'||el.dataset.f==='W'){ var v=parseFloat(el.value); if(v>0) r[el.dataset.f]=v; } else r[el.dataset.f]=el.value;
+    S.off={}; renderRooms(); render(); }
+});
+document.addEventListener('click',function(e){
+  var d=e.target.closest('[data-del]'); if(d){ S.rooms.splice(+d.dataset.del,1); S.off={}; renderRooms(); render(); return; }
+  var tb=e.target.closest('.tier button'); if(tb){ S.tier=tb.dataset.t; document.querySelectorAll('.tier button').forEach(function(b){b.classList.toggle('on',b===tb);}); render(); }
+});
+document.getElementById('addRoom').onclick=function(){ S.rooms.push({name:'New room',type:'bedroom',L:12,W:10}); renderRooms(); render(); };
+document.getElementById('again').onclick=function(){ document.getElementById('result').style.display='none'; document.getElementById('start').style.display=''; document.getElementById('f').style.display=''; document.getElementById('loading').style.display='none'; window.scrollTo({top:0,behavior:'smooth'}); };
+
+/* ---------- upload ---------- */
+var fileData=null;
+var drop=document.getElementById('drop'), fin=document.getElementById('file');
+drop.onclick=function(){ fin.click(); };
+drop.onkeydown=function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fin.click(); } };
+['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop',function(e){ if(e.dataTransfer.files[0]) pick(e.dataTransfer.files[0]); });
+fin.onchange=function(){ if(fin.files[0]) pick(fin.files[0]); };
+function showErr(m){ var e=document.getElementById('err'); e.textContent=m; e.style.display=m?'block':'none'; }
+function pick(f){
+  showErr(''); fileData=null; var prev=document.getElementById('prev'); prev.hidden=true;
+  document.getElementById('picked').textContent='Preparing '+f.name+'…';
+  if(f.type==='application/pdf'){
+    if(f.size>3.8*1024*1024){ document.getElementById('picked').textContent=''; return showErr('This PDF is over 4 MB. Please upload a screenshot or photo of the plan instead.'); }
+    var rd=new FileReader(); rd.onload=function(){ fileData={data:rd.result.split(',')[1], type:'application/pdf'}; document.getElementById('picked').textContent='✓ '+f.name; }; rd.readAsDataURL(f); return;
+  }
+  if(!/^image\//.test(f.type)){ document.getElementById('picked').textContent=''; return showErr('Please upload a JPG, PNG or PDF.'); }
+  var img=new Image(), url=URL.createObjectURL(f);
+  img.onload=function(){
+    var max=2000, s=Math.min(1, max/Math.max(img.width,img.height)), c=document.createElement('canvas');
+    c.width=Math.round(img.width*s); c.height=Math.round(img.height*s);
+    var x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height);
+    var d=c.toDataURL('image/jpeg',0.88); fileData={data:d.split(',')[1], type:'image/jpeg'};
+    prev.src=d; prev.hidden=false; document.getElementById('picked').textContent='✓ '+f.name; URL.revokeObjectURL(url);
+  };
+  img.onerror=function(){ document.getElementById('picked').textContent=''; showErr('We could not open this image. Please try a JPG or PNG.'); };
+  img.src=url;
+}
+
+/* ---------- lead capture ---------- */
+function saveLead(status){
+  var L=S.lead; if(!L || L.saved) return; L.saved=true;
+  var summary = status==='ok'
+    ? 'Floor-plan estimate: '+(S.label||'')+' · '+S.rooms.length+' rooms · '+inr(S.total)+' (Standard, excl. GST) · rooms: '+S.rooms.map(function(r){return r.name+' '+r1(r.L)+'x'+r1(r.W)+'ft';}).join(', ')
+    : 'Floor-plan estimate could not be generated ('+status+'). Follow up for the plan on WhatsApp.';
+  var row={ name:L.name, phone:L.phone, city:L.city||null, project_type:L.property||null, area: S.rooms.length? String(carpet())+' sq.ft.' : null, source:'cost-estimate', message:summary };
+  try{
+    fetch(SUPABASE_URL+'/rest/v1/lead%20submissions',{method:'POST',headers:{'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}).catch(function(){});
+  }catch(e){}
+  try{ emailjs.send('service_3dpadmb','template_jg3vvys',{to_name:'Indéva studio',to_email:'ceo@indevastudio.com',from_name:L.name,from_email:'',reply_to:'',phone:L.phone,project_type:L.property||'—',area:row.area||'—',budget:status==='ok'?inr(S.total):'—',timeline:'—',subject:'floor-plan estimate: '+L.name,message:'Name: '+L.name+'\nPhone: '+L.phone+'\nCity: '+(L.city||'—')+'\n'+summary}).catch(function(){}); }catch(e){}
+  try{ gtag('event','cost_estimate',{event_category:'lead',event_label:status}); }catch(e){}
+}
+
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault(); showErr('');
+  var name=document.getElementById('nm').value.trim(), phone=document.getElementById('ph').value.replace(/\D/g,'').slice(-10);
+  if(name.length<2) return showErr('Please enter your name.');
+  if(!/^[6-9]\d{9}$/.test(phone)) return showErr('Please enter a valid 10-digit WhatsApp number.');
+  if(!fileData) return showErr('Please upload your floor plan.');
+  S.lead={name:name, phone:phone, city:document.getElementById('ct').value.trim(), property:document.getElementById('pt').value};
+  document.getElementById('f').style.display='none'; document.getElementById('loading').style.display='block';
+  fetch('/api/estimate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({file:fileData.data, mediaType:fileData.type, phone:phone, website:document.getElementById('website').value})})
+  .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+  .then(function(res){
+    if(!res.ok){ throw new Error(res.j && res.j.error || 'We could not read the plan.'); }
+    var j=res.j;
+    S.label=j.flat_label||''; S.carpetStated=j.carpet_area_sqft||null; S.off={}; S.tier='s';
+    S.rooms=j.rooms.map(function(r){ return {name:r.name, type:r.type, L:r.length_mm/MM_FT, W:r.width_mm/MM_FT, est:r.size_source==='estimated'}; });
+    var est=S.rooms.filter(function(r){return r.est;}).length;
+    var note=(j.notes||'') + (est? (j.notes?' ':'')+est+' room size'+(est>1?'s were':' was')+' estimated from the drawing scale — please check them below.':'');
+    var n=document.getElementById('aiNote'); n.textContent=note; n.hidden=!note;
+    document.querySelectorAll('.tier button').forEach(function(b){b.classList.toggle('on',b.dataset.t==='s');});
+    renderRooms(); render(); saveLead('ok');
+    document.getElementById('start').style.display='none'; document.getElementById('result').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  })
+  .catch(function(err){
+    saveLead('failed');
+    document.getElementById('loading').style.display='none'; document.getElementById('f').style.display='';
+    showErr((err && err.message ? err.message : 'Something went wrong.')+' You can also WhatsApp your plan to +91 97178 81083.');
+    if(S.lead) S.lead.saved=false;
+  });
+});
+})();
+</script>
+</body>
+</html>
