@@ -1,6 +1,6 @@
 ---
 id: mini-farmhouse
-status: ready          # ready → written (PR open) → published (merged). use "hold" to skip.
+status: published          # ready → written (PR open) → published (merged). use "hold" to skip.
 priority: 4            # lower runs first
 project: /projects/mini-farmhouse-delhi
 target_keyword: "small farmhouse design in india"
