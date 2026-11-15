@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staircase Marble Selector | Indéva Studio</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--esp:#262019;--brass:#D97757;--cream:#F5F4EE;--card:#FFFEFB;--line:#E5E1D5;--grey:#83807A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--esp);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+header{background:var(--esp);color:#fff;padding:22px clamp(16px,4vw,40px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+header .b{font-size:11px;letter-spacing:.22em;color:var(--brass);font-weight:600;text-transform:uppercase}
+header h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(22px,3.4vw,32px);margin:6px 0 0}
+header p{margin:6px 0 0;color:#cfc6b8;font-size:14px}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;padding:22px clamp(12px,3vw,32px) 40px;max-width:1500px;margin:0 auto}
+@media(max-width:980px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 3px rgba(38,32,25,.06),0 8px 22px rgba(38,32,25,.05)}
+.viewer{padding:12px;position:sticky;top:12px;align-self:start}
+@media(max-width:980px){.viewer{position:static}}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.tabs button,.seg button{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:999px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--esp)}
+.tabs button.on{background:var(--esp);color:#fff;border-color:var(--esp)}
+.tabs .sp{flex:1}
+.stage{position:relative;border-radius:12px;overflow:hidden;background:#ddd;line-height:0}
+.stage canvas{width:100%;height:auto;display:block}
+.stage .busy{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.35);font:600 14px Inter;line-height:1.4;color:var(--esp)}
+.cap{font-size:12px;color:var(--grey);margin:10px 4px 2px;line-height:1.5}
+.panel{padding:18px}
+.panel h2{font-family:Fraunces,Georgia,serif;font-size:19px;margin:0 0 4px;font-weight:600}
+.sub{font-size:12.5px;color:var(--grey);margin:0 0 12px;line-height:1.5}
+.zone{margin-bottom:20px}
+.zone .zh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.zone .zh b{font-size:14px}.zone .zh span{font-size:12px;color:var(--grey)}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.sw button{border:2px solid transparent;border-radius:10px;padding:0;background:none;cursor:pointer;text-align:left;font:inherit}
+.sw button img,.sw .up{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line)}
+.sw button.on{border-color:var(--brass)}
+.sw small{display:block;font-size:10.5px;line-height:1.25;margin:4px 2px 0;color:var(--esp);font-weight:600}
+.sw small i{font-style:normal;color:var(--grey);font-weight:500}
+.sw .up{display:flex;align-items:center;justify-content:center;background:#f3eee4;font-size:22px;color:var(--brass)}
+.price{background:var(--esp);color:#fff;border-radius:14px;padding:16px 18px;margin:6px 0 16px}
+.price .t{font-family:Fraunces,Georgia,serif;font-size:30px;font-weight:600}
+.price .l{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#cfc6b8}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+td{padding:6px 2px;border-bottom:1px solid #f0ebe0;vertical-align:top}
+td.n{text-align:right;white-space:nowrap}
+details{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+summary{cursor:pointer;font-weight:600;font-size:13.5px}
+.dims{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.dims label{font-size:11.5px;color:var(--grey);font-weight:600}
+.dims input,.rate input{width:100%;padding:7px 8px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px}
+.chk{display:flex;gap:8px;align-items:center;font-size:12.5px;margin-top:8px}
+.rate{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px}
+.rate input{width:110px}
+.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.cta a,.cta button{flex:1;text-align:center;padding:11px 12px;border-radius:999px;font:inherit;font-weight:600;font-size:13px;text-decoration:none;cursor:pointer;border:1.5px solid var(--esp);background:#fff;color:var(--esp)}
+.cta a.p{background:var(--brass);border-color:var(--brass);color:#fff}
+.slider{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--grey);margin:8px 4px 0}
+.slider input{flex:1;accent-color:var(--brass)}
+@media print{.tabs,.cta,details,.slider,.sw .uprow{display:none!important}.wrap{grid-template-columns:1fr}.viewer{position:static}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="b">Indéva Studio · Staircase</div><h1>Choose the marble for your staircase</h1><p>Tap a marble to see it on the staircase and the cost for the whole staircase update.</p></div>
+</header>
+<div class="wrap">
+  <section class="card viewer">
+    <div class="tabs" id="views"></div>
+    <div class="stage"><canvas id="cv"></canvas><div class="busy" id="busy">Applying marble…</div></div>
+    <div class="slider">Vein size <input type="range" id="scale" min="40" max="220" value="100"> <span id="sv">100%</span></div>
+    <p class="cap">Hold <b>“Show original”</b> to compare with the design render. The marble preview is indicative; colour and veining vary slab to slab, so final selection is made at the stone yard.</p>
+  </section>
+
+  <aside class="card panel">
+    <div class="price"><div class="l">Marble for the full staircase · excl. GST</div><div class="t" id="total">₹0</div><div style="font-size:12px;color:#cfc6b8;margin-top:4px" id="area">—</div></div>
+
+    <div class="zone"><div class="zh"><b>Treads, landing &amp; sides</b><span id="nameL"></span></div><div class="sw" id="swL"></div></div>
+    <div class="zone"><div class="zh"><b>Risers</b><span id="nameD"></span></div><div class="sw" id="swD"></div></div>
+
+    <table id="bd"></table>
+
+    <details>
+      <summary>Staircase size &amp; rates</summary>
+      <div class="dims">
+        <div><label>Number of steps</label><input type="number" id="steps" value="18" min="1"></div>
+        <div><label>Stair width (ft)</label><input type="number" id="width" value="3.5" step="0.1"></div>
+        <div><label>Tread depth (in)</label><input type="number" id="tread" value="12" step="0.5"></div>
+        <div><label>Riser height (in)</label><input type="number" id="riser" value="6.5" step="0.5"></div>
+        <div><label>Landing length (ft)</label><input type="number" id="ll" value="7" step="0.1"></div>
+        <div><label>Landing width (ft)</label><input type="number" id="lw" value="3.5" step="0.1"></div>
+        <div><label>Wastage %</label><input type="number" id="waste" value="15"></div>
+        <div><label>Laying + polish (₹/sq.ft)</label><input type="number" id="labour" value="250"></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="sides" checked> Clad the exposed stair sides (zig-zag edges)</label>
+      <label class="chk"><input type="checkbox" id="soffit"> Clad the underside of the upper flight</label>
+      <p class="sub" style="margin-top:10px">Marble rates are allowances per sq.ft. for the slab; edit the rates of the selected marbles here.</p>
+      <div id="rateEdit"></div>
+    </details>
+
+    <div class="cta"><a class="p" id="wa" target="_blank" rel="noopener">Book this marble on WhatsApp</a><button type="button" onclick="window.print()">Save as PDF</button></div>
+  </aside>
+</div>
+
+<input type="file" id="upfile" accept="image/*" hidden>
+<script>
+(function(){
+var VIEWS=[
+  {id:'night',name:'Night view',src:'/staircase-marble/staircase-night.jpg',L:'/staircase-marble/staircase-night-light.png',D:'/staircase-marble/staircase-night-dark.png',lrefL:0.763,lrefD:0.119},
+  {id:'closeup',name:'Up close',src:'/staircase-marble/staircase-closeup.jpg',L:'/staircase-marble/staircase-closeup-light.png',D:'/staircase-marble/staircase-closeup-dark.png',lrefL:0.71,lrefD:0.125}
+];
+var M=[ // rate = slab allowance ₹/sq.ft
+  {id:'statuario',name:'Statuario',o:'Italian',rate:1500,src:'/staircase-marble/marble-statuario.jpg'},
+  {id:'carrara',name:'Carrara',o:'Italian',rate:450,src:'/staircase-marble/marble-carrara.jpg'},
+  {id:'botticino',name:'Botticino',o:'Italian',rate:350,src:'/staircase-marble/marble-botticino.jpg'},
+  {id:'makrana',name:'Makrana White',o:'Indian',rate:350,src:'/staircase-marble/marble-makrana-white.jpg'},
+  {id:'nero',name:'Nero Marquina',o:'Spanish',rate:550,src:'/staircase-marble/marble-nero-marquina.jpg'},
+  {id:'emperador',name:'Dark Emperador',o:'Spanish',rate:450,src:'/staircase-marble/marble-emperador.jpg'},
+  {id:'verde',name:'Verde Guatemala',o:'Indian green',rate:500,src:'/staircase-marble/marble-verde-guatemala.jpg'},
+  {id:'absblack',name:'Absolute Black',o:'Granite',rate:180,src:'/staircase-marble/marble-absolute-black.jpg'}
+];
+var S={view:0, L:'statuario', D:'nero', scale:1, orig:false};
+var IMG={}, cache={};
+var cv=document.getElementById('cv'), ctx=cv.getContext('2d',{willReadFrequently:true});
+function inr(n){ return '₹'+Math.round(n).toLocaleString('en-IN'); }
+function load(src){ if(IMG[src]) return IMG[src]; IMG[src]=new Promise(function(res,rej){ var i=new Image(); i.crossOrigin='anonymous'; i.onload=function(){res(i);}; i.onerror=rej; i.src=src; }); return IMG[src]; }
+function byId(id){ return M.find(function(m){return m.id===id;}); }
+
+/* ---------- swatches ---------- */
+function swatches(){
+  ['L','D'].forEach(function(z){
+    var el=document.getElementById('sw'+z);
+    el.innerHTML=M.map(function(m){ return '<button type="button" class="'+(S[z]===m.id?'on':'')+'" data-z="'+z+'" data-m="'+m.id+'"><img src="'+m.src+'" alt="'+m.name+' marble"><small>'+m.name+'<br><i>₹'+m.rate.toLocaleString('en-IN')+'/sq.ft</i></small></button>'; }).join('')
+      + '<button type="button" class="uprow" data-up="'+z+'"><div class="up">+</div><small>Upload<br><i>your marble</i></small></button>';
+    document.getElementById('name'+z).textContent=byId(S[z]).name;
+  });
+  var r=byId(S.L), d=byId(S.D);
+  document.getElementById('rateEdit').innerHTML=[r,d].filter(function(m,i,a){return a.indexOf(m)===i;}).map(function(m){ return '<div class="rate"><span style="flex:1">'+m.name+' (₹/sq.ft)</span><input type="number" data-rate="'+m.id+'" value="'+m.rate+'"></div>'; }).join('');
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.sw button'); if(!b) return;
+  if(b.dataset.up){ upZone=b.dataset.up; document.getElementById('upfile').click(); return; }
+  S[b.dataset.z]=b.dataset.m; swatches(); price(); render();
+});
+document.addEventListener('input',function(e){
+  if(e.target.dataset && e.target.dataset.rate){ var m=byId(e.target.dataset.rate); m.rate=+e.target.value||0; price(); var sw=document.querySelectorAll('[data-m="'+m.id+'"] i'); sw.forEach(function(i){ i.textContent='₹'+m.rate.toLocaleString('en-IN')+'/sq.ft'; }); return; }
+  if(e.target.closest('.dims')||e.target.type==='checkbox') price();
+});
+var upZone='L';
+document.getElementById('upfile').onchange=function(){
+  var f=this.files[0]; if(!f) return;
+  var rate=parseFloat(prompt('Rate of this marble per sq.ft (₹)? You can change it later.','500'))||0;
+  var url=URL.createObjectURL(f), id='up'+Date.now();
+  M.push({id:id,name:(f.name.replace(/\.[^.]+$/,'').slice(0,18)||'Your marble'),o:'Uploaded',rate:rate,src:url});
+  S[upZone]=id; this.value=''; swatches(); price(); render();
+};
+
+/* ---------- price ---------- */
+function v(id){ return parseFloat(document.getElementById(id).value)||0; }
+function price(){
+  var n=v('steps'), w=v('width'), t=v('tread')/12, r=v('riser')/12, waste=1+v('waste')/100, lab=v('labour');
+  var aT=n*w*t, aR=n*w*r, aLand=v('ll')*v('lw'), aSide=document.getElementById('sides').checked? n*t*r : 0,
+      aSoff=document.getElementById('soffit').checked? w*Math.hypot(n/2*t, n/2*r) : 0;
+  var aL=aT+aLand+aSide+aSoff, mL=byId(S.L), mD=byId(S.D);
+  var rows=[
+    ['Treads ('+n+' × '+w+' ft × '+v('tread')+'″)', aT, mL],
+    ['Landing ('+v('ll')+' × '+v('lw')+' ft)', aLand, mL]];
+  if(aSide) rows.push(['Stair sides (zig-zag edges)', aSide, mL]);
+  if(aSoff) rows.push(['Underside of upper flight', aSoff, mL]);
+  rows.push(['Risers ('+n+' × '+w+' ft × '+v('riser')+'″)', aR, mD]);
+  var tot=0, html='', area=0;
+  rows.forEach(function(x){ var a=x[1]*waste, amt=a*(x[2].rate+lab); tot+=amt; area+=x[1];
+    html+='<tr><td>'+x[0]+'<br><span style="color:var(--grey)">'+x[2].name+' · '+a.toFixed(1)+' sq.ft incl. wastage × (₹'+x[2].rate.toLocaleString('en-IN')+' + ₹'+lab+' laying)</span></td><td class="n">'+inr(amt)+'</td></tr>'; });
+  document.getElementById('bd').innerHTML=html+'<tr><td><b>Total</b></td><td class="n"><b>'+inr(tot)+'</b></td></tr>';
+  document.getElementById('total').textContent=inr(tot);
+  document.getElementById('area').textContent=area.toFixed(0)+' sq.ft of marble + '+v('waste')+'% wastage · '+mL.name+' with '+mD.name+' risers';
+  var msg='Hi Indéva, for my staircase I like '+mL.name+' for the treads and landing with '+mD.name+' risers. Estimate on your page: '+inr(tot)+' (excl. GST).';
+  document.getElementById('wa').href='https://wa.me/919717881083?text='+encodeURIComponent(msg);
+}
+
+/* ---------- render ---------- */
+function getMask(img,w,h){
+  var c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d'); x.drawImage(img,0,0,w,h);
+  var d=x.getImageData(0,0,w,h).data, m=new Float32Array(w*h); for(var i=0;i<m.length;i++) m[i]=d[i*4]/255; return m;
+}
+function prep(vw){
+  if(cache[vw.id]) return Promise.resolve(cache[vw.id]);
+  return Promise.all([load(vw.src),load(vw.L),load(vw.D)]).then(function(r){
+    var w=r[0].naturalWidth, h=r[0].naturalHeight, c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d'); x.drawImage(r[0],0,0);
+    var base=x.getImageData(0,0,w,h), Lum=new Float32Array(w*h), d=base.data;
+    for(var i=0;i<Lum.length;i++){ Lum[i]=(0.2126*d[i*4]+0.7152*d[i*4+1]+0.0722*d[i*4+2])/255; }
+    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,mL:getMask(r[1],w,h),mD:getMask(r[2],w,h)};
+  });
+}
+function texData(m,w,h,scale,dark){
+  return load(m.src).then(function(img){
+    var c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d');
+    var tw=Math.round(Math.max(w,h)*0.62*scale), th=Math.round(tw*img.naturalHeight/img.naturalWidth);
+    var t=document.createElement('canvas'); t.width=tw; t.height=th; t.getContext('2d').drawImage(img,0,0,tw,th);
+    x.fillStyle=x.createPattern(t,'repeat'); x.save(); if(dark) x.translate(tw*0.37,th*0.21); x.fillRect(-tw,-th,w+2*tw,h+2*th); x.restore();
+    return x.getImageData(0,0,w,h).data;
+  });
+}
+var token=0;
+function render(){
+  var my=++token, vw=VIEWS[S.view]; document.getElementById('busy').style.display='flex';
+  prep(vw).then(function(P){
+    if(cv.width!==P.w){ cv.width=P.w; cv.height=P.h; }
+    if(S.orig){ ctx.putImageData(P.base,0,0); document.getElementById('busy').style.display='none'; return; }
+    return Promise.all([texData(byId(S.L),P.w,P.h,S.scale,false),texData(byId(S.D),P.w,P.h,S.scale,true)]).then(function(T){
+      if(my!==token) return;
+      var out=ctx.createImageData(P.w,P.h), o=out.data, b=P.base.data, TL=T[0], TD=T[1];
+      for(var i=0,p=0;i<P.Lum.length;i++,p+=4){
+        var r=b[p],g=b[p+1],bl=b[p+2];
+        var a=P.mL[i], c=P.mD[i];
+        if(a>0.01){ var s=P.Lum[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*150:0;
+          r=r*(1-a)+(TL[p]*sh+hi)*a; g=g*(1-a)+(TL[p+1]*sh+hi)*a; bl=bl*(1-a)+(TL[p+2]*sh+hi)*a; }
+        if(c>0.01){ var s2=P.Lum[i]/vw.lrefD, sh2=s2<1.15?s2:1.15, hi2=s2>1.15?(s2-1.15)*40:0;
+          r=r*(1-c)+(TD[p]*sh2+hi2)*c; g=g*(1-c)+(TD[p+1]*sh2+hi2)*c; bl=bl*(1-c)+(TD[p+2]*sh2+hi2)*c; }
+        o[p]=r; o[p+1]=g; o[p+2]=bl; o[p+3]=255;
+      }
+      ctx.putImageData(out,0,0); document.getElementById('busy').style.display='none';
+    });
+  }).catch(function(){ document.getElementById('busy').textContent='Could not load the images.'; });
+}
+
+/* ---------- view tabs, compare, scale ---------- */
+var tabs=document.getElementById('views');
+tabs.innerHTML=VIEWS.map(function(v,i){ return '<button type="button" data-v="'+i+'" class="'+(i===0?'on':'')+'">'+v.name+'</button>'; }).join('')+'<span class="sp"></span><button type="button" id="cmp">Show original</button>';
+tabs.addEventListener('click',function(e){ var b=e.target.closest('[data-v]'); if(!b) return; S.view=+b.dataset.v; tabs.querySelectorAll('[data-v]').forEach(function(x){x.classList.toggle('on',x===b);}); render(); });
+var cmp=document.getElementById('cmp');
+function setOrig(on){ if(S.orig===on) return; S.orig=on; cmp.classList.toggle('on',on); render(); }
+cmp.addEventListener('pointerdown',function(){setOrig(true);}); ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ cmp.addEventListener(ev,function(){setOrig(false);}); });
+var sc=document.getElementById('scale'), st; sc.oninput=function(){ document.getElementById('sv').textContent=sc.value+'%'; S.scale=sc.value/100; clearTimeout(st); st=setTimeout(render,120); };
+
+swatches(); price(); render();
+})();
+</script>
+</body>
+</html>
