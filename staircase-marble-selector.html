@@ -34,7 +34,7 @@ header p{margin:6px 0 0;color:#cfc6b8;font-size:14px}
 .sub{font-size:12.5px;color:var(--grey);margin:0 0 12px;line-height:1.5}
 .zone{margin-bottom:20px}
 .zone .zh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.zone .zh b{font-size:14px}.zone .zh span{font-size:12px;color:var(--grey)}
+.zone .zh b{font-size:14px;line-height:1.35}.zone .zh span#nameL,.zone .zh span#nameD{color:var(--brass);font-weight:600;white-space:nowrap}.zone .zh span{font-size:12px;color:var(--grey)}
 .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
 .sw button{border:2px solid transparent;border-radius:10px;padding:0;background:none;cursor:pointer;text-align:left;font:inherit}
 .sw button img,.sw .up{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;border:1px solid var(--line)}
@@ -66,7 +66,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 </head>
 <body>
 <header>
-  <div><div class="b">Indéva Studio · Staircase</div><h1>Choose the marble for your staircase</h1><p>Tap a marble to see it on the staircase and the cost for the whole staircase update.</p></div>
+  <div><div class="b">Indéva Studio · Staircase</div><h1>Choose the marble for your staircase</h1><p>Pick a <b>top marble</b> for the treads and landing, and a <b>riser marble</b> for the step faces — the staircase and the cost update instantly.</p></div>
 </header>
 <div class="wrap">
   <section class="card viewer">
@@ -77,10 +77,9 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
   </section>
 
   <aside class="card panel">
+    <div class="zone"><div class="zh"><b>1 · Top marble <span style="font-weight:500;color:var(--grey)">— treads, landing &amp; sides</span></b><span id="nameL"></span></div><div class="sw" id="swL"></div></div>
+    <div class="zone"><div class="zh"><b>2 · Riser marble <span style="font-weight:500;color:var(--grey)">— the vertical face of each step</span></b><span id="nameD"></span></div><div class="sw" id="swD"></div></div>
     <div class="price"><div class="l">Marble for the full staircase · excl. GST</div><div class="t" id="total">₹0</div><div style="font-size:12px;color:#cfc6b8;margin-top:4px" id="area">—</div></div>
-
-    <div class="zone"><div class="zh"><b>Treads, landing &amp; sides</b><span id="nameL"></span></div><div class="sw" id="swL"></div></div>
-    <div class="zone"><div class="zh"><b>Risers</b><span id="nameD"></span></div><div class="sw" id="swD"></div></div>
 
     <table id="bd"></table>
 
@@ -144,7 +143,7 @@ function swatches(){
 document.addEventListener('click',function(e){
   var b=e.target.closest('.sw button'); if(!b) return;
   if(b.dataset.up){ upZone=b.dataset.up; document.getElementById('upfile').click(); return; }
-  S[b.dataset.z]=b.dataset.m; swatches(); price(); render();
+  S[b.dataset.z]=b.dataset.m; swatches(); price(); render(b.dataset.z);
 });
 document.addEventListener('input',function(e){
   if(e.target.dataset && e.target.dataset.rate){ var m=byId(e.target.dataset.rate); m.rate=+e.target.value||0; price(); var sw=document.querySelectorAll('[data-m="'+m.id+'"] i'); sw.forEach(function(i){ i.textContent='₹'+m.rate.toLocaleString('en-IN')+'/sq.ft'; }); return; }
@@ -206,7 +205,7 @@ function texData(m,w,h,scale,dark){
   });
 }
 var token=0;
-function render(){
+function render(flashZone){
   var my=++token, vw=VIEWS[S.view]; document.getElementById('busy').style.display='flex';
   prep(vw).then(function(P){
     if(cv.width!==P.w){ cv.width=P.w; cv.height=P.h; }
@@ -217,13 +216,16 @@ function render(){
       for(var i=0,p=0;i<P.Lum.length;i++,p+=4){
         var r=b[p],g=b[p+1],bl=b[p+2];
         var a=P.mL[i], c=P.mD[i];
-        if(a>0.01){ var s=P.Lum[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*150:0;
+        if(a>0.01){ var s=P.Lum[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*55:0;
           r=r*(1-a)+(TL[p]*sh+hi)*a; g=g*(1-a)+(TL[p+1]*sh+hi)*a; bl=bl*(1-a)+(TL[p+2]*sh+hi)*a; }
         if(c>0.01){ var s2=P.Lum[i]/vw.lrefD, sh2=s2<1.15?s2:1.15, hi2=s2>1.15?(s2-1.15)*40:0;
           r=r*(1-c)+(TD[p]*sh2+hi2)*c; g=g*(1-c)+(TD[p+1]*sh2+hi2)*c; bl=bl*(1-c)+(TD[p+2]*sh2+hi2)*c; }
         o[p]=r; o[p+1]=g; o[p+2]=bl; o[p+3]=255;
       }
       ctx.putImageData(out,0,0); document.getElementById('busy').style.display='none';
+      if(flashZone){ var mk=flashZone==='L'?P.mL:P.mD, fl=new ImageData(new Uint8ClampedArray(o),P.w,P.h), fd=fl.data;
+        for(var j=0,q=0;j<mk.length;j++,q+=4){ var a2=mk[j]*0.45; if(a2>0.01){ fd[q]=fd[q]*(1-a2)+217*a2; fd[q+1]=fd[q+1]*(1-a2)+119*a2; fd[q+2]=fd[q+2]*(1-a2)+87*a2; } }
+        ctx.putImageData(fl,0,0); setTimeout(function(){ if(my===token) ctx.putImageData(out,0,0); },450); }
     });
   }).catch(function(){ document.getElementById('busy').textContent='Could not load the images.'; });
 }
