@@ -23,7 +23,7 @@ header p{margin:6px 0 0;color:#cfc6b8;font-size:14px}
 @media(max-width:980px){.viewer{position:static}}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .tabs button,.seg button{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:999px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--esp)}
-.tabs button.on{background:var(--esp);color:#fff;border-color:var(--esp)}
+.seg button.on,.tabs button.on{background:var(--esp);color:#fff;border-color:var(--esp)}
 .tabs .sp{flex:1}
 .stage{position:relative;border-radius:12px;overflow:hidden;background:#ddd;line-height:0}
 .stage canvas{width:100%;height:auto;display:block}
@@ -99,7 +99,11 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
   <aside class="card panel">
     <div class="zone"><div class="zh"><b>1 · Top marble <span style="font-weight:500;color:var(--grey)">— treads, landing &amp; sides</span></b><span id="nameL"></span></div><div class="sw" id="swL"></div></div>
     <div class="zone"><div class="zh"><b>2 · Riser marble <span style="font-weight:500;color:var(--grey)">— the vertical face of each step</span></b><span id="nameD"></span></div><div class="sw" id="swD"></div></div>
-    <div class="price"><div class="l">Marble for the full staircase · excl. GST</div><div class="t" id="total">₹0</div><div style="font-size:12px;color:#cfc6b8;margin-top:4px" id="area">—</div></div>
+    <div class="zone"><div class="zh"><b>3 · Step lights <span style="font-weight:500;color:var(--grey)">— LED profile under each tread, lighting the riser</span></b></div>
+      <label class="chk" style="font-size:13.5px"><input type="checkbox" id="prof" checked> Show profile lights</label>
+      <div class="seg" id="ptone" style="display:flex;gap:6px;margin-top:8px"><button type="button" data-t="warm" class="on">Warm 2700K</button><button type="button" data-t="neutral">Neutral 4000K</button></div>
+    </div>
+    <div class="price"><div class="l" id="plabel">Marble &amp; step lights · full staircase · excl. GST</div><div class="t" id="total">₹0</div><div style="font-size:12px;color:#cfc6b8;margin-top:4px" id="area">—</div></div>
 
     <table id="bd"></table>
 
@@ -114,6 +118,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
         <div><label>Landing width (ft)</label><input type="number" id="lw" value="3.5" step="0.1"></div>
         <div><label>Wastage %</label><input type="number" id="waste" value="15"></div>
         <div><label>Laying + polish (₹/sq.ft)</label><input type="number" id="labour" value="250"></div>
+        <div><label>Step lights (₹/rft)</label><input type="number" id="lrate" value="180"></div>
       </div>
       <label class="chk"><input type="checkbox" id="sides" checked> Clad the exposed stair sides (zig-zag edges)</label>
       <label class="chk"><input type="checkbox" id="soffit"> Clad the underside of the upper flight</label>
@@ -142,7 +147,8 @@ var M=[ // rate = slab allowance ₹/sq.ft
   {id:'verde',name:'Verde Guatemala',o:'Indian green',rate:500,src:'/staircase-marble/marble-verde-guatemala.jpg'},
   {id:'absblack',name:'Absolute Black',o:'Granite',rate:180,src:'/staircase-marble/marble-absolute-black.jpg'}
 ];
-var S={view:0, L:'statuario', D:'nero', scale:1, orig:false};
+var S={view:0, L:'statuario', D:'nero', scale:1, orig:false, prof:true, tone:'warm'};
+var TONE={warm:[255,176,96],neutral:[255,236,205]};
 var IMG={}, cache={};
 var cv=document.getElementById('cv'), ctx=cv.getContext('2d',{willReadFrequently:true});
 function inr(n){ return '₹'+Math.round(n).toLocaleString('en-IN'); }
@@ -191,13 +197,15 @@ function price(){
   if(aSide) rows.push(['Stair sides (zig-zag edges)', aSide, mL]);
   if(aSoff) rows.push(['Underside of upper flight', aSoff, mL]);
   rows.push(['Risers ('+n+' × '+w+' ft × '+v('riser')+'″)', aR, mD]);
-  var tot=0, html='', area=0;
+  var tot=0, html='', area=0, lrft=0;
+  if(S.prof){ lrft=n*w; }
   rows.forEach(function(x){ var a=x[1]*waste, amt=a*(x[2].rate+lab); tot+=amt; area+=x[1];
     html+='<tr><td>'+x[0]+'<br><span style="color:var(--grey)">'+x[2].name+' · '+a.toFixed(1)+' sq.ft incl. wastage × (₹'+x[2].rate.toLocaleString('en-IN')+' + ₹'+lab+' laying)</span></td><td class="n">'+inr(amt)+'</td></tr>'; });
+  if(lrft){ var la=lrft*v('lrate'); tot+=la; html+='<tr><td>Step profile lights ('+n+' × '+w+' ft)<br><span style="color:var(--grey)">'+lrft.toFixed(1)+' rft × ₹'+v('lrate')+' · Philips LED strip with driver in aluminium profile</span></td><td class="n">'+inr(la)+'</td></tr>'; }
   document.getElementById('bd').innerHTML=html+'<tr><td><b>Total</b></td><td class="n"><b>'+inr(tot)+'</b></td></tr>';
-  document.getElementById('total').textContent=inr(tot);
+  document.getElementById('total').textContent=inr(tot); document.getElementById('plabel').innerHTML=(lrft?'Marble &amp; step lights':'Marble')+' · full staircase · excl. GST';
   document.getElementById('area').textContent=area.toFixed(0)+' sq.ft of marble + '+v('waste')+'% wastage · '+mL.name+' with '+mD.name+' risers';
-  var msg='Hi Indéva, for my staircase I like '+mL.name+' for the treads and landing with '+mD.name+' risers. Estimate on your page: '+inr(tot)+' (excl. GST).';
+  var msg='Hi Indéva, for my staircase I like '+mL.name+' for the treads and landing with '+mD.name+' risers'+(lrft?' and step profile lights':'')+'. Estimate on your page: '+inr(tot)+' (excl. GST).';
   document.getElementById('wa').href='https://wa.me/919717881083?text='+encodeURIComponent(msg);
 }
 
@@ -212,7 +220,18 @@ function prep(vw){
     var w=r[0].naturalWidth, h=r[0].naturalHeight, c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d'); x.drawImage(r[0],0,0);
     var base=x.getImageData(0,0,w,h), Lum=new Float32Array(w*h), d=base.data;
     for(var i=0;i<Lum.length;i++){ Lum[i]=(0.2126*d[i*4]+0.7152*d[i*4+1]+0.0722*d[i*4+2])/255; }
-    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,mL:getMask(r[1],w,h),mD:getMask(r[2],w,h)};
+    var mL=getMask(r[1],w,h), mD=getMask(r[2],w,h), G=new Float32Array(w*h);
+    for(var x0=0;x0<w;x0++){ for(var y0=4;y0<h-2;y0++){ var k0=y0*w+x0;
+      if(mD[k0]>0.5 && mD[k0-2*w]<0.3 && (mL[k0-4*w]>0.4||mL[k0-3*w]>0.4)){
+        var run=0; while(y0+run<h && mD[(y0+run)*w+x0]>0.3 && run<400) run++;
+        if(run<8) continue; var tau=Math.max(4,run*0.32);
+        for(var k=0;k<run;k++){ var gi=(y0+k)*w+x0, gv=(k<2?1.25:Math.exp(-k/tau)); if(gv>G[gi]) G[gi]=gv; }
+        y0+=run; } } }
+    // smooth the glow along each step so it reads as one continuous strip
+    var R=18, tmp=new Float32Array(w*h);
+    for(var yy=0;yy<h;yy++){ var acc=0, row=yy*w; for(var xx=-R;xx<w;xx++){ if(xx+R<w) acc+=G[row+xx+R]; if(xx-R-1>=0) acc-=G[row+xx-R-1]; if(xx>=0) tmp[row+xx]=acc/(2*R+1); } }
+    for(var q=0;q<G.length;q++){ G[q]=Math.min(1.3, tmp[q]*1.35) * (mD[q]>0.3?1:0); }
+    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,mL:mL,mD:mD,G:G};
   });
 }
 function texData(m,w,h,scale,dark){
@@ -240,6 +259,7 @@ function render(flashZone){
           r=r*(1-a)+(TL[p]*sh+hi)*a; g=g*(1-a)+(TL[p+1]*sh+hi)*a; bl=bl*(1-a)+(TL[p+2]*sh+hi)*a; }
         if(c>0.01){ var s2=P.Lum[i]/vw.lrefD, sh2=s2<1.15?s2:1.15, hi2=s2>1.15?(s2-1.15)*40:0;
           r=r*(1-c)+(TD[p]*sh2+hi2)*c; g=g*(1-c)+(TD[p+1]*sh2+hi2)*c; bl=bl*(1-c)+(TD[p+2]*sh2+hi2)*c; }
+        if(S.prof){ var gg=P.G[i]; if(gg>0.01){ var tc=TONE[S.tone]; r+=tc[0]*gg; g+=tc[1]*gg; bl+=tc[2]*gg; } }
         o[p]=r; o[p+1]=g; o[p+2]=bl; o[p+3]=255;
       }
       ctx.putImageData(out,0,0); document.getElementById('busy').style.display='none';
@@ -261,6 +281,8 @@ var lt=document.getElementById('light');
 function applyLight(){ var v=+lt.value, b=1+v/100, c=v<0?1+(-v)/400:1-v/600; cv.style.filter='brightness('+b.toFixed(2)+') contrast('+c.toFixed(2)+')'+(v<0?' saturate('+(1+(-v)/300).toFixed(2)+')':''); }
 lt.oninput=applyLight; document.getElementById('lreset').onclick=function(){ lt.value=0; applyLight(); };
 
+document.getElementById('prof').onchange=function(){ S.prof=this.checked; price(); render(); };
+document.getElementById('ptone').addEventListener('click',function(e){ var b=e.target.closest('[data-t]'); if(!b) return; S.tone=b.dataset.t; this.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);}); render(); });
 swatches(); price(); render();
 })();
 </script>
