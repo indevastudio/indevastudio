@@ -60,7 +60,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 .cta a,.cta button{flex:1;text-align:center;padding:11px 12px;border-radius:999px;font:inherit;font-weight:600;font-size:13px;text-decoration:none;cursor:pointer;border:1.5px solid var(--esp);background:#fff;color:var(--esp)}
 .cta a.p{background:var(--brass);border-color:var(--brass);color:#fff}
 .slider{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--grey);margin:8px 4px 0}
-.slider input{flex:1;accent-color:var(--brass)}
+.slider input{flex:1;accent-color:var(--brass)}.slider span{white-space:nowrap}
 @media(min-width:981px){
   html,body{height:100%}
   body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
@@ -92,8 +92,8 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
   <section class="card viewer">
     <div class="tabs" id="views"></div>
     <div class="stage"><canvas id="cv"></canvas><div class="busy" id="busy">Applying marble…</div></div>
-    <div class="slider">Vein size <input type="range" id="scale" min="40" max="220" value="100"> <span id="sv">100%</span></div>
-    <p class="cap">Hold <b>“Show original”</b> to compare with the design render. The marble preview is indicative; colour and veining vary slab to slab, so final selection is made at the stone yard.</p>
+    <div class="slider"><span title="Darker">☾ Darker</span> <input type="range" id="light" min="-60" max="60" value="0" aria-label="Light and darkness"> <span title="Lighter">Lighter ☀</span> <button type="button" id="lreset" style="border:0;background:none;color:var(--brass);font:inherit;font-weight:600;cursor:pointer">Reset</button></div>
+    <p class="cap">Drag the slider to see the staircase in softer or brighter light. Hold <b>“Show original”</b> to compare with the design render. The marble preview is indicative; colour and veining vary slab to slab, so final selection is made at the stone yard.</p>
   </section>
 
   <aside class="card panel">
@@ -257,7 +257,9 @@ tabs.addEventListener('click',function(e){ var b=e.target.closest('[data-v]'); i
 var cmp=document.getElementById('cmp');
 function setOrig(on){ if(S.orig===on) return; S.orig=on; cmp.classList.toggle('on',on); render(); }
 cmp.addEventListener('pointerdown',function(){setOrig(true);}); ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ cmp.addEventListener(ev,function(){setOrig(false);}); });
-var sc=document.getElementById('scale'), st; sc.oninput=function(){ document.getElementById('sv').textContent=sc.value+'%'; S.scale=sc.value/100; clearTimeout(st); st=setTimeout(render,120); };
+var lt=document.getElementById('light');
+function applyLight(){ var v=+lt.value, b=1+v/100, c=v<0?1+(-v)/400:1-v/600; cv.style.filter='brightness('+b.toFixed(2)+') contrast('+c.toFixed(2)+')'+(v<0?' saturate('+(1+(-v)/300).toFixed(2)+')':''); }
+lt.oninput=applyLight; document.getElementById('lreset').onclick=function(){ lt.value=0; applyLight(); };
 
 swatches(); price(); render();
 })();
