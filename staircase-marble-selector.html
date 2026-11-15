@@ -93,7 +93,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     <div class="tabs" id="views"></div>
     <div class="stage"><canvas id="cv"></canvas><div class="busy" id="busy">Applying marble…</div></div>
     <div class="slider"><span title="Darker">☾ Darker</span> <input type="range" id="light" min="-60" max="60" value="0" aria-label="Light and darkness"> <span title="Lighter">Lighter ☀</span> <button type="button" id="lreset" style="border:0;background:none;color:var(--brass);font:inherit;font-weight:600;cursor:pointer">Reset</button></div>
-    <p class="cap">Drag the slider to see the staircase in softer or brighter light. Hold <b>“Show original”</b> to compare with the design render. The marble preview is indicative; colour and veining vary slab to slab, so final selection is made at the stone yard.</p>
+    <p class="cap">Drag the slider to see the staircase in softer or brighter light. Hold <b>“Show original”</b> to compare with the design render. The marble preview is indicative; colour varies slab to slab, so final selection is made at the stone yard.</p>
   </section>
 
   <aside class="card panel">
@@ -220,6 +220,10 @@ function prep(vw){
     var w=r[0].naturalWidth, h=r[0].naturalHeight, c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d'); x.drawImage(r[0],0,0);
     var base=x.getImageData(0,0,w,h), Lum=new Float32Array(w*h), d=base.data;
     for(var i=0;i<Lum.length;i++){ Lum[i]=(0.2126*d[i*4]+0.7152*d[i*4+1]+0.0722*d[i*4+2])/255; }
+    // blur the render's luminance so its own marble veins don't show through; keeps the lighting
+    (function(){ var Rb=9, t=new Float32Array(w*h);
+      for(var yy=0;yy<h;yy++){ var a=0,row=yy*w; for(var xx=-Rb;xx<w;xx++){ if(xx+Rb<w) a+=Lum[row+xx+Rb]; if(xx-Rb-1>=0) a-=Lum[row+xx-Rb-1]; if(xx>=0) t[row+xx]=a/(2*Rb+1); } }
+      for(var xx2=0;xx2<w;xx2++){ var a2=0; for(var yy2=-Rb;yy2<h;yy2++){ if(yy2+Rb<h) a2+=t[(yy2+Rb)*w+xx2]; if(yy2-Rb-1>=0) a2-=t[(yy2-Rb-1)*w+xx2]; if(yy2>=0) Lum[yy2*w+xx2]=a2/(2*Rb+1); } } })();
     var mL=getMask(r[1],w,h), mD=getMask(r[2],w,h), G=new Float32Array(w*h);
     for(var x0=0;x0<w;x0++){ for(var y0=4;y0<h-2;y0++){ var k0=y0*w+x0;
       if(mD[k0]>0.5 && mD[k0-2*w]<0.3 && (mL[k0-4*w]>0.4||mL[k0-3*w]>0.4)){
