@@ -556,6 +556,11 @@ const SECTIONS = [
       {id:"m2", room:B2, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
       {id:"m3", room:B3, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
     ]},
+    {note:"Hanging lights — ₹3,000 per bathroom", items:[
+      {id:"hl1", room:B1, name:"Hanging light", unit:"No.", qty:1, rate:3000, on:true, spec:"Decorative hanging / pendant light, supplied and fixed on an existing electrical point. ₹3,000 each; style per your selection."},
+      {id:"hl2", room:B2, name:"Hanging light", unit:"No.", qty:1, rate:3000, on:true, spec:"Decorative hanging / pendant light, supplied and fixed on an existing electrical point. ₹3,000 each; style per your selection."},
+      {id:"hl3", room:B3, name:"Hanging light", unit:"No.", qty:1, rate:3000, on:true, spec:"Decorative hanging / pendant light, supplied and fixed on an existing electrical point. ₹3,000 each; style per your selection."},
+    ]},
     {note:"Optional", items:[
       {id:"btap", room:"All 3 bathrooms", name:"Basin pillar tap, waste coupling and angle valves", unit:"bathrooms", qty:3, rate:3000, on:false, src:"Allowance · to confirm", spec:"Basin pillar tap, waste coupling, bottle trap and angle valves for each basin. Allowance of ₹3,000 per bathroom (range ₹1,500–4,000 depending on brand); final per your selection."},
     ]},
@@ -678,7 +683,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set and mirror in each bathroom, and Indéva's design and execution. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.24 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.24 lakh (Economy) up to ₹3.43 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set, mirror and hanging light in each bathroom, and Indéva's design and execution. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.33 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.33 lakh (Economy) up to ₹3.52 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
