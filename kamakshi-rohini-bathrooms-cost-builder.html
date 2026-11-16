@@ -534,9 +534,9 @@ const SECTIONS = [
       {id:"p3", room:B3, name:"Plumbing work", unit:"bathroom", qty:1, rate:10000, on:true, spec:"Concealed CPVC water supply lines and UPVC drainage for the WC, basin, shower and health faucet, with pressure testing. ₹10,000 per bathroom."},
     ]},
     {note:"Sanitary fittings — floor-mounted WC + pedestal basin + shower set, per bathroom", items:[
-      {id:"s1", room:B1, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
-      {id:"s2", room:B2, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
-      {id:"s3", room:B3, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
+      {id:"s1", room:B1, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Economy", options:SAN_OPT},
+      {id:"s2", room:B2, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Economy", options:SAN_OPT},
+      {id:"s3", room:B3, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Economy", options:SAN_OPT},
     ]},
     {note:"Mirrors — ₹2,400 per bathroom", items:[
       {id:"m1", room:B1, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
@@ -656,7 +656,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin, shower set and mirror in each bathroom. With the lowest-cost Hindware fittings selected, the estimate comes to about <b>₹1.94 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from about ₹1.90 lakh (Economy) to ₹3.09 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin, shower set and mirror in each bathroom. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹1.90 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹1.90 lakh (Economy) up to ₹3.09 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
