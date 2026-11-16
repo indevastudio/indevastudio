@@ -508,7 +508,7 @@ const SECTIONS = [
   hero:[],
   groups:[
     {note:"Dismantling of existing tiles — lump sum", items:[
-      {id:"dis", room:"All 3 bathrooms", name:"Dismantling existing wall and floor tiles", unit:"lumpsum", qty:1, rate:20000, on:true, spec:"Removing the existing wall and floor tiles with their bedding in all three bathrooms, and cleaning the surfaces for new tiling. Lump sum ₹20,000."},
+      {id:"dis", room:"All 3 bathrooms", name:"Dismantling existing wall and floor tiles", unit:"lumpsum", qty:1, rate:10000, on:true, spec:"Removing the existing wall and floor tiles with their bedding in all three bathrooms, and cleaning the surfaces for new tiling. Lump sum ₹10,000."},
     ]},
     {note:"Debris (malba) removal", items:[
       {id:"malba", room:"All 3 bathrooms", name:"Malba trolley — debris removal", unit:"trolley", qty:2, rate:2000, on:true, spec:"Bagging the dismantled tiles and debris, carrying it down and carting it away from site by trolley. 2 trolleys at ₹2,000 each."},
@@ -678,7 +678,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set and mirror in each bathroom, and Indéva's design and execution. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.34 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.34 lakh (Economy) up to ₹3.53 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set and mirror in each bathroom, and Indéva's design and execution. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.24 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.24 lakh (Economy) up to ₹3.43 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
