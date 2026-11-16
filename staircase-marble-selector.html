@@ -231,6 +231,19 @@ function prep(vw){
     function maskedL(m,Rb){ var lm=new Float32Array(w*h); for(var q=0;q<lm.length;q++) lm[q]=Lum[q]*m[q];
       var A=blur(lm,Rb), B=blur(m,Rb), out=new Float32Array(w*h); for(var q2=0;q2<out.length;q2++) out[q2]=B[q2]>0.5?A[q2]/B[q2]:Lum[q2]; return out; }
     var LumL=maskedL(mL,9), LumD=maskedL(mD,45);
+    // colour of the light falling on each surface (warm LED / daylight), normalised to luminance 1
+    function tint(m,Rb,Lm){ var B=blur(m,Rb), ch=[], T=new Float32Array(w*h*3), d0=base.data;
+      for(var c=0;c<3;c++){ var a=new Float32Array(w*h); for(var q=0;q<a.length;q++) a[q]=d0[q*4+c]/255*m[q]; ch.push(blur(a,Rb)); }
+      for(var q3=0;q3<w*h;q3++){ if(B[q3]>0.5&&Lm[q3]>0.02){ for(var c2=0;c2<3;c2++) T[q3*3+c2]=Math.min(1.6,ch[c2][q3]/B[q3]/Lm[q3]); } else { T[q3*3]=T[q3*3+1]=T[q3*3+2]=1; } }
+      return T; }
+    var TintL=tint(mL,15,LumL), TintD=tint(mD,45,LumD);
+    // label each slab (connected piece of a mask) so every tread and riser gets its own cut of the marble
+    function labels(m){ var lab=new Int32Array(w*h), n=0, st=new Int32Array(w*h);
+      for(var q=0;q<w*h;q++){ if(m[q]>0.5&&!lab[q]){ n++; var top=0; st[top++]=q; lab[q]=n;
+        while(top){ var c=st[--top], cx=c%w; var nb=[c-w,c+w,cx>0?c-1:-1,cx<w-1?c+1:-1];
+          for(var k=0;k<4;k++){ var t=nb[k]; if(t>=0&&t<w*h&&!lab[t]&&m[t]>0.5){ lab[t]=n; st[top++]=t; } } } } }
+      return lab; }
+    var LabL=labels(mL), LabD=labels(mD);
     for(var x0=0;x0<w;x0++){ for(var y0=h-6;y0>2;y0--){ var k0=y0*w+x0;
       if(mD[k0]>0.5 && mD[k0+2*w]<0.3 && (mL[k0+3*w]>0.4||mL[k0+4*w]>0.4||mL[k0+5*w]>0.4)){
         var run=0; while(y0-run>0 && mD[(y0-run)*w+x0]>0.3 && run<400) run++;
@@ -241,35 +254,41 @@ function prep(vw){
     var R=18, tmp=new Float32Array(w*h);
     for(var yy=0;yy<h;yy++){ var acc=0, row=yy*w; for(var xx=-R;xx<w;xx++){ if(xx+R<w) acc+=G[row+xx+R]; if(xx-R-1>=0) acc-=G[row+xx-R-1]; if(xx>=0) tmp[row+xx]=acc/(2*R+1); } }
     for(var q=0;q<G.length;q++){ G[q]=Math.min(1.3, tmp[q]*1.35) * (mD[q]>0.3?1:0); }
-    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,LumL:LumL,LumD:LumD,mL:mL,mD:mD,G:G};
+    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,LumL:LumL,LumD:LumD,TintL:TintL,TintD:TintD,LabL:LabL,LabD:LabD,mL:mL,mD:mD,G:G};
   });
 }
-function texData(m,w,h,scale,dark){
+function texData(m,w,h,scale){
   return load(m.src).then(function(img){
-    var c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d');
     var tw=Math.round(Math.max(w,h)*0.62*scale), th=Math.round(tw*img.naturalHeight/img.naturalWidth);
-    var t=document.createElement('canvas'); t.width=tw; t.height=th; t.getContext('2d').drawImage(img,0,0,tw,th);
-    x.fillStyle=x.createPattern(t,'repeat'); x.save(); if(dark) x.translate(tw*0.37,th*0.21); x.fillRect(-tw,-th,w+2*tw,h+2*th); x.restore();
-    return x.getImageData(0,0,w,h).data;
+    var t=document.createElement('canvas'); t.width=tw; t.height=th; var x=t.getContext('2d'); x.drawImage(img,0,0,tw,th);
+    return {d:x.getImageData(0,0,tw,th).data, w:tw, h:th};
   });
 }
+function hash(n){ n=(n*2654435761)>>>0; return (n%10007)/10007; }
 var token=0;
 function render(flashZone){
   var my=++token, vw=VIEWS[S.view]; document.getElementById('busy').style.display='flex';
   prep(vw).then(function(P){
     if(cv.width!==P.w){ cv.width=P.w; cv.height=P.h; }
     if(S.orig){ ctx.putImageData(P.base,0,0); document.getElementById('busy').style.display='none'; return; }
-    return Promise.all([texData(byId(S.L),P.w,P.h,S.scale,false),texData(byId(S.D),P.w,P.h,S.scale,true)]).then(function(T){
+    return Promise.all([texData(byId(S.L),P.w,P.h,S.scale),texData(byId(S.D),P.w,P.h,S.scale)]).then(function(T){
       if(my!==token) return;
-      var out=ctx.createImageData(P.w,P.h), o=out.data, b=P.base.data, TL=T[0], TD=T[1];
+      var out=ctx.createImageData(P.w,P.h), o=out.data, b=P.base.data, TL=T[0], TD=T[1], W=P.w;
       for(var i=0,p=0;i<P.Lum.length;i++,p+=4){
-        var r=b[p],g=b[p+1],bl=b[p+2];
-        var a=P.mL[i], c=P.mD[i];
-        if(a>0.01){ var s=P.LumL[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*55:0;
-          r=r*(1-a)+(TL[p]*sh+hi)*a; g=g*(1-a)+(TL[p+1]*sh+hi)*a; bl=bl*(1-a)+(TL[p+2]*sh+hi)*a; }
-        if(c>0.01){ var s2=P.LumD[i]/vw.lrefD, sh2=s2<1.05?s2:1.05, hi2=0;
-          r=r*(1-c)+(TD[p]*sh2+hi2)*c; g=g*(1-c)+(TD[p+1]*sh2+hi2)*c; bl=bl*(1-c)+(TD[p+2]*sh2+hi2)*c; }
-        if(S.prof){ var gg=P.G[i]; if(gg>0.01){ var tc=TONE[S.tone]; gg*=1-0.65*(TD[p]*0.3+TD[p+1]*0.59+TD[p+2]*0.11)/255; r+=tc[0]*gg*0.85; g+=tc[1]*gg*0.85; bl+=tc[2]*gg*0.85; } }
+        var r=b[p],g=b[p+1],bl=b[p+2], x=i%W, y=(i/W)|0;
+        var a=P.mL[i], c=P.mD[i], tdr=0,tdg=0,tdb=0;
+        if(a>0.01){ var lb=P.LabL[i]||0, ox=(hash(lb+1)*TL.w)|0, oy=(hash(lb+7)*TL.h)|0;
+          var tx=(x+ox)%TL.w, ty=(((y*2.2)|0)+oy)%TL.h, tp=(ty*TL.w+tx)*4;
+          var s=P.LumL[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*55:0, spec=P.Lum[i]-P.LumL[i]-0.05; spec=spec>0?spec*1.6*255:0;
+          var t0=P.TintL[i*3],t1=P.TintL[i*3+1],t2=P.TintL[i*3+2];
+          var cr=TL.d[tp]*sh*(0.55+0.45*t0)+hi+spec, cg=TL.d[tp+1]*sh*(0.55+0.45*t1)+hi+spec, cb=TL.d[tp+2]*sh*(0.55+0.45*t2)+hi+spec;
+          r=r*(1-a)+cr*a; g=g*(1-a)+cg*a; bl=bl*(1-a)+cb*a; }
+        if(c>0.01){ var ld=P.LabD[i]||0, ox2=(hash(ld+3)*TD.w)|0, oy2=(hash(ld+11)*TD.h)|0;
+          var tx2=(x+ox2)%TD.w, ty2=(y+oy2)%TD.h, tq=(ty2*TD.w+tx2)*4; tdr=TD.d[tq]; tdg=TD.d[tq+1]; tdb=TD.d[tq+2];
+          var s2=P.LumD[i]/vw.lrefD, sh2=s2<1.05?s2:1.05;
+          var u0=P.TintD[i*3],u1=P.TintD[i*3+1],u2=P.TintD[i*3+2];
+          r=r*(1-c)+tdr*sh2*(0.6+0.4*u0)*c; g=g*(1-c)+tdg*sh2*(0.6+0.4*u1)*c; bl=bl*(1-c)+tdb*sh2*(0.6+0.4*u2)*c; }
+        if(S.prof){ var gg=P.G[i]; if(gg>0.01){ var tc=TONE[S.tone]; gg*=1-0.65*(tdr*0.3+tdg*0.59+tdb*0.11)/255; r+=tc[0]*gg*0.85; g+=tc[1]*gg*0.85; bl+=tc[2]*gg*0.85; } }
         o[p]=r; o[p+1]=g; o[p+2]=bl; o[p+3]=255;
       }
       ctx.putImageData(out,0,0); document.getElementById('busy').style.display='none';
