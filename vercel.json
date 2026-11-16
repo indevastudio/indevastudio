@@ -1075,6 +1075,24 @@
   ],
   "headers": [
     {
+      "source": "/staircase-marble-selector",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/staircase-marble/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
