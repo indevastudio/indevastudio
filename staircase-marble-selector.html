@@ -127,30 +127,45 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 <script>
 (function(){
 var VIEWS=[
-  {id:'straight',name:'Straight staircase',src:'/staircase-marble/staircase-straight.jpg?v=6',L:'/staircase-marble/staircase-straight-light.png?v=6',D:'/staircase-marble/staircase-straight-dark.png?v=6',lrefL:0.744,lrefD:0.16},
-  {id:'main',name:'Main view',src:'/staircase-marble/staircase-main.jpg?v=6',L:'/staircase-marble/staircase-main-light.png?v=6',D:'/staircase-marble/staircase-main-dark.png?v=6',lrefL:0.654,lrefD:0.129},
-  {id:'night',name:'Night view',src:'/staircase-marble/staircase-night.jpg?v=6',L:'/staircase-marble/staircase-night-light.png?v=6',D:'/staircase-marble/staircase-night-dark.png?v=6',lrefL:0.763,lrefD:0.119},
-  {id:'closeup',name:'Up close',src:'/staircase-marble/staircase-closeup.jpg?v=6',L:'/staircase-marble/staircase-closeup-light.png?v=6',D:'/staircase-marble/staircase-closeup-dark.png?v=6',lrefL:0.71,lrefD:0.125}
+  {id:'straight',name:'Straight staircase',src:'/staircase-marble/staircase-straight.jpg?v=7',L:'/staircase-marble/staircase-straight-light.png?v=7',D:'/staircase-marble/staircase-straight-dark.png?v=7',lrefL:0.744,lrefD:0.16},
+  {id:'main',name:'Main view',src:'/staircase-marble/staircase-main.jpg?v=7',L:'/staircase-marble/staircase-main-light.png?v=7',D:'/staircase-marble/staircase-main-dark.png?v=7',lrefL:0.654,lrefD:0.129},
+  {id:'night',name:'Night view',src:'/staircase-marble/staircase-night.jpg?v=7',L:'/staircase-marble/staircase-night-light.png?v=7',D:'/staircase-marble/staircase-night-dark.png?v=7',lrefL:0.763,lrefD:0.119},
+  {id:'closeup',name:'Up close',src:'/staircase-marble/staircase-closeup.jpg?v=7',L:'/staircase-marble/staircase-closeup-light.png?v=7',D:'/staircase-marble/staircase-closeup-dark.png?v=7',lrefL:0.71,lrefD:0.125}
 ];
 var M=[ // rate = ₹/sq.ft as quoted by the stone yard
-  {id:'copper-black',name:'Copper Black',o:'',rate:60,src:'/staircase-marble/stone-copper-black.jpg?v=6'},
-  {id:'copper-brown',name:'Copper Brown',o:'',rate:65,src:'/staircase-marble/stone-copper-brown.jpg?v=6'},
-  {id:'silver-grey',name:'Silver Grey',o:'',rate:70,src:'/staircase-marble/stone-silver-grey.jpg?v=6'},
-  {id:'green-breccia',name:'Green Breccia',o:'',rate:75,src:'/staircase-marble/stone-green-breccia.jpg?v=6'},
-  {id:'light-grey',name:'Light Grey',o:'',rate:85,src:'/staircase-marble/stone-light-grey.jpg?v=6'},
-  {id:'grey-white-swirl',name:'Grey White Swirl',o:'',rate:100,src:'/staircase-marble/stone-grey-white-swirl.jpg?v=6'},
-  {id:'diagonal-grey-white',name:'Diagonal Grey White',o:'',rate:100,src:'/staircase-marble/stone-diagonal-grey-white.jpg?v=6'},
-  {id:'white-grey',name:'White Grey',o:'',rate:105,src:'/staircase-marble/stone-white-grey.jpg?v=6'},
-  {id:'black-white-wave',name:'Black White Wave',o:'',rate:110,src:'/staircase-marble/stone-black-white-wave.jpg?v=6'},
-  {id:'black-white-vein',name:'Black White Vein',o:'',rate:115,src:'/staircase-marble/stone-black-white-vein.jpg?v=6'},
-  {id:'dark-green',name:'Dark Green',o:'',rate:120,src:'/staircase-marble/stone-dark-green.jpg?v=6'},
-  {id:'green-network',name:'Green Network',o:'',rate:125,src:'/staircase-marble/stone-green-network.jpg?v=6'},
-  {id:'black-purple-vein',name:'Black Purple Vein',o:'',rate:130,src:'/staircase-marble/stone-black-purple-vein.jpg?v=6'},
-  {id:'black-slab',name:'Black Slab',o:'',rate:135,src:'/staircase-marble/stone-black-slab.jpg?v=6'},
-  {id:'beige-slab',name:'Beige Slab',o:'',rate:135,src:'/staircase-marble/stone-beige-slab.jpg?v=6'},
-  {id:'black-white-marble',name:'Black White Marble',o:'',rate:135,src:'/staircase-marble/stone-black-white-marble.jpg?v=6'},
-  {id:'blue-slab',name:'Blue Slab',o:'',rate:135,src:'/staircase-marble/stone-blue-slab.jpg?v=6'},
-  {id:'charcoal-grey',name:'Charcoal Grey',o:'',rate:140,src:'/staircase-marble/stone-charcoal-grey.jpg?v=6'}
+  {id:'beige-white-streak',name:'Beige White Streak',o:'',rate:45,src:'/staircase-marble/stone-beige-white-streak.jpg?v=7'},
+  {id:'grey-dash-white',name:'Grey Dash White',o:'',rate:55,src:'/staircase-marble/stone-grey-dash-white.jpg?v=7'},
+  {id:'copper-black',name:'Copper Black',o:'',rate:60,src:'/staircase-marble/stone-copper-black.jpg?v=7'},
+  {id:'copper-brown',name:'Copper Brown',o:'',rate:65,src:'/staircase-marble/stone-copper-brown.jpg?v=7'},
+  {id:'forest-green',name:'Forest Green',o:'',rate:65,src:'/staircase-marble/stone-forest-green.jpg?v=7'},
+  {id:'silver-grey',name:'Silver Grey',o:'',rate:70,src:'/staircase-marble/stone-silver-grey.jpg?v=7'},
+  {id:'green-breccia',name:'Green Breccia',o:'',rate:75,src:'/staircase-marble/stone-green-breccia.jpg?v=7'},
+  {id:'black-white-granite',name:'Black White Granite',o:'',rate:75,src:'/staircase-marble/stone-black-white-granite.jpg?v=7'},
+  {id:'light-grey',name:'Light Grey',o:'',rate:85,src:'/staircase-marble/stone-light-grey.jpg?v=7'},
+  {id:'grey-white-swirl',name:'Grey White Swirl',o:'',rate:100,src:'/staircase-marble/stone-grey-white-swirl.jpg?v=7'},
+  {id:'diagonal-grey-white',name:'Diagonal Grey White',o:'',rate:100,src:'/staircase-marble/stone-diagonal-grey-white.jpg?v=7'},
+  {id:'tan-brown',name:'Tan Brown',o:'',rate:100,src:'/staircase-marble/stone-tan-brown.jpg?v=7'},
+  {id:'white-grey',name:'White Grey',o:'',rate:105,src:'/staircase-marble/stone-white-grey.jpg?v=7'},
+  {id:'black-white-wave',name:'Black White Wave',o:'',rate:110,src:'/staircase-marble/stone-black-white-wave.jpg?v=7'},
+  {id:'black-white-vein',name:'Black White Vein',o:'',rate:115,src:'/staircase-marble/stone-black-white-vein.jpg?v=7'},
+  {id:'dark-green',name:'Dark Green',o:'',rate:120,src:'/staircase-marble/stone-dark-green.jpg?v=7'},
+  {id:'green-network',name:'Green Network',o:'',rate:125,src:'/staircase-marble/stone-green-network.jpg?v=7'},
+  {id:'black-purple-vein',name:'Black Purple Vein',o:'',rate:130,src:'/staircase-marble/stone-black-purple-vein.jpg?v=7'},
+  {id:'black-slab',name:'Black Slab',o:'',rate:135,src:'/staircase-marble/stone-black-slab.jpg?v=7'},
+  {id:'beige-slab',name:'Beige Slab',o:'',rate:135,src:'/staircase-marble/stone-beige-slab.jpg?v=7'},
+  {id:'black-white-marble',name:'Black White Marble',o:'',rate:135,src:'/staircase-marble/stone-black-white-marble.jpg?v=7'},
+  {id:'blue-slab',name:'Blue Slab',o:'',rate:135,src:'/staircase-marble/stone-blue-slab.jpg?v=7'},
+  {id:'charcoal-grey',name:'Charcoal Grey',o:'',rate:140,src:'/staircase-marble/stone-charcoal-grey.jpg?v=7'},
+  {id:'black-granite',name:'Black Granite',o:'',rate:145,src:'/staircase-marble/stone-black-granite.jpg?v=7'},
+  {id:'grey-white',name:'Grey White',o:'',rate:160,src:'/staircase-marble/stone-grey-white.jpg?v=7'},
+  {id:'streak-white',name:'Streak White',o:'',rate:185,src:'/staircase-marble/stone-streak-white.jpg?v=7'},
+  {id:'linear-white',name:'Linear White',o:'',rate:190,src:'/staircase-marble/stone-linear-white.jpg?v=7'},
+  {id:'cloud-white',name:'Cloud White',o:'',rate:200,src:'/staircase-marble/stone-cloud-white.jpg?v=7'},
+  {id:'jet-black',name:'Jet Black',o:'',rate:210,src:'/staircase-marble/stone-jet-black.jpg?v=7'},
+  {id:'black-galaxy',name:'Black Galaxy',o:'',rate:225,src:'/staircase-marble/stone-black-galaxy.jpg?v=7'},
+  {id:'red-granite',name:'Red Granite',o:'',rate:230,src:'/staircase-marble/stone-red-granite.jpg?v=7'},
+  {id:'burgundy-white-vein',name:'Burgundy White Vein',o:'',rate:1500,src:'/staircase-marble/stone-burgundy-white-vein.jpg?v=7'},
+  {id:'white-diagonal-vein',name:'White Diagonal Vein',o:'',rate:1600,src:'/staircase-marble/stone-white-diagonal-vein.jpg?v=7'}
 ];
 var S={view:0, L:'white-grey', D:'black-purple-vein', scale:1, orig:false, prof:false, tone:'warm'};
 var TONE={warm:[255,176,96],neutral:[255,236,205]};
