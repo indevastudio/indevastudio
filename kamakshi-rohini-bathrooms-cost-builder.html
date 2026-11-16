@@ -538,6 +538,11 @@ const SECTIONS = [
       {id:"s2", room:B2, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
       {id:"s3", room:B3, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
     ]},
+    {note:"Mirrors — ₹2,400 per bathroom", items:[
+      {id:"m1", room:B1, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
+      {id:"m2", room:B2, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
+      {id:"m3", room:B3, name:"Bathroom mirror", unit:"No.", qty:1, rate:2400, on:true, spec:"Bathroom mirror above the basin, fixed to the wall. ₹2,400 each; size and style per your selection."},
+    ]},
     {note:"Optional", items:[
       {id:"btap", room:"All 3 bathrooms", name:"Basin pillar tap, waste coupling and angle valves", unit:"bathrooms", qty:3, rate:3000, on:false, src:"Allowance · to confirm", spec:"Basin pillar tap, waste coupling, bottle trap and angle valves for each basin. Allowance of ₹3,000 per bathroom (range ₹1,500–4,000 depending on brand); final per your selection."},
     ]},
@@ -651,7 +656,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin and shower set in each bathroom. With the lowest-cost Hindware fittings selected, the estimate comes to about <b>₹1.87 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from about ₹1.82 lakh (Economy) to ₹3.02 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin, shower set and mirror in each bathroom. With the lowest-cost Hindware fittings selected, the estimate comes to about <b>₹1.94 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from about ₹1.90 lakh (Economy) to ₹3.09 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
@@ -661,7 +666,7 @@ function panelOverview(){
     <div class="item"><div class="item-title">Sanitary packages per bathroom (WC + pedestal basin + shower set)</div><div class="item-spec" style="margin-bottom:0">
       ${Object.entries(SAN_OPT).map(([n,o])=>`<b>${n}</b> — ${fmt(o.rate)} per bathroom · ${fmt(o.rate*3)} for all three`).join('<br>')}</div></div>
     <div class="item"><div class="item-title">Not included</div><div class="item-spec" style="margin-bottom:0">
-      Demolition of old tiles and debris removal, waterproofing, geysers and exhaust fans, bathroom accessories (towel rails, soap dishes, mirrors), vanities, electrical work, false ceiling, doors and GST. Basin taps and wastes are listed as an optional allowance. These can be added once the site is inspected.</div></div>
+      Demolition of old tiles and debris removal, waterproofing, geysers and exhaust fans, bathroom accessories (towel rails, soap dishes), vanities, electrical work, false ceiling, doors and GST. Basin taps and wastes are listed as an optional allowance. These can be added once the site is inspected.</div></div>
   </section>`;
 }
 
