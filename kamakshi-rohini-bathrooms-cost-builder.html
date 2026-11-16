@@ -493,6 +493,7 @@ function kitchenHardware(hinges, potpan, extras){ return [
    spec:"SS 304 wire GTPT basket on soft-close channels for a 750mm cabinet."},
 ];}
 const SAN_OPT = {
+  "Hindware Basic":{rate:14498, spec:"Lowest-cost Hindware set. <b>WC:</b> Hindware Popular floor-mounted EWC, S-trap, with Sleek Essence cistern (518884) — ₹3,863 · <b>Basin:</b> Hindware Popular pedestal basin (10125) + full pedestal (11047) — ₹3,470 · <b>Shower:</b> Hindware 3-in-1 wall mixer (F690022CP) — ₹4,180 + Hindware 100 mm overhead shower with 150 mm arm (F160119CP) — ₹1,936 + Hindware Flora health faucet — ₹1,049."},
   "Economy":{rate:12936, spec:"<b>WC:</b> Essco by Jaquar ECS-WHT-553SSPP floor-mounted EWC, S-trap (₹4,500) · <b>Basin:</b> Cera Cana S2040119 with full pedestal (₹3,136) · <b>Shower:</b> Jaquar Continental Prime COP-CHR-209PM wall mixer (₹2,790) + overhead shower and arm (₹1,500 allowance) + health faucet (₹1,000 allowance)."},
   "Hindware Standard":{rate:16825, spec:"<b>WC:</b> Hindware Ace one-piece floor-mounted EWC with seat cover (₹7,125) · <b>Basin:</b> Hindware Mario basin + full pedestal (₹4,400) · <b>Shower:</b> Jaquar Continental Prime COP-CHR-209PM set as in Economy (₹5,300)."},
   "Jaquar Continental":{rate:28340, spec:"<b>WC:</b> Jaquar Continental rimless one-piece CNS-WHT-853S220SPPSM with slim soft-close seat (₹13,140) · <b>Basin:</b> Jaquar Continental CNS-WHT-801 + full pedestal (≈₹3,950) · <b>Shower:</b> Jaquar Continental Prime COP-CHR-273PM wall mixer with overhead provision (₹5,100) + Jaquar Multi Flow overhead shower (₹4,150) + arm and health faucet (₹2,000 allowance)."},
@@ -533,9 +534,9 @@ const SECTIONS = [
       {id:"p3", room:B3, name:"Plumbing work", unit:"bathroom", qty:1, rate:10000, on:true, spec:"Concealed CPVC water supply lines and UPVC drainage for the WC, basin, shower and health faucet, with pressure testing. ₹10,000 per bathroom."},
     ]},
     {note:"Sanitary fittings — floor-mounted WC + pedestal basin + shower set, per bathroom", items:[
-      {id:"s1", room:B1, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Jaquar Continental", options:SAN_OPT},
-      {id:"s2", room:B2, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Jaquar Continental", options:SAN_OPT},
-      {id:"s3", room:B3, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Jaquar Continental", options:SAN_OPT},
+      {id:"s1", room:B1, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
+      {id:"s2", room:B2, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
+      {id:"s3", room:B3, name:"Sanitary fittings package", unit:"set", qty:1, on:true, selected:"Hindware Basic", options:SAN_OPT},
     ]},
     {note:"Optional", items:[
       {id:"btap", room:"All 3 bathrooms", name:"Basin pillar tap, waste coupling and angle valves", unit:"bathrooms", qty:3, rate:3000, on:false, src:"Allowance · to confirm", spec:"Basin pillar tap, waste coupling, bottle trap and angle valves for each basin. Allowance of ₹3,000 per bathroom (range ₹1,500–4,000 depending on brand); final per your selection."},
@@ -650,7 +651,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin and shower set in each bathroom. With the Jaquar Continental fittings selected, the estimate comes to about <b>₹2.29 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from about ₹1.82 lakh (Economy) to ₹3.02 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin and shower set in each bathroom. With the lowest-cost Hindware fittings selected, the estimate comes to about <b>₹1.87 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from about ₹1.82 lakh (Economy) to ₹3.02 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
