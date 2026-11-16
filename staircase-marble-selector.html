@@ -99,7 +99,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
   <aside class="card panel">
     <div class="zone"><div class="zh"><b>1 · Top marble <span style="font-weight:500;color:var(--grey)">— top of each tread &amp; the landing</span></b><span id="nameL"></span></div><div class="sw" id="swL"></div></div>
     <div class="zone"><div class="zh"><b>2 · Riser marble <span style="font-weight:500;color:var(--grey)">— the vertical face of each step</span></b><span id="nameD"></span></div><div class="sw" id="swD"></div></div>
-    <div class="zone"><div class="zh"><b>3 · Step lights <span style="font-weight:500;color:var(--grey)">— LED profile under each tread, lighting the riser</span></b></div>
+    <div class="zone"><div class="zh"><b>3 · Step lights <span style="font-weight:500;color:var(--grey)">— LED profile at the foot of each riser</span></b></div>
       <label class="chk" style="font-size:13.5px"><input type="checkbox" id="prof" checked> Show profile lights</label>
       <div class="seg" id="ptone" style="display:flex;gap:6px;margin-top:8px"><button type="button" data-t="warm" class="on">Warm 2700K</button><button type="button" data-t="neutral">Neutral 4000K</button></div>
     </div>
@@ -110,12 +110,12 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     <details>
       <summary>Staircase size &amp; rates</summary>
       <div class="dims">
-        <div><label>Number of steps</label><input type="number" id="steps" value="18" min="1"></div>
-        <div><label>Stair width (ft)</label><input type="number" id="width" value="3.5" step="0.1"></div>
-        <div><label>Tread depth (in)</label><input type="number" id="tread" value="12" step="0.5"></div>
-        <div><label>Riser height (in)</label><input type="number" id="riser" value="6.5" step="0.5"></div>
-        <div><label>Landing length (ft)</label><input type="number" id="ll" value="7" step="0.1"></div>
-        <div><label>Landing width (ft)</label><input type="number" id="lw" value="3.5" step="0.1"></div>
+        <div><label>Number of steps</label><input type="number" id="steps" value="10" min="1"></div>
+        <div><label>Stair width (ft)</label><input type="number" id="width" value="3" step="0.1"></div>
+        <div><label>Tread depth (in)</label><input type="number" id="tread" value="8" step="0.5"></div>
+        <div><label>Riser height (in)</label><input type="number" id="riser" value="8" step="0.5"></div>
+        <div><label>Landing length (ft)</label><input type="number" id="ll" value="3" step="0.1"></div>
+        <div><label>Landing width (ft)</label><input type="number" id="lw" value="3" step="0.1"></div>
         <div><label>Wastage %</label><input type="number" id="waste" value="15"></div>
         <div><label>Laying + polish (₹/sq.ft)</label><input type="number" id="labour" value="250"></div>
         <div><label>Step lights (₹/rft)</label><input type="number" id="lrate" value="180"></div>
@@ -134,6 +134,7 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
 <script>
 (function(){
 var VIEWS=[
+  {id:'model',name:'Staircase model',src:'/staircase-marble/staircase-model.jpg',L:'/staircase-marble/staircase-model-light.png',D:'/staircase-marble/staircase-model-dark.png',lrefL:0.752,lrefD:0.145},
   {id:'main',name:'Main view',src:'/staircase-marble/staircase-main.jpg',L:'/staircase-marble/staircase-main-light.png',D:'/staircase-marble/staircase-main-dark.png',lrefL:0.654,lrefD:0.129},
   {id:'night',name:'Night view',src:'/staircase-marble/staircase-night.jpg',L:'/staircase-marble/staircase-night-light.png',D:'/staircase-marble/staircase-night-dark.png',lrefL:0.763,lrefD:0.119},
   {id:'closeup',name:'Up close',src:'/staircase-marble/staircase-closeup.jpg',L:'/staircase-marble/staircase-closeup-light.png',D:'/staircase-marble/staircase-closeup-dark.png',lrefL:0.71,lrefD:0.125}
@@ -221,22 +222,26 @@ function prep(vw){
     var w=r[0].naturalWidth, h=r[0].naturalHeight, c=document.createElement('canvas'); c.width=w; c.height=h; var x=c.getContext('2d'); x.drawImage(r[0],0,0);
     var base=x.getImageData(0,0,w,h), Lum=new Float32Array(w*h), d=base.data;
     for(var i=0;i<Lum.length;i++){ Lum[i]=(0.2126*d[i*4]+0.7152*d[i*4+1]+0.0722*d[i*4+2])/255; }
-    // blur the render's luminance so its own marble veins don't show through; keeps the lighting
-    (function(){ var Rb=9, t=new Float32Array(w*h);
-      for(var yy=0;yy<h;yy++){ var a=0,row=yy*w; for(var xx=-Rb;xx<w;xx++){ if(xx+Rb<w) a+=Lum[row+xx+Rb]; if(xx-Rb-1>=0) a-=Lum[row+xx-Rb-1]; if(xx>=0) t[row+xx]=a/(2*Rb+1); } }
-      for(var xx2=0;xx2<w;xx2++){ var a2=0; for(var yy2=-Rb;yy2<h;yy2++){ if(yy2+Rb<h) a2+=t[(yy2+Rb)*w+xx2]; if(yy2-Rb-1>=0) a2-=t[(yy2-Rb-1)*w+xx2]; if(yy2>=0) Lum[yy2*w+xx2]=a2/(2*Rb+1); } } })();
     var mL=getMask(r[1],w,h), mD=getMask(r[2],w,h), G=new Float32Array(w*h);
-    for(var x0=0;x0<w;x0++){ for(var y0=4;y0<h-2;y0++){ var k0=y0*w+x0;
-      if(mD[k0]>0.5 && mD[k0-2*w]<0.3 && (mL[k0-4*w]>0.4||mL[k0-3*w]>0.4)){
-        var run=0; while(y0+run<h && mD[(y0+run)*w+x0]>0.3 && run<400) run++;
+    // smooth the render's luminance within each surface only (removes its veins, keeps light and shadow, no bleeding between tread and riser)
+    function blur(src,Rb){ var t=new Float32Array(w*h), o=new Float32Array(w*h);
+      for(var yy=0;yy<h;yy++){ var a=0,row=yy*w; for(var xx=-Rb;xx<w;xx++){ if(xx+Rb<w) a+=src[row+xx+Rb]; if(xx-Rb-1>=0) a-=src[row+xx-Rb-1]; if(xx>=0) t[row+xx]=a; } }
+      for(var xx2=0;xx2<w;xx2++){ var a2=0; for(var yy2=-Rb;yy2<h;yy2++){ if(yy2+Rb<h) a2+=t[(yy2+Rb)*w+xx2]; if(yy2-Rb-1>=0) a2-=t[(yy2-Rb-1)*w+xx2]; if(yy2>=0) o[yy2*w+xx2]=a2; } }
+      return o; }
+    function maskedL(m,Rb){ var lm=new Float32Array(w*h); for(var q=0;q<lm.length;q++) lm[q]=Lum[q]*m[q];
+      var A=blur(lm,Rb), B=blur(m,Rb), out=new Float32Array(w*h); for(var q2=0;q2<out.length;q2++) out[q2]=B[q2]>0.5?A[q2]/B[q2]:Lum[q2]; return out; }
+    var LumL=maskedL(mL,9), LumD=maskedL(mD,45);
+    for(var x0=0;x0<w;x0++){ for(var y0=h-6;y0>2;y0--){ var k0=y0*w+x0;
+      if(mD[k0]>0.5 && mD[k0+2*w]<0.3 && (mL[k0+3*w]>0.4||mL[k0+4*w]>0.4||mL[k0+5*w]>0.4)){
+        var run=0; while(y0-run>0 && mD[(y0-run)*w+x0]>0.3 && run<400) run++;
         if(run<8) continue; var tau=Math.max(4,run*0.32);
-        for(var k=0;k<run;k++){ var gi=(y0+k)*w+x0, gv=(k<2?1.25:Math.exp(-k/tau)); if(gv>G[gi]) G[gi]=gv; }
-        y0+=run; } } }
+        for(var k=0;k<run;k++){ var gi=(y0-k)*w+x0, gv=(k<2?1.25:Math.exp(-k/tau)); if(gv>G[gi]) G[gi]=gv; }
+        y0-=run; } } }
     // smooth the glow along each step so it reads as one continuous strip
     var R=18, tmp=new Float32Array(w*h);
     for(var yy=0;yy<h;yy++){ var acc=0, row=yy*w; for(var xx=-R;xx<w;xx++){ if(xx+R<w) acc+=G[row+xx+R]; if(xx-R-1>=0) acc-=G[row+xx-R-1]; if(xx>=0) tmp[row+xx]=acc/(2*R+1); } }
     for(var q=0;q<G.length;q++){ G[q]=Math.min(1.3, tmp[q]*1.35) * (mD[q]>0.3?1:0); }
-    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,mL:mL,mD:mD,G:G};
+    return cache[vw.id]={w:w,h:h,base:base,Lum:Lum,LumL:LumL,LumD:LumD,mL:mL,mD:mD,G:G};
   });
 }
 function texData(m,w,h,scale,dark){
@@ -260,11 +265,11 @@ function render(flashZone){
       for(var i=0,p=0;i<P.Lum.length;i++,p+=4){
         var r=b[p],g=b[p+1],bl=b[p+2];
         var a=P.mL[i], c=P.mD[i];
-        if(a>0.01){ var s=P.Lum[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*55:0;
+        if(a>0.01){ var s=P.LumL[i]/vw.lrefL, sh=s<1?s:1, hi=s>1?(s-1)*55:0;
           r=r*(1-a)+(TL[p]*sh+hi)*a; g=g*(1-a)+(TL[p+1]*sh+hi)*a; bl=bl*(1-a)+(TL[p+2]*sh+hi)*a; }
-        if(c>0.01){ var s2=P.Lum[i]/vw.lrefD, sh2=s2<1.15?s2:1.15, hi2=s2>1.15?(s2-1.15)*40:0;
+        if(c>0.01){ var s2=P.LumD[i]/vw.lrefD, sh2=s2<1.05?s2:1.05, hi2=0;
           r=r*(1-c)+(TD[p]*sh2+hi2)*c; g=g*(1-c)+(TD[p+1]*sh2+hi2)*c; bl=bl*(1-c)+(TD[p+2]*sh2+hi2)*c; }
-        if(S.prof){ var gg=P.G[i]; if(gg>0.01){ var tc=TONE[S.tone]; gg*=1-0.65*(TD[p]*0.3+TD[p+1]*0.59+TD[p+2]*0.11)/255; r+=tc[0]*gg; g+=tc[1]*gg; bl+=tc[2]*gg; } }
+        if(S.prof){ var gg=P.G[i]; if(gg>0.01){ var tc=TONE[S.tone]; gg*=1-0.65*(TD[p]*0.3+TD[p+1]*0.59+TD[p+2]*0.11)/255; r+=tc[0]*gg*0.85; g+=tc[1]*gg*0.85; bl+=tc[2]*gg*0.85; } }
         o[p]=r; o[p+1]=g; o[p+2]=bl; o[p+3]=255;
       }
       ctx.putImageData(out,0,0); document.getElementById('busy').style.display='none';
