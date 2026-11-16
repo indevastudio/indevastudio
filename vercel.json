@@ -1071,6 +1071,10 @@
     {
       "source": "/projects/vasant-kunj-dda-residence",
       "destination": "/project-vasant-kunj-dda-residence"
+    },
+    {
+      "source": "/projects/signature-global-millennia-gurgaon",
+      "destination": "/project-signature-global-millennia-gurgaon"
     }
   ],
   "headers": [

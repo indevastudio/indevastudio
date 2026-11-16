@@ -216,6 +216,7 @@
     <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-grand-exterior-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/dda-apartment-delhi-grey-kitchen-671.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-master-bedroom-bed-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/studio-workspace-gurgaon-studio-main-floor-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/indeva-studio-office-narela-meeting-table-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-ground-floor-800.webp</image:loc></image:image>
@@ -375,6 +376,18 @@
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-dressing-render-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-zoning-plan-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-modern-bedroom-bed-wall-drawing-800.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/projects/signature-global-millennia-gurgaon</loc>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-master-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-master-bedroom-wardrobe-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-master-bedroom-window-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-master-bedroom-tv-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-guest-bedroom-bed-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-guest-bedroom-wardrobe-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-guest-bedroom-window-view-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/signature-millennia-gurgaon-guest-bedroom-tv-wall-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
