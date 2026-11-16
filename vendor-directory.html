@@ -109,6 +109,28 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
 .leaflet-popup-content b{font-size:14px}
 .pin{width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45)}
 .mtoggle{display:none}
+.tabs{display:flex;gap:4px;background:#E9E8E1;border-radius:10px;padding:3px}
+.tab{border:0;background:none;border-radius:8px;padding:7px 14px;font-weight:700;cursor:pointer;color:var(--muted)}
+.tab.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.app.marbles .filters,.app.marbles .main{display:none}
+.app:not(.marbles) #marbleView{display:none}
+#marbleView{overflow:auto;padding:14px 18px 50px}
+.mbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.mbar .area{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.mbar .area input{width:110px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.mimg{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#E9E8E1;cursor:zoom-in}
+.mbody{padding:11px 13px 13px;display:grid;gap:4px;flex:1}
+.mname{font-weight:700;font-size:15.5px}
+.mkind{font-size:12px;font-weight:600;color:var(--muted)}
+.mrate{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.mrate small{font-size:12px;font-weight:600;color:var(--muted)}
+.mtotal{font-size:13px;color:var(--in);font-weight:700}
+.mnote{font-size:12.5px;color:var(--muted)}
+.mvendor{font-size:13px}
+#zoomDlg{max-width:1100px}
+#zoomDlg img{width:100%;display:block}
 @media (max-width:900px){
   .app{height:auto;min-height:100vh}
   .main{grid-template-columns:1fr}
@@ -118,6 +140,9 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
   .main.showmap .list{display:none}
   .main:not(.showmap) #mapWrap{display:none}
   .grid2{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .mrate{font-size:17px}
+  .mbody{padding:9px 10px 11px}
 }
 </style>
 </head>
@@ -127,6 +152,7 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
 <div class="app" id="app">
   <header class="top">
     <h1>Vendor Directory <small id="totalNote"></small></h1>
+    <div class="tabs" role="tablist"><button class="tab on" data-view="vendors" role="tab">Vendors</button><button class="tab" data-view="marbles" role="tab">Marble rates</button></div>
     <button class="btn link who" id="who" title="Change your name"></button>
     <button class="btn brass" id="addBtn">+ Add vendor</button>
     <button class="btn" id="csvBtn">Export CSV</button>
@@ -149,7 +175,36 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
     <div class="list"><p class="count" id="count"></p><div id="cards"></div></div>
     <div id="mapWrap"><div id="map"></div></div>
   </div>
+  <section id="marbleView" aria-label="Marble and granite rates">
+    <div class="mbar">
+      <input class="search" id="mq" type="search" placeholder="Search stone name…" aria-label="Search stones" style="max-width:320px">
+      <select class="sel" id="mkindF" aria-label="Type"><option value="">Marble &amp; granite</option><option>Marble</option><option>Granite</option></select>
+      <select class="sel" id="msortF" aria-label="Sort"><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="name">Name A–Z</option></select>
+      <label class="area">Area <input id="marea" type="number" min="0" step="1" placeholder="sq.ft"> sq.ft</label>
+      <button class="btn brass" id="addStone" style="margin-left:auto">+ Add stone</button>
+    </div>
+    <p class="count" id="mcount"></p>
+    <div class="mgrid" id="mgrid"></div>
+  </section>
 </div>
+
+<dialog id="zoomDlg"><div class="dlg"><h2 id="zoomTitle"></h2><img id="zoomImg" alt=""><div class="row"><button class="btn" type="button" data-close>Close</button></div></div></dialog>
+
+<dialog id="stoneDlg">
+  <form class="dlg" id="stoneForm" method="dialog">
+    <h2 id="stoneTitle">Add stone</h2>
+    <div class="grid2">
+      <label class="f">Stone name *<input name="name" required></label>
+      <label class="f">Type<select name="kind"><option>Marble</option><option>Granite</option><option>Quartz</option><option>Onyx</option><option>Other</option></select></label>
+      <label class="f">Rate (₹) *<input name="rate" type="number" min="0" step="0.01" required></label>
+      <label class="f">Per<select name="unit"><option>sq.ft</option><option>slab</option><option>running ft</option></select></label>
+    </div>
+    <label class="f">Supplier<select name="vendor_id"><option value="">— Not set —</option></select></label>
+    <label class="f">Photo link<input name="image_url" placeholder="Paste an image link (optional)"><span class="hint">Leave blank to keep the current photo.</span></label>
+    <label class="f">Notes<textarea name="notes" rows="2" placeholder="Thickness, finish, slab size, quote date…"></textarea></label>
+    <div class="row"><button class="btn" type="button" data-close>Cancel</button><button class="btn primary" type="submit">Save stone</button></div>
+  </form>
+</dialog>
 
 <!-- vendor detail -->
 <dialog id="detailDlg"><div class="dlg" id="detailBody"></div></dialog>
@@ -513,6 +568,68 @@ $("#delBtn").addEventListener("click", async () => {
   $("#editDlg").close(); toast("Vendor deleted"); await load();
 });
 
+/* ---------------- marble rates ---------------- */
+const inr = (n) => "₹" + Number(n || 0).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+const mstate = { list: [], q: "", kind: "", sort: "low", area: 0, editing: null, loaded: false };
+async function loadStones() {
+  const { data, error } = await sb.from("vd_materials").select("*").order("sort_order", { nullsFirst: false }).order("name");
+  if (error) { toast("Could not load stones: " + error.message, 5000); return; }
+  mstate.list = data || []; mstate.loaded = true; renderStones();
+}
+function renderStones() {
+  const q = mstate.q.trim().toLowerCase();
+  let list = mstate.list.filter((m) => (!mstate.kind || m.kind === mstate.kind) && (!q || [m.name, m.kind, m.notes].join(" ").toLowerCase().includes(q)));
+  if (mstate.sort === "name") list.sort((a, b) => a.name.localeCompare(b.name));
+  else list.sort((a, b) => (mstate.sort === "high" ? -1 : 1) * ((+a.rate || 0) - (+b.rate || 0)));
+  const vname = (id) => (state.vendors.find((v) => v.id === id) || {}).name;
+  $("#mcount").textContent = `${list.length} stone${list.length === 1 ? "" : "s"}` + (mstate.area ? ` · cost shown for ${mstate.area.toLocaleString("en-IN")} sq.ft` : " · enter an area to see the total cost");
+  $("#mgrid").innerHTML = list.map((m) => `<article class="mcard">
+      ${m.image_url ? `<img class="mimg" src="${esc(m.image_url)}" alt="${esc(m.name)} ${esc(m.kind.toLowerCase())} slab" loading="lazy" data-zoom="${m.id}">` : `<div class="mimg"></div>`}
+      <div class="mbody">
+        <div class="mname">${esc(m.name)}</div>
+        <div class="mkind">${esc(m.kind)}</div>
+        <div class="mrate">${m.rate != null ? inr(m.rate) : "—"} <small>/ ${esc(m.unit)}</small></div>
+        ${mstate.area && m.rate != null && m.unit === "sq.ft" ? `<div class="mtotal">${inr(Math.round(m.rate * mstate.area))} for ${mstate.area.toLocaleString("en-IN")} sq.ft</div>` : ""}
+        ${m.vendor_id && vname(m.vendor_id) ? `<div class="mvendor">Supplier: <button class="btn link" data-vend="${m.vendor_id}">${esc(vname(m.vendor_id))}</button></div>` : ""}
+        ${m.notes ? `<div class="mnote">${esc(m.notes)}</div>` : ""}
+        <div class="mnote">Updated ${new Date(m.updated_at).toLocaleDateString("en-IN")}${m.updated_by ? " by " + esc(m.updated_by) : ""}</div>
+        <div class="actions"><button class="btn small" data-medit="${m.id}">Update rate</button></div>
+      </div></article>`).join("") || `<div class="empty">No stones match.</div>`;
+  $$("#mgrid [data-zoom]").forEach((im) => im.onclick = () => { const m = mstate.list.find((x) => x.id === im.dataset.zoom); $("#zoomTitle").textContent = `${m.name} — ${m.rate != null ? inr(m.rate) + " / " + m.unit : ""}`; $("#zoomImg").src = m.image_url; $("#zoomImg").alt = m.name; $("#zoomDlg").showModal(); });
+  $$("#mgrid [data-medit]").forEach((b) => b.onclick = () => needName(() => openStone(mstate.list.find((x) => x.id === b.dataset.medit))));
+  $$("#mgrid [data-vend]").forEach((b) => b.onclick = () => { const v = state.vendors.find((x) => x.id === b.dataset.vend); v && openDetail(v); });
+}
+function openStone(m) {
+  mstate.editing = m || null; const f = $("#stoneForm"); f.reset();
+  $("#stoneTitle").textContent = m ? "Update " + m.name : "Add stone";
+  const vs = [...state.vendors].sort((a, b) => (b.category === "Marble & Stone") - (a.category === "Marble & Stone") || a.name.localeCompare(b.name));
+  f.vendor_id.innerHTML = `<option value="">— Not set —</option>` + vs.map((v) => `<option value="${v.id}">${esc(v.name)}${v.category === "Marble & Stone" ? "" : " (" + esc(v.category) + ")"}</option>`).join("");
+  if (m) { f.name.value = m.name; f.kind.value = m.kind; f.rate.value = m.rate ?? ""; f.unit.value = m.unit; f.vendor_id.value = m.vendor_id || ""; f.notes.value = m.notes || ""; }
+  $("#stoneDlg").showModal();
+}
+$("#stoneForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); const f = e.target; const m = mstate.editing;
+  const row = { name: f.name.value.trim(), kind: f.kind.value, rate: f.rate.value === "" ? null : +f.rate.value, unit: f.unit.value, vendor_id: f.vendor_id.value || null, notes: f.notes.value.trim() || null, updated_by: state.me };
+  if (f.image_url.value.trim()) row.image_url = f.image_url.value.trim();
+  const res = m ? await sb.from("vd_materials").update(row).eq("id", m.id) : await sb.from("vd_materials").insert(row);
+  if (res.error) { toast("Could not save: " + res.error.message, 5000); return; }
+  $("#stoneDlg").close(); toast(m ? "Rate updated" : "Stone added"); loadStones();
+});
+$("#addStone").addEventListener("click", () => needName(() => openStone()));
+$("#mq").addEventListener("input", (e) => { mstate.q = e.target.value; renderStones(); });
+$("#mkindF").addEventListener("change", (e) => { mstate.kind = e.target.value; renderStones(); });
+$("#msortF").addEventListener("change", (e) => { mstate.sort = e.target.value; renderStones(); });
+$("#marea").addEventListener("input", (e) => { mstate.area = Math.max(0, +e.target.value || 0); renderStones(); });
+function setView(v) {
+  $("#app").classList.toggle("marbles", v === "marbles");
+  $$(".tab").forEach((t) => t.classList.toggle("on", t.dataset.view === v));
+  try { history.replaceState(null, "", v === "marbles" ? "#marbles" : location.pathname); } catch {}
+  if (v === "marbles" && !mstate.loaded) loadStones();
+  if (v !== "marbles" && map) setTimeout(() => map.invalidateSize(), 50);
+}
+$$(".tab").forEach((t) => t.addEventListener("click", () => setView(t.dataset.view)));
+$$("#zoomDlg [data-close],#stoneDlg [data-close]").forEach((b) => b.addEventListener("click", () => b.closest("dialog").close()));
+
 /* ---------------- csv ---------------- */
 $("#csvBtn").addEventListener("click", () => {
   const cols = ["name", "category", "deals_in", "contact_person", "phones", "email", "website", "address", "area", "city", "avg_stars", "ratings", "needs_check", "notes"];
@@ -525,6 +642,7 @@ $("#csvBtn").addEventListener("click", () => {
 /* ---------------- start ---------------- */
 initMap();
 load();
+if (location.hash === "#marbles") setView("marbles");
 if (!state.me) askName();
 </script>
 </body>
