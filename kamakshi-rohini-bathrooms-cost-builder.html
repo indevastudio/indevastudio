@@ -573,11 +573,11 @@ const SECTIONS = [
 },
 {
   id:"design", tab:"Design & Execution", letter:"D", title:"Design & Execution",
-  intro:"Indéva's design consultancy and site execution management for the renovation, as a lump sum.",
+  intro:"Indéva's design and execution for the renovation, as a lump sum: 3D visualisation, sourcing, coordination of all trades and vendors, and site management through to handover.",
   hero:[],
   groups:[{note:null, items:[
-    {id:"designexec", room:"All 3 bathrooms", name:"Design Consultancy & Site Execution Management", unit:"lumpsum", qty:1, rate:20000, on:true,
-     spec:"Tile layout and selection, fittings selection, working drawings, BOQ and on-site supervision through to handover. Lump sum ₹20,000."},
+    {id:"designexec", room:"All 3 bathrooms", name:"Design & Execution — 3D visualisation, sourcing, coordination and site management", unit:"lumpsum", qty:1, rate:20000, on:true,
+     spec:"<b>3D visualisation</b> of all three bathrooms, tile layout and selection, fittings selection, working drawings and BOQ · <b>Sourcing</b> of tiles, sanitaryware, fittings, mirrors and lights at the best dealer rates · <b>Coordination</b> of the tiling, plumbing and electrical teams and vendors · <b>Site management</b> and on-site supervision from dismantling through to handover. Lump sum ₹20,000."},
   ]}]
 },
 ];
@@ -690,6 +690,7 @@ function panelOverview(){
     <div class="panel-head"><h2>Project Overview</h2>
       <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles with a wall niche, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set, wall mirror and wall light in each bathroom, and Indéva's design and execution. With the selected fittings (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.49 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.49 lakh up to ₹3.69 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
+    <div class="item"><div class="item-title">Timeline</div><div class="item-spec" style="margin-bottom:0"><b>20 to 30 days</b> for the complete work, from dismantling to handover of all three bathrooms.</div></div>
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
       <b>Bathroom 2</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
@@ -712,7 +713,7 @@ function panelCostSheet(){
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
     ${rows}
-    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Ms. Kamakshi · Rohini Sector 7 — 3 bathroom renovation</div></div><div class="value">${fmt(grandTotal())}</div></div>
+    <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Ms. Kamakshi · Rohini Sector 7 — 3 bathroom renovation · Timeline 20–30 days</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
     <p class="foot-note">Excludes GST, transportation, waterproofing, geysers, exhaust fans, accessories, vanities and electrical work. Tile quantities include no deduction for openings. Sanitary prices are current dealer and online rates and are confirmed with the Delhi dealer before ordering. Final quantities are measured on site.</p>
   </section>`;
