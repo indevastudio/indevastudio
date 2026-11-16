@@ -530,6 +530,11 @@ const SECTIONS = [
       {id:"f2", room:B2, name:"Floor tiles — anti-skid", unit:"sq.ft.", qty:60.125, rate:70, on:true, spec:"6.5 ft × 9.25 ft = 60.13 sq.ft. Anti-skid matt vitrified floor tiles (Kajaria / Somany / Johnson). Supply rate ₹70/sq.ft."},
       {id:"f3", room:B3, name:"Floor tiles — anti-skid", unit:"sq.ft.", qty:31.98, rate:70, on:true, spec:"6.5 ft × 4.92 ft = 31.98 sq.ft. Anti-skid matt vitrified floor tiles (Kajaria / Somany / Johnson). Supply rate ₹70/sq.ft."},
     ]},
+    {note:"Wall niche — ₹1,000 per bathroom", items:[
+      {id:"n1", room:B1, name:"Wall niche in the shower area", unit:"No.", qty:1, rate:1000, on:true, spec:"Recessed wall niche in the shower wall for toiletries, cut into the wall and finished with tiles. ₹1,000 each."},
+      {id:"n2", room:B2, name:"Wall niche in the shower area", unit:"No.", qty:1, rate:1000, on:true, spec:"Recessed wall niche in the shower wall for toiletries, cut into the wall and finished with tiles. ₹1,000 each."},
+      {id:"n3", room:B3, name:"Wall niche in the shower area", unit:"No.", qty:1, rate:1000, on:true, spec:"Recessed wall niche in the shower wall for toiletries, cut into the wall and finished with tiles. ₹1,000 each."},
+    ]},
     {note:"Adhesive and laying — on the total tiled area of 1,096.47 sq.ft. (walls + floors)", items:[
       {id:"adh", room:"All 3 bathrooms", name:"Tile adhesive bags", unit:"bags", qty:110, rate:250, on:true, spec:"20 bags per 200 sq.ft. of tiling: 1,096.47 sq.ft. ÷ 200 × 20 = 109.6, rounded up to 110 bags at ₹250 per bag."},
       {id:"lay", room:"All 3 bathrooms", name:"Tile laying — labour", unit:"sq.ft.", qty:1096.47, rate:30, on:true, spec:"Laying wall and floor tiles with adhesive, levelling, spacers and grouting, at ₹30/sq.ft. on 1,096.47 sq.ft."},
@@ -683,7 +688,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set, wall mirror and wall light in each bathroom, and Indéva's design and execution. With the selected fittings (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.46 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.46 lakh up to ₹3.66 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles with a wall niche, new anti-skid floor tiles, new plumbing, a new WC, pedestal basin, shower set, wall mirror and wall light in each bathroom, and Indéva's design and execution. With the selected fittings (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.49 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.49 lakh up to ₹3.69 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
