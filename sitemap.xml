@@ -22,7 +22,7 @@
     <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-parents-bedroom-full-view-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/villa-narela-kitchen-tall-units-800.webp</image:loc></image:image>
-    <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-mural-headboard-wall-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/about</loc>
@@ -379,6 +379,7 @@
   <url>
     <loc>https://www.indevastudio.com/insights</loc>
     <priority>0.8</priority>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-mural-headboard-wall-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/mini-farmhouse-delhi-primary-elevation-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/south-delhi-neoclassical-residence-living-room-800.webp</image:loc></image:image>
     <image:image><image:loc>https://www.indevastudio.com/patel-nagar-retail-store-shirt-wall-800.webp</image:loc></image:image>
@@ -597,6 +598,17 @@
     <loc>https://www.indevastudio.com/insights/custom-furniture-construction-guide</loc>
     <lastmod>2026-08-12</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.indevastudio.com/insights/dda-flat-interior-design-joinery-and-light-vasant-kunj</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-mural-headboard-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-powder-washroom-basin-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-window-seat-and-tv-wall-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-bed-wall-straight-on-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-dining-towards-living-render-800.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.indevastudio.com/vasant-kunj-dda-residence-kitchen-elevation-drawing-800.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://www.indevastudio.com/insights/dda-flat-renovation-cost-guide</loc>

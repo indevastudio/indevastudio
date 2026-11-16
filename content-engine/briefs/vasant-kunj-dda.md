@@ -1,6 +1,6 @@
 ---
 id: vasant-kunj-dda
-status: ready          # ready → written (PR open) → published (merged). use "hold" to skip.
+status: published          # ready → written (PR open) → published (merged). use "hold" to skip.
 priority: 5            # lower runs first
 project: /projects/vasant-kunj-dda-residence
 target_keyword: "dda flat interior design"

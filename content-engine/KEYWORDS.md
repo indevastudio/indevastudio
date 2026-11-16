@@ -28,7 +28,7 @@ it would compete with it. `check.py` reads this table. Volumes: monthly Google s
 | clothing store interior design | /insights/clothing-store-interior-design-let-the-shirts-sell | 1000 |
 | neoclassical interior design | /insights/neoclassical-interior-design-apartment-south-delhi | 480 |
 | small farmhouse design in india | /insights/small-farmhouse-design-india-zone-the-open-plan | 390 |
-| dda flat interior design | (open — brief: vasant-kunj-dda) | 10 |
+| dda flat interior design | /insights/dda-flat-interior-design-joinery-and-light-vasant-kunj | 10 |
 | design studio office interior | (open — brief: studio-workspace-gurgaon) | - |
 
 When an article is published, replace "(open — …)" with its URL.
