@@ -123,29 +123,13 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
 </head>
 <body>
 
-<section class="login" id="login">
-  <form id="loginForm" autocomplete="on">
-    <div>
-      <h1>Vendor Directory</h1>
-      <p class="muted" style="margin:6px 0 0">Indéva Studio team only. Sign in with your studio email.</p>
-    </div>
-    <label>Email <input id="lgEmail" type="email" required autocomplete="username"></label>
-    <label>Password <input id="lgPass" type="password" autocomplete="current-password"></label>
-    <button class="btn primary" type="submit">Sign in</button>
-    <div class="or">or</div>
-    <button class="btn" type="button" id="magicBtn">Email me a sign-in link</button>
-    <p class="msg" id="loginMsg" role="status"></p>
-  </form>
-</section>
 
-<div class="app" id="app" hidden>
+<div class="app" id="app">
   <header class="top">
     <h1>Vendor Directory <small id="totalNote"></small></h1>
-    <span class="who" id="who"></span>
+    <button class="btn link who" id="who" title="Change your name"></button>
     <button class="btn brass" id="addBtn">+ Add vendor</button>
-    <button class="btn" id="teamBtn" hidden>Team access</button>
     <button class="btn" id="csvBtn">Export CSV</button>
-    <button class="btn" id="signOut">Sign out</button>
   </header>
   <div class="filters">
     <div class="frow">
@@ -232,29 +216,22 @@ dialog::backdrop{background:rgba(30,36,34,.4)}
   </form>
 </dialog>
 
-<!-- team -->
-<dialog id="teamDlg">
-  <div class="dlg">
-    <h2>Team access</h2>
-    <p class="muted" style="margin:0">People on this list can view, add and rate vendors. They sign in with this email, using a password or the "Email me a sign-in link" button. Only you can delete vendors or change this list.</p>
-    <form class="frow" id="teamForm">
-      <input class="search" name="email" type="email" required placeholder="name@indevastudio.com" style="min-width:200px">
-      <input class="search" name="name" placeholder="Name (optional)" style="min-width:140px;flex:.6">
-      <button class="btn primary" type="submit">Add</button>
-    </form>
-    <div id="teamList"></div>
-    <div class="row"><button class="btn" type="button" data-close>Close</button></div>
-  </div>
+<!-- name -->
+<dialog id="nameDlg">
+  <form class="dlg" id="nameForm" method="dialog">
+    <h2>Who's using the directory?</h2>
+    <p class="muted" style="margin:0">Your name is shown next to the ratings and vendors you add, so the team knows who to ask. It's saved on this device only.</p>
+    <label class="f">Your name<input name="who" required autocomplete="name" placeholder="e.g. Salman"></label>
+    <div class="row"><button class="btn primary" type="submit">Continue</button></div>
+  </form>
 </dialog>
 
 <div class="toast" id="toast" role="status" hidden></div>
 
-<script src="/auth-kit.js"></script>
 <script>
 const SUPABASE_URL = "https://rolarfaotykmprzvcmgh.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI";
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-if (window.AuthKit) AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -267,45 +244,17 @@ const colorOf = (c) => { const i = CATS.indexOf(c); if (i >= 0) return PALETTE[i
 
 const state = { me: "", admin: false, vendors: [], ratings: [], cat: "", q: "", city: "", sort: "rating", check: false, active: null, editing: null, rating: null, pick: null };
 
-/* ---------------- auth ---------------- */
-$("#loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault(); const m = $("#loginMsg"); m.className = "msg"; m.textContent = "";
-  const pass = $("#lgPass").value;
-  if (!pass) { m.textContent = "Enter your password, or use the sign-in link below."; return; }
-  const { error } = await sb.auth.signInWithPassword({ email: $("#lgEmail").value.trim(), password: pass });
-  if (error) m.textContent = "Sign-in failed: " + error.message;
-});
-$("#magicBtn").addEventListener("click", async () => {
-  const m = $("#loginMsg"); m.className = "msg"; const email = $("#lgEmail").value.trim();
-  if (!email) { m.textContent = "Enter your email first."; return; }
-  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + "/vendor-directory" } });
-  if (error) { m.textContent = "Could not send the link: " + error.message; return; }
-  m.className = "msg ok"; m.textContent = "Check your inbox for a sign-in link from Supabase.";
-});
-$("#signOut").addEventListener("click", () => sb.auth.signOut());
-
-let entered = false;
-sb.auth.onAuthStateChange((_e, session) => {
-  if (session && !entered) enter(session);
-  if (!session) { entered = false; $("#app").hidden = true; $("#login").hidden = false; }
-});
-
-async function enter(session) {
-  entered = true;
-  state.me = (session.user.email || "").toLowerCase();
-  const [{ data: staff }, { data: admin }] = await Promise.all([sb.rpc("vd_is_staff"), sb.rpc("et_is_admin")]);
-  if (!staff) {
-    $("#loginMsg").className = "msg";
-    $("#loginMsg").textContent = state.me + " is not on the vendor directory team list. Ask Arpit to add you under Team access.";
-    await sb.auth.signOut(); return;
-  }
-  state.admin = !!admin;
-  $("#teamBtn").hidden = !state.admin;
-  $("#who").textContent = state.me;
-  $("#login").hidden = true; $("#app").hidden = false;
-  initMap();
-  await load();
+/* ---------------- who ---------------- */
+const store = { get: (k) => { try { return localStorage.getItem(k) || ""; } catch { return ""; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch {} } };
+function setWho(n) { state.me = n; $("#who").textContent = n ? "You: " + n + " (change)" : "Set your name"; }
+function askName(then) {
+  const f = $("#nameForm"); f.who.value = state.me || "";
+  f.onsubmit = (e) => { e.preventDefault(); const n = f.who.value.trim(); if (!n) return; store.set("vd_name", n); setWho(n); $("#nameDlg").close(); then && then(); };
+  $("#nameDlg").showModal();
 }
+const needName = (fn) => (state.me ? fn() : askName(fn));
+$("#who").addEventListener("click", () => askName(() => render()));
+setWho(store.get("vd_name"));
 
 /* ---------------- data ---------------- */
 async function load() {
@@ -361,13 +310,13 @@ const isMobileNo = (p) => { const d = p.replace(/\D/g, ""); return /^(91)?[6-9]\
 function render() {
   const list = filtered();
   $("#count").textContent = `${list.length} vendor${list.length === 1 ? "" : "s"}${state.cat ? " in " + state.cat : ""}` + (list.length ? ` · ${list.filter((v) => v.lat == null).length} without a map pin` : "");
-  $("#cards").innerHTML = list.length ? list.map(cardHtml).join("") : `<div class="empty">No vendors match. <button class="btn link" onclick="openEdit()">Add one</button></div>`;
+  $("#cards").innerHTML = list.length ? list.map(cardHtml).join("") : `<div class="empty">No vendors match. <button class="btn link" onclick="needName(() => openEdit())">Add one</button></div>`;
   $$("#cards .vcard").forEach((el) => {
     el.addEventListener("click", (e) => { if (e.target.closest("a,button")) return; focusVendor(el.dataset.id, true); });
   });
   $$("#cards [data-act]").forEach((b) => b.addEventListener("click", (e) => {
     e.stopPropagation(); const v = state.vendors.find((x) => x.id === b.dataset.id);
-    if (b.dataset.act === "rate") openRate(v); else if (b.dataset.act === "edit") openEdit(v); else if (b.dataset.act === "more") openDetail(v);
+    if (b.dataset.act === "rate") needName(() => openRate(v)); else if (b.dataset.act === "edit") needName(() => openEdit(v)); else if (b.dataset.act === "more") openDetail(v);
   }));
   drawMarkers(list);
 }
@@ -468,8 +417,8 @@ function openDetail(v) {
         <div class="stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>${r.comment ? `<div>${esc(r.comment)}</div>` : ""}</div>`).join("") || `<p class="muted" style="margin:0">No reviews yet. Be the first to rate this vendor after working with them.</p>`}
     </div>
     <div class="row"><button class="btn" type="button" id="dClose">Close</button></div>`;
-  $("#dRate").onclick = () => { $("#detailDlg").close(); openRate(v); };
-  $("#dEdit").onclick = () => { $("#detailDlg").close(); openEdit(v); };
+  $("#dRate").onclick = () => { $("#detailDlg").close(); needName(() => openRate(v)); };
+  $("#dEdit").onclick = () => { $("#detailDlg").close(); needName(() => openEdit(v)); };
   $("#dClose").onclick = () => $("#detailDlg").close();
   $("#detailDlg").showModal();
 }
@@ -513,7 +462,7 @@ function setPin(lat, lng, zoom) {
 function openEdit(v) {
   state.editing = v || null; const f = $("#editForm"); f.reset();
   $("#editTitle").textContent = v ? "Edit " + v.name : "Add vendor";
-  $("#delBtn").hidden = !(v && state.admin);
+  $("#delBtn").hidden = true;
   if (v) {
     for (const k of ["name", "category", "deals_in", "contact_person", "email", "website", "address", "area", "city", "notes"]) f[k].value = v[k] || "";
     f.phones.value = (v.phones || []).join(", "); f.needs_check.checked = !!v.needs_check;
@@ -526,7 +475,7 @@ function openEdit(v) {
   }
   setTimeout(() => { pickMap.invalidateSize(); if (v && v.lat != null) setPin(v.lat, v.lng, 15); else { setPin(null); pickMap.setView([28.6, 77.15], 10); } }, 60);
 }
-$("#addBtn").addEventListener("click", () => openEdit());
+$("#addBtn").addEventListener("click", () => needName(() => openEdit()));
 $("#geoBtn").addEventListener("click", async () => {
   const f = $("#editForm"); const q = [f.address.value, f.area.value, f.city.value].filter(Boolean).join(", ") || f.name.value;
   if (!q) { toast("Type an address, area or city first."); return; }
@@ -553,7 +502,7 @@ $("#editForm").addEventListener("submit", async (e) => {
     needs_check: f.needs_check.checked, lat: state.pick ? state.pick.lat : null, lng: state.pick ? state.pick.lng : null,
   };
   if (!row.name) return;
-  const res = v ? await sb.from("vd_vendors").update(row).eq("id", v.id) : await sb.from("vd_vendors").insert({ ...row, source: "staff" });
+  const res = v ? await sb.from("vd_vendors").update(row).eq("id", v.id) : await sb.from("vd_vendors").insert({ ...row, source: "staff", created_by: state.me });
   if (res.error) { toast("Could not save: " + res.error.message, 5000); return; }
   $("#editDlg").close(); toast(v ? "Vendor updated" : "Vendor added"); await load();
 });
@@ -564,22 +513,6 @@ $("#delBtn").addEventListener("click", async () => {
   $("#editDlg").close(); toast("Vendor deleted"); await load();
 });
 
-/* ---------------- team ---------------- */
-async function loadTeam() {
-  const { data, error } = await sb.from("vd_staff").select("*").order("email");
-  $("#teamList").innerHTML = error ? `<p class="muted">${esc(error.message)}</p>` : (data.length ? data.map((p) => `<div class="frow review" style="justify-content:space-between"><span>${esc(p.email)}${p.name ? ` <span class="muted">· ${esc(p.name)}</span>` : ""}</span><button class="btn small danger" data-rm="${esc(p.email)}">Remove</button></div>`).join("") : `<p class="muted" style="margin:0">No team members yet. You (as admin) always have access.</p>`);
-  $$("#teamList [data-rm]").forEach((b) => b.onclick = async () => {
-    if (!confirm("Remove " + b.dataset.rm + " from the vendor directory?")) return;
-    const { error } = await sb.from("vd_staff").delete().eq("email", b.dataset.rm); if (error) toast(error.message, 5000); loadTeam();
-  });
-}
-$("#teamBtn").addEventListener("click", () => { $("#teamDlg").showModal(); loadTeam(); });
-$("#teamForm").addEventListener("submit", async (e) => {
-  e.preventDefault(); const email = e.target.email.value.trim().toLowerCase(); const name = e.target.name.value.trim() || null;
-  const { error } = await sb.from("vd_staff").upsert({ email, name }); if (error) { toast(error.message, 5000); return; }
-  e.target.reset(); toast("Added " + email); loadTeam();
-});
-
 /* ---------------- csv ---------------- */
 $("#csvBtn").addEventListener("click", () => {
   const cols = ["name", "category", "deals_in", "contact_person", "phones", "email", "website", "address", "area", "city", "avg_stars", "ratings", "needs_check", "notes"];
@@ -588,6 +521,11 @@ $("#csvBtn").addEventListener("click", () => {
   const blob = new Blob(["﻿" + cols.join(",") + "\n" + rows.join("\n")], { type: "text/csv" });
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "indeva-vendors.csv"; a.click(); URL.revokeObjectURL(a.href);
 });
+
+/* ---------------- start ---------------- */
+initMap();
+load();
+if (!state.me) askName();
 </script>
 </body>
 </html>
