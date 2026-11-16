@@ -108,20 +108,13 @@ summary{cursor:pointer;font-weight:600;font-size:13.5px}
     <table id="bd"></table>
 
     <details>
-      <summary>Staircase size &amp; rates</summary>
+      <summary>Quantities &amp; rates</summary>
       <div class="dims">
-        <div><label>Number of steps</label><input type="number" id="steps" value="18" min="1"></div>
-        <div><label>Stair width (ft)</label><input type="number" id="width" value="3" step="0.1"></div>
-        <div><label>Tread depth (in)</label><input type="number" id="tread" value="8" step="0.5"></div>
-        <div><label>Riser height (in)</label><input type="number" id="riser" value="8" step="0.5"></div>
-        <div><label>Landing length (ft)</label><input type="number" id="ll" value="0" step="0.1"></div>
-        <div><label>Landing width (ft)</label><input type="number" id="lw" value="0" step="0.1"></div>
-        <div><label>Wastage %</label><input type="number" id="waste" value="15"></div>
-        <div><label>Laying + polish (₹/sq.ft)</label><input type="number" id="labour" value="250"></div>
-        <div><label>Step lights (₹/rft)</label><input type="number" id="lrate" value="180"></div>
+        <div><label>Top marble quantity (sq.ft)</label><input type="number" id="qtyL" value="300" min="0"></div>
+        <div><label>Riser marble quantity (sq.ft)</label><input type="number" id="qtyD" value="100" min="0"></div>
+        <div><label>Step lights (rft)</label><input type="number" id="lrft" value="54" min="0"></div>
+        <div><label>Step lights rate (₹/rft)</label><input type="number" id="lrate" value="180"></div>
       </div>
-      <label class="chk"><input type="checkbox" id="sides"> Clad the exposed stair sides (zig-zag edges)</label>
-      <label class="chk"><input type="checkbox" id="soffit"> Clad the underside of the upper flight</label>
       <p class="sub" style="margin-top:10px">Marble rates are allowances per sq.ft. for the slab; edit the rates of the selected marbles here.</p>
       <div id="rateEdit"></div>
     </details>
@@ -199,26 +192,15 @@ document.getElementById('upfile').onchange=function(){
 /* ---------- price ---------- */
 function v(id){ return parseFloat(document.getElementById(id).value)||0; }
 function price(){
-  var n=v('steps'), w=v('width'), t=v('tread')/12, r=v('riser')/12, waste=1+v('waste')/100, lab=v('labour');
-  var aT=n*w*t, aR=n*w*r, aLand=v('ll')*v('lw'), aSide=document.getElementById('sides').checked? n*t*r : 0,
-      aSoff=document.getElementById('soffit').checked? w*Math.hypot(n/2*t, n/2*r) : 0;
-  var aL=aT+aLand+aSide+aSoff, mL=byId(S.L), mD=byId(S.D);
-  var rows=[
-    ['Treads ('+n+' × '+w+' ft × '+v('tread')+'″)', aT, mL],
-  ];
-  if(aLand) rows.push(['Landing ('+v('ll')+' × '+v('lw')+' ft)', aLand, mL]);
-  if(aSide) rows.push(['Stair sides (zig-zag edges)', aSide, mL]);
-  if(aSoff) rows.push(['Underside of upper flight', aSoff, mL]);
-  rows.push(['Risers ('+n+' × '+w+' ft × '+v('riser')+'″)', aR, mD]);
-  var tot=0, html='', area=0, lrft=0;
-  if(S.prof){ lrft=n*w; }
-  rows.forEach(function(x){ var a=x[1]*waste, amt=a*(x[2].rate+lab); tot+=amt; area+=x[1];
-    html+='<tr><td>'+x[0]+'<br><span style="color:var(--grey)">'+x[2].name+' · '+a.toFixed(1)+' sq.ft incl. wastage × (₹'+x[2].rate.toLocaleString('en-IN')+' + ₹'+lab+' laying)</span></td><td class="n">'+inr(amt)+'</td></tr>'; });
-  if(lrft){ var la=lrft*v('lrate'); tot+=la; html+='<tr><td>Step profile lights ('+n+' × '+w+' ft)<br><span style="color:var(--grey)">'+lrft.toFixed(1)+' rft × ₹'+v('lrate')+' · Philips LED strip with driver in aluminium profile</span></td><td class="n">'+inr(la)+'</td></tr>'; }
+  var qL=v('qtyL'), qD=v('qtyD'), mL=byId(S.L), mD=byId(S.D), lrft=S.prof?v('lrft'):0;
+  var rows=[['Top marble — treads & landing',qL,mL],['Riser marble',qD,mD]], tot=0, html='';
+  rows.forEach(function(x){ var amt=x[1]*x[2].rate; tot+=amt;
+    html+='<tr><td>'+x[0]+'<br><span style="color:var(--grey)">'+x[2].name+' · '+x[1].toLocaleString('en-IN')+' sq.ft × ₹'+x[2].rate.toLocaleString('en-IN')+'/sq.ft</span></td><td class="n">'+inr(amt)+'</td></tr>'; });
+  if(lrft){ var la=lrft*v('lrate'); tot+=la; html+='<tr><td>Step profile lights<br><span style="color:var(--grey)">'+lrft+' rft × ₹'+v('lrate')+' · Philips LED strip in aluminium profile</span></td><td class="n">'+inr(la)+'</td></tr>'; }
   document.getElementById('bd').innerHTML=html+'<tr><td><b>Total</b></td><td class="n"><b>'+inr(tot)+'</b></td></tr>';
   document.getElementById('total').textContent=inr(tot); document.getElementById('plabel').innerHTML=(lrft?'Marble &amp; step lights':'Marble')+' · full staircase · excl. GST';
-  document.getElementById('area').textContent=area.toFixed(0)+' sq.ft of marble + '+v('waste')+'% wastage · '+mL.name+' with '+mD.name+' risers';
-  var msg='Hi Indéva, for my staircase I like '+mL.name+' for the treads and landing with '+mD.name+' risers'+(lrft?' and step profile lights':'')+'. Estimate on your page: '+inr(tot)+' (excl. GST).';
+  document.getElementById('area').textContent=qL+' sq.ft '+mL.name+' + '+qD+' sq.ft '+mD.name;
+  var msg='Hi Indéva, for my staircase I like '+mL.name+' ('+qL+' sq.ft) for the top and '+mD.name+' ('+qD+' sq.ft) for the risers'+(lrft?' with step profile lights':'')+'. Estimate on your page: '+inr(tot)+' (excl. GST).';
   document.getElementById('wa').href='https://wa.me/919717881083?text='+encodeURIComponent(msg);
 }
 
