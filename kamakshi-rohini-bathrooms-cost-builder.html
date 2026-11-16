@@ -503,7 +503,22 @@ const SAN_OPT = {
 const B1="Bathroom 1 (6'6\" × 9'3\")", B2="Bathroom 2 (6'6\" × 9'3\")", B3="Small Bathroom (6'6\" × 4'11\")";
 const SECTIONS = [
 {
-  id:"tiling", tab:"Tiling", letter:"A", title:"Tiling — Walls, Floors, Adhesive and Laying",
+  id:"demo", tab:"Dismantling", letter:"A", title:"Dismantling and Debris Removal",
+  intro:"Removing the existing wall and floor tiles in all three bathrooms down to the base plaster and screed, ready for new tiling, and carting away the debris (malba).",
+  hero:[],
+  groups:[
+    {note:"Dismantling of existing tiles — ₹40/sq.ft. on 1,096.47 sq.ft. (walls 944.24 + floors 152.23)", items:[
+      {id:"dis1", room:B1, name:"Dismantling existing wall and floor tiles", unit:"sq.ft.", qty:406.625, rate:40, on:true, spec:"Removing existing wall tiles (346.5 sq.ft.) and floor tiles (60.13 sq.ft.) with their bedding, and cleaning the surface for new tiling. ₹40/sq.ft."},
+      {id:"dis2", room:B2, name:"Dismantling existing wall and floor tiles", unit:"sq.ft.", qty:406.625, rate:40, on:true, spec:"Removing existing wall tiles (346.5 sq.ft.) and floor tiles (60.13 sq.ft.) with their bedding, and cleaning the surface for new tiling. ₹40/sq.ft."},
+      {id:"dis3", room:B3, name:"Dismantling existing wall and floor tiles", unit:"sq.ft.", qty:283.22, rate:40, on:true, spec:"Removing existing wall tiles (251.24 sq.ft.) and floor tiles (31.98 sq.ft.) with their bedding, and cleaning the surface for new tiling. ₹40/sq.ft."},
+    ]},
+    {note:"Debris (malba) removal", items:[
+      {id:"malba", room:"All 3 bathrooms", name:"Malba trolley — debris removal", unit:"trolley", qty:2, rate:2000, on:true, spec:"Bagging the dismantled tiles and debris, carrying it down and carting it away from site by trolley. 2 trolleys at ₹2,000 each."},
+    ]},
+  ]
+},
+{
+  id:"tiling", tab:"Tiling", letter:"B", title:"Tiling — Walls, Floors, Adhesive and Laying",
   intro:"Full-height wall tiles to the 11 ft ceiling and new floor tiles in all three bathrooms. Areas are worked out from the sizes given: wall area = room perimeter × 11 ft height, with no deduction for doors or windows (the extra covers cutting wastage). Tile rates are for supply; laying and adhesive are listed separately.",
   hero:[],
   groups:[
@@ -524,7 +539,7 @@ const SECTIONS = [
   ]
 },
 {
-  id:"sanitary", tab:"Plumbing & Sanitary", letter:"B", title:"Plumbing and Sanitary Fittings",
+  id:"sanitary", tab:"Plumbing & Sanitary", letter:"C", title:"Plumbing and Sanitary Fittings",
   intro:"New plumbing in each bathroom, and a floor-mounted WC, pedestal basin and shower set in each one. Choose a brand package per bathroom: you can keep all three the same or mix them, for example a premium set in the main bathroom and Economy in the small one. Prices are current Indian dealer and online rates; Delhi dealer rates can differ by 10–20% and are confirmed before ordering.",
   hero:[],
   groups:[
@@ -656,7 +671,7 @@ function overviewBreakdown(){
 function panelOverview(){
   return `<section class="panel" id="panel-overview">
     <div class="panel-head"><h2>Project Overview</h2>
-      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin, shower set and mirror in each bathroom. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.04 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.04 lakh (Economy) up to ₹3.23 lakh (Cera Senator).</p></div>
+      <p>Renovation of three bathrooms at Ms. Kamakshi's home in Rohini Sector 7: dismantling the old tiles and carting away the debris, full-height wall tiles, new anti-skid floor tiles, new plumbing, and a new WC, pedestal basin, shower set and mirror in each bathroom. With the Economy fittings selected (Essco by Jaquar WC, Cera basin, Jaquar shower mixer), the estimate comes to about <b>₹2.53 lakh (excl. GST)</b>. Change the sanitary package in <b>Plumbing & Sanitary</b> to see the total from ₹2.53 lakh (Economy) up to ₹3.72 lakh (Cera Senator).</p></div>
     ${overviewBreakdown()}
     <div class="item"><div class="item-title">Bathroom sizes and areas</div><div class="item-spec" style="margin-bottom:0">
       <b>Bathroom 1</b> 6.5 × 9.25 ft · walls 346.5 sq.ft. · floor 60.13 sq.ft.<br>
@@ -666,7 +681,7 @@ function panelOverview(){
     <div class="item"><div class="item-title">Sanitary packages per bathroom (WC + pedestal basin + shower set)</div><div class="item-spec" style="margin-bottom:0">
       ${Object.entries(SAN_OPT).map(([n,o])=>`<b>${n}</b> — ${fmt(o.rate)} per bathroom · ${fmt(o.rate*3)} for all three`).join('<br>')}</div></div>
     <div class="item"><div class="item-title">Not included</div><div class="item-spec" style="margin-bottom:0">
-      Demolition of old tiles and debris removal, waterproofing, geysers and exhaust fans, bathroom accessories (towel rails, soap dishes), vanities, electrical work, false ceiling, doors and GST. Basin taps and wastes are listed as an optional allowance. These can be added once the site is inspected.</div></div>
+      Waterproofing, geysers and exhaust fans, bathroom accessories (towel rails, soap dishes), vanities, electrical work, false ceiling, doors and GST. Basin taps and wastes are listed as an optional allowance. These can be added once the site is inspected.</div></div>
   </section>`;
 }
 
@@ -682,7 +697,7 @@ function panelCostSheet(){
     ${rows}
     <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Ms. Kamakshi · Rohini Sector 7 — 3 bathroom renovation</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
-    <p class="foot-note">Excludes GST, transportation, demolition and debris removal, waterproofing, geysers, exhaust fans, accessories, vanities and electrical work. Tile quantities include no deduction for openings. Sanitary prices are current dealer and online rates and are confirmed with the Delhi dealer before ordering. Final quantities are measured on site.</p>
+    <p class="foot-note">Excludes GST, transportation, waterproofing, geysers, exhaust fans, accessories, vanities and electrical work. Tile quantities include no deduction for openings. Sanitary prices are current dealer and online rates and are confirmed with the Delhi dealer before ordering. Final quantities are measured on site.</p>
   </section>`;
 }
 let currentTab='overview', showAllMode=false;
