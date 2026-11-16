@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Vendor Directory — Indéva Studio (internal)</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --paper:#F5F5F0; --card:#FFFFFF; --ink:#1E2422; --muted:#6B706C; --line:#DCDDD5;
+  --brass:#8C6A2E; --brass-deep:#6F531F; --brass-soft:#EFE8D8;
+  --in:#2E6A4C; --in-soft:#E3EFE8; --out:#A5432F; --out-soft:#F5E4DF; --warn:#8A5A00; --warn-soft:#FBF0D9;
+  --focus:#2B5FA8; --star:#C08A1E;
+  font-family:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink); background:var(--paper);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.muted{color:var(--muted)}
+[hidden]{display:none !important}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.primary:hover{background:#000}
+.btn.brass{background:var(--brass);border-color:var(--brass);color:#fff}
+.btn.small{padding:5px 10px;font-size:13px}
+.btn.danger{color:var(--out);border-color:var(--out-soft)}
+a.btn{color:var(--ink);text-decoration:none;display:inline-flex;align-items:center}
+.btn.link{border:0;background:none;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+.login form{display:grid;gap:14px;width:100%;max-width:380px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.login h1{font-size:28px;line-height:1.1;margin:0;font-weight:800;letter-spacing:-.02em}
+.login label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
+.login input{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:16px}
+.login .msg{font-size:14px;color:var(--out);min-height:1em}
+.login .msg.ok{color:var(--in)}
+.or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}
+.or:before,.or:after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* app */
+.app{display:grid;grid-template-rows:auto auto 1fr;height:100vh}
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper)}
+header.top h1{font-size:19px;margin:0;font-weight:800;letter-spacing:-.01em;margin-right:auto}
+header.top h1 small{font-weight:500;color:var(--muted);font-size:13px;margin-left:8px}
+.who{font-size:13px;color:var(--muted)}
+.filters{display:grid;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper)}
+.frow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:220px;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:15px;background:var(--card)}
+.sel{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip .n{font-weight:500;opacity:.7}
+.main{display:grid;grid-template-columns:minmax(360px,1fr) 1.15fr;min-height:0}
+.list{overflow:auto;padding:14px 18px 40px;border-right:1px solid var(--line)}
+.count{font-size:13px;color:var(--muted);margin:0 0 10px}
+#map{height:100%;min-height:300px}
+.vcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
+.vcard:hover,.vcard.active{border-color:var(--ink)}
+.vtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.vname{font-weight:700;font-size:16px;line-height:1.25}
+.vcat{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--muted);margin-top:3px}
+.vcat .dot{width:8px;height:8px;border-radius:50%}
+.stars{color:var(--star);font-size:14px;letter-spacing:1px;white-space:nowrap}
+.stars .nr{color:var(--muted);font-size:12px;letter-spacing:0;margin-left:4px}
+.vmeta{font-size:13.5px;margin-top:8px;display:grid;gap:3px}
+.vmeta a{color:var(--ink)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:6px;padding:2px 7px;background:var(--warn-soft);color:var(--warn)}
+.badge.nomap{background:#EEE;color:var(--muted)}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.empty{padding:40px 10px;text-align:center;color:var(--muted)}
+
+/* drawer & dialogs */
+dialog{border:1px solid var(--line);border-radius:14px;padding:0;max-width:640px;width:calc(100% - 24px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(30,36,34,.4)}
+.dlg{padding:20px 22px;display:grid;gap:14px;max-height:88vh;overflow:auto}
+.dlg h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em}
+.dlg .row{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
+.f input,.f select,.f textarea{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:15px;font-weight:500;color:var(--ink);background:#fff;width:100%}
+.f textarea{min-height:70px;resize:vertical}
+.hint{font-size:12px;color:var(--muted);font-weight:500}
+#pickMap{height:240px;border-radius:10px;border:1px solid var(--line)}
+.starpick{display:flex;gap:4px}
+.starpick button{border:0;background:none;font-size:26px;line-height:1;cursor:pointer;color:#D4CFC2;padding:0 2px}
+.starpick button.on{color:var(--star)}
+.subrate{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;font-size:13px}
+.subrate .starpick button{font-size:20px}
+.review{border-top:1px solid var(--line);padding-top:10px;font-size:14px}
+.review .rh{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
+.detail-meta{display:grid;gap:6px;font-size:14px}
+.detail-meta b{display:inline-block;min-width:92px;color:var(--muted);font-weight:600;font-size:13px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;z-index:2000;max-width:90vw}
+.leaflet-popup-content{font-family:inherit;font-size:13px}
+.leaflet-popup-content b{font-size:14px}
+.pin{width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45)}
+.mtoggle{display:none}
+@media (max-width:900px){
+  .app{height:auto;min-height:100vh}
+  .main{grid-template-columns:1fr}
+  .list{border-right:0}
+  #mapWrap{height:62vh}
+  .mtoggle{display:inline-flex}
+  .main.showmap .list{display:none}
+  .main:not(.showmap) #mapWrap{display:none}
+  .grid2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<section class="login" id="login">
+  <form id="loginForm" autocomplete="on">
+    <div>
+      <h1>Vendor Directory</h1>
+      <p class="muted" style="margin:6px 0 0">Indéva Studio team only. Sign in with your studio email.</p>
+    </div>
+    <label>Email <input id="lgEmail" type="email" required autocomplete="username"></label>
+    <label>Password <input id="lgPass" type="password" autocomplete="current-password"></label>
+    <button class="btn primary" type="submit">Sign in</button>
+    <div class="or">or</div>
+    <button class="btn" type="button" id="magicBtn">Email me a sign-in link</button>
+    <p class="msg" id="loginMsg" role="status"></p>
+  </form>
+</section>
+
+<div class="app" id="app" hidden>
+  <header class="top">
+    <h1>Vendor Directory <small id="totalNote"></small></h1>
+    <span class="who" id="who"></span>
+    <button class="btn brass" id="addBtn">+ Add vendor</button>
+    <button class="btn" id="teamBtn" hidden>Team access</button>
+    <button class="btn" id="csvBtn">Export CSV</button>
+    <button class="btn" id="signOut">Sign out</button>
+  </header>
+  <div class="filters">
+    <div class="frow">
+      <input class="search" id="q" type="search" placeholder="Search name, person, material, area, phone…" aria-label="Search vendors">
+      <select class="sel" id="cityF" aria-label="City"><option value="">All cities</option></select>
+      <select class="sel" id="sortF" aria-label="Sort">
+        <option value="rating">Top rated</option>
+        <option value="name">Name A–Z</option>
+        <option value="recent">Recently added</option>
+      </select>
+      <label class="muted" style="font-size:13px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="checkF"> Needs checking</label>
+      <button class="btn mtoggle" id="viewToggle">Map</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="main" id="main">
+    <div class="list"><p class="count" id="count"></p><div id="cards"></div></div>
+    <div id="mapWrap"><div id="map"></div></div>
+  </div>
+</div>
+
+<!-- vendor detail -->
+<dialog id="detailDlg"><div class="dlg" id="detailBody"></div></dialog>
+
+<!-- add / edit vendor -->
+<dialog id="editDlg">
+  <form class="dlg" id="editForm" method="dialog">
+    <h2 id="editTitle">Add vendor</h2>
+    <div class="grid2">
+      <label class="f">Company / vendor name *<input name="name" required></label>
+      <label class="f">Work / category *
+        <input name="category" list="catList" required placeholder="e.g. Marble & Stone">
+        <datalist id="catList"></datalist>
+      </label>
+    </div>
+    <label class="f">Deals in<input name="deals_in" placeholder="Italian marble, quartz, granite…"></label>
+    <div class="grid2">
+      <label class="f">Contact person(s)<input name="contact_person"></label>
+      <label class="f">Phone numbers<input name="phones" placeholder="Separate with commas"></label>
+      <label class="f">Email<input name="email" type="email"></label>
+      <label class="f">Website<input name="website"></label>
+    </div>
+    <label class="f">Address<textarea name="address" rows="2"></textarea></label>
+    <div class="grid2">
+      <label class="f">Area / market<input name="area" placeholder="Ghitorni, Kirti Nagar…"></label>
+      <label class="f">City<input name="city" placeholder="New Delhi"></label>
+    </div>
+    <div class="f">Location on map
+      <div class="frow">
+        <button class="btn small" type="button" id="geoBtn">Find address on map</button>
+        <button class="btn small" type="button" id="hereBtn">Use my current location</button>
+        <button class="btn small" type="button" id="clearPin">Remove pin</button>
+        <span class="hint" id="pinNote">Or click the map to drop the pin.</span>
+      </div>
+      <div id="pickMap"></div>
+    </div>
+    <label class="f">Notes<textarea name="notes" rows="2" placeholder="Rates, lead times, who to ask for…"></textarea></label>
+    <label class="f" style="display:flex;gap:8px;align-items:center;color:var(--ink)"><input type="checkbox" name="needs_check" style="width:auto"> Details still need checking</label>
+    <div class="row">
+      <button class="btn danger" type="button" id="delBtn" hidden style="margin-right:auto">Delete vendor</button>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit" id="saveBtn">Save vendor</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- rate -->
+<dialog id="rateDlg">
+  <form class="dlg" id="rateForm" method="dialog">
+    <h2 id="rateTitle">Rate vendor</h2>
+    <div class="f">Overall *<div class="starpick" data-k="stars"></div></div>
+    <div class="subrate">
+      <span>Quality</span><div class="starpick" data-k="quality"></div>
+      <span>Value for money</span><div class="starpick" data-k="price"></div>
+      <span>On-time delivery</span><div class="starpick" data-k="timeliness"></div>
+    </div>
+    <label class="f">Project (optional)<input name="project" placeholder="e.g. Kamakshi — Rohini bathrooms"></label>
+    <label class="f">Comment<textarea name="comment" placeholder="What went well, what didn't, rates you got…"></textarea></label>
+    <div class="row">
+      <button class="btn danger" type="button" id="rateDel" hidden style="margin-right:auto">Remove my rating</button>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit">Save rating</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- team -->
+<dialog id="teamDlg">
+  <div class="dlg">
+    <h2>Team access</h2>
+    <p class="muted" style="margin:0">People on this list can view, add and rate vendors. They sign in with this email, using a password or the "Email me a sign-in link" button. Only you can delete vendors or change this list.</p>
+    <form class="frow" id="teamForm">
+      <input class="search" name="email" type="email" required placeholder="name@indevastudio.com" style="min-width:200px">
+      <input class="search" name="name" placeholder="Name (optional)" style="min-width:140px;flex:.6">
+      <button class="btn primary" type="submit">Add</button>
+    </form>
+    <div id="teamList"></div>
+    <div class="row"><button class="btn" type="button" data-close>Close</button></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="/auth-kit.js"></script>
+<script>
+const SUPABASE_URL = "https://rolarfaotykmprzvcmgh.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvbGFyZmFvdHlrbXByenZjbWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY4OTI1OTgsImV4cCI6MjEwMjQ2ODU5OH0.B7mIRJLh9Q7rzQvrGguqjlhzIMgmoJmiq29Kl6lRkPI";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+if (window.AuthKit) AuthKit.init(sb, { form: "#loginForm", email: "#lgEmail", password: "#lgPass", changeBefore: "#signOut", changeHtml: "Password" });
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const toast = (m, ms = 2600) => { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), ms); };
+
+const CATS = ["Furniture","Marble & Stone","Tiles","Sanitary & CP Fittings","Glass & Mirrors","Plywood & Laminates","Hardware","Doors","Kitchens & Wardrobes","Lighting","Decor & Art","Rugs & Carpets","Soft Furnishings & Fabrics","Paint & Wall Finishes","Mattress & Beds","Home Automation & AV","Signage","Solar","Media & Marketing","Property & Real Estate","Other"];
+const PALETTE = ["#8C6A2E","#6B4E9B","#2E6A4C","#2B5FA8","#1E8A8A","#A5432F","#4A4A4A","#7A4B2A","#B5651D","#C9A227","#C2185B","#7B1FA2","#00796B","#5D7A1F","#3949AB","#455A64","#E65100","#F9A825","#6D4C41","#9E9E9E","#78909C"];
+const colorOf = (c) => { const i = CATS.indexOf(c); if (i >= 0) return PALETTE[i]; let h = 0; for (const ch of String(c)) h = (h * 31 + ch.charCodeAt(0)) % 360; return `hsl(${h} 45% 42%)`; };
+
+const state = { me: "", admin: false, vendors: [], ratings: [], cat: "", q: "", city: "", sort: "rating", check: false, active: null, editing: null, rating: null, pick: null };
+
+/* ---------------- auth ---------------- */
+$("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); const m = $("#loginMsg"); m.className = "msg"; m.textContent = "";
+  const pass = $("#lgPass").value;
+  if (!pass) { m.textContent = "Enter your password, or use the sign-in link below."; return; }
+  const { error } = await sb.auth.signInWithPassword({ email: $("#lgEmail").value.trim(), password: pass });
+  if (error) m.textContent = "Sign-in failed: " + error.message;
+});
+$("#magicBtn").addEventListener("click", async () => {
+  const m = $("#loginMsg"); m.className = "msg"; const email = $("#lgEmail").value.trim();
+  if (!email) { m.textContent = "Enter your email first."; return; }
+  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + "/vendor-directory" } });
+  if (error) { m.textContent = "Could not send the link: " + error.message; return; }
+  m.className = "msg ok"; m.textContent = "Check your inbox for a sign-in link from Supabase.";
+});
+$("#signOut").addEventListener("click", () => sb.auth.signOut());
+
+let entered = false;
+sb.auth.onAuthStateChange((_e, session) => {
+  if (session && !entered) enter(session);
+  if (!session) { entered = false; $("#app").hidden = true; $("#login").hidden = false; }
+});
+
+async function enter(session) {
+  entered = true;
+  state.me = (session.user.email || "").toLowerCase();
+  const [{ data: staff }, { data: admin }] = await Promise.all([sb.rpc("vd_is_staff"), sb.rpc("et_is_admin")]);
+  if (!staff) {
+    $("#loginMsg").className = "msg";
+    $("#loginMsg").textContent = state.me + " is not on the vendor directory team list. Ask Arpit to add you under Team access.";
+    await sb.auth.signOut(); return;
+  }
+  state.admin = !!admin;
+  $("#teamBtn").hidden = !state.admin;
+  $("#who").textContent = state.me;
+  $("#login").hidden = true; $("#app").hidden = false;
+  initMap();
+  await load();
+}
+
+/* ---------------- data ---------------- */
+async function load() {
+  const [v, r] = await Promise.all([
+    sb.from("vd_vendors").select("*").order("name"),
+    sb.from("vd_ratings").select("*").order("created_at", { ascending: false }),
+  ]);
+  if (v.error) { toast("Could not load vendors: " + v.error.message, 5000); return; }
+  state.vendors = v.data || []; state.ratings = r.data || [];
+  const byV = {};
+  for (const x of state.ratings) (byV[x.vendor_id] ||= []).push(x);
+  for (const x of state.vendors) {
+    const rs = byV[x.id] || [];
+    x._ratings = rs; x._n = rs.length;
+    x._avg = rs.length ? rs.reduce((a, b) => a + b.stars, 0) / rs.length : 0;
+  }
+  buildFilters(); render();
+}
+
+function buildFilters() {
+  const counts = {}; for (const v of state.vendors) counts[v.category] = (counts[v.category] || 0) + 1;
+  const cats = [...new Set([...CATS.filter((c) => counts[c]), ...Object.keys(counts)])];
+  $("#chips").innerHTML = `<button class="chip ${state.cat ? "" : "on"}" data-c="">All <span class="n">${state.vendors.length}</span></button>` +
+    cats.map((c) => `<button class="chip ${state.cat === c ? "on" : ""}" data-c="${esc(c)}"><span class="dot" style="background:${colorOf(c)}"></span>${esc(c)} <span class="n">${counts[c]}</span></button>`).join("");
+  $$("#chips .chip").forEach((b) => b.onclick = () => { state.cat = b.dataset.c; buildFilters(); render(); });
+  const cities = [...new Set(state.vendors.map((v) => v.city).filter(Boolean))].sort();
+  const cur = state.city;
+  $("#cityF").innerHTML = `<option value="">All cities</option>` + cities.map((c) => `<option ${c === cur ? "selected" : ""}>${esc(c)}</option>`).join("");
+  $("#catList").innerHTML = [...new Set([...CATS, ...Object.keys(counts)])].map((c) => `<option value="${esc(c)}">`).join("");
+  $("#totalNote").textContent = `${state.vendors.length} vendors · ${state.ratings.length} ratings`;
+}
+
+function filtered() {
+  const q = state.q.trim().toLowerCase();
+  let list = state.vendors.filter((v) =>
+    (!state.cat || v.category === state.cat) &&
+    (!state.city || v.city === state.city) &&
+    (!state.check || v.needs_check) &&
+    (!q || [v.name, v.contact_person, v.category, v.deals_in, v.area, v.city, v.address, v.notes, (v.phones || []).join(" "), v.email].join(" ").toLowerCase().includes(q)));
+  if (state.sort === "name") list.sort((a, b) => a.name.localeCompare(b.name));
+  else if (state.sort === "recent") list.sort((a, b) => b.created_at.localeCompare(a.created_at));
+  else list.sort((a, b) => b._avg - a._avg || b._n - a._n || a.name.localeCompare(b.name));
+  return list;
+}
+
+const starStr = (avg, n) => n ? `<span class="stars" title="${avg.toFixed(1)} from ${n} rating${n > 1 ? "s" : ""}">${"★".repeat(Math.round(avg))}${"☆".repeat(5 - Math.round(avg))}<span class="nr">${avg.toFixed(1)} (${n})</span></span>` : `<span class="stars"><span class="nr">Not rated</span></span>`;
+const telHref = (p) => "tel:" + p.replace(/[^\d+]/g, "");
+const waHref = (p) => { let d = p.replace(/\D/g, ""); if (d.length === 10) d = "91" + d; return "https://wa.me/" + d; };
+const webHref = (w) => (/^https?:/i.test(w) ? w : "https://" + w);
+const dirHref = (v) => v.lat != null ? `https://www.google.com/maps/dir/?api=1&destination=${v.lat},${v.lng}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([v.name, v.address, v.city].filter(Boolean).join(", "))}`;
+const isMobileNo = (p) => { const d = p.replace(/\D/g, ""); return /^(91)?[6-9]\d{9}$/.test(d); };
+
+function render() {
+  const list = filtered();
+  $("#count").textContent = `${list.length} vendor${list.length === 1 ? "" : "s"}${state.cat ? " in " + state.cat : ""}` + (list.length ? ` · ${list.filter((v) => v.lat == null).length} without a map pin` : "");
+  $("#cards").innerHTML = list.length ? list.map(cardHtml).join("") : `<div class="empty">No vendors match. <button class="btn link" onclick="openEdit()">Add one</button></div>`;
+  $$("#cards .vcard").forEach((el) => {
+    el.addEventListener("click", (e) => { if (e.target.closest("a,button")) return; focusVendor(el.dataset.id, true); });
+  });
+  $$("#cards [data-act]").forEach((b) => b.addEventListener("click", (e) => {
+    e.stopPropagation(); const v = state.vendors.find((x) => x.id === b.dataset.id);
+    if (b.dataset.act === "rate") openRate(v); else if (b.dataset.act === "edit") openEdit(v); else if (b.dataset.act === "more") openDetail(v);
+  }));
+  drawMarkers(list);
+}
+
+function cardHtml(v) {
+  const phones = (v.phones || []);
+  return `<article class="vcard ${state.active === v.id ? "active" : ""}" data-id="${v.id}" id="v-${v.id}">
+    <div class="vtop"><div><div class="vname">${esc(v.name)}</div>
+      <div class="vcat"><span class="dot" style="background:${colorOf(v.category)}"></span>${esc(v.category)}${v.area || v.city ? " · " + esc([v.area, v.city].filter(Boolean).join(", ")) : ""}</div></div>
+      ${starStr(v._avg, v._n)}</div>
+    <div class="vmeta">
+      ${v.deals_in ? `<div>${esc(v.deals_in)}</div>` : ""}
+      ${v.contact_person ? `<div class="muted">${esc(v.contact_person)}</div>` : ""}
+      ${phones.length ? `<div>${phones.map((p) => `<a href="${telHref(p)}">${esc(p)}</a>${isMobileNo(p) ? ` <a href="${waHref(p)}" target="_blank" rel="noopener" title="WhatsApp">WA</a>` : ""}`).join(" · ")}</div>` : ""}
+      ${v.email ? `<div><a href="mailto:${esc(v.email)}">${esc(v.email)}</a></div>` : ""}
+      ${v.address ? `<div class="muted">${esc(v.address)}</div>` : ""}
+      <div>${v.needs_check ? `<span class="badge">Needs checking</span> ` : ""}${v.lat == null ? `<span class="badge nomap">No map pin</span>` : ""}</div>
+    </div>
+    <div class="actions">
+      <button class="btn small primary" data-act="rate" data-id="${v.id}">Rate</button>
+      <button class="btn small" data-act="more" data-id="${v.id}">Reviews &amp; details</button>
+      <button class="btn small" data-act="edit" data-id="${v.id}">Edit</button>
+      <a class="btn small" href="${dirHref(v)}" target="_blank" rel="noopener">Directions</a>
+    </div>
+  </article>`;
+}
+
+/* ---------------- map ---------------- */
+let map, layer, markers = {};
+function initMap() {
+  if (map) return;
+  map = L.map("map", { scrollWheelZoom: true }).setView([28.6, 77.15], 10);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+  layer = L.layerGroup().addTo(map);
+}
+function pinIcon(c) { return L.divIcon({ className: "", html: `<div class="pin" style="background:${colorOf(c)}"></div>`, iconSize: [16, 16], iconAnchor: [8, 8], popupAnchor: [0, -8] }); }
+function drawMarkers(list) {
+  if (!map) return; layer.clearLayers(); markers = {};
+  const pts = [];
+  // spread vendors that share an exact point
+  const seen = {};
+  for (const v of list) {
+    if (v.lat == null || v.lng == null) continue;
+    const k = v.lat.toFixed(4) + "," + v.lng.toFixed(4); const n = (seen[k] = (seen[k] || 0) + 1) - 1;
+    const lat = v.lat + (n ? Math.sin(n * 2.4) * 0.0009 * Math.ceil(n / 6) : 0), lng = v.lng + (n ? Math.cos(n * 2.4) * 0.0009 * Math.ceil(n / 6) : 0);
+    const m = L.marker([lat, lng], { icon: pinIcon(v.category), title: v.name }).addTo(layer);
+    m.bindPopup(`<b>${esc(v.name)}</b><br>${esc(v.category)}<br>${v._n ? "★ " + v._avg.toFixed(1) + " (" + v._n + ")" : "Not rated"}${(v.phones || [])[0] ? `<br><a href="${telHref(v.phones[0])}">${esc(v.phones[0])}</a>` : ""}<br><a href="${dirHref(v)}" target="_blank" rel="noopener">Directions</a>`);
+    m.on("click", () => focusVendor(v.id, false));
+    markers[v.id] = m; pts.push([lat, lng]);
+  }
+  if (pts.length) {
+    const ncr = pts.filter(([a, b]) => a > 28.1 && a < 29.1 && b > 76.6 && b < 77.6);
+    map.fitBounds(L.latLngBounds(ncr.length >= Math.max(3, pts.length * 0.6) ? ncr : pts).pad(0.12), { maxZoom: 14 });
+  }
+}
+function focusVendor(id, fromList) {
+  state.active = id;
+  $$("#cards .vcard").forEach((c) => c.classList.toggle("active", c.dataset.id === id));
+  const m = markers[id];
+  if (m && fromList) { map.setView(m.getLatLng(), 15); m.openPopup(); }
+  if (!fromList) { const el = $("#v-" + id); el && el.scrollIntoView({ behavior: "smooth", block: "center" }); }
+}
+
+/* ---------------- filters ---------------- */
+$("#q").addEventListener("input", (e) => { state.q = e.target.value; render(); });
+$("#cityF").addEventListener("change", (e) => { state.city = e.target.value; render(); });
+$("#sortF").addEventListener("change", (e) => { state.sort = e.target.value; render(); });
+$("#checkF").addEventListener("change", (e) => { state.check = e.target.checked; render(); });
+$("#viewToggle").addEventListener("click", () => {
+  const on = $("#main").classList.toggle("showmap"); $("#viewToggle").textContent = on ? "List" : "Map";
+  if (on) setTimeout(() => map.invalidateSize(), 50);
+});
+$$("dialog [data-close]").forEach((b) => b.addEventListener("click", () => b.closest("dialog").close()));
+
+/* ---------------- detail ---------------- */
+function openDetail(v) {
+  const sub = (k) => { const xs = v._ratings.filter((r) => r[k]); return xs.length ? (xs.reduce((a, b) => a + b[k], 0) / xs.length).toFixed(1) : "–"; };
+  $("#detailBody").innerHTML = `
+    <div class="vtop"><div><h2>${esc(v.name)}</h2><div class="vcat"><span class="dot" style="background:${colorOf(v.category)}"></span>${esc(v.category)}</div></div>${starStr(v._avg, v._n)}</div>
+    ${v._n ? `<div class="muted" style="font-size:13px">Quality ${sub("quality")} · Value ${sub("price")} · On time ${sub("timeliness")}</div>` : ""}
+    <div class="detail-meta">
+      ${v.deals_in ? `<div><b>Deals in</b>${esc(v.deals_in)}</div>` : ""}
+      ${v.contact_person ? `<div><b>Contact</b>${esc(v.contact_person)}</div>` : ""}
+      ${(v.phones || []).length ? `<div><b>Phone</b>${v.phones.map((p) => `<a href="${telHref(p)}">${esc(p)}</a>${isMobileNo(p) ? ` (<a href="${waHref(p)}" target="_blank" rel="noopener">WhatsApp</a>)` : ""}`).join(", ")}</div>` : ""}
+      ${v.email ? `<div><b>Email</b><a href="mailto:${esc(v.email)}">${esc(v.email)}</a></div>` : ""}
+      ${v.website ? `<div><b>Website</b><a href="${esc(webHref(v.website))}" target="_blank" rel="noopener">${esc(v.website)}</a></div>` : ""}
+      ${v.address ? `<div><b>Address</b>${esc(v.address)}</div>` : ""}
+      ${v.notes ? `<div><b>Notes</b>${esc(v.notes)}</div>` : ""}
+      <div><b>Added by</b>${esc(v.created_by || "—")} · ${new Date(v.created_at).toLocaleDateString("en-IN")}</div>
+    </div>
+    <div class="row" style="justify-content:flex-start">
+      <button class="btn primary" id="dRate">${v._ratings.some((r) => r.user_email === state.me) ? "Edit my rating" : "Rate this vendor"}</button>
+      <button class="btn" id="dEdit">Edit details</button>
+      <a class="btn" href="${dirHref(v)}" target="_blank" rel="noopener">Directions</a>
+    </div>
+    <div><h3 style="margin:6px 0 8px;font-size:16px">Reviews (${v._n})</h3>
+      ${v._ratings.map((r) => `<div class="review"><div class="rh"><span>${esc(r.user_email)}${r.project ? " · " + esc(r.project) : ""}</span><span>${new Date(r.updated_at || r.created_at).toLocaleDateString("en-IN")}</span></div>
+        <div class="stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>${r.comment ? `<div>${esc(r.comment)}</div>` : ""}</div>`).join("") || `<p class="muted" style="margin:0">No reviews yet. Be the first to rate this vendor after working with them.</p>`}
+    </div>
+    <div class="row"><button class="btn" type="button" id="dClose">Close</button></div>`;
+  $("#dRate").onclick = () => { $("#detailDlg").close(); openRate(v); };
+  $("#dEdit").onclick = () => { $("#detailDlg").close(); openEdit(v); };
+  $("#dClose").onclick = () => $("#detailDlg").close();
+  $("#detailDlg").showModal();
+}
+
+/* ---------------- rate ---------------- */
+function starPicker(el, val) {
+  el.innerHTML = [1, 2, 3, 4, 5].map((i) => `<button type="button" data-i="${i}" aria-label="${i} star${i > 1 ? "s" : ""}" class="${i <= (val || 0) ? "on" : ""}">★</button>`).join("");
+  el.dataset.v = val || "";
+  $$("button", el).forEach((b) => b.onclick = () => { const i = +b.dataset.i; el.dataset.v = el.dataset.v == i && el.dataset.k !== "stars" ? "" : i; $$("button", el).forEach((x) => x.classList.toggle("on", +x.dataset.i <= +el.dataset.v)); });
+}
+function openRate(v) {
+  state.rating = v; const mine = v._ratings.find((r) => r.user_email === state.me);
+  $("#rateTitle").textContent = "Rate " + v.name;
+  $$("#rateForm .starpick").forEach((el) => starPicker(el, mine ? mine[el.dataset.k] : 0));
+  $("#rateForm").project.value = mine?.project || ""; $("#rateForm").comment.value = mine?.comment || "";
+  $("#rateDel").hidden = !mine;
+  $("#rateDlg").showModal();
+}
+$("#rateForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); const v = state.rating; const g = (k) => +$(`#rateForm .starpick[data-k="${k}"]`).dataset.v || null;
+  if (!g("stars")) { toast("Pick an overall star rating."); return; }
+  const row = { vendor_id: v.id, user_email: state.me, stars: g("stars"), quality: g("quality"), price: g("price"), timeliness: g("timeliness"), project: e.target.project.value.trim() || null, comment: e.target.comment.value.trim() || null };
+  const { error } = await sb.from("vd_ratings").upsert(row, { onConflict: "vendor_id,user_email" });
+  if (error) { toast("Could not save: " + error.message, 5000); return; }
+  $("#rateDlg").close(); toast("Rating saved"); await load();
+});
+$("#rateDel").addEventListener("click", async () => {
+  const v = state.rating; const { error } = await sb.from("vd_ratings").delete().eq("vendor_id", v.id).eq("user_email", state.me);
+  if (error) { toast("Could not remove: " + error.message, 5000); return; }
+  $("#rateDlg").close(); toast("Rating removed"); await load();
+});
+
+/* ---------------- add / edit ---------------- */
+let pickMap, pickMarker;
+function setPin(lat, lng, zoom) {
+  state.pick = lat == null ? null : { lat: +lat, lng: +lng };
+  if (pickMarker) { pickMap.removeLayer(pickMarker); pickMarker = null; }
+  if (state.pick) { pickMarker = L.marker([lat, lng], { draggable: true }).addTo(pickMap); pickMarker.on("dragend", () => { const p = pickMarker.getLatLng(); state.pick = { lat: p.lat, lng: p.lng }; }); pickMap.setView([lat, lng], zoom || Math.max(pickMap.getZoom(), 15)); }
+  $("#pinNote").textContent = state.pick ? "Pin set — drag it to adjust." : "No pin yet. Find the address or click the map.";
+}
+function openEdit(v) {
+  state.editing = v || null; const f = $("#editForm"); f.reset();
+  $("#editTitle").textContent = v ? "Edit " + v.name : "Add vendor";
+  $("#delBtn").hidden = !(v && state.admin);
+  if (v) {
+    for (const k of ["name", "category", "deals_in", "contact_person", "email", "website", "address", "area", "city", "notes"]) f[k].value = v[k] || "";
+    f.phones.value = (v.phones || []).join(", "); f.needs_check.checked = !!v.needs_check;
+  } else if (state.cat) f.category.value = state.cat;
+  $("#editDlg").showModal();
+  if (!pickMap) {
+    pickMap = L.map("pickMap").setView([28.6, 77.15], 10);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap" }).addTo(pickMap);
+    pickMap.on("click", (e) => setPin(e.latlng.lat, e.latlng.lng, pickMap.getZoom()));
+  }
+  setTimeout(() => { pickMap.invalidateSize(); if (v && v.lat != null) setPin(v.lat, v.lng, 15); else { setPin(null); pickMap.setView([28.6, 77.15], 10); } }, 60);
+}
+$("#addBtn").addEventListener("click", () => openEdit());
+$("#geoBtn").addEventListener("click", async () => {
+  const f = $("#editForm"); const q = [f.address.value, f.area.value, f.city.value].filter(Boolean).join(", ") || f.name.value;
+  if (!q) { toast("Type an address, area or city first."); return; }
+  $("#pinNote").textContent = "Searching…";
+  try {
+    const tryQ = async (qq) => (await fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=in&q=" + encodeURIComponent(qq), { headers: { "Accept-Language": "en" } })).json();
+    let r = await tryQ(q);
+    if (!r.length && (f.area.value || f.city.value)) r = await tryQ([f.area.value, f.city.value].filter(Boolean).join(", "));
+    if (r.length) setPin(r[0].lat, r[0].lon, 16); else $("#pinNote").textContent = "Couldn't find that address. Click the map to drop the pin.";
+  } catch { $("#pinNote").textContent = "Map search is unavailable right now. Click the map to drop the pin."; }
+});
+$("#hereBtn").addEventListener("click", () => {
+  if (!navigator.geolocation) { toast("Location isn't available on this device."); return; }
+  navigator.geolocation.getCurrentPosition((p) => setPin(p.coords.latitude, p.coords.longitude, 17), () => toast("Couldn't get your location."), { enableHighAccuracy: true, timeout: 10000 });
+});
+$("#clearPin").addEventListener("click", () => setPin(null));
+$("#editForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); const f = e.target; const v = state.editing;
+  const row = {
+    name: f.name.value.trim(), category: f.category.value.trim() || "Other", deals_in: f.deals_in.value.trim() || null,
+    contact_person: f.contact_person.value.trim() || null, phones: f.phones.value.split(/[,;\n]/).map((s) => s.trim()).filter(Boolean),
+    email: f.email.value.trim() || null, website: f.website.value.trim() || null, address: f.address.value.trim() || null,
+    area: f.area.value.trim() || null, city: f.city.value.trim() || null, notes: f.notes.value.trim() || null,
+    needs_check: f.needs_check.checked, lat: state.pick ? state.pick.lat : null, lng: state.pick ? state.pick.lng : null,
+  };
+  if (!row.name) return;
+  const res = v ? await sb.from("vd_vendors").update(row).eq("id", v.id) : await sb.from("vd_vendors").insert({ ...row, source: "staff" });
+  if (res.error) { toast("Could not save: " + res.error.message, 5000); return; }
+  $("#editDlg").close(); toast(v ? "Vendor updated" : "Vendor added"); await load();
+});
+$("#delBtn").addEventListener("click", async () => {
+  const v = state.editing; if (!v || !confirm(`Delete ${v.name} and all its ratings? This can't be undone.`)) return;
+  const { error } = await sb.from("vd_vendors").delete().eq("id", v.id);
+  if (error) { toast("Could not delete: " + error.message, 5000); return; }
+  $("#editDlg").close(); toast("Vendor deleted"); await load();
+});
+
+/* ---------------- team ---------------- */
+async function loadTeam() {
+  const { data, error } = await sb.from("vd_staff").select("*").order("email");
+  $("#teamList").innerHTML = error ? `<p class="muted">${esc(error.message)}</p>` : (data.length ? data.map((p) => `<div class="frow review" style="justify-content:space-between"><span>${esc(p.email)}${p.name ? ` <span class="muted">· ${esc(p.name)}</span>` : ""}</span><button class="btn small danger" data-rm="${esc(p.email)}">Remove</button></div>`).join("") : `<p class="muted" style="margin:0">No team members yet. You (as admin) always have access.</p>`);
+  $$("#teamList [data-rm]").forEach((b) => b.onclick = async () => {
+    if (!confirm("Remove " + b.dataset.rm + " from the vendor directory?")) return;
+    const { error } = await sb.from("vd_staff").delete().eq("email", b.dataset.rm); if (error) toast(error.message, 5000); loadTeam();
+  });
+}
+$("#teamBtn").addEventListener("click", () => { $("#teamDlg").showModal(); loadTeam(); });
+$("#teamForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); const email = e.target.email.value.trim().toLowerCase(); const name = e.target.name.value.trim() || null;
+  const { error } = await sb.from("vd_staff").upsert({ email, name }); if (error) { toast(error.message, 5000); return; }
+  e.target.reset(); toast("Added " + email); loadTeam();
+});
+
+/* ---------------- csv ---------------- */
+$("#csvBtn").addEventListener("click", () => {
+  const cols = ["name", "category", "deals_in", "contact_person", "phones", "email", "website", "address", "area", "city", "avg_stars", "ratings", "needs_check", "notes"];
+  const cell = (x) => `"${String(x ?? "").replace(/"/g, '""')}"`;
+  const rows = filtered().map((v) => [v.name, v.category, v.deals_in, v.contact_person, (v.phones || []).join(" / "), v.email, v.website, v.address, v.area, v.city, v._n ? v._avg.toFixed(1) : "", v._n, v.needs_check ? "yes" : "", v.notes].map(cell).join(","));
+  const blob = new Blob(["﻿" + cols.join(",") + "\n" + rows.join("\n")], { type: "text/csv" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "indeva-vendors.csv"; a.click(); URL.revokeObjectURL(a.href);
+});
+</script>
+</body>
+</html>

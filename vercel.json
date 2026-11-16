@@ -1079,6 +1079,19 @@
   ],
   "headers": [
     {
+      "source": "/vendor-directory(.html)?",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/staircase-marble-selector",
       "headers": [
         {
