@@ -724,8 +724,8 @@ const SECTIONS = [
 {
   id:"design", tab:null, letter:"I", title:"Complete Project Fees", intro:"", hero:[],
   groups:[{note:null, items:[
-    {id:"designexec", room:"Both floors incl. toilets", name:"Complete Project Fees", unit:"sq.ft.", qty:3453, rate:100, on:true, src:"To confirm",
-     spec:"Complete project fees covering design development, 3D views, working drawings, BOQ, procurement coordination and on-site execution management through to handover, at ₹100/sq.ft. of carpet area: 3,453 sq.ft. across both floors, rooms + toilets, balconies excluded (Indéva design rate)."},
+    {id:"designexec", room:"Both floors incl. toilets", name:"Complete Project Fees", unit:"sq.ft.", qty:3453, rate:70, src:"Agreed rate", on:true,
+     spec:"Complete project fees covering design development, 3D views, working drawings, BOQ, procurement coordination and on-site execution management through to handover, at ₹70/sq.ft. of carpet area: 3,453 sq.ft. across both floors, rooms + toilets, balconies excluded (Indéva design rate)."},
   ]}]
 },
 ];
@@ -804,7 +804,7 @@ const CATEGORIES = [
   {id:"c_site", label:"Site Expenses", test:id=>id==="siteexp",
    intro:"Site protection, casual labour, site cleaning, transportation and wastage at ₹50/sq.ft. of carpet area."},
   {id:"c_fees", label:"Project Fees", test:id=>id==="designexec",
-   intro:"Complete project fees at ₹100/sq.ft. of carpet area."},
+   intro:"Complete project fees at ₹70/sq.ft. of carpet area."},
 ];
 ALL_ITEMS.forEach(it=>{ const c=CATEGORIES.find(c=>c.test(it.id)); it._cat=c?c.id:null; });
 const UNCAT = ALL_ITEMS.filter(i=>!i._cat).map(i=>i.id); if(UNCAT.length) console.warn("Uncategorised:",UNCAT);
