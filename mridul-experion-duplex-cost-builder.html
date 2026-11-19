@@ -495,7 +495,7 @@ const CEIL = {
 const SECTIONS = [
 {
   id:"house", tab:"Entire Duplex", letter:"A", title:"Entire Duplex — Ceiling, Electrical, Lighting, Paint, Curtains (both floors)",
-  intro:"Work that runs through both floors. Carpet area approx. 3,453 sq.ft., measured room by room from the Experion plans (rooms + toilets, balconies excluded): lower floor approx. 1,740 sq.ft., upper floor approx. 1,713 sq.ft. Electrical work and the complete project fees are charged on this carpet area; ceilings, paint and lighting are measured on the rooms alone (approx. 2,922 sq.ft.). <b>Flooring, sanitaryware, doors and windows stay as they are</b> and are not part of this BOQ. <b>False ceiling is included in the total but optional</b>: switch it off room by room if not wanted.",
+  intro:"Work that runs through both floors. Carpet area approx. 3,453 sq.ft., measured room by room from the Experion plans (rooms + toilets, balconies excluded): lower floor approx. 1,740 sq.ft., upper floor approx. 1,713 sq.ft. Electrical work and the design fees are charged on this carpet area; ceilings, paint and lighting are measured on the rooms alone (approx. 2,922 sq.ft.). <b>Flooring, sanitaryware, doors and windows stay as they are</b> and are not part of this BOQ. <b>False ceiling is included in the total but optional</b>: switch it off room by room if not wanted.",
   hero:[],
   groups:[
     {note:"False ceiling — approx. 2,830 sq.ft. in all rooms, with cove / pelmet detail for concealed LED. Included in the total; optional for the client, so any room can be switched off.", items:
@@ -722,10 +722,12 @@ const SECTIONS = [
   ]
 },
 {
-  id:"design", tab:null, letter:"I", title:"Complete Project Fees", intro:"", hero:[],
+  id:"design", tab:null, letter:"I", title:"Design & Project Handling Fees", intro:"", hero:[],
   groups:[{note:null, items:[
-    {id:"designexec", room:"Both floors incl. toilets", name:"Complete Project Fees", unit:"sq.ft.", qty:3453, rate:70, src:"Agreed rate", on:true,
-     spec:"Complete project fees covering design development, 3D views, working drawings, BOQ, procurement coordination and on-site execution management through to handover, at ₹70/sq.ft. of carpet area: 3,453 sq.ft. across both floors, rooms + toilets, balconies excluded (Indéva design rate)."},
+    {id:"designexec", room:"Both floors incl. toilets", name:"Design Fees", unit:"sq.ft.", qty:3453, rate:70, on:true, src:"Agreed rate",
+     spec:"Design development, space planning, 3D views, working drawings and the BOQ for both floors, at ₹70/sq.ft. of carpet area: 3,453 sq.ft. (rooms + toilets, balconies excluded)."},
+    {id:"handling", room:"Both floors", name:"Project Handling Fees — 5% of works", unit:"lumpsum", qty:1, pct:5, on:true, src:"5% of works",
+     spec:"Project management and site execution through to handover: procurement, vendor coordination, material handling, quality checks and supervision, at 5% of the value of all works switched on (design and handling fees excluded). Updates automatically as items are switched on or off."},
   ]}]
 },
 ];
@@ -747,7 +749,8 @@ SECTIONS.forEach(s=>s.groups.forEach(g=>g.items.forEach(it=>{ it._sec=s; ALL_ITE
 const BY_ID = Object.fromEntries(ALL_ITEMS.map(i=>[i.id,i]));
 const DEFAULTS = Object.fromEntries(ALL_ITEMS.map(i=>[i.id,{on:i.on, selected:i.selected}]));
 
-function rateOf(it){ return it.options ? it.options[it.selected].rate : it.rate; }
+function worksBase(){ let t=0; ALL_ITEMS.forEach(i=>{ if(i.on && !i.pct && i.id!=="designexec") t+=i.qty*(i.options ? i.options[i.selected].rate : i.rate); }); return t; }
+function rateOf(it){ if(it.pct) return Math.round(worksBase()*it.pct/100); return it.options ? it.options[it.selected].rate : it.rate; }
 function amtOf(it){ return it.qty * rateOf(it); }
 function specOf(it){ return it.options ? it.options[it.selected].spec : it.spec; }
 function secTotal(s){ let t=0; s.groups.forEach(g=>g.items.forEach(it=>{ if(it.on) t+=amtOf(it); })); return t; }
@@ -803,8 +806,8 @@ const CATEGORIES = [
    intro:"Bought-out items supplied and fixed by us: chandelier, curtains and tracks, kitchen blind, mosquito mesh, kitchen sink and mixer, cloth dryers, mirrors, glass shower partitions and balcony furniture."},
   {id:"c_site", label:"Site Expenses", test:id=>id==="siteexp",
    intro:"Site protection, casual labour, site cleaning, transportation and wastage at ₹50/sq.ft. of carpet area."},
-  {id:"c_fees", label:"Project Fees", test:id=>id==="designexec",
-   intro:"Complete project fees at ₹70/sq.ft. of carpet area."},
+  {id:"c_fees", label:"Design & Handling Fees", test:id=>id==="designexec"||id==="handling",
+   intro:"Design fees at ₹70/sq.ft. of carpet area and project handling fees at 5% of the works value."},
 ];
 ALL_ITEMS.forEach(it=>{ const c=CATEGORIES.find(c=>c.test(it.id)); it._cat=c?c.id:null; });
 const UNCAT = ALL_ITEMS.filter(i=>!i._cat).map(i=>i.id); if(UNCAT.length) console.warn("Uncategorised:",UNCAT);
