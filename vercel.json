@@ -2526,6 +2526,24 @@
           "value": "noindex, follow"
         }
       ]
+    },
+    {
+      "source": "/mridul-experion-duplex-cost-builder",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/mridul-experion-duplex-cost-builder.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
