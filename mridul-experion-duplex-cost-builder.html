@@ -317,7 +317,7 @@
 
 <nav class="tabs" id="tabs"></nav>
 <div class="showall-bar">
-  <button class="showall-btn" id="showAllBtn" onclick="toggleShowAll()">☰ Show All Categories</button>
+  <button class="showall-btn" id="showAllBtn" onclick="toggleShowAll()">☰ Show All Rooms</button>
 </div>
 
 
@@ -767,8 +767,54 @@ function toggleItem(id, val){ BY_ID[id].on=val; saveState(); renderMain(); }
 /* =====================================================================
    RENDER
    ===================================================================== */
-const TABS = [{id:"overview", label:"Overview"}]
+
+/* =====================================================================
+   CATEGORY VIEWS — the same items regrouped by trade. Views only: every
+   item is still counted once in the total.
+   ===================================================================== */
+const CATEGORIES = [
+  {id:"c_civil", label:"Civil Work", test:id=>/^(kwall|kplaster|kdebris|kxwall|kxplaster)$/.test(id),
+   intro:"Breaking the kitchen wall for the open kitchen, the optional kitchen extension into the utility room, plastering and debris removal. Flooring, doors, windows and bathroom work are not part of this BOQ."},
+  {id:"c_ceiling", label:"False Ceiling", test:id=>/^(ceil\d+|ceilk|ply)$/.test(id),
+   intro:"Gypsum / POP false ceiling room by room, moisture-resistant kitchen ceiling and ply support for fixtures. Optional: all switched off by default."},
+  {id:"c_elec", label:"Electrical & Lighting", test:id=>/^(elec|cove|spots|kled)$/.test(id),
+   intro:"Electrical work at ₹250/sq.ft. on the carpet area, Philips spotlights, under-cabinet LED and (with the false ceiling) cove lighting."},
+  {id:"c_paint", label:"Paint", test:id=>/^paint$/.test(id),
+   intro:"Royale-grade emulsion on walls and ceilings of all rooms at ₹60/sq.ft."},
+  {id:"c_wood", label:"Woodwork", test:id=>/^(kcab|kxcab|kbreak|crockery|shoe|foyerwall|lutil|uutil|upuja|vanity|mb1chest)$/.test(id)||/(ward|store|dresser|tv|wall|desk)$/.test(id),
+   intro:"Everything made by our carpenters / factory: laminate kitchen, wardrobes and the parents' storage unit, dressers, TV units, pooja unit, crockery, shoe and utility units, feature walls and bed-back panelling, vanities and study desks."},
+  {id:"c_hw", label:"Hardware", test:id=>/^hw_/.test(id),
+   intro:"Kitchen hardware (Hettich / Ebco), as per the client's selection: switched off until chosen. Wardrobe hardware is likewise as per selection."},
+  {id:"c_stone", label:"Stone & Plumbing", test:id=>/^(ktop|kxtop|kplumb)$/.test(id),
+   intro:"Kitchen counter in granite / quartz and the kitchen plumbing fit-out on existing points."},
+  {id:"c_furn", label:"Loose Furniture", test:id=>/(bed|side|sofa|coffee|lounge)$/.test(id)||id==="dtable",
+   intro:"Beds, bedside tables, sofas, coffee tables, the dining table and lounge seating."},
+  {id:"c_shop", label:"Shopping Items", test:id=>/^(chand|ctrack|cfabric|kblind|mesh|sink|dryer|mirrors|pwmirror|shower|balbig|balsmall)$/.test(id),
+   intro:"Bought-out items supplied and fixed by us: chandelier, curtains and tracks, kitchen blind, mosquito mesh, kitchen sink and mixer, cloth dryers, mirrors, glass shower partitions and balcony furniture."},
+  {id:"c_fees", label:"Project Fees", test:id=>id==="designexec",
+   intro:"Complete project fees at ₹100/sq.ft. of carpet area."},
+];
+ALL_ITEMS.forEach(it=>{ const c=CATEGORIES.find(c=>c.test(it.id)); it._cat=c?c.id:null; });
+const UNCAT = ALL_ITEMS.filter(i=>!i._cat).map(i=>i.id); if(UNCAT.length) console.warn("Uncategorised:",UNCAT);
+function catItems(c){ return ALL_ITEMS.filter(i=>i._cat===c.id); }
+function catTotal(c){ return catItems(c).reduce((t,it)=>t+(it.on?amtOf(it):0),0); }
+function panelCategory(c){
+  const bySec=[]; catItems(c).forEach(it=>{ let g=bySec.find(x=>x.sec===it._sec); if(!g){ g={sec:it._sec, items:[]}; bySec.push(g);} g.items.push(it); });
+  return `<section class="panel" id="panel-${c.id}" data-trade="1">
+    <div class="panel-head"><h2>${c.label}</h2><p>${c.intro} Switching an item on or off here also changes it in its room tab; nothing is counted twice.</p></div>
+    ${bySec.map(g=>`<div class="divider-note">${g.sec.tab||g.sec.title}</div>`+g.items.map(renderItem).join('')).join('')}
+    <div class="subtotal-strip"><span>${c.label} subtotal</span><span class="val">${fmt(catTotal(c))}</span></div>
+  </section>`;
+}
+function catSummaryTable(){
+  return `<div class="cs-group"><h3>Category-wise summary</h3><table class="cs"><thead><tr><th>Category</th><th class="num">Amount</th></tr></thead><tbody>
+    ${CATEGORIES.map(c=>`<tr><td><b>${c.label}</b></td><td class="num">${fmt(catTotal(c))}</td></tr>`).join('')}
+    <tr><td style="text-align:right;font-weight:600">Total</td><td class="num" style="font-weight:700">${fmt(grandTotal())}</td></tr></tbody></table></div>`;
+}
+
+const TABS = [{id:"overview", label:"Overview"}, {id:"categories", label:"By Category"}]
   .concat(SECTIONS.filter(s=>s.tab).map(s=>({id:s.id, label:s.tab})))
+  .concat(CATEGORIES.map(c=>({id:c.id, label:c.label})))
   .concat([{id:"costsheet", label:"Cost Sheet"}]);
 
 function renderTabs(){
@@ -835,6 +881,13 @@ function panelOverview(){
   </section>`;
 }
 
+function panelCatIndex(){
+  return `<section class="panel" id="panel-categories" data-trade="1">
+    <div class="panel-head"><h2>By Category</h2><p>The same BOQ grouped by type of work instead of by room. Tap a category to see its items; totals update with your selections.</p></div>
+    ${CATEGORIES.map(c=>`<div class="item" style="cursor:pointer" onclick="goTo('${c.id}')"><div class="item-top"><div><div class="item-title">${c.label}</div><div class="item-room">${catItems(c).filter(i=>i.on).length} of ${catItems(c).length} items selected</div></div><div class="toggle-row"><span class="amount">${fmt(catTotal(c))}</span></div></div></div>`).join('')}
+    <div class="subtotal-strip"><span>Grand total</span><span class="val">${fmt(grandTotal())}</span></div>
+  </section>`;
+}
 function panelCostSheet(){
   let rows='';
   SECTIONS.forEach(s=>{
@@ -844,6 +897,7 @@ function panelCostSheet(){
   });
   return `<section class="panel" id="panel-costsheet">
     <div class="panel-head"><h2>Cost Sheet</h2><p>Built from your current selections. Switched-off items are struck through and not counted.</p></div>
+    ${catSummaryTable()}
     ${rows}
     <div class="grand"><div><div class="label">Grand Total (excl. GST)</div><div class="cap-note">Mr. Mridul · Experion Duplex · Both floors · Revision 1</div></div><div class="value">${fmt(grandTotal())}</div></div>
     <div class="actions"><button class="cta" onclick="window.print()">Print / Save as PDF</button><button class="cta ghost" onclick="resetAll()">Reset to recommended</button></div>
@@ -853,19 +907,19 @@ function panelCostSheet(){
 let currentTab='overview', showAllMode=false;
 function renderMain(){
   const y=window.scrollY;
-  document.getElementById('main').innerHTML = panelOverview() + SECTIONS.filter(s=>s.tab).map(renderSection).join('') + renderSection(SECTIONS.find(s=>s.id==='design')).replace('class="panel"','class="panel" data-hidden="1"') + panelCostSheet();
+  document.getElementById('main').innerHTML = panelOverview() + SECTIONS.filter(s=>s.tab).map(renderSection).join('') + panelCatIndex() + CATEGORIES.map(panelCategory).join('') + renderSection(SECTIONS.find(s=>s.id==='design')).replace('class="panel"','class="panel" data-hidden="1"') + panelCostSheet();
   document.getElementById('stickyValue').textContent = fmt(grandTotal());
   applyView(false); window.scrollTo(0,y);
 }
 function applyView(scrollTop){
   document.querySelectorAll('section.panel').forEach(p=>{
     const id=p.id.replace('panel-','');
-    const show = p.dataset.hidden ? false : (showAllMode ? true : id===currentTab);
+    const show = p.dataset.hidden ? false : (showAllMode ? !p.dataset.trade : id===currentTab);
     p.classList.toggle('active', show);
   });
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', !showAllMode && b.dataset.tab===currentTab));
   const btn=document.getElementById('showAllBtn'); btn.classList.toggle('active', showAllMode);
-  btn.textContent = showAllMode ? '✕ Back to Tabs' : '☰ Show All Categories';
+  btn.textContent = showAllMode ? '✕ Back to Tabs' : '☰ Show All Rooms';
   if(scrollTop) window.scrollTo({top:0, behavior:'auto'});
 }
 function goTo(id){ showAllMode=false; currentTab=id; applyView(true); }
