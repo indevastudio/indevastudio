@@ -443,7 +443,7 @@ function bedroomSet(p, room, o){
   if(o.dresser) a.push({id:p+"dresser", room:o.wardRoom||room, name:"Dresser with mirror", unit:"No.", qty:1, on:true, selected:"Standard", options:DRESSER});
   a.push({id:p+"bed", room:room, name:o.bed==="K"?"Bed — King, upholstered with storage":"Bed — Queen, upholstered with storage", unit:"No.", qty:1, rate:100000, on:true, src:"Agreed rate", spec:(o.bed==="K"?"King size":"Queen size")+BED_SPEC});
   a.push({id:p+"side", room:room, name:"Bedside tables", unit:"No.", qty:2, rate:15000, on:true, src:"Agreed rate", spec:SIDE_SPEC});
-  a.push({id:p+"tv", room:room, name:"TV unit with storage", unit:"No.", qty:1, rate:120000, on:true, src:"Agreed rate", spec:TV_SPEC});
+  if(o.tv) a.push({id:p+"tv", room:room, name:"TV unit with storage", unit:"No.", qty:1, rate:120000, on:true, src:"Agreed rate", spec:TV_SPEC});
   a.push({id:p+"wall", room:room, name:"Bed-back wall design ("+o.wallLabel+")", unit:"sq.ft.", qty:o.wallQty, on:true, selected:"Standard", options:PANEL});
   if(o.lounge) a.push({id:p+"lounge", room:room, name:o.lounge, unit:"set", qty:1, rate:30000, on:false, src:"Optional · allowance",
      spec:"Seating for the corner shown on the plan, with a small side table. Allowance; final as per your selection."});
@@ -495,12 +495,12 @@ const CEIL = {
 const SECTIONS = [
 {
   id:"house", tab:"Entire Duplex", letter:"A", title:"Entire Duplex — Ceiling, Electrical, Lighting, Paint, Curtains (both floors)",
-  intro:"Work that runs through both floors. Carpet area approx. 3,453 sq.ft., measured room by room from the Experion plans (rooms + toilets, balconies excluded): lower floor approx. 1,740 sq.ft., upper floor approx. 1,713 sq.ft. Electrical work and the complete project fees are charged on this carpet area; ceilings, paint and lighting are measured on the rooms alone (approx. 2,922 sq.ft.). <b>Flooring is not part of this BOQ</b>, and the <b>existing sanitaryware is retained</b> in all toilets; bathroom tiles, doors and windows stay as handed over.",
+  intro:"Work that runs through both floors. Carpet area approx. 3,453 sq.ft., measured room by room from the Experion plans (rooms + toilets, balconies excluded): lower floor approx. 1,740 sq.ft., upper floor approx. 1,713 sq.ft. Electrical work and the complete project fees are charged on this carpet area; ceilings, paint and lighting are measured on the rooms alone (approx. 2,922 sq.ft.). <b>Flooring, sanitaryware, doors and windows stay as they are</b> and are not part of this BOQ. <b>False ceiling is optional</b> and switched off; switch it on room by room if wanted.",
   hero:[],
   groups:[
-    {note:"False ceiling (approx. 2,830 sq.ft.) with cove / pelmet detail for concealed LED — areas from the room sizes on the plan", items:
-      [["Living (lower) 20'0\" × 16'1\"", 322], ["Dining 12'0\" × 8'8\"", 104], ["Entry lobby + bedroom lobby", 120], ["Master Bedroom-1 12'0\" × 17'8\"", 212], ["M. Dress-1 8'2\" × 7'11\"", 65], ["Bedroom-2 14'2\" × 14'5\"", 204], ["Dress (Bedroom-2) 6'1\" × 8'0\"", 49], ["Bedroom-1 13'0\" × 13'0\"", 169], ["Puja (lower) 7'4\" × 5'4\"", 39], ["Living (upper) 20'0\" × 16'5\"", 328], ["Family room 12'0\" × 14'9\"", 177], ["Passage (1525 mm wide) + landing", 170], ["Master Bedroom-2 12'0\" × 17'8\"", 212], ["M. Dress-2 8'2\" × 7'11\"", 65], ["Bedroom-4 14'2\" × 14'5\"", 204], ["Dress (Bedroom-4) 6'1\" × 8'0\"", 49], ["Bedroom-3 13'0\" × 13'0\"", 169], ["Puja (upper) 7'4\" × 5'4\"", 39]].map(([room,q],i)=>({id:"ceil"+i, room:room, name:"False Ceiling", unit:"sq.ft.", qty:q, on:true, selected:"Gypsum", options:CEIL})).concat([
-      {id:"ceilk", room:"Kitchen (lower floor)", name:"False Ceiling — moisture-resistant", unit:"sq.ft.", qty:133, rate:150, on:true,
+    {note:"False ceiling — OPTIONAL, off by default (approx. 2,830 sq.ft. if done in all rooms, with cove / pelmet detail). Switch on room by room.", items:
+      [["Living (lower) 20'0\" × 16'1\"", 322], ["Dining 12'0\" × 8'8\"", 104], ["Entry lobby + bedroom lobby", 120], ["Master Bedroom-1 12'0\" × 17'8\"", 212], ["M. Dress-1 8'2\" × 7'11\"", 65], ["Bedroom-2 14'2\" × 14'5\"", 204], ["Dress (Bedroom-2) 6'1\" × 8'0\"", 49], ["Bedroom-1 13'0\" × 13'0\"", 169], ["Puja (lower) 7'4\" × 5'4\"", 39], ["Living (upper) 20'0\" × 16'5\"", 328], ["Family room 12'0\" × 14'9\"", 177], ["Passage (1525 mm wide) + landing", 170], ["Master Bedroom-2 12'0\" × 17'8\"", 212], ["M. Dress-2 8'2\" × 7'11\"", 65], ["Bedroom-4 14'2\" × 14'5\"", 204], ["Dress (Bedroom-4) 6'1\" × 8'0\"", 49], ["Bedroom-3 13'0\" × 13'0\"", 169], ["Puja (upper) 7'4\" × 5'4\"", 39]].map(([room,q],i)=>({id:"ceil"+i, room:room, name:"False Ceiling", unit:"sq.ft.", qty:q, on:false, src:"Optional", selected:"Gypsum", options:CEIL})).concat([
+      {id:"ceilk", room:"Kitchen (lower floor)", name:"False Ceiling — moisture-resistant", unit:"sq.ft.", qty:133, rate:150, on:false, src:"Optional",
        spec:"Saint-Gobain Gyproc moisture-resistant board on GI framing for the kitchen (12'0\" × 11'1\"), with access panel. As the kitchen opens to the dining, the ceiling runs through as one design. Rate as per Indéva master BOQ."}
     ])},
     {note:"Electrical — modifications to the builder's wiring", items:[
@@ -509,11 +509,11 @@ const SECTIONS = [
         "Existing conduits":{rate:100, spec:"New points and relocation of the builder's points for the new furniture and lighting layout, using the existing conduits and wiring where possible: chiselling, AKG PVC conduits, boxing, Finolex / Polycab / KEI wires, and labour for fitting architectural lights, exhaust fans, switches and MCBs. 3,453 sq.ft. carpet area (rooms + toilets, balconies excluded) × ₹100 (Indéva master BOQ). Switch plates, MCBs, DB and fixtures excluded."},
         "All new points":{rate:250, spec:"Complete electrical work with all new points throughout, 3,453 sq.ft. carpet area × agreed rate ₹250/sq.ft.: internal chiselling, AKG PVC conduits, boxing, Finolex / Polycab / KEI wires, and labour for fitting architectural lights, exhaust fans, switches and MCBs. Rate as per Indéva master BOQ. Switch plates, MCBs, DB and fixtures excluded."}
        }},
-      {id:"ply", room:"False-ceiling areas", name:"Ply support for light fixtures (chandelier, pendants)", unit:"sq.ft.", qty:30, rate:100, on:true,
+      {id:"ply", room:"False-ceiling areas", name:"Ply support for light fixtures (chandelier, pendants)", unit:"sq.ft.", qty:30, rate:100, on:false, src:"Optional",
        spec:"Plywood backing in the ceiling for the dining chandelier, pendants and heavy fixtures on both floors. Rate as per Indéva master BOQ (low-side ply work)."},
     ]},
     {note:"Lighting — Philips", items:[
-      {id:"cove", room:"Living rooms, dining, family room + 6 bedrooms", name:"Philips Cove Lighting (LED strip)", unit:"rft", qty:576, rate:180, on:true, src:"Qty estimate",
+      {id:"cove", room:"Living rooms, dining, family room + 6 bedrooms", name:"Philips Cove Lighting (LED strip)", unit:"rft", qty:576, rate:180, on:false, src:"Optional · with false ceiling",
        spec:"Philips LED strip with driver and aluminium profile in the false-ceiling coves. Lower floor: living 72 rft, dining 41, Master Bedroom-1 59, Bedroom-2 57, Bedroom-1 52. Upper floor: living 73, family room 54, Master Bedroom-2 59, Bedroom-4 57, Bedroom-3 52. Quantity from room perimeters on the plan; confirm on site."},
       {id:"spots", room:"Both floors", name:"Philips Spotlights (COB)", unit:"No.", qty:113, rate:650, on:true, src:"Qty estimate",
        spec:"Philips COB spotlights, approx. 1 per 25 sq.ft. of false ceiling, across the living rooms, dining, kitchen, family room, lobby and passage, puja rooms, bedrooms and dress rooms. Confirm on the lighting layout."},
@@ -538,8 +538,8 @@ const SECTIONS = [
   ]
 },
 {
-  id:"lliving", tab:"Lower — Living, Dining & Puja", letter:"B", title:"Lower Floor — Living (20'0\" × 16'1\"), Dining (12'0\" × 8'8\"), Lobby & Puja (7'4\" × 5'4\")",
-  intro:"The entry opens into the lobby with the puja room on the left; the living room (20' × 16'1\") opens to Balcony-1 (20'11\" × 5'11\"), with the dining area between the living room and the kitchen. The plan shows a 3-seater sofa with four armchairs in the living room and a 6-seater dining table.",
+  id:"lliving", tab:"Lower — Living & Dining", letter:"B", title:"Lower Floor — Living (20'0\" × 16'1\"), Dining (12'0\" × 8'8\") & Lobby",
+  intro:"The entry opens into the lobby (the pooja unit is placed on the upper floor as per Vastu, so none is planned here); the living room (20' × 16'1\") opens to Balcony-1 (20'11\" × 5'11\"), with the dining area between the living room and the kitchen. The plan shows a 3-seater sofa with four armchairs in the living room and a 6-seater dining table.",
   hero:[],
   groups:[
     {note:"Living room", items:[
@@ -564,25 +564,29 @@ const SECTIONS = [
       {id:"pwmirror", room:"Powder room", name:"Mirror", unit:"No.", qty:1, rate:15000, on:true, src:"Agreed rate",
        spec:"5mm Saint-Gobain mirror with bevelled edge, framed, approx. 2 ft × 3 ft. Agreed rate ₹15,000. The existing WC and basin stay as they are."},
     ]},
-    {note:"Puja room (7'4\" × 5'4\")", items:[
-      {id:"lpuja", room:"Puja (lower)", name:"Mandir unit (approx. 4 ft wide × 7 ft high)", unit:"No.", qty:1, on:true, selected:"Standard", options:PUJA},
-      {id:"lpujaback", room:"Puja (lower)", name:"Puja back wall — CNC jaali backdrop (5 ft × 7 ft)", unit:"sq.ft.", qty:35, rate:1500, on:false, src:"Optional",
-       spec:"MDF CNC jaali panel with frame, PU paint, with LED back-lighting behind the mandir. Rate as per Indéva master BOQ (MDF jaali partition)."},
-    ]},
+
   ]
 },
 {
   id:"kitchen", tab:"Kitchen & Utility", letter:"C", title:"Kitchen (12'0\" × 11'1\") opened to the Dining, Utility Rooms (6'9\" × 6'9\") on both floors",
-  intro:"The kitchen is planned as an open kitchen: part of the wall between the kitchen and the dining area is taken down so the two read as one space. The L-shaped kitchen runs along the hob wall and the window wall, approx. 19 ft running length with base, wall and loft units plus one tall unit beside the fridge — approx. 130 sq.ft. of front area. Cabinet rates are for carcass + shutters; hardware is listed separately. Chimney, hob and appliances are not included. Each floor has a utility room off the utility balcony.",
+  intro:"The client wants an open kitchen: the kitchen wall towards the living / dining is broken so the two read as one space. They would also like a more spacious kitchen, so taking the lower-floor utility room into the kitchen is listed as an option for them to decide (off by default). The L-shaped kitchen runs along the hob wall and the window wall, approx. 19 ft running length with base, wall and loft units plus one tall unit beside the fridge — approx. 130 sq.ft. of front area. Cabinet rates are for carcass + shutters; hardware is listed separately. Chimney, hob and appliances are not included. Each floor has a utility room off the utility balcony.",
   hero:[],
   groups:[
-    {note:"Opening the kitchen to the dining", items:[
-      {id:"kwall", room:"Kitchen ↔ Dining wall", name:"Dismantling part of the kitchen wall for the open kitchen (approx. 8 ft × 10 ft)", unit:"sq.ft.", qty:80, rate:40, on:true, src:"Subject to structural check",
+    {note:"Open kitchen — breaking the kitchen wall towards the living / dining", items:[
+      {id:"kwall", room:"Kitchen ↔ Dining wall", name:"Dismantling the kitchen wall towards the living / dining for the open kitchen (approx. 8 ft × 10 ft)", unit:"sq.ft.", qty:80, rate:40, on:true, src:"Subject to structural check",
        spec:"Dismantling of the brick wall with plaster between the kitchen and the dining, cutting back and making good the edges. Rate as per Indéva master BOQ. Experion towers use RCC shear walls in places: only a non-structural masonry wall can be removed, so this needs the builder's structural drawing and society approval before work starts."},
       {id:"kplaster", room:"Kitchen ↔ Dining wall", name:"Plastering and edge finishing of the new opening", unit:"sq.ft.", qty:40, rate:40, on:true,
        spec:"Cement plaster on the cut wall ends, soffit and junctions, ready for punning and paint. Rate as per Indéva master BOQ."},
       {id:"kdebris", room:"Kitchen", name:"Removal of construction debris", unit:"trolley", qty:2, rate:2000, on:true,
        spec:"Debris removal by trolley. Rate as per Indéva master BOQ. Lift usage as per society rules."},
+      {id:"kxwall", room:"Kitchen ↔ Utility room", name:"Kitchen extension: dismantling the wall between kitchen and utility room (approx. 7 ft × 10 ft)", unit:"sq.ft.", qty:70, rate:40, on:false, src:"Client to decide · structural check",
+       spec:"To make the kitchen more spacious, the lower-floor utility room (6'9\" × 6'9\", approx. 46 sq.ft.) can be taken into the kitchen by removing the wall between them. Rate as per Indéva master BOQ. Only possible if the wall is non-structural and the utility toilet and shaft are not affected; needs the builder's structural drawing and society approval."},
+      {id:"kxplaster", room:"Kitchen ↔ Utility room", name:"Kitchen extension: plaster, edge finishing and debris", unit:"lumpsum", qty:1, rate:6800, on:false, src:"Client to decide",
+       spec:"Plastering of the cut ends and junctions (approx. 40 sq.ft. × ₹40 = ₹1,600, Indéva master BOQ) + 2 trolleys of debris (₹4,000) + making good the floor strip where the wall stood (₹1,200, flooring material by client)."},
+      {id:"kxcab", room:"Kitchen extension (utility side)", name:"Kitchen extension: extra laminate cabinetry (approx. 40 sq.ft.)", unit:"sq.ft.", qty:40, rate:1800, on:false, src:"Client to decide",
+       spec:"Additional base + wall units along the former utility wall, for the washing machine / dishwasher bay and pantry storage, same laminate specification and agreed rate ₹1,800/sq.ft. Hardware as per selection."},
+      {id:"kxtop", room:"Kitchen extension (utility side)", name:"Kitchen extension: extra counter (approx. 6 ft)", unit:"sq.ft.", qty:14, rate:250, on:false, src:"Client to decide",
+       spec:"Granite / quartz counter on the extended run, with moulding. Rate as per Indéva master BOQ."},
       {id:"kbreak", room:"Kitchen ↔ Dining", name:"Breakfast counter on the open side (5 ft)", unit:"sq.ft.", qty:15, on:false, selected:"Standard", src:"Optional", options:LOOSE},
     ]},
     {note:"Laminate kitchen — ₹1,800 per sq.ft. of front area (hardware extra, as per selection)", items:[
@@ -622,7 +626,7 @@ const SECTIONS = [
        spec:"Kitchen plumbing works excluding modification of the internal piping: sink, RO and dishwasher connections on the builder's points. Rate as per Indéva master BOQ."},
     ]},
     {note:"Utility rooms (6'9\" × 6'9\") & utility balconies — both floors", items:[
-      {id:"lutil", room:"Utility room (lower)", name:"Utility unit — washing machine housing, storage above (6 ft × 7 ft)", unit:"sq.ft.", qty:42, on:true, selected:"Standard", options:UTIL},
+      {id:"lutil", room:"Utility room (lower)", name:"Utility unit — washing machine housing, storage above (6 ft × 7 ft) · switch off if the utility is merged into the kitchen", unit:"sq.ft.", qty:42, on:true, selected:"Standard", options:UTIL},
       {id:"uutil", room:"Utility room (upper)", name:"Utility unit — storage (6 ft × 7 ft)", unit:"sq.ft.", qty:42, on:true, selected:"Standard", options:UTIL},
       {id:"dryer", room:"Utility balconies", name:"Ceiling clothes-drying system", unit:"No.", qty:2, rate:4500, on:true, src:"Market rate · to confirm",
        spec:"Ceiling-mounted pulley cloth dryer, 6 SS rods, 6 ft, one in each utility balcony (17'2\" × 4'5\")."},
@@ -631,17 +635,23 @@ const SECTIONS = [
 },
 {
   id:"lbeds", tab:"Lower — Bedrooms", letter:"D", title:"Lower Floor — Master Bedroom-1 (12'0\" × 17'8\") + M. Dress-1, Bedroom-2 (14'2\" × 14'5\") + Dress, Bedroom-1 (13'0\" × 13'0\")",
-  intro:"Master Bedroom-1 is planned as the parents' room, with its walk-in dress (8'2\" × 7'11\") and toilet. Bedroom-2 has its own dress (6'1\" × 8'0\"), toilet and Balcony-2. Bedroom-1 is next to the entry lobby with its own toilet. Wardrobes in the dress rooms are taken on two walls as drawn on the plan; confirm on site.",
+  intro:"Master Bedroom-1 is designed as the parents' room, with its walk-in dress (8'2\" × 7'11\"), toilet and extra in-room storage. TV units are needed only in the Guest Bedroom (Bedroom-1) and in Bedroom-2, opposite the master bedroom. Bedroom-2 has its own dress (6'1\" × 8'0\"), toilet and Balcony-2. Bedroom-1, next to the entry lobby with its own toilet, is the guest bedroom. Wardrobes in the dress rooms are taken on two walls as drawn on the plan; confirm on site.",
   hero:[],
   groups:[
     {note:"Master Bedroom-1 (parents' room) + M. Dress-1 · wardrobe hardware as per selection", items: bedroomSet("mb1","Master Bedroom-1",{wardRoom:"M. Dress-1", wardLabel:"Walk-in wardrobe — L-shape (8 ft + 6 ft × 9 ft high)", wardQty:126, bed:"K", wallLabel:"12 ft × 9 ft", wallQty:108, dresser:true, lounge:"2-seater lounge sofa (as on the plan)"})},
-    {note:"Bedroom-2 + Dress", items: bedroomSet("b2","Bedroom-2",{wardRoom:"Dress (Bedroom-2)", wardLabel:"Walk-in wardrobe — L-shape (6 ft + 6 ft × 9 ft high)", wardQty:108, bed:"K", wallLabel:"12 ft × 9 ft", wallQty:108, lounge:"Lounge chairs (pair) + side table"})},
-    {note:"Bedroom-1", items: bedroomSet("b1","Bedroom-1",{wardLabel:"Wardrobe (7 ft wide × 9 ft high)", wardQty:63, bed:"Q", wallLabel:"10 ft × 9 ft", wallQty:90, desk:true})},
+    {note:"Master Bedroom-1 — extra storage for the parents", items:[
+      {id:"mb1store", room:"Master Bedroom-1", name:"Additional storage unit in the bedroom (8 ft × 9 ft) — laminate", unit:"sq.ft.", qty:72, rate:1600, on:true, src:"Agreed rate",
+       spec:"Floor-to-ceiling storage unit on the wall freed up by not having a TV in this room: closed shutters with internal shelves, 2 drawer stacks at a comfortable height for the parents, and a loft above. "+STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam). Agreed rate ₹1,600/sq.ft.; hardware as per selection."},
+      {id:"mb1chest", room:"Master Bedroom-1", name:"Chest of drawers (4 ft) — laminate", unit:"No.", qty:1, rate:30000, on:false, src:"Optional · allowance",
+       spec:"4 ft chest of 4 drawers on soft-close channels, 18mm HDHMR with 1mm laminate, for everyday clothes and medicines within easy reach. Allowance."},
+    ]},
+    {note:"Bedroom-2 + Dress (opposite Master Bedroom-1)", items: bedroomSet("b2","Bedroom-2",{tv:true, wardRoom:"Dress (Bedroom-2)", wardLabel:"Walk-in wardrobe — L-shape (6 ft + 6 ft × 9 ft high)", wardQty:108, bed:"K", wallLabel:"12 ft × 9 ft", wallQty:108, lounge:"Lounge chairs (pair) + side table"})},
+    {note:"Bedroom-1 (Guest Bedroom)", items: bedroomSet("b1","Bedroom-1 (Guest Bedroom)",{tv:true, wardLabel:"Wardrobe (7 ft wide × 9 ft high)", wardQty:63, bed:"Q", wallLabel:"10 ft × 9 ft", wallQty:90, desk:true})},
   ]
 },
 {
-  id:"uliving", tab:"Upper — Living, Family & Puja", letter:"E", title:"Upper Floor — Living (20'0\" × 16'5\"), Family Room (12'0\" × 14'9\"), Passage & Puja (7'4\" × 5'4\")",
-  intro:"The stair lands in the 1525 mm (5 ft) wide passage that links the upper living room (20' × 16'5\", opening to Balcony-3), the family room (12' × 14'9\") and the bedrooms. The plan shows a 3-seater sofa with four chairs in the living room and a curved sofa with two armchairs in the family room. No bar units are planned.",
+  id:"uliving", tab:"Upper — Living, Family & Pooja", letter:"E", title:"Upper Floor — Living (20'0\" × 16'5\"), Family Room (12'0\" × 14'9\"), Passage & Puja (7'4\" × 5'4\")",
+  intro:"The stair lands in the 1525 mm (5 ft) wide passage that links the upper living room (20' × 16'5\", opening to Balcony-3), the family room (12' × 14'9\") and the bedrooms. The plan shows a 3-seater sofa with four chairs in the living room and a curved sofa with two armchairs in the family room. No bar units are planned (Jain family).",
   hero:[],
   groups:[
     {note:"Living room (upper)", items:[
@@ -656,15 +666,17 @@ const SECTIONS = [
       {id:"fcoffee", room:"Family room", name:"Round coffee table", unit:"No.", qty:1, rate:30000, on:true, src:"Agreed rate", spec:COFFEE_SPEC},
       {id:"fwall", room:"Family room", name:"Feature wall (12 ft × 9 ft)", unit:"sq.ft.", qty:108, on:false, selected:"Standard", src:"Optional", options:PANEL},
     ]},
-    {note:"Passage & puja room (upper)", items:[
+    {note:"Passage (upper)", items:[
       {id:"pwall", room:"Passage (upper)", name:"Passage wall panelling (20 ft × 9 ft)", unit:"sq.ft.", qty:180, on:false, selected:"Standard", src:"Optional", options:PANEL},
-      {id:"upuja", room:"Puja (upper)", name:"Mandir unit (approx. 4 ft wide × 7 ft high)", unit:"No.", qty:1, on:true, selected:"Standard", options:PUJA},
+    ]},
+    {note:"Pooja unit — in the upper floor living area, as per Vastu", items:[
+            {id:"upuja", room:"Living (upper) — as per Vastu", name:"Pooja unit in the upper living area (approx. 4 ft wide × 7 ft high)", unit:"No.", qty:1, on:true, selected:"Standard", options:PUJA},
     ]},
   ]
 },
 {
   id:"ubeds", tab:"Upper — Bedrooms", letter:"F", title:"Upper Floor — Master Bedroom-2 (12'0\" × 17'8\") + M. Dress-2, Bedroom-4 (14'2\" × 14'5\") + Dress, Bedroom-3 (13'0\" × 13'0\")",
-  intro:"The upper floor repeats the lower bedroom layout: Master Bedroom-2 with its walk-in dress (8'2\" × 7'11\") and toilet, Bedroom-4 with its dress (6'1\" × 8'0\"), toilet and Balcony-4, and Bedroom-3 with its own toilet.",
+  intro:"The upper floor repeats the lower bedroom layout: Master Bedroom-2 with its walk-in dress (8'2\" × 7'11\") and toilet, Bedroom-4 with its dress (6'1\" × 8'0\"), toilet and Balcony-4, and Bedroom-3 with its own toilet. No TV units are planned in the upper-floor bedrooms.",
   hero:[],
   groups:[
     {note:"Master Bedroom-2 + M. Dress-2", items: bedroomSet("mb2","Master Bedroom-2",{wardRoom:"M. Dress-2", wardLabel:"Walk-in wardrobe — L-shape (8 ft + 6 ft × 9 ft high)", wardQty:126, bed:"K", wallLabel:"12 ft × 9 ft", wallQty:108, dresser:true, lounge:"2-seater lounge sofa (as on the plan)"})},
@@ -673,16 +685,16 @@ const SECTIONS = [
   ]
 },
 {
-  id:"baths", tab:"Bathrooms", letter:"G", title:"Toilets — Mirrors (existing sanitaryware retained)",
-  intro:"The existing sanitaryware and tiles stay in all toilets, so no plumbing, tiling or sanitary work is priced. Each of the six bedroom toilets (M. Toilet-1 & 2, Toilets 1–4) gets a framed mirror; vanity units and glass shower partitions are listed as optional. The powder room mirror is on the lower-floor tab; the two utility toilets are left as they are.",
+  id:"baths", tab:"Bathrooms", letter:"G", title:"Toilets — Mirrors & Shower Partitions (existing sanitaryware retained)",
+  intro:"The existing sanitaryware and tiles stay in all toilets, so no plumbing, tiling or sanitary work is priced. Each of the six bedroom toilets (M. Toilet-1 & 2, Toilets 1–4) gets a framed mirror. Glass shower partitions are required in every toilet except the MBR washroom (M. Toilet-1), which already has one; vanity units are optional. The powder room mirror is on the lower-floor tab; the two utility toilets are left as they are.",
   hero:[],
   groups:[
     {note:null, items:[
       {id:"mirrors", room:"6 toilets", name:"Bathroom mirrors", unit:"No.", qty:6, rate:15000, on:true, src:"Agreed rate",
        spec:"5mm Saint-Gobain mirror with bevelled edge, framed, approx. 2 ft × 3 ft. Agreed rate ₹15,000 per mirror."},
       {id:"vanity", room:"6 toilets", name:"Vanity unit under the existing basin (2 ft)", unit:"No.", qty:6, on:false, selected:"Laminate", src:"Optional", options:VAN},
-      {id:"shower", room:"6 toilets", name:"Glass shower partition", unit:"No.", qty:6, rate:16500, on:false, src:"Optional · market rate",
-       spec:"10mm toughened clear glass partition with SS 304 hinges / clamps and seals, approx. 15 sq.ft. per toilet. Size per toilet to be measured."},
+      {id:"shower", room:"Toilet-1, Toilet-2, Toilet-3, Toilet-4, M. Toilet-2", name:"Glass shower partition", unit:"No.", qty:5, rate:16500, on:true, src:"Market rate · to confirm",
+       spec:"10mm toughened clear glass partition with SS 304 hinges / clamps and seals, approx. 15 sq.ft. per toilet, fixed on the existing tiles. Required in every toilet except the MBR washroom (M. Toilet-1), which already has one. Size per toilet to be measured."},
     ]},
   ]
 },
@@ -808,13 +820,13 @@ function panelOverview(){
       <b>Upper floor:</b> Living 6095 × 5000 (20'0" × 16'5") · Family room 3660 × 4480 (12'0" × 14'9") · 1525 mm wide passage · Puja 2240 × 1615 · Master Bedroom-2 3650 × 5380 + M. Dress-2 + M. Toilet-2 · Bedroom-4 4305 × 4385 + Dress + Toilet-4 + Balcony-4 · Bedroom-3 3960 × 3965 + Toilet-3 · Utility room, utility toilet · Balcony-3 6370 × 1800 · Utility balcony 5240 × 1345. Carpet area approx. 1,713 sq.ft. incl. toilets.<br>
       Rooms approx. 2,922 sq.ft. + toilets approx. 539 sq.ft. (6 bedroom toilets, 2 utility toilets, powder room) = <b>carpet area approx. 3,453 sq.ft.</b> (lower 1,740 + upper 1,713), balconies excluded (approx. 508 sq.ft.).</div></div>
     <div class="item"><div class="item-title">Scope covered</div><div class="item-spec" style="margin-bottom:0">
-      <b>Entire duplex:</b> gypsum false ceiling, electrical modifications, Philips cove and spot lighting, Royale-grade paint (₹60/sq.ft.), all-new electrical (₹250/sq.ft.), blackout + sheer curtains, kitchen blind; optional mosquito mesh.<br>
-      <b>Lower floor — living, dining & puja:</b> TV + storage unit, sofa set, coffee table, feature wall, 6-seater dining, crockery unit, chandelier, shoe cabinet, mandir unit, powder-room mirror; optional entry feature wall and puja jaali backdrop.<br>
-      <b>Kitchen & utility:</b> open kitchen (part of the kitchen–dining wall removed, subject to structural check), L-shaped laminate modular kitchen with tall unit at ₹1,800/sq.ft., kitchen hardware as per selection, stone counter, sink, under-cabinet LED, plumbing fit-out; utility units and cloth dryers on both floors.<br>
-      <b>Bedrooms (both floors):</b> laminate wardrobes at ₹1,600/sq.ft. (hardware as per selection) in all dress rooms and Bedrooms 1 & 3, dressers in the master dress rooms, beds at ₹1,00,000 each, bedside tables at ₹15,000 per piece, TV units with storage at ₹1,20,000 and bed-back walls in all six bedrooms; optional lounge seating and study desks.<br>
-      <b>Upper floor — living, family & puja:</b> TV + storage unit, sofa set and coffee table in the living room; TV unit, curved sofa with armchairs and coffee table in the family room; mandir unit; optional feature walls and passage panelling.<br>
-      <b>Toilets:</b> mirrors in the six bedroom toilets; optional vanities and shower partitions.<br>
-      <b>Not included:</b> flooring of any kind, sanitaryware, bathroom tiling and plumbing (existing retained), civil work other than the open-kitchen wall, appliances, chimney and hob, mattresses, ACs, switch plates, MCBs, DB, staircase and railing work, and decorative fixtures other than those listed.</div></div>
+      <b>Entire duplex:</b> optional gypsum false ceiling (off by default), electrical work, Philips cove and spot lighting, Royale-grade paint (₹60/sq.ft.), all-new electrical (₹250/sq.ft.), blackout + sheer curtains, kitchen blind; optional mosquito mesh.<br>
+      <b>Lower floor — living & dining:</b> TV unit, sofa set, coffee table, feature wall, 6-seater dining, crockery unit, chandelier, shoe cabinet, powder-room mirror; optional entry feature wall.<br>
+      <b>Kitchen & utility:</b> open kitchen (kitchen wall towards the living / dining broken, subject to structural check), optional extension of the kitchen into the lower utility room for more space, L-shaped laminate modular kitchen with tall unit at ₹1,800/sq.ft., kitchen hardware as per selection, stone counter, sink, under-cabinet LED, plumbing fit-out; utility units and cloth dryers on both floors.<br>
+      <b>Bedrooms (both floors):</b> laminate wardrobes at ₹1,600/sq.ft. (hardware as per selection) in all dress rooms and Bedrooms 1 & 3, dressers in the master dress rooms, beds at ₹1,00,000 each, bedside tables at ₹15,000 per piece and bed-back walls in all six bedrooms; TV units (₹1,20,000) only in the Guest Bedroom (Bedroom-1) and Bedroom-2; extra storage in Master Bedroom-1, designed as the parents' room; optional lounge seating and study desks.<br>
+      <b>Upper floor — living, family & pooja:</b> TV unit, sofa set, coffee table and the pooja unit (placed in the upper living area as per Vastu); TV unit, curved sofa with armchairs and coffee table in the family room; optional feature walls and passage panelling.<br>
+      <b>Toilets:</b> mirrors in the six bedroom toilets, glass shower partitions in all toilets except the MBR washroom; optional vanities.<br>
+      <b>Not included:</b> flooring, sanitaryware, doors and windows (all existing retained), bathroom tiling and plumbing, bar units (Jain family), civil work other than the open-kitchen wall, appliances, chimney and hob, mattresses, ACs, switch plates, MCBs, DB, staircase and railing work, and decorative fixtures other than those listed.</div></div>
     <div class="item"><div class="item-title">Material standards used throughout</div><div class="item-spec" style="margin-bottom:0">
       <b>Boards:</b> HDHMR (Action TESA / Greenpanel) for dry-area carcasses; 18mm BWP ply (Century / Greenply) for wet areas.<br>
       <b>Surfaces:</b> 1mm laminate (Merino / Greenlam), 1.2mm acrylic (Rehau / Merino Luxe), 2K PU paint (ICA / Sirca); 2mm PVC edge banding (Rehau).<br>
