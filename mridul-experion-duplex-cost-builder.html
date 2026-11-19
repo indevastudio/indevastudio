@@ -439,7 +439,7 @@ const KBED = {
 function bedroomSet(p, room, o){
   // o: {wardLabel, wardQty, wardRoom, bed:"K"|"Q", wallLabel, wallQty, lounge:bool, dresser:bool, desk:bool}
   const a=[];
-  a.push({id:p+"ward", room:o.wardRoom||room, name:o.wardLabel+" — laminate", unit:"sq.ft.", qty:o.wardQty, rate:1600, on:true, src:"Agreed rate", spec:WARD_SPEC});
+  a.push({id:p+"ward", room:o.wardRoom||room, name:o.wardLabel+" — PU finish", unit:"sq.ft.", qty:o.wardQty, rate:2200, on:true, src:"Agreed rate", spec:WARD_SPEC});
   if(o.dresser) a.push({id:p+"dresser", room:o.wardRoom||room, name:"Dresser with mirror", unit:"No.", qty:1, on:true, selected:"Standard", options:DRESSER});
   a.push({id:p+"bed", room:room, name:o.bed==="K"?"Bed — King, upholstered with storage":"Bed — Queen, upholstered with storage", unit:"No.", qty:1, rate:100000, on:true, src:"Agreed rate", spec:(o.bed==="K"?"King size":"Queen size")+BED_SPEC});
   a.push({id:p+"side", room:room, name:"Bedside tables", unit:"No.", qty:2, rate:15000, on:true, src:"Agreed rate", spec:SIDE_SPEC});
@@ -450,7 +450,7 @@ function bedroomSet(p, room, o){
   if(o.desk) a.push({id:p+"desk", room:room, name:"Study desk (4 ft) with drawers", unit:"No.", qty:1, on:false, selected:"Standard", src:"Optional", options:DESK});
   return a;
 }
-const WARD_SPEC = STD.carcass+" Shutters: 18mm HDHMR with 1mm laminate (Merino / Greenlam), both faces balanced. SS oval wardrobe tube and internal shelves. Agreed rate ₹1,600/sq.ft. of front area for carcass + laminate shutters; wardrobe hardware (hinges, drawer channels, locks, handles, pull-outs) is extra, as per your selection.";
+const WARD_SPEC = STD.carcass+" Shutters: 18mm HDHMR in 2K PU paint (ICA / Sirca), matt or gloss, in the shade of your choice. SS oval wardrobe tube and internal shelves. Agreed rate ₹2,200/sq.ft. of front area for carcass + PU-finish shutters; wardrobe hardware (hinges, drawer channels, locks, handles, pull-outs) is extra, as per your selection.";
 const BED_SPEC = " upholstered bed, frame in 19mm BWP ply (Century / Greenply), hydraulic lift-up storage (Ebco / Hettich gas lift), upholstered headboard with 40-density foam, fabric from the standard range. Mattress excluded. Agreed rate ₹1,00,000 per bed.";
 const SIDE_SPEC = "Bedside table, approx. 18\"W × 16\"D, 18mm HDHMR in laminate / PU finish, 1 drawer on "+STD.channels+". Agreed rate ₹15,000 per piece; 2 pieces per bedroom.";
 const TV_SPEC = "TV unit with storage: TV back panel, wall-hung console with drawers and open / closed storage, 18mm HDHMR carcass, 1mm laminate / acrylic finish, Hettich hardware, Philips LED accent. Agreed rate ₹1,20,000 per unit.";
@@ -795,7 +795,7 @@ const CATEGORIES = [
   {id:"c_paint", label:"POP Punning & Paint", test:id=>/^(paint|punning)$/.test(id),
    intro:"POP punning on all walls at ₹45/sq.ft. and Royale-grade emulsion on walls and ceilings of all rooms at ₹60/sq.ft."},
   {id:"c_wood", label:"Woodwork", test:id=>/^(kcab|kxcab|kbreak|crockery|shoe|foyerwall|lutil|uutil|upuja|vanity|mb1chest)$/.test(id)||/(ward|store|dresser|tv|wall|desk)$/.test(id),
-   intro:"Everything made by our carpenters / factory: laminate kitchen, wardrobes and the parents' storage unit, dressers, TV units, pooja unit, crockery, shoe and utility units, feature walls and bed-back panelling, vanities and study desks."},
+   intro:"Everything made by our carpenters / factory: laminate kitchen, PU-finish wardrobes, the parents' storage unit, dressers, TV units, pooja unit, crockery, shoe and utility units, feature walls and bed-back panelling, vanities and study desks."},
   {id:"c_hw", label:"Hardware", test:id=>/^hw_/.test(id),
    intro:"Kitchen hardware (Hettich / Ebco), as per the client's selection: switched off until chosen. Wardrobe hardware is likewise as per selection."},
   {id:"c_stone", label:"Stone & Plumbing", test:id=>/^(ktop|kxtop|kplumb)$/.test(id),
@@ -884,7 +884,7 @@ function panelOverview(){
       <b>Entire duplex:</b> gypsum false ceiling with cove lighting (optional, included in the total), electrical work, Philips cove and spot lighting, POP punning on walls (₹45/sq.ft.), Royale-grade paint (₹60/sq.ft.), wall materials (₹100 × carpet area ÷ 3), site expenses (₹50/sq.ft.: protection, casual labour, cleaning, transportation, wastage), all-new electrical (₹250/sq.ft.), blackout + sheer curtains, kitchen blind; optional mosquito mesh.<br>
       <b>Lower floor — living & dining:</b> TV unit, sofa set, coffee table, feature wall, 6-seater dining, crockery unit, chandelier, shoe cabinet, powder-room mirror; optional entry feature wall.<br>
       <b>Kitchen & utility:</b> open kitchen (kitchen wall towards the living / dining broken, subject to structural check), optional extension of the kitchen into the lower utility room for more space, L-shaped laminate modular kitchen with tall unit at ₹1,800/sq.ft., kitchen hardware as per selection, stone counter, sink, under-cabinet LED, plumbing fit-out; utility units and cloth dryers on both floors.<br>
-      <b>Bedrooms (both floors):</b> laminate wardrobes at ₹1,600/sq.ft. (hardware as per selection) in all dress rooms and Bedrooms 1 & 3, dressers in the master dress rooms, beds at ₹1,00,000 each, bedside tables at ₹15,000 per piece and bed-back walls in all six bedrooms; TV units (₹1,20,000) only in the Guest Bedroom (Bedroom-1) and Bedroom-2; extra storage in Master Bedroom-1, designed as the parents' room; optional lounge seating and study desks.<br>
+      <b>Bedrooms (both floors):</b> PU-finish wardrobes at ₹2,200/sq.ft. (hardware extra, as per selection) in all dress rooms and Bedrooms 1 & 3, dressers in the master dress rooms, beds at ₹1,00,000 each, bedside tables at ₹15,000 per piece and bed-back walls in all six bedrooms; TV units (₹1,20,000) only in the Guest Bedroom (Bedroom-1) and Bedroom-2; extra storage in Master Bedroom-1, designed as the parents' room; optional lounge seating and study desks.<br>
       <b>Upper floor — living, family & pooja:</b> TV unit, sofa set, coffee table and the pooja unit (placed in the upper living area as per Vastu); TV unit, curved sofa with armchairs and coffee table in the family room; optional feature walls and passage panelling.<br>
       <b>Toilets:</b> mirrors in the six bedroom toilets, glass shower partitions in all toilets except the MBR washroom; optional vanities.<br>
       <b>Not included:</b> flooring, sanitaryware, doors and windows (all existing retained), bathroom tiling and plumbing, bar units (Jain family), civil work other than the open-kitchen wall, appliances, chimney and hob, mattresses, ACs, switch plates, MCBs, DB, staircase and railing work, and decorative fixtures other than those listed.</div></div>
