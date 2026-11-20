@@ -2544,6 +2544,24 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/narela-guest-room-3d",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/narela-guest-room-3d.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
