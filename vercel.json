@@ -2562,6 +2562,24 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/narela-first-floor-3d",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/narela-first-floor-3d.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
